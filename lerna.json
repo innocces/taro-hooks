@@ -1,0 +1,15 @@
+{
+  "packages": ["packages/*"],
+  "command": {
+    "version": {
+      "allowBranch": "main",
+      "includeMergedTags": true
+    },
+    "publish": {
+      "registry": "https://registry.npmjs.org/"
+    }
+  },
+  "useWorkspaces": true,
+  "ignoreChanges": ["**/*.md", "**/es/*", "**/lib/*", "**/dist/*"],
+  "version": "0.0.0"
+}

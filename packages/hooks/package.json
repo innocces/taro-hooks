@@ -1,0 +1,42 @@
+{
+  "name": "taro-hooks",
+  "version": "0.0.0",
+  "description": "为 Taro 而设计的 Hooks Library",
+  "keywords": [
+    "taro-hooks",
+    "hooks",
+    "taro",
+    "react",
+    "javascript"
+  ],
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "types": "./lib/index.d.ts",
+  "unpkg": "dist/taro-hooks.js",
+  "sideEffects": false,
+  "authors": {
+    "name": "inoccess"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  },
+  "repository": "https://github.com/innocces/taro-hooks",
+  "homepage": "https://github.com/innocces/taro-hooks",
+  "scripts": {},
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "taro": ">= 3.x"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "license": "MIT"
+}
