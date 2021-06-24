@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/*"],
+  "packages": ["packages/*", "app"],
   "command": {
     "version": {
       "allowBranch": "main",
@@ -11,5 +11,6 @@
   },
   "useWorkspaces": true,
   "ignoreChanges": ["**/*.md", "**/es/*", "**/lib/*", "**/dist/*"],
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "npmClient": "yarn"
 }

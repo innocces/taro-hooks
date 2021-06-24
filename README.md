@@ -50,13 +50,13 @@
 ## 安装
 
 ```bash
-$ npm i taro-hook --save
+$ npm i taro-hooks --save
 ```
 
 ## 使用
 
 ```jsx
-import { useEnv } from 'taro-hook';
+import { useEnv } from 'taro-hooks';
 ```
 
 ## 参与贡献

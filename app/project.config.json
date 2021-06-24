@@ -1,0 +1,23 @@
+{
+  "miniprogramRoot": "dist/",
+  "projectname": "app",
+  "description": "taro-hooks weapp & h5 demo",
+  "appid": "wx15171eb44c7567ae",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "preloadBackgroundData": false,
+    "minified": false,
+    "newFeature": true,
+    "autoAudits": false,
+    "coverView": true,
+    "showShadowRootInWxmlPanel": false,
+    "scopeDataCheck": false,
+    "useCompilerModule": false
+  },
+  "compileType": "miniprogram",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {}
+}

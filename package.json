@@ -1,7 +1,8 @@
 {
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "app"
   ],
   "name": "taro-hooks",
   "version": "0.0.0",
@@ -9,6 +10,8 @@
     "start": "dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
+    "app:dev": "cd ./app && npm run dev:weapp",
+    "app:build": "cd ./app && npm run build:weapp",
     "build": "father-build",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "release": "npm run build && npm publish",
@@ -56,5 +59,11 @@
   },
   "engines": {
     "node": ">=12.0.0"
+  },
+  "repository": {
+    "branch": "main",
+    "platform": "github",
+    "url": "git@github.com:innocces/taro-hooks.git",
+    "type": "git"
   }
 }
