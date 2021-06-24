@@ -2,7 +2,7 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   title: 'Taro-hooks',
-  favicon: '/image/logo.png',
+  favicon: '/image/hook.png',
   logo: '/image/logo.png',
   outputPath: 'docs-dist',
   mode: 'site',
