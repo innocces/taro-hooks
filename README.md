@@ -16,10 +16,10 @@
   <tbody>
     <tr>
       <td align="center">
-        <a target="_blank" href="">
+        <a>
           <img
-            width="32"
-            src=""
+            width="200"
+            src="./public/image/hooks.jpeg"
           />
           <br>
           <strong>Taro-hooks weapp</strong>
