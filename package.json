@@ -52,6 +52,8 @@
     "lerna": "^4.0.0",
     "lint-staged": "^10.0.7",
     "new-github-release-url": "^1.0.0",
+    "postcss-pxtorem": "5.1.1",
+    "postcss-pxtransform": "^3.2.13",
     "prettier": "^2.2.1",
     "yorkie": "^2.0.0"
   },

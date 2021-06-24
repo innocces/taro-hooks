@@ -9,6 +9,21 @@ export default defineConfig({
   devServer: {
     port: 12345,
   },
+  alias: {
+    '@tarojs/components$': '@tarojs/components/dist-h5/react',
+  },
+  extraPostCSSPlugins: [
+    require('postcss-pxtorem')({
+      exclude: /packages|.dumi|docs/i,
+      rootValue: 100,
+      unitPrecision: 5,
+      propList: ['*'],
+      selectorBlackList: [],
+      replace: true,
+      mediaQuery: true,
+      minPixelValue: 0,
+    }),
+  ],
   dynamicImport: {},
   exportStatic: {},
   navs: [
@@ -25,7 +40,6 @@ export default defineConfig({
   links: [{ rel: 'stylesheet', href: '/assets/style.css' }],
   themeConfig: {
     hd: {
-      // 根据不同的设备屏幕宽度断点切换高清方案
       rules: [
         { maxWidth: 375, mode: 'vw', options: [100, 750] },
         { minWidth: 376, maxWidth: 750, mode: 'vw', options: [100, 1500] },
