@@ -1,35 +1,48 @@
-import React, { Component } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { View, Text } from '@tarojs/components';
-import Taro from '@tarojs/taro';
-import { AtButton } from 'taro-ui';
-import 'taro-ui/dist/style/components/button.scss'; // 按需引入
+import { AtList, AtListItem } from 'taro-ui';
+
+import Taro, { ENV_TYPE } from '@tarojs/taro';
+import { useEnv } from 'taro-hooks';
+
+import 'taro-ui/dist/style/components/icon.scss';
 import './index.less';
 
-export default class Index extends Component {
-  componentWillMount() {}
+import { webPages, weappPages } from '../../route';
 
-  componentDidMount() {}
+const Index = () => {
+  const env = useEnv();
 
-  componentWillUnmount() {}
+  const pages = useMemo(() => {
+    return env === ENV_TYPE.WEB ? webPages : weappPages;
+  }, [env]);
 
-  componentDidShow() {}
+  const handleLocation = useCallback(
+    (route) => {
+      if (env === ENV_TYPE.WEAPP) {
+        Taro.navigateTo({
+          url: route,
+        });
+      } else {
+        window.parent.location = route;
+      }
+    },
+    [env],
+  );
+  return (
+    <AtList>
+      {pages.map((config) => {
+        const [name, route] = Object.entries(config)[0];
+        return (
+          <AtListItem
+            key={name}
+            title={name}
+            onClick={() => handleLocation(route)}
+          />
+        );
+      })}
+    </AtList>
+  );
+};
 
-  componentDidHide() {}
-
-  render() {
-    return (
-      <View className="index">
-        <Text>Hello world!</Text>
-        <AtButton type="primary">I need Taro UI</AtButton>
-        <Text>Taro UI 支持 Vue 了吗？</Text>
-        <AtButton type="primary" circle>
-          支持
-        </AtButton>
-        <Text>共建？</Text>
-        <AtButton type="secondary" circle>
-          来
-        </AtButton>
-      </View>
-    );
-  }
-}
+export default Index;

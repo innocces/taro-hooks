@@ -1,4 +1,14 @@
 export default {
-  esm: 'rollup',
-  cjs: 'rollup',
+  esm: {
+    type: 'babel',
+  },
+  cjs: {
+    type: 'babel',
+    lazy: true,
+  },
+  umd: {
+    globals: 'taro-hooks',
+    name: 'taro-hooks',
+    miniFile: true,
+  },
 };

@@ -1,9 +1,9 @@
 export default {
-  pages: ['pages/index/index'],
+  pages: ['pages/index/index', 'pages/useEnv/index'],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
+    navigationBarTitleText: 'taro-hooks',
     navigationBarTextStyle: 'black',
   },
 };

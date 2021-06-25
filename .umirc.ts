@@ -1,5 +1,6 @@
 import { defineConfig } from 'dumi';
 
+const specialItem = ['list-item', 'countdown-item'];
 export default defineConfig({
   title: 'Taro-hooks',
   favicon: '/image/hook.png',
@@ -11,6 +12,7 @@ export default defineConfig({
   },
   alias: {
     '@tarojs/components$': '@tarojs/components/dist-h5/react',
+    '@pages': __dirname + '/app/src/pages',
   },
   extraPostCSSPlugins: [
     require('postcss-pxtorem')({
@@ -23,6 +25,38 @@ export default defineConfig({
       mediaQuery: true,
       minPixelValue: 0,
     }),
+  ],
+  extraBabelPlugins: [
+    [
+      'import',
+      {
+        libraryName: 'taro-hooks',
+        camel2DashComponentName: false,
+        libraryDirectory: 'src',
+      },
+      'taro-hooks',
+    ],
+    [
+      'import',
+      {
+        libraryName: 'taro-ui',
+        customName: (name) => {
+          name = name.replace('at-', '');
+          if (specialItem.includes(name)) {
+            name = name.replace('-', '/');
+          }
+          return 'taro-ui/lib/components/' + name;
+        },
+        customStyleName: (name) => {
+          name = name.replace('at-', '');
+          if (specialItem.includes(name)) {
+            name = name.split('-')[0];
+          }
+          return 'taro-ui/dist/style/components/' + name + '.scss';
+        },
+      },
+      'taro-ui',
+    ],
   ],
   dynamicImport: {},
   exportStatic: {},

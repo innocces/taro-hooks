@@ -44,4 +44,4 @@ $ npm run dev:weapp --watch
 
 参考[taro build](https://taro-docs.jd.com/taro/docs/config)
 
-<code hidden="1" src="../../app/src/pages/index/index.tsx"/>
+<code hidden="1" src="@pages/index"/>
