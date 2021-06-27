@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { AtRadio, AtMessage } from 'taro-ui';
+import DocPage from '../../components/DocPage';
 
 import { useEnv } from 'taro-hooks';
 import Taro, { ENV_TYPE } from '@tarojs/taro';
@@ -27,11 +28,13 @@ export default () => {
   return (
     <>
       <AtMessage />
-      <AtRadio
-        options={radioOptions(env)}
-        value={env}
-        onClick={() => handleRadioClick()}
-      />
+      <DocPage title="useEnv 获取当前环境值" panelTitle="useEnv">
+        <AtRadio
+          options={radioOptions(env)}
+          value={env}
+          onClick={() => handleRadioClick()}
+        />
+      </DocPage>
     </>
   );
 };

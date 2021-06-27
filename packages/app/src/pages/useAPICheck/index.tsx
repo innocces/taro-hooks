@@ -6,14 +6,13 @@ import {
   AtNoticebar,
 } from 'taro-ui';
 import { View } from '@tarojs/components';
-import PaneTitle from '../../components/PaneTitle';
+import DocPage from '../../components/DocPage';
 
 import { useEnv, useAPICheck } from 'taro-hooks';
 import { ENV_TYPE } from '@tarojs/taro';
 
 import 'taro-ui/dist/style/components/icon.scss';
 import 'taro-ui/dist/style/components/article.scss';
-import './index.less';
 
 const selection = [
   'openBluetoothAdapter',
@@ -41,18 +40,17 @@ export default () => {
   return (
     <>
       {env !== ENV_TYPE.WEAPP && (
-        <AtNoticebar className="use-api-check-gap">
-          useAPICheck 仅可以在小程序环境中使用
-        </AtNoticebar>
+        <AtNoticebar>useAPICheck 仅可以在小程序环境中使用</AtNoticebar>
       )}
-      <PaneTitle title="useAPICheck" />
-      <AtButton onClick={() => changeSheetVisible(!sheetVisible)}>
-        选择示例API测试
-      </AtButton>
-      <View className="at-article__h2">当前选择API为:</View>
-      <View className="at-article__p">{selectionChecked}</View>
-      <View className="at-article__h2">当前选择API环境是否可用结果: </View>
-      <View className="at-article__p">{canIUse.toString()}</View>
+      <DocPage title="useAPICheck 判断是否可用" panelTitle="useAPICheck">
+        <AtButton onClick={() => changeSheetVisible(!sheetVisible)}>
+          选择示例API测试
+        </AtButton>
+        <View className="at-article__h2">当前选择API为:</View>
+        <View className="at-article__p">{selectionChecked}</View>
+        <View className="at-article__h2">当前选择API环境是否可用结果: </View>
+        <View className="at-article__p">{canIUse.toString()}</View>
+      </DocPage>
       <AtActionSheet
         isOpened={sheetVisible}
         title="更改选项以调试"

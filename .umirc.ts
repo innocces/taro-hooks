@@ -15,7 +15,11 @@ export default defineConfig({
   },
   alias: {
     '@tarojs/components$': '@tarojs/components/dist-h5/react',
+    '@tarojs/taro': '@tarojs/taro-h5',
     '@pages': __dirname + '/packages/app/src/pages',
+  },
+  define: {
+    'process.env.TARO_ENV': 'h5',
   },
   extraPostCSSPlugins: [
     require('postcss-pxtorem')({

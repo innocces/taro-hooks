@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from 'react';
-import { AtIcon } from 'taro-ui';
+import React, { useCallback, useState } from 'react';
+import { AtIcon, AtToast } from 'taro-ui';
 import { Image, View } from '@tarojs/components';
 
 import Taro, { ENV_TYPE } from '@tarojs/taro';
@@ -9,30 +9,34 @@ import './index.less';
 
 import logoImg from '../../../../../public/image/hook.png';
 
-import { webPages, weappPages } from '../../route';
-import List from './constant';
+import { List } from '../../constant';
 
 const Index = () => {
   const env = useEnv();
-
-  const pages = useMemo(() => {
-    return env === ENV_TYPE.WEB ? webPages : weappPages;
-  }, [env]);
+  const [visible, changeVisible] = useState(false);
 
   const handleLocation = useCallback(
-    (route) => {
-      if (env === ENV_TYPE.WEAPP) {
-        Taro.navigateTo({
-          url: '/' + route,
-        });
+    (route: string) => {
+      if (env === ENV_TYPE.WEB) {
+        changeVisible(true);
       } else {
-        window.parent.location = route;
+        Taro.navigateTo({
+          url: '/pages/panel/index?id=' + route.toLowerCase(),
+        });
       }
     },
     [env],
   );
+
   return (
     <View className="page page-index">
+      <AtToast
+        isOpened={visible}
+        text="web|h5暂不全体预览, 请点击对应hooks查看示例"
+        hasMask
+        icon="help"
+        onClose={() => changeVisible(false)}
+      />
       <View className="logo">
         <Image src={logoImg} className="img" mode="widthFix" />
       </View>
@@ -43,6 +47,7 @@ const Index = () => {
             key={index}
             data-id={item.id}
             data-name={item.title}
+            onClick={() => handleLocation(item.id)}
           >
             <AtIcon value={item.icon} className="module-list__icon" />
             <View className="module-list__info">

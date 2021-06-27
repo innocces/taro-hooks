@@ -10,6 +10,7 @@
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "app:dev": "cd ./packages/app && npm run dev:weapp",
+    "app:dev:h5": "cd ./packages/app && npm run dev:h5",
     "app:build": "cd ./packages/app && npm run build:weapp",
     "build": "father-build",
     "deploy": "npm run docs:build && npm run docs:deploy",
