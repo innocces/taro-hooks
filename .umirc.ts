@@ -1,6 +1,9 @@
 import { defineConfig } from 'dumi';
 
-const specialItem = ['list-item', 'countdown-item'];
+const specialItem = ['list-item', 'countdown-item', 'action-sheet-item'];
+const specialItemMap = {
+  'action-sheet-item': 'action-sheet/body/item',
+};
 export default defineConfig({
   title: 'Taro-hooks',
   favicon: '/image/hook.png',
@@ -12,11 +15,11 @@ export default defineConfig({
   },
   alias: {
     '@tarojs/components$': '@tarojs/components/dist-h5/react',
-    '@pages': __dirname + '/app/src/pages',
+    '@pages': __dirname + '/packages/app/src/pages',
   },
   extraPostCSSPlugins: [
     require('postcss-pxtorem')({
-      exclude: /packages|.dumi|docs/i,
+      exclude: /packages\/hooks|.dumi|docs/i,
       rootValue: 100,
       unitPrecision: 5,
       propList: ['*'],
@@ -42,7 +45,9 @@ export default defineConfig({
         libraryName: 'taro-ui',
         customName: (name) => {
           name = name.replace('at-', '');
-          if (specialItem.includes(name)) {
+          if (specialItemMap[name]) {
+            name = specialItemMap[name];
+          } else if (specialItem.includes(name)) {
             name = name.replace('-', '/');
           }
           return 'taro-ui/lib/components/' + name;
@@ -50,7 +55,11 @@ export default defineConfig({
         customStyleName: (name) => {
           name = name.replace('at-', '');
           if (specialItem.includes(name)) {
-            name = name.split('-')[0];
+            name = name
+              .split('-')
+              .map((v, i, self) => (i === self.length - 1 ? null : v))
+              .filter((v) => v)
+              .join('-');
           }
           return 'taro-ui/dist/style/components/' + name + '.scss';
         },
@@ -80,6 +89,9 @@ export default defineConfig({
       ],
       // 更多 rule 配置访问 https://github.com/umijs/dumi/blob/master/packages/theme-mobile/src/typings/config.d.ts#L7
     },
+  },
+  esbuild: {
+    target: 'es5',
   },
   // more config: https://d.umijs.org/config
 });

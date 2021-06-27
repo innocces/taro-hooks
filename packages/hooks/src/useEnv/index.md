@@ -17,6 +17,12 @@ group:
 
 当需要获取当前环境值做一些判断时
 
+## API
+
+```jsx | pure
+() => Taro.ENV_TYPE;
+```
+
 ## 代码演示
 
 <code src="@pages/useEnv" />

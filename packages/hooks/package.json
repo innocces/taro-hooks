@@ -30,9 +30,13 @@
     "package.json",
     "README.md"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@babel/runtime": "^7.14.6"
+  },
   "peerDependencies": {
-    "taro": ">= 3.x"
+    "taro": ">= 3.x",
+    "react": ">=16.9",
+    "react-dom": ">=16.9"
   },
   "devDependencies": {},
   "engines": {

@@ -11,4 +11,5 @@ export default {
     name: 'taro-hooks',
     miniFile: true,
   },
+  runtimeHelpers: true,
 };

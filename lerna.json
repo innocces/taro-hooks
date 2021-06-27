@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/*", "app"],
+  "packages": ["packages/*"],
   "command": {
     "version": {
       "allowBranch": "main",
