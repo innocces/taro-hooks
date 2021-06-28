@@ -46,9 +46,9 @@ export default () => {
         <AtButton onClick={() => changeSheetVisible(!sheetVisible)}>
           选择示例API测试
         </AtButton>
-        <View className="at-article__h2">当前选择API为:</View>
+        <View className="at-article__h3">当前选择API为:</View>
         <View className="at-article__p">{selectionChecked}</View>
-        <View className="at-article__h2">当前选择API环境是否可用结果: </View>
+        <View className="at-article__h3">当前选择API环境是否可用结果: </View>
         <View className="at-article__p">{canIUse.toString()}</View>
       </DocPage>
       <AtActionSheet
