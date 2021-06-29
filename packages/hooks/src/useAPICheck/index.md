@@ -20,7 +20,7 @@ group:
 ## API
 
 ```jsx | pure
-(scheme: string) => boolean;
+const [canIUse, setAPI] = useAPICheck(scheme: string)
 ```
 
 ## 参数说明
@@ -46,9 +46,22 @@ group:
 - `attribute`: 代表组件属性
 - `option`: 代表组件属性的可选值
 
+## 返回值说明
+
+| 返回值  | 说明                  | 类型                       |
+| ------- | --------------------- | -------------------------- |
+| canIUse | 是否可用              | `boolean`                  |
+| setAPI  | 更改当前判断的 scheme | `(scheme: string) => void` |
+
 ## 代码演示
 
 <code src="@pages/useAPICheck" />
+
+## Hook 支持度
+
+| 微信小程序 | H5  | ReactNative |
+| :--------: | :-: | :---------: |
+|     ✔️     |     |             |
 
 ## FAQ
 

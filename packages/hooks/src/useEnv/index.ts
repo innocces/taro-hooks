@@ -1,7 +1,16 @@
-import Taro from '@tarojs/taro';
+import { getEnv, ENV_TYPE } from '@tarojs/taro';
+import { useEffect, useState } from 'react';
 
-function useEnv(): Taro.ENV_TYPE {
-  return Taro.getEnv();
+export type Result = ENV_TYPE | '';
+
+function useEnv(): Result {
+  const [env, setEnv] = useState<Result>('');
+
+  useEffect(() => {
+    setEnv(getEnv());
+  }, []);
+
+  return env;
 }
 
 export default useEnv;

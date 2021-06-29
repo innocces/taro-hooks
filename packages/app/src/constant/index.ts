@@ -42,6 +42,14 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useBase64ToArrayBuffer',
       name: 'useBase64ToArrayBuffer 转换base64',
     },
+    {
+      id: 'useArrayBufferToBase64',
+      name: 'useArrayBufferToBase64 转换ArrayBuffer',
+    },
+    {
+      id: 'useSystemInfo',
+      name: 'useSystemInfo 系统信息',
+    },
   ],
   [APIChildrenName.environment]: [
     {

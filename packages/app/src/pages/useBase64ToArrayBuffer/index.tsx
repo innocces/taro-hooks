@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useBase64ToArrayBuffer } from 'taro-hooks';
 import { encode } from 'base-64';
@@ -12,16 +12,20 @@ import DocPage from '../../components/DocPage';
 import './index.less';
 
 export default () => {
-  const [base64, setBase64] = useState('');
+  const [base64, changeBase64] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const buffer = useBase64ToArrayBuffer(base64);
+  const [buffer, setBase64] = useBase64ToArrayBuffer(base64);
 
-  const translateArrayBuffer = useCallback((value) => {
-    const arrayBuffer = encode(value);
-    setBase64(arrayBuffer);
-    setInputValue(value);
-    return value;
-  }, []);
+  const translateArrayBuffer = useCallback(
+    (value) => {
+      const arrayBuffer = encode(value);
+      changeBase64(arrayBuffer);
+      setBase64(arrayBuffer);
+      setInputValue(value);
+      return value;
+    },
+    [setBase64],
+  );
 
   return (
     <>

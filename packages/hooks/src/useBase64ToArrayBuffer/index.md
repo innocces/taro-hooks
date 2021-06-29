@@ -20,7 +20,7 @@ group:
 ## API
 
 ```jsx | pure
-(base64: string) => ArrayBuffer;
+const [buffer, setBase64] = useBase64ToArrayBuffer(base64);
 ```
 
 ## 参数说明
@@ -29,9 +29,22 @@ group:
 | ------ | ----------------------------------------------- | -------- | ------ |
 | base64 | 必填，要转化成 ArrayBuffer 对象的 Base64 字符串 | `string` | -      |
 
+## 返回值说明
+
+| 返回值    | 说明                  | 类型                       |
+| --------- | --------------------- | -------------------------- |
+| buffer    | 转换的 ArrayBuffer    | `ArrayBuffer`              |
+| setBase64 | 更改当前转换的 base64 | `(base64: string) => void` |
+
 ## 代码演示
 
 <code src="@pages/useBase64ToArrayBuffer" />
+
+## Hook 支持度
+
+| 微信小程序 | H5  | ReactNative |
+| :--------: | :-: | :---------: |
+|     ✔️     | ✔️  |     ✔️      |
 
 ## FAQ
 

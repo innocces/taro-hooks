@@ -1,10 +1,25 @@
-import Taro, { ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE, canIUse } from '@tarojs/taro';
+import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
 
-function useAPICheck(scheme: string): boolean {
+function useAPICheck(scheme: string): [boolean, (scheme: string) => void] {
   const env = useEnv();
+  const [apiValid, setApiValid] = useState(false);
 
-  return env === ENV_TYPE.WEB ? false : Taro.canIUse(scheme);
+  const setAPI = useCallback(
+    (scheme: string) => {
+      if (env.length && env !== ENV_TYPE.WEB) {
+        setApiValid(canIUse(scheme));
+      }
+    },
+    [env],
+  );
+
+  useEffect(() => {
+    setAPI(scheme);
+  }, [env]);
+
+  return [apiValid, setAPI];
 }
 
 export default useAPICheck;

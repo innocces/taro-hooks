@@ -5,6 +5,8 @@ export default {
     'pages/useAPICheck/index',
     'pages/panel/index',
     'pages/useBase64ToArrayBuffer/index',
+    'pages/useArrayBufferToBase64/index',
+    'pages/useSystemInfo/index',
   ],
   window: {
     backgroundTextStyle: 'light',

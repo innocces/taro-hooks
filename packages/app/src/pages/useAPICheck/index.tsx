@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   AtButton,
   AtActionSheet,
@@ -30,12 +30,16 @@ export default () => {
   const [selectionChecked, setSelectionChecked] = useState(selection[0]);
 
   const env = useEnv();
-  const canIUse = useAPICheck(selectionChecked);
+  const [canIUse, setAPI] = useAPICheck(selectionChecked);
 
-  const handleAcionSheetChange = useCallback((value) => {
-    setSelectionChecked(value);
-    changeSheetVisible(false);
-  }, []);
+  const handleAcionSheetChange = useCallback(
+    (value) => {
+      setSelectionChecked(value);
+      setAPI(value);
+      changeSheetVisible(false);
+    },
+    [setAPI],
+  );
 
   return (
     <>
