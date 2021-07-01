@@ -1,0 +1,7 @@
+tasks:
+  - init: yarn bootstrap
+    command: yarn start
+
+ports:
+  - port: 12345
+    onOpen: open-preview
