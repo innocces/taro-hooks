@@ -1,9 +1,11 @@
 tasks:
   - name: dependencies
-    init: |
-      yarn global add lerna
-      yarn bootstrap
+    init: >
+      yarn global add lerna &&
+      yarn bootstrap &&
+      gp sync-done bundle
   - name: dev server
+    init: gp sync-await bundle
     command: yarn start
 
 ports:
