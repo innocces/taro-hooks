@@ -68,7 +68,7 @@ $ yarn
 $ yarn start
 ```
 
-会自动打开浏览器 - [http://localhost:12345](http://localhost:12345)  
+打开浏览器 - [http://localhost:12345](http://localhost:12345)  
 更多贡献详情见[官网文档](https://innocces.github.io/taro-hooks)
 
 ## 交流讨论

@@ -1,5 +1,9 @@
 tasks:
-  - init: yarn bootstrap
+  - name: dependencies
+    init: |
+      yarn global add lerna
+      yarn bootstrap
+  - name: dev server
     command: yarn start
 
 ports:
