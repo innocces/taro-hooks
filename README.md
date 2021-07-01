@@ -1,6 +1,6 @@
 # Taro-hooks
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)[![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2]
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)[![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4]
 
 ## 简介
 
@@ -81,7 +81,11 @@ $ yarn start
 
 [1]: https://www.npmjs.com/package/taro-hooks
 [2]: https://npmjs.org/package/taro-hooks
+[3]: https://gitpod.io/#https://github.com/innocces/taro-hooks
+[4]: https://github.com/umijs/dumi
 [image-1]: https://img.shields.io/npm/v/taro-hooks.svg?style=flat
 [image-2]: https://img.shields.io/npm/dm/taro-hooks.svg?style=flat
 [image-3]: https://img.shields.io/node/v/taro-hooks.svg?style=flat-square
 [image-4]: https://img.shields.io/npm/l/taro-hooks.svg?style=flat-square
+[image-5]: https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod
+[image-6]: https://img.shields.io/badge/docs%20by-dumi-blue
