@@ -5,6 +5,10 @@ export interface IEventQueue {
   [_: string]: (() => void)[];
 }
 
+export interface IActionAddPayload {
+  eventName: string;
+  handlers: (() => void)[];
+}
 export interface IState {
   eventQueue: IEventQueue;
   eventNameQueue: string[];
@@ -21,7 +25,7 @@ export enum IActionType {
 
 export interface IAction {
   type: IActionType;
-  payload: string | string[] | null;
+  payload: string | string[] | IActionAddPayload | null;
 }
 
 export const safeNamespace = ['__taro', 'at'];
@@ -34,7 +38,24 @@ const initState: IState = {
 function useEvent(namespace: string) {
   const { eventBus } = useContext(context);
 
-  const setListener = useCallback(() => {}, []);
+  const setListener = useCallback(
+    (eventName: string, ...handlers: (() => void)[]) => {
+      if (!eventName || safeNamespace.some((v) => eventName.startsWith(v))) {
+        console.warn('eventName not valid. listen failed');
+      } else if (!handlers.length) {
+        console.warn('you mast provide one handler to listen. add failed');
+      } else {
+        dispatch({
+          type: IActionType.ADD,
+          payload: {
+            eventName,
+            handlers,
+          },
+        });
+      }
+    },
+    [],
+  );
 
   const removeListener = useCallback(() => {}, []);
 
@@ -66,20 +87,77 @@ function useEvent(namespace: string) {
     }
   }, []);
 
-  const safeRemoveEvents = useCallback(() => {}, []);
+  const safeRemoveEvents = useCallback(
+    (eventNameQueue: string[], eventQueue): IEventQueue => {
+      const removeEventName = eventNameQueue.filter(
+        (v) => !safeNamespace.some((n) => v.startsWith(n)),
+      );
+
+      removeEventName.forEach((v) => eventBus.off(v));
+      const offQueue: IEventQueue = {};
+      if (eventNameQueue.length === 1 && removeEventName.length) {
+        Object.keys(eventQueue).forEach((key) => {
+          if (!eventNameQueue.includes(key)) {
+            offQueue[key] = eventQueue[key];
+          }
+        });
+      }
+      return offQueue;
+    },
+    [],
+  );
 
   const reducer = useCallback(
     (state: IState, { type, payload }: IAction): IState => {
       switch (type) {
         case IActionType.CLEAR:
           if (!payload) {
-            eventBus.off();
+            safeRemoveEvents(state.eventNameQueue, state.eventQueue);
+            return {
+              eventQueue: {},
+              eventNameQueue: eventBus.display(),
+            };
           } else {
-            eventBus.off(payload as string);
+            return {
+              eventNameQueue: state.eventNameQueue.filter((v) => v !== payload),
+              eventQueue: safeRemoveEvents(
+                [payload as string],
+                state.eventQueue,
+              ),
+            };
           }
-          return {
-            ...state,
-          };
+        case IActionType.ADD:
+          if (
+            !payload ||
+            !(payload as IActionAddPayload).eventName ||
+            !(payload as IActionAddPayload).handlers
+          ) {
+            console.warn(
+              'you mast provider eventName and one handler to listen',
+            );
+            return {
+              ...state,
+            };
+          } else {
+            (payload as IActionAddPayload).handlers.forEach((handler) => {
+              eventBus.on((payload as IActionAddPayload).eventName, handler);
+            });
+            return {
+              eventNameQueue: [
+                ...new Set([
+                  ...state.eventNameQueue,
+                  (payload as IActionAddPayload).eventName,
+                ]),
+              ],
+              eventQueue: {
+                ...state.eventQueue,
+                [(payload as IActionAddPayload).eventName]: [
+                  ...state.eventQueue[(payload as IActionAddPayload).eventName],
+                  ...(payload as IActionAddPayload).handlers,
+                ],
+              },
+            };
+          }
         default:
           return state;
       }
