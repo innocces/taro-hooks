@@ -61,10 +61,12 @@ import { useEnv } from 'taro-hooks';
 
 ## 参与贡献
 
+务必保证预装`lerna`
+
 ```bash
 $ git clone git@github.com:innocces/taro-hooks.git
 $ cd taro-hooks
-$ yarn
+$ yarn bootstrap
 $ yarn start
 ```
 
