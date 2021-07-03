@@ -7,6 +7,7 @@ export default {
     'pages/useBase64ToArrayBuffer/index',
     'pages/useArrayBufferToBase64/index',
     'pages/useSystemInfo/index',
+    'pages/useEvent/index',
   ],
   window: {
     backgroundTextStyle: 'light',
