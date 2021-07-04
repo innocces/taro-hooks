@@ -29,6 +29,9 @@ export default () => {
 
   const handleSetListenerOnce = useCallback(() => {
     setListenerOnce(eventName + '-once', handler);
+    Taro.atMessage({
+      message: '设置监听成功(once)',
+    });
   }, [setListenerOnce, handler]);
 
   const handleEmitEvent = useCallback(

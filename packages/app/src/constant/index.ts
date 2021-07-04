@@ -39,6 +39,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useAPICheck 判断是否可用',
     },
     {
+      id: 'useEvent',
+      name: 'useEvent 事件中心',
+    },
+    {
       id: 'useBase64ToArrayBuffer',
       name: 'useBase64ToArrayBuffer 转换base64',
     },
