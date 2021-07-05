@@ -12,13 +12,19 @@ export const List: APIList = [
     id: 'Basic',
     title: '基础Hooks',
     content: '包含事件、调试等',
-    icon: 'filter',
+    icon: 'basic',
   },
   {
     id: 'Environment',
     title: '环境Hooks',
     content: '包含环境判断等',
-    icon: 'equalizer',
+    icon: 'environment',
+  },
+  {
+    id: 'Wechat',
+    title: '小程序Hooks',
+    content: '包含管理器、API等',
+    icon: 'wechat',
   },
 ];
 
@@ -30,14 +36,11 @@ export interface APIChildrenItem {
 export enum APIChildrenName {
   basic = 'basic',
   environment = 'environment',
+  wechat = 'wechat',
 }
 
 export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
   [APIChildrenName.basic]: [
-    {
-      id: 'useAPICheck',
-      name: 'useAPICheck 判断是否可用',
-    },
     {
       id: 'useEvent',
       name: 'useEvent 事件中心',
@@ -59,6 +62,16 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useEnv',
       name: 'useEnv 获取当前环境值',
+    },
+  ],
+  [APIChildrenName.wechat]: [
+    {
+      id: 'useAPICheck',
+      name: 'useAPICheck 判断是否可用',
+    },
+    {
+      id: 'useUpdateManager',
+      name: 'useUpdateManager 更新',
     },
   ],
 };

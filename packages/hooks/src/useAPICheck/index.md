@@ -5,8 +5,8 @@ nav:
   path: /hooks
   order: 2
 group:
-  title: 基础
-  path: /basic
+  title: 小程序
+  path: /wechat
 ---
 
 # useAPICheck

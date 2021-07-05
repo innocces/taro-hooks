@@ -8,6 +8,7 @@ export default {
     'pages/useArrayBufferToBase64/index',
     'pages/useSystemInfo/index',
     'pages/useEvent/index',
+    'pages/useUpdateManager/index',
   ],
   window: {
     backgroundTextStyle: 'light',

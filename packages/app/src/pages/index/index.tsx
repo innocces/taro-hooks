@@ -49,7 +49,11 @@ const Index = () => {
             data-name={item.title}
             onClick={() => handleLocation(item.id)}
           >
-            <AtIcon value={item.icon} className="module-list__icon" />
+            <AtIcon
+              prefixClass="iconfont"
+              value={item.icon}
+              className="module-list__icon"
+            />
             <View className="module-list__info">
               <View className="title">{item.title}</View>
               <View className="content">{item.content}</View>

@@ -5,36 +5,50 @@ nav:
   path: /hooks
   order: 2
 group:
-  title: 基础
-  path: /basic
+  title: 小程序
+  path: /wechat
 ---
 
 # useUpdateManager
 
-获取当前环境值
+获取全局唯一版本更新管理器
 
 ## 何时使用
 
-当需要获取当前环境值做一些判断时
+管理小程序更新机制。
 
 ## API
 
 ```jsx | pure
-() => Taro.ENV_TYPE;
+const updateManager = useUpdateManager({
+  onCheckForUpdate,
+  onUpdateReady,
+  onUpdateFailed,
+});
+```
+
+## 入参说明
+
+```tsx | pure
+function onCheckForUpdate(res) {}
+
+function onUpdateReady() {}
+
+function onUpdateFailed() {}
 ```
 
 ## 返回值说明
 
-| 返回值 | 说明       | 类型       |
-| ------ | ---------- | ---------- |
-| env    | 当前环境值 | `ENV_TYPE` |
+| 返回值        | 说明           | 类型            |
+| ------------- | -------------- | --------------- |
+| updateManager | 更新管理器实例 | `UpdateManager` |
 
 ## 代码演示
 
-<code src="@pages/useEnv" />
+<code src="@pages/useUpdateManager" />
 
 ## Hook 支持度
 
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
-|     ✔️     | ✔️  |     ✔️      |
+|     ✔️     |     |             |

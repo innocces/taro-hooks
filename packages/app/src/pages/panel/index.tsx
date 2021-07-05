@@ -40,7 +40,11 @@ const Panel = ({}: IPanelProps) => {
   return (
     <View className="page">
       <View className="panel-header">
-        <AtIcon value={panelInfo.icon} className="panel-header__icon" />
+        <AtIcon
+          prefixClass="iconfont"
+          value={panelInfo.icon}
+          className="panel-header__icon"
+        />
         <View className="panel-header__title">{panelInfo.title}</View>
       </View>
       <View className="panel-body">
