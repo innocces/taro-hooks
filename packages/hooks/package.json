@@ -7,7 +7,11 @@
     "hooks",
     "taro",
     "react",
-    "javascript"
+    "javascript",
+    "lerna",
+    "monorepo",
+    "wechat",
+    "miniprograme"
   ],
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -21,7 +25,7 @@
     "registry": "https://registry.npmjs.com/"
   },
   "repository": "https://github.com/innocces/taro-hooks",
-  "homepage": "https://github.com/innocces/taro-hooks",
+  "homepage": "https://innocces.github.io/taro-hooks/",
   "scripts": {},
   "files": [
     "dist",

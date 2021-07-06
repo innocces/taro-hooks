@@ -26,6 +26,12 @@ export const List: APIList = [
     content: '包含管理器、API等',
     icon: 'wechat',
   },
+  {
+    id: 'Network',
+    title: '网络Hooks',
+    content: '包含请求、下载等',
+    icon: 'network',
+  },
 ];
 
 export interface APIChildrenItem {
@@ -37,6 +43,7 @@ export enum APIChildrenName {
   basic = 'basic',
   environment = 'environment',
   wechat = 'wechat',
+  network = 'network',
 }
 
 export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
@@ -57,6 +64,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useSystemInfo',
       name: 'useSystemInfo 系统信息',
     },
+    {
+      id: 'useVisible',
+      name: 'useVisible 页面状态',
+    },
   ],
   [APIChildrenName.environment]: [
     {
@@ -72,6 +83,20 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useUpdateManager',
       name: 'useUpdateManager 更新',
+    },
+  ],
+  [APIChildrenName.network]: [
+    {
+      id: 'useRequest',
+      name: 'useRequest 请求',
+    },
+    {
+      id: 'useNetworkType',
+      name: 'useNetworkType 网络类型',
+    },
+    {
+      id: 'useOnline',
+      name: 'useOnline 网络状态',
     },
   ],
 };
