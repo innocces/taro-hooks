@@ -1,5 +1,7 @@
-import React from 'react';
-import { PropsWithChildren } from '@tarojs/taro';
+import React, { useEffect } from 'react';
+import Taro, { PropsWithChildren } from '@tarojs/taro';
+
+import { useEvent } from 'taro-hooks';
 
 import { View } from '@tarojs/components';
 import PaneTitle from '../PaneTitle';
@@ -13,6 +15,15 @@ export type IDocPageProps = PropsWithChildren<{
 }>;
 
 const DocPage = ({ children, title, panelTitle }: IDocPageProps) => {
+  // fix runtime change problem
+  const [state, { emitEvent }] = useEvent('');
+
+  useEffect(() => {
+    if (!Taro.atMessage) {
+      Taro.atMessage = (...arg) => emitEvent('atMessage', ...arg);
+    }
+  }, [emitEvent]);
+
   return (
     <View className="page">
       <DocHeader title={title} />

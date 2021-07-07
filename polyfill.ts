@@ -1,11 +1,5 @@
 // add some poly to fix dumi -> taro
-import { ShareAppMessageReturn, ShareAppMessageObject } from '@tarojs/taro';
-import Taro from '@tarojs/taro-h5';
+import Taro, { eventCenter } from '@tarojs/taro';
 
-function useShareAppMessage(
-  callback: (payload: ShareAppMessageObject) => ShareAppMessageReturn,
-): void {}
-
-export default Taro;
-
-export { useShareAppMessage };
+// runtime change due to atmessage delay
+Taro.atMessage = eventCenter.trigger.bind(eventCenter, 'atMessage');
