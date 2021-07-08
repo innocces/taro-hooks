@@ -35,14 +35,16 @@
     "README.md"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.14.6"
+    "@babel/runtime": "^7.14.6",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
+    "@tarojs/taro": "3.2.15",
+		"react": "^17.0.2"
   },
   "peerDependencies": {
     "@tarojs/taro": ">= 3.x",
-    "react": ">=16.9",
-    "react-dom": ">=16.9"
+    "react": ">=16.9"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=12.0.0"
   },

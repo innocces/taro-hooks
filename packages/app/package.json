@@ -42,6 +42,7 @@
 		"@tarojs/runtime": "3.2.15",
 		"@tarojs/taro": "3.2.15",
 		"lodash": "4.17.15",
+		"mockjs": "^1.1.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"taro-hooks": "^0.0.0",
