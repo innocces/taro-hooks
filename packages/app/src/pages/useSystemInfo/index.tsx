@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { AtRadio } from 'taro-ui';
-import DocPage from '../../components/DocPage';
+import DocPage from '@components/DocPage';
 
 import { useSystemInfo } from 'taro-hooks';
 import { getSystemInfoSync } from '@tarojs/taro';

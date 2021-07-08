@@ -29,7 +29,7 @@ const DocPage = ({ children, title, panelTitle }: IDocPageProps) => {
       <DocHeader title={title} />
       <View className="doc-body">
         <View className="panel">
-          <PaneTitle title={panelTitle} />
+          {panelTitle && <PaneTitle title={panelTitle} />}
           <View className="panel__content">{children}</View>
         </View>
       </View>

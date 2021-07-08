@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { AtRadio, AtMessage } from 'taro-ui';
-import DocPage from '../../components/DocPage';
+import DocPage from '@components/DocPage';
 
 import { useEnv } from 'taro-hooks';
 import Taro, { ENV_TYPE } from '@tarojs/taro';

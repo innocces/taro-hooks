@@ -1,3 +1,5 @@
+const { resolve } = require('path');
+
 const config = {
   projectName: 'taro-hooks',
   date: '2021-6-24',
@@ -16,6 +18,9 @@ const config = {
     options: {},
   },
   framework: 'react',
+  alias: {
+    '@components': resolve(__dirname, '../', 'src/components'),
+  },
   mini: {
     postcss: {
       pxtransform: {

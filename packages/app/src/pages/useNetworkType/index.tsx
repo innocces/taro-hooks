@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { AtMessage, AtRadio, AtNoticebar } from 'taro-ui';
-import DocPage from '../../components/DocPage';
+import DocPage from '@components/DocPage';
 
 import { useNetworkType } from 'taro-hooks';
 import Taro from '@tarojs/taro';

@@ -16,6 +16,9 @@ export default {
     'pages/useUpdateManager/index',
     // network
     'pages/useRequest/index',
+    'pages/useRequest/defaultRequest/index',
+    'pages/useRequest/manual/index',
+    'pages/useRequest/polling/index',
     'pages/useNetworkType/index',
     'pages/useOnline/index',
   ],

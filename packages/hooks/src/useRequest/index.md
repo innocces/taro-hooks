@@ -61,6 +61,20 @@ const { data, error, loading, run, params, cancel, refresh, mutate, fetches } =
   });
 ```
 
+## 代码演示
+
+### 默认请求
+
+<code src="@pages/useRequest/defaultRequest"></code>
+
+### 手动触发
+
+<code src="@pages/useRequest/manual"></code>
+
+### 轮询
+
+<code src="@pages/useRequest/polling"></code>
+
 ## 返回值说明
 
 | 参数    | 说明                                                                                                                                                                            | 类型                                                                    |

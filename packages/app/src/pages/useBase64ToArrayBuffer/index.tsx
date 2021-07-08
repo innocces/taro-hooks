@@ -7,7 +7,7 @@ import 'taro-ui/dist/style/components/article.scss';
 
 import { View } from '@tarojs/components';
 import { AtInput } from 'taro-ui';
-import DocPage from '../../components/DocPage';
+import DocPage from '@components/DocPage';
 
 import './index.less';
 

@@ -6,7 +6,7 @@ import {
   AtNoticebar,
 } from 'taro-ui';
 import { View } from '@tarojs/components';
-import DocPage from '../../components/DocPage';
+import DocPage from '@components/DocPage';
 
 import { useEnv, useAPICheck } from 'taro-hooks';
 import { ENV_TYPE } from '@tarojs/taro';

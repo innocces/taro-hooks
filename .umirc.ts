@@ -18,6 +18,7 @@ export default defineConfig({
     '@tarojs/taro': '@tarojs/taro-h5',
     '@tarojs/runtime': '@taro-hooks/website-runtime',
     '@pages': __dirname + '/packages/app/src/pages',
+    '@components': __dirname + '/packages/app/src/components',
   },
   define: {
     'process.env.TARO_ENV': 'h5',

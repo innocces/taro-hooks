@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { AtMessage, AtNoticebar } from 'taro-ui';
 import { View } from '@tarojs/components';
-import DocPage from '../../components/DocPage';
+import DocPage from '@components/DocPage';
 
 import { useEnv, useUpdateManager } from 'taro-hooks';
 import Taro, { ENV_TYPE } from '@tarojs/taro';

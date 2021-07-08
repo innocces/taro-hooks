@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { AtNoticebar, AtTimeline } from 'taro-ui';
 import { AtTimelineProps } from 'taro-ui/types/timeline';
 
-import DocPage from '../../components/DocPage';
+import DocPage from '@components/DocPage';
 
 import { useVisible } from 'taro-hooks';
 

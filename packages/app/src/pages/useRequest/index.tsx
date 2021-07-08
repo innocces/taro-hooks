@@ -1,44 +1,51 @@
 import React, { useCallback } from 'react';
-import { AtMessage } from 'taro-ui';
-import { View } from '@tarojs/components';
-import DocPage from '../../components/DocPage';
 
-import { useUpdateManager } from 'taro-hooks';
-import Taro from '@tarojs/taro';
+import { navigateTo } from '@tarojs/taro';
+
+import { AtList, AtListItem } from 'taro-ui';
+import DocPage from '@components/DocPage';
 
 import 'taro-ui/dist/style/components/icon.scss';
+import { AtListItemProps } from 'taro-ui/types/list';
+
+interface IListItem extends AtListItemProps {
+  route: string;
+}
+
+const list: IListItem[] = [
+  {
+    title: '默认请求',
+    note: '在组件初次加载时， 自动触发该函数执行。',
+    route: 'defaultRequest',
+  },
+  {
+    title: '手动触发',
+    note: '通过设置 options.manual = true , 则需要手动调用 run 时才会触发执行异步函数。',
+    route: 'manual',
+  },
+  {
+    title: '轮询',
+    note: '通过设置 options.pollingInterval，进入轮询模式，定时触发函数执行。',
+    route: 'polling',
+  },
+];
 
 export default () => {
-  const onCheckForUpdate = useCallback((res) => {
-    Taro.atMessage({
-      message: res.hasUpdate ? '有新版本' : '无新版本',
-    });
+  const routePage = useCallback((route: string) => {
+    navigateTo({ url: `${route}/index` });
   }, []);
-
-  const onUpdateReady = useCallback(() => {
-    Taro.atMessage({
-      message: '检查更新成功',
-    });
-  }, []);
-
-  const onUpdateFailed = useCallback(() => {
-    Taro.atMessage({
-      message: '检查更新失败',
-    });
-  }, []);
-
-  const updateManager = useUpdateManager({
-    onCheckForUpdate,
-    onUpdateReady,
-    onUpdateFailed,
-  });
 
   return (
-    <>
-      <AtMessage />
-      <DocPage title="useRequest 请求" panelTitle="useRequest">
-        <View>检查更新中....</View>
-      </DocPage>
-    </>
+    <DocPage title="useRequest 请求">
+      <AtList>
+        {list.map((listItem, index) => (
+          <AtListItem
+            {...listItem}
+            key={index}
+            onClick={() => routePage(listItem.route)}
+          />
+        ))}
+      </AtList>
+    </DocPage>
   );
 };
