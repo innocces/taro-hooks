@@ -28,6 +28,16 @@ const list: IListItem[] = [
     note: '通过设置 options.pollingInterval，进入轮询模式，定时触发函数执行。',
     route: 'polling',
   },
+  {
+    title: '并行请求',
+    note: '通过 options.fetchKey ，可以将请求进行分类，每一类的请求都有独立的状态，你可以在 fetches 中找到所有的请求。',
+    route: 'concurrent',
+  },
+  {
+    title: '依赖请求',
+    note: '只有当 options.ready 变为 true 时, 才会发起请求，基于该特性可以实现串行请求，依赖请求等。',
+    route: 'ready',
+  },
 ];
 
 export default () => {

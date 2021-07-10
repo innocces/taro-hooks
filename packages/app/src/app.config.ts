@@ -19,6 +19,8 @@ export default {
     'pages/useRequest/defaultRequest/index',
     'pages/useRequest/manual/index',
     'pages/useRequest/polling/index',
+    'pages/useRequest/concurrent/index',
+    'pages/useRequest/ready/index',
     'pages/useNetworkType/index',
     'pages/useOnline/index',
   ],

@@ -19,7 +19,7 @@ function changeUsername(username: string): Promise<Result> {
   });
 }
 
-const DefaultRequest = () => {
+const ManualRequest = () => {
   const [state, setState] = useState('');
 
   const { loading, run } = useRequest(changeUsername, {
@@ -49,4 +49,4 @@ const DefaultRequest = () => {
   );
 };
 
-export default DefaultRequest;
+export default ManualRequest;

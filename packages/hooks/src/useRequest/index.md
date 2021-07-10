@@ -75,6 +75,14 @@ const { data, error, loading, run, params, cancel, refresh, mutate, fetches } =
 
 <code src="@pages/useRequest/polling"></code>
 
+### 并行请求
+
+<code src="@pages/useRequest/concurrent"></code>
+
+### 依赖请求
+
+<code src="@pages/useRequest/ready"></code>
+
 ## 返回值说明
 
 | 参数    | 说明                                                                                                                                                                            | 类型                                                                    |
