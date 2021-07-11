@@ -38,6 +38,36 @@ const list: IListItem[] = [
     note: '只有当 options.ready 变为 true 时, 才会发起请求，基于该特性可以实现串行请求，依赖请求等。',
     route: 'ready',
   },
+  {
+    title: '防抖',
+    note: '通过设置 options.debounceInterval ，则进入防抖模式。此时如果频繁触发 run ，则会以防抖策略进行请求。',
+    route: 'debounce',
+  },
+  {
+    title: '节流',
+    note: '通过设置 options.throttleInterval ，则进入节流模式。此时如果频繁触发 run ，则会以节流策略进行请求。',
+    route: 'throttle',
+  },
+  {
+    title: '缓存 & SWR',
+    note: '如果设置了 options.cacheKey ， useRequest 会将当前请求结束数据缓存起来。下次组件初始化时，如果有缓存数据，我们会优先返回缓存数据，然后在背后发送新请求，也就是 SWR 的能力。你可以通过 cacheTime 设置缓存数据回收时间，也可以通过 staleTime 设置数据保持新鲜时间。',
+    route: 'cacheKey',
+  },
+  {
+    title: '预加载',
+    note: '同一个 cacheKey 的请求，是全局共享的，也就是你可以提前加载数据。利用该特性，可以很方便的实现预加载。',
+    route: 'preload',
+  },
+  {
+    title: '屏幕聚焦重新请求',
+    note: '如果你设置了 options.refreshOnWindowFocus = true ，则在浏览器窗口 refocus 和 revisible 时，会重新发起请求。你可以通过设置 options.focusTimespan 来设置请求间隔，默认为 5000ms 。',
+    route: 'refreshOnWindowFocus',
+  },
+  {
+    title: '突变',
+    note: '你可以通过 mutate ，直接修改 data 。 mutate 函数参数可以为 newData 或 (oldData)=> newData 。',
+    route: 'mutate',
+  },
 ];
 
 export default () => {

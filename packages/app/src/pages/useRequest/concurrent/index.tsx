@@ -9,6 +9,8 @@ import { AtMessage, AtButton } from 'taro-ui';
 import { View } from '@tarojs/components';
 import DocPage from '@components/DocPage';
 
+import 'taro-ui/dist/style/components/icon.scss';
+
 type Result = { success: boolean };
 
 export function deleteUser(userId: string): Promise<Result> {

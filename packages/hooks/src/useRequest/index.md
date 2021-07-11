@@ -83,6 +83,30 @@ const { data, error, loading, run, params, cancel, refresh, mutate, fetches } =
 
 <code src="@pages/useRequest/ready"></code>
 
+### 防抖
+
+<code src="@pages/useRequest/debounce"></code>
+
+### 节流
+
+<code src="@pages/useRequest/throttle"></code>
+
+### 缓存 & SWR
+
+<code src="@pages/useRequest/cacheKey"></code>
+
+### 预加载
+
+<code src="@pages/useRequest/preload"></code>
+
+### 屏幕聚焦重新请求
+
+<code src="@pages/useRequest/refreshOnWindowFocus"></code>
+
+### 突变
+
+<code src="@pages/useRequest/mutate"></code>
+
 ## 返回值说明
 
 | 参数    | 说明                                                                                                                                                                            | 类型                                                                    |

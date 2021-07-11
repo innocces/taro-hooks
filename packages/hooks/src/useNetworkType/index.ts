@@ -2,8 +2,10 @@ import {
   getNetworkType,
   onNetworkStatusChange,
   offNetworkStatusChange,
+  ENV_TYPE,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
+import { useEnv } from '../';
 
 export enum NetworkType {
   wifi = 'wifi',
@@ -17,16 +19,18 @@ export enum NetworkType {
 
 function useNetworkType(): keyof getNetworkType.networkType | undefined {
   const [type, setType] = useState<keyof getNetworkType.networkType>();
+  const env = useEnv();
 
   useEffect(() => {
+    if (!env) return;
     getNetworkType().then(({ networkType }) => setType(networkType));
 
     onNetworkStatusChange(listenNetworkStatusChange);
 
     return () => {
-      offNetworkStatusChange(listenNetworkStatusChange);
+      env !== ENV_TYPE.WEB && offNetworkStatusChange(listenNetworkStatusChange);
     };
-  }, []);
+  }, [env]);
 
   const listenNetworkStatusChange = useCallback(
     ({ networkType }) => {

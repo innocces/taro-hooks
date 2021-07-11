@@ -8,6 +8,8 @@ import Taro from '@tarojs/taro';
 import { AtMessage, AtInput, AtButton } from 'taro-ui';
 import DocPage from '@components/DocPage';
 
+import 'taro-ui/dist/style/components/icon.scss';
+
 type Result = { success: boolean };
 
 function changeUsername(username: string): Promise<Result> {
