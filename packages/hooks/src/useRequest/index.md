@@ -238,6 +238,10 @@ const {...} = useRequest<R>(
 - 会额外返回 `pagination` 字段，包含所有分页信息，及操作分页的函数。
 - `refreshDeps` 变化，会重置 `current` 到第一页，并重新发起请求，一般你可以把 pagination 依赖的条件放这里。
 
+下面示例使用`AtPagination`(即`Taro ui`)的分页器。属性同`antd`的`pagination`.
+
+<code src="@pages/useRequest/pagination"></code>
+
 #### API
 
 ```javascript

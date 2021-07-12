@@ -88,6 +88,11 @@ const list: IListItem[] = [
     note: '通过设置 requstMethod, 可以使用自己的请求库。',
     route: 'axios',
   },
+  {
+    title: '普通分页',
+    note: '普通的分页场景，我们会自动管理 current 和 pageSize。',
+    route: 'pagination',
+  },
 ];
 
 export default () => {
