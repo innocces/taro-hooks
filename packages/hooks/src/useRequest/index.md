@@ -107,6 +107,26 @@ const { data, error, loading, run, params, cancel, refresh, mutate, fetches } =
 
 <code src="@pages/useRequest/mutate"></code>
 
+### Loading Delay
+
+<code src="@pages/useRequest/loadingDelay"></code>
+
+### refreshDeps
+
+当某些`state`变化时，我们需要重新执行异步请求，一般我们会这样写代码：
+
+```javascript
+const [userId, setUserId] = useState('1');
+const { data, run, loading } = useRequest(() => getUserSchool(userId));
+useEffect(() => {
+  run();
+}, [userId]);
+```
+
+`refreshDeps`是一个语法糖，让你更方便的实现上面的功能。当`refreshDeps`变化时，会使用之前的`params`重新执行`service`。
+
+<code src="@pages/useRequest/refreshDeps"></code>
+
 ## 返回值说明
 
 | 参数    | 说明                                                                                                                                                                            | 类型                                                                    |
@@ -183,6 +203,10 @@ const { loading, run } = useRequest(
   },
 );
 ```
+
+<code src="@pages/useRequest/fetch"></code>
+
+<code src="@pages/useRequest/axios"></code>
 
 #### API
 

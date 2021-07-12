@@ -41,6 +41,8 @@
 		"@tarojs/react": "3.2.15",
 		"@tarojs/runtime": "3.2.15",
 		"@tarojs/taro": "3.2.15",
+		"axios": "^0.21.1",
+		"axios-miniprogram-adapter": "^0.3.2",
 		"lodash": "4.17.15",
 		"mockjs": "^1.1.0",
 		"react": "^17.0.2",

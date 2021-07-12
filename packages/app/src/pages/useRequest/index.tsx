@@ -68,6 +68,26 @@ const list: IListItem[] = [
     note: '你可以通过 mutate ，直接修改 data 。 mutate 函数参数可以为 newData 或 (oldData)=> newData 。',
     route: 'mutate',
   },
+  {
+    title: 'Loading Delay',
+    note: '通过设置 options.loadingDelay ，可以延迟 loading 变成 true 的时间，有效防止闪烁。',
+    route: 'loadingDelay',
+  },
+  {
+    title: 'refreshDeps',
+    note: '当 options.refreshDeps 变化时，useRequest 会使用之前的参数重新执行 service。',
+    route: 'refreshDeps',
+  },
+  {
+    title: '默认请求库',
+    note: '如果 useRequest 第一个参数是 string、object 或 ()=> string|object，则默认使用 Taro.request 发送网络请求',
+    route: 'fetch',
+  },
+  {
+    title: '集成请求库',
+    note: '通过设置 requstMethod, 可以使用自己的请求库。',
+    route: 'axios',
+  },
 ];
 
 export default () => {
