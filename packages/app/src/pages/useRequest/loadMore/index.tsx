@@ -56,7 +56,7 @@ const LoadMoreRequest = () => {
   );
 
   return (
-    <DocPage title="useRequest 请求" panelTitle="依赖请求">
+    <DocPage title="useRequest 普通加载更多" panelTitle="普通加载更多">
       <View>
         You can click the button multiple times, the loadmore will be cached.
       </View>

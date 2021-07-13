@@ -93,6 +93,16 @@ const list: IListItem[] = [
     note: '普通的分页场景，我们会自动管理 current 和 pageSize。',
     route: 'pagination',
   },
+  {
+    title: '缓存分页',
+    note: '在 cacheKey 场景下， run 的参数 params 是可以缓存的，利用这个特点，我们可以实现 pagination 相关条件的缓存。',
+    route: 'paginationCache',
+  },
+  {
+    title: '缓存加载更多',
+    note: '通过设置 cacheKey，可以缓存所有 list 数据。',
+    route: 'loadMore',
+  },
 ];
 
 export default () => {

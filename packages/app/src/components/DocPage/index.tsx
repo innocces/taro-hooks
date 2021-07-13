@@ -1,4 +1,9 @@
-import React, { useEffect } from 'react';
+import React, {
+  useEffect,
+  forwardRef,
+  CSSProperties,
+  ForwardedRef,
+} from 'react';
 import Taro, { PropsWithChildren } from '@tarojs/taro';
 
 import { useEvent } from 'taro-hooks';
@@ -12,9 +17,17 @@ import './index.less';
 export type IDocPageProps = PropsWithChildren<{
   title?: string;
   panelTitle?: string;
+  style?: CSSProperties;
+  forwardedRef: ForwardedRef<unknown>;
 }>;
 
-const DocPage = ({ children, title, panelTitle }: IDocPageProps) => {
+const DocPage = ({
+  children,
+  title,
+  panelTitle,
+  style,
+  forwardedRef,
+}: IDocPageProps) => {
   // fix runtime change problem
   const [state, { emitEvent }] = useEvent('');
 
@@ -25,7 +38,7 @@ const DocPage = ({ children, title, panelTitle }: IDocPageProps) => {
   }, [emitEvent]);
 
   return (
-    <View className="page">
+    <View className="page" ref={forwardedRef} style={style}>
       <DocHeader title={title} />
       <View className="doc-body">
         <View className="panel">
@@ -37,4 +50,6 @@ const DocPage = ({ children, title, panelTitle }: IDocPageProps) => {
   );
 };
 
-export default DocPage;
+export default forwardRef((props, ref) => (
+  <DocPage {...props} forwardedRef={ref} />
+));
