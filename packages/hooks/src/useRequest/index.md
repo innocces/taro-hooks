@@ -242,6 +242,8 @@ const {...} = useRequest<R>(
 
 <code src="@pages/useRequest/pagination"></code>
 
+<code src="@pages/useRequest/paginationCache"></code>
+
 #### API
 
 ```javascript
@@ -302,6 +304,8 @@ const {
 - useRequest 会额外返回 `result.loadingMore` 和 `result.loadMore` 。
 - 通过设置 `options.ref`， `options.isNoMore`，可以实现上拉加载更多功能。
 - `refreshDeps` 变化，会清空当前数据，并重新发起请求，一般你可以把 loadMore 依赖的条件放这里。
+
+<code src="@pages/useRequest/loadMore"></code>
 
 #### API
 

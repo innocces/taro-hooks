@@ -43,7 +43,7 @@ async function getUserList(params: {
   });
 }
 
-const ReadyRequest = () => {
+const PaginationRequest = () => {
   const { data, loading, pagination } = useRequest(
     ({ current, pageSize }: { current: number; pageSize: number }) =>
       getUserList({ current, pageSize }),
@@ -51,7 +51,7 @@ const ReadyRequest = () => {
       paginated: true,
     },
   );
-  console.log(pagination);
+
   return (
     <DocPage title="useRequest 普通分页" panelTitle="普通分页">
       {loading ? (
@@ -67,12 +67,18 @@ const ReadyRequest = () => {
       <AtPagination
         customStyle={{ marginTop: '10px' }}
         {...pagination}
-        onPageChange={(type: string, current: number) =>
-          pagination.onChange(current, 10)
-        }
+        onPageChange={({
+          type,
+          current,
+        }: {
+          type: string;
+          current: number;
+        }) => {
+          pagination.onChange(current, 10);
+        }}
       />
     </DocPage>
   );
 };
 
-export default ReadyRequest;
+export default PaginationRequest;
