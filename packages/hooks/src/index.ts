@@ -7,6 +7,7 @@ import useArrayBufferToBase64 from './useArrayBufferToBase64';
 import useSystemInfo from './useSystemInfo';
 import useEvent from './useEvent';
 import useVisible from './useVisible';
+import useSelectorQuery from './useSelectorQuery';
 
 // wechat
 import useAPICheck from './useAPICheck';
@@ -24,6 +25,7 @@ export {
   useSystemInfo,
   useEvent,
   useVisible,
+  useSelectorQuery,
   useAPICheck,
   useUpdateManager,
   useNetworkType,

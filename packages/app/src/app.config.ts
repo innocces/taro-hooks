@@ -11,6 +11,9 @@ export default {
     'pages/useSystemInfo/index',
     'pages/useEvent/index',
     'pages/useVisible/index',
+    'pages/useSelectorQuery/index',
+    'pages/useSelectorQuery/getBoundingClientRect/index',
+    'pages/useSelectorQuery/getFields/index',
     // wechat
     'pages/useAPICheck/index',
     'pages/useUpdateManager/index',

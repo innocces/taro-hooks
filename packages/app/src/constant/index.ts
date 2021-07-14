@@ -68,6 +68,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useVisible',
       name: 'useVisible 页面状态',
     },
+    {
+      id: 'useSelectorQuery',
+      name: 'useSelectorQuery 节点查询',
+    },
   ],
   [APIChildrenName.environment]: [
     {
