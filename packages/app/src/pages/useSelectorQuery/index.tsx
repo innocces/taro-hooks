@@ -29,12 +29,16 @@ export default () => {
     <>
       <DocPage title="useSelectorQuery 节点查询">
         <AtList>
-          {renderList.map((v) => {
-            if (v === 'getContext' && env !== ENV_TYPE.WEAPP) {
-              return null;
-            }
-            return <AtListItem title={v} key={v} onClick={() => navigate(v)} />;
-          })}
+          {renderList.map((v) => (
+            <AtListItem
+              disabled={
+                ['getContext', 'getNode'].includes(v) && env !== ENV_TYPE.WEAPP
+              }
+              title={v}
+              key={v}
+              onClick={() => navigate(v)}
+            />
+          ))}
         </AtList>
       </DocPage>
     </>

@@ -18,7 +18,7 @@ export type IDocPageProps = PropsWithChildren<{
   title?: string;
   panelTitle?: string;
   style?: CSSProperties;
-  forwardedRef: ForwardedRef<unknown>;
+  forwardedRef?: ForwardedRef<unknown>;
 }>;
 
 const DocPage = ({

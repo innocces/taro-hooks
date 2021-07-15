@@ -1,42 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AtDivider, AtList, AtListItem } from 'taro-ui';
 import DocPage from '@components/DocPage';
-import { Video } from '@tarojs/components';
+import { ScrollView, View } from '@tarojs/components';
 
 import { useSelectorQuery, useEnv } from 'taro-hooks';
 import { useReady, ENV_TYPE, General } from '@tarojs/taro';
 
-const fields = {
-  dataset: true,
-  size: true,
-  mark: true,
-  rect: true,
-  scrollOffset: true,
-  properties: ['scrollX', 'scrollY'],
-  computedStyle: ['margin', 'backgroundColor'],
-  context: true,
-};
-
 const Query = () => {
   const env = useEnv();
-  const [query, { getFields }] = useSelectorQuery();
+  const [query, { getScrollOffset }] = useSelectorQuery();
   const [rect, setRect] = useState<General.IAnyObject>({});
 
   useEffect(() => {
     if (env !== ENV_TYPE.WEAPP) {
-      getFields('.demo', fields).then(setRect);
+      getScrollOffset('.demo').then(setRect);
     }
-  }, [getFields, env]);
+  }, [getScrollOffset, env]);
 
   useReady(() => {
     if (env === ENV_TYPE.WEAPP) {
-      getFields('.demo', fields).then(setRect);
+      getScrollOffset('.demo').then(setRect);
     }
   });
+
   return (
     <>
-      <DocPage title="useSelectorQuery fields">
-        <Video src="" className="demo" />
+      <DocPage title="useSelectorQuery getScrollOffset">
+        <ScrollView scrollY scrollTop={100} className="demo">
+          <View style={{ height: '400px', backgroundColor: 'white' }}></View>
+        </ScrollView>
         <AtDivider content="属性" />
         <AtList>
           {rect &&

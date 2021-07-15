@@ -103,6 +103,11 @@ const list: IListItem[] = [
     note: '通过设置 cacheKey，可以缓存所有 list 数据。',
     route: 'loadMore',
   },
+  {
+    title: '上拉加载更多',
+    note: '如果 options 中存在 ref，则在滚动到底部时，自动触发 loadMore。当然此时你必须设置 isNoMore, 以便让 useRequest 知道何时停止。',
+    route: 'loadMoreRef',
+  },
 ];
 
 export default () => {

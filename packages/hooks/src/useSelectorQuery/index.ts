@@ -9,7 +9,7 @@ import {
 
 export type getBoundingClientRectType = (
   selector: string,
-  all: boolean,
+  all?: boolean,
 ) => Promise<NodesRef.BoundingClientRectCallbackResult>;
 
 export type getContextType = (selector: string) => Promise<General.IAnyObject>;

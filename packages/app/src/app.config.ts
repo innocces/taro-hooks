@@ -14,6 +14,9 @@ export default {
     'pages/useSelectorQuery/index',
     'pages/useSelectorQuery/getBoundingClientRect/index',
     'pages/useSelectorQuery/getFields/index',
+    'pages/useSelectorQuery/getNode/index',
+    'pages/useSelectorQuery/getContext/index',
+    'pages/useSelectorQuery/getScrollOffset/index',
     // wechat
     'pages/useAPICheck/index',
     'pages/useUpdateManager/index',
@@ -37,6 +40,7 @@ export default {
     'pages/useRequest/pagination/index',
     'pages/useRequest/paginationCache/index',
     'pages/useRequest/loadMore/index',
+    'pages/useRequest/loadMoreRef/index',
     'pages/useNetworkType/index',
     'pages/useOnline/index',
   ],

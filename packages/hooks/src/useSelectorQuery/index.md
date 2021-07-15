@@ -97,6 +97,8 @@ getContext(selector: string).then(context)
 getFields(selector: string, fields: NodesRef.Fields).then(fields)
 ```
 
+<code src="@pages/useSelectorQuery/getFields" />
+
 ### getNode
 
 ```javascript
@@ -108,6 +110,8 @@ getNode(selector: string).then(node)
 ```javascript
 getScrollOffset(selector: string).then((offsetInfo: NodesRef.scrollOffsetCallbackResult))
 ```
+
+<code src="@pages/useSelectorQuery/getScrollOffset" />
 
 ## Hook 支持度
 

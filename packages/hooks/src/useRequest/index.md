@@ -302,10 +302,11 @@ const {
 - useRequest 会自动管理列表数据，返回的 `data.list` 为所有请求数据的 list 合并数组。service 的参数为 `result.data | undefined`。
 - service 返回的数据结构必须包含 `{list: Item[]}` ，如果不满足，可以通过 `options.formatResult` 转换一次。
 - useRequest 会额外返回 `result.loadingMore` 和 `result.loadMore` 。
-- 通过设置 `options.ref`， `options.isNoMore`，可以实现上拉加载更多功能。
+- 通过设置 `options.ref`(注意这里必须使用`ScrollView`, 此外小程序端的`threshold`无效), `options.isNoMore`，可以实现上拉加载更多功能。
 - `refreshDeps` 变化，会清空当前数据，并重新发起请求，一般你可以把 loadMore 依赖的条件放这里。
 
 <code src="@pages/useRequest/loadMore"></code>
+<code src="@pages/useRequest/loadMoreRef"></code>
 
 #### API
 

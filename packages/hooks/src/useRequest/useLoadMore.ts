@@ -8,6 +8,12 @@ import {
   LoadMoreOptions,
 } from './types';
 import useUpdateEffect from './utils/useUpdateEffect';
+import { ENV_TYPE } from '@tarojs/taro';
+import { BaseEventOrig } from '@tarojs/components';
+import { ScrollViewProps } from '@tarojs/components/types/ScrollView';
+import { useEnv } from '../';
+
+type scrollEvent = BaseEventOrig<ScrollViewProps.onScrollDetail>;
 
 function useLoadMore<R extends LoadMoreFormatReturn, RR>(
   service: (...p: LoadMoreParams<R>) => Promise<RR>,
@@ -31,6 +37,7 @@ function useLoadMore<R extends LoadMoreFormatReturn, RR = any>(
   } = options;
 
   const [loadingMore, setLoadingMore] = useState(false);
+  const env = useEnv();
 
   useEffect(() => {
     if (options.fetchKey) {
@@ -99,13 +106,15 @@ function useLoadMore<R extends LoadMoreFormatReturn, RR = any>(
   }, [noMore, run, dataGroup, params]);
 
   /* 上拉加载的方法 */
-  const scrollMethod = () => {
+  const scrollMethod = (event: scrollEvent) => {
     if (loading || loadingMore || !ref || !ref.current) {
       return;
     }
+
     if (
+      env === ENV_TYPE.WEAPP ||
       ref.current.scrollHeight - ref.current.scrollTop <=
-      ref.current.clientHeight + threshold
+        ref.current.clientHeight + threshold
     ) {
       loadMore();
     }
@@ -122,12 +131,13 @@ function useLoadMore<R extends LoadMoreFormatReturn, RR = any>(
       return () => {};
     }
 
-    const scrollTrigger = () => scrollMethodRef.current();
-
-    ref.current.addEventListener('scroll', scrollTrigger);
+    const scrollTrigger = (event: scrollEvent) =>
+      scrollMethodRef.current(event);
+    const eventName = env === ENV_TYPE.WEAPP ? 'scrollToLower' : 'scroll';
+    ref.current.addEventListener(eventName, scrollTrigger);
     return () => {
       if (ref && ref.current) {
-        ref.current.removeEventListener('scroll', scrollTrigger);
+        ref.current.removeEventListener(eventName, scrollTrigger);
       }
     };
   }, [scrollMethodRef]);
