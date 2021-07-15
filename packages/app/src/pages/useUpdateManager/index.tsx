@@ -38,7 +38,9 @@ export default () => {
   return (
     <>
       {env !== ENV_TYPE.WEAPP && (
-        <AtNoticebar>useUpdateManager 仅可以在小程序环境中使用</AtNoticebar>
+        <AtNoticebar marquee>
+          useUpdateManager 仅可以在小程序环境中使用
+        </AtNoticebar>
       )}
       <AtMessage />
       <DocPage title="useUpdateManager 更新" panelTitle="useUpdateManager">
