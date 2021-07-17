@@ -88,6 +88,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useUpdateManager',
       name: 'useUpdateManager 更新',
     },
+    {
+      id: 'useLaunchOptions',
+      name: 'useLaunchOptions 启动参数',
+    },
   ],
   [APIChildrenName.network]: [
     {
@@ -103,4 +107,13 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useOnline 网络状态',
     },
   ],
+};
+
+export const SceneEnum: { [_: number]: string } = {
+  1020: '公众号 profile 页相关小程序列表',
+  1035: '公众号自定义菜单',
+  1036: 'App 分享消息卡片',
+  1037: '小程序打开小程序',
+  1038: '从另一个小程序返回',
+  1043: '公众号模板消息',
 };
