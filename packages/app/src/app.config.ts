@@ -2,12 +2,16 @@ export default {
   pages: [
     // layout
     'pages/index/index',
+    'pages/about/index',
     'pages/panel/index',
     // env
     'pages/useEnv/index',
     // basic
+    'pages/useRouter/index',
+    'pages/usePromise/index',
     'pages/useBase64ToArrayBuffer/index',
     'pages/useArrayBufferToBase64/index',
+    'pages/useClipboardData/index',
     'pages/useSystemInfo/index',
     'pages/useEvent/index',
     'pages/useVisible/index',
@@ -51,5 +55,24 @@ export default {
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'Taro hooks',
     navigationBarTextStyle: 'black',
+  },
+  tabBar: {
+    color: '#6a6a77',
+    selectedColor: '#78a4fa',
+    borderStyle: 'white',
+    list: [
+      {
+        pagePath: 'pages/index/index',
+        text: '首页',
+        iconPath: './assets/icon/index.png',
+        selectedIconPath: './assets/icon/index-select.png',
+      },
+      {
+        pagePath: 'pages/about/index',
+        text: '关于',
+        iconPath: './assets/icon/about.png',
+        selectedIconPath: './assets/icon/about-select.png',
+      },
+    ],
   },
 };

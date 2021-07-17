@@ -53,12 +53,20 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useEvent 事件中心',
     },
     {
+      id: 'useRouter',
+      name: 'useRouter 路由',
+    },
+    {
       id: 'useBase64ToArrayBuffer',
       name: 'useBase64ToArrayBuffer 转换base64',
     },
     {
       id: 'useArrayBufferToBase64',
       name: 'useArrayBufferToBase64 转换ArrayBuffer',
+    },
+    {
+      id: 'useClipboardData',
+      name: 'useClipboardData 剪贴板',
     },
     {
       id: 'useSystemInfo',
@@ -71,6 +79,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useSelectorQuery',
       name: 'useSelectorQuery 节点查询',
+    },
+    {
+      id: 'usePromise',
+      name: 'usePromise 异步',
     },
   ],
   [APIChildrenName.environment]: [

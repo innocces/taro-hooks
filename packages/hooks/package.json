@@ -36,10 +36,11 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.14.6",
+    "@tarojs/taro": "3.2.15",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
-    "@tarojs/taro": "3.2.15",
-		"react": "^17.0.2"
+    "querystring": "^0.2.1",
+    "react": "^17.0.2"
   },
   "peerDependencies": {
     "@tarojs/taro": ">= 3.x",
