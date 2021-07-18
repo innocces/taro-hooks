@@ -26,6 +26,7 @@ export default () => {
           跳转TabBar
         </AtButton>
         <AtButton
+          className="gap"
           disabled={env === ENV_TYPE.WEB}
           onClick={() => relaunch('/pages/useRequest/index')}
         >
@@ -38,6 +39,7 @@ export default () => {
           重定向页面
         </AtButton>
         <AtButton
+          className="gap"
           disabled={env === ENV_TYPE.WEB}
           onClick={() =>
             navigateTo('/pages/useLaunchOptions/index', { from: 'useRoute' })

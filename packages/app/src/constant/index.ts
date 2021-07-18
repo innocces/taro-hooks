@@ -15,6 +15,12 @@ export const List: APIList = [
     icon: 'basic',
   },
   {
+    id: 'Feedback',
+    title: '操作反馈Hooks',
+    content: '包含Toast, Modal等',
+    icon: 'feedback',
+  },
+  {
     id: 'Environment',
     title: '环境Hooks',
     content: '包含环境判断等',
@@ -44,6 +50,7 @@ export enum APIChildrenName {
   environment = 'environment',
   wechat = 'wechat',
   network = 'network',
+  feedback = 'feedback',
 }
 
 export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
@@ -83,6 +90,24 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'usePromise',
       name: 'usePromise 异步',
+    },
+  ],
+  [APIChildrenName.feedback]: [
+    {
+      id: 'useToast',
+      name: 'useToast 消息提示框',
+    },
+    {
+      id: 'useModal',
+      name: 'useModal 模态对话框',
+    },
+    {
+      id: 'useLoading',
+      name: 'useLoading 加载提示框',
+    },
+    {
+      id: 'useActionSheet',
+      name: 'useActionSheet 操作菜单',
     },
   ],
   [APIChildrenName.environment]: [

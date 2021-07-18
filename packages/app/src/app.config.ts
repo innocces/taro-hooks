@@ -21,6 +21,11 @@ export default {
     'pages/useSelectorQuery/getNode/index',
     'pages/useSelectorQuery/getContext/index',
     'pages/useSelectorQuery/getScrollOffset/index',
+    // feedback
+    'pages/useToast/index',
+    'pages/useModal/index',
+    'pages/useLoading/index',
+    'pages/useActionSheet/index',
     // wechat
     'pages/useAPICheck/index',
     'pages/useUpdateManager/index',

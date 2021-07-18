@@ -13,6 +13,12 @@ import useEvent from './useEvent';
 import useVisible from './useVisible';
 import useSelectorQuery from './useSelectorQuery';
 
+// feedback
+import useToast from './useToast';
+import useModal from './useModal';
+import useLoading from './useLoading';
+import useActionSheet from './useActionSheet';
+
 // wechat
 import useAPICheck from './useAPICheck';
 import useUpdateManager from './useUpdateManager';
@@ -39,4 +45,8 @@ export {
   useNetworkType,
   useOnline,
   useRequest,
+  useToast,
+  useModal,
+  useLoading,
+  useActionSheet,
 };
