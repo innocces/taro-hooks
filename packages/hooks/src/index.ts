@@ -18,6 +18,7 @@ import useToast from './useToast';
 import useModal from './useModal';
 import useLoading from './useLoading';
 import useActionSheet from './useActionSheet';
+import useNavigationBar from './useNavigationBar';
 
 // wechat
 import useAPICheck from './useAPICheck';
@@ -49,4 +50,5 @@ export {
   useModal,
   useLoading,
   useActionSheet,
+  useNavigationBar,
 };

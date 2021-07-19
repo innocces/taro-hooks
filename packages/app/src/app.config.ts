@@ -26,6 +26,7 @@ export default {
     'pages/useModal/index',
     'pages/useLoading/index',
     'pages/useActionSheet/index',
+    'pages/useNavigationBar/index',
     // wechat
     'pages/useAPICheck/index',
     'pages/useUpdateManager/index',

@@ -109,6 +109,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useActionSheet',
       name: 'useActionSheet 操作菜单',
     },
+    {
+      id: 'useNavigationBar',
+      name: 'useNavigationBar 导航条',
+    },
   ],
   [APIChildrenName.environment]: [
     {
