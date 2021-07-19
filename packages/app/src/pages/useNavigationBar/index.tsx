@@ -14,7 +14,7 @@ export default () => {
     useNavigationBar({
       loading: true,
       title: Mock.mock('@name()'),
-      backgroundColor: '@color()',
+      backgroundColor: Mock.mock('@color()'),
       frontColor: '#ffffff',
       animation: false,
     });
