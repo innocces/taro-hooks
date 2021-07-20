@@ -12,6 +12,7 @@ import useSystemInfo from './useSystemInfo';
 import useEvent from './useEvent';
 import useVisible from './useVisible';
 import useSelectorQuery from './useSelectorQuery';
+import useStorage from './useStorage';
 
 // feedback
 import useToast from './useToast';
@@ -51,4 +52,5 @@ export {
   useLoading,
   useActionSheet,
   useNavigationBar,
+  useStorage,
 };

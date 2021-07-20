@@ -21,6 +21,7 @@ export default {
     'pages/useSelectorQuery/getNode/index',
     'pages/useSelectorQuery/getContext/index',
     'pages/useSelectorQuery/getScrollOffset/index',
+    'pages/useStorage/index',
     // feedback
     'pages/useToast/index',
     'pages/useModal/index',

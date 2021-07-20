@@ -91,6 +91,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'usePromise',
       name: 'usePromise 异步',
     },
+    {
+      id: 'useStorage',
+      name: 'useStorage 数据缓存',
+    },
   ],
   [APIChildrenName.feedback]: [
     {
