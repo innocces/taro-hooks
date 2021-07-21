@@ -55,6 +55,8 @@ export default {
     'pages/useRequest/loadMoreRef/index',
     'pages/useNetworkType/index',
     'pages/useOnline/index',
+    // device
+    'pages/useBattery/index',
   ],
   window: {
     backgroundTextStyle: 'light',

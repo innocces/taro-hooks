@@ -21,10 +21,22 @@ export const List: APIList = [
     icon: 'feedback',
   },
   {
-    id: 'Environment',
-    title: '环境Hooks',
-    content: '包含环境判断等',
-    icon: 'environment',
+    id: 'Network',
+    title: '网络Hooks',
+    content: '包含请求、下载等',
+    icon: 'network',
+  },
+  {
+    id: 'Media',
+    title: '媒体Hooks',
+    content: '包含图片、音频等',
+    icon: 'media',
+  },
+  {
+    id: 'Device',
+    title: '设备Hooks',
+    content: '包含地理位置、电量等',
+    icon: 'device',
   },
   {
     id: 'Wechat',
@@ -33,10 +45,10 @@ export const List: APIList = [
     icon: 'wechat',
   },
   {
-    id: 'Network',
-    title: '网络Hooks',
-    content: '包含请求、下载等',
-    icon: 'network',
+    id: 'Environment',
+    title: '环境Hooks',
+    content: '包含环境判断等',
+    icon: 'environment',
   },
 ];
 
@@ -51,6 +63,8 @@ export enum APIChildrenName {
   wechat = 'wechat',
   network = 'network',
   feedback = 'feedback',
+  media = 'media',
+  device = 'device',
 }
 
 export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
@@ -136,6 +150,34 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useLaunchOptions',
       name: 'useLaunchOptions 启动参数',
+    },
+  ],
+  [APIChildrenName.media]: [
+    {
+      id: 'useImage',
+      name: 'useImage 图片',
+    },
+    {
+      id: 'useVideo',
+      name: 'useVideo 视频',
+    },
+    {
+      id: 'useAudio',
+      name: 'useAudio 音频',
+    },
+    {
+      id: 'useCamera',
+      name: 'useCamera 相机',
+    },
+    {
+      id: 'useRecord',
+      name: 'useRecord 录音',
+    },
+  ],
+  [APIChildrenName.device]: [
+    {
+      id: 'useBattery',
+      name: 'useBattery 电量',
     },
   ],
   [APIChildrenName.network]: [

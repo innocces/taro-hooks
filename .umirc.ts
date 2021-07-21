@@ -11,6 +11,7 @@ export default defineConfig({
   outputPath: 'docs-dist',
   mode: 'site',
   devServer: {
+    host: '0.0.0.0',
     port: 12345,
   },
   alias: {
@@ -19,6 +20,7 @@ export default defineConfig({
     '@tarojs/runtime': '@taro-hooks/website-runtime',
     '@pages': __dirname + '/packages/app/src/pages',
     '@components': __dirname + '/packages/app/src/components',
+    '@assets': __dirname + '/packages/app/src/assets',
   },
   define: {
     'process.env.TARO_ENV': 'h5',

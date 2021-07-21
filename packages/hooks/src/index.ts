@@ -30,6 +30,9 @@ import useNetworkType from './useNetworkType';
 import useOnline from './useOnline';
 import useRequest from './useRequest';
 
+// device
+import useBattery from './useBattery';
+
 export {
   useEnv,
   useLaunchOptions,
@@ -53,4 +56,5 @@ export {
   useActionSheet,
   useNavigationBar,
   useStorage,
+  useBattery,
 };

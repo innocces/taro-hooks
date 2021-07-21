@@ -20,6 +20,7 @@ const config = {
   framework: 'react',
   alias: {
     '@components': resolve(__dirname, '../', 'src/components'),
+    '@assets': resolve(__dirname, '../', 'src/assets'),
   },
   mini: {
     postcss: {
