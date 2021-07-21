@@ -4,11 +4,20 @@ import DocPage from '@components/DocPage';
 
 import { useEnv } from 'taro-hooks';
 import Taro, { ENV_TYPE } from '@tarojs/taro';
-
 import 'taro-ui/dist/style/components/icon.scss';
 
+const ENVTYPE = [
+  ['WEAPP', 'WEAPP'],
+  ['WEB', 'WEB'],
+  ['RN', 'RN'],
+  ['SWAN', 'SWAN'],
+  ['ALIPAY', 'ALIPAY'],
+  ['TT ', 'TT'],
+  ['QQ', 'QQ'],
+  ['JD', 'JD'],
+];
 const radioOptions = (env: ENV_TYPE) =>
-  Object.entries(ENV_TYPE).map(([label, value]) => ({
+  ENVTYPE.map(([label, value]) => ({
     label,
     value,
     desc: `环境: ${label}`,

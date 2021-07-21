@@ -16,10 +16,6 @@ export type Result = [string, clipboardAction];
 function useClipboardData(): Result {
   const [clipboardData, changeClipborardData] = useState<string>('');
 
-  useEffect(() => {
-    getClipboard();
-  }, []);
-
   const setClipboard = useCallback<setClipboard>((text: any) => {
     if (!text) {
       console.warn('please enter a text');

@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { AtIcon, AtToast } from 'taro-ui';
 import { Image, View } from '@tarojs/components';
 
-import Taro, { ENV_TYPE } from '@tarojs/taro';
-import { useEnv } from 'taro-hooks';
+import { ENV_TYPE } from '@tarojs/taro';
+import { useEnv, useRouter } from 'taro-hooks';
 
 import './index.less';
 
@@ -14,18 +14,18 @@ import { List } from '../../constant';
 const Index = () => {
   const env = useEnv();
   const [visible, changeVisible] = useState(false);
+  const [routerInfo, { navigateTo }] = useRouter();
+  console.log(routerInfo);
 
   const handleLocation = useCallback(
     (route: string) => {
-      if (env === ENV_TYPE.WEB) {
+      if (!routerInfo && env === ENV_TYPE.WEB) {
         changeVisible(true);
       } else {
-        Taro.navigateTo({
-          url: '/pages/panel/index?id=' + route.toLowerCase(),
-        });
+        navigateTo('/pages/panel/index?id=' + route.toLowerCase());
       }
     },
-    [env],
+    [env, routerInfo, navigateTo],
   );
 
   return (
