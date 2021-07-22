@@ -32,6 +32,7 @@ import useRequest from './useRequest';
 
 // device
 import useBattery from './useBattery';
+import useVibrate from './useVibrate';
 
 export {
   useEnv,
@@ -57,4 +58,5 @@ export {
   useNavigationBar,
   useStorage,
   useBattery,
+  useVibrate,
 };

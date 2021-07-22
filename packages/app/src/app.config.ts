@@ -57,6 +57,7 @@ export default {
     'pages/useOnline/index',
     // device
     'pages/useBattery/index',
+    'pages/useVibrate/index',
   ],
   window: {
     backgroundTextStyle: 'light',

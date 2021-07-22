@@ -179,6 +179,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useBattery',
       name: 'useBattery 电量',
     },
+    {
+      id: 'useVibrate',
+      name: 'useVibrate 震动反馈',
+    },
   ],
   [APIChildrenName.network]: [
     {
