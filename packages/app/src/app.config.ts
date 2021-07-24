@@ -58,6 +58,8 @@ export default {
     // device
     'pages/useBattery/index',
     'pages/useVibrate/index',
+    'pages/useScreen/index',
+    'pages/useBrightness/index',
   ],
   window: {
     backgroundTextStyle: 'light',
