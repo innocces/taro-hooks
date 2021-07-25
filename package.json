@@ -22,9 +22,9 @@
     "lerna": "lerna init",
     "log": "./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s -r 0"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/taro-hooks.js",
+  "module": "dist/taro-hooks.esm.js",
+  "typings": "dist/taro-hooks.d.ts",
   "gitHooks": {
     "pre-commit": "lint-staged"
   },

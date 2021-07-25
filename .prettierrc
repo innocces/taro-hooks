@@ -5,7 +5,11 @@
   "overrides": [
     {
       "files": ".prettierrc",
-      "options": { "parser": "json" }
+      "options": {
+        "parser": "json",
+        "jsxBracketSameLine": false,
+        "jsxSingleQuote": true
+      }
     }
   ]
 }
