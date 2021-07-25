@@ -36,7 +36,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.14.6",
-    "@tarojs/taro": "3.2.15",
+    "@tarojs/taro": "3.3.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "querystring": "^0.2.1",

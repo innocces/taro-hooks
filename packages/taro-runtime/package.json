@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/website-runtime",
-  "version": "3.2.15",
+  "version": "3.3.1",
   "description": "taro runtime for mini apps.",
   "main": "dist/runtime.esm.js",
   "module": "dist/runtime.esm.js",
@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "test": "jest",
+    "test:ci": "jest -i --coverage false",
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
@@ -22,7 +23,17 @@
     "access": "public"
   },
   "dependencies": {
-    "@tarojs/shared": "3.2.15",
-    "lodash-es": "4.17.15"
+    "@tarojs/shared": "3.3.1",
+    "inversify": "5.1.1",
+    "lodash-es": "4.17.15",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@tarojs/taro": "3.3.1",
+    "@vue/runtime-core": "^3.1.5",
+    "rollup": "^2.53.3",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "vue": "^2.6.14"
   }
 }

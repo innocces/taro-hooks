@@ -58,7 +58,7 @@ export default {
     // device
     'pages/useBattery/index',
     'pages/useVibrate/index',
-    'pages/useScreen/index',
+    'pages/useMotion/index',
     'pages/useBrightness/index',
   ],
   window: {

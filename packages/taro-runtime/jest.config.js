@@ -13,13 +13,12 @@ module.exports = {
   coveragePathIgnorePatterns: ['nerv.js', 'vue.js', 'utils.js'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   globals: {
+    ENABLE_INNER_HTML: true,
+    ENABLE_ADJACENT_HTML: true,
+    ENABLE_SIZE_APIS: true,
     'ts-jest': {
       diagnostics: false,
-      tsConfig: {
-        jsx: 'react',
-        allowJs: true,
-        target: 'ES6',
-      },
+      tsConfig: 'tsconfig.test.json',
     },
   },
   testPathIgnorePatterns: ['node_modules', 'utils'],

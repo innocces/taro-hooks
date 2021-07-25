@@ -5,7 +5,14 @@ const cwd = __dirname;
 
 const baseConfig = {
   input: join(cwd, 'src/index.ts'),
-  external: ['react', 'nervjs', 'react-dom', 'vue', '@tarojs/shared'],
+  external: [
+    'react',
+    'nervjs',
+    'react-dom',
+    'vue',
+    '@tarojs/shared',
+    'inversify',
+  ],
   output: [
     {
       file: join(cwd, 'dist/index.js'),
@@ -33,7 +40,7 @@ function rollup() {
   } else if (target === 'esm') {
     return esmConfig;
   } else {
-    return [baseConfig, esmConfig];
+    return [esmConfig];
   }
 }
 module.exports = rollup();

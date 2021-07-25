@@ -184,8 +184,8 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useVibrate 震动反馈',
     },
     {
-      id: 'useScreen',
-      name: 'useScreen 屏幕相关',
+      id: 'useMotion',
+      name: 'useMotion 设备方向',
     },
     {
       id: 'useBrightness',

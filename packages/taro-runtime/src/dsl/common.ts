@@ -6,44 +6,43 @@ import {
   Shortcuts,
   isUndefined,
   isArray,
-  warn,
 } from '@tarojs/shared';
+import container from '../container';
+import SERVICE_IDENTIFIER from '../constants/identifiers';
 import { eventHandler } from '../dom/event';
 import { Current } from '../current';
 import { document } from '../bom/document';
-import { TaroRootElement } from '../dom/root';
-import { MpInstance } from '../hydrate';
-import { Instance, PageInstance, PageProps } from './instance';
 import { incrementId } from '../utils';
 import { perf } from '../perf';
 import { PAGE_INIT } from '../constants';
 import { isBrowser } from '../env';
 import { eventCenter } from '../emitter/emitter';
 import { raf } from '../bom/raf';
-import { CurrentReconciler } from '../reconciler';
 
 import type { PageConfig } from '@tarojs/taro';
-import type { Func } from '../utils/types';
+import type { Instance, PageInstance, PageProps } from './instance';
+import type { Func, IHooks, MpInstance } from '../interface';
+import type { TaroRootElement } from '../dom/root';
 
 const instances = new Map<string, Instance>();
+const pageId = incrementId();
+const hooks = container.get<IHooks>(SERVICE_IDENTIFIER.Hooks);
 
 export function injectPageInstance(inst: Instance<PageProps>, id: string) {
-  CurrentReconciler.mergePageInstance?.(instances.get(id), inst);
+  hooks.mergePageInstance?.(instances.get(id), inst);
   instances.set(id, inst);
 }
 
-export function getPageInstance(id: string) {
+export function getPageInstance(id: string): Instance | undefined {
   return instances.get(id);
 }
 
-export function addLeadingSlash(path?: string) {
+export function addLeadingSlash(path?: string): string {
   if (path == null) {
     return '';
   }
   return path.charAt(0) === '/' ? path : '/' + path;
 }
-
-const pageId = incrementId();
 
 export function safeExecute(
   path: string,
@@ -56,7 +55,7 @@ export function safeExecute(
     return;
   }
 
-  const func = CurrentReconciler.getLifecyle(instance, lifecycle);
+  const func = hooks.getLifecycle(instance, lifecycle);
 
   if (isArray(func)) {
     const res = func.map((fn) => fn.apply(instance, args));
@@ -244,7 +243,7 @@ export function createPageConfig(
     component.enableShareAppMessage
   ) {
     config.onShareAppMessage = function (options) {
-      const target = options.target;
+      const target = options?.target;
       if (target != null) {
         const id = target.id;
         const element = document.getElementById(id);
@@ -289,7 +288,7 @@ export function createComponentConfig(
   const config: any = {
     attached() {
       perf.start(PAGE_INIT);
-      const path = getPath(id, { id: this.getPageId() });
+      const path = getPath(id, { id: this.getPageId?.() || pageId() });
       Current.app!.mount!(component, path, () => {
         componentElement = document.getElementById<TaroRootElement>(path);
         ensure(componentElement !== null, '没有找到组件实例。');
@@ -308,14 +307,6 @@ export function createComponentConfig(
           componentElement.ctx = null;
         }
       });
-    },
-    pageLifetimes: {
-      show() {
-        safeExecute(id, 'onShow');
-      },
-      hide() {
-        safeExecute(id, 'onHide');
-      },
     },
     methods: {
       eh: eventHandler,
@@ -343,16 +334,6 @@ export function createRecursiveComponentConfig(componentName?: string) {
       l: {
         type: String,
         value: '',
-      },
-    },
-    observers: {
-      i(val: Record<string, unknown>) {
-        warn(
-          val[Shortcuts.NodeName] === '#text',
-          `请在此元素外再套一层非 Text 元素：<text>${
-            val[Shortcuts.Text]
-          }</text>，详情：https://github.com/NervJS/taro/issues/6054`,
-        );
       },
     },
     options: {

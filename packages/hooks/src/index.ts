@@ -33,7 +33,7 @@ import useRequest from './useRequest';
 // device
 import useBattery from './useBattery';
 import useVibrate from './useVibrate';
-import useScreen from './useScreen';
+import useMotion from './useMotion';
 import useBrightness from './useBrightness';
 
 export {
@@ -61,6 +61,6 @@ export {
   useStorage,
   useBattery,
   useVibrate,
-  useScreen,
+  useMotion,
   useBrightness,
 };
