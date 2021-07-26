@@ -60,6 +60,8 @@ export default {
     'pages/useVibrate/index',
     'pages/useMotion/index',
     'pages/useBrightness/index',
+    // media
+    'pages/useImage/index',
   ],
   window: {
     backgroundTextStyle: 'light',

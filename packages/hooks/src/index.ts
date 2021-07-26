@@ -36,6 +36,9 @@ import useVibrate from './useVibrate';
 import useMotion from './useMotion';
 import useBrightness from './useBrightness';
 
+// media
+import useImage from './useImage';
+
 export {
   useEnv,
   useLaunchOptions,
@@ -63,4 +66,5 @@ export {
   useVibrate,
   useMotion,
   useBrightness,
+  useImage,
 };
