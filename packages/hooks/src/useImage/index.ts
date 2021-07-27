@@ -8,7 +8,7 @@ import {
   General,
   ENV_TYPE,
 } from '@tarojs/taro';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useEnv } from '..';
 import { saveImageForH5 } from './utils';
 
@@ -26,9 +26,24 @@ export type PreviewImageAction = (
   option: PreviewImageOption,
 ) => Promise<General.CallbackResult>;
 
-export type saveImageToPhotosAlbumAction = (
+export type SaveImageToPhotosAlbumAction = (
   filePath: string,
 ) => Promise<General.CallbackResult>;
+
+export type GetImageInfoAction = (
+  src: string,
+) => Promise<getImageInfo.SuccessCallbackResult>;
+
+export type ChooseMessageFileAction = (
+  count: number,
+  type?: Pick<chooseMessageFile.Option, 'type'>,
+  extend?: Pick<chooseMessageFile.Option, 'extension'>,
+) => Promise<chooseMessageFile.SuccessCallbackResult>;
+
+export type CompressImageAction = (
+  src: string,
+  quality?: number,
+) => Promise<compressImage.SuccessCallbackResult>;
 
 export type IFileInfo = Partial<
   Pick<chooseImage.SuccessCallbackResult, 'tempFilePaths' | 'tempFiles'>
@@ -38,8 +53,11 @@ export type IOptions = ChooseImageOption;
 
 export interface IAction {
   choose: ChooseImageAction;
+  chooseMessageFile: ChooseMessageFileAction;
   preview: PreviewImageAction;
-  save: saveImageToPhotosAlbumAction;
+  save: SaveImageToPhotosAlbumAction;
+  getInfo: GetImageInfoAction;
+  compress: CompressImageAction;
 }
 
 function useImage(options: IOptions): [IFileInfo, IAction] {
@@ -91,7 +109,7 @@ function useImage(options: IOptions): [IFileInfo, IAction] {
     });
   }, []);
 
-  const saveImageToPhotosAlbumAsync = useCallback<saveImageToPhotosAlbumAction>(
+  const saveImageToPhotosAlbumAsync = useCallback<SaveImageToPhotosAlbumAction>(
     (filePath) => {
       return new Promise(async (resolve, reject) => {
         if (!filePath) {
@@ -123,12 +141,85 @@ function useImage(options: IOptions): [IFileInfo, IAction] {
     [env],
   );
 
+  const getImageInfoAsync = useCallback<GetImageInfoAction>((src) => {
+    return new Promise((resolve, reject) => {
+      if (!src) {
+        reject('please enter a valid path');
+      } else {
+        try {
+          getImageInfo({
+            src,
+            success: resolve,
+            fail: reject,
+          }).catch(reject);
+        } catch (e) {
+          reject(e);
+        }
+      }
+    });
+  }, []);
+
+  const chooseMessageFileAsync = useCallback<ChooseMessageFileAction>(
+    (count, type, extension) => {
+      return new Promise((resolve, reject) => {
+        if (!count || env !== ENV_TYPE.WEAPP) {
+          reject('you must provide count');
+        } else {
+          try {
+            const payload = Object.fromEntries(
+              [
+                ['type', type],
+                ['extension', extension],
+              ].filter((v) => v[1]) || [],
+            );
+            chooseMessageFile({
+              count,
+              ...payload,
+              success: resolve,
+              fail: reject,
+            });
+          } catch (e) {
+            reject(e);
+          }
+        }
+      });
+    },
+    [env],
+  );
+
+  const compressImageAsync = useCallback<CompressImageAction>(
+    (src, quality) => {
+      return new Promise((resolve, reject) => {
+        if (!src) {
+          reject('you must provide src');
+        }
+        try {
+          if (env === ENV_TYPE.WEB) {
+          } else {
+            compressImage({
+              src,
+              ...(quality ? { quality } : {}),
+              success: resolve,
+              fail: reject,
+            }).catch(reject);
+          }
+        } catch (e) {
+          reject(e);
+        }
+      });
+    },
+    [env],
+  );
+
   return [
     fileInfo,
     {
       choose: chooseImageAsync,
+      chooseMessageFile: chooseMessageFileAsync,
       preview: previewImageAsync,
       save: saveImageToPhotosAlbumAsync,
+      getInfo: getImageInfoAsync,
+      compress: compressImageAsync,
     },
   ];
 }

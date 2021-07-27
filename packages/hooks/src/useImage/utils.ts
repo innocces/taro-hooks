@@ -3,7 +3,6 @@ export const saveImageForH5 = async (filePath: string) => {
     let result = true;
     try {
       const responese = await fetch(filePath);
-      console.log(responese);
       const blob = await responese.blob();
       const blobInstance = new Blob([blob], {
         type: 'application/octet-stream',
