@@ -20,21 +20,28 @@ group:
 ## API
 
 ```jsx | pure
-const [show, hide] = useLoading(initialOption);
+const [
+  fileInfo,
+  { choose, chooseMessageFile, preview, save, getInfo, compress },
+] = useImage(initialOption);
 ```
 
 ## 参数说明
 
-| 参数          | 说明                                       | 类型                 | 默认值 |
-| ------------- | ------------------------------------------ | -------------------- | ------ |
-| initialOption | 初始提示框配置(若指定后面可与新的配置合并) | `General.IAnyObject` | -      |
+| 参数          | 说明                                         | 类型                                                                               | 默认值 |
+| ------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- | ------ |
+| initialOption | 初始拾取图片配置(若指定后面可与新的配置合并) | `Partial<Pick<chooseImage.Option, 'count' &#124; 'sizeType' &#124; 'sourceType'>>` | -      |
 
 ## 返回值说明
 
-| 返回值 | 说明           | 类型                                             |
-| ------ | -------------- | ------------------------------------------------ |
-| show   | 显示加载提示框 | `(options?: General.IAnyObject) => Promise<any>` |
-| hide   | 隐藏提示框     | `() => Promise<any>`                             |
+| 返回值            | 说明              | 类型                                                                                                                                                                    |
+| ----------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| choose            | 选择图片          | `(option: ChooseImageOption) => Promise<chooseImage.SuccessCallbackResult>`                                                                                             |
+| chooseMessageFile | 选择会话资源      | `(count: number,type?: Pick<chooseMessageFile.Option, 'type'>,extend?: Pick<chooseMessageFileOption, 'extension'>) => Promise<chooseMessageFile.SuccessCallbackResult>` |
+| preview           | 预览图片          | `(option: PreviewImageOption) => Promise<General.CallbackResult>`                                                                                                       |
+| save              | 保存图片(h5 支持) | `(filePath: string) => Promise<General.CallbackResult>`                                                                                                                 |
+| getInfo           | 获取图片资源详情  | `(src: string) => Promise<getImageInfo.SuccessCallbackResult>`                                                                                                          |
+| compress          | 压缩图片(h5 支持) | `(src: string,quality?: number) => Promise<compressImage.SuccessCallbackResult>`                                                                                        |
 
 ## 代码演示
 
