@@ -9,8 +9,9 @@ import {
   ENV_TYPE,
 } from '@tarojs/taro';
 import { useCallback, useState } from 'react';
+import Compressor from 'compressorjs';
 import { useEnv } from '..';
-import { saveImageForH5 } from './utils';
+import { saveImageForH5, downloadImage, generateBlobUrl } from './utils';
 
 export type ChooseImageOption = Partial<
   Pick<chooseImage.Option, 'count' | 'sizeType' | 'sourceType'>
@@ -189,12 +190,24 @@ function useImage(options: IOptions): [IFileInfo, IAction] {
 
   const compressImageAsync = useCallback<CompressImageAction>(
     (src, quality) => {
-      return new Promise((resolve, reject) => {
+      return new Promise(async (resolve, reject) => {
         if (!src) {
           reject('you must provide src');
         }
         try {
           if (env === ENV_TYPE.WEB) {
+            const blob = await downloadImage(src);
+            new Compressor(blob, {
+              quality: (quality || 80) / 100,
+              success: (res) => {
+                const tempFilePath = generateBlobUrl(res);
+                resolve({
+                  tempFilePath,
+                  errMsg: 'compressImage:ok',
+                });
+              },
+              error: reject,
+            });
           } else {
             compressImage({
               src,
