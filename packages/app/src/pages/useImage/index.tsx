@@ -3,12 +3,13 @@ import { AtButton, AtFloatLayout, AtList, AtListItem } from 'taro-ui';
 import DocPage from '@components/DocPage';
 import { Swiper, SwiperItem, Image } from '@tarojs/components';
 
-import { useImage, useEnv } from 'taro-hooks';
+import { useImage, useEnv, useToast } from 'taro-hooks';
 import { ENV_TYPE } from '@tarojs/taro';
 
 import './index.less';
 
 export default () => {
+  const [show] = useToast({ mask: true });
   const [open, changeOpen] = useState<boolean>(false);
   const [imageInfo, setImageInfo] = useState({});
   const env = useEnv();
@@ -43,6 +44,20 @@ export default () => {
     [compress],
   );
 
+  const saveInfo = useCallback(() => {
+    save(fileInfo.tempFilePaths[0])
+      .then(() => {
+        show({
+          title: '保存成功',
+        });
+      })
+      .catch(() => {
+        show({
+          title: '保存失败',
+        });
+      });
+  }, [save, fileInfo, show]);
+
   return (
     <>
       <DocPage title="useImage 图片" panelTitle="useImage">
@@ -61,10 +76,7 @@ export default () => {
         >
           预览照片
         </AtButton>
-        <AtButton
-          disabled={!fileInfo.tempFilePaths}
-          onClick={() => save(fileInfo.tempFilePaths[0])}
-        >
+        <AtButton disabled={!fileInfo.tempFilePaths} onClick={saveInfo}>
           保存图片
         </AtButton>
         <AtButton
