@@ -1,5 +1,6 @@
 import { defineConfig } from 'dumi';
 
+const isProd = process.env.NODE_ENV === 'production';
 const specialItem = ['list-item', 'countdown-item', 'action-sheet-item'];
 const specialItemMap = {
   'action-sheet-item': 'action-sheet/body/item',
@@ -98,8 +99,14 @@ export default defineConfig({
       // 更多 rule 配置访问 https://github.com/umijs/dumi/blob/master/packages/theme-mobile/src/typings/config.d.ts#L7
     },
   },
-  esbuild: {
-    target: 'es5',
-  },
+  ...(isProd
+    ? {
+        webpack5: {},
+      }
+    : {
+        esbuild: {
+          target: 'es5',
+        },
+      }),
   // more config: https://d.umijs.org/config
 });

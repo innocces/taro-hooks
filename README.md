@@ -4,7 +4,7 @@
 
 # Taro-hooks
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)[![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4] [![][image-7]][5]
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)[![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4] [![][image-7]][5][![Netlify Status][image-8]][6]
 
 ## 简介
 
@@ -13,6 +13,7 @@
 ## 文档
 
 [传送门](https://innocces.github.io/taro-hooks)
+[netlify](https://taro-hooks.netlify.app)
 
 ## 使用案例
 
@@ -92,6 +93,7 @@ $ yarn start
 [3]: https://gitpod.io/#https://github.com/innocces/taro-hooks
 [4]: https://github.com/umijs/dumi
 [5]: https://codecov.io/gh/innocces/taro-hooks
+[6]: https://app.netlify.com/sites/taro-hooks/deploys
 [image-1]: https://img.shields.io/npm/v/taro-hooks.svg?style=flat
 [image-2]: https://img.shields.io/npm/dm/taro-hooks.svg?style=flat
 [image-3]: https://img.shields.io/node/v/taro-hooks.svg?style=flat-square
@@ -99,3 +101,4 @@ $ yarn start
 [image-5]: https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod
 [image-6]: https://img.shields.io/badge/docs%20by-dumi-blue
 [image-7]: https://codecov.io/gh/innocces/taro-hooks/branch/main/graph/badge.svg
+[image-8]: https://api.netlify.com/api/v1/badges/287ea853-a0e4-4f3a-9733-2ed39ae34d12/deploy-status
