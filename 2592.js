@@ -1,0 +1,1 @@
+(self["webpackChunktaro_hooks"]=self["webpackChunktaro_hooks"]||[]).push([[2592],{42592:function(r,t,o){"use strict";o.r(t),o.d(t,{taro_label_core:function(){return e}});var n=o(41674),e=function(){function r(r){(0,n.r)(this,r)}return r.prototype.render=function(){return(0,n.h)("label",{htmlFor:this["for"]},(0,n.h)("slot",null))},r}()}}]);

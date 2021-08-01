@@ -1,0 +1,1 @@
+(self["webpackChunktaro_hooks"]=self["webpackChunktaro_hooks"]||[]).push([[8511],{48511:function(r,n,t){"use strict";t.r(n),t.d(n,{taro_custom_wrapper_core:function(){return u}});var o=t(41674),u=function(){function r(r){(0,o.r)(this,r)}return r.prototype.render=function(){return(0,o.h)(o.H,null)},r}()}}]);
