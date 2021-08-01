@@ -62,6 +62,7 @@ export default {
     'pages/useBrightness/index',
     // media
     'pages/useImage/index',
+    'pages/useVideo/index',
   ],
   window: {
     backgroundTextStyle: 'light',
