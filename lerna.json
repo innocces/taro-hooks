@@ -3,10 +3,13 @@
   "command": {
     "version": {
       "allowBranch": "main",
-      "includeMergedTags": true
+      "includeMergedTags": true,
+      "message": "chore(release): publish %s",
+      "conventionalCommits": true
     },
     "publish": {
-      "registry": "https://registry.npmjs.org/"
+      "registry": "https://registry.npmjs.org/",
+      "message": "chore(release): publish %s"
     }
   },
   "useWorkspaces": true,
