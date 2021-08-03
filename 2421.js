@@ -1,1 +1,1 @@
-(self["webpackChunktaro_hooks"]=self["webpackChunktaro_hooks"]||[]).push([[2421],{82421:function(n,r,o){"use strict";o.r(r),o.d(r,{taro_block_core:function(){return u}});var t=o(41674),u=function(){function n(n){(0,t.r)(this,n)}return n.prototype.render=function(){return(0,t.h)(t.H,null)},n}()}}]);
+(self["webpackChunk"]=self["webpackChunk"]||[]).push([[2421],{82421:function(n,r,t){"use strict";t.r(r),t.d(r,{taro_block_core:function(){return e}});var u=t(41674),e=function(){function n(n){(0,u.r)(this,n)}return n.prototype.render=function(){return(0,u.h)(u.H,null)},n}()}}]);
