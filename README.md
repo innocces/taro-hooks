@@ -79,7 +79,7 @@ $ yarn start
 打开浏览器 - [http://localhost:12345](http://localhost:12345)  
 更多贡献详情见[官网文档](https://innocces.github.io/taro-hooks)
 
-> 注: `packages/taro-runtime`是为了配合文档单独使用生命周期 hook 独立保存的。遇更新会随时更新。无需关心。
+> 注: `packages/taro-runtime`是为了配合文档单独使用生命周期 hook 独立保存的。遇更新会随时更新。无需关心。`father-build`同理。
 
 ## 交流讨论
 

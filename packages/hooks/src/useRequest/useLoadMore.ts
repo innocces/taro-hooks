@@ -11,7 +11,7 @@ import useUpdateEffect from './utils/useUpdateEffect';
 import { ENV_TYPE } from '@tarojs/taro';
 import { BaseEventOrig } from '@tarojs/components';
 import { ScrollViewProps } from '@tarojs/components/types/ScrollView';
-import { useEnv } from '../';
+import useEnv from '../useEnv';
 
 type scrollEvent = BaseEventOrig<ScrollViewProps.onScrollDetail>;
 

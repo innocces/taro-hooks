@@ -12,10 +12,18 @@ export default {
     minify: true,
   },
   umd: {
-    globals: 'taro-hooks',
+    globals: {
+      react: 'React',
+      '@tarojs/taro': 'Taro',
+      querystring: 'querystring',
+    },
     name: 'taro-hooks',
-    miniFile: true,
+    file: 'taro-hooks',
+    minFile: true,
     sourcemap: true,
   },
+  injectCSS: false, // 不注入css
+  extractCSS: false, // 单独提取css
   runtimeHelpers: true,
+  disableTypeCheck: true,
 };

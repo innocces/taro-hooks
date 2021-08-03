@@ -8,7 +8,7 @@ import {
   ENV_TYPE,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useRef } from 'react';
-import { useEnv } from '../';
+import useEnv from '../useEnv';
 
 export interface ISetColorOption {
   backgroundColor: string;

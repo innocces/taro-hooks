@@ -26,7 +26,9 @@
   },
   "repository": "https://github.com/innocces/taro-hooks",
   "homepage": "https://innocces.github.io/taro-hooks/",
-  "scripts": {},
+  "scripts": {
+    "build": "../../node_modules/.bin/father-build"
+  },
   "files": [
     "dist",
     "lib",

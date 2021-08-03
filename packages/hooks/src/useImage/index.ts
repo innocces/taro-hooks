@@ -10,7 +10,7 @@ import {
 } from '@tarojs/taro';
 import { useCallback, useState } from 'react';
 import Compressor from 'compressorjs';
-import { useEnv } from '..';
+import useEnv from '../useEnv';
 import { saveImageForH5, downloadImage, generateBlobUrl } from './utils';
 
 export type ChooseImageOption = Partial<
@@ -50,8 +50,6 @@ export type IFileInfo = Partial<
   Pick<chooseImage.SuccessCallbackResult, 'tempFilePaths' | 'tempFiles'>
 >;
 
-export type IOptions = ChooseImageOption;
-
 export interface IAction {
   choose: ChooseImageAction;
   chooseMessageFile: ChooseMessageFileAction;
@@ -61,7 +59,7 @@ export interface IAction {
   compress: CompressImageAction;
 }
 
-function useImage(options: IOptions): [IFileInfo, IAction] {
+function useImage(options: ChooseImageOption): [IFileInfo, IAction] {
   const [fileInfo, setFileInfo] = useState<IFileInfo>({});
   const env = useEnv();
 

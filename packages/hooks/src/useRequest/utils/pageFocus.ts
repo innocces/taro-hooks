@@ -1,6 +1,7 @@
 // from swr
 import { useCallback, useEffect, useState } from 'react';
-import { useVisible, useOnline } from '../../';
+import useVisible from '../../useVisible';
+import useOnline from '../../useOnline';
 
 function usePageFocus() {
   const [listeners, setListeners] = useState<any[]>([]);

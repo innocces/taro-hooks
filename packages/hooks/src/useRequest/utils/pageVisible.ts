@@ -1,6 +1,6 @@
 // from swr
 import { useCallback, useEffect, useState } from 'react';
-import { useVisible } from '../../';
+import useVisible from '../../useVisible';
 
 function usePageVisible() {
   const [listeners, setListeners] = useState<any[]>([]);

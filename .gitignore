@@ -6,6 +6,7 @@
 /yarn-error.log
 /yarn.lock
 /package-lock.json
+/packages/*/node_modules
 
 /packages/taro-runtime/dist/*
 
@@ -13,6 +14,9 @@
 /dist
 /docs-dist
 /app-dist
+/packages/hooks/lib
+/packages/hooks/es
+/packages/hooks/dist
 
 # misc
 .DS_Store

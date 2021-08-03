@@ -7,7 +7,7 @@ import {
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 
-import { useEnv } from '..';
+import useEnv from '../useEnv';
 
 export type interval = keyof startDeviceMotionListening.interval;
 
