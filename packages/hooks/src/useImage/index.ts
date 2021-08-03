@@ -1,4 +1,4 @@
-import {
+import Taro, {
   saveImageToPhotosAlbum,
   previewImage,
   getImageInfo,
@@ -171,7 +171,7 @@ function useImage(options: ChooseImageOption): [IFileInfo, IAction] {
                 ['extension', extension],
               ].filter((v) => v[1]) || [],
             );
-            chooseMessageFile({
+            Taro.chooseMessageFile({
               count,
               ...payload,
               success: resolve,
@@ -207,7 +207,7 @@ function useImage(options: ChooseImageOption): [IFileInfo, IAction] {
               error: reject,
             });
           } else {
-            compressImage({
+            Taro.compressImage({
               src,
               ...(quality ? { quality } : {}),
               success: resolve,
