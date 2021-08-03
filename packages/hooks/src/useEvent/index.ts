@@ -1,6 +1,7 @@
 import { useCallback, useContext, useReducer } from 'react';
 import { context, wrapperEvent } from '../context';
 import { typeOf } from '../utils/tool';
+import uniq from 'lodash.uniq';
 
 export type eventHandler = (...args: any[]) => void;
 
@@ -197,7 +198,7 @@ function useEvent(namespace: string) {
             });
             return {
               eventNameQueue: [
-                ...new Set([
+                ...uniq([
                   ...state.eventNameQueue,
                   (payload as IActionAddPayload).eventName,
                 ]),
