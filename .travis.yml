@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 'lts/*'
+install:
+  - npm install -g yarn
+  - yarn bootstrap
+script:
+  - yarn docs:build
+cache:
+  directories:
+    - 'node_modules'
