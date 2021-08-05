@@ -80,11 +80,12 @@ $ yarn app:dev
 $ yarn app:dev:h5
 ```
 
-打开浏览器 - [http://localhost:12345](http://localhost:12345)
+打开浏览器 - [http://localhost:12345](http://localhost:12345)  
 若开启 h5 预览 - [http://0.0.0.0:10086](http://0.0.0.0:10086)  
 更多贡献详情见[官网文档](https://taro-hooks.vercel.app)
 
-> 注: `packages/taro-runtime`是为了配合文档单独使用生命周期 hook 独立保存的。遇更新会随时更新。无需关心。`father-build`同理。
+> 注: `packages/taro-runtime`是为了配合文档单独使用生命周期 hook 独立保存的。遇更新会随时更新。无需关心。
+> `father-build`同理。
 
 ## 交流讨论
 
