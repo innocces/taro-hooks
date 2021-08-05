@@ -4,7 +4,7 @@
 
 # Taro-hooks
 
-[![PRs Welcome][image-10]](8)[![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]]([9])
+[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]
 
 ## 简介
 
@@ -92,7 +92,9 @@ $ yarn app:dev:h5
 
 ## License
 
-[MIT](./LICENSE)
+[MIT@innocces](./LICENSE)
+
+[![FOSSA Status][image-13]][11]
 
 [1]: https://www.npmjs.com/package/taro-hooks
 [2]: https://npmjs.org/package/taro-hooks
@@ -103,6 +105,8 @@ $ yarn app:dev:h5
 [7]: https://www.npmjs.com/package/father-build
 [8]: http://makeapullrequest.com
 [9]: https://lerna.js.org/
+[10]: https://app.fossa.com/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks?ref=badge_shield
+[11]: https://app.fossa.com/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks?ref=badge_large
 [image-1]: https://img.shields.io/npm/v/taro-hooks.svg?style=flat
 [image-2]: https://img.shields.io/npm/dm/taro-hooks.svg?style=flat
 [image-3]: https://img.shields.io/node/v/taro-hooks.svg?style=flat-square
@@ -114,3 +118,5 @@ $ yarn app:dev:h5
 [image-9]: https://img.shields.io/badge/build%20by-father-build
 [image-10]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [image-11]: https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg
+[image-12]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks.svg?type=shield
+[image-13]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks.svg?type=large
