@@ -20,23 +20,25 @@ group:
 ## API
 
 ```jsx | pure
-const [videoContext, { choose, save, create }] = useVideo(initialOption?);
+const [
+  cameraContext,
+  { create, startRecord, stopRecord, takePhoto, onCameraFrame },
+] = useCamera();
 ```
 
 ## 参数说明
 
-| 参数          | 说明                                         | 类型                                                                          | 默认值 |
-| ------------- | -------------------------------------------- | ----------------------------------------------------------------------------- | ------ |
-| initialOption | 初始选择视频配置(若指定后面可与新的配置合并) | `Pick<chooseVideo.Option, 'camera' &#124; 'sourceType' &#124; 'maxDuration'>` | -      |
+无
 
 ## 返回值说明
 
-| 返回值       | 说明              | 类型                                                                 |
-| ------------ | ----------------- | -------------------------------------------------------------------- |
-| videoContext | video 上下文      | `VideoContext &#124; undefined`                                      |
-| choose       | 选择视频          | `(option?: IOptions) => Promise<chooseVideo。SuccessCallbackResult>` |
-| save         | 保存视频          | `(filePath: string,) => Promise<General.CallbackResult>`             |
-| create       | 创建 Video 上下文 | `(id: string, component?: Record<string, any>,) => IVideoContext`    |
+| 返回值        | 说明               | 类型                                                                                                                         |
+| ------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| cameraContext | camera 上下文      | `CameraContext &#124; undefined`                                                                                             |
+| startRecord   | 开始录制视屏       | `(callback?: CameraContext.StartRecordTimeoutCallback) => Promise<General.CallbackResult>`                                   |
+| stopRecord    | 结束录制视频       | `() => Promise<General.CallbackResult &#124; CameraContext.StopRecordSuccessCallbackResult>`                                 |
+| takePhoto     | 拍照               | `(option: Partial<Pick<CameraContext.TakePhotoOption, 'quality'>>) => Promise<CameraContext.TakePhotoSuccessCallbackResult>` |
+| create        | 创建 camera 上下文 | `() => ICameraContext`                                                                                                       |
 
 ## 代码演示
 
