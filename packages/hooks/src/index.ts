@@ -40,6 +40,7 @@ import useBrightness from './useBrightness';
 import useImage from './useImage';
 import useVideo from './useVideo';
 import useCamera from './useCamera';
+import useAudio from './useAudio';
 
 export {
   useEnv,
@@ -71,4 +72,5 @@ export {
   useImage,
   useVideo,
   useCamera,
+  useAudio,
 };

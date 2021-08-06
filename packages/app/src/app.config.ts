@@ -64,6 +64,7 @@ export default {
     'pages/useImage/index',
     'pages/useVideo/index',
     'pages/useCamera/index',
+    'pages/useAudio/index',
   ],
   window: {
     backgroundTextStyle: 'light',
