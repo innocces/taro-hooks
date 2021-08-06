@@ -4,6 +4,7 @@
     "packages/*"
   ],
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
