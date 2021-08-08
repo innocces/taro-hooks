@@ -163,6 +163,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     },
     {
       id: 'useAudio',
+      name: 'useRecord 录音',
+    },
+    {
+      id: 'useAudio',
       name: 'useAudio 音频',
     },
     {

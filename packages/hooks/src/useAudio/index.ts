@@ -1,259 +1,406 @@
 import {
   General,
   ENV_TYPE,
-  getRecorderManager,
-  RecorderManager,
+  createInnerAudioContext,
+  setInnerAudioOption,
+  getAvailableAudioSources,
+  InnerAudioContext,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
 
-export type IRecorderManager = RecorderManager | undefined;
+export type IAudioContext = InnerAudioContext | undefined;
 
-export type RecordStatus =
-  | 'error'
-  | undefined
-  | 'start'
-  | 'stop'
-  | 'pause'
-  | 'frameRecorder'
-  | 'interruptionBegin'
-  | 'interruptionEnd'
-  | 'resume';
-
-export type IOnErrorAction = (
-  callback: RecorderManager.OnErrorCallback,
-) => void;
-
-export type IOnFrameRecorded = (
-  callback: RecorderManager.OnFrameRecordedCallback,
-) => void;
-
-export type IOnStopAction = (callback: RecorderManager.OnStopCallback) => void;
-
-export type INormalAction = (callback: General.EventCallback) => void;
-
-export type IStartRecordAction = (
-  option: RecorderManager.StartOption,
-) => Promise<General.CallbackResult>;
-
-export type INormalPromiseAction = () => Promise<General.CallbackResult>;
-
-export interface IAction {
-  onError: IOnErrorAction;
-  onFrameRecorded: IOnFrameRecorded;
-  onInterruptionBegin: INormalAction;
-  onInterruptionEnd: INormalAction;
-  onPause: INormalAction;
-  onResume: INormalAction;
-  onStart: INormalAction;
-  onStop: IOnStopAction;
-  startRecord: IStartRecordAction;
-  stopRecord: INormalPromiseAction;
-  pauseRecord: INormalPromiseAction;
-  resumeRecord: INormalPromiseAction;
+export type IAudioSource =
+  | getAvailableAudioSources.SuccessCallbackResult['audioSources']
+  | undefined;
+export interface IOption extends Partial<setInnerAudioOption.Option> {
+  autoplay: boolean;
+  loop: boolean;
+  src: string;
+  startTime: number;
+  volume: number;
 }
 
-const noop = () => {};
+export type ICreateAction = (createOption?: Partial<IOption>) => IAudioContext;
 
-function useAudio(): [IRecorderManager, RecordStatus, IAction] {
-  const [recorderManager, setRecorderManager] = useState<IRecorderManager>();
-  const [recorderManagerStatus, changeRecorderManagerStatus] =
-    useState<RecordStatus>();
+export type ISetOptionAction = (
+  option?: Partial<IOption>,
+  instance?: InnerAudioContext,
+) => Promise<General.CallbackResult>;
+
+export type IGetAudioSourceAction =
+  () => Promise<getAvailableAudioSources.SuccessCallbackResult>;
+
+export type IPlayAction = (src?: string) => void;
+
+export type ISeekAction = (position: number) => void;
+
+export type INormalAction = () => void;
+
+export type INormalEventAction = (callback: INormalAction) => void;
+
+export type IOnErrorAction = (
+  callback: (res: InnerAudioContext.onErrorDetail) => void,
+) => void;
+export interface IAction {
+  create: ICreateAction;
+  setOption: ISetOptionAction;
+  getAudioSource: IGetAudioSourceAction;
+  play: IPlayAction;
+  stop: INormalAction;
+  pause: INormalAction;
+  seek: ISeekAction;
+  destory: INormalAction;
+  onCanPlay: INormalEventAction;
+  onPlay: INormalEventAction;
+  onPause: INormalEventAction;
+  onStop: INormalEventAction;
+  onEnded: INormalEventAction;
+  onTimeUpdate: INormalEventAction;
+  onError: IOnErrorAction;
+  onWaiting: INormalEventAction;
+  onSeeking: INormalEventAction;
+  onSeeked: INormalEventAction;
+  offCanPlay: INormalEventAction;
+  offPlay: INormalEventAction;
+  offPause: INormalEventAction;
+  offStop: INormalEventAction;
+  offEnded: INormalEventAction;
+  offTimeUpdate: INormalEventAction;
+  offError: INormalEventAction;
+  offWaiting: INormalEventAction;
+  offSeeking: INormalEventAction;
+  offSeeked: INormalEventAction;
+}
+
+const SPECIALOPTION = ['mixWithOther', 'obeyMuteSwitch'];
+
+function useAudio(
+  initOption?: Partial<IOption>,
+): [IAudioContext, IAudioSource, IAction] {
   const env = useEnv();
+  const [audioSource, setAudioSource] = useState<IAudioSource>();
+  const [audioContext, setAudioContext] = useState<IAudioContext>();
 
   useEffect(() => {
-    if (env) {
-      create();
-    }
-  }, [env]);
+    createAudioContext();
+    getAudioSourceAsync();
+  }, []);
 
-  useEffect(() => {
-    if (recorderManager) {
-      onError(noop);
-      onFrameRecorded(noop);
-      onInterruptionBegin(noop);
-      onInterruptionEnd(noop);
-      onPause(noop);
-      onResume(noop);
-      onStart(noop);
-      onStop(noop);
-    }
-  }, [recorderManager]);
-
-  const create = useCallback(() => {
-    if (env !== ENV_TYPE.WEB) {
-      const context = getRecorderManager();
-      setRecorderManager(context);
-    }
-  }, [env]);
-
-  const onError = useCallback<IOnErrorAction>(
-    (callback) => {
-      if (recorderManager) {
-        recorderManager.onError((res) => {
-          changeRecorderManagerStatus('error');
-          callback && callback(res);
-        });
+  const getAudioSourceAsync = useCallback<IGetAudioSourceAction>(() => {
+    return new Promise((resolve, reject) => {
+      if (env === ENV_TYPE.WEAPP) {
+        try {
+          getAvailableAudioSources({
+            success: (res) => {
+              resolve(res);
+              setAudioSource(res.audioSources);
+            },
+            fail: reject,
+          }).catch(reject);
+        } catch (e) {
+          reject(e);
+        }
       }
+    });
+  }, [audioContext, env]);
+
+  const createAudioContext = useCallback<ICreateAction>(
+    (createOption = {}) => {
+      if (audioContext) {
+        return audioContext;
+      }
+      const context = createInnerAudioContext();
+      setAudioOption({ ...(initOption || {}), ...createOption }, context);
+      setAudioContext(context);
+      return context;
     },
-    [recorderManager],
+    [audioContext],
   );
 
-  const onFrameRecorded = useCallback<IOnFrameRecorded>(
-    (callback) => {
-      if (recorderManager) {
-        recorderManager.onFrameRecorded((res) => {
-          changeRecorderManagerStatus('frameRecorder');
-          callback && callback(res);
-        });
-      }
-    },
-    [recorderManager],
-  );
-
-  const onInterruptionBegin = useCallback<INormalAction>(
-    (callback) => {
-      if (recorderManager) {
-        recorderManager.onInterruptionBegin((res) => {
-          changeRecorderManagerStatus('interruptionBegin');
-          callback && callback(res);
-        });
-      }
-    },
-    [recorderManager],
-  );
-
-  const onInterruptionEnd = useCallback<INormalAction>(
-    (callback) => {
-      if (recorderManager) {
-        recorderManager.onInterruptionEnd((res) => {
-          changeRecorderManagerStatus('interruptionEnd');
-          callback && callback(res);
-        });
-      }
-    },
-    [recorderManager],
-  );
-
-  const onPause = useCallback<INormalAction>(
-    (callback) => {
-      if (recorderManager) {
-        recorderManager.onPause((res) => {
-          changeRecorderManagerStatus('pause');
-          callback && callback(res);
-        });
-      }
-    },
-    [recorderManager],
-  );
-
-  const onResume = useCallback<INormalAction>(
-    (callback) => {
-      if (recorderManager) {
-        recorderManager.onResume((res) => {
-          changeRecorderManagerStatus('resume');
-          callback && callback(res);
-        });
-      }
-    },
-    [recorderManager],
-  );
-
-  const onStart = useCallback<INormalAction>(
-    (callback) => {
-      if (recorderManager) {
-        recorderManager.onStart((res) => {
-          changeRecorderManagerStatus('start');
-          callback && callback(res);
-        });
-      }
-    },
-    [recorderManager],
-  );
-
-  const onStop = useCallback<IOnStopAction>(
-    (callback) => {
-      if (recorderManager) {
-        recorderManager.onStop((res) => {
-          changeRecorderManagerStatus('stop');
-          callback && callback(res);
-        });
-      }
-    },
-    [recorderManager],
-  );
-
-  const startRecord = useCallback<IStartRecordAction>(
-    (option = {}) => {
+  const setAudioOption = useCallback<ISetOptionAction>(
+    (option = {}, instance) => {
       return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEB && recorderManager) {
+        if (!option && (!audioContext || !instance)) {
+          reject({ errMsg: 'please provide option' });
+        } else {
+          const context = instance || audioContext;
           try {
-            recorderManager.start(option);
+            const specialOptions: { [_: string]: any } = {};
+            Object.entries(option).forEach(([key, value]) => {
+              if (SPECIALOPTION.includes(key)) {
+                specialOptions[key] = value;
+              } else {
+                (<any>context)[key] = value;
+              }
+            });
+            setInnerAudioOption({
+              ...specialOptions,
+              success: resolve,
+              fail: reject,
+            }).catch(reject);
           } catch (e) {
             reject(e);
           }
-          resolve({ errMsg: 'startRecord: ok' });
         }
       });
     },
-    [env, recorderManager],
+    [audioContext],
   );
 
-  const stopRecord = useCallback<INormalPromiseAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env !== ENV_TYPE.WEB && recorderManager) {
-        try {
-          recorderManager.stop();
-        } catch (e) {
-          reject({ errMsg: e });
+  const play = useCallback<IPlayAction>(
+    (src) => {
+      if (audioContext) {
+        if (src) {
+          setAudioOption({ src });
         }
-        resolve({ errMsg: 'stopRecord: ok' });
+        audioContext.play();
       }
-    });
-  }, [env, recorderManager]);
+    },
+    [audioContext],
+  );
 
-  const pauseRecord = useCallback<INormalPromiseAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env !== ENV_TYPE.WEB && recorderManager) {
-        try {
-          recorderManager.pause();
-        } catch (e) {
-          reject({ errMsg: e });
-        }
-        resolve({ errMsg: 'pauseRecord: ok' });
-      }
-    });
-  }, [env, recorderManager]);
+  const stop = useCallback<INormalAction>(() => {
+    if (audioContext) {
+      audioContext.stop();
+    }
+  }, [audioContext]);
 
-  const resumeRecord = useCallback<INormalPromiseAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env !== ENV_TYPE.WEB && recorderManager) {
-        try {
-          recorderManager.resume();
-        } catch (e) {
-          reject({ errMsg: e });
-        }
-        resolve({ errMsg: 'resumeRecord: ok' });
+  const pause = useCallback<INormalAction>(() => {
+    if (audioContext) {
+      audioContext.pause();
+    }
+  }, [audioContext]);
+
+  const seek = useCallback<ISeekAction>(
+    (position) => {
+      if (audioContext && typeof position === 'number') {
+        audioContext.seek(position);
       }
-    });
-  }, [env, recorderManager]);
+    },
+    [audioContext],
+  );
+
+  const destory = useCallback<INormalAction>(() => {
+    if (audioContext && env !== ENV_TYPE.WEB) {
+      audioContext.destroy();
+      setAudioContext(undefined);
+    }
+  }, [audioContext, env]);
+
+  const onCanPlay = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onCanplay(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offCanPlay = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offCanplay(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onPlay = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onPlay(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offPlay = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offPlay(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onStop = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onStop(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offStop = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offStop(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onPause = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onPause(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offPause = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offPause(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onEnded = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onEnded(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offEnded = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offEnded(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onTimeUpdate = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onTimeUpdate(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offTimeUpdate = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offTimeUpdate(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onError = useCallback<IOnErrorAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onError(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offError = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offError(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onWaiting = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onWaiting(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offWaiting = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offWaiting(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onSeeking = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onSeeking(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offSeeking = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offSeeking(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const onSeeked = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.onSeeked(callback);
+      }
+    },
+    [audioContext, env],
+  );
+
+  const offSeeked = useCallback<INormalEventAction>(
+    (callback) => {
+      if (audioContext && env !== ENV_TYPE.WEB && callback) {
+        audioContext.offSeeked(callback);
+      }
+    },
+    [audioContext, env],
+  );
 
   return [
-    recorderManager,
-    recorderManagerStatus,
+    audioContext,
+    audioSource,
     {
+      create: createAudioContext,
+      setOption: setAudioOption,
+      getAudioSource: getAudioSourceAsync,
+      play,
+      pause,
+      stop,
+      seek,
+      destory,
+      onCanPlay,
+      onEnded,
       onError,
-      onFrameRecorded,
-      onInterruptionBegin,
-      onInterruptionEnd,
       onPause,
-      onResume,
-      onStart,
+      onPlay,
+      onSeeked,
+      onSeeking,
       onStop,
-      startRecord,
-      stopRecord,
-      pauseRecord,
-      resumeRecord,
+      onTimeUpdate,
+      onWaiting,
+      offCanPlay,
+      offEnded,
+      offError,
+      offPause,
+      offPlay,
+      offSeeked,
+      offSeeking,
+      offStop,
+      offTimeUpdate,
+      offWaiting,
     },
   ];
 }
