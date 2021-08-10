@@ -60,6 +60,7 @@ export default {
     'pages/useVibrate/index',
     'pages/useMotion/index',
     'pages/useBrightness/index',
+    'pages/useLocation/index',
     // media
     'pages/useImage/index',
     'pages/useVideo/index',
@@ -92,4 +93,10 @@ export default {
       },
     ],
   },
+  permission: {
+    'scope.userLocation': {
+      desc: '您的位置信息将用于小程序位置接口展示',
+    },
+  },
+  requiredBackgroundModes: ['location'],
 };

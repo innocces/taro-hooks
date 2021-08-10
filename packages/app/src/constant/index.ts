@@ -174,8 +174,8 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useCamera 相机',
     },
     {
-      id: 'useRecord',
-      name: 'useRecord 录音',
+      id: 'useMap',
+      name: 'useMap 地图',
     },
   ],
   [APIChildrenName.device]: [
@@ -194,6 +194,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useBrightness',
       name: 'useBrightness 屏幕亮度',
+    },
+    {
+      id: 'useLocation',
+      name: 'useLocation 地理位置',
     },
   ],
   [APIChildrenName.network]: [

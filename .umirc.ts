@@ -14,6 +14,7 @@ export default defineConfig({
   devServer: {
     host: '0.0.0.0',
     port: 12345,
+    https: true,
   },
   alias: {
     '@tarojs/components$': '@tarojs/components/dist-h5/react',
@@ -25,6 +26,7 @@ export default defineConfig({
   },
   define: {
     'process.env.TARO_ENV': 'h5',
+    LOCATION_APIKEY: JSON.stringify('J3OBZ-WBJKG-M5DQZ-IJQ4V-FSK2H-BTBZV'),
   },
   extraPostCSSPlugins: [
     require('postcss-pxtorem')({

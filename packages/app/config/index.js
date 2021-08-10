@@ -12,7 +12,9 @@ const config = {
   sourceRoot: 'src',
   outputRoot: '../../app-dist',
   plugins: [],
-  defineConstants: {},
+  defineConstants: {
+    LOCATION_APIKEY: JSON.stringify('J3OBZ-WBJKG-M5DQZ-IJQ4V-FSK2H-BTBZV'),
+  },
   copy: {
     patterns: [],
     options: {},
