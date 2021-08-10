@@ -1,18 +1,32 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AtNoticebar, AtList, AtListItem, AtButton } from 'taro-ui';
 
 import DocPage from '@components/DocPage';
 
 import { useLocation, useEnv, useModal } from 'taro-hooks';
-import { ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE, General } from '@tarojs/taro';
 
 import './index.less';
 
 export default () => {
-  const [location, { getLocation, chooseLocation }] = useLocation({
+  const [
+    location,
+    {
+      getLocation,
+      chooseLocation,
+      openLocation,
+      onLocationChange,
+      offLocationChange,
+      startLocationUpdate,
+      startLocationUpdateBackground,
+      stopLocationUpdate,
+    },
+  ] = useLocation({
     isHighAccuracy: true,
     altitude: true,
+    type: 'gcj02',
   });
+  const [listenStatus, changeListenStatus] = useState<boolean>();
   const env = useEnv();
   const [show] = useModal({ mask: true, title: '地理信息' });
 
@@ -25,6 +39,40 @@ export default () => {
     const chooseInfo = await chooseLocation();
     show({ content: JSON.stringify(chooseInfo) });
   }, [chooseLocation, show]);
+
+  const handleStartLocatonUpdate = useCallback(() => {
+    startLocationUpdate().finally((res: General.CallbackResult) => {
+      show({
+        content: res?.errMsg || '操作成功',
+      });
+    });
+  }, [startLocationUpdate, show]);
+
+  const handleStopLocatonUpdate = useCallback(() => {
+    stopLocationUpdate().finally((res: General.CallbackResult) => {
+      show({
+        content: res?.errMsg || '操作成功',
+      });
+    });
+  }, [stopLocationUpdate, show]);
+
+  const handleStartLocationUpdateBackground = useCallback(() => {
+    startLocationUpdateBackground().finally((res: General.CallbackResult) => {
+      show({
+        content: res?.errMsg || '操作成功',
+      });
+    });
+  }, [startLocationUpdateBackground, show]);
+
+  useEffect(() => {
+    if (typeof listenStatus === 'boolean') {
+      if (listenStatus) {
+        onLocationChange(console.log);
+      } else {
+        offLocationChange(console.log);
+      }
+    }
+  }, [listenStatus, onLocationChange, offLocationChange]);
 
   return (
     <>
@@ -42,13 +90,33 @@ export default () => {
           获取当前地理信息
         </AtButton>
         <AtButton onClick={handleChooseLocation}>选择地理信息</AtButton>
-        <AtButton className="gap">监听地理信息变化</AtButton>
-        <AtButton>取消监听地理信息变化</AtButton>
-        <AtButton className="gap" disabled={env === ENV_TYPE.WEB}>
+        <AtButton disabled={!location} onClick={() => openLocation(location)}>
+          打开地图查看信息
+        </AtButton>
+        <AtButton className="gap" onClick={() => changeListenStatus(true)}>
+          监听地理信息变化
+        </AtButton>
+        <AtButton onClick={() => changeListenStatus(false)}>
+          取消监听地理信息变化
+        </AtButton>
+        <AtButton
+          className="gap"
+          disabled={env === ENV_TYPE.WEB}
+          onClick={handleStartLocatonUpdate}
+        >
           开启前台接收位置
         </AtButton>
-        <AtButton disabled={env === ENV_TYPE.WEB}>停止前台接收位置</AtButton>
-        <AtButton className="gap" disabled={env === ENV_TYPE.WEB}>
+        <AtButton
+          disabled={env === ENV_TYPE.WEB}
+          onClick={handleStopLocatonUpdate}
+        >
+          停止前台接收位置
+        </AtButton>
+        <AtButton
+          className="gap"
+          disabled={env === ENV_TYPE.WEB}
+          onClick={handleStartLocationUpdateBackground}
+        >
           开启后台接收位置
         </AtButton>
       </DocPage>
