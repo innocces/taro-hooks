@@ -1,4 +1,4 @@
-import {
+import Taro, {
   getLocation,
   openLocation,
   chooseLocation,
@@ -147,7 +147,7 @@ function useLocation(options?: IGetLocationOption): [ILocation, IAction] {
               listenId.current = id as number;
             });
         } else {
-          onLocationChange(<onLocationChange.Callback>callback);
+          Taro.onLocationChange(<onLocationChange.Callback>callback);
         }
       }
     },
