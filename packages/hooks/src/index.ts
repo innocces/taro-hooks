@@ -43,6 +43,7 @@ import useVideo from './useVideo';
 import useCamera from './useCamera';
 import useRecord from './useRecord';
 import useAudio from './useAudio';
+import useMap from './useMap';
 
 export {
   useEnv,
@@ -77,4 +78,5 @@ export {
   useCamera,
   useAudio,
   useRecord,
+  useMap,
 };

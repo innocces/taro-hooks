@@ -27,6 +27,7 @@ export default () => {
     type: 'gcj02',
   });
   const [listenStatus, changeListenStatus] = useState<boolean>();
+  const [chooseLocationInfo, setChooseLocationInfo] = useState<object>();
   const env = useEnv();
   const [show] = useModal({ mask: true, title: '地理信息' });
 
@@ -37,6 +38,7 @@ export default () => {
 
   const handleChooseLocation = useCallback(async () => {
     const chooseInfo = await chooseLocation();
+    setChooseLocationInfo(chooseInfo);
     show({ content: JSON.stringify(chooseInfo) });
   }, [chooseLocation, show]);
 
@@ -90,8 +92,11 @@ export default () => {
           获取当前地理信息
         </AtButton>
         <AtButton onClick={handleChooseLocation}>选择地理信息</AtButton>
-        <AtButton disabled={!location} onClick={() => openLocation(location)}>
-          打开地图查看信息
+        <AtButton
+          disabled={!location || !chooseLocationInfo}
+          onClick={() => openLocation(chooseLocationInfo)}
+        >
+          打开地图查看信息(先选择)
         </AtButton>
         <AtButton className="gap" onClick={() => changeListenStatus(true)}>
           监听地理信息变化
