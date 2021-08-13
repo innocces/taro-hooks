@@ -1,3 +1,11 @@
+---
+name: Report bug
+about: Create a report to help us improve
+title: 'bug: '
+labels: 'bug'
+assignees: ''
+---
+
 <!--
 - Try to search for your issue, it may have already been answered or even fixed in the development version.
 
