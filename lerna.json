@@ -14,6 +14,6 @@
   },
   "useWorkspaces": true,
   "ignoreChanges": ["**/*.md", "**/es/*", "**/lib/*", "**/dist/*"],
-  "version": "0.0.0",
+  "version": "independent",
   "npmClient": "yarn"
 }

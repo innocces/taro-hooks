@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "father-build",
   "version": "1.19.6",
   "description": "Library build tool based on rollup.",
