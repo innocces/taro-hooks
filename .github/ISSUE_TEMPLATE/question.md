@@ -1,6 +1,6 @@
 ---
 name: Question
-about: Need help during use dumi
+about: Need help during use taro-hooks
 labels: question
 ---
 
