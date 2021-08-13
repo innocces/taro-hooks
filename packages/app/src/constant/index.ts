@@ -213,6 +213,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useOnline',
       name: 'useOnline 网络状态',
     },
+    {
+      id: 'useFile',
+      name: 'useFile 上传下载',
+    },
   ],
 };
 

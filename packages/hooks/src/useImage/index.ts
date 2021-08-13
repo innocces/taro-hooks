@@ -81,7 +81,6 @@ function useImage(options: ChooseImageOption): [IFileInfo, IAction] {
         chooseImage({
           ...finalOptions,
           success: (res) => {
-            console.log(res);
             const { errMsg, ...fileInfo } = res;
             setFileInfo(fileInfo);
             resolve(res);

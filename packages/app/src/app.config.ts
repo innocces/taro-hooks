@@ -55,6 +55,7 @@ export default {
     'pages/useRequest/loadMoreRef/index',
     'pages/useNetworkType/index',
     'pages/useOnline/index',
+    'pages/useFile/index',
     // device
     'pages/useBattery/index',
     'pages/useVibrate/index',

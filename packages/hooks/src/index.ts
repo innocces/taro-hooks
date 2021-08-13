@@ -29,6 +29,7 @@ import useUpdateManager from './useUpdateManager';
 import useNetworkType from './useNetworkType';
 import useOnline from './useOnline';
 import useRequest from './useRequest';
+import useFile from './useFile';
 
 // device
 import useBattery from './useBattery';
@@ -62,6 +63,7 @@ export {
   useNetworkType,
   useOnline,
   useRequest,
+  useFile,
   useToast,
   useModal,
   useLoading,
