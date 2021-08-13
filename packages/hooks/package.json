@@ -6,12 +6,16 @@
     "taro-hooks",
     "hooks",
     "taro",
+    "tarojs",
+    "tarojs-hooks",
     "react",
     "javascript",
     "lerna",
     "monorepo",
     "wechat",
-    "miniprograme"
+    "miniprograme",
+    "typescript",
+    "helpers"
   ],
   "main": "./lib/index.js",
   "module": "./es/index.js",
