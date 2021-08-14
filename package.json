@@ -25,7 +25,8 @@
     "lerna:publish:major": "lerna publish major",
     "lerna:publish:minor": "lerna publish minor",
     "lerna:publish:patch": "lerna publish patch",
-    "log": "./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s -r 0"
+    "log": "./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s -r 0",
+    "postversion": "npm run log"
   },
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -46,6 +47,9 @@
     "*.ts?(x)": [
       "prettier --parser=typescript --write"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",
@@ -90,6 +94,6 @@
     "type": "git"
   },
   "authors": [
-    "innocces <> (https://github.com/innocces)"
+    "innocces <jiangjiangjiangxi@gmail.com> (https://github.com/innocces)"
   ]
 }
