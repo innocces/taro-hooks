@@ -1,6 +1,6 @@
 {
   "name": "taro-hooks",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "为 Taro 而设计的 Hooks Library",
   "keywords": [
     "taro-hooks",
