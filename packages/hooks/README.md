@@ -89,7 +89,7 @@ $ yarn app:dev:h5
 
 ## 交流讨论
 
-<img src="" alt="wechat code" width="300"/>
+<img src="https://github.com/innocces/taro-hooks/blob/main/public/image/qrcode.jpg" alt="wechat code" width="300"/>
 
 ## License
 
