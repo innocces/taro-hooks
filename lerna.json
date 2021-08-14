@@ -18,9 +18,9 @@
     "**/es/*",
     "**/lib/*",
     "**/dist/*",
-    "packages/app/*",
-    "packages/father-build/*",
-    "packages/taro-runtime/*"
+    "app/*",
+    "father-build/*",
+    "taro-runtime/*"
   ],
   "version": "0.0.0",
   "tagVersionPrefix": "taro-hooks-v",
