@@ -1,6 +1,6 @@
 {
 	"name": "app",
-	"version": "2.0.0",
+	"version": "1.0.0",
 	"private": true,
 	"description": "taro-hooks weapp &amp; h5 demo",
 	"templateInfo": {
@@ -49,7 +49,7 @@
 		"mockjs": "^1.1.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"taro-hooks": "^1.0.0",
+		"taro-hooks": "^0.0.0",
 		"taro-ui": "^3.0.0-alpha.3"
 	},
 	"devDependencies": {
