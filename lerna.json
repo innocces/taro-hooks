@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/taro-hooks"],
+  "packages": ["packages/*"],
   "command": {
     "version": {
       "allowBranch": "main",
@@ -13,15 +13,7 @@
     }
   },
   "useWorkspaces": true,
-  "ignoreChanges": [
-    "**/*.md",
-    "**/es/*",
-    "**/lib/*",
-    "**/dist/*",
-    "app/*",
-    "father-build/*",
-    "taro-runtime/*"
-  ],
+  "ignoreChanges": ["**/*.md", "**/es/*", "**/lib/*", "**/dist/*"],
   "version": "1.0.0",
   "tagVersionPrefix": "taro-hooks-v",
   "npmClient": "yarn"
