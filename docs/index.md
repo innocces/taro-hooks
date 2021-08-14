@@ -65,6 +65,5 @@ import { useEnv } from 'taro-hooks';
 ## 交流讨论
 
 <div>
-  <img data-type="dingtalk" src="https://g" width="300" />
-  <img data-type="wechat" src="http://111" width="300" />
+  <img data-type="wechat" src="/image/qrcode.jpg" width="300" />
 </div>
