@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/innocces/taro-hooks/blob/main/public/image/hook.png" alt="taro hooks logo"/>
+  <img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-8-16/1629044969573-hook.png" alt="taro hooks logo"/>
 </div>
 
 # Taro-hooks
@@ -28,7 +28,7 @@
         <a>
           <img
             width="200"
-            src="https://github.com/innocces/taro-hooks/blob/main/public/image/hooks.jpeg"
+            src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-8-16/1629044960619-hooks.jpeg"
           />
           <br>
           <strong>Taro-hooks weapp</strong>
@@ -39,7 +39,7 @@
           <img
             height="200"
             style="vertical-align: -0.32em; margin-right: 8px;"
-            src="https://github.com/innocces/taro-hooks/blob/main/public/image/hooksite.png"
+            src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-8-16/1629044960613-hooksite.png"
           />
           <br>
           <strong>Taro-hooks h5</strong>
@@ -92,7 +92,7 @@ $ yarn app:dev:h5
 
 ## 交流讨论
 
-<img src="https://github.com/innocces/taro-hooks/blob/main/public/image/qrcode.jpg" alt="wechat code" width="300"/>
+<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-8-16/1629044960609-qrcode.jpg" alt="wechat code" width="300"/>
 
 ## License
 
