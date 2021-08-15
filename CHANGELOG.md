@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.0.0...taro-hooks-v1.0.1) (2021-08-15)
+
+### Bug Fixes
+
+- **demo deps:** update demo deps of packages ([637a1cd](https://github.com/innocces/taro-hooks/commit/637a1cdc890b7cadf301f1750aefd24741c9cead))
+- **docs build:** fix docs build demo style ([ffe31c5](https://github.com/innocces/taro-hooks/commit/ffe31c5b83b4eed8c2716fb5b27fa56a8fb0595d))
+- **revert version:** revert version of private deps ([1bbfd1c](https://github.com/innocces/taro-hooks/commit/1bbfd1c940e03786ea19a163fefe37db2a7c38b8))
+- **symlink:** fix readme symlink file type ([335ee2a](https://github.com/innocces/taro-hooks/commit/335ee2aa546496bc31c6f025382a1f296c0c519f))
+
+### Features
+
+- **contributors:** add contributors bot config ([a8365cd](https://github.com/innocces/taro-hooks/commit/a8365cd513a8b214c3e172934d2f6cddf4b13da1))
+
 # 1.0.0 (2021-08-14)
 
 ### Bug Fixes

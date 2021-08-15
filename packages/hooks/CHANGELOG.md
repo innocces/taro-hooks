@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.0.0...taro-hooks-v1.0.1) (2021-08-15)
+
+### Features
+
+- **contributors:** add contributors bot config ([a8365cd](https://github.com/innocces/taro-hooks/commit/a8365cd513a8b214c3e172934d2f6cddf4b13da1))
+
 # 1.0.0 (2021-08-14)
 
 ### Bug Fixes
