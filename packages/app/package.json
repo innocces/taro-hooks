@@ -22,7 +22,7 @@
 		"dev:swan": "npm run build:swan -- --watch",
 		"dev:alipay": "npm run build:alipay -- --watch",
 		"dev:tt": "npm run build:tt -- --watch",
-		"dev:h5": "npm run build:h5 -- --watch",
+		"dev:h5": "NODE_ENV=production  npm run build:h5 -- --watch",
 		"dev:rn": "npm run build:rn -- --watch",
 		"dev:qq": "npm run build:qq -- --watch",
 		"dev:jd": "npm run build:jd -- --watch",

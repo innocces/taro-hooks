@@ -4,7 +4,10 @@
 
 # Taro-hooks
 
-[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]
+[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors][image-14]](#contributors)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 简介
 
@@ -97,6 +100,18 @@ $ yarn app:dev:h5
 
 [![FOSSA Status][image-13]][11]
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+[more contributors](./CONTRIBUTORS.md)
+
 [1]: https://www.npmjs.com/package/taro-hooks
 [2]: https://npmjs.org/package/taro-hooks
 [3]: https://gitpod.io/#https://github.com/innocces/taro-hooks
@@ -121,3 +136,4 @@ $ yarn app:dev:h5
 [image-11]: https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg
 [image-12]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks.svg?type=shield
 [image-13]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks.svg?type=large
+[image-14]: https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square

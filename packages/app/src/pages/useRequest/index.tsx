@@ -112,7 +112,7 @@ const list: IListItem[] = [
 
 export default () => {
   const routePage = useCallback((route: string) => {
-    navigateTo({ url: `${route}/index` });
+    navigateTo({ url: `/pages/useRequest/${route}/index` });
   }, []);
 
   return (

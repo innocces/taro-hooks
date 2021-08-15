@@ -48,6 +48,9 @@ const config = {
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
+    router: {
+      mode: 'browser',
+    },
     postcss: {
       autoprefixer: {
         enable: true,
@@ -55,7 +58,11 @@ const config = {
       },
       pxtransform: {
         enable: true,
-        config: {},
+        config: {
+          exclude: (file) => {
+            return file.indexOf('taro-ui') === -1;
+          },
+        },
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true

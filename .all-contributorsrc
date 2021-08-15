@@ -1,0 +1,30 @@
+{
+  "projectName": "taro-hooks",
+  "projectOwner": "innocces",
+  "files": ["README.md", "CONTRIBUTORS.md"],
+  "imageSize": 50,
+  "contributorsPerLine": 10,
+  "commit": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "innocces",
+      "name": "innocces",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38065966?s=60&v=4",
+      "profile": "https://github.com/innocces",
+      "contributions": [
+        "question",
+        "doc",
+        "review",
+        "talk",
+        "ideas",
+        "test",
+        "platform",
+        "eventOrganizing",
+        "design"
+      ]
+    }
+  ]
+}
