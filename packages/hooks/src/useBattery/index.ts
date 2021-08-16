@@ -1,4 +1,4 @@
-import { getBatteryInfoSync, ENV_TYPE } from '@tarojs/taro';
+import { getBatteryInfo, ENV_TYPE } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
 
@@ -45,7 +45,7 @@ function useBattery(): IBatteryInfo {
           };
         }
       } else {
-        battery = getBatteryInfoSync();
+        battery = await getBatteryInfo();
       }
       setBatteryInfo(battery as IBatteryInfo);
     } catch (e) {
