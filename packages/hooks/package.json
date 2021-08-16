@@ -17,9 +17,9 @@
     "typescript",
     "helpers"
   ],
-  "main": "./lib/index.js",
-  "module": "./es/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "dist/index.d.ts",
   "unpkg": "dist/taro-hooks.js",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",

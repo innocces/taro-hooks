@@ -1,5 +1,5 @@
 import { General, vibrateLong, vibrateShort } from '@tarojs/taro';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
 
 export type VibrateAction = (
   long?: boolean,
@@ -16,6 +16,15 @@ function useVibrate(
   gap?: number,
 ): [VibrateAction, StopVibrateAction] {
   const timer = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    return () => {
+      if (timer.current && interval) {
+        stopVibrateAction();
+      }
+    };
+  }, [timer, interval]);
+
   const vibrateAction = useCallback<VibrateAction>((long) => {
     return new Promise((resolve, reject) => {
       try {
