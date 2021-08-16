@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.0.1...taro-hooks-v1.0.2) (2021-08-16)
+
+### Bug Fixes
+
+- **usebattery:** fix useBattery ios level async problem ([5c3d937](https://github.com/innocces/taro-hooks/commit/5c3d9379dad538c1701f67e5ad970dda560c7713))
+- **usevibrate:** fix useVibrate interval to auto close ([8e4808e](https://github.com/innocces/taro-hooks/commit/8e4808ecf5cede53b123a0d2a2ce3c2ee3638edf))
+
 ## [1.0.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.0.0...taro-hooks-v1.0.1) (2021-08-15)
 
 ### Bug Fixes
