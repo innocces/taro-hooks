@@ -17,7 +17,7 @@
 
 [传送门](https://innocces.github.io/taro-hooks)  
 [netlify](https://taro-hooks.netlify.app)  
-[vercel](https://taro-hooks.vercel.app)
+[vercel](https://taro-hooks-innocces.vercel.app)
 
 ## 使用案例
 
@@ -35,7 +35,7 @@
         </a>
       </td>
       <td align="center">
-        <a target="_blank" href="https://taro-hooks-h5.vercel.app">
+        <a target="_blank" href="https://taro-hooks-h5-innocces.vercel.app">
           <img
             height="200"
             style="vertical-align: -0.32em; margin-right: 8px;"
