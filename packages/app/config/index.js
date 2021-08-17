@@ -14,6 +14,7 @@ const config = {
   plugins: [],
   defineConstants: {
     LOCATION_APIKEY: JSON.stringify('J3OBZ-WBJKG-M5DQZ-IJQ4V-FSK2H-BTBZV'),
+    BUILD_MODE: JSON.stringify(process.env.BUILD_MODE),
   },
   copy: {
     patterns: [],

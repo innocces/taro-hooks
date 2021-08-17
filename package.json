@@ -13,6 +13,7 @@
     "app:dev:h5": "cd ./packages/app && npm run dev:h5",
     "app:build:h5": "cd ./packages/app && npm run build:h5",
     "app:build": "cd ./packages/app && npm run build:weapp",
+    "app:build:examine": "cd ./packages/app && npm run build:weapp:examine",
     "build": "cd ./packages/hooks && npm run build",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "release": "npm run build && npm run lerna:publish:major",

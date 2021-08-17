@@ -3,6 +3,7 @@ import { View, Text } from '@tarojs/components';
 import { AtIcon } from 'taro-ui';
 
 import { Current, navigateTo } from '@tarojs/taro';
+import { useModal } from 'taro-hooks';
 
 import {
   List,
@@ -18,9 +19,10 @@ export interface IPanelProps {}
 const Panel = ({}: IPanelProps) => {
   const [panelInfo, setPanelInfo] = useState<APIListItem>();
   const [panelItemInfo, setPanelItemInfo] = useState<APIChildrenItem[]>();
+  const [show] = useModal({ mask: true, title: '温馨提示', showCancel: false });
 
   useEffect(() => {
-    const { id } = Current.router.params;
+    const { id } = Current.router?.params || {};
     if (id) {
       const currentPanelInfo = List.find((v) => v.id.toLowerCase() === id);
       const currentPanelItemInfo = ChildrenList[id];
@@ -29,11 +31,20 @@ const Panel = ({}: IPanelProps) => {
     }
   }, []);
 
-  const handleItemAction = useCallback((id: string) => {
-    navigateTo({
-      url: `/pages/${id}/index`,
-    });
-  }, []);
+  const handleItemAction = useCallback(
+    (id: string) => {
+      if (BUILD_MODE && id === 'useVideo') {
+        show({
+          content: '由于个人账号限制, 无法在线预览useVideo. 可至github查看',
+        });
+      } else {
+        navigateTo({
+          url: `/pages/${id}/index`,
+        });
+      }
+    },
+    [show],
+  );
 
   if (!panelInfo) return <View />;
 

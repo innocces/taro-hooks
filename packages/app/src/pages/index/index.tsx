@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from 'react';
-import { AtIcon, AtToast } from 'taro-ui';
+import React, { useCallback, useEffect, useState } from 'react';
+import { AtIcon } from 'taro-ui';
 import { Image, View } from '@tarojs/components';
 
 import { ENV_TYPE } from '@tarojs/taro';
-import { useEnv, useRouter } from 'taro-hooks';
+import { useEnv, useRouter, useModal } from 'taro-hooks';
 
 import './index.less';
 
@@ -13,30 +13,33 @@ import { List } from '../../constant';
 
 const Index = () => {
   const env = useEnv();
-  const [visible, changeVisible] = useState(false);
   const [routerInfo, { navigateTo }] = useRouter();
-  console.log(routerInfo);
+  const [show] = useModal({ mask: true, title: '温馨提示', showCancel: false });
+
+  useEffect(() => {
+    console.log(BUILD_MODE);
+    if (BUILD_MODE) {
+      show({
+        content: '由于个人账号限制, 无法在线预览useVideo. 可至github查看',
+      });
+    }
+  }, [show]);
 
   const handleLocation = useCallback(
     (route: string) => {
       if (!routerInfo && env === ENV_TYPE.WEB) {
-        changeVisible(true);
+        show({
+          content: 'web|h5暂不全体预览, 请点击对应hooks查看示例',
+        });
       } else {
         navigateTo('/pages/panel/index?id=' + route.toLowerCase());
       }
     },
-    [env, routerInfo, navigateTo],
+    [env, routerInfo, navigateTo, show],
   );
 
   return (
     <View className="page page-index">
-      <AtToast
-        isOpened={visible}
-        text="web|h5暂不全体预览, 请点击对应hooks查看示例"
-        hasMask
-        icon="help"
-        onClose={() => changeVisible(false)}
-      />
       <View className="logo">
         <Image src={logoImg} className="img" mode="widthFix" />
       </View>

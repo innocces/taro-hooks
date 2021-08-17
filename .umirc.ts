@@ -27,6 +27,7 @@ export default defineConfig({
   define: {
     'process.env.TARO_ENV': 'h5',
     LOCATION_APIKEY: JSON.stringify('J3OBZ-WBJKG-M5DQZ-IJQ4V-FSK2H-BTBZV'),
+    BUILD_MODE: JSON.stringify(undefined),
   },
   extraPostCSSPlugins: [
     require('postcss-pxtorem')({
