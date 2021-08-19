@@ -17,6 +17,7 @@
 /packages/hooks/lib
 /packages/hooks/es
 /packages/hooks/dist
+/coverage
 
 # misc
 .DS_Store
