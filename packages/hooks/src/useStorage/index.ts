@@ -1,9 +1,9 @@
 import {
-  setStorageSync,
-  getStorageInfoSync,
-  getStorageSync,
-  removeStorageSync,
-  clearStorageSync,
+  setStorage,
+  getStorage,
+  getStorageInfo,
+  removeStorage,
+  clearStorage,
   ENV_TYPE,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
@@ -22,6 +22,8 @@ export interface IStorageInfo extends Required<IStorageSpace> {
 export type setAction = (key: string, data: any) => Promise<boolean>;
 export type getAction = (key?: string) => Promise<any>;
 export type removeAction = (key?: string) => Promise<boolean>;
+
+type getStorageSyncAction = (key: string) => Promise<any>;
 
 export interface IAction {
   set: setAction;
@@ -46,23 +48,31 @@ function useStorage(): [IStorageInfo, IAction] {
     }
   }, [env]);
 
-  const generateStorageInfo = useCallback(async () => {
-    try {
-      const currentInfo = getStorageInfoSync();
-      const storage = await getStorage();
-      let polyfillInfo = {};
-      if (env === ENV_TYPE.WEB) {
-        polyfillInfo = await getStorageSpaceForWeb();
+  const generateStorageInfo = useCallback(() => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        getStorageInfo({
+          success: async (currentInfo) => {
+            const storage = await getStorageAsync();
+            let polyfillInfo = {};
+            if (env === ENV_TYPE.WEB) {
+              polyfillInfo = await getStorageSpaceForWeb();
+            }
+            const storageInfo = {
+              ...setStorageInfo,
+              storage: storage || {},
+              ...currentInfo,
+              ...polyfillInfo,
+            };
+            setStorageInfo(storageInfo);
+            resolve(storageInfo);
+          },
+          fail: reject,
+        });
+      } catch (e) {
+        console.log(e);
       }
-      setStorageInfo({
-        ...setStorageInfo,
-        storage: storage || {},
-        ...currentInfo,
-        ...polyfillInfo,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    });
   }, [storageInfo, env]);
 
   const getStorageSpaceForWeb = useCallback<
@@ -90,25 +100,43 @@ function useStorage(): [IStorageInfo, IAction] {
     return storageSpace;
   }, [env]);
 
-  const getStorage = useCallback<getAction>(
+  const getStorageSync = useCallback<getStorageSyncAction>((key) => {
+    return new Promise((resolve, reject) => {
+      try {
+        getStorage({
+          key,
+          success: ({ data }) => resolve(data),
+          fail: () => reject(undefined),
+        });
+      } catch (e) {
+        reject(undefined);
+      }
+    });
+  }, []);
+
+  const getStorageAsync = useCallback<getAction>(
     (key) => {
-      return new Promise((resolve, reject) => {
+      return new Promise(async (resolve, reject) => {
         try {
           // 没有key默认全部获取
           if (!key) {
-            const { keys } = getStorageInfoSync();
-            if (!keys.length) {
-              resolve(undefined);
-            } else {
-              const result: { [_: string]: any } = {};
-              keys.forEach((currentKey) => {
-                const data = getStorageSync(currentKey);
-                result[currentKey] = data;
-              });
-              resolve(result);
-            }
+            getStorageInfo({
+              success: async ({ keys }) => {
+                if (!keys.length) {
+                  resolve(undefined);
+                } else {
+                  const result: { [_: string]: any } = {};
+                  for await (let currentKey of keys) {
+                    const data = await getStorageSync(currentKey);
+                    result[currentKey] = data;
+                  }
+                  resolve(result);
+                }
+              },
+              fail: () => reject(undefined),
+            });
           } else {
-            const data = getStorageSync(key);
+            const data = await getStorageSync(key);
             resolve(data);
           }
         } catch (e) {
@@ -119,7 +147,7 @@ function useStorage(): [IStorageInfo, IAction] {
     [storageInfo, env],
   );
 
-  const setStorage = useCallback<setAction>(
+  const setStorageAsync = useCallback<setAction>(
     (key, data) => {
       return new Promise((resolve, reject) => {
         try {
@@ -127,29 +155,46 @@ function useStorage(): [IStorageInfo, IAction] {
             console.warn('please provide a option');
             return reject(false);
           } else {
-            setStorageSync(key, data);
-            generateStorageInfo();
-            resolve(true);
+            setStorage({
+              key,
+              data,
+              success: () => {
+                generateStorageInfo();
+                resolve(true);
+              },
+              fail: () => reject(false),
+            });
           }
         } catch (e) {
-          reject(e);
+          reject(false);
         }
       });
     },
     [env],
   );
 
-  const removeStorage = useCallback<removeAction>(
+  const removeStorageAsync = useCallback<removeAction>(
     (key) => {
       return new Promise((resolve, reject) => {
+        const callbackOptions = {
+          success: () => {
+            generateStorageInfo();
+            resolve(true);
+          },
+          fail: () => reject(false),
+        };
         try {
           if (!key) {
-            clearStorageSync();
+            clearStorage();
+            // why not add options to feedback success? because it is not worked!
+            generateStorageInfo();
+            resolve(true);
           } else {
-            removeStorageSync(key);
+            removeStorage({
+              key,
+              ...callbackOptions,
+            });
           }
-          generateStorageInfo();
-          resolve(true);
         } catch (e) {
           reject(false);
         }
@@ -161,9 +206,9 @@ function useStorage(): [IStorageInfo, IAction] {
   return [
     storageInfo,
     {
-      set: setStorage,
-      get: getStorage,
-      remove: removeStorage,
+      set: setStorageAsync,
+      get: getStorageAsync,
+      remove: removeStorageAsync,
     },
   ];
 }

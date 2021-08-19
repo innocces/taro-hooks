@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { AtList, AtListItem, AtMessage, AtDivider, AtCard } from 'taro-ui';
 import { View } from '@tarojs/components';
 import DocPage from '@components/DocPage';
@@ -12,6 +12,11 @@ import 'taro-ui/dist/style/components/flex.scss';
 
 export default () => {
   const [storageInfo, { set, get, remove }] = useStorage();
+
+  useEffect(() => {
+    // remove for web detail error
+    remove();
+  }, [remove]);
 
   const handleSetStorage = useCallback(() => {
     set(Mock.mock('@name()'), Mock.mock('@name()')).then((res: boolean) => {
@@ -27,7 +32,8 @@ export default () => {
     if (!keys.length) {
       message = '暂无缓存可获取';
     } else {
-      const data = await get(keys[0]);
+      const randomIndex = Math.ceil(Math.random() * keys.length);
+      const data = await get(keys[randomIndex]);
       if (data) {
         message += `: ${data}`;
       } else {
