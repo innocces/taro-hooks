@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AtDivider, AtList, AtListItem } from 'taro-ui';
 import DocPage from '@components/DocPage';
-import { Video } from '@tarojs/components';
+import { View } from '@tarojs/components';
 
 import { useSelectorQuery, useEnv } from 'taro-hooks';
 import { useReady, ENV_TYPE, General } from '@tarojs/taro';
@@ -36,7 +36,7 @@ const Query = () => {
   return (
     <>
       <DocPage title="useSelectorQuery fields">
-        <Video src="" className="demo" />
+        <View src="" className="demo" />
         <AtDivider content="属性" />
         <AtList>
           {rect &&

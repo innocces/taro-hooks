@@ -1,13 +1,24 @@
-import { getSystemInfoSync } from '@tarojs/taro';
-import { useEffect, useState } from 'react';
+import { getSystemInfo } from '@tarojs/taro';
+import { useCallback, useEffect, useState } from 'react';
 
-export type Result = getSystemInfoSync.Result | {};
+export type Result = getSystemInfo.Result | {};
 
 function useSystemInfo(): Result {
   const [systemInfo, setSystemInfo] = useState<Result>({});
 
   useEffect(() => {
-    setSystemInfo(getSystemInfoSync());
+    getSystemInfoSync();
+  }, []);
+
+  const getSystemInfoSync = useCallback(() => {
+    try {
+      getSystemInfo({
+        success: setSystemInfo,
+        fail: () => setSystemInfo({}),
+      });
+    } catch (e) {
+      setSystemInfo({});
+    }
   }, []);
 
   return systemInfo;
