@@ -4,10 +4,7 @@
 
 # Taro-hooks
 
-[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END --> [![GitHub commit activity][image-16]][13] [![GitHub closed issues][image-17]][13] [![GitHub commits since latest release (by date)][image-18]][13] [![GitHub Release Date][image-19]][13]
 
 ## 简介
 
@@ -118,6 +115,10 @@ $ yarn app:dev:h5
 
 [more contributors](./CONTRIBUTORS.md)
 
+## Gitee
+
+[![阿酱/taro-hooks][image-15]][12]
+
 [1]: https://www.npmjs.com/package/taro-hooks
 [2]: https://npmjs.org/package/taro-hooks
 [3]: https://gitpod.io/#https://github.com/innocces/taro-hooks
@@ -129,6 +130,8 @@ $ yarn app:dev:h5
 [9]: https://lerna.js.org/
 [10]: https://app.fossa.com/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks?ref=badge_shield
 [11]: https://app.fossa.com/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks?ref=badge_large
+[12]: https://gitee.com/inocces/taro-hooks
+[13]: https://github.com/innocces/taro-hooks
 [image-1]: https://img.shields.io/npm/v/taro-hooks.svg?style=flat
 [image-2]: https://img.shields.io/npm/dm/taro-hooks.svg?style=flat
 [image-3]: https://img.shields.io/node/v/taro-hooks.svg?style=flat-square
@@ -143,3 +146,8 @@ $ yarn app:dev:h5
 [image-12]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks.svg?type=shield
 [image-13]: https://app.fossa.com/api/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks.svg?type=large
 [image-14]: https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square
+[image-15]: https://gitee.com/inocces/taro-hooks/widgets/widget_card.svg?colors=4183c4,ffffff,ffffff,e3e9ed,666666,9b9b9b
+[image-16]: https://img.shields.io/github/commit-activity/w/innocces/taro-hooks
+[image-17]: https://img.shields.io/github/issues-closed/innocces/taro-hooks
+[image-18]: https://img.shields.io/github/commits-since/innocces/taro-hooks/latest/main
+[image-19]: https://img.shields.io/github/release-date/innocces/taro-hooks
