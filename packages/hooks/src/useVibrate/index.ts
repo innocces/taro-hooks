@@ -25,32 +25,37 @@ function useVibrate(
     };
   }, [timer, interval]);
 
-  const vibrateAction = useCallback<VibrateAction>((long) => {
-    return new Promise((resolve, reject) => {
-      try {
-        const vibrateMethod = long ? vibrateLong : vibrateShort;
-        vibrateMethod({
-          success: (res) => {
-            const computedGap =
-              (gap || DEFAULTGAP) + (long ? LONGINTERVAL : SHORTINTERVAL);
-            if (interval) {
-              timer.current = setTimeout(() => {
-                vibrateAction(long);
-              }, computedGap);
-            }
-            resolve(res);
-          },
-          fail: reject,
-        }).catch(reject);
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }, []);
-
   const stopVibrateAction = useCallback(() => {
     timer.current && clearTimeout(timer.current);
   }, [timer]);
+
+  const vibrateAction = useCallback<VibrateAction>(
+    (long) => {
+      return new Promise((resolve, reject) => {
+        try {
+          const vibrateMethod = long ? vibrateLong : vibrateShort;
+          vibrateMethod({
+            success: (res) => {
+              const computedGap =
+                (gap || DEFAULTGAP) + (long ? LONGINTERVAL : SHORTINTERVAL);
+              if (interval) {
+                // whether timer exist, clear first to fix multi vibrate
+                stopVibrateAction();
+                timer.current = setTimeout(() => {
+                  vibrateAction(long);
+                }, computedGap);
+              }
+              resolve(res);
+            },
+            fail: reject,
+          }).catch(reject);
+        } catch (e) {
+          reject(e);
+        }
+      });
+    },
+    [stopVibrateAction],
+  );
 
   return [vibrateAction, stopVibrateAction];
 }
