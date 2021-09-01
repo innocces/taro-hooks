@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.1.0...taro-hooks-v1.1.1) (2021-09-01)
+
+### Bug Fixes
+
+- **usevibrate interval mode:** fix useVibrate interval mode error ([f99082f](https://github.com/innocces/taro-hooks/commit/f99082f3f60f31ad633860101eb66cb0ef9160f2))
+
 # [1.1.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.0.2...taro-hooks-v1.1.0) (2021-08-19)
 
 **Note:** Version bump only for package taro-hooks
