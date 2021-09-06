@@ -8,6 +8,7 @@
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
+    "docs:build:gh": "cross-env BUILD_TARGET=GH dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "app:dev": "cd ./packages/app && npm run dev:weapp",
     "app:dev:h5": "cd ./packages/app && npm run dev:h5",
@@ -70,6 +71,7 @@
     "babel-preset-taro": "^3.2.13",
     "commitizen": "^4.2.4",
     "conventional-changelog-cli": "^2.1.1",
+    "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "dumi": "^1.1.19",
     "dumi-theme-mobile": "^1.1.3",

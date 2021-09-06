@@ -10,6 +10,7 @@ export default defineConfig({
   favicon: '/image/hook.png',
   logo: '/image/logo.png',
   outputPath: 'docs-dist',
+  ...(process.env.BUILD_TARGET === 'GH' ? { publicPath: '/taro-hooks/' } : {}),
   mode: 'site',
   devServer: {
     host: '0.0.0.0',

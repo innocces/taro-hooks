@@ -13,7 +13,7 @@ jobs:
       - run: npm i -g yarn
       - run: npm i -g lerna
       - run: yarn bootstrap
-      - run: yarn docs:build
+      - run: yarn docs:build:gh
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
