@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.1.1...taro-hooks-v1.2.0) (2021-09-06)
+
+### Features
+
+- **taro.ver & demo:** update taro version to 3.3.6(latest); improvment some demo page; ([547080a](https://github.com/innocces/taro-hooks/commit/547080a7adc5c9cbc0ba55c0a046378d29f21868))
+- **useupdatemanager:** improve useUpdateManager behavior and app index check update ([411684c](https://github.com/innocces/taro-hooks/commit/411684ceb83c09b7f5dea9d647c8e5899ca9bbb5))
+
 ## [1.1.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.1.0...taro-hooks-v1.1.1) (2021-09-01)
 
 ### Bug Fixes
