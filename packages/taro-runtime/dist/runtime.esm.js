@@ -2,8 +2,8 @@ import {
   injectable,
   inject,
   optional,
-  ContainerModule,
   multiInject,
+  ContainerModule,
   Container,
 } from 'inversify';
 import {
@@ -17,13 +17,12 @@ import {
   isString,
   EMPTY_OBJ,
   isFunction as isFunction$1,
-  controlledComponent,
   internalComponents,
+  controlledComponent,
   defaultReconciler,
   noop,
   isBoolean,
 } from '@tarojs/shared';
-import React from 'react';
 
 /*! *****************************************************************************
 Copyright (C) Microsoft. All rights reserved.
@@ -1224,18 +1223,18 @@ if (process.env.TARO_ENV === 'h5') {
 }
 
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
 
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
 
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
 ***************************************************************************** */
 
 function __decorate(decorators, target, key, desc) {
@@ -1274,9 +1273,6 @@ const SERVICE_IDENTIFIER = {
   TaroTextFactory: 'Factory<TaroText>',
   TaroNodeImpl: 'TaroNodeImpl',
   TaroElementImpl: 'TaroElementImpl',
-  InnerHTMLImpl: 'InnerHTMLImpl',
-  insertAdjacentHTMLImpl: 'insertAdjacentHTMLImpl',
-  getBoundingClientRectImpl: 'getBoundingClientRectImpl',
   Hooks: 'hooks',
   onRemoveAttribute: 'onRemoveAttribute',
   getLifecycle: 'getLifecycle',
@@ -1296,6 +1292,7 @@ const SERVICE_IDENTIFIER = {
   modifySetAttrPayload: 'modifySetAttrPayload',
   modifyRmAttrPayload: 'modifyRmAttrPayload',
   onAddEvent: 'onAddEvent',
+  patchElement: 'patchElement',
 };
 
 const PROPERTY_THRESHOLD = 2046;
@@ -1309,6 +1306,7 @@ const BODY = 'body';
 const APP = 'app';
 const CONTAINER = 'container';
 const DOCUMENT_ELEMENT_NAME = '#document';
+const DOCUMENT_FRAGMENT = 'document-fragment';
 const ID = 'id';
 const UID = 'uid';
 const CLASS = 'class';
@@ -1509,7 +1507,7 @@ function hydrate(node) {
     if (
       nodeName === VIEW &&
       propInCamelCase === CATCHMOVE &&
-      props[prop] !== 'false'
+      props[prop] !== false
     ) {
       data['nn' /* NodeName */] = CATCH_VIEW;
     }
@@ -1644,6 +1642,13 @@ let TaroNode = class TaroNode extends TaroEventTarget {
     }
   }
   insertBefore(newChild, refChild, isReplace) {
+    if (newChild.nodeName === DOCUMENT_FRAGMENT) {
+      newChild.childNodes.reduceRight((previousValue, currentValue) => {
+        this.insertBefore(currentValue, previousValue);
+        return currentValue;
+      }, refChild);
+      return newChild;
+    }
     newChild.remove();
     newChild.parentNode = this;
     let payload;
@@ -1658,7 +1663,12 @@ let TaroNode = class TaroNode extends TaroEventTarget {
       } else {
         payload = {
           path: `${this._path}.${'cn' /* Childnodes */}`,
-          value: () => this.childNodes.map(hydrate),
+          value: () => {
+            const childNodes = this.childNodes.filter(
+              (node) => !isComment(node),
+            );
+            return childNodes.map(hydrate);
+          },
         };
       }
     } else {
@@ -1690,7 +1700,10 @@ let TaroNode = class TaroNode extends TaroEventTarget {
     if (!isReplace) {
       this.enqueueUpdate({
         path: `${this._path}.${'cn' /* Childnodes */}`,
-        value: () => this.childNodes.map(hydrate),
+        value: () => {
+          const childNodes = this.childNodes.filter((node) => !isComment(node));
+          return childNodes.map(hydrate);
+        },
       });
     }
     child.parentNode = null;
@@ -1714,32 +1727,6 @@ let TaroNode = class TaroNode extends TaroEventTarget {
       ? void 0
       : _a.enqueueUpdate(payload);
   }
-  cloneNode(isDeep = false) {
-    const document = this._getElement(ElementNames.Document)();
-    let newNode;
-    if (this.nodeType === 1 /* ELEMENT_NODE */) {
-      newNode = document.createElement(this.nodeName);
-    } else if (this.nodeType === 3 /* TEXT_NODE */) {
-      newNode = document.createTextNode('');
-    }
-    for (const key in this) {
-      const value = this[key];
-      if ([PROPS, DATASET].includes(key) && typeof value === OBJECT) {
-        newNode[key] = Object.assign({}, value);
-      } else if (key === '_value') {
-        newNode[key] = value;
-      } else if (key === STYLE) {
-        newNode.style._value = Object.assign({}, value._value);
-        newNode.style._usedStyleProp = new Set(
-          Array.from(value._usedStyleProp),
-        );
-      }
-    }
-    if (isDeep) {
-      newNode.childNodes = this.childNodes.map((node) => node.cloneNode(true));
-    }
-    return newNode;
-  }
   contains(node) {
     let isContains = false;
     this.childNodes.some((childNode) => {
@@ -1750,6 +1737,10 @@ let TaroNode = class TaroNode extends TaroEventTarget {
       }
     });
     return isContains;
+  }
+  get ownerDocument() {
+    const document = this._getElement(ElementNames.Document)();
+    return document;
   }
 };
 TaroNode = __decorate(
@@ -2311,6 +2302,7 @@ let TaroElement = class TaroElement extends TaroNode {
     elementImpl.bind(this);
     this.nodeType = 1 /* ELEMENT_NODE */;
     this.style = new Style(this);
+    hooks.patchElement(this);
   }
   _stopPropagation(event) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -2419,12 +2411,25 @@ let TaroElement = class TaroElement extends TaroNode {
       ? void 0
       : _b.call(_a, this, qualifiedName, payload);
     this.enqueueUpdate(payload);
-    // pure-view => static-view
-    if (isPureView && isHasExtractProp(this)) {
-      this.enqueueUpdate({
-        path: `${this._path}.${'nn' /* NodeName */}`,
-        value: STATIC_VIEW,
-      });
+    if (this.nodeName === VIEW) {
+      if (toCamelCase(qualifiedName) === CATCHMOVE) {
+        // catchMove = true: catch-view
+        // catchMove = false: view or static-view
+        this.enqueueUpdate({
+          path: `${this._path}.${'nn' /* NodeName */}`,
+          value: value
+            ? CATCH_VIEW
+            : this.isAnyEventBinded()
+            ? VIEW
+            : STATIC_VIEW,
+        });
+      } else if (isPureView && isHasExtractProp(this)) {
+        // pure-view => static-view
+        this.enqueueUpdate({
+          path: `${this._path}.${'nn' /* NodeName */}`,
+          value: STATIC_VIEW,
+        });
+      }
     }
   }
   removeAttribute(qualifiedName) {
@@ -2457,12 +2462,24 @@ let TaroElement = class TaroElement extends TaroNode {
       ? void 0
       : _d.call(_c, this, qualifiedName, payload);
     this.enqueueUpdate(payload);
-    // static-view => pure-view
-    if (isStaticView && !isHasExtractProp(this)) {
-      this.enqueueUpdate({
-        path: `${this._path}.${'nn' /* NodeName */}`,
-        value: PURE_VIEW,
-      });
+    if (this.nodeName === VIEW) {
+      if (toCamelCase(qualifiedName) === CATCHMOVE) {
+        // catch-view => view or static-view or pure-view
+        this.enqueueUpdate({
+          path: `${this._path}.${'nn' /* NodeName */}`,
+          value: this.isAnyEventBinded()
+            ? VIEW
+            : isHasExtractProp(this)
+            ? STATIC_VIEW
+            : PURE_VIEW,
+        });
+      } else if (isStaticView && !isHasExtractProp(this)) {
+        // static-view => pure-view
+        this.enqueueUpdate({
+          path: `${this._path}.${'nn' /* NodeName */}`,
+          value: PURE_VIEW,
+        });
+      }
     }
   }
   getAttribute(qualifiedName) {
@@ -2585,20 +2602,20 @@ var root = freeGlobal || freeSelf || Function('return this')();
 var Symbol$1 = root.Symbol;
 
 /** Used for built-in method references. */
-var objectProto$4 = Object.prototype;
+var objectProto = Object.prototype;
 
 /** Used to check objects for own properties. */
-var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
+var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
-var nativeObjectToString$1 = objectProto$4.toString;
+var nativeObjectToString = objectProto.toString;
 
 /** Built-in value references. */
-var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : undefined;
+var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : undefined;
 
 /**
  * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
@@ -2608,34 +2625,34 @@ var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : undefined;
  * @returns {string} Returns the raw `toStringTag`.
  */
 function getRawTag(value) {
-  var isOwn = hasOwnProperty$3.call(value, symToStringTag$1),
-    tag = value[symToStringTag$1];
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+    tag = value[symToStringTag];
 
   try {
-    value[symToStringTag$1] = undefined;
+    value[symToStringTag] = undefined;
     var unmasked = true;
   } catch (e) {}
 
-  var result = nativeObjectToString$1.call(value);
+  var result = nativeObjectToString.call(value);
   if (unmasked) {
     if (isOwn) {
-      value[symToStringTag$1] = tag;
+      value[symToStringTag] = tag;
     } else {
-      delete value[symToStringTag$1];
+      delete value[symToStringTag];
     }
   }
   return result;
 }
 
 /** Used for built-in method references. */
-var objectProto$3 = Object.prototype;
+var objectProto$1 = Object.prototype;
 
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
-var nativeObjectToString = objectProto$3.toString;
+var nativeObjectToString$1 = objectProto$1.toString;
 
 /**
  * Converts `value` to a string using `Object.prototype.toString`.
@@ -2645,7 +2662,7 @@ var nativeObjectToString = objectProto$3.toString;
  * @returns {string} Returns the converted string.
  */
 function objectToString(value) {
-  return nativeObjectToString.call(value);
+  return nativeObjectToString$1.call(value);
 }
 
 /** `Object#toString` result references. */
@@ -2653,7 +2670,7 @@ var nullTag = '[object Null]',
   undefinedTag = '[object Undefined]';
 
 /** Built-in value references. */
-var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : undefined;
+var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : undefined;
 
 /**
  * The base implementation of `getTag` without fallbacks for buggy environments.
@@ -2666,7 +2683,7 @@ function baseGetTag(value) {
   if (value == null) {
     return value === undefined ? undefinedTag : nullTag;
   }
-  return symToStringTag && symToStringTag in Object(value)
+  return symToStringTag$1 && symToStringTag$1 in Object(value)
     ? getRawTag(value)
     : objectToString(value);
 }
@@ -2845,10 +2862,10 @@ function isMasked(func) {
 }
 
 /** Used for built-in method references. */
-var funcProto$1 = Function.prototype;
+var funcProto = Function.prototype;
 
 /** Used to resolve the decompiled source of functions. */
-var funcToString$1 = funcProto$1.toString;
+var funcToString = funcProto.toString;
 
 /**
  * Converts `func` to its source code.
@@ -2860,7 +2877,7 @@ var funcToString$1 = funcProto$1.toString;
 function toSource(func) {
   if (func != null) {
     try {
-      return funcToString$1.call(func);
+      return funcToString.call(func);
     } catch (e) {}
     try {
       return func + '';
@@ -2879,20 +2896,20 @@ var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
 
 /** Used for built-in method references. */
-var funcProto = Function.prototype,
+var funcProto$1 = Function.prototype,
   objectProto$2 = Object.prototype;
 
 /** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
+var funcToString$1 = funcProto$1.toString;
 
 /** Used to check objects for own properties. */
-var hasOwnProperty$2 = objectProto$2.hasOwnProperty;
+var hasOwnProperty$1 = objectProto$2.hasOwnProperty;
 
 /** Used to detect if a method is native. */
 var reIsNative = RegExp(
   '^' +
-    funcToString
-      .call(hasOwnProperty$2)
+    funcToString$1
+      .call(hasOwnProperty$1)
       .replace(reRegExpChar, '\\$&')
       .replace(
         /hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,
@@ -2974,13 +2991,13 @@ function hashDelete(key) {
 }
 
 /** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED$1 = '__lodash_hash_undefined__';
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
 /** Used for built-in method references. */
-var objectProto$1 = Object.prototype;
+var objectProto$3 = Object.prototype;
 
 /** Used to check objects for own properties. */
-var hasOwnProperty$1 = objectProto$1.hasOwnProperty;
+var hasOwnProperty$2 = objectProto$3.hasOwnProperty;
 
 /**
  * Gets the hash value for `key`.
@@ -2995,16 +3012,16 @@ function hashGet(key) {
   var data = this.__data__;
   if (nativeCreate) {
     var result = data[key];
-    return result === HASH_UNDEFINED$1 ? undefined : result;
+    return result === HASH_UNDEFINED ? undefined : result;
   }
-  return hasOwnProperty$1.call(data, key) ? data[key] : undefined;
+  return hasOwnProperty$2.call(data, key) ? data[key] : undefined;
 }
 
 /** Used for built-in method references. */
-var objectProto = Object.prototype;
+var objectProto$4 = Object.prototype;
 
 /** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
+var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
 
 /**
  * Checks if a hash value for `key` exists.
@@ -3019,11 +3036,11 @@ function hashHas(key) {
   var data = this.__data__;
   return nativeCreate
     ? data[key] !== undefined
-    : hasOwnProperty.call(data, key);
+    : hasOwnProperty$3.call(data, key);
 }
 
 /** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
+var HASH_UNDEFINED$1 = '__lodash_hash_undefined__';
 
 /**
  * Sets the hash `key` to `value`.
@@ -3038,7 +3055,7 @@ var HASH_UNDEFINED = '__lodash_hash_undefined__';
 function hashSet(key, value) {
   var data = this.__data__;
   this.size += this.has(key) ? 0 : 1;
-  data[key] = nativeCreate && value === undefined ? HASH_UNDEFINED : value;
+  data[key] = nativeCreate && value === undefined ? HASH_UNDEFINED$1 : value;
   return this;
 }
 
@@ -3522,7 +3539,7 @@ function arrayMap(array, iteratee) {
 }
 
 /** Used as references for various `Number` constants. */
-var INFINITY$1 = 1 / 0;
+var INFINITY = 1 / 0;
 
 /** Used to convert symbols to primitives and strings. */
 var symbolProto = Symbol$1 ? Symbol$1.prototype : undefined,
@@ -3549,7 +3566,7 @@ function baseToString(value) {
     return symbolToString ? symbolToString.call(value) : '';
   }
   var result = value + '';
-  return result == '0' && 1 / value == -INFINITY$1 ? '-0' : result;
+  return result == '0' && 1 / value == -INFINITY ? '-0' : result;
 }
 
 /**
@@ -3593,7 +3610,7 @@ function castPath(value, object) {
 }
 
 /** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0;
+var INFINITY$1 = 1 / 0;
 
 /**
  * Converts `value` to a string key if it's not a string or symbol.
@@ -3607,7 +3624,7 @@ function toKey(value) {
     return value;
   }
   var result = value + '';
-  return result == '0' && 1 / value == -INFINITY ? '-0' : result;
+  return result == '0' && 1 / value == -INFINITY$1 ? '-0' : result;
 }
 
 /**
@@ -3692,10 +3709,10 @@ const eventIncrementId = incrementId();
 let TaroRootElement = class TaroRootElement extends TaroElement {
   constructor(nodeImpl, getElement, hooks, elementImpl, eventCenter) { // eslint-disable-next-line @typescript-eslint/indent
     super(nodeImpl, getElement, hooks, elementImpl);
-    this.pendingUpdate = false;
     this.pendingFlush = false;
     this.updatePayloads = [];
     this.updateCallbacks = [];
+    this.pendingUpdate = false;
     this.ctx = null;
     this.nodeName = ROOT_STR;
     this.eventCenter = eventCenter;
@@ -3745,6 +3762,7 @@ let TaroRootElement = class TaroRootElement extends TaroElement {
       } else {
         this.pendingUpdate = false;
         const customWrapperUpdate = [];
+        const customWrapperMap = new Map();
         const normalUpdate = {};
         if (!initRender) {
           for (const p in data) {
@@ -3761,12 +3779,16 @@ let TaroRootElement = class TaroRootElement extends TaroElement {
                 const splitedPath = dataPathArr.slice(i).join('.');
                 if (customWrapper) {
                   hasCustomWrapper = true;
-                  customWrapperUpdate.push({
-                    ctx: ctx.selectComponent(`#${customWrapperId}`),
-                    data: {
-                      [`i.${splitedPath}`]: data[p],
-                    },
-                  });
+                  customWrapperMap.set(
+                    customWrapper,
+                    Object.assign(
+                      Object.assign(
+                        {},
+                        customWrapperMap.get(customWrapper) || {},
+                      ),
+                      { [`i.${splitedPath}`]: data[p] },
+                    ),
+                  );
                 }
                 break;
               }
@@ -3774,6 +3796,11 @@ let TaroRootElement = class TaroRootElement extends TaroElement {
             if (!hasCustomWrapper) {
               normalUpdate[p] = data[p];
             }
+          }
+          if (customWrapperMap.size > 0) {
+            customWrapperMap.forEach((data, ctx) => {
+              customWrapperUpdate.push({ ctx, data });
+            });
           }
         }
         const updateArrLen = customWrapperUpdate.length;
@@ -3891,149 +3918,8 @@ class FormElement extends TaroElement {
   }
 }
 
-let TaroNodeImpl = class TaroNodeImpl {
-  constructor(getElement, innerHTMLImpl, adjacentImpl) { // eslint-disable-next-line @typescript-eslint/indent
-    this.getDoc = () => getElement(ElementNames.Document)();
-    this.innerHTMLImpl = innerHTMLImpl;
-    this.adjacentImpl = adjacentImpl;
-  }
-  bind(ctx) {
-    this.ctx = ctx;
-    this.bindInnerHTML();
-    this.bindAdjacentHTML();
-  }
-  bindInnerHTML() {
-    const { ctx, innerHTMLImpl: impl, getDoc } = this;
-    Object.defineProperty(ctx, 'innerHTML', {
-      configurable: true,
-      enumerable: true,
-      set(html) {
-        if (isFunction$1(impl)) {
-          impl.call(ctx, ctx, html, getDoc);
-        } else {
-          process.env.NODE_ENV !== 'production' &&
-            warn(true, '请实现 node.innerHTML');
-        }
-      },
-      get() {
-        return '';
-      },
-    });
-  }
-  bindAdjacentHTML() {
-    const { ctx, adjacentImpl: impl, getDoc } = this;
-    ctx.insertAdjacentHTML = function (position, html) {
-      if (isFunction$1(impl)) {
-        impl.call(ctx, position, html, getDoc);
-      } else {
-        process.env.NODE_ENV !== 'production' &&
-          warn(true, '请实现 node.insertAdjacentHTML');
-      }
-    };
-  }
-};
-TaroNodeImpl = __decorate(
-  [
-    injectable(),
-    __param(0, inject(SERVICE_IDENTIFIER.TaroElementFactory)),
-    __param(1, inject(SERVICE_IDENTIFIER.InnerHTMLImpl)),
-    __param(1, optional()),
-    __param(2, inject(SERVICE_IDENTIFIER.insertAdjacentHTMLImpl)),
-    __param(2, optional()),
-    __metadata('design:paramtypes', [Function, Function, Function]),
-  ],
-  TaroNodeImpl,
-);
-
-let TaroElementImpl = class TaroElementImpl {
-  constructor(rectImpl) { // eslint-disable-next-line @typescript-eslint/indent
-    this.rectImpl = rectImpl;
-  }
-  bind(ctx) {
-    this.bindRect(ctx);
-  }
-  bindRect(ctx) {
-    const impl = this.rectImpl;
-    ctx.getBoundingClientRect = async function (...args) {
-      if (isFunction$1(impl)) {
-        return await impl.apply(ctx, args);
-      }
-      process.env.NODE_ENV !== 'production' &&
-        warn(true, '请实现 element.getBoundingClientRect');
-      return Promise.resolve(null);
-    };
-  }
-};
-TaroElementImpl = __decorate(
-  [
-    injectable(),
-    __param(0, inject(SERVICE_IDENTIFIER.getBoundingClientRectImpl)),
-    __param(0, optional()),
-    __metadata('design:paramtypes', [Object]),
-  ],
-  TaroElementImpl,
-);
-
-let TaroDocument = class TaroDocument extends TaroElement {
-  constructor(nodeImpl, getElement, hooks, elementImpl, getText) { // eslint-disable-next-line @typescript-eslint/indent
-    super(nodeImpl, getElement, hooks, elementImpl);
-    this._getText = getText;
-    this.nodeType = 9 /* DOCUMENT_NODE */;
-    this.nodeName = DOCUMENT_ELEMENT_NAME;
-  }
-  createElement(type) {
-    if (type === ROOT_STR) {
-      return this._getElement(ElementNames.RootElement)();
-    }
-    if (controlledComponent.has(type)) {
-      return this._getElement(ElementNames.FormElement)(type);
-    }
-    return this._getElement(ElementNames.Element)(type);
-  }
-  // an ugly fake createElementNS to deal with @vue/runtime-dom's
-  // support mounting app to svg container since vue@3.0.8
-  createElementNS(_svgNS, type) {
-    return this.createElement(type);
-  }
-  createTextNode(text) {
-    return this._getText(text);
-  }
-  getElementById(id) {
-    const el = eventSource.get(id);
-    return isUndefined(el) ? null : el;
-  }
-  querySelector(query) {
-    // 为了 Vue3 的乞丐版实现
-    if (/^#/.test(query)) {
-      return this.getElementById(query.slice(1));
-    }
-    return null;
-  }
-  // @TODO: @PERF: 在 hydrate 移除掉空的 node
-  createComment() {
-    const textnode = this._getText('');
-    textnode.nodeName = COMMENT;
-    return textnode;
-  }
-};
-TaroDocument = __decorate(
-  [
-    injectable(),
-    __param(0, inject(SERVICE_IDENTIFIER.TaroNodeImpl)),
-    __param(1, inject(SERVICE_IDENTIFIER.TaroElementFactory)),
-    __param(2, inject(SERVICE_IDENTIFIER.Hooks)),
-    __param(3, inject(SERVICE_IDENTIFIER.TaroElementImpl)),
-    __param(4, inject(SERVICE_IDENTIFIER.TaroTextFactory)),
-    __metadata('design:paramtypes', [
-      Function,
-      Function,
-      Function,
-      Function,
-      Function,
-    ]),
-  ],
-  TaroDocument,
-);
+// for Vue3
+class SVGElement extends TaroElement {}
 
 function initPosition() {
   return {
@@ -4403,7 +4289,13 @@ class StyleTagParser {
     while (lb > -1) {
       const rb = style.indexOf(RIGHT_BRACKET);
       const selectors = style.slice(0, lb).trim();
-      let content = style.slice(lb + 1, rb).replace(/ /g, '');
+      let content = style.slice(lb + 1, rb);
+      content = content.replace(/:(.*);/g, function (_, $1) {
+        const t = $1.trim().replace(/ +/g, '+++');
+        return `:${t};`;
+      });
+      content = content.replace(/ /g, '');
+      content = content.replace(/\+\+\+/g, ' ');
       if (!/;$/.test(content)) {
         content += ';';
       }
@@ -4856,26 +4748,13 @@ options.html = {
   renderHTMLTag: false,
 };
 function setInnerHTML(element, html, getDoc) {
-  element.childNodes.forEach((node) => {
-    element.removeChild(node);
-  });
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
   const children = parser(html, getDoc());
   for (let i = 0; i < children.length; i++) {
     element.appendChild(children[i]);
   }
-}
-
-function getBoundingClientRectImpl() {
-  if (!options.miniGlobal) return Promise.resolve(null);
-  return new Promise((resolve) => {
-    const query = options.miniGlobal.createSelectorQuery();
-    query
-      .select(`#${this.uid}`)
-      .boundingClientRect((res) => {
-        resolve(res);
-      })
-      .exec();
-  });
 }
 
 /**
@@ -4911,24 +4790,186 @@ function insertAdjacentHTMLImpl(position, html, getDoc) {
     }
   }
 }
-
-const domExternal = new ContainerModule((bind) => {
-  if (process.env.TARO_ENV !== 'h5') {
-    if (typeof ENABLE_INNER_HTML !== 'undefined' && ENABLE_INNER_HTML) {
-      bind(SERVICE_IDENTIFIER.InnerHTMLImpl).toFunction(setInnerHTML);
-      if (typeof ENABLE_ADJACENT_HTML !== 'undefined' && ENABLE_ADJACENT_HTML) {
-        bind(SERVICE_IDENTIFIER.insertAdjacentHTMLImpl).toFunction(
-          insertAdjacentHTMLImpl,
-        );
-      }
-    }
-    if (typeof ENABLE_SIZE_APIS !== 'undefined' && ENABLE_SIZE_APIS) {
-      bind(SERVICE_IDENTIFIER.getBoundingClientRectImpl).toFunction(
-        getBoundingClientRectImpl,
-      );
+function cloneNode(ctx, getDoc, isDeep = false) {
+  const document = getDoc();
+  let newNode;
+  if (ctx.nodeType === 1 /* ELEMENT_NODE */) {
+    newNode = document.createElement(ctx.nodeName);
+  } else if (ctx.nodeType === 3 /* TEXT_NODE */) {
+    newNode = document.createTextNode('');
+  }
+  for (const key in this) {
+    const value = this[key];
+    if ([PROPS, DATASET].includes(key) && typeof value === OBJECT) {
+      newNode[key] = Object.assign({}, value);
+    } else if (key === '_value') {
+      newNode[key] = value;
+    } else if (key === STYLE) {
+      newNode.style._value = Object.assign({}, value._value);
+      newNode.style._usedStyleProp = new Set(Array.from(value._usedStyleProp));
     }
   }
-});
+  if (isDeep) {
+    newNode.childNodes = ctx.childNodes.map((node) => node.cloneNode(true));
+  }
+  return newNode;
+}
+
+let TaroNodeImpl = class TaroNodeImpl {
+  constructor(getElement) { // eslint-disable-next-line @typescript-eslint/indent
+    this.getDoc = () => getElement(ElementNames.Document)();
+  }
+  bind(ctx) {
+    const getDoc = this.getDoc;
+    if (ENABLE_INNER_HTML) {
+      bindInnerHTML(ctx, getDoc);
+      if (ENABLE_ADJACENT_HTML) {
+        bindAdjacentHTML(ctx, getDoc);
+      }
+    }
+    if (ENABLE_CLONE_NODE) {
+      ctx.cloneNode = cloneNode.bind(ctx, ctx, getDoc);
+    }
+  }
+};
+TaroNodeImpl = __decorate(
+  [
+    injectable(),
+    __param(0, inject(SERVICE_IDENTIFIER.TaroElementFactory)),
+    __metadata('design:paramtypes', [Function]),
+  ],
+  TaroNodeImpl,
+);
+function bindInnerHTML(ctx, getDoc) {
+  Object.defineProperty(ctx, 'innerHTML', {
+    configurable: true,
+    enumerable: true,
+    set(html) {
+      setInnerHTML.call(ctx, ctx, html, getDoc);
+    },
+    get() {
+      return '';
+    },
+  });
+}
+function bindAdjacentHTML(ctx, getDoc) {
+  ctx.insertAdjacentHTML = function (position, html) {
+    insertAdjacentHTMLImpl.call(ctx, position, html, getDoc);
+  };
+}
+
+function getBoundingClientRectImpl() {
+  if (!options.miniGlobal) return Promise.resolve(null);
+  return new Promise((resolve) => {
+    const query = options.miniGlobal.createSelectorQuery();
+    query
+      .select(`#${this.uid}`)
+      .boundingClientRect((res) => {
+        resolve(res);
+      })
+      .exec();
+  });
+}
+function getTemplateContent(ctx) {
+  if (ctx.nodeName === 'template') {
+    const content = ctx._getElement(ElementNames.Element)(DOCUMENT_FRAGMENT);
+    content.childNodes = ctx.childNodes;
+    ctx.childNodes = [content];
+    content.parentNode = ctx;
+    content.childNodes.forEach((nodes) => {
+      nodes.parentNode = content;
+    });
+    return content;
+  }
+}
+
+let TaroElementImpl = class TaroElementImpl {
+  bind(ctx) {
+    if (ENABLE_SIZE_APIS) {
+      ctx.getBoundingClientRect = async function (...args) {
+        return await getBoundingClientRectImpl.apply(ctx, args);
+      };
+    }
+    if (ENABLE_TEMPLATE_CONTENT) {
+      bindContent(ctx);
+    }
+  }
+};
+TaroElementImpl = __decorate([injectable()], TaroElementImpl);
+function bindContent(ctx) {
+  Object.defineProperty(ctx, 'content', {
+    configurable: true,
+    enumerable: true,
+    get() {
+      return getTemplateContent(ctx);
+    },
+  });
+}
+
+let TaroDocument = class TaroDocument extends TaroElement {
+  constructor(nodeImpl, getElement, hooks, elementImpl, getText) { // eslint-disable-next-line @typescript-eslint/indent
+    super(nodeImpl, getElement, hooks, elementImpl);
+    this._getText = getText;
+    this.nodeType = 9 /* DOCUMENT_NODE */;
+    this.nodeName = DOCUMENT_ELEMENT_NAME;
+  }
+  createElement(type) {
+    if (type === ROOT_STR) {
+      return this._getElement(ElementNames.RootElement)();
+    }
+    if (controlledComponent.has(type)) {
+      return this._getElement(ElementNames.FormElement)(type);
+    }
+    return this._getElement(ElementNames.Element)(type);
+  }
+  // an ugly fake createElementNS to deal with @vue/runtime-dom's
+  // support mounting app to svg container since vue@3.0.8
+  createElementNS(_svgNS, type) {
+    return this.createElement(type);
+  }
+  createTextNode(text) {
+    return this._getText(text);
+  }
+  getElementById(id) {
+    const el = eventSource.get(id);
+    return isUndefined(el) ? null : el;
+  }
+  querySelector(query) {
+    // 为了 Vue3 的乞丐版实现
+    if (/^#/.test(query)) {
+      return this.getElementById(query.slice(1));
+    }
+    return null;
+  }
+  querySelectorAll() {
+    // fake hack
+    return [];
+  }
+  // @TODO: @PERF: 在 hydrate 移除掉空的 node
+  createComment() {
+    const textnode = this._getText('');
+    textnode.nodeName = COMMENT;
+    return textnode;
+  }
+};
+TaroDocument = __decorate(
+  [
+    injectable(),
+    __param(0, inject(SERVICE_IDENTIFIER.TaroNodeImpl)),
+    __param(1, inject(SERVICE_IDENTIFIER.TaroElementFactory)),
+    __param(2, inject(SERVICE_IDENTIFIER.Hooks)),
+    __param(3, inject(SERVICE_IDENTIFIER.TaroElementImpl)),
+    __param(4, inject(SERVICE_IDENTIFIER.TaroTextFactory)),
+    __metadata('design:paramtypes', [
+      Function,
+      Function,
+      Function,
+      Function,
+      Function,
+    ]),
+  ],
+  TaroDocument,
+);
 
 let Hooks = class Hooks {
   modifyMpEvent(e) {
@@ -4948,6 +4989,12 @@ let Hooks = class Hooks {
     (_a = this.initNativeApiImpls) === null || _a === void 0
       ? void 0
       : _a.forEach((fn) => fn(taro));
+  }
+  patchElement(element) {
+    var _a;
+    (_a = this.patchElementImpls) === null || _a === void 0
+      ? void 0
+      : _a.forEach((fn) => fn(element));
   }
 };
 __decorate(
@@ -5115,6 +5162,16 @@ __decorate(
   'initNativeApiImpls',
   void 0,
 );
+__decorate(
+  [
+    multiInject(SERVICE_IDENTIFIER.patchElement),
+    optional(),
+    __metadata('design:type', Array),
+  ],
+  Hooks.prototype,
+  'patchElementImpls',
+  void 0,
+);
 Hooks = __decorate([injectable()], Hooks);
 
 /**
@@ -5182,59 +5239,66 @@ function processPluginHooks(container) {
 }
 
 const container = new Container();
-container
-  .bind(SERVICE_IDENTIFIER.TaroElement)
-  .to(TaroElement)
-  .whenTargetNamed(ElementNames.Element);
-container
-  .bind(SERVICE_IDENTIFIER.TaroElement)
-  .to(TaroDocument)
-  .inSingletonScope()
-  .whenTargetNamed(ElementNames.Document);
-container
-  .bind(SERVICE_IDENTIFIER.TaroElement)
-  .to(TaroRootElement)
-  .whenTargetNamed(ElementNames.RootElement);
-container
-  .bind(SERVICE_IDENTIFIER.TaroElement)
-  .to(FormElement)
-  .whenTargetNamed(ElementNames.FormElement);
-container.bind(SERVICE_IDENTIFIER.TaroElementFactory).toFactory((context) => {
-  return (named) => (nodeName) => {
-    const el = context.container.getNamed(
-      SERVICE_IDENTIFIER.TaroElement,
-      named,
-    );
-    if (nodeName) {
-      el.nodeName = nodeName;
-    }
-    el.tagName = el.nodeName.toUpperCase();
-    return el;
-  };
-});
-container.bind(SERVICE_IDENTIFIER.TaroText).to(TaroText);
-container.bind(SERVICE_IDENTIFIER.TaroTextFactory).toFactory((context) => {
-  return (text) => {
-    const textNode = context.container.get(SERVICE_IDENTIFIER.TaroText);
-    textNode._value = text;
-    return textNode;
-  };
-});
-container
-  .bind(SERVICE_IDENTIFIER.TaroNodeImpl)
-  .to(TaroNodeImpl)
-  .inSingletonScope();
-container
-  .bind(SERVICE_IDENTIFIER.TaroElementImpl)
-  .to(TaroElementImpl)
-  .inSingletonScope();
+if (process.env.TARO_ENV !== 'h5') {
+  container
+    .bind(SERVICE_IDENTIFIER.TaroElement)
+    .to(TaroElement)
+    .whenTargetNamed(ElementNames.Element);
+  container
+    .bind(SERVICE_IDENTIFIER.TaroElement)
+    .to(TaroDocument)
+    .inSingletonScope()
+    .whenTargetNamed(ElementNames.Document);
+  container
+    .bind(SERVICE_IDENTIFIER.TaroElement)
+    .to(TaroRootElement)
+    .whenTargetNamed(ElementNames.RootElement);
+  container
+    .bind(SERVICE_IDENTIFIER.TaroElement)
+    .to(FormElement)
+    .whenTargetNamed(ElementNames.FormElement);
+  container.bind(SERVICE_IDENTIFIER.TaroElementFactory).toFactory((context) => {
+    return (named) => (nodeName) => {
+      const el = context.container.getNamed(
+        SERVICE_IDENTIFIER.TaroElement,
+        named,
+      );
+      if (nodeName) {
+        el.nodeName = nodeName;
+      }
+      el.tagName = el.nodeName.toUpperCase();
+      return el;
+    };
+  });
+  container.bind(SERVICE_IDENTIFIER.TaroText).to(TaroText);
+  container.bind(SERVICE_IDENTIFIER.TaroTextFactory).toFactory((context) => {
+    return (text) => {
+      const textNode = context.container.get(SERVICE_IDENTIFIER.TaroText);
+      textNode._value = text;
+      return textNode;
+    };
+  });
+  container
+    .bind(SERVICE_IDENTIFIER.TaroNodeImpl)
+    .to(TaroNodeImpl)
+    .inSingletonScope();
+  container
+    .bind(SERVICE_IDENTIFIER.TaroElementImpl)
+    .to(TaroElementImpl)
+    .inSingletonScope();
+}
 container.bind(SERVICE_IDENTIFIER.Hooks).to(Hooks).inSingletonScope();
-container.load(domExternal, DefaultHooksContainer);
+container.load(DefaultHooksContainer);
 processPluginHooks(container);
 
-const hooks$3 = container.get(SERVICE_IDENTIFIER.Hooks);
-const getElement = container.get(SERVICE_IDENTIFIER.TaroElementFactory);
-const document$2 = getElement(ElementNames.Document)();
+let hooks;
+let getElement;
+let document$1;
+if (process.env.TARO_ENV !== 'h5') {
+  hooks = container.get(SERVICE_IDENTIFIER.Hooks);
+  getElement = container.get(SERVICE_IDENTIFIER.TaroElementFactory);
+  document$1 = getElement(ElementNames.Document)();
+}
 // Taro 事件对象。以 Web 标准的事件对象为基础，加入小程序事件对象中携带的部分信息，并模拟实现事件冒泡。
 class TaroEvent {
   constructor(type, opts, event) {
@@ -5260,7 +5324,7 @@ class TaroEvent {
   }
   get target() {
     var _a, _b, _c;
-    const element = document$2.getElementById(
+    const element = document$1.getElementById(
       (_a = this.mpEvent) === null || _a === void 0 ? void 0 : _a.target.id,
     );
     return Object.assign(
@@ -5276,7 +5340,7 @@ class TaroEvent {
   }
   get currentTarget() {
     var _a, _b, _c;
-    const element = document$2.getElementById(
+    const element = document$1.getElementById(
       (_a = this.mpEvent) === null || _a === void 0
         ? void 0
         : _a.currentTarget.id,
@@ -5333,31 +5397,31 @@ const eventsBatch = {};
 // 小程序的事件代理回调函数
 function eventHandler(event) {
   var _a;
-  (_a = hooks$3.modifyMpEvent) === null || _a === void 0
+  (_a = hooks.modifyMpEvent) === null || _a === void 0
     ? void 0
-    : _a.call(hooks$3, event);
+    : _a.call(hooks, event);
   if (event.currentTarget == null) {
     event.currentTarget = event.target;
   }
-  const node = document$2.getElementById(event.currentTarget.id);
+  const node = document$1.getElementById(event.currentTarget.id);
   if (node) {
     const dispatch = () => {
       var _a;
       const e = createEvent(event, node);
-      (_a = hooks$3.modifyTaroEvent) === null || _a === void 0
+      (_a = hooks.modifyTaroEvent) === null || _a === void 0
         ? void 0
-        : _a.call(hooks$3, e, node);
+        : _a.call(hooks, e, node);
       node.dispatchEvent(e);
     };
-    if (typeof hooks$3.batchedEventUpdates === 'function') {
+    if (typeof hooks.batchedEventUpdates === 'function') {
       const type = event.type;
       if (
-        !hooks$3.isBubbleEvents(type) ||
+        !hooks.isBubbleEvents(type) ||
         !isParentBinded(node, type) ||
         (type === TOUCHMOVE && !!node.props.catchMove)
       ) {
         // 最上层组件统一 batchUpdate
-        hooks$3.batchedEventUpdates(() => {
+        hooks.batchedEventUpdates(() => {
           if (eventsBatch[type]) {
             eventsBatch[type].forEach((fn) => fn());
             delete eventsBatch[type];
@@ -5411,7 +5475,7 @@ function createDocument() {
   doc.createEvent = createEvent;
   return doc;
 }
-const document$1 = isBrowser ? doc : createDocument();
+const document$2 = isBrowser ? doc : createDocument();
 
 const machine = 'Macintosh';
 const arch = 'Intel Mac OS X 10_14_5';
@@ -5489,7 +5553,7 @@ const window$1 = isBrowser
   ? win
   : {
       navigator,
-      document: document$1,
+      document: document$2,
     };
 if (!isBrowser) {
   const globalProperties = [
@@ -5502,6 +5566,7 @@ if (!isBrowser) {
       window$1[property] = global[property];
     }
   });
+  document$2.defaultView = window$1;
 }
 if (process.env.TARO_ENV && process.env.TARO_ENV !== 'h5') {
   window$1.requestAnimationFrame = raf;
@@ -5607,19 +5672,19 @@ class Events {
   }
 }
 Events.eventSplitter = /\s+/;
-const hooks$2 = container.get(SERVICE_IDENTIFIER.Hooks);
-const eventCenter = hooks$2.getEventCenter(Events);
+const hooks$1 = container.get(SERVICE_IDENTIFIER.Hooks);
+const eventCenter = hooks$1.getEventCenter(Events);
 container.bind(SERVICE_IDENTIFIER.eventCenter).toConstantValue(eventCenter);
 
 /* eslint-disable dot-notation */
 const instances = new Map();
 const pageId = incrementId();
-const hooks$1 = container.get(SERVICE_IDENTIFIER.Hooks);
+const hooks$2 = container.get(SERVICE_IDENTIFIER.Hooks);
 function injectPageInstance(inst, id) {
   var _a;
-  (_a = hooks$1.mergePageInstance) === null || _a === void 0
+  (_a = hooks$2.mergePageInstance) === null || _a === void 0
     ? void 0
-    : _a.call(hooks$1, instances.get(id), inst);
+    : _a.call(hooks$2, instances.get(id), inst);
   instances.set(id, inst);
 }
 function getPageInstance(id) {
@@ -5636,7 +5701,7 @@ function safeExecute(path, lifecycle, ...args) {
   if (instance == null) {
     return;
   }
-  const func = hooks$1.getLifecycle(instance, lifecycle);
+  const func = hooks$2.getLifecycle(instance, lifecycle);
   if (isArray$1(func)) {
     const res = func.map((fn) => fn.apply(instance, args));
     return res[0];
@@ -5705,12 +5770,14 @@ function createPageConfig(component, pageName, data, pageConfig) {
       };
       const mount = () => {
         Current.app.mount(component, this.$taroPath, () => {
-          pageElement = document$1.getElementById(this.$taroPath);
+          pageElement = document$2.getElementById(this.$taroPath);
           ensure(pageElement !== null, '没有找到页面实例。');
           safeExecute(this.$taroPath, 'onLoad', this.$taroParams);
           if (!isBrowser) {
             pageElement.ctx = this;
             pageElement.performUpdate(true, cb);
+          } else {
+            isFunction$1(cb) && cb();
           }
         });
       };
@@ -5807,7 +5874,7 @@ function createPageConfig(component, pageName, data, pageConfig) {
         options === null || options === void 0 ? void 0 : options.target;
       if (target != null) {
         const id = target.id;
-        const element = document$1.getElementById(id);
+        const element = document$2.getElementById(id);
         if (element != null) {
           options.target.dataset = element.dataset;
         }
@@ -5853,7 +5920,7 @@ function createComponentConfig(component, componentName, data) {
             : _a.call(this)) || pageId(),
       });
       Current.app.mount(component, path, () => {
-        componentElement = document$1.getElementById(path);
+        componentElement = document$2.getElementById(path);
         ensure(componentElement !== null, '没有找到组件实例。');
         safeExecute(path, 'onLoad');
         if (!isBrowser) {
@@ -5925,7 +5992,7 @@ function createRecursiveComponentConfig(componentName) {
   };
 }
 
-const hooks = container.get(SERVICE_IDENTIFIER.Hooks);
+const hooks$3 = container.get(SERVICE_IDENTIFIER.Hooks);
 function isClassComponent(R, component) {
   var _a;
   return (
@@ -5990,7 +6057,7 @@ function connectReactPage(R, id) {
   };
 }
 let ReactDOM;
-function setReconciler$2() {
+function setReconciler() {
   const getLifecycle = function (instance, lifecycle) {
     lifecycle = lifecycle.replace(/^on(Show|Hide)$/, 'componentDid$1');
     return instance[lifecycle];
@@ -6014,12 +6081,12 @@ function setReconciler$2() {
       }
     });
   };
-  hooks.getLifecycle = getLifecycle;
-  hooks.modifyMpEvent = modifyMpEvent;
-  hooks.batchedEventUpdates = batchedEventUpdates;
-  hooks.mergePageInstance = mergePageInstance;
+  hooks$3.getLifecycle = getLifecycle;
+  hooks$3.modifyMpEvent = modifyMpEvent;
+  hooks$3.batchedEventUpdates = batchedEventUpdates;
+  hooks$3.mergePageInstance = mergePageInstance;
   if (process.env.TARO_ENV === 'h5') {
-    hooks.createPullDownComponent = (el, _, R, customWrapper) => {
+    hooks$3.createPullDownComponent = (el, _, R, customWrapper) => {
       const isReactComponent = isClassComponent(R, el);
       return R.forwardRef((props, ref) => {
         const newProps = Object.assign({}, props);
@@ -6037,7 +6104,7 @@ function setReconciler$2() {
         );
       });
     };
-    hooks.getDOMNode = (inst) => {
+    hooks$3.getDOMNode = (inst) => {
       return ReactDOM.findDOMNode(inst);
     };
   }
@@ -6052,7 +6119,7 @@ function createReactApp(App, react, reactdom, config) {
   );
   const ref = R.createRef();
   const isReactComponent = isClassComponent(R, App);
-  setReconciler$2();
+  setReconciler();
   class AppWrapper extends R.Component {
     constructor() {
       super(...arguments);
@@ -6099,7 +6166,7 @@ function createReactApp(App, react, reactdom, config) {
     // eslint-disable-next-line react/no-render-return-value
     wrapper = ReactDOM.render(
       R.createElement(AppWrapper),
-      document$1.getElementById('app'),
+      document$2.getElementById('app'),
     );
   }
   const app = Object.create(
@@ -6138,7 +6205,7 @@ function createReactApp(App, react, reactdom, config) {
             // eslint-disable-next-line react/no-render-return-value
             wrapper = ReactDOM.render(
               R.createElement(AppWrapper),
-              document$1.getElementById('app'),
+              document$2.getElementById('app'),
             );
           }
           const app = ref.current;
@@ -6215,7 +6282,7 @@ function createReactApp(App, react, reactdom, config) {
     const instance = getPageInstance(HOOKS_APP_ID);
     if (instance) {
       const app = ref.current;
-      const func = hooks.getLifecycle(instance, lifecycle);
+      const func = hooks$3.getLifecycle(instance, lifecycle);
       if (Array.isArray(func)) {
         func.forEach((cb) => cb.apply(app));
       }
@@ -6303,8 +6370,8 @@ function initNativeComponentEntry(R, ReactDOM) {
       return components.map(({ element }) => element);
     }
   }
-  setReconciler$2();
-  const app = document$1.getElementById('app');
+  setReconciler();
+  const app = document$2.getElementById('app');
   ReactDOM.render(R.createElement(Entry, {}), app);
 }
 function createNativeComponentConfig(
@@ -6315,6 +6382,7 @@ function createNativeComponentConfig(
 ) {
   R = react;
   ReactDOM = reactdom;
+  setReconciler();
   const config = {
     properties: {
       props: {
@@ -6512,7 +6580,7 @@ function createVueApp(App, vue, config) {
     },
   });
   if (!isBrowser) {
-    wrapper.$mount(document$1.getElementById('app'));
+    wrapper.$mount(document$2.getElementById('app'));
   }
   const app = Object.create(
     {
@@ -6544,7 +6612,7 @@ function createVueApp(App, vue, config) {
           );
           if (isBrowser) {
             // 由于 H5 路由初始化的时候会清除 app 下的 dom 元素，所以需要在路由初始化后再执行 render
-            wrapper.$mount(document$1.getElementById('app'));
+            wrapper.$mount(document$2.getElementById('app'));
           }
           appInstance = wrapper.$refs.app;
           if (
@@ -6637,7 +6705,7 @@ function createVue3Page(h, id) {
     );
   };
 }
-function setReconciler() {
+function setReconciler$2() {
   const hooks = container.get(SERVICE_IDENTIFIER.Hooks);
   const getLifecycle = function (instance, lifecycle) {
     return instance.$options[lifecycle];
@@ -6681,7 +6749,7 @@ function createVue3App(app, h, config) {
   let pages = [];
   let appInstance;
   ensure(!isFunction$1(app._component), '入口组件不支持使用函数式组件');
-  setReconciler();
+  setReconciler$2();
   app._component.render = function () {
     return pages.slice();
   };
@@ -6781,11 +6849,11 @@ function createVue3App(app, h, config) {
 
 const taroHooks = (lifecycle) => {
   return (fn) => {
-    const id = React.useContext(PageContext) || HOOKS_APP_ID;
+    const id = R.useContext(PageContext) || HOOKS_APP_ID;
     // hold fn ref and keep up to date
-    const fnRef = React.useRef(fn);
+    const fnRef = R.useRef(fn);
     if (fnRef.current !== fn) fnRef.current = fn;
-    React.useLayoutEffect(() => {
+    R.useLayoutEffect(() => {
       let inst = getPageInstance(id);
       let first = false;
       if (inst == null) {
@@ -6830,7 +6898,7 @@ const useShareTimeline = taroHooks('onShareTimeline');
 const useAddToFavorites = taroHooks('onAddToFavorites');
 const useReady = taroHooks('onReady');
 const useRouter = (dynamic = false) => {
-  return dynamic ? Current.router : React.useMemo(() => Current.router, []);
+  return dynamic ? Current.router : R.useMemo(() => Current.router, []);
 };
 const useScope = () => undefined;
 
@@ -6851,8 +6919,12 @@ const nextTick = (cb, ctx) => {
   if (router !== null) {
     let pageElement = null;
     const path = getPath(removeLeadingSlash(router.path), router.params);
-    pageElement = document$1.getElementById(path);
-    if (pageElement !== null) {
+    pageElement = document$2.getElementById(path);
+    if (
+      pageElement === null || pageElement === void 0
+        ? void 0
+        : pageElement.pendingUpdate
+    ) {
       if (isBrowser) {
         // eslint-disable-next-line dot-notation
         (_c =
@@ -6883,6 +6955,7 @@ export {
   Events,
   FormElement,
   SERVICE_IDENTIFIER,
+  SVGElement,
   Style,
   TaroElement,
   TaroEvent,
@@ -6902,7 +6975,7 @@ export {
   createRecursiveComponentConfig,
   createVue3App,
   createVueApp,
-  document$1 as document,
+  document$2 as document,
   eventCenter,
   getComputedStyle,
   getCurrentInstance,
@@ -6912,6 +6985,7 @@ export {
   nextTick,
   now,
   options,
+  processPluginHooks,
   raf as requestAnimationFrame,
   stringify,
   useAddToFavorites,

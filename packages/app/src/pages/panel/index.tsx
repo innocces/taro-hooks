@@ -3,7 +3,7 @@ import { View, Text } from '@tarojs/components';
 import { AtIcon } from 'taro-ui';
 
 import { Current, navigateTo } from '@tarojs/taro';
-import { useModal } from 'taro-hooks';
+import { useModal, useNavigationBar } from 'taro-hooks';
 
 import {
   List,
@@ -20,6 +20,7 @@ const Panel = ({}: IPanelProps) => {
   const [panelInfo, setPanelInfo] = useState<APIListItem>();
   const [panelItemInfo, setPanelItemInfo] = useState<APIChildrenItem[]>();
   const [show] = useModal({ mask: true, title: '温馨提示', showCancel: false });
+  const [_, { setTitle }] = useNavigationBar({ title: 'Taro-hooks' });
 
   useEffect(() => {
     const { id } = Current.router?.params || {};
@@ -30,6 +31,12 @@ const Panel = ({}: IPanelProps) => {
       setPanelItemInfo(currentPanelItemInfo);
     }
   }, []);
+
+  useEffect(() => {
+    if (panelInfo && panelInfo.title) {
+      setTitle(panelInfo.title);
+    }
+  }, [panelInfo, setTitle]);
 
   const handleItemAction = useCallback(
     (id: string) => {

@@ -10,6 +10,7 @@ export declare const BODY = 'body';
 export declare const APP = 'app';
 export declare const CONTAINER = 'container';
 export declare const DOCUMENT_ELEMENT_NAME = '#document';
+export declare const DOCUMENT_FRAGMENT = 'document-fragment';
 export declare const ID = 'id';
 export declare const UID = 'uid';
 export declare const CLASS = 'class';

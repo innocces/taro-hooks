@@ -25,5 +25,6 @@ export declare class TaroDocument extends TaroElement {
     id: string | undefined | null,
   ): T | null;
   querySelector<T extends TaroElement>(query: string): T | null;
+  querySelectorAll(): never[];
   createComment(): TaroText;
 }

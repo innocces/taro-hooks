@@ -10,11 +10,11 @@ import type { TaroElementImpl } from '../dom-external/element-impl';
 import type { Hooks } from '../hooks';
 import type { Events } from '../emitter/emitter';
 export declare class TaroRootElement extends TaroElement {
-  private pendingUpdate;
   private pendingFlush;
   private updatePayloads;
   private updateCallbacks;
   private eventCenter;
+  pendingUpdate: boolean;
   ctx: null | MpInstance;
   constructor( // eslint-disable-next-line @typescript-eslint/indent
     nodeImpl: TaroNodeImpl,

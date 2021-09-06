@@ -59,6 +59,9 @@ export interface ModifyRmAttrPayload {
 export interface OnAddEvent<T extends TaroEventTarget = TaroEventTarget> {
   (type: string, handler: EventHandler, options: any, node: T): void;
 }
+export interface patchElement {
+  (node: TaroElement): void;
+}
 export interface IHooks {
   /** 解决 React 生命周期名称的兼容问题 */
   getLifecycle: GetLifecycle;
@@ -88,7 +91,10 @@ export interface IHooks {
   createPullDownComponent?: CreatePullDownComponent;
   /** H5 获取原生 DOM 对象 */
   getDOMNode?: GetDOMNode;
-  /** 挂载属性或 API 到 Taro 对象上 */
+  /**
+   * @multi-inject
+   * 挂载属性或 API 到 Taro 对象上
+   **/
   initNativeApi?: InitNativeApi;
   /**
    * @todo: mutiInject
@@ -110,5 +116,10 @@ export interface IHooks {
    * 调用 addEventListener 时触发
    **/
   onAddEvent?: OnAddEvent;
+  /**
+   * @todo: mutiInject
+   * 给 TaroElement 实例注入属性或方法
+   **/
+  patchElement?: patchElement;
 }
 export {};

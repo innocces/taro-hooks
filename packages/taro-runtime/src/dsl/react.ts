@@ -497,6 +497,8 @@ export function createNativeComponentConfig(
   R = react;
   ReactDOM = reactdom;
 
+  setReconciler();
+
   const config = {
     properties: {
       props: {

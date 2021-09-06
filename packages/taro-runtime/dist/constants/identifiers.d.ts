@@ -5,9 +5,6 @@ declare const SERVICE_IDENTIFIER: {
   TaroTextFactory: string;
   TaroNodeImpl: string;
   TaroElementImpl: string;
-  InnerHTMLImpl: string;
-  insertAdjacentHTMLImpl: string;
-  getBoundingClientRectImpl: string;
   Hooks: string;
   onRemoveAttribute: string;
   getLifecycle: string;
@@ -27,5 +24,6 @@ declare const SERVICE_IDENTIFIER: {
   modifySetAttrPayload: string;
   modifyRmAttrPayload: string;
   onAddEvent: string;
+  patchElement: string;
 };
 export default SERVICE_IDENTIFIER;

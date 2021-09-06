@@ -1,6 +1,7 @@
 import { NodeType } from './node_types';
 import { TaroEventTarget } from './event-target';
 import type { UpdatePayload, InstanceNamedFactory } from '../interface';
+import type { TaroDocument } from './document';
 import type { TaroRootElement } from './root';
 import type { TaroElement } from './element';
 import type { TaroNodeImpl } from '../dom-external/node-impl';
@@ -46,10 +47,10 @@ export declare class TaroNode extends TaroEventTarget {
   remove(isReplace?: boolean): void;
   hasChildNodes(): boolean;
   enqueueUpdate(payload: UpdatePayload): void;
-  cloneNode(isDeep?: boolean): any;
   contains(
     node: TaroNode & {
       id?: string;
     },
   ): boolean;
+  get ownerDocument(): TaroDocument;
 }

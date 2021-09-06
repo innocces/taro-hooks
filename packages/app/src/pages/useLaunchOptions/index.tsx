@@ -37,7 +37,7 @@ export default () => {
     <>
       <AtNoticebar marquee>请尝试从不同场景打开小程序观察参数变化</AtNoticebar>
       <DocPage title="useLaunchOptions 启动参数" panelTitle="useLaunchOptions">
-        {env !== ENV_TYPE.WEAPP && '改hook仅可在小程序中使用'}
+        {env !== ENV_TYPE.WEAPP && '该hook仅可在小程序中使用'}
         <AtRadio
           options={transferOptions(launchOptions)}
           value={MOCK}

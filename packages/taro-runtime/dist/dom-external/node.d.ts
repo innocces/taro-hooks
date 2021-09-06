@@ -1,4 +1,5 @@
 import { GetDoc } from '../interface';
+import type { Ctx } from '../interface';
 export declare type IPosition =
   | 'beforebegin'
   | 'afterbegin'
@@ -13,3 +14,4 @@ export declare function insertAdjacentHTMLImpl(
   html: string,
   getDoc: GetDoc,
 ): void;
+export declare function cloneNode(ctx: Ctx, getDoc: any, isDeep?: boolean): any;

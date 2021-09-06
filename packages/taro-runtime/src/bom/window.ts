@@ -24,6 +24,7 @@ if (!isBrowser) {
       window[property] = global[property];
     }
   });
+  (document as any).defaultView = window;
 }
 
 if (process.env.TARO_ENV && process.env.TARO_ENV !== 'h5') {

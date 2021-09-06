@@ -16,6 +16,7 @@ import type {
   ModifyRmAttrPayload,
   MpEvent,
   OnAddEvent,
+  patchElement,
 } from './interface';
 import type { TaroElement } from './dom/element';
 import type { TaroEvent } from './dom/event';
@@ -40,4 +41,6 @@ export declare class Hooks implements IHooks {
   modifyTaroEvent(e: TaroEvent, element: TaroElement): void;
   initNativeApiImpls?: InitNativeApi[];
   initNativeApi(taro: Record<string, any>): void;
+  patchElementImpls?: patchElement[];
+  patchElement(element: TaroElement): void;
 }

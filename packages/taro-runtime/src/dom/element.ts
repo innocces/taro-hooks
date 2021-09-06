@@ -25,6 +25,8 @@ import {
   STATIC_VIEW,
   PURE_VIEW,
   PROPERTY_THRESHOLD,
+  CATCHMOVE,
+  CATCH_VIEW,
 } from '../constants';
 
 import type { TaroEvent } from './event';
@@ -53,6 +55,7 @@ export class TaroElement extends TaroNode {
     elementImpl.bind(this);
     this.nodeType = NodeType.ELEMENT_NODE;
     this.style = new Style(this);
+    hooks.patchElement(this);
   }
 
   private _stopPropagation(event: TaroEvent) {
@@ -186,12 +189,25 @@ export class TaroElement extends TaroNode {
 
     this.enqueueUpdate(payload);
 
-    // pure-view => static-view
-    if (isPureView && isHasExtractProp(this)) {
-      this.enqueueUpdate({
-        path: `${this._path}.${Shortcuts.NodeName}`,
-        value: STATIC_VIEW,
-      });
+    if (this.nodeName === VIEW) {
+      if (toCamelCase(qualifiedName) === CATCHMOVE) {
+        // catchMove = true: catch-view
+        // catchMove = false: view or static-view
+        this.enqueueUpdate({
+          path: `${this._path}.${Shortcuts.NodeName}`,
+          value: value
+            ? CATCH_VIEW
+            : this.isAnyEventBinded()
+            ? VIEW
+            : STATIC_VIEW,
+        });
+      } else if (isPureView && isHasExtractProp(this)) {
+        // pure-view => static-view
+        this.enqueueUpdate({
+          path: `${this._path}.${Shortcuts.NodeName}`,
+          value: STATIC_VIEW,
+        });
+      }
     }
   }
 
@@ -226,12 +242,24 @@ export class TaroElement extends TaroNode {
 
     this.enqueueUpdate(payload);
 
-    // static-view => pure-view
-    if (isStaticView && !isHasExtractProp(this)) {
-      this.enqueueUpdate({
-        path: `${this._path}.${Shortcuts.NodeName}`,
-        value: PURE_VIEW,
-      });
+    if (this.nodeName === VIEW) {
+      if (toCamelCase(qualifiedName) === CATCHMOVE) {
+        // catch-view => view or static-view or pure-view
+        this.enqueueUpdate({
+          path: `${this._path}.${Shortcuts.NodeName}`,
+          value: this.isAnyEventBinded()
+            ? VIEW
+            : isHasExtractProp(this)
+            ? STATIC_VIEW
+            : PURE_VIEW,
+        });
+      } else if (isStaticView && !isHasExtractProp(this)) {
+        // static-view => pure-view
+        this.enqueueUpdate({
+          path: `${this._path}.${Shortcuts.NodeName}`,
+          value: PURE_VIEW,
+        });
+      }
     }
   }
 

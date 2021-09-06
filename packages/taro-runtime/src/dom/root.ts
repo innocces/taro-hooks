@@ -25,11 +25,16 @@ const eventIncrementId = incrementId();
 
 @injectable()
 export class TaroRootElement extends TaroElement {
-  private pendingUpdate = false;
   private pendingFlush = false;
+
   private updatePayloads: UpdatePayload[] = [];
+
   private updateCallbacks: Func[] = [];
+
   private eventCenter: Events;
+
+  public pendingUpdate = false;
+
   public ctx: null | MpInstance = null;
 
   public constructor(
@@ -105,6 +110,10 @@ export class TaroRootElement extends TaroElement {
         this.pendingUpdate = false;
         const customWrapperUpdate: { ctx: any; data: Record<string, any> }[] =
           [];
+        const customWrapperMap: Map<
+          Record<any, any>,
+          Record<string, any>
+        > = new Map();
         const normalUpdate = {};
         if (!initRender) {
           for (const p in data) {
@@ -121,11 +130,9 @@ export class TaroRootElement extends TaroElement {
                 const splitedPath = dataPathArr.slice(i).join('.');
                 if (customWrapper) {
                   hasCustomWrapper = true;
-                  customWrapperUpdate.push({
-                    ctx: ctx.selectComponent(`#${customWrapperId}`),
-                    data: {
-                      [`i.${splitedPath}`]: data[p],
-                    },
+                  customWrapperMap.set(customWrapper, {
+                    ...(customWrapperMap.get(customWrapper) || {}),
+                    [`i.${splitedPath}`]: data[p],
                   });
                 }
                 break;
@@ -134,6 +141,11 @@ export class TaroRootElement extends TaroElement {
             if (!hasCustomWrapper) {
               normalUpdate[p] = data[p];
             }
+          }
+          if (customWrapperMap.size > 0) {
+            customWrapperMap.forEach((data, ctx) => {
+              customWrapperUpdate.push({ ctx, data });
+            });
           }
         }
         const updateArrLen = customWrapperUpdate.length;

@@ -50,9 +50,9 @@ export function setInnerHTML(
   html: string,
   getDoc: () => TaroDocument,
 ) {
-  element.childNodes.forEach((node) => {
-    element.removeChild(node);
-  });
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
   const children = parser(html, getDoc());
 
   for (let i = 0; i < children.length; i++) {

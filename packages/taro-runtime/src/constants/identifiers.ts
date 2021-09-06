@@ -5,9 +5,6 @@ const SERVICE_IDENTIFIER = {
   TaroTextFactory: 'Factory<TaroText>',
   TaroNodeImpl: 'TaroNodeImpl',
   TaroElementImpl: 'TaroElementImpl',
-  InnerHTMLImpl: 'InnerHTMLImpl',
-  insertAdjacentHTMLImpl: 'insertAdjacentHTMLImpl',
-  getBoundingClientRectImpl: 'getBoundingClientRectImpl',
   Hooks: 'hooks',
   onRemoveAttribute: 'onRemoveAttribute',
   getLifecycle: 'getLifecycle',
@@ -27,6 +24,7 @@ const SERVICE_IDENTIFIER = {
   modifySetAttrPayload: 'modifySetAttrPayload',
   modifyRmAttrPayload: 'modifyRmAttrPayload',
   onAddEvent: 'onAddEvent',
+  patchElement: 'patchElement',
 };
 
 export default SERVICE_IDENTIFIER;

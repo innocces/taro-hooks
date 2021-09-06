@@ -7,7 +7,7 @@ import { TaroEventTarget } from './event-target';
 import { hydrate } from '../hydrate';
 import { eventSource } from './event-source';
 import { ElementNames } from '../interface';
-import { STYLE, DATASET, PROPS, OBJECT } from '../constants';
+import { DOCUMENT_FRAGMENT } from '../constants';
 
 import type { UpdatePayload, InstanceNamedFactory } from '../interface';
 import type { TaroDocument } from './document';
@@ -135,6 +135,14 @@ export class TaroNode extends TaroEventTarget {
     refChild?: TaroNode | null,
     isReplace?: boolean,
   ): T {
+    if (newChild.nodeName === DOCUMENT_FRAGMENT) {
+      newChild.childNodes.reduceRight((previousValue, currentValue) => {
+        this.insertBefore(currentValue, previousValue);
+        return currentValue;
+      }, refChild);
+      return newChild;
+    }
+
     newChild.remove();
     newChild.parentNode = this;
     let payload: UpdatePayload;
@@ -150,7 +158,12 @@ export class TaroNode extends TaroEventTarget {
       } else {
         payload = {
           path: `${this._path}.${Shortcuts.Childnodes}`,
-          value: () => this.childNodes.map(hydrate),
+          value: () => {
+            const childNodes = this.childNodes.filter(
+              (node) => !isComment(node),
+            );
+            return childNodes.map(hydrate);
+          },
         };
       }
     } else {
@@ -188,7 +201,10 @@ export class TaroNode extends TaroEventTarget {
     if (!isReplace) {
       this.enqueueUpdate({
         path: `${this._path}.${Shortcuts.Childnodes}`,
-        value: () => this.childNodes.map(hydrate),
+        value: () => {
+          const childNodes = this.childNodes.filter((node) => !isComment(node));
+          return childNodes.map(hydrate);
+        },
       });
     }
     child.parentNode = null;
@@ -210,37 +226,6 @@ export class TaroNode extends TaroEventTarget {
     this._root?.enqueueUpdate(payload);
   }
 
-  public cloneNode(isDeep = false) {
-    const document = this._getElement<TaroDocument>(ElementNames.Document)();
-    let newNode;
-
-    if (this.nodeType === NodeType.ELEMENT_NODE) {
-      newNode = document.createElement(this.nodeName);
-    } else if (this.nodeType === NodeType.TEXT_NODE) {
-      newNode = document.createTextNode('');
-    }
-
-    for (const key in this) {
-      const value: any = this[key];
-      if ([PROPS, DATASET].includes(key) && typeof value === OBJECT) {
-        newNode[key] = { ...value };
-      } else if (key === '_value') {
-        newNode[key] = value;
-      } else if (key === STYLE) {
-        newNode.style._value = { ...value._value };
-        newNode.style._usedStyleProp = new Set(
-          Array.from(value._usedStyleProp),
-        );
-      }
-    }
-
-    if (isDeep) {
-      newNode.childNodes = this.childNodes.map((node) => node.cloneNode(true));
-    }
-
-    return newNode;
-  }
-
   public contains(node: TaroNode & { id?: string }): boolean {
     let isContains = false;
     this.childNodes.some((childNode) => {
@@ -251,5 +236,10 @@ export class TaroNode extends TaroEventTarget {
       }
     });
     return isContains;
+  }
+
+  public get ownerDocument() {
+    const document = this._getElement<TaroDocument>(ElementNames.Document)();
+    return document;
   }
 }

@@ -26,6 +26,7 @@ import type {
   ModifyRmAttrPayload,
   MpEvent,
   OnAddEvent,
+  patchElement,
 } from './interface';
 import type { TaroElement } from './dom/element';
 import type { TaroEvent } from './dom/event';
@@ -105,5 +106,13 @@ export class Hooks implements IHooks {
 
   public initNativeApi(taro: Record<string, any>) {
     this.initNativeApiImpls?.forEach((fn) => fn(taro));
+  }
+
+  @multiInject(SERVICE_IDENTIFIER.patchElement)
+  @optional()
+  public patchElementImpls?: patchElement[];
+
+  public patchElement(element: TaroElement) {
+    this.patchElementImpls?.forEach((fn) => fn(element));
   }
 }

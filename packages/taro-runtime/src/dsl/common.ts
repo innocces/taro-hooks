@@ -149,6 +149,8 @@ export function createPageConfig(
           if (!isBrowser) {
             pageElement.ctx = this;
             pageElement.performUpdate(true, cb);
+          } else {
+            isFunction(cb) && cb();
           }
         });
       };
