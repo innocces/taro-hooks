@@ -4,11 +4,21 @@ import useEnv from '../useEnv';
 
 export type Result = UpdateManager | {};
 
+export type IAction = (manager: UpdateManager) => void;
+export interface IUpdateManager {
+  onCheckForUpdate?: (
+    manager: UpdateManager,
+    result: UpdateManager.OnCheckForUpdateResult,
+  ) => void;
+  onUpdateReady?: IAction;
+  onUpdateFailed?: IAction;
+}
+
 function useUpdateManager({
   onCheckForUpdate,
   onUpdateReady,
   onUpdateFailed,
-}: UpdateManager): Result {
+}: IUpdateManager): Result {
   const env = useEnv();
   const updateManager = useRef<Result>({});
 
@@ -21,9 +31,19 @@ function useUpdateManager({
   }, [env]);
 
   const addEventListener = useCallback((updateManagerInstance) => {
-    updateManagerInstance.onCheckForUpdate(onCheckForUpdate);
-    updateManagerInstance.onUpdateReady(onUpdateReady);
-    updateManagerInstance.onUpdateFailed(onUpdateFailed);
+    onCheckForUpdate &&
+      updateManagerInstance.onCheckForUpdate(
+        (result: UpdateManager.OnCheckForUpdateResult) =>
+          onCheckForUpdate(updateManagerInstance, result),
+      );
+    onUpdateReady &&
+      updateManagerInstance.onUpdateReady(() =>
+        onUpdateReady(updateManagerInstance),
+      );
+    onUpdateFailed &&
+      updateManagerInstance.onUpdateFailed(() =>
+        onUpdateFailed(updateManagerInstance),
+      );
   }, []);
 
   return updateManager;

@@ -30,11 +30,11 @@ const updateManager = useUpdateManager({
 ## 入参说明
 
 ```tsx | pure
-function onCheckForUpdate(res) {}
+function onCheckForUpdate(manager, res) {}
 
-function onUpdateReady() {}
+function onUpdateReady(manager) {}
 
-function onUpdateFailed() {}
+function onUpdateFailed(manager) {}
 ```
 
 ## 返回值说明

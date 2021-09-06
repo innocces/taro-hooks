@@ -11,7 +11,7 @@ import 'taro-ui/dist/style/components/icon.scss';
 export default () => {
   const env = useEnv();
 
-  const onCheckForUpdate = useCallback((res) => {
+  const onCheckForUpdate = useCallback((manager, res) => {
     Taro.atMessage({
       message: res.hasUpdate ? '有新版本' : '无新版本',
     });

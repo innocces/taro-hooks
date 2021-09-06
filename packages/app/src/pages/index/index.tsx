@@ -3,7 +3,7 @@ import { AtIcon } from 'taro-ui';
 import { Image, View } from '@tarojs/components';
 
 import { ENV_TYPE } from '@tarojs/taro';
-import { useEnv, useRouter, useModal } from 'taro-hooks';
+import { useEnv, useRouter, useModal, useUpdateManager } from 'taro-hooks';
 
 import './index.less';
 
@@ -15,6 +15,22 @@ const Index = () => {
   const env = useEnv();
   const [routerInfo, { navigateTo }] = useRouter();
   const [show] = useModal({ mask: true, title: '温馨提示', showCancel: false });
+
+  const onUpdateReady = useCallback(
+    (manager) => {
+      show({
+        title: '更新提示',
+        content: '新版本已经准备好，请重启应用更新',
+      }).then(() => {
+        manager.applyUpdate();
+      });
+    },
+    [show],
+  );
+
+  useUpdateManager({
+    onUpdateReady,
+  });
 
   useEffect(() => {
     console.log(BUILD_MODE);
