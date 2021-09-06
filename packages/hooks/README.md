@@ -89,7 +89,7 @@ $ yarn app:dev:h5
 
 ## 交流讨论
 
-<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-9-1/1630505811853-qrcode.JPG" alt="wechat code" width="300"/>
+<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-9-6/1630929924555-qrcode.jpg" alt="wechat code" width="300"/>
 
 ## License
 
