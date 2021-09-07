@@ -62,6 +62,7 @@ export default {
     'pages/useMotion/index',
     'pages/useBrightness/index',
     'pages/useLocation/index',
+    'pages/useScanCode/index',
     // media
     'pages/useImage/index',
     'pages/useVideo/index',

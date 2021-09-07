@@ -37,6 +37,7 @@ import useVibrate from './useVibrate';
 import useMotion from './useMotion';
 import useBrightness from './useBrightness';
 import useLocation from './useLocation';
+import useScanCode from './useScanCode';
 
 // media
 import useImage from './useImage';
@@ -75,6 +76,7 @@ export {
   useMotion,
   useBrightness,
   useLocation,
+  useScanCode,
   useImage,
   useVideo,
   useCamera,

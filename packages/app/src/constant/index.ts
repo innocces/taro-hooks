@@ -199,6 +199,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useLocation',
       name: 'useLocation 地理位置',
     },
+    {
+      id: 'useScanCode',
+      name: 'useScanCode 扫码',
+    },
   ],
   [APIChildrenName.network]: [
     {
