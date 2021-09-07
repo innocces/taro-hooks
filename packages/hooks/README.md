@@ -121,7 +121,7 @@ $ yarn app:dev:h5
 
 ## Sponsor
 
-[![][image-20]][14]
+<a href="https://www.buymeacoffee.com/innocces" target="_blank"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee 🎉&emoji=&slug=innocces&button_colour=BD5FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00"></a>
 
 [1]: https://www.npmjs.com/package/taro-hooks
 [2]: https://npmjs.org/package/taro-hooks
@@ -136,7 +136,6 @@ $ yarn app:dev:h5
 [11]: https://app.fossa.com/projects/git%2Bgithub.com%2Finnocces%2Ftaro-hooks?ref=badge_large
 [12]: https://gitee.com/inocces/taro-hooks
 [13]: https://github.com/innocces/taro-hooks
-[14]: https://www.buymeacoffee.com/innocces
 [image-1]: https://img.shields.io/npm/v/taro-hooks.svg?style=flat
 [image-2]: https://img.shields.io/npm/dm/taro-hooks.svg?style=flat
 [image-3]: https://img.shields.io/node/v/taro-hooks.svg?style=flat-square
@@ -156,4 +155,3 @@ $ yarn app:dev:h5
 [image-17]: https://img.shields.io/github/issues-closed/innocces/taro-hooks
 [image-18]: https://img.shields.io/github/commits-since/innocces/taro-hooks/latest/main
 [image-19]: https://img.shields.io/github/release-date/innocces/taro-hooks
-[image-20]: https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=innocces&button_colour=BD5FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00

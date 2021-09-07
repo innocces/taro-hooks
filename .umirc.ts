@@ -94,6 +94,20 @@ export default defineConfig({
     },
   ],
   links: [{ rel: 'stylesheet', href: '/assets/style.css' }],
+  headScripts: [
+    {
+      'data-name': 'BMC-Widget',
+      'data-cfasync': 'false',
+      src: 'https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js',
+      'data-id': 'innocces',
+      'data-description': 'Support me on Buy me a coffee!',
+      'data-message': '_(:з」∠)_ thanks',
+      'data-color': '#BD5FFF',
+      'data-position': 'Right',
+      'data-x_margin': '18',
+      'data-y_margin': '18',
+    },
+  ],
   themeConfig: {
     hd: {
       rules: [
