@@ -53,6 +53,19 @@ export default () => {
         >
           返回上一页
         </AtButton>
+        <AtButton
+          className="gap"
+          disabled={env === ENV_TYPE.WEB}
+          onClick={() => navigateTo(true, { appId: 'wxce815e33b0e06cf5' })}
+        >
+          跳转小程序
+        </AtButton>
+        <AtButton
+          disabled={env === ENV_TYPE.WEB}
+          onClick={() => navigateBack(true)}
+        >
+          返回小程序
+        </AtButton>
         {env !== ENV_TYPE.WEB && (
           <View>
             routeInfo:

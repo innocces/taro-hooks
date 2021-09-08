@@ -11,11 +11,11 @@ group:
 
 # useRouter
 
-路由相关, 扩充`Taro useRouter`
+路由相关, 扩充 `Taro useRouter` , 并融合跳转小程序 `api`
 
 ## 何时使用
 
-当需要获取路由，或者进行路由操作时
+当需要获取路由，或者进行路由以及小程序跳转操作时
 
 ## API
 
@@ -38,14 +38,14 @@ const [
 - `options: { [_string]: any }`: 跳转携带参数(可选)
   <br/>
 
-| 返回值       | 说明                                       | 类型                                                         |
-| ------------ | ------------------------------------------ | ------------------------------------------------------------ |
-| routerInfo   | `当前页面路由信息`                         | `RouterInfo<Partial<Record<string, string>>>`                |
-| switchTab    | `异步跳转tabBar页面`                       | `switchTab(url: string, options?: { [_string]: any }).then`  |
-| reLaunch     | `异步关闭所有页面，打开到应用内的某个页面` | `reLaunch(url: string, options?: { [_string]: any }).then`   |
-| redirectTo   | `异步关闭当前页面，跳转到应用内的某个页面` | `redirectTo(url: string, options?: { [_string]: any }).then` |
-| navigateTo   | `异步保留当前页面，跳转到应用内的某个页面` | `navigateTo(url: string, options?: { [_string]: any }).then` |
-| navigateBack | `异步关闭当前页面，返回上一页面或多级页面` | `navigateBack(delta?: number).then`                          |
+| 返回值       | 说明                                                   | 类型                                                                                                                                |
+| ------------ | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| routerInfo   | 当前页面路由信息                                       | `RouterInfo<Partial<Record<string, string>>>`                                                                                       |
+| switchTab    | 异步跳转 tabBar 页面                                   | `(url: string, options?: TRecord) => Promise<General.CallbackResult>`                                                               |
+| reLaunch     | 异步关闭所有页面，打开到应用内的某个页面               | `(url: string, options?: TRecord) => Promise<General.CallbackResult>`                                                               |
+| redirectTo   | 异步关闭当前页面，跳转到应用内的某个页面               | `(url: string, options?: TRecord) => Promise<General.CallbackResult>`                                                               |
+| navigateTo   | 异步保留当前页面，跳转到应用内的某个页面或跳转至小程序 | `(urlOrMark: string &#124; boolean, options?: TRecord &#124; INavigateToMiniProgramSyncOptions) => Promise<General.CallbackResult>` |
+| navigateBack | 异步关闭当前页面，返回上一页面或多级页面或返回小程序   | `(deltaOrMark?: number &#124; boolean, extraData?: TRecord) => Promise<General.CallbackResult>`                                     |
 
 ## 代码演示
 
