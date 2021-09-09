@@ -37,7 +37,11 @@ export type NavigateToSync = (
   options?: TRecord | INavigateToMiniProgramSyncOptions,
 ) => Promise<General.CallbackResult>;
 export interface ResultMethods {
-  [_: string]: CommonRouteWithOptionsSync | NavigateBackSync | NavigateToSync;
+  switchTab: CommonRouteWithOptionsSync;
+  relaunch: CommonRouteWithOptionsSync;
+  redirectTo: CommonRouteWithOptionsSync;
+  navigateTo: NavigateToSync;
+  navigateBack: NavigateBackSync;
 }
 
 export type Result = [RouterInfoResult, ResultMethods];
