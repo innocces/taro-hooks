@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { AtRadio } from 'taro-ui';
 import DocPage from '@components/DocPage';
 

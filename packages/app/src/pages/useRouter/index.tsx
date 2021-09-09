@@ -4,7 +4,7 @@ import DocPage from '@components/DocPage';
 import { View } from '@tarojs/components';
 
 import { useRouter, useEnv } from 'taro-hooks';
-import { getSystemInfoSync, ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE } from '@tarojs/taro';
 
 export default () => {
   const env = useEnv();

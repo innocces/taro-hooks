@@ -5,3 +5,5 @@ interface INavigator extends Navigator {
 }
 
 declare var navigator: INavigator;
+
+declare var wx: any;

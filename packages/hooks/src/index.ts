@@ -2,7 +2,6 @@
 import useEnv from './useEnv';
 
 // basic
-import useLaunchOptions from './useLaunchOptions';
 import useRouter from './useRouter';
 import usePromise from './usePromise';
 import useBase64ToArrayBuffer from './useBase64ToArrayBuffer';
@@ -24,6 +23,8 @@ import useNavigationBar from './useNavigationBar';
 // wechat
 import useAPICheck from './useAPICheck';
 import useUpdateManager from './useUpdateManager';
+import useLaunchOptions from './useLaunchOptions';
+import useAuthorize from './useAuthorize';
 
 // network
 import useNetworkType from './useNetworkType';

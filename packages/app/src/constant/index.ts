@@ -151,6 +151,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useLaunchOptions',
       name: 'useLaunchOptions 启动参数',
     },
+    {
+      id: 'useAuthorize',
+      name: 'useAuthorize 用户授权',
+    },
   ],
   [APIChildrenName.media]: [
     {
