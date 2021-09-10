@@ -93,7 +93,7 @@ $ yarn app:dev:h5
 
 ## License
 
-[MIT@innocces](./LICENSE)
+[MIT@innocces](https://github.com/innocces/taro-hooks/blob/main/LICENSE)
 
 [![FOSSA Status][image-13]][11]
 
@@ -113,7 +113,7 @@ $ yarn app:dev:h5
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-[more contributors](./CONTRIBUTORS.md)
+[more contributors](https://github.com/innocces/taro-hooks/blob/main/CONTRIBUTORS.md)
 
 ## Gitee
 
