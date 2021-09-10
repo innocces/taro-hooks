@@ -32,6 +32,10 @@ $ npm i taro-hooks --save
 import { useEnv } from 'taro-hooks';
 ```
 
+3. taro-init
+
+<embed src="../packages/hooks/README.md#L57-L63"></embed>
+
 ## 使用案例
 
 <table>
@@ -62,8 +66,4 @@ import { useEnv } from 'taro-hooks';
   </tbody>
 </table>
 
-## 交流讨论
-
-<div>
-  <img data-type="wechat" src="/image/qrcode.jpg" width="300" />
-</div>
+<embed src="../packages/hooks/README.md#L97-L105"></embed>

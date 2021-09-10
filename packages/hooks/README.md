@@ -4,7 +4,7 @@
 
 # Taro-hooks
 
-[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END --> [![GitHub commit activity][image-16]][13] [![GitHub closed issues][image-17]][13] [![GitHub commits since latest release (by date)][image-18]][13] [![GitHub Release Date][image-19]][13][![Install size][image-20]][14] [![brotli][image-21]][15]
+[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END --> [![GitHub commit activity][image-16]][13] [![GitHub closed issues][image-17]][13] [![GitHub commits since latest release (by date)][image-18]][13] [![GitHub Release Date][image-19]][13][![Install size][image-20]][14] [![brotli][image-21]][15][![][image-22]][15][![][image-23]][16][![][image-24]][16]
 
 ## 简介
 
@@ -53,6 +53,14 @@
 - 完整的类型定义文件
 - 更易用的方式
 
+## taro init
+
+确保当前`node>=12.x`. 可使用`npx taro init projectname`选择`taro-hooks`模板进行初始化项目.
+
+<video autoplay loop preload="auto">
+  <source src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-9-11/1631294499323-taro-hooks-templete.mov"></source>
+</video>
+
 ## 安装
 
 ```bash
@@ -89,7 +97,7 @@ $ yarn app:dev:h5
 
 ## 交流讨论
 
-<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-9-6/1630929924555-qrcode.jpg" alt="wechat code" width="300"/>
+<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-9-11/1631293099153-qrcode.jpg" alt="wechat code" width="300"/>
 
 ## License
 
@@ -138,7 +146,7 @@ $ yarn app:dev:h5
 [13]: https://github.com/innocces/taro-hooks
 [14]: https://packagephobia.now.sh/result?p=taro-hooks
 [15]: https://bundlephobia.com/result?p=taro-hooks
-
+[16]: https://www.jsdelivr.com/package/npm/taro-hooks
 [image-1]: https://img.shields.io/npm/v/taro-hooks.svg?style=flat
 [image-2]: https://img.shields.io/npm/dm/taro-hooks.svg?style=flat
 [image-3]: https://img.shields.io/node/v/taro-hooks.svg?style=flat-square
@@ -160,3 +168,6 @@ $ yarn app:dev:h5
 [image-19]: https://img.shields.io/github/release-date/innocces/taro-hooks
 [image-20]: https://badgen.net/packagephobia/install/taro-hooks
 [image-21]: https://badgen.net/bundlephobia/minzip/taro-hooks
+[image-22]: https://badgen.net/bundlephobia/tree-shaking/taro-hooks
+[image-23]: https://data.jsdelivr.com/v1/package/npm/taro-hooks/badge
+[image-24]: https://badgen.net/jsdelivr/v/npm/taro-hooks
