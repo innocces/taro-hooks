@@ -32,8 +32,10 @@ export default {
     'pages/useAPICheck/index',
     'pages/useUpdateManager/index',
     'pages/useLaunchOptions/index',
+    'pages/useUserInfo/index',
     'pages/useAccountInfo/index',
     'pages/useAuthorize/index',
+    'pages/useLogin/index',
     // network
     'pages/useRequest/index',
     'pages/useRequest/defaultRequest/index',

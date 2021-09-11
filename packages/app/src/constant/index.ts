@@ -152,6 +152,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useLaunchOptions 启动参数',
     },
     {
+      id: 'useUserInfo',
+      name: 'useUserInfo 用户信息',
+    },
+    {
       id: 'useAccountInfo',
       name: 'useAccountInfo 账号信息',
     },

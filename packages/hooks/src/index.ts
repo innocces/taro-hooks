@@ -25,7 +25,9 @@ import useAPICheck from './useAPICheck';
 import useUpdateManager from './useUpdateManager';
 import useLaunchOptions from './useLaunchOptions';
 import useAuthorize from './useAuthorize';
+import useUserInfo from './useUserInfo';
 import useAccountInfo from './useAccountInfo';
+import useLogin from './useLogin';
 
 // network
 import useNetworkType from './useNetworkType';
@@ -87,4 +89,6 @@ export {
   useMap,
   useAuthorize,
   useAccountInfo,
+  useUserInfo,
+  useLogin,
 };
