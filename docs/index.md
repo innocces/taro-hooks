@@ -15,7 +15,7 @@ features:
   - icon: https://taro.zone/static/images/icon_component.svg
     title: 类型定义
     desc: 使用typescript开发, 完整的类型定义方便开发
-footer: Open-source MIT Licensed | Copyright © 2021<br />Powered by [taro-hooks](https://github.com/innocces/taro-hooks)
+footer: Open-source [MIT Licensed](https://github.com/innocces/taro-hooks/blob/main/LICENSE) | Copyright © 2021<br />Powered by [taro-hooks](https://github.com/innocces/taro-hooks)
 ---
 
 ## 轻松使用
@@ -30,6 +30,24 @@ $ npm i taro-hooks --save
 
 ```jsx | pure
 import { useEnv } from 'taro-hooks';
+```
+
+注: `taro-hooks`的`js`代码默认支持基于`ES modules`的`tree shaking`. 但你依然可以显式的使用[`babel-plugin-import`](https://github.com/ant-design/babel-plugin-import)去设置按需加载, 设置方式如下:
+
+```js | pure
+// babel.config.js
+module.exports = {
+  plugins: [
+    [
+      'import',
+      {
+        libraryName: 'taro-hooks',
+        camel2DashComponentName: false,
+      },
+      'taro-hooks',
+    ],
+  ],
+};
 ```
 
 3. taro-init
@@ -66,4 +84,4 @@ import { useEnv } from 'taro-hooks';
   </tbody>
 </table>
 
-<embed src="../packages/hooks/README.md#L97-L105"></embed>
+<embed src="../packages/hooks/README.md#L114-L121"></embed>

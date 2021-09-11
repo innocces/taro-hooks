@@ -34,7 +34,7 @@ $ v12.22.1
 
 ```bash
 $ npx @tarojs/cli init taro-hooks-app
-# 选择react模板
+# 选择react模板 - (可直接选择模板中的taro-hooks模板或可以在后续自行安装)
 $ cd taro-hooks-app
 $ npm i taro-hooks --save
 $ npm run dev:weapp --watch

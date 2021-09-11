@@ -12,8 +12,6 @@
 
 ## 文档
 
-[传送门](https://innocces.github.io/taro-hooks)  
-[netlify](https://taro-hooks.netlify.app)  
 [vercel](https://taro-hooks-innocces.vercel.app)
 
 ## 使用案例
@@ -51,13 +49,14 @@
 - 全面匹配`Taro API`.
 - 结合`ahooks`扩展常用`hook`.
 - 完整的类型定义文件
+- 按需加载
 - 更易用的方式
 
 ## taro init
 
 确保当前`node>=12.x`. 可使用`npx taro init projectname`选择`taro-hooks`模板进行初始化项目.
 
-<video autoplay loop preload="auto">
+<video controls autoplay loop preload="auto">
   <source src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-9-11/1631294499323-taro-hooks-templete.mov"></source>
 </video>
 
@@ -71,6 +70,24 @@ $ npm i taro-hooks --save
 
 ```jsx
 import { useEnv } from 'taro-hooks';
+```
+
+注: `taro-hooks`的`js`代码默认支持基于`ES modules`的`tree shaking`. 但你依然可以显式的使用[`babel-plugin-import`](https://github.com/ant-design/babel-plugin-import)去设置按需加载, 设置方式如下:
+
+```js
+// babel.config.js
+module.exports = {
+  plugins: [
+    [
+      'import',
+      {
+        libraryName: 'taro-hooks',
+        camel2DashComponentName: false,
+      },
+      'taro-hooks',
+    ],
+  ],
+};
 ```
 
 ## 参与贡献
