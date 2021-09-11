@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.2.0...taro-hooks-v1.3.0) (2021-09-11)
+
+### Bug Fixes
+
+- **gh build:** fix gh build public path error ([54375c5](https://github.com/innocces/taro-hooks/commit/54375c5b14851717c6a888d6003d55b9eec887a5))
+
+### Features
+
+- **useaccountinfo:** add useAccountInfo hooks and demo ([cd8aa61](https://github.com/innocces/taro-hooks/commit/cd8aa61950a2666383cbe19ef91303e61303862f))
+- **useauthorize:** add useAuthorize hook ([c0ec57c](https://github.com/innocces/taro-hooks/commit/c0ec57c0359eee64926dc101dbdb2903d38e0f40))
+- **uselogin & useuserinfo:** add useLogin, useUserInfo hooks and demo ([fa74d86](https://github.com/innocces/taro-hooks/commit/fa74d860c9627794678d1dc2498bb869b3b8e823))
+- **usescancode:** add useScanCode hook ([1a55a65](https://github.com/innocces/taro-hooks/commit/1a55a659e9da63af6a9cbd80add0eb054d5878ee))
+
 # [1.2.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.1.1...taro-hooks-v1.2.0) (2021-09-06)
 
 ### Features
