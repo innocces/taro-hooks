@@ -25,6 +25,7 @@ import useAPICheck from './useAPICheck';
 import useUpdateManager from './useUpdateManager';
 import useLaunchOptions from './useLaunchOptions';
 import useAuthorize from './useAuthorize';
+import useAccountInfo from './useAccountInfo';
 
 // network
 import useNetworkType from './useNetworkType';
@@ -84,4 +85,6 @@ export {
   useAudio,
   useRecord,
   useMap,
+  useAuthorize,
+  useAccountInfo,
 };
