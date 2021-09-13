@@ -54,7 +54,7 @@
 
 ## taro init
 
-确保当前`node>=12.x`、`taro3.3.x`(由于<3.3版本hook处理方式不同). 可使用`npx taro init projectname`选择`taro-hooks`模板进行初始化项目.
+确保当前`node>=12.x`. 可使用`npx taro init projectname`选择`taro-hooks`模板进行初始化项目.
 
 <video controls autoplay loop preload="auto">
   <source src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-9-11/1631294499323-taro-hooks-templete.mov"></source>

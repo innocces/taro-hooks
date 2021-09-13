@@ -26,8 +26,6 @@ title: 介绍
 $ node -v
 # 确保node版本为12+
 $ v12.22.1
-$ taro info
-# 确保 taro 版本 >= 3.3.0
 ```
 
 ### 脚手架初始化`Taro`
@@ -40,15 +38,6 @@ $ npx @tarojs/cli init taro-hooks-app
 $ cd taro-hooks-app
 $ npm i taro-hooks --save
 $ npm run dev:weapp --watch
-```
-
-若之前项目中`taro`版本低于`3.3.x`. 可使用`taro`官方命令来升级当前项目中的所有依赖:
-
-```bash
-# 下方命令二选一
-$ taro update project
-# 或
-$ npx @tarojs/cli update project
 ```
 
 ### 构建及部署
