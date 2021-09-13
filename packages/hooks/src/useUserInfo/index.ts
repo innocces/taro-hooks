@@ -5,6 +5,10 @@ import {
   General,
   ENV_TYPE,
 } from '@tarojs/taro';
+import type {
+  getUserInfo as getUserInfoNamespace,
+  getUserProfile as getUserProfileNamespace,
+} from '@tarojs/taro';
 import { useCallback, useState } from 'react';
 import useEnv from '../useEnv';
 
@@ -48,8 +52,8 @@ function useUserInfo(): [
   const combineUserInfo = useCallback(
     (
       info:
-        | getUserInfo.SuccessCallbackResult
-        | getUserProfile.SuccessCallbackResult,
+        | getUserInfoNamespace.SuccessCallbackResult
+        | getUserProfileNamespace.SuccessCallbackResult,
     ): IUserInfo => {
       const { userInfo, rawData, signature, encryptedData, iv, cloudID } =
         info || {};
