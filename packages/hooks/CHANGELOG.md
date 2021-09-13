@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.3.0...taro-hooks-v1.3.1) (2021-09-13)
+
+### Bug Fixes
+
+- **build type:** fix build type for namespace error ([05a285b](https://github.com/innocces/taro-hooks/commit/05a285b8d4761bee2c55a9dd7ccb71d53223acfc))
+- **deps of hooks:** fix deps to devDeps for hooks force version conflict ([fd72923](https://github.com/innocces/taro-hooks/commit/fd72923453619c1e9c0a8964b36ad0efd221f1d5))
+
 # [1.3.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.2.0...taro-hooks-v1.3.0) (2021-09-11)
 
 ### Features
