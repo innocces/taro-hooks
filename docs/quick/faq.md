@@ -21,3 +21,7 @@ query
   .scrollOffset((res) => console.log(res))
   .exec();
 ```
+
+### 3. 哪些版本的`taro`可以使用？
+
+理论支持`react hooks`以及`taro hooks`版本(即`3.x`)的`taro`均可使用本库.

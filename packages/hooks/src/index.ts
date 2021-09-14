@@ -28,6 +28,7 @@ import useAuthorize from './useAuthorize';
 import useUserInfo from './useUserInfo';
 import useAccountInfo from './useAccountInfo';
 import useLogin from './useLogin';
+import useRequestSubscribeMessage from './useRequestSubscribeMessage';
 
 // network
 import useNetworkType from './useNetworkType';
@@ -91,4 +92,5 @@ export {
   useAccountInfo,
   useUserInfo,
   useLogin,
+  useRequestSubscribeMessage,
 };
