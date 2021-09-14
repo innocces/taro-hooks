@@ -1,0 +1,7 @@
+{
+  "ignoredFiles": [
+    "node_modules/*"
+  ],
+  "compressWiki": "true", // true|false
+  "minKBReduced": 200
+}
