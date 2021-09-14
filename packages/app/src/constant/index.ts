@@ -167,6 +167,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useRequestSubscribeMessage',
       name: 'useRequestSubscribeMessage 订阅消息',
     },
+    {
+      id: 'useChooseAddress',
+      name: 'useChooseAddress 收货地址',
+    },
   ],
   [APIChildrenName.media]: [
     {

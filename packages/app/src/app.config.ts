@@ -37,6 +37,7 @@ export default {
     'pages/useAuthorize/index',
     'pages/useLogin/index',
     'pages/useRequestSubscribeMessage/index',
+    'pages/useChooseAddress/index',
     // network
     'pages/useRequest/index',
     'pages/useRequest/defaultRequest/index',
