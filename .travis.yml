@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-  - 'lts/*'
+  - 12
 install:
   - npm install -g yarn
   - yarn bootstrap
 script:
-  - yarn docs:build
+  - yarn test:coverage
 cache:
   directories:
     - 'node_modules'
