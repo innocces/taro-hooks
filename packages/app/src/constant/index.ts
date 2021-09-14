@@ -163,6 +163,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useAuthorize',
       name: 'useAuthorize 用户授权',
     },
+    {
+      id: 'useRequestSubscribeMessage',
+      name: 'useRequestSubscribeMessage 订阅消息',
+    },
   ],
   [APIChildrenName.media]: [
     {

@@ -10,6 +10,7 @@ import {
 import useEnv from '../useEnv';
 import useVisible from '../useVisible';
 import { typeOf } from '../utils/tool';
+import type { TAuthResultType } from '../type';
 
 declare var wx: any;
 
@@ -17,7 +18,7 @@ declare var wx: any;
 interface ISubscriptionsSetting {
   mainSwitch?: boolean;
   itemSetting?: {
-    [_: string]: 'accept' | 'reject' | 'ban';
+    [_: string]: TAuthResultType;
   };
 }
 interface IROpenSettingSuccessCallbackResult

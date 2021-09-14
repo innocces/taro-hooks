@@ -3,8 +3,9 @@ import React, {
   forwardRef,
   CSSProperties,
   ForwardedRef,
+  FC,
 } from 'react';
-import Taro, { PropsWithChildren } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 
 import { useEvent } from 'taro-hooks';
 
@@ -14,22 +15,22 @@ import DocHeader from '../DocHeader';
 
 import './index.less';
 
-export type IDocPageProps = PropsWithChildren<{
+export interface IDocPageProps {
   title?: string;
   panelTitle?: string;
   style?: CSSProperties;
   forwardedRef?: ForwardedRef<unknown>;
-}>;
+}
 
-const DocPage = ({
+const DocPage: FC<IDocPageProps> = ({
   children,
   title,
   panelTitle,
   style,
   forwardedRef,
-}: IDocPageProps) => {
+}) => {
   // fix runtime change problem
-  const [state, { emitEvent }] = useEvent('');
+  const [_, { emitEvent }] = useEvent('');
 
   useEffect(() => {
     if (!Taro.atMessage) {

@@ -36,6 +36,7 @@ export default {
     'pages/useAccountInfo/index',
     'pages/useAuthorize/index',
     'pages/useLogin/index',
+    'pages/useRequestSubscribeMessage/index',
     // network
     'pages/useRequest/index',
     'pages/useRequest/defaultRequest/index',
