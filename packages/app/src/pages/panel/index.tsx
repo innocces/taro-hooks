@@ -10,6 +10,7 @@ import {
   APIListItem,
   ChildrenList,
   APIChildrenItem,
+  PRODUCTIONDISABLEPANEL,
 } from '../../constant';
 
 import './index.less';
@@ -40,9 +41,9 @@ const Panel = ({}: IPanelProps) => {
 
   const handleItemAction = useCallback(
     (id: string) => {
-      if (BUILD_MODE && id === 'useVideo') {
+      if (BUILD_MODE && PRODUCTIONDISABLEPANEL.includes(id)) {
         show({
-          content: '由于个人账号限制, 无法在线预览useVideo. 可至github查看',
+          content: '由于个人账号限制, 无法在线预览' + id + '. 可至github查看',
         });
       } else {
         navigateTo({

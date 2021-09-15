@@ -171,6 +171,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useChooseAddress',
       name: 'useChooseAddress 收货地址',
     },
+    {
+      id: 'useInvoice',
+      name: 'useInvoice 发票(抬头)',
+    },
   ],
   [APIChildrenName.media]: [
     {
@@ -252,3 +256,9 @@ export const SceneEnum: { [_: number]: string } = {
   1038: '从另一个小程序返回',
   1043: '公众号模板消息',
 };
+
+export const PRODUCTIONDISABLEPANEL: string[] = [
+  'useVideo',
+  'useWeRun',
+  'useInvoice',
+];
