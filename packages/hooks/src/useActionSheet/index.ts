@@ -1,5 +1,5 @@
 import { showActionSheet, General } from '@tarojs/taro';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export interface ActionSheetOption {
   itemList: string[];
@@ -8,7 +8,7 @@ export interface ActionSheetOption {
 }
 
 export type ShowActionSheet = (
-  option?: ActionSheetOption,
+  option?: Partial<ActionSheetOption>,
 ) => Promise<General.CallbackResult>;
 
 export type onActionItemTap = (
@@ -16,15 +16,17 @@ export type onActionItemTap = (
   tapItem: string | undefined,
 ) => any;
 
-function useActionSheet(option?: ActionSheetOption): [ShowActionSheet] {
-  const initialOption = useRef<ActionSheetOption>();
+function useActionSheet(
+  option?: Partial<ActionSheetOption>,
+): [ShowActionSheet] {
+  const initialOption = useRef<Partial<ActionSheetOption>>();
 
   useEffect(() => {
     initialOption.current = option;
   }, [option]);
 
   const showActionSheetAsync = useCallback<ShowActionSheet>(
-    (option?: ActionSheetOption) => {
+    (option?: Partial<ActionSheetOption>) => {
       return new Promise((resolve, reject) => {
         try {
           if (!option && !initialOption.current) {
@@ -35,21 +37,27 @@ function useActionSheet(option?: ActionSheetOption): [ShowActionSheet] {
               {},
               initialOption.current || {},
               option || {},
-            ) as ActionSheetOption;
-            showActionSheet({
-              ...options,
-              success: (res) => {
-                if (onActionItemTap) {
-                  const tapIndex = res.tapIndex;
-                  onActionItemTap(
-                    tapIndex,
-                    options.itemList.find((v, i) => i === tapIndex),
-                  );
-                }
-                resolve(res);
-              },
-              fail: reject,
-            }).catch(reject);
+            );
+            if (!options.itemList) {
+              reject({ errMsg: 'showActionSheet: fail' });
+            } else {
+              showActionSheet({
+                ...(options as ActionSheetOption),
+                success: (res) => {
+                  if (onActionItemTap) {
+                    const tapIndex = res.tapIndex;
+                    onActionItemTap(
+                      tapIndex,
+                      (options as ActionSheetOption).itemList.find(
+                        (v, i) => i === tapIndex,
+                      ),
+                    );
+                  }
+                  resolve(res);
+                },
+                fail: reject,
+              }).catch(reject);
+            }
           }
         } catch (e) {
           reject(e);

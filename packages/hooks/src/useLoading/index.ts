@@ -7,19 +7,21 @@ export interface LoadingOption {
 }
 
 export type ShowLoading = (
-  option?: LoadingOption,
+  option?: Partial<LoadingOption>,
 ) => Promise<General.CallbackResult>;
 export type HideLoading = () => Promise<General.CallbackResult>;
 
-function useLoading(option?: LoadingOption): [ShowLoading, HideLoading] {
-  const initialOption = useRef<LoadingOption>();
+function useLoading(
+  option?: Partial<LoadingOption>,
+): [ShowLoading, HideLoading] {
+  const initialOption = useRef<Partial<LoadingOption>>();
 
   useEffect(() => {
     initialOption.current = option;
   }, [option]);
 
   const showLoadingAsync = useCallback<ShowLoading>(
-    (option?: LoadingOption) => {
+    (option?: Partial<LoadingOption>) => {
       return new Promise((resolve, reject) => {
         try {
           if (!option && !initialOption.current) {
@@ -30,12 +32,16 @@ function useLoading(option?: LoadingOption): [ShowLoading, HideLoading] {
               {},
               initialOption.current || {},
               option || {},
-            ) as LoadingOption;
-            showLoading({
-              ...options,
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
+            );
+            if (!options.title) {
+              reject({ errMsg: 'showLoading: fail' });
+            } else {
+              showLoading({
+                ...(options as LoadingOption),
+                success: resolve,
+                fail: reject,
+              }).catch(reject);
+            }
           }
         } catch (e) {
           reject(e);

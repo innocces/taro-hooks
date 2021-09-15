@@ -3,7 +3,8 @@ import { useCallback, useEffect, useRef } from 'react';
 
 export interface ModalOption {
   title?: string;
-  content: string;
+  content?: string;
+  mask?: boolean;
   cancelColor?: string;
   cancelText?: string;
   confirmColor?: string;
@@ -34,7 +35,7 @@ function useModal(option?: ModalOption): [ShowModal] {
               {},
               initialOption.current || {},
               option || {},
-            ) as ModalOption;
+            );
             showModal({
               ...options,
               success: resolve,

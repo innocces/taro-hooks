@@ -1,5 +1,5 @@
 import { showToast, hideToast, General } from '@tarojs/taro';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export interface ToastOption {
   title: string;
@@ -10,19 +10,19 @@ export interface ToastOption {
 }
 
 export type ShowToast = (
-  option?: ToastOption,
+  option?: Partial<ToastOption>,
 ) => Promise<General.CallbackResult>;
 export type HideToast = () => Promise<General.CallbackResult>;
 
-function useToast(option?: ToastOption): [ShowToast, HideToast] {
-  const initialOption = useRef<ToastOption>();
+function useToast(option?: Partial<ToastOption>): [ShowToast, HideToast] {
+  const initialOption = useRef<Partial<ToastOption>>();
 
   useEffect(() => {
     initialOption.current = option;
   }, [option]);
 
   const showToastAsync = useCallback<ShowToast>(
-    (option?: ToastOption) => {
+    (option?: Partial<ToastOption>) => {
       return new Promise((resolve, reject) => {
         try {
           if (!option && !initialOption.current) {
@@ -33,12 +33,16 @@ function useToast(option?: ToastOption): [ShowToast, HideToast] {
               {},
               initialOption.current || {},
               option || {},
-            ) as ToastOption;
-            showToast({
-              ...options,
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
+            );
+            if (!options.title) {
+              reject({ errMsg: 'showToast: fail' });
+            } else {
+              showToast({
+                ...(options as ToastOption),
+                success: resolve,
+                fail: reject,
+              }).catch(reject);
+            }
           }
         } catch (e) {
           reject(e);
