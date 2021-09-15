@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.3.1...taro-hooks-v1.3.2) (2021-09-15)
+
+### Bug Fixes
+
+- **type:** fix type of feedback hooks ([4728379](https://github.com/innocces/taro-hooks/commit/4728379aabadc58b8c3b166e65d036d397612369))
+
 ## [1.3.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.3.0...taro-hooks-v1.3.1) (2021-09-13)
 
 ### Bug Fixes
