@@ -30,6 +30,7 @@ import useAccountInfo from './useAccountInfo';
 import useLogin from './useLogin';
 import useRequestSubscribeMessage from './useRequestSubscribeMessage';
 import useChooseAddress from './useChooseAddress';
+import useInvoice from './useInvoice';
 
 // network
 import useNetworkType from './useNetworkType';
@@ -95,4 +96,5 @@ export {
   useLogin,
   useRequestSubscribeMessage,
   useChooseAddress,
+  useInvoice,
 };

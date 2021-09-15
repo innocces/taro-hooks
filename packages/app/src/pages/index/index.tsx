@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { AtIcon } from 'taro-ui';
 import { Image, View } from '@tarojs/components';
 
@@ -31,15 +31,6 @@ const Index = () => {
   useUpdateManager({
     onUpdateReady,
   });
-
-  useEffect(() => {
-    console.log(BUILD_MODE);
-    if (BUILD_MODE) {
-      show({
-        content: '由于个人账号限制, 无法在线预览useVideo. 可至github查看',
-      });
-    }
-  }, [show]);
 
   const handleLocation = useCallback(
     (route: string) => {

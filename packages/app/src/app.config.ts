@@ -38,6 +38,7 @@ export default {
     'pages/useLogin/index',
     'pages/useRequestSubscribeMessage/index',
     'pages/useChooseAddress/index',
+    'pages/useInvoice/index',
     // network
     'pages/useRequest/index',
     'pages/useRequest/defaultRequest/index',
