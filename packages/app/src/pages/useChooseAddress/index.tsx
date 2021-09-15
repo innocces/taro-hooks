@@ -29,6 +29,7 @@ export default () => {
     <DocPage title="useChooseAddress 收货地址" panelTitle="useChooseAddress">
       <AtButton onClick={handleRequestSubscribeMessage}>获取收货地址</AtButton>
       <AtRadio
+        onClick={console.log}
         value={null}
         options={Object.entries(addressInfo).map(([key, value]) => ({
           label: key,
