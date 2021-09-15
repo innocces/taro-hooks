@@ -175,6 +175,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useInvoice',
       name: 'useInvoice 发票(抬头)',
     },
+    {
+      id: 'useWeRun',
+      name: 'useWeRun 微信运动',
+    },
   ],
   [APIChildrenName.media]: [
     {
