@@ -41,6 +41,7 @@ export default {
     'pages/useInvoice/index',
     'pages/useWeRun/index',
     'pages/useTopBarText/index',
+    'pages/useMenuButtonBoundingClientRect/index',
     // network
     'pages/useRequest/index',
     'pages/useRequest/defaultRequest/index',
