@@ -40,6 +40,7 @@ export default {
     'pages/useChooseAddress/index',
     'pages/useInvoice/index',
     'pages/useWeRun/index',
+    'pages/useTopBarText/index',
     // network
     'pages/useRequest/index',
     'pages/useRequest/defaultRequest/index',

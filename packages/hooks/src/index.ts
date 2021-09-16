@@ -32,6 +32,7 @@ import useRequestSubscribeMessage from './useRequestSubscribeMessage';
 import useChooseAddress from './useChooseAddress';
 import useInvoice from './useInvoice';
 import useWeRun from './useWeRun';
+import useTopBarText from './useTopBarText';
 
 // network
 import useNetworkType from './useNetworkType';
@@ -99,4 +100,5 @@ export {
   useChooseAddress,
   useInvoice,
   useWeRun,
+  useTopBarText,
 };
