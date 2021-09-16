@@ -183,6 +183,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useTopBarText',
       name: 'useTopBarText 置顶信息',
     },
+    {
+      id: 'useMenuButtonBoundingClientRect',
+      name: 'useMenuButtonBoundingClientRect 胶囊位置',
+    },
   ],
   [APIChildrenName.media]: [
     {

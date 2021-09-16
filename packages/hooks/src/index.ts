@@ -32,6 +32,7 @@ import useRequestSubscribeMessage from './useRequestSubscribeMessage';
 import useChooseAddress from './useChooseAddress';
 import useInvoice from './useInvoice';
 import useWeRun from './useWeRun';
+import useMenuButtonBoundingClientRect from './useMenuButtonBoundingClientRect';
 import useTopBarText from './useTopBarText';
 
 // network
@@ -100,5 +101,6 @@ export {
   useChooseAddress,
   useInvoice,
   useWeRun,
+  useMenuButtonBoundingClientRect,
   useTopBarText,
 };
