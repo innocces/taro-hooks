@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.3.2...taro-hooks-v1.4.0) (2021-09-21)
+
+### Features
+
+- **usebackground:** add useBackground hook ([5f43b0c](https://github.com/innocces/taro-hooks/commit/5f43b0cf66c9d09cfbd63063e08344b6152ebc41))
+- **usechooseaddress:** add useChooseAddress hook ([7187d95](https://github.com/innocces/taro-hooks/commit/7187d9587ff5174d038801e43361e81a7fb30db2))
+- **useinvoice:** add useInvoice hooks ([c293b1e](https://github.com/innocces/taro-hooks/commit/c293b1e801e5d810b63a3b080654079732eb4460))
+- **usemanualpulldownrefresh:** add useManualPullDownRefresh hook ([9b1d18b](https://github.com/innocces/taro-hooks/commit/9b1d18b1914cf275fde4a707d8ce1dd34ee154b7))
+- **usemenubuttonboundingclientrect:** add useMenuButtonBoundingClientRect hook ([5c7cde6](https://github.com/innocces/taro-hooks/commit/5c7cde69ef6be79a3699cdb39fa436a363f189b7))
+- **userequestsubscribemessage:** add useRequestSubscribeMessage hook & faq for hooks version ([ba3ea2f](https://github.com/innocces/taro-hooks/commit/ba3ea2f583b00d443aad31cab59e60151e1ed873))
+- **usetabbar:** add useTabBar hook ([d46240c](https://github.com/innocces/taro-hooks/commit/d46240c915e18ce214070cb2aec005b01029f07e))
+- **usetopbartext:** add useTopBarText hook ([cd22332](https://github.com/innocces/taro-hooks/commit/cd22332a8f8fffee5a1ea0b81214b219011afeaa))
+- **usewerun:** add useWeRun hook ([951826f](https://github.com/innocces/taro-hooks/commit/951826f4f423d44661be6d5eddca6e693ba68dbd))
+
 ## [1.3.2](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.3.1...taro-hooks-v1.3.2) (2021-09-15)
 
 ### Bug Fixes
