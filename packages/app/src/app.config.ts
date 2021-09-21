@@ -22,6 +22,8 @@ export default {
     'pages/useSelectorQuery/getContext/index',
     'pages/useSelectorQuery/getScrollOffset/index',
     'pages/useStorage/index',
+    // layout
+    'pages/useBackground/index',
     // feedback
     'pages/useToast/index',
     'pages/useModal/index',
@@ -86,6 +88,7 @@ export default {
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'Taro hooks',
     navigationBarTextStyle: 'black',
+    enablePullDownRefresh: true,
   },
   tabBar: {
     color: '#6a6a77',

@@ -84,13 +84,8 @@ export default defineConfig({
   exportStatic: {},
   navs: [
     null,
-    {
-      title: 'Git',
-      children: [
-        { title: 'GitHub', path: 'https://github.com/innocces/taro-hooks' },
-        { title: 'Gitee', path: 'https://gitee.com/inocces/taro-hooks' },
-      ],
-    },
+    { title: 'GitHub', path: 'https://github.com/innocces/taro-hooks' },
+    { title: 'Gitee', path: 'https://gitee.com/inocces/taro-hooks' },
     {
       title: '更新日志',
       path: 'https://github.com/innocces/taro-hooks/releases',

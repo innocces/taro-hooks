@@ -15,6 +15,12 @@ export const List: APIList = [
     icon: 'basic',
   },
   {
+    id: 'Layout',
+    title: '布局Hooks',
+    content: '包含tab、背景等',
+    icon: 'layout',
+  },
+  {
     id: 'Feedback',
     title: '操作反馈Hooks',
     content: '包含Toast, Modal等',
@@ -59,6 +65,7 @@ export interface APIChildrenItem {
 
 export enum APIChildrenName {
   basic = 'basic',
+  layout = 'layout',
   environment = 'environment',
   wechat = 'wechat',
   network = 'network',
@@ -108,6 +115,12 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useStorage',
       name: 'useStorage 数据缓存',
+    },
+  ],
+  [APIChildrenName.layout]: [
+    {
+      id: 'useBackground',
+      name: 'useBackground 窗口设置',
     },
   ],
   [APIChildrenName.feedback]: [
