@@ -13,6 +13,8 @@ import useVisible from './useVisible';
 import useSelectorQuery from './useSelectorQuery';
 import useStorage from './useStorage';
 
+// layout
+import useBackground from './useBackground';
 // feedback
 import useToast from './useToast';
 import useModal from './useModal';
@@ -103,4 +105,5 @@ export {
   useWeRun,
   useMenuButtonBoundingClientRect,
   useTopBarText,
+  useBackground,
 };
