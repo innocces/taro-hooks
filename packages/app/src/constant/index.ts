@@ -122,6 +122,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useBackground',
       name: 'useBackground 窗口设置',
     },
+    {
+      id: 'useManualPullDownRefresh',
+      name: 'useManualPullDownRefresh 手动下拉刷新',
+    },
   ],
   [APIChildrenName.feedback]: [
     {

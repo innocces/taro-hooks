@@ -24,6 +24,7 @@ export default {
     'pages/useStorage/index',
     // layout
     'pages/useBackground/index',
+    'pages/useManualPullDownRefresh/index',
     // feedback
     'pages/useToast/index',
     'pages/useModal/index',
