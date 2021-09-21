@@ -24,6 +24,7 @@ export default {
     'pages/useStorage/index',
     // layout
     'pages/useBackground/index',
+    'pages/useTabBar/index',
     'pages/useManualPullDownRefresh/index',
     // feedback
     'pages/useToast/index',
@@ -89,7 +90,6 @@ export default {
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'Taro hooks',
     navigationBarTextStyle: 'black',
-    enablePullDownRefresh: true,
   },
   tabBar: {
     color: '#6a6a77',
@@ -101,6 +101,12 @@ export default {
         text: '首页',
         iconPath: './assets/icon/index.png',
         selectedIconPath: './assets/icon/index-select.png',
+      },
+      {
+        pagePath: 'pages/useTabBar/index',
+        text: 'useTabBar',
+        iconPath: './assets/icon/tabbar.png',
+        selectedIconPath: './assets/icon/tabbar-select.png',
       },
       {
         pagePath: 'pages/about/index',

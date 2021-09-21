@@ -61,6 +61,7 @@ export const List: APIList = [
 export interface APIChildrenItem {
   id: string;
   name: string;
+  tabBar?: boolean;
 }
 
 export enum APIChildrenName {
@@ -125,6 +126,11 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useManualPullDownRefresh',
       name: 'useManualPullDownRefresh 手动下拉刷新',
+    },
+    {
+      id: 'useTabBar',
+      name: 'useTabBar tab栏',
+      tabBar: true,
     },
   ],
   [APIChildrenName.feedback]: [

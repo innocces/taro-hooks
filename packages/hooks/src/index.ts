@@ -15,7 +15,9 @@ import useStorage from './useStorage';
 
 // layout
 import useBackground from './useBackground';
+import useTabBar from './useTabBar';
 import useManualPullDownRefresh from './useManualPullDownRefresh';
+
 // feedback
 import useToast from './useToast';
 import useModal from './useModal';
@@ -108,4 +110,5 @@ export {
   useTopBarText,
   useBackground,
   useManualPullDownRefresh,
+  useTabBar,
 };

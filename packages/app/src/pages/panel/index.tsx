@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import { AtIcon } from 'taro-ui';
 
-import { Current, navigateTo } from '@tarojs/taro';
-import { useModal, useNavigationBar } from 'taro-hooks';
+import { Current } from '@tarojs/taro';
+import { useModal, useNavigationBar, useRouter } from 'taro-hooks';
 
 import {
   List,
@@ -22,6 +22,7 @@ const Panel = ({}: IPanelProps) => {
   const [panelItemInfo, setPanelItemInfo] = useState<APIChildrenItem[]>();
   const [show] = useModal({ mask: true, title: '温馨提示', showCancel: false });
   const [_, { setTitle }] = useNavigationBar({ title: 'Taro-hooks' });
+  const [__, { navigateTo, switchTab }] = useRouter();
 
   useEffect(() => {
     const { id } = Current.router?.params || {};
@@ -40,18 +41,17 @@ const Panel = ({}: IPanelProps) => {
   }, [panelInfo, setTitle]);
 
   const handleItemAction = useCallback(
-    (id: string) => {
+    (id: string, tabBar?: boolean) => {
       if (BUILD_MODE && PRODUCTIONDISABLEPANEL.includes(id)) {
         show({
           content: '由于个人账号限制, 无法在线预览' + id + '. 可至github查看',
         });
       } else {
-        navigateTo({
-          url: `/pages/${id}/index`,
-        });
+        const url = `/pages/${id}/index`;
+        tabBar ? switchTab(url) : navigateTo(url);
       }
     },
-    [show],
+    [show, navigateTo, switchTab],
   );
 
   if (!panelInfo) return <View />;
@@ -69,11 +69,11 @@ const Panel = ({}: IPanelProps) => {
       <View className="panel-body">
         <View className="component-list">
           {panelItemInfo &&
-            panelItemInfo.map(({ id, name }) => (
+            panelItemInfo.map(({ id, name, tabBar }) => (
               <View
                 className="component-list__item"
                 key={id}
-                onClick={() => handleItemAction(id)}
+                onClick={() => handleItemAction(id, tabBar)}
               >
                 <Text className="name">{name}</Text>
                 <AtIcon value="chevron-right" />
