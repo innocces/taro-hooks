@@ -21,6 +21,7 @@
   "module": "es/index.js",
   "types": "dist/index.d.ts",
   "unpkg": "dist/taro-hooks.js",
+  "jsdelivr": "dist/taro-hooks.js",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
   "publishConfig": {
