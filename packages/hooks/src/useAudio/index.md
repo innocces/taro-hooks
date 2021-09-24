@@ -114,3 +114,17 @@ const [
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     | ✔️  |     ✔️      |
+
+## FAQ
+
+- 注意: iOS 在静音状态下, `innerAudio`会遵循静音原则无声音. 若需要在静音状态下播放声音. 可增加配置项如下
+
+  ```js | pure
+  {
+    obeyMuteSwitch: false;
+  }
+  ```
+
+- [audio](https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/wx.setInnerAudioOption.html)
+
+- [audio article 推荐](https://developers.weixin.qq.com/community/develop/article/doc/000a2c9894cb081577d8d67ef5b813)

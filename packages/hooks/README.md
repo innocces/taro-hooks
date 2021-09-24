@@ -16,6 +16,8 @@
 
 ## 使用案例
 
+欢迎大家多多使用, 可将使用案例贡献在[Who are using taro-hooks?](https://github.com/innocces/taro-hooks/issues/4). 我们会在文档和 README 展示出来.
+
 <table>
   <tbody>
     <tr>
@@ -114,7 +116,13 @@ $ yarn app:dev:h5
 
 ## 交流讨论
 
+### WeChat
+
 <img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-09-22/1632246716051-qrcode.jpg" alt="wechat code" width="300"/>
+
+### Issuehunt
+
+[![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/379632117)
 
 ## License
 
@@ -145,6 +153,12 @@ $ yarn app:dev:h5
 [![阿酱/taro-hooks][image-15]][12]
 
 ## Sponsor
+
+### Open Collective
+
+[![Open Collective](https://opencollective.com/taro-hooks/tiers/sponsor.svg)](https://opencollective.com/taro-hooks)
+
+### Buy Me A Coffee
 
 <a href="https://www.buymeacoffee.com/innocces" target="_blank"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee 🎉&emoji=&slug=innocces&button_colour=BD5FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00"></a>
 

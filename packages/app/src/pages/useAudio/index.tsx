@@ -33,10 +33,12 @@ export default () => {
       resumeRecord,
     },
   ] = useRecord();
-  const [audioContext, audioSource, { play, stop, pause }] = useAudio({
-    autoplay: true,
-    loop: true,
-  });
+  const [audioContext, audioSource, { play, stop, pause, setOption }] =
+    useAudio({
+      autoplay: true,
+      loop: true,
+      obeyMuteSwitch: false,
+    });
   const [open, setOpen] = useState<boolean>(false);
   const [recordInfo, setRecordInfo] = useState<
     RecorderManager.OnStopCallbackResult | undefined
@@ -44,7 +46,6 @@ export default () => {
 
   useEffect(() => {
     if (recorderManager) {
-      console.log(recorderManager);
       onError(({ errMsg }: RecorderManager.OnErrorCallbackResult) =>
         show({ title: errMsg, icon: 'fail' }),
       );
@@ -65,8 +66,9 @@ export default () => {
         show({ title: '录音开始, 请记得说话' });
       });
       onStop((res: RecorderManager.OnStopCallbackResult) => {
-        show({ title: '录音结束' });
+        show({ title: '录音结束, 请确保非静音模式' });
         console.log(res);
+        setOption({ obeyMuteSwitch: false });
         play(res.tempFilePath);
         setRecordInfo(res);
         setOpen(true);
@@ -93,12 +95,14 @@ export default () => {
     resumeRecord,
     play,
     stop,
+    setOption,
   ]);
 
   return (
     <>
       <AtNoticebar marquee>
-        当前hook不支持h5, 请移步小程序体验。且录音和音频共用
+        当前hook不支持h5, 请移步小程序体验。且录音和音频共用.
+        静音会导致音频无法正常播放
       </AtNoticebar>
       <DocPage
         title="useAudio&useRecord 音频相关"

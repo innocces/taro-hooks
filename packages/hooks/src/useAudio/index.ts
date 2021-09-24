@@ -131,9 +131,9 @@ function useAudio(
             Object.entries(option).forEach(([key, value]) => {
               if (SPECIALOPTION.includes(key)) {
                 specialOptions[key] = value;
-              } else {
-                (<any>context)[key] = value;
               }
+              // some option need setting root
+              (<any>context)[key] = value;
             });
             setInnerAudioOption({
               ...specialOptions,
