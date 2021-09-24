@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.0...taro-hooks-v1.4.1) (2021-09-24)
+
+### Bug Fixes
+
+- **add create inner:** useWebAudioImplement option add ([9e1254c](https://github.com/innocces/taro-hooks/commit/9e1254c527f6bd1d3ceba24f7338d3dd69242d51))
+- **useaudio option:** add option set root for context ([b63567f](https://github.com/innocces/taro-hooks/commit/b63567feec61567e90ccc19c400b48e4a68dad0d))
+
 # [1.4.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.3.2...taro-hooks-v1.4.0) (2021-09-21)
 
 ### Features
