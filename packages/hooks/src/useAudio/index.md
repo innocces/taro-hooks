@@ -60,15 +60,16 @@ const [
 
 ##### 以下均为`initOptions`
 
-| 参数           | 说明                                                  | 类型      | 默认值  |
-| -------------- | ----------------------------------------------------- | --------- | ------- |
-| autoplay       | 是否自动开始播放(若指定后面可与新的配置合并)          | `boolean` | `false` |
-| loop           | 是否循环播放(若指定后面可与新的配置合并)              | `boolean` | `false` |
-| src            | 音频资源的地址(若指定后面可与新的配置合并)            | `string`  | -       |
-| volume         | 音量。范围 0~1(若指定后面可与新的配置合并)            | `number`  | `1`     |
-| startTime      | 开始播放的位置（单位：s）(若指定后面可与新的配置合并) | `number`  | `0`     |
-| mixWithOther   | 是否与其他音频混播(若指定后面可与新的配置合并)        | `boolean` | -       |
-| obeyMuteSwitch | 是否遵循系统静音开关(若指定后面可与新的配置合并)      | `boolean` | `true`  |
+| 参数                 | 说明                                                                                                                                                                       | 类型      | 默认值  |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- |
+| autoplay             | 是否自动开始播放(若指定后面可与新的配置合并)                                                                                                                               | `boolean` | `false` |
+| loop                 | 是否循环播放(若指定后面可与新的配置合并)                                                                                                                                   | `boolean` | `false` |
+| src                  | 音频资源的地址(若指定后面可与新的配置合并)                                                                                                                                 | `string`  | -       |
+| volume               | 音量。范围 0~1(若指定后面可与新的配置合并)                                                                                                                                 | `number`  | `1`     |
+| startTime            | 开始播放的位置（单位：s）(若指定后面可与新的配置合并)                                                                                                                      | `number`  | `0`     |
+| mixWithOther         | 是否与其他音频混播(若指定后面可与新的配置合并)                                                                                                                             | `boolean` | -       |
+| obeyMuteSwitch       | 是否遵循系统静音开关(若指定后面可与新的配置合并)                                                                                                                           | `boolean` | `true`  |
+| useWebAudioImplement | 是否使用 WebAudio 作为底层音频驱动，默认关闭。对于短音频、播放频繁的音频建议开启此选项，开启后将获得更优的性能表现，对于长音频建议关闭此选项。(若指定后面可与新的配置合并) | `boolean` | `false` |
 
 ## 返回值说明
 
@@ -128,3 +129,7 @@ const [
 - [audio](https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/wx.setInnerAudioOption.html)
 
 - [audio article 推荐](https://developers.weixin.qq.com/community/develop/article/doc/000a2c9894cb081577d8d67ef5b813)
+
+- [useWebAudioImplement](https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/wx.createInnerAudioContext.html#%E5%8F%82%E6%95%B0)
+
+- [useWebAudioImplement warn](https://developers.weixin.qq.com/community/develop/doc/000806e46d80408196cc3a6085bc00?highLine=wx.setInnerAudioOption)

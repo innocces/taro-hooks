@@ -9,12 +9,19 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
 
+export interface ICreateInnerAudioContextOption {
+  useWebAudioImplement?: boolean;
+}
+export type ICreateInnerAudioContext = (
+  option?: ICreateInnerAudioContextOption,
+) => InnerAudioContext;
 export type IAudioContext = InnerAudioContext | undefined;
 
 export type IAudioSource =
   | getAvailableAudioSources.SuccessCallbackResult['audioSources']
   | undefined;
-export interface IOption extends Partial<setInnerAudioOption.Option> {
+export interface IOption
+  extends Partial<setInnerAudioOption.Option & ICreateInnerAudioContextOption> {
   autoplay: boolean;
   loop: boolean;
   src: string;
@@ -111,7 +118,13 @@ function useAudio(
       if (audioContext) {
         return audioContext;
       }
-      const context = createInnerAudioContext();
+      const payload =
+        typeof createOption.useWebAudioImplement === 'undefined'
+          ? {}
+          : { useWebAudioImplement: createOption.useWebAudioImplement };
+      const context = (
+        createInnerAudioContext as unknown as ICreateInnerAudioContext
+      )(payload);
       setAudioOption({ ...(initOption || {}), ...createOption }, context);
       setAudioContext(context);
       return context;
@@ -132,8 +145,10 @@ function useAudio(
               if (SPECIALOPTION.includes(key)) {
                 specialOptions[key] = value;
               }
-              // some option need setting root
-              (<any>context)[key] = value;
+              // some option need setting root not in weapp
+              if (!SPECIALOPTION.includes(key) || env === ENV_TYPE.WEAPP) {
+                (<any>context)[key] = value;
+              }
             });
             setInnerAudioOption({
               ...specialOptions,
@@ -146,7 +161,7 @@ function useAudio(
         }
       });
     },
-    [audioContext],
+    [audioContext, env],
   );
 
   const play = useCallback<IPlayAction>(
