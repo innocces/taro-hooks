@@ -39,7 +39,7 @@
     "es",
     "package.json",
     "README.md",
-    "postinsall.js"
+    "postinstall.js"
   ],
   "dependencies": {
     "@babel/runtime": "^7.14.6",
