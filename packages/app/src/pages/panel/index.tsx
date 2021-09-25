@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import { AtIcon } from 'taro-ui';
 
-import { Current } from '@tarojs/taro';
+import { Current, useShareAppMessage } from '@tarojs/taro';
 import { useModal, useNavigationBar, useRouter } from 'taro-hooks';
 
 import {
@@ -26,6 +26,7 @@ const Panel = ({}: IPanelProps) => {
 
   useEffect(() => {
     const { id } = Current.router?.params || {};
+    console.log(Current.router?.params);
     if (id) {
       const currentPanelInfo = List.find((v) => v.id.toLowerCase() === id);
       const currentPanelItemInfo = ChildrenList[id];
@@ -53,6 +54,14 @@ const Panel = ({}: IPanelProps) => {
     },
     [show, navigateTo, switchTab],
   );
+
+  useShareAppMessage(() => {
+    return {
+      title: panelInfo?.title,
+      path: '/pages/panel/index?id=' + panelInfo?.id.toLocaleLowerCase(),
+      imageUrl: require('../../../../../public/image/hook.png'),
+    };
+  });
 
   if (!panelInfo) return <View />;
 

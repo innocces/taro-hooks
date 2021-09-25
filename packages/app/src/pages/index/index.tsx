@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { AtIcon } from 'taro-ui';
 import { Image, View } from '@tarojs/components';
 
-import { ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE, useShareAppMessage } from '@tarojs/taro';
 import { useEnv, useRouter, useModal, useUpdateManager } from 'taro-hooks';
 
 import './index.less';
@@ -30,6 +30,14 @@ const Index = () => {
 
   useUpdateManager({
     onUpdateReady,
+  });
+
+  useShareAppMessage(() => {
+    return {
+      title: 'Taro Hooks: 为Taro而设计的Hooks Library',
+      path: '/pages/index/index',
+      imageUrl: require('../../../../../public/image/hook.png'),
+    };
   });
 
   const handleLocation = useCallback(

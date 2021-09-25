@@ -91,6 +91,7 @@ export default {
     navigationBarTitleText: 'Taro hooks',
     navigationBarTextStyle: 'black',
   },
+  style: 'v2',
   tabBar: {
     color: '#6a6a77',
     selectedColor: '#78a4fa',
@@ -121,5 +122,5 @@ export default {
       desc: '您的位置信息将用于小程序位置接口展示',
     },
   },
-  requiredBackgroundModes: ['location'],
+  requiredBackgroundModes: ['location', 'audio'],
 };
