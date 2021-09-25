@@ -25,3 +25,7 @@ query
 ### 3. 哪些版本的`taro`可以使用？
 
 理论支持`react hooks`以及`taro hooks`版本(即`3.x`)的`taro`均可使用本库.
+
+### 4. `ERROR_MULTIPLE_CALLBACK`问题
+
+问题表现为: 页面点击跳转导致终端报错而终端程序. 原因为`node https`模块导致的问题. 由于文档中有部分`mock api`是`https`请求. 故开发服务器启动默认开启了`https`功能. 若您在`fork`本库后启动遇到此问题可尝试将`node`升至`14+`版本或将[.umirc.ts](https://github.com/innocces/taro-hooks/blob/main/.umirc.ts#L18)中`https`选项去掉即可. 相关[issue](https://github.com/umijs/umi/issues/5901)
