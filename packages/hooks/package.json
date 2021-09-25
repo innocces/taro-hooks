@@ -30,14 +30,16 @@
   "repository": "https://github.com/innocces/taro-hooks",
   "homepage": "https://innocces.github.io/taro-hooks/",
   "scripts": {
-    "build": "../../node_modules/.bin/father-build"
+    "build": "../../node_modules/.bin/father-build",
+    "postinstall": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
   "files": [
     "dist",
     "lib",
     "es",
     "package.json",
-    "README.md"
+    "README.md",
+    "postintall.js"
   ],
   "dependencies": {
     "@babel/runtime": "^7.14.6",
