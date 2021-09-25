@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.4](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.3...taro-hooks-v1.4.4) (2021-09-25)
+
+**Note:** Version bump only for package taro-hooks
+
 ## [1.4.3](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.2...taro-hooks-v1.4.3) (2021-09-25)
 
 **Note:** Version bump only for package taro-hooks
