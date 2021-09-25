@@ -14,7 +14,7 @@
   },
   "useWorkspaces": true,
   "ignoreChanges": ["**/*.md", "**/es/*", "**/lib/*", "**/dist/*"],
-  "version": "1.4.2",
+  "version": "1.4.3",
   "tagVersionPrefix": "taro-hooks-v",
   "npmClient": "yarn"
 }
