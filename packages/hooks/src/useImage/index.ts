@@ -20,7 +20,7 @@ export type ChooseImageOption = Partial<
 export type PreviewImageOption = Pick<previewImage.Option, 'current' | 'urls'>;
 
 export type ChooseImageAction = (
-  option: ChooseImageOption,
+  option?: ChooseImageOption,
 ) => Promise<chooseImage.SuccessCallbackResult>;
 
 export type PreviewImageAction = (
@@ -63,7 +63,7 @@ function useImage(options: ChooseImageOption): [IFileInfo, IAction] {
   const [fileInfo, setFileInfo] = useState<IFileInfo>({});
   const env = useEnv();
 
-  const chooseImageAsync = useCallback<ChooseImageAction>((option) => {
+  const chooseImageAsync = useCallback<ChooseImageAction>((option = {}) => {
     const { count, sizeType, sourceType } = options;
     const finalOptions = Object.assign(
       {},

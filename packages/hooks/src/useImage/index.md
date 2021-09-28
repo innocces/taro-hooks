@@ -36,7 +36,7 @@ const [
 
 | 返回值            | 说明              | 类型                                                                                                                                                                    |
 | ----------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| choose            | 选择图片          | `(option: ChooseImageOption) => Promise<chooseImage.SuccessCallbackResult>`                                                                                             |
+| choose            | 选择图片          | `(option?: ChooseImageOption) => Promise<chooseImage.SuccessCallbackResult>`                                                                                            |
 | chooseMessageFile | 选择会话资源      | `(count: number,type?: Pick<chooseMessageFile.Option, 'type'>,extend?: Pick<chooseMessageFileOption, 'extension'>) => Promise<chooseMessageFile.SuccessCallbackResult>` |
 | preview           | 预览图片          | `(option: PreviewImageOption) => Promise<General.CallbackResult>`                                                                                                       |
 | save              | 保存图片(h5 支持) | `(filePath: string) => Promise<General.CallbackResult>`                                                                                                                 |
