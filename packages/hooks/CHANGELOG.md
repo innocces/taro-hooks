@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.5](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.4...taro-hooks-v1.4.5) (2021-09-28)
+
+### Bug Fixes
+
+- **useimage:** fix useImage choose function params partial ([cf7be5f](https://github.com/innocces/taro-hooks/commit/cf7be5f9832e6744d4a1baf5211212b1bb27d33c))
+
 ## [1.4.4](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.3...taro-hooks-v1.4.4) (2021-09-25)
 
 **Note:** Version bump only for package taro-hooks
