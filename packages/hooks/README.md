@@ -118,11 +118,15 @@ $ yarn app:dev:h5
 
 ### WeChat
 
-<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-09-22/1632246716051-qrcode.jpg" alt="wechat code" width="300"/>
+<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-09-28/1632834598048-qrcode.jpeg" alt="wechat code" width="300"/>
 
 ### Issuehunt
 
 [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/379632117)
+
+## CHANGELOG
+
+本项目遵从 [Angular Style Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)，更新日志请查阅 [Release](https://github.com/innocces/taro-hooks/releases), [CHANGELOG](https://github.com/innocces/taro-hooks/blob/main/CHANGELOG.md)。
 
 ## License
 
