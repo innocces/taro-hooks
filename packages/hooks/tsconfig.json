@@ -2,6 +2,6 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "src",
-    "typeRoots": ["./typings/*.d.ts", "../../node_modules/@types"]
+    "typeRoots": ["./typings/index.d.ts", "../../node_modules/@types"]
   }
 }

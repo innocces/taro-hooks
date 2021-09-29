@@ -7,3 +7,7 @@ interface INavigator extends Navigator {
 declare var navigator: INavigator;
 
 declare var wx: any;
+
+declare type TRecord<T = unknown> = {
+  [_: string | number]: T;
+};

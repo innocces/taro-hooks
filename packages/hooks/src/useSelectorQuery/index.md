@@ -118,3 +118,9 @@ getScrollOffset(selector: string).then((offsetInfo: NodesRef.scrollOffsetCallbac
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     | ✔️  |             |
+
+## FAQ
+
+- 为什么获取不到结果, 时有时无?
+
+  官方推荐的获取时机为`onReady|useReady`时, 若在`ready`中依然有不稳定因素建议搭配`nextTick`来确保元素已经渲染完成.

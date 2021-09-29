@@ -4,7 +4,6 @@ import DocPage from '@components/DocPage';
 
 import { useEnv } from 'taro-hooks';
 import Taro, { ENV_TYPE } from '@tarojs/taro';
-import 'taro-ui/dist/style/components/icon.scss';
 
 const ENVTYPE = [
   ['WEAPP', 'WEAPP'],

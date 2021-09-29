@@ -78,6 +78,10 @@ export enum APIChildrenName {
 export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
   [APIChildrenName.basic]: [
     {
+      id: 'useApp',
+      name: 'useApp 应用实例',
+    },
+    {
       id: 'useEvent',
       name: 'useEvent 事件中心',
     },

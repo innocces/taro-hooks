@@ -14,6 +14,7 @@
       "@@/*": ["src/.umi/*"],
       "@components/*": ["packages/app/src/components/*"]
     },
+    "typeRoots": ["node_modules/@types", "typings.d.ts"],
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "declaration": false,

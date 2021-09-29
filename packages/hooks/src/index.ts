@@ -2,6 +2,7 @@
 import useEnv from './useEnv';
 
 // basic
+import useApp from './useApp';
 import useRouter from './useRouter';
 import usePromise from './usePromise';
 import useBase64ToArrayBuffer from './useBase64ToArrayBuffer';
@@ -64,6 +65,7 @@ import useMap from './useMap';
 
 export {
   useEnv,
+  useApp,
   useLaunchOptions,
   useRouter,
   usePromise,

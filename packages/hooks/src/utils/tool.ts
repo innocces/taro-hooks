@@ -12,3 +12,6 @@ export const typeOf = (target: any, type: string | string[]): boolean => {
 
 export const isPlainObject = (object: TRecord): boolean =>
   !(object && Object.entries(object).length);
+
+export const isUndefined = (target: unknown): boolean =>
+  typeof target === 'undefined';

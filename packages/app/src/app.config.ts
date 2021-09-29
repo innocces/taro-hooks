@@ -7,6 +7,7 @@ export default {
     // env
     'pages/useEnv/index',
     // basic
+    'pages/useApp/index',
     'pages/useRouter/index',
     'pages/usePromise/index',
     'pages/useBase64ToArrayBuffer/index',
