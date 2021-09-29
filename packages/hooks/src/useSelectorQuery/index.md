@@ -62,25 +62,25 @@ SelectorQuery.exec(callback?: void)
 ### select
 
 ```javascript
-const node: NodesRef = select(selector: string);
+const node: NodesRef = select(selector: string, scope?: PageInstance);
 ```
 
 ### selectAll
 
 ```javascript
-const nodes: NodesRef = select(selector: string);
+const nodes: NodesRef = select(selector: string, scope?: PageInstance);
 ```
 
 ### selectViewport
 
 ```javascript
-const nodes: NodesRef = select(selector: string);
+const nodes: NodesRef = select(selector: string, scope?: PageInstance);
 ```
 
 ### getBoundingClientRect
 
 ```javascript
-getBoundingClientRect(selector: string, all: boolean).then((nodes: NodesRef.boundingClientRectCallbackResult) => void)
+getBoundingClientRect(selector: string, all: boolean, scope?: PageInstance).then((nodes: NodesRef.boundingClientRectCallbackResult) => void)
 ```
 
 <code src="@pages/useSelectorQuery/getBoundingClientRect" />
@@ -88,13 +88,13 @@ getBoundingClientRect(selector: string, all: boolean).then((nodes: NodesRef.boun
 ### getContext
 
 ```javascript
-getContext(selector: string).then(context)
+getContext(selector: string, scope?: PageInstance).then(context)
 ```
 
 ### getFields
 
 ```javascript
-getFields(selector: string, fields: NodesRef.Fields).then(fields)
+getFields(selector: string, fields: NodesRef.Fields, scope?: PageInstance).then(fields)
 ```
 
 <code src="@pages/useSelectorQuery/getFields" />
@@ -102,13 +102,13 @@ getFields(selector: string, fields: NodesRef.Fields).then(fields)
 ### getNode
 
 ```javascript
-getNode(selector: string).then(node)
+getNode(selector: string, scope?: PageInstance).then(node)
 ```
 
 ### getScrollOffset
 
 ```javascript
-getScrollOffset(selector: string).then((offsetInfo: NodesRef.scrollOffsetCallbackResult))
+getScrollOffset(selector: string, scope?: PageInstance).then((offsetInfo: NodesRef.scrollOffsetCallbackResult))
 ```
 
 <code src="@pages/useSelectorQuery/getScrollOffset" />

@@ -11,7 +11,11 @@ export default defineConfig({
   logo: '/image/logo.png',
   outputPath: 'docs-dist',
   ...(process.env.BUILD_TARGET === 'GH'
-    ? { publicPath: '/taro-hooks/', base: '/taro-hooks' }
+    ? {
+        publicPath: '/taro-hooks/',
+        base: '/taro-hooks',
+        history: { mode: 'hash' },
+      }
     : {}),
   mode: 'site',
   devServer: {

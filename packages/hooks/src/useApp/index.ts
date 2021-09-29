@@ -4,7 +4,7 @@ import { getApp } from '@tarojs/taro';
 import { isUndefined } from '../utils/tool';
 
 import type { App, General } from '@tarojs/taro';
-import type { TRecord } from '../../typings';
+import type { TRecord } from '../type';
 
 export type TSetGlobalData = (
   key: string,

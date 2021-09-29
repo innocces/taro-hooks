@@ -82,6 +82,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useApp 应用实例',
     },
     {
+      id: 'usePage',
+      name: 'usePage 页面(栈)',
+    },
+    {
       id: 'useEvent',
       name: 'useEvent 事件中心',
     },

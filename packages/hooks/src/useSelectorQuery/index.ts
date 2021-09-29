@@ -4,25 +4,35 @@ import {
   createSelectorQuery,
   General,
   NodesRef,
+  PageInstance,
   SelectorQuery,
 } from '@tarojs/taro';
 
 export type getBoundingClientRectType = (
   selector: string,
   all?: boolean,
+  scope?: PageInstance,
 ) => Promise<NodesRef.BoundingClientRectCallbackResult>;
 
-export type getContextType = (selector: string) => Promise<General.IAnyObject>;
+export type getContextType = (
+  selector: string,
+  scope?: PageInstance,
+) => Promise<General.IAnyObject>;
 
 export type getFieldsType = (
   selector: string,
   fields: NodesRef.Fields,
+  scope?: PageInstance,
 ) => Promise<General.IAnyObject>;
 
-export type getNodeType = (selector: string) => Promise<General.IAnyObject>;
+export type getNodeType = (
+  selector: string,
+  scope?: PageInstance,
+) => Promise<General.IAnyObject>;
 
 export type getScrollOffsetType = (
   selector: string,
+  scope?: PageInstance,
 ) => Promise<NodesRef.ScrollOffsetCallbackResult>;
 
 export interface ISelectorMethod extends SelectorQuery {
@@ -51,14 +61,18 @@ function useSelectorQuery(): [SelectorQuery, ISelectorMethod] {
   );
 
   const getBoundingClientRect = useCallback<getBoundingClientRectType>(
-    (selector, all) => {
+    (selector, all, scope) => {
       return new Promise((resolve, reject) => {
         if (!selector) {
           reject({});
         } else {
           try {
             const select = all ? querySelectorAll : querySelector;
-            select(selector).boundingClientRect(resolve).exec();
+            let selectorQuery = select(selector).boundingClientRect(resolve);
+            if (scope) {
+              selectorQuery = selectorQuery.in(scope);
+            }
+            selectorQuery.exec();
           } catch (e) {
             reject(e);
           }
@@ -69,15 +83,19 @@ function useSelectorQuery(): [SelectorQuery, ISelectorMethod] {
   );
 
   const getContext = useCallback<getContextType>(
-    (selector) => {
+    (selector, scope) => {
       return new Promise((resolve, reject) => {
         if (!selector) {
           reject({});
         } else {
           try {
-            querySelector(selector)
-              .context((res) => resolve(res.context))
-              .exec();
+            let selectorQuery = querySelector(selector).context((res) =>
+              resolve(res.context),
+            );
+            if (scope) {
+              selectorQuery = selectorQuery.in(scope);
+            }
+            selectorQuery.exec();
           } catch (e) {
             reject(e);
           }
@@ -88,13 +106,17 @@ function useSelectorQuery(): [SelectorQuery, ISelectorMethod] {
   );
 
   const getFields = useCallback<getFieldsType>(
-    (selector, fields) => {
+    (selector, fields, scope) => {
       return new Promise((resolve, reject) => {
         if (!selector) {
           reject({});
         } else {
           try {
-            querySelector(selector).fields(fields, resolve).exec();
+            let selectorQuery = querySelector(selector).fields(fields, resolve);
+            if (scope) {
+              selectorQuery = selectorQuery.in(scope);
+            }
+            selectorQuery.exec();
           } catch (e) {
             reject(e);
           }
@@ -105,15 +127,19 @@ function useSelectorQuery(): [SelectorQuery, ISelectorMethod] {
   );
 
   const getNode = useCallback<getNodeType>(
-    (selector) => {
+    (selector, scope) => {
       return new Promise((resolve, reject) => {
         if (!selector) {
           reject({});
         } else {
           try {
-            querySelector(selector)
-              .node((res) => resolve(res.node))
-              .exec();
+            let selectorQuery = querySelector(selector).node((res) =>
+              resolve(res.node),
+            );
+            if (scope) {
+              selectorQuery = selectorQuery.in(scope);
+            }
+            selectorQuery.exec();
           } catch (e) {
             reject(e);
           }
@@ -124,13 +150,17 @@ function useSelectorQuery(): [SelectorQuery, ISelectorMethod] {
   );
 
   const getScrollOffset = useCallback<getScrollOffsetType>(
-    (selector) => {
+    (selector, scope) => {
       return new Promise((resolve, reject) => {
         if (!selector) {
           reject({});
         } else {
           try {
-            querySelector(selector).scrollOffset(resolve).exec();
+            let selectorQuery = querySelector(selector).scrollOffset(resolve);
+            if (scope) {
+              selectorQuery = selectorQuery.in(scope);
+            }
+            selectorQuery.exec();
           } catch (e) {
             reject(e);
           }
