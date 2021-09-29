@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.6](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.5...taro-hooks-v1.4.6) (2021-09-29)
+
+### Features
+
+- **faq & useapp:** add useApp hooks & faq of useSelectorQuery ([3e0ebea](https://github.com/innocces/taro-hooks/commit/3e0ebeaafffb1279532f25996b69221a3398aa51))
+- **usepage:** add usePage hook & useSelectorQuery method scope optional ([35b8ab7](https://github.com/innocces/taro-hooks/commit/35b8ab72b580688292bdb33d06dc6d3530f1844f))
+
 ## [1.4.5](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.4...taro-hooks-v1.4.5) (2021-09-28)
 
 ### Bug Fixes
