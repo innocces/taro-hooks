@@ -93,6 +93,11 @@ module.exports = {
 };
 ```
 
+### 如何在`taro 2.x`中使用 ?
+
+原则上不推荐在小于`3.x`的`taro`项目中使用`taro-hooks`. 但若有希望可以使用的, 还是提供了接入方式, 但是并不是完全可用, 部分`hook`还是受到限制.  
+具体使用方式可参考[taro-hooks-demo-for-taro2.x](https://github.com/taro-hooks/taro-hooks-demo-for-taro2.x)
+
 ## 参与贡献
 
 务必保证预装`lerna`
