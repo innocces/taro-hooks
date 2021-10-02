@@ -14,7 +14,7 @@ export default defineConfig({
     ? {
         publicPath: '/taro-hooks/',
         base: '/taro-hooks',
-        history: { mode: 'hash' },
+        history: { type: 'hash' },
       }
     : {}),
   mode: 'site',
