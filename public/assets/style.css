@@ -9,3 +9,14 @@
 .__dumi-default-device-status>span:last-child {
   text-align: left!important;
 }
+
+.__dumi-default-custom-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.__dumi-default-custom-loading img {
+  width: 80%;
+}

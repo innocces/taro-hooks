@@ -52,36 +52,10 @@ module.exports = {
 
 3. taro-init
 
-<embed src="../packages/hooks/README.md#L57-L63"></embed>
+<embed src="../packages/hooks/README.md#L82-L88"></embed>
 
 ## 使用案例
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a>
-          <img
-            width="200"
-            src="/image/hooks.jpeg"
-          />
-          <br>
-          <strong>Taro-hooks weapp</strong>
-        </a>
-      </td>
-      <td align="center">
-        <a target="_blank" href="https://taro-hooks-h5-innocces.vercel.app">
-          <img
-            height="200"
-            style="vertical-align: -0.32em; margin-right: 8px;"
-            src="/image/hooksite.png"
-          />
-          <br>
-          <strong>Taro-hooks h5</strong>
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<embed src="../packages/hooks/README.md#L19-L72"></embed>
 
-<embed src="../packages/hooks/README.md#L146-L210"></embed>
+<embed src="../packages/hooks/README.md#L145-L290"></embed>

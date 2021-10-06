@@ -29,3 +29,8 @@ query
 ### 4. `ERROR_MULTIPLE_CALLBACK`问题
 
 问题表现为: 页面点击跳转导致终端报错而终端程序. 原因为`node https`模块导致的问题. 由于文档中有部分`mock api`是`https`请求. 故开发服务器启动默认开启了`https`功能. 若您在`fork`本库后启动遇到此问题可尝试将`node`升至`14+`版本或将[.umirc.ts](https://github.com/innocces/taro-hooks/blob/main/.umirc.ts#L18)中`https`选项去掉即可. 相关[issue](https://github.com/umijs/umi/issues/5901)
+
+### 5. 如何在`taro 2.x`使用`taro-hooks`?
+
+原则上不推荐在小于`3.x`的`taro`项目中使用`taro-hooks`. 但若有希望可以使用的, 还是提供了接入方式, 但是并不是完全可用, 部分`hook`还是受到限制.  
+具体使用方式可参考[taro-hooks-demo-for-taro2.x](https://github.com/taro-hooks/taro-hooks-demo-for-taro2.x)
