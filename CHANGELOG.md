@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.7](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.6...taro-hooks-v1.4.7) (2021-10-06)
+
+### Bug Fixes
+
+- **usemodal:** fix useModal callback type ([d1e14a7](https://github.com/innocces/taro-hooks/commit/d1e14a7f73dda098ec062b9c3c3173f1eec404f8))
+
 ## [1.4.6](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.5...taro-hooks-v1.4.6) (2021-09-29)
 
 ### Features
