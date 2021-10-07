@@ -36,7 +36,6 @@
         <a target="_blank" href="https://taro-hooks-h5-innocces.vercel.app">
           <img
             height="200"
-            style="vertical-align: -0.32em; margin-right: 8px;"
             src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-10-06/1633498858560-hooksite.png"
           />
           <br>
@@ -59,7 +58,6 @@
         <a target="_blank" href="https://taro-todolist.vercel.app">
           <img
             height="200"
-            style="vertical-align: -0.32em; margin-right: 8px;"
             src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-10-06/1633494500167-taro-todolist.png"
           />
           <br>

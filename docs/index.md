@@ -52,10 +52,10 @@ module.exports = {
 
 3. taro-init
 
-<embed src="../packages/hooks/README.md#L82-L88"></embed>
+<embed src="../packages/hooks/README.md#L80-L86"></embed>
 
 ## 使用案例
 
-<embed src="../packages/hooks/README.md#L19-L72"></embed>
+<embed src="../packages/hooks/README.md#L19-L70"></embed>
 
-<embed src="../packages/hooks/README.md#L145-L290"></embed>
+<embed src="../packages/hooks/README.md#L143-L290"></embed>
