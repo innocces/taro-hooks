@@ -9,13 +9,18 @@
     "tarojs",
     "tarojs-hooks",
     "react",
+    "react-hooks",
     "javascript",
     "lerna",
     "monorepo",
     "wechat",
     "miniprograme",
     "typescript",
-    "helpers"
+    "helpers",
+    "web",
+    "h5",
+    "rn",
+    "react-native"
   ],
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -30,7 +35,7 @@
   "repository": "https://github.com/innocces/taro-hooks",
   "homepage": "https://innocces.github.io/taro-hooks/",
   "scripts": {
-    "build": "../../node_modules/.bin/father-build",
+    "build": "yarn father-build",
     "postinstall": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
   "files": [
