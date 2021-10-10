@@ -270,6 +270,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useScanCode',
       name: 'useScanCode 扫码',
     },
+    {
+      id: 'useBluetooth',
+      name: 'useBluetooth 蓝牙',
+    },
   ],
   [APIChildrenName.network]: [
     {
