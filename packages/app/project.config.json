@@ -4,7 +4,7 @@
   "description": "taro-hooks weapp & h5 demo",
   "appid": "wx15171eb44c7567ae",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": true,
     "postcss": false,

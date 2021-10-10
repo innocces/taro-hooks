@@ -79,6 +79,7 @@ export default {
     'pages/useBrightness/index',
     'pages/useLocation/index',
     'pages/useScanCode/index',
+    'pages/useBluetooth/index',
     // media
     'pages/useImage/index',
     'pages/useVideo/index',
