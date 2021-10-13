@@ -10,7 +10,7 @@ import {
   getBLEDeviceCharacteristics,
   getBLEDeviceServices,
 } from '@tarojs/taro';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { General } from '@tarojs/taro';
 import type { TGeneralCallback } from '../type';
 
@@ -94,8 +94,51 @@ export type TSetBLEMTU = (
   mtu: number,
 ) => Promise<General.BluetoothError>;
 
+export interface IBLE {
+  deviceId: string;
+  services: IService[];
+  characteristics: ICharacteristic[];
+  RSSI: number;
+}
+
 function useBLE(deviceId?: string) {
   const env = useEnv();
+  const [ble, setBLE] = useState<IBLE>();
+
+  useEffect(() => {
+    if (env && env === ENV_TYPE.WEAPP && deviceId) {
+      initBLE(deviceId);
+      return () => {
+        closeBLE(deviceId);
+      };
+    }
+  }, [env, deviceId]);
+
+  // @private
+  const initBLE = useCallback(async (deviceId: string) => {
+    try {
+      const { errCode } = await connectBLE(deviceId);
+      if (errCode === 0) {
+        // success for connect
+        const services = (await getBLEServicesByDeviceId(
+          deviceId,
+        )) as IService[];
+        const characteristics = (await getBLECharacteristicsByDeviceId(
+          deviceId,
+        )) as ICharacteristic[];
+        const RSSI = (await getBLERSSIByDeviceId(deviceId)) as number;
+        setBLE({
+          deviceId,
+          services,
+          characteristics,
+          RSSI,
+        });
+      }
+    } catch (e) {
+      console.error('init BLE with deviceId: ' + deviceId + ' fail!', e);
+    }
+  }, []);
+
   const connectBLE = useCallback<TCreateBLEConnection>(
     (deviceId, timeout) => {
       return new Promise((resolve, reject) => {
@@ -426,6 +469,26 @@ function useBLE(deviceId?: string) {
     },
     [env],
   );
+
+  return [
+    ble,
+    {
+      connectBLE,
+      closeBLE,
+      setBLEMTU,
+      getBLEServicesByDeviceId,
+      getBLECharacteristicsByDeviceId,
+      getBLERSSIByDeviceId,
+      listenBLEConnectionStateChange,
+      removeBLEConnectionStateChange,
+      listenBLECharacteristicValueChange: addBLECharacteristicValueChange,
+      removeBLECharacteristicValueChange,
+      notifyBLECharacteristicValueChange:
+        notifyBLECharacteristicValueChangeAsync,
+      readCharacteristicValue,
+      writeCharacteristicValue,
+    },
+  ];
 }
 
 export default useBLE;
