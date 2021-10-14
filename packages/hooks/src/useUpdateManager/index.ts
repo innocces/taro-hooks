@@ -2,7 +2,7 @@ import { ENV_TYPE, getUpdateManager, UpdateManager } from '@tarojs/taro';
 import { useCallback, useEffect, useRef } from 'react';
 import useEnv from '../useEnv';
 
-export type Result = UpdateManager | {};
+export type Result = UpdateManager | undefined;
 
 export type IAction = (manager: UpdateManager) => void;
 export interface IUpdateManager {
@@ -20,7 +20,7 @@ function useUpdateManager({
   onUpdateFailed,
 }: IUpdateManager): Result {
   const env = useEnv();
-  const updateManager = useRef<Result>({});
+  const updateManager = useRef<Result>();
 
   useEffect(() => {
     if (env === ENV_TYPE.WEAPP) {
@@ -46,7 +46,7 @@ function useUpdateManager({
       );
   }, []);
 
-  return updateManager;
+  return updateManager.current;
 }
 
 export default useUpdateManager;
