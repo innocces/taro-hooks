@@ -14,7 +14,7 @@ function useSystemInfo(): Result {
     try {
       getSystemInfo({
         success: setSystemInfo,
-        fail: () => console.error({ errMsg: 'getSystemInfo: fail', data: e }),
+        fail: () => console.error({ errMsg: 'getSystemInfo: fail' }),
       });
     } catch (e) {
       console.error({ errMsg: 'getSystemInfo: fail', data: e });

@@ -43,10 +43,10 @@ export type IProfileAction = (
 const INITOPTION: IOption = { withCredentials: false, lang: 'en' };
 
 function useUserInfo(): [
-  IUserInfo,
+  IUserInfo | undefined,
   { getUserInfo: INormalAction; getUserProfile: IProfileAction },
 ] {
-  const [userInfo, setUserInfo] = useState<IUserInfo>({});
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
   const env = useEnv();
 
   const combineUserInfo = useCallback(
