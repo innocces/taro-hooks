@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.8](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.7...taro-hooks-v1.4.8) (2021-10-14)
+
+### Bug Fixes
+
+- **hook type:** fix default value of some hook instance ([28b96f8](https://github.com/innocces/taro-hooks/commit/28b96f82c020c4dcec5f1c446765e915a35c4c8e))
+- **usemenubuttonboundingclientrect:** fix typeof useMenuButtonBoundingClientRect result ([a25d76c](https://github.com/innocces/taro-hooks/commit/a25d76cc14dc45639fbdcb73917d58fc7733a20b))
+- **usesysteminfo:** fix typeof useSystemInfo result ([db30a1b](https://github.com/innocces/taro-hooks/commit/db30a1b4ac3099b8dfd06b6077f0c89ecc51ff8a))
+- **useupdatemanager:** fix return instance of useUpdateManager ([92d99ca](https://github.com/innocces/taro-hooks/commit/92d99ca691277a5006e87c801d44c97766afb1c0))
+
+### Performance Improvements
+
+- **share & default:** add share func for request feature & fix some default of hooks ([879ca4b](https://github.com/innocces/taro-hooks/commit/879ca4bcaacdadec84d14cd33e8e63898905dd8f))
+
 ## [1.4.7](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.6...taro-hooks-v1.4.7) (2021-10-06)
 
 ### Bug Fixes
