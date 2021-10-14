@@ -3,11 +3,11 @@ import type { getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRect
 import { useEffect, useState } from 'react';
 import useEnv from '../useEnv';
 
-export type TRect = getMenuButtonBoundingClientRectNamespace.Rect | {};
+export type TRect = getMenuButtonBoundingClientRectNamespace.Rect | undefined;
 
 function useMenuButtonBoundingClientRect(): TRect {
   const env = useEnv();
-  const [rect, setRect] = useState<TRect>({});
+  const [rect, setRect] = useState<TRect>();
 
   useEffect(() => {
     if (env && env === ENV_TYPE.WEAPP) {

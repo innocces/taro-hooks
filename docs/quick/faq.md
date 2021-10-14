@@ -34,3 +34,18 @@ query
 
 原则上不推荐在小于`3.x`的`taro`项目中使用`taro-hooks`. 但若有希望可以使用的, 还是提供了接入方式, 但是并不是完全可用, 部分`hook`还是受到限制.  
 具体使用方式可参考[taro-hooks-demo-for-taro2.x](https://github.com/taro-hooks/taro-hooks-demo-for-taro2.x)
+
+### 6. 为什么有些类型会报不存在?<Badge>v1.4.8</Badge>
+
+因为部分`hook`为部分端专属, 若使用了此类`hook`产出的值需要做判空处理来避规当前的类型错误.如:
+
+```tsx | pure
+const rect = useMenuButtonBoundingClientRect(); // 该hook为小程序专属, 故初始值为`undefined`
+if (rect) {
+  const { top, ... } = rect;
+}
+
+// 或使用强制
+const { top, ... } = useMenuButtonBoundingClientRect()!;
+
+```
