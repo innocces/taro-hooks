@@ -1,10 +1,10 @@
 import { getSystemInfo } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 
-export type Result = getSystemInfo.Result | {};
+export type Result = getSystemInfo.Result | undefined;
 
 function useSystemInfo(): Result {
-  const [systemInfo, setSystemInfo] = useState<Result>({});
+  const [systemInfo, setSystemInfo] = useState<Result>();
 
   useEffect(() => {
     getSystemInfoSync();
@@ -14,10 +14,10 @@ function useSystemInfo(): Result {
     try {
       getSystemInfo({
         success: setSystemInfo,
-        fail: () => setSystemInfo({}),
+        fail: () => console.error({ errMsg: 'getSystemInfo: fail', data: e }),
       });
     } catch (e) {
-      setSystemInfo({});
+      console.error({ errMsg: 'getSystemInfo: fail', data: e });
     }
   }, []);
 

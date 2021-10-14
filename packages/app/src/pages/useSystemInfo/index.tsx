@@ -19,7 +19,7 @@ const transferOptions = (systemInfo: getSystemInfoSync.Result) =>
   }));
 
 export default () => {
-  const systemInfo = useSystemInfo();
+  const systemInfo = useSystemInfo() || {};
 
   return (
     <>

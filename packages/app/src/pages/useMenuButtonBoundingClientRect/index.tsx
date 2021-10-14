@@ -8,7 +8,7 @@ import { Text } from '@tarojs/components';
 
 export default () => {
   const env = useEnv();
-  const rect = useMenuButtonBoundingClientRect();
+  const rect = useMenuButtonBoundingClientRect() || {};
 
   return (
     <>
