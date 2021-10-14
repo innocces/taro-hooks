@@ -1,10 +1,10 @@
 import { getAccountInfoSync } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 
-export type Result = getAccountInfoSync.AccountInfo | {};
+export type Result = getAccountInfoSync.AccountInfo | undefined;
 
 function useAccountInfo(): Result {
-  const [accountInfo, setAccountInfo] = useState<Result>({});
+  const [accountInfo, setAccountInfo] = useState<Result>();
 
   useEffect(() => {
     getAccountInfo();

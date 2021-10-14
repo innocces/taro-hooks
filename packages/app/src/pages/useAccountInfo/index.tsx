@@ -5,7 +5,7 @@ import DocPage from '@components/DocPage';
 import { useAccountInfo } from 'taro-hooks';
 
 export default () => {
-  const { miniProgram = {}, plugin = {} } = useAccountInfo();
+  const { miniProgram = {}, plugin = {} } = useAccountInfo() || {};
 
   return (
     <>

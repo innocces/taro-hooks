@@ -12,16 +12,11 @@ import { SceneEnum } from '../../constant';
 const MOCK = '1';
 
 const transferOptions = (launchOptions: General.LaunchOptionsApp) =>
-  Object.keys(launchOptions).map((key: any) => {
-    let desc = JSON.stringify(
-      launchOptions[key as keyof General.LaunchOptionsApp] || '',
-    );
+  Object.entries(launchOptions).map(([key, value]) => {
+    let desc = JSON.stringify(value || '');
 
     if (key === 'scene') {
-      desc =
-        desc +
-        ':' +
-        (SceneEnum[launchOptions[key as keyof General.LaunchOptionsApp]] || '');
+      desc = desc + ':' + (SceneEnum[value] || '');
     }
     return {
       label: key + ':',
@@ -31,7 +26,7 @@ const transferOptions = (launchOptions: General.LaunchOptionsApp) =>
   });
 
 export default () => {
-  const launchOptions = useLaunchOptions();
+  const launchOptions = useLaunchOptions() || {};
   const env = useEnv();
   return (
     <>

@@ -19,7 +19,7 @@ const transferOptions = (userInfo: UserInfo) =>
   }));
 
 export default () => {
-  const [userInfo, { getUserInfo, getUserProfile }] = useUserInfo();
+  const [userInfo = {}, { getUserInfo, getUserProfile }] = useUserInfo();
   const [login] = useLogin();
 
   const handleGetUserInfo = useCallback(() => {
