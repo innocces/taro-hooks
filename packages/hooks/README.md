@@ -4,7 +4,7 @@
 
 # Taro-hooks
 
-[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![Netlify Status][image-8]][6][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END --> [![GitHub commit activity][image-16]][13] [![GitHub closed issues][image-17]][13] [![GitHub commits since latest release (by date)][image-18]][13] [![GitHub Release Date][image-19]][13][![Install size][image-20]][14] [![brotli][image-21]][15][![][image-22]][15][![][image-23]][16][![][image-24]][16][![][image-25]][12][![][image-26]][13]
+[![PRs Welcome][image-10]][8][![NPM version][image-1]][1] [![NPM downloads][image-2]][2][![node][image-3]][2][![license][image-4]][2] [![Always ready-to-code.][image-5]][3] [![dumi][image-6]][4][![father-build][image-9]][7] [![][image-7]][5][![lerna][image-11]][9] [![FOSSA Status][image-12]][10]<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END --> [![GitHub commit activity][image-16]][13] [![GitHub closed issues][image-17]][13] [![GitHub commits since latest release (by date)][image-18]][13] [![GitHub Release Date][image-19]][13][![Install size][image-20]][14] [![brotli][image-21]][15][![][image-22]][15][![][image-23]][16][![][image-24]][16][![][image-25]][12][![][image-26]][13]
 
 ## 简介
 
@@ -145,7 +145,7 @@ $ yarn app:dev:h5
 
 ### WeChat
 
-<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-10-06/1633495059027-qrcode.jpeg" alt="wechat code" width="300"/>
+<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-10-14/1634190434551-qrcode.jpeg" alt="wechat code" width="300"/>
 
 ### Issuehunt
 
