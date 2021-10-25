@@ -101,7 +101,32 @@ export interface IBLE {
   RSSI: number;
 }
 
-function useBLE(deviceId?: string) {
+function useBLE(deviceId?: string): [
+  IBLE | undefined,
+  {
+    connectBLE: TCreateBLEConnection;
+    closeBLE: TCloseBLEConnection;
+    setBLEMTU: TSetBLEMTU;
+    getBLEServicesByDeviceId: TGetBLEDeviceServices;
+    getBLECharacteristicsByDeviceId: TGetBLEDeviceCharacteristics;
+    getBLERSSIByDeviceId: TGetBLEDeviceRSSI;
+    listenBLEConnectionStateChange: (
+      callback: TGeneralCallback<IConnectStateChangeCallbackResult>,
+    ) => void;
+    removeBLEConnectionStateChange: (
+      callback: TGeneralCallback<IConnectStateChangeCallbackResult>,
+    ) => void;
+    listenBLECharacteristicValueChange: (
+      callback: TGeneralCallback<ICharacteristicValueChangeCallbackResult>,
+    ) => void;
+    removeBLECharacteristicValueChange: (
+      callback: TGeneralCallback<ICharacteristicValueChangeCallbackResult>,
+    ) => void;
+    notifyBLECharacteristicValueChange: TNotifyBLECharacteristicValueChange;
+    readCharacteristicValue: TReadBLECharacteristicValue;
+    writeCharacteristicValue: TWriteBLECharacteristicValue;
+  },
+] {
   const env = useEnv();
   const [ble, setBLE] = useState<IBLE>();
 
