@@ -56,6 +56,7 @@ import useBrightness from './useBrightness';
 import useLocation from './useLocation';
 import useScanCode from './useScanCode';
 import useBluetooth from './useBluetooth';
+import useBLE from './useBLE';
 
 // media
 import useImage from './useImage';
@@ -98,6 +99,7 @@ export {
   useLocation,
   useScanCode,
   useBluetooth,
+  useBLE,
   useImage,
   useVideo,
   useCamera,

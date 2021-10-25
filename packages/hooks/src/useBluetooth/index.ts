@@ -89,13 +89,37 @@ export interface IPolyStartBluetoothDevicesDiscoveryOption
 export type TPolyStartBluetoothDevicesDiscovery = (
   option?: IPolyStartBluetoothDevicesDiscoveryOption,
 ) => Promise<startBluetoothDevicesDiscoveryNamespace.Promised>;
-export type TMakBluetoothPair = (
+export type TMakeBluetoothPair = (
   deviceId: string,
   pin: string,
   timeout?: number,
 ) => Promise<General.BluetoothError>;
+export type TIsBluetoothDevicePaired = (
+  deviceId: string,
+) => Promise<General.BluetoothError>;
 
-function useBluetooth() {
+function useBluetooth(): [
+  {
+    devices?: getBluetoothDevicesNamespace.SuccessCallbackResultBlueToothDevice[];
+    connectedDevices?: getConnectedBluetoothDevicesNamespace.BluetoothDeviceInfo[];
+    adapter?: IAdapter;
+  },
+  {
+    openAdapter: TOpenBluetoothAdapter;
+    closeAdapter: TCloseBluetoothAdapter;
+    getAdapterState: TGetBluetoothAdapterState;
+    getDevices: TGetBluetoothDevices;
+    getConnectedDevices: TGetConnectedBluetoothDevices;
+    onAdapterStateChange: TOnBluetoothAdapterStateChange;
+    offAdapterStateChange: TOffBluetoothAdapterStateChange;
+    onDeviceFound: TBluetoothDeviceFound;
+    offDeviceFound: TBluetoothDeviceFound;
+    startDiscovery: TStartBluetoothDevicesDiscovery;
+    stopDiscovery: TNormalAction<General.BluetoothError>;
+    makePair: TMakeBluetoothPair;
+    isBluetoothDevicePaired: TIsBluetoothDevicePaired;
+  },
+] {
   const env = useEnv();
   const [adapter, setAdapter] = useState<IAdapter>();
   const [devices, setDevices] =
@@ -302,7 +326,7 @@ function useBluetooth() {
     });
   }, [env]);
 
-  const makePair = useCallback<TMakBluetoothPair>(
+  const makePair = useCallback<TMakeBluetoothPair>(
     (deviceId, pin, timeout = 20000) => {
       return new Promise((resolve, reject) => {
         if (env !== ENV_TYPE.WEAPP) {
@@ -318,6 +342,27 @@ function useBluetooth() {
             });
           } catch (e) {
             reject({ errMsg: 'makeBluetoothPair: fail', data: e });
+          }
+        }
+      });
+    },
+    [env],
+  );
+
+  const isBluetoothDevicePaired = useCallback<TIsBluetoothDevicePaired>(
+    (deviceId) => {
+      return new Promise((resolve, reject) => {
+        if (env !== ENV_TYPE.WEAPP) {
+          reject({ errMsg: 'isBluetoothDevicePaired: fail' });
+        } else {
+          try {
+            wx.isBluetoothDevicePaired({
+              deviceId,
+              success: resolve,
+              fail: reject,
+            });
+          } catch (e) {
+            reject({ errMsg: 'isBluetoothDevicePaired: fail', data: e });
           }
         }
       });
@@ -392,6 +437,7 @@ function useBluetooth() {
       startDiscovery,
       stopDiscovery,
       makePair,
+      isBluetoothDevicePaired,
     },
   ];
 }
