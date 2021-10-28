@@ -67,53 +67,49 @@ const [
 | makePair<Badge>2.12.0</Badge><Badge>Android</Badge>                | 通常情况下（需要指定 pin 码或者密码时）系统会接管配对流程，直接调用 wx.createBLEConnection 即可。该接口只应当在开发者不想让用户手动输入 pin 码且真机验证确认可以正常生效情况下用 | `(deviceId: string, pin: string, timeout?: number) => Promise<General.BluetoothError>`                                       |
 | isBluetoothDevicePaired<Badge>2.20.1</Badge><Badge>Android</Badge> | 查询蓝牙设备是否配对，仅安卓支持                                                                                                                                                 | `(deviceId: string) => Promise<General.BluetoothError>`                                                                      |
 
-### IService
+### IAdapter
 
-| 参数      | 类型      | 说明                |
-| --------- | --------- | ------------------- |
-| uuid      | `string`  | 蓝牙设备服务的 UUID |
-| isPrimary | `boolean` | 该服务是否为主服务  |
+| 参数        | 类型      | 说明               |
+| ----------- | --------- | ------------------ |
+| available   | `boolean` | 蓝牙适配器是否可用 |
+| discovering | `boolean` | 是否正在搜索设备   |
+| powered     | `boolean` | 是否为扫描模式     |
 
-### IProperties
+### TOpenBluetoothAdapterType<Badge>iOS</Badge>
 
-| 参数     | 类型      | 说明                         |
-| -------- | --------- | ---------------------------- |
-| read     | `boolean` | 该特征是否支持 read 操作     |
-| write    | `boolean` | 该特征是否支持 write 操作    |
-| notify   | `boolean` | 该特征是否支持 notify 操作   |
-| indicate | `boolean` | 该特征是否支持 indicate 操作 |
+蓝牙模式，可作为主/从设备
 
-### ICharacteristic
+| 参数       | 说明                 |
+| ---------- | -------------------- |
+| central    | 主机模式             |
+| peripheral | 从机（外围设备）模式 |
 
-| 参数       | 类型          | 说明                 |
-| ---------- | ------------- | -------------------- |
-| uuid       | `string`      | 蓝牙设备服务的 UUID  |
-| properties | `IProperties` | 该特征支持的操作类型 |
+### TPowerLevel<Badge>Android Wechat >= 7.0.12</Badge>
 
-### IConnectStateChangeCallbackResult
+扫描模式，越高扫描越快，也越耗电
 
-| 参数      | 类型     | 说明               |
-| --------- | -------- | ------------------ |
-| connected | `string` | 是否处于已连接状态 |
-| deviceId  | `string` | 蓝牙设备 id        |
+| 参数   | 说明 |
+| ------ | ---- |
+| low    | 低   |
+| medium | 中   |
+| high   | 高   |
 
-### ICharacteristicValueChangeCallbackResult
+### IStartBluetoothDevicesDiscoveryOption
 
-| 参数             | 类型          | 说明                    |
-| ---------------- | ------------- | ----------------------- |
-| deviceId         | `string`      | 蓝牙设备 id             |
-| serviceId        | `string`      | 蓝牙特征对应服务的 UUID |
-| characteristicId | `string`      | 蓝牙特征的 UUID         |
-| value            | `ArrayBuffer` | 特征最新的值            |
+| 参数               | 类型          | 说明                                                                          |
+| ------------------ | ------------- | ----------------------------------------------------------------------------- |
+| services           | `string[]`    | 要搜索的蓝牙设备主服务的 UUID 列表（支持 16/32/128 位 UUID）                  |
+| allowDuplicatesKey | `boolean`     | 是否允许重复上报同一设备                                                      |
+| interval           | `number`      | 上报设备的间隔，单位 ms。0 表示找到新设备立即上报，其他数值根据传入的间隔上报 |
+| powerLevel         | `TPowerLevel` | 扫描模式，越高扫描越快，也越耗电。仅安卓微信客户端 7.0.12 及以上支持          |
 
-### IBLE
+### TMakeBluetoothPair
 
-| 参数            | 类型                | 说明                             |
-| --------------- | ------------------- | -------------------------------- |
-| deviceId        | `string`            | 蓝牙设备 id                      |
-| services        | `IService[]`        | 蓝牙低功耗设备所有服务           |
-| characteristics | `ICharacteristic[]` | 蓝牙低功耗设备某个服务中所有特征 |
-| RSSI            | `number`            | 蓝牙低功耗设备的信号强度         |
+| 参数     | 类型     | 说明                  |
+| -------- | -------- | --------------------- |
+| deviceId | `string` | 蓝牙设备 id           |
+| pin      | `string` | pin 码，Base64 格式。 |
+| timeout  | `number` | 超时时间，单位 ms     |
 
 ### BluetoothError
 
