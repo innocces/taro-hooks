@@ -1,5 +1,5 @@
 import React from 'react';
-import { AtButton, AtNoticebar, AtCard } from 'taro-ui';
+import { AtButton, AtNoticebar, AtList, AtListItem } from 'taro-ui';
 import DocPage from '@components/DocPage';
 import { View } from '@tarojs/components';
 
@@ -19,6 +19,11 @@ export default () => {
         由于文档无路由输出。故移步小程序体验或下载包进行体验。
       </AtNoticebar>
       <DocPage title="useRouter 路由" panelTitle="useRouter">
+        {routeInfo?.from?.route && (
+          <AtList>
+            <AtListItem title="来源页面" note={routeInfo?.from?.route} />
+          </AtList>
+        )}
         <AtButton
           disabled={env === ENV_TYPE.WEB}
           onClick={() => switchTab('/pages/about/index')}
