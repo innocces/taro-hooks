@@ -10,12 +10,16 @@ import {
   navigateToMiniProgram,
   navigateBackMiniProgram,
 } from '@tarojs/taro';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { stringify } from 'querystring';
+import usePage from '../usePage';
 import { typeOf } from '../utils/tool';
 
 export type TRecord = { [_: string]: any };
-export type RouterInfoResult = RouterInfo<Partial<Record<string, string>>>;
+export interface RouterInfoResult
+  extends RouterInfo<Partial<Record<string, string>>> {
+  from?: RouterInfo<Partial<Record<string, string>>> | {};
+}
 export type NavigateBackSync = (
   deltaOrMark?: number | boolean,
   extraData?: TRecord,
@@ -56,7 +60,19 @@ function stringfiyUrl(url: string, options?: TRecord): string {
 }
 
 function useRouter(): Result {
-  const router = useTaroRouter();
+  const [stackLength, { pageInstance, pageStack }] = usePage();
+  const router = useRef<RouterInfoResult>(useTaroRouter());
+
+  useEffect(() => {
+    let from = {};
+    if (stackLength > 1) {
+      from = pageStack[stackLength - 2];
+    }
+    router.current = {
+      ...router.current,
+      from,
+    };
+  }, [stackLength, pageStack, router]);
 
   const switchTabSync = useCallback<CommonRouteWithOptionsSync>(
     (url, options) => {
@@ -151,7 +167,7 @@ function useRouter(): Result {
   );
 
   return [
-    router,
+    router.current,
     {
       switchTab: switchTabSync,
       relaunch: relaunchSync,
