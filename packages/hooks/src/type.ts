@@ -1,6 +1,6 @@
 import type { General, RouterInfo } from '@tarojs/taro';
 
-export type TRecord = { [_: string]: any };
+export type TRecord<R = any> = { [_: string]: R };
 
 export type TAuthResultType = 'accept' | 'reject' | 'ban';
 
