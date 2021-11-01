@@ -21,7 +21,7 @@ function useLoading(
   }, [option]);
 
   const showLoadingAsync = useCallback<ShowLoading>(
-    (option?: Partial<LoadingOption>) => {
+    (option) => {
       return new Promise((resolve, reject) => {
         try {
           if (!option && !initialOption.current) {
