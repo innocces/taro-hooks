@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.8...taro-hooks-v1.5.0) (2021-11-01)
+
+### Features
+
+- **useble:** add useBLE ([9d60c08](https://github.com/innocces/taro-hooks/commit/9d60c08e9b16515ec6a4ac65146fbf6545de6d45))
+- **useble:** add useEffect code for useBLE ([615a23a](https://github.com/innocces/taro-hooks/commit/615a23a316a0d3e024122f81d2898c7f5857ef38))
+- **usebluetooth:** add doc and type for useBluetooth ([7f1b80b](https://github.com/innocces/taro-hooks/commit/7f1b80b9ef3f3d7a2ef5b9fce581c11658d65ffe))
+- **usebluetooth:** add useBluetooth ([931d7f4](https://github.com/innocces/taro-hooks/commit/931d7f47495e757eb03423d1f8eff53774141a94))
+- **usefrom:** add useFrom hook ([248157d](https://github.com/innocces/taro-hooks/commit/248157d60656a985757b4608623dd429c62b4905))
+- **userouter:** add from info for useRouter ([c2631f6](https://github.com/innocces/taro-hooks/commit/c2631f69f6afd044544a3b6126736d16f0da1940))
+
 ## [1.4.8](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.7...taro-hooks-v1.4.8) (2021-10-14)
 
 ### Bug Fixes
