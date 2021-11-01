@@ -7,11 +7,13 @@ import {
   AtSwitch,
   AtList,
   AtListItem,
+  AtFloatLayout,
+  AtAccordion,
 } from 'taro-ui';
 import { View } from '@tarojs/components';
 import DocPage from '@components/DocPage';
 
-import { useBluetooth, useModal } from 'taro-hooks';
+import { useBluetooth, useModal, useBLE, useLoading } from 'taro-hooks';
 import Taro from '@tarojs/taro';
 import type { getBluetoothDevices } from '@tarojs/taro';
 
@@ -23,6 +25,13 @@ export default () => {
     showCancel: false,
     confirmText: '确认信息',
     title: '蓝牙操作结果',
+  });
+  const [chooseDeviceId, setChooseDeviceId] = useState<string>();
+  const [chooseDeviceInfo, setChooseDeviceInfo] = useState<TRecord>();
+  const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
+  const [showLoading, hideLoading] = useLoading({
+    mask: true,
+    title: '获取设备信息',
   });
   const [
     { devices = [], connectedDevices = [], adapter = {} },
@@ -38,37 +47,29 @@ export default () => {
       stopDiscovery,
     },
   ] = useBluetooth();
+  const [
+    ble,
+    {
+      connectBLE,
+      closeBLE,
+      setBLEMTU,
+      getBLEServicesByDeviceId,
+      getBLECharacteristicsByDeviceId,
+      getBLERSSIByDeviceId,
+      listenBLEConnectionStateChange,
+      removeBLEConnectionStateChange,
+      listenBLECharacteristicValueChange,
+      removeBLECharacteristicValueChange,
+      notifyBLECharacteristicValueChange,
+      readCharacteristicValue,
+      writeCharacteristicValue,
+    },
+  ] = useBLE();
   const [isListen, setIsListen] = useState<boolean>(false);
-
-  console.log(devices, connectedDevices, adapter);
 
   const handleDeviceFound = useCallback((findDevices) => {
     Taro.atMessage({ message: `最新发现设备数量为: ${findDevices?.length}` });
   }, []);
-
-  useEffect(() => {
-    if (adapter.available && !isListen) {
-      setIsListen(true);
-      startDiscovery()
-        .then(() => onDeviceFound(handleDeviceFound))
-        .catch(console.log);
-    }
-    return () => {
-      if (!isListen) return;
-      stopDiscovery();
-      offDeviceFound(handleDeviceFound);
-    };
-  }, [
-    isListen,
-    adapter,
-    startDiscovery,
-    stopDiscovery,
-    onAdapterStateChange,
-    offAdapterStateChange,
-    onDeviceFound,
-    offDeviceFound,
-    handleDeviceFound,
-  ]);
 
   const handleGetDevices = useCallback(async () => {
     if (!adapter?.available) {
@@ -100,6 +101,71 @@ export default () => {
       show({ content: `当前获取到蓝牙状态: ${JSON.stringify(state || {})}` });
     }
   }, [adapter, getAdapterState, show]);
+
+  const handleDevicesBLE = useCallback(
+    async (deviceId, { name }) => {
+      showLoading();
+      try {
+        setChooseDeviceId(deviceId);
+        await connectBLE(deviceId);
+        const services = await getBLEServicesByDeviceId(deviceId);
+        const rssi = await getBLERSSIByDeviceId(deviceId);
+        const characteristics = await getBLECharacteristicsByDeviceId(deviceId);
+        console.log(services, rssi, characteristics);
+        setChooseDeviceInfo({
+          name,
+          services,
+          rssi,
+          characteristics,
+        });
+        setDrawerVisible(true);
+      } catch (e) {
+        show({ content: '调用失败' });
+        console.log(e);
+      }
+      hideLoading();
+    },
+    [
+      showLoading,
+      hideLoading,
+      connectBLE,
+      getBLECharacteristicsByDeviceId,
+      getBLERSSIByDeviceId,
+      getBLEServicesByDeviceId,
+      show,
+    ],
+  );
+
+  useEffect(() => {
+    if (adapter.available && !isListen) {
+      setIsListen(true);
+      startDiscovery()
+        .then(() => onDeviceFound(handleDeviceFound))
+        .catch(console.log);
+      handleGetConnectedDevices();
+    }
+    return () => {
+      if (chooseDeviceId) {
+        closeBLE(chooseDeviceId);
+      }
+      if (!isListen) return;
+      stopDiscovery();
+      offDeviceFound(handleDeviceFound);
+    };
+  }, [
+    isListen,
+    adapter,
+    startDiscovery,
+    stopDiscovery,
+    onAdapterStateChange,
+    offAdapterStateChange,
+    onDeviceFound,
+    offDeviceFound,
+    handleDeviceFound,
+    closeBLE,
+    chooseDeviceId,
+    handleGetConnectedDevices,
+  ]);
 
   return (
     <>
@@ -138,26 +204,78 @@ export default () => {
           <AtList>
             {(
               devices as getBluetoothDevices.SuccessCallbackResultBlueToothDevice[]
-            ).map(({ name, deviceId }, index) => (
-              <AtListItem
-                isSwitch
-                disabled
-                key={index}
-                title={name}
-                note={deviceId}
-                switchIsCheck={Boolean(
-                  (
-                    connectedDevices as getBluetoothDevices.SuccessCallbackResultBlueToothDevice[]
-                  ).find((v) => v.deviceId === deviceId),
-                )}
-              />
-            ))}
+            ).map(({ name, deviceId }, index) => {
+              const isConnected = (
+                connectedDevices as getBluetoothDevices.SuccessCallbackResultBlueToothDevice[]
+              ).find((v) => v.deviceId === deviceId);
+              return (
+                <AtListItem
+                  onClick={() => handleDevicesBLE(deviceId, { name })}
+                  key={index}
+                  title={name}
+                  note={deviceId}
+                  iconInfo={{
+                    value: isConnected ? 'check-circle' : 'clock',
+                    color: isConnected ? '#78A4FA' : '#FF4949',
+                  }}
+                />
+              );
+            })}
           </AtList>
         ) : (
           <View className="normal-title">
             暂无查找到的设备, 确保蓝牙是否已开启, 可检查蓝牙适配器状态
           </View>
         )}
+        <AtFloatLayout
+          isOpened={drawerVisible}
+          title={(chooseDeviceInfo?.name as string) || '当前选择设备'}
+          onClose={() => {
+            setDrawerVisible(false);
+            setChooseDeviceId('');
+            setChooseDeviceInfo({});
+          }}
+        >
+          {chooseDeviceInfo && (
+            <View className="at-article">
+              <View className="at-article__h3">Services:</View>
+              <AtList>
+                {(chooseDeviceInfo.services as any[]).map(
+                  ({ isPrimary, uuid }) => (
+                    <AtListItem
+                      key={uuid}
+                      isSwitch
+                      switchIsCheck={isPrimary}
+                      disabled
+                      title={uuid}
+                    />
+                  ),
+                )}
+              </AtList>
+              <View className="at-article__h3">
+                RSSI: {chooseDeviceInfo.rssi}
+              </View>
+              <View className="at-article__h3">Characteristics:</View>
+              {(chooseDeviceInfo.characteristics as any[]).map(
+                ({ properties, uuid }) => (
+                  <AtAccordion key={uuid} title={uuid} open>
+                    <AtList>
+                      {Object.entries(properties).map(([key, value]) => (
+                        <AtListItem
+                          key={key}
+                          isSwitch
+                          switchIsCheck={value as boolean}
+                          disabled
+                          title={key}
+                        />
+                      ))}
+                    </AtList>
+                  </AtAccordion>
+                ),
+              )}
+            </View>
+          )}
+        </AtFloatLayout>
       </DocPage>
     </>
   );
