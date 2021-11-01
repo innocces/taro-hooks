@@ -145,7 +145,7 @@ $ yarn app:dev:h5
 
 ### WeChat
 
-<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-10-14/1634190434551-qrcode.jpeg" alt="wechat code" width="300"/>
+<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-11-01/1635772045359-qrcode.png" alt="wechat code" width="300"/>
 
 ### Issuehunt
 
