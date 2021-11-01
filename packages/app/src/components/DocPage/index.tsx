@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  forwardRef,
-  CSSProperties,
-  ForwardedRef,
-  FC,
-} from 'react';
+import React, { useEffect, CSSProperties, ForwardedRef, FC } from 'react';
 import Taro from '@tarojs/taro';
 
 import { useEvent } from 'taro-hooks';

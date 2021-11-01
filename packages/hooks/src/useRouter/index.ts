@@ -14,11 +14,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { stringify } from 'querystring';
 import useFrom from '../useFrom';
 import { typeOf } from '../utils/tool';
-
-export type TRecord = { [_: string]: any };
-export interface RouterInfoResult
-  extends RouterInfo<Partial<Record<string, string>>> {
-  from?: RouterInfo<Partial<Record<string, string>>> | {};
+import type { TRouteInfo, TRecord, TPartialRouteInfo } from '../type';
+export interface RouterInfoResult extends TRouteInfo {
+  from?: TPartialRouteInfo;
 }
 export type NavigateBackSync = (
   deltaOrMark?: number | boolean,
