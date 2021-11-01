@@ -14,6 +14,7 @@ import useEvent from './useEvent';
 import useVisible from './useVisible';
 import useSelectorQuery from './useSelectorQuery';
 import useStorage from './useStorage';
+import useFrom from './useFrom';
 
 // layout
 import useBackground from './useBackground';
@@ -72,6 +73,7 @@ export {
   usePage,
   useLaunchOptions,
   useRouter,
+  useFrom,
   usePromise,
   useBase64ToArrayBuffer,
   useArrayBufferToBase64,

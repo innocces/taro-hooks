@@ -10,6 +10,7 @@ export default {
     'pages/useApp/index',
     'pages/usePage/index',
     'pages/useRouter/index',
+    'pages/useFrom/index',
     'pages/usePromise/index',
     'pages/useBase64ToArrayBuffer/index',
     'pages/useArrayBufferToBase64/index',

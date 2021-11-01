@@ -10,9 +10,9 @@ import {
   navigateToMiniProgram,
   navigateBackMiniProgram,
 } from '@tarojs/taro';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { stringify } from 'querystring';
-import usePage from '../usePage';
+import useFrom from '../useFrom';
 import { typeOf } from '../utils/tool';
 
 export type TRecord = { [_: string]: any };
@@ -60,19 +60,15 @@ function stringfiyUrl(url: string, options?: TRecord): string {
 }
 
 function useRouter(): Result {
-  const [stackLength, { pageInstance, pageStack }] = usePage();
-  const router = useRef<RouterInfoResult>(useTaroRouter());
+  const [router, setRouter] = useState<RouterInfoResult>(useTaroRouter());
+  const from = useFrom();
 
   useEffect(() => {
-    let from = {};
-    if (stackLength > 1) {
-      from = pageStack[stackLength - 2];
-    }
-    router.current = {
-      ...router.current,
+    setRouter({
+      ...router,
       from,
-    };
-  }, [stackLength, pageStack, router]);
+    });
+  }, [from]);
 
   const switchTabSync = useCallback<CommonRouteWithOptionsSync>(
     (url, options) => {
@@ -167,7 +163,7 @@ function useRouter(): Result {
   );
 
   return [
-    router.current,
+    router,
     {
       switchTab: switchTabSync,
       relaunch: relaunchSync,

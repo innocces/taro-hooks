@@ -51,6 +51,4 @@ const DocPage: FC<IDocPageProps> = ({
   );
 };
 
-export default forwardRef((props, ref) => (
-  <DocPage {...props} forwardedRef={ref} />
-));
+export default DocPage;

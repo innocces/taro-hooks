@@ -94,6 +94,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useRouter 路由',
     },
     {
+      id: 'useFrom',
+      name: 'useFrom 路由来源',
+    },
+    {
       id: 'useBase64ToArrayBuffer',
       name: 'useBase64ToArrayBuffer 转换base64',
     },
