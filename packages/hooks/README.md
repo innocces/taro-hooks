@@ -149,6 +149,10 @@ $ yarn app:dev:h5
     
 > 若失效可点击[Welcome to discuss in wechat](https://github.com/innocces/taro-hooks/issues/12)获取最新二维码
 
+### monthly
+
+每个月都会发一篇关于`taro-hooks`的更新内容. 可至[monthly](https://github.com/taro-hooks/monthly)查看全部内容.
+
 ### Issuehunt
 
 [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/379632117)
