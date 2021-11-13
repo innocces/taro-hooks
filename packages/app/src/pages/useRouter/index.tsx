@@ -61,7 +61,12 @@ export default () => {
         <AtButton
           className="gap"
           disabled={env === ENV_TYPE.WEB}
-          onClick={() => navigateTo(true, { appId: 'wxce815e33b0e06cf5' })}
+          onClick={() =>
+            navigateTo(true, {
+              appId: 'wxce815e33b0e06cf5',
+              extraData: { from: 'taro-hooks' },
+            })
+          }
         >
           跳转小程序
         </AtButton>
