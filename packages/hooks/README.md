@@ -145,7 +145,7 @@ $ yarn app:dev:h5
 
 ### WeChat
 
-<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-11-08/1636338503541-qrcode.png" alt="wechat code" width="300"/>
+<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-11-13/1636777127887-qrcode.png" alt="wechat code" width="300"/>
     
 > 若失效可点击[Welcome to discuss in wechat](https://github.com/innocces/taro-hooks/issues/12)获取最新二维码
 
@@ -161,15 +161,15 @@ $ yarn app:dev:h5
 
 本项目遵从 [Angular Style Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)，更新日志请查阅 [Release](https://github.com/innocces/taro-hooks/releases), [CHANGELOG](https://github.com/innocces/taro-hooks/blob/main/CHANGELOG.md)。
 
-## License
-
-[MIT@innocces](https://github.com/innocces/taro-hooks/blob/main/LICENSE)
-
 ## 友情推荐
 
 | 项目                                              | 描述                                                                                                                |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | [taroify](https://github.com/mallfoundry/taroify) | Taroify 是移动端组件库 Vant 的 Taro 版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建小程序应用 |
+
+## License
+
+[MIT@innocces](https://github.com/innocces/taro-hooks/blob/main/LICENSE)
 
 [![FOSSA Status][image-13]][11]
 
