@@ -13,7 +13,9 @@
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],
       "@components/*": ["packages/app/src/components/*"],
-      "@project/*": ["./*"]
+      "@project/*": ["./*"],
+      "demos": ["ant-mobile-taro/src/demos/*"],
+      "ant-mobile-taro": ["ant-mobile-taro/src/*"]
     },
     "typeRoots": ["node_modules/@types", "typings.d.ts"],
     "allowSyntheticDefaultImports": true,
@@ -29,7 +31,6 @@
     "typings",
     "**/__test__",
     "test",
-    "docs",
     "tests"
   ]
 }

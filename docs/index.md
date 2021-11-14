@@ -1,10 +1,12 @@
 ---
 hero:
-  title: Taro-hooks
+  image: /image/hook.png
   desc: 为 Taro 而设计的 Hooks Library
   actions:
     - text: 快速上手
       link: /quick
+    - text: hooks 列表
+      link: /hooks
 features:
   - icon: https://taro.zone/static/images/icon_community.svg
     title: 全面匹配

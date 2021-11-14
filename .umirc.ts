@@ -1,4 +1,5 @@
 import { defineConfig } from 'dumi';
+import { components } from './components';
 
 const { resolve } = require('path');
 const isProd = process.env.NODE_ENV === 'production';
@@ -6,6 +7,7 @@ const specialItem = ['list-item', 'countdown-item', 'action-sheet-item'];
 const specialItemMap = {
   'action-sheet-item': 'action-sheet/body/item',
 };
+
 export default defineConfig({
   title: 'Taro-hooks',
   favicon: '/image/hook.png',
@@ -24,6 +26,10 @@ export default defineConfig({
     port: 12345,
     https: true,
   },
+  resolve: {
+    includes: ['docs', 'packages/hooks/src', 'ant-mobile-taro/src'],
+    passivePreview: true,
+  },
   alias: {
     '@tarojs/components$': '@tarojs/components/dist-h5/react',
     '@tarojs/taro': '@tarojs/taro-h5',
@@ -32,6 +38,8 @@ export default defineConfig({
     '@components': __dirname + '/packages/app/src/components',
     '@assets': __dirname + '/packages/app/src/assets',
     '@project': __dirname,
+    'ant-mobile-taro/es': process.cwd() + '/ant-mobile-taro/src',
+    demos: process.cwd() + '/ant-mobile-taro/src/demos/index.ts',
   },
   define: {
     'process.env.TARO_ENV': 'h5',
@@ -39,16 +47,16 @@ export default defineConfig({
     BUILD_MODE: JSON.stringify(undefined),
   },
   extraPostCSSPlugins: [
-    require('postcss-pxtorem')({
-      exclude: /packages\/hooks|.dumi|docs/i,
-      rootValue: 100,
-      unitPrecision: 5,
-      propList: ['*'],
-      selectorBlackList: [],
-      replace: true,
-      mediaQuery: true,
-      minPixelValue: 0,
-    }),
+    // require('postcss-pxtorem')({
+    //   exclude: /packages\/hooks|.dumi|docs/i,
+    //   rootValue: 100,
+    //   unitPrecision: 5,
+    //   propList: ['*'],
+    //   selectorBlackList: [],
+    //   replace: true,
+    //   mediaQuery: true,
+    //   minPixelValue: 0,
+    // }),
   ],
   extraBabelPlugins: [
     [
@@ -101,6 +109,44 @@ export default defineConfig({
       path: 'https://github.com/innocces/taro-hooks/releases',
     },
   ],
+  menus: {
+    '/ant-mobile-taro': [
+      {
+        title: 'ant-mobile-taro',
+        path: 'ant-mobile-taro',
+      },
+    ],
+    '/ant-mobile-taro/src/components': [
+      {
+        title: '基础',
+        children: components.basic,
+      },
+      {
+        title: '数据展示',
+        children: components.dataDisplay,
+      },
+      {
+        title: '数据录入',
+        children: components.dataEntry,
+      },
+      {
+        title: '反馈',
+        children: components.feedback,
+      },
+      {
+        title: '导航和布局',
+        children: components.navigationAndLayout,
+      },
+      {
+        title: '其他',
+        children: components.other,
+      },
+      {
+        title: '试验性',
+        children: components.experimental,
+      },
+    ],
+  },
   links: [{ rel: 'stylesheet', href: '/assets/style.css' }],
   headScripts: [
     {
@@ -116,11 +162,33 @@ export default defineConfig({
       'data-y_margin': '18',
     },
   ],
+  scripts: [
+    `if (location.pathname.startsWith('/~demos/')) {
+      document.body.style.background = '#f5f7fa'
+    }`,
+  ],
+  metas: [
+    {
+      name: 'viewport',
+      content:
+        'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover',
+    },
+  ],
+  styles: [
+    `
+    #root .__dumi-default-mobile-demo-layout {
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+    }
+    `,
+  ],
   themeConfig: {
     hd: {
       rules: [
-        { maxWidth: 375, mode: 'vw', options: [100, 750] },
-        { minWidth: 376, maxWidth: 750, mode: 'vw', options: [100, 1500] },
+        // { maxWidth: 375, mode: 'vw', options: [100, 750] },
+        // { minWidth: 376, maxWidth: 750, mode: 'vw', options: [100, 1500] },
       ],
       // 更多 rule 配置访问 https://github.com/umijs/dumi/blob/master/packages/theme-mobile/src/typings/config.d.ts#L7
     },

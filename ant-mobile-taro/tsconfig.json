@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "target": "ES6",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "allowJs": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "typeRoots": [
+      "./src/typings",
+      "./node_modules/@types",
+      "../node_modules/@types"
+    ],
+    "lib": ["ES2015", "DOM"],
+    "paths": {
+      "ant-mobile-taro": ["src/index.ts"],
+      "ant-mobile-taro/src/*": ["src/*"],
+      "ant-mobile-taro/es/*": ["src/*"],
+      "demos": ["src/demos/index.ts"],
+      "testing": ["src/tests/testing"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "lib", "es", "dist", ".dumi"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "resolveJsonModule": true,
+      "noImplicitAny": false
+    }
+  }
+}

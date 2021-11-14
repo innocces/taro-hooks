@@ -88,6 +88,12 @@ export default {
     'pages/useAudio/index',
     'pages/useMap/index',
   ],
+  subPackages: [
+    {
+      root: 'ui',
+      pages: ['pages/button/index'],
+    },
+  ],
   window: {
     backgroundTextStyle: 'light',
     backgroundColor: '#f8f8f8',
