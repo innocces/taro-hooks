@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 试验性
+  path: /experimental
+---
+
 # PickerView 选择器视图
 
 PickerView 是 Picker 的内容区域。

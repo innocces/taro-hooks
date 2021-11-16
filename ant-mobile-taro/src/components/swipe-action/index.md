@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 反馈
+  path: /feedback
+---
+
 # SwipeAction 滑动操作
 
 <code src="./demos/demo1.tsx"></code>

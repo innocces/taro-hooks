@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 数据展示
+  path: /dataDisplay
+---
+
 # PageIndicator 页码指示器
 
 <code src="./demos/demo1.tsx"></code>

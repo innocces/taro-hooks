@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 数据录入
+  path: /dataEntry
+---
+
 # Picker 选择器
 
 Picker 系列一共包括了三个组件：[Picker](#picker)、[CascadePicker](#cascadepicker)、[DatePicker](#datepicker)。

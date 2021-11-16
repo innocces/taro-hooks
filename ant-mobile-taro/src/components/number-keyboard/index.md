@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 试验性
+  path: /experimental
+---
+
 # NumberKeyboard 数字键盘
 
 H5 数字键盘，可以配合密码输入框组件或自定义的输入框组件使用

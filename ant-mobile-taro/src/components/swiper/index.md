@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 数据展示
+  path: /dataDisplay
+---
+
 # Swiper 走马灯
 
 ### 基础用法

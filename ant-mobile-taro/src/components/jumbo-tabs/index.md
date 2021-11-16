@@ -1,3 +1,7 @@
+---
+hide: true
+---
+
 # JumboTabs 复杂选项卡
 
 <code src="./demos/index.tsx"></code>

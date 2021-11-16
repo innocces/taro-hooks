@@ -7,7 +7,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "dumi dev",
+    "start": "NODE_OPTIONS=--max_old_space_size=4096 dumi dev",
     "docs:build": "dumi build",
     "docs:build:gh": "cross-env BUILD_TARGET=GH dumi build",
     "docs:deploy": "gh-pages -d docs-dist",

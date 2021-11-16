@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 试验性
+  path: /experimental
+---
+
 # Dropdown 下拉菜单
 
 <code src="./demos/demo1.tsx"></code>

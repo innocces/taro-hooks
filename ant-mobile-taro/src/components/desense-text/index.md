@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 试验性
+  path: /experimental
+---
+
 # DesenseText 脱敏
 
 <code src="./demos/index.tsx"></code>

@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 导航和布局
+  path: /navigationAndLayout
+---
+
 # TabBar 标签栏
 
 <code src="./demos/demo1.tsx"></code>

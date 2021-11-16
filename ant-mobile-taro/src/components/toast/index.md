@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 反馈
+  path: /feedback
+---
+
 # Toast 轻提示
 
 <code src="./demos/index.tsx"></code>

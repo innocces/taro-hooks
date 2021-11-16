@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 数据展示
+  path: /dataDisplay
+---
+
 # Popover 气泡弹出框
 
 <code src="./demos/index.tsx"></code>

@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 数据录入
+  path: /dataEntry
+---
+
 # Slider 滑动输入条
 
 <code src="./demos/index.tsx"></code>

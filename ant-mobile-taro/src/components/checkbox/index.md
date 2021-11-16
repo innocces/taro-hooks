@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 数据录入
+  path: /dataEntry
+---
+
 # Checkbox 勾选框
 
 <code src="./demos/index.tsx"></code>

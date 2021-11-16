@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 基础
+  path: /basic
+---
+
 # List 列表
 
 <code src="./demos/index.tsx"></code>

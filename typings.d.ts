@@ -5,6 +5,7 @@ declare module '*.png';
 
 // mock typings
 declare module 'taro-hooks';
+declare module 'demos';
 declare module 'ant-mobile-taro';
 declare module '@tarojs/runtime';
 declare module 'mockjs';

@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 基础
+  path: /basic
+---
+
 # Icon 图标
 
 图标是在一个单独的 npm 包中，如果你想使用图标，需要先安装它：

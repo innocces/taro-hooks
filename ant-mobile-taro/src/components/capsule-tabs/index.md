@@ -1,3 +1,7 @@
+---
+hide: true
+---
+
 # CapsuleTabs 胶囊选项卡
 
 <code src="./demos/index.tsx"></code>

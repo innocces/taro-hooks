@@ -26,6 +26,7 @@ export default defineConfig({
     port: 12345,
     https: true,
   },
+  devtool: 'eval',
   resolve: {
     includes: ['docs', 'packages/hooks/src', 'ant-mobile-taro/src'],
     passivePreview: true,
@@ -100,6 +101,10 @@ export default defineConfig({
     loading: resolve(__dirname, 'components/Loading'),
   },
   exportStatic: {},
+  nodeModulesTransform: {
+    type: 'none',
+    exclude: [],
+  },
   navs: [
     null,
     { title: 'GitHub', path: 'https://github.com/innocces/taro-hooks' },
@@ -109,44 +114,6 @@ export default defineConfig({
       path: 'https://github.com/innocces/taro-hooks/releases',
     },
   ],
-  menus: {
-    '/ant-mobile-taro': [
-      {
-        title: 'ant-mobile-taro',
-        path: 'ant-mobile-taro',
-      },
-    ],
-    '/ant-mobile-taro/src/components': [
-      {
-        title: '基础',
-        children: components.basic,
-      },
-      {
-        title: '数据展示',
-        children: components.dataDisplay,
-      },
-      {
-        title: '数据录入',
-        children: components.dataEntry,
-      },
-      {
-        title: '反馈',
-        children: components.feedback,
-      },
-      {
-        title: '导航和布局',
-        children: components.navigationAndLayout,
-      },
-      {
-        title: '其他',
-        children: components.other,
-      },
-      {
-        title: '试验性',
-        children: components.experimental,
-      },
-    ],
-  },
   links: [{ rel: 'stylesheet', href: '/assets/style.css' }],
   headScripts: [
     {

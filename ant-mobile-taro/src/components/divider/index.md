@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 导航和布局
+  path: /navigationAndLayout
+---
+
 # Divider 分割线
 
 <code src="./demos/index.tsx"></code>

@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 导航和布局
+  path: /navigationAndLayout
+---
+
 # FloatingPanel 浮动面板
 
 <code src="./demos/index.tsx"></code>

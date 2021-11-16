@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 试验性
+  path: /experimental
+---
+
 # TreeSelect 级联选择器
 
 <code src="./demos/demo1.tsx"></code>

@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 反馈
+  path: /feedback
+---
+
 # Dialog 弹窗
 
 <code src="./demos/index.tsx"></code>

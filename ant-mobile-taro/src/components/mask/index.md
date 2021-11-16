@@ -1,3 +1,13 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 反馈
+  path: /feedback
+---
+
 # Mask 遮罩层
 
 <code src="./demos/demo1.tsx"></code>

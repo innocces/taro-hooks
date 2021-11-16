@@ -1,3 +1,7 @@
+---
+hide: true
+---
+
 # ScrollMask 滚动两侧遮罩
 
 <code src="./demos/index.tsx"></code>
