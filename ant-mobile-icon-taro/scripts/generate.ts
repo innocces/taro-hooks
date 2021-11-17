@@ -9,6 +9,7 @@ import { resolve, join } from 'path';
 const generateIconMode = process.argv[2] === '--target=icon';
 const iconURI = 'http://at.alicdn.com/t/font_2943084_mnj77jf56tr.js';
 const iconsDIR = join(__dirname, '../src/icons');
+const framwork = ['react', 'vue'];
 
 interface IconInfoItem {
   name: string;
@@ -129,14 +130,14 @@ import React, { FC, useMemo } from 'react';
 import { View } from '@tarojs/components';
 import { pxTransform } from '@tarojs/taro';
 // @ts-ignore
-import { template, hex2rgb } from '../util';
-import type { ITaroIconProps } from '../type';
-import '../style/icon.less';
+import { template, hex2rgb } from '../../util';
+import type { ITaroIconProps } from '../../type';
+import '../../style/icon.less';
 
 
 const ${iconName}: FC<ITaroIconProps> = ({
   size,
-  style,
+  style = {},
   color,
   usePX,
   ...props
@@ -165,6 +166,54 @@ ${iconName}.defaultProps = {
 }
 
 export default ${iconName};
+`;
+
+const vueIconTemplate = (iconName: string, iconSVG: string): string => `
+// GENERATE BY ./scripts/generate.ts
+// DON NOT EDIT IT MANUALLY
+
+import { defineComponent } from 'vue';
+import { pxTransform } from '@tarojs/taro';
+// @ts-ignore
+import { template, hex2rgb } from '../../util';
+import { taroIconProps } from '../../type.vue';
+import '../../style/icon.less';
+
+export default defineComponent({
+  name: '${iconName}',
+  props: taroIconProps,
+  emits: ['click'],
+  setup(props, { emit }) {
+    const onClick = (event: MouseEvent) => {
+      emit('click', event);
+    };
+
+    return () => {
+      const {
+        size = 18,
+        style = {},
+        color,
+        usePX,
+        ...restProps
+      } = props;
+
+      const renderSize = () => {
+        return usePX ? pxTransform(size!).replace(/rpx|rem/ig, 'px') : pxTransform(size!);
+      }
+
+      const background = () => {
+        const base64SVG = template("${iconSVG}", { size: renderSize, color: hex2rgb(color || '') });
+        const escape = base64SVG.replace(/<|>/g, (str: string) => encodeURIComponent(str));
+        return \`url("data:image/svg+xml, \${escape\}") no-repeat\`;
+      };
+
+      return (
+        // @ts-ignore
+        <view onClick={onClick} class="adm-icon" {...restProps} style={{...style, background, width: renderSize, height: renderSize}}></view>
+      )
+    }
+  }
+})
 `;
 
 async function parseIconInfo(): Promise<IconInfoItem[]> {
@@ -203,33 +252,44 @@ async function parseIconInfo(): Promise<IconInfoItem[]> {
   }
 }
 
+async function checkBaseDIR(type: string) {
+  try {
+    accessSync(join(iconsDIR, type));
+  } catch (e) {
+    await promisify(mkdir)(join(iconsDIR, type));
+  }
+}
+
 (async () => {
   if (generateIconMode) {
     const svgInfo = await parseIconInfo();
-    try {
-      accessSync(iconsDIR);
-    } catch (e) {
-      await promisify(mkdir)(iconsDIR);
-    }
-    // generate file
-    await walk(async (name, svg) => {
-      console.log(`generate file: ${name}.tsx`);
+    for await (let i of framwork) {
+      await checkBaseDIR(i);
+      // generate file
+      await walk(async (name, svg) => {
+        console.log(`generate file: ${name}.${i}.tsx`);
+        writeFileSync(
+          resolve(__dirname, `../src/icons/${i}/${name}.${i}.tsx`),
+          i === 'react'
+            ? reactIconTemplate(name, svg)
+            : vueIconTemplate(name, svg),
+        );
+      }, svgInfo);
+      // generate entry
+      const entryTemplate = svgInfo
+        .map(
+          ({ name }) =>
+            `export { default as ${name} } from './icons/${i}/${name}.${i}'`,
+        )
+        .join('\n');
       writeFileSync(
-        resolve(__dirname, `../src/icons/${name}.tsx`),
-        reactIconTemplate(name, svg),
-      );
-    }, svgInfo);
-    // generate entry
-    const entryTemplate = svgInfo
-      .map(({ name }) => `export { default as ${name} } from './icons/${name}'`)
-      .join('\n');
-    writeFileSync(
-      resolve(__dirname, '../src/index.react.ts'),
-      `
+        resolve(__dirname, `../src/index.${i}.ts`),
+        `
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 ${entryTemplate}
     `,
-    );
+      );
+    }
   }
 })();

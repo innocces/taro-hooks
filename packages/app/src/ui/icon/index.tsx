@@ -41,12 +41,18 @@ export default () => {
       </DemoBlock>
       <DemoBlock title="颜色">
         {/* <Space wrap > */}
-        <RocketFill usePX size={36} color="#76c6b8" />
+        <RocketFill
+          usePX
+          size={36}
+          color="var(--adm-color-primary)"
+          style={{ color: 'var(--adm-color-primary)' }}
+        />
         <RocketFill usePX size={36} color="#1677ff" />
         <RocketFill usePX size={36} color="#999" />
         <RocketFill usePX size={36} color="#ff3141" />
         {/* </Space> */}
       </DemoBlock>
+
       <View className="container">
         {/* <Grid columns={4}> */}
         {items.map((item) => (

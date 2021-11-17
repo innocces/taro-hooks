@@ -1,0 +1,56 @@
+// GENERATE BY ./scripts/generate.ts
+// DON NOT EDIT IT MANUALLY
+
+import { defineComponent } from 'vue';
+import { pxTransform } from '@tarojs/taro';
+// @ts-ignore
+import { template, hex2rgb } from '../../util';
+import { taroIconProps } from '../../type.vue';
+import '../../style/icon.less';
+
+export default defineComponent({
+  name: 'CompassFill',
+  props: taroIconProps,
+  emits: ['click'],
+  setup(props, { emit }) {
+    const onClick = (event: MouseEvent) => {
+      emit('click', event);
+    };
+
+    return () => {
+      const { size = 18, style = {}, color, usePX, ...restProps } = props;
+
+      const renderSize = () => {
+        return usePX
+          ? pxTransform(size!).replace(/rpx|rem/gi, 'px')
+          : pxTransform(size!);
+      };
+
+      const background = () => {
+        const base64SVG = template(
+          "<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width=<%= size %> height=<%= size %> aria-hidden='true' focusable='false'><path d='M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zM327.3 702.4c-2 0.9-4.4 0-5.3-2.1-0.4-1-0.4-2.2 0-3.2l98.7-225.5 132.1 132.1-225.5 98.7z m375.1-375.1l-98.7 225.5-132.1-132.1L697.1 322c2-0.9 4.4 0 5.3 2.1 0.4 1 0.4 2.1 0 3.2z' fill='<%= color %>' /></svg>",
+          { size: renderSize, color: hex2rgb(color || '') },
+        );
+        const escape = base64SVG.replace(/<|>/g, (str: string) =>
+          encodeURIComponent(str),
+        );
+        return `url("data:image/svg+xml, ${escape}") no-repeat`;
+      };
+
+      return (
+        // @ts-ignore
+        <view
+          onClick={onClick}
+          class="adm-icon"
+          {...restProps}
+          style={{
+            ...style,
+            background,
+            width: renderSize,
+            height: renderSize,
+          }}
+        ></view>
+      );
+    };
+  },
+});
