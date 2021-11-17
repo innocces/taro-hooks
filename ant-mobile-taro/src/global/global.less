@@ -1,25 +1,39 @@
 @import './theme.less';
 
-:root {
+:root,
+page {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-body {
+body,
+page {
   color: var(--adm-color-text);
   font-size: var(--adm-font-size-main);
   font-family: var(--adm-font-family);
 }
 
+/*  #ifdef web  */
 * {
   box-sizing: border-box;
 }
+/*  #endif  */
+
+/*  #ifdef weapp  */
+View,
+Text {
+  box-sizing: border-box;
+}
+/*  #endif  */
 
 a,
-button {
+View.adm-link,
+button,
+Button {
   cursor: pointer;
 }
 
-a {
+a,
+View.adm-link {
   color: var(--adm-color-primary);
   transition: opacity ease-in-out 0.2s;
   &:active {
@@ -35,11 +49,14 @@ a {
   }
 }
 
-body.adm-overflow-hidden {
+body.adm-overflow-hidden,
+page.adm-overflow-hidden,
+View.adm-overflow-hidden {
   overflow: hidden !important;
 }
 
-div.adm-px-tester {
+div.adm-px-tester,
+View.adm-px-tester {
   --size: 1;
   height: calc(var(--size) * 1px);
   width: 0;

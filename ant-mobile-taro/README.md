@@ -9,66 +9,68 @@
 
 ## 迁移实现组件
 
-- [ ] button
-- [ ] list
-- [ ] space
-- [ ] badge
-- [ ] card
-- [ ] image
-- [ ] image-viewer
-- [ ] infinite-scroll
-- [ ] notice-bar
-- [ ] page-indicator
-- [ ] popover
-- [ ] steps
-- [ ] swiper
-- [ ] tag
-- [ ] water-mark
-- [ ] check-list
-- [ ] checkbox
-- [ ] form
-- [ ] input
-- [ ] picker
-- [ ] radio
-- [ ] rate
-- [ ] search
-- [ ] selector
-- [ ] slider
-- [ ] stepper
-- [ ] switch
-- [ ] text-area
-- [ ] action-sheet
-- [ ] dialog
-- [ ] empty
-- [ ] error-block
-- [ ] loading
-- [ ] mask
-- [ ] progress-bar
-- [ ] progress-circle
-- [ ] pull-to-refresh
-- [ ] result
-- [ ] swipe-action
-- [ ] toast
-- [ ] capsule-tabs
-- [ ] collapse
-- [ ] divider
-- [ ] floating-panel
-- [ ] grid
-- [ ] index-bar
-- [ ] jumbo-tabs
-- [ ] nav-bar
-- [ ] popup
-- [ ] side-bar
-- [ ] tab-bar
-- [ ] tabs
-- [ ] config-provider
-- [ ] auto-center
-- [ ] desense-text
-- [ ] dropdown
-- [ ] ellipsis
-- [ ] image-uploader
-- [ ] number-keyboard
-- [ ] picker-view
-- [ ] safe-area
-- [ ] tree-select
-- [ ] virtual-input
+| 组件名称        | React | Vue |
+| --------------- | ----- | --- |
+| button          | ✅    | 🕡  |
+| list            | 🕡    | 🕡  |
+| space           | 🕡    | 🕡  |
+| badge           | 🕡    | 🕡  |
+| card            | 🕡    | 🕡  |
+| image           | 🕡    | 🕡  |
+| image-viewer    | 🕡    | 🕡  |
+| infinite-scroll | 🕡    | 🕡  |
+| notice-bar      | 🕡    | 🕡  |
+| page-indicator  | 🕡    | 🕡  |
+| popover         | 🕡    | 🕡  |
+| steps           | 🕡    | 🕡  |
+| swiper          | 🕡    | 🕡  |
+| tag             | 🕡    | 🕡  |
+| water-mark      | 🕡    | 🕡  |
+| check-list      | 🕡    | 🕡  |
+| checkbox        | 🕡    | 🕡  |
+| form            | 🕡    | 🕡  |
+| input           | 🕡    | 🕡  |
+| picker          | 🕡    | 🕡  |
+| radio           | 🕡    | 🕡  |
+| rate            | 🕡    | 🕡  |
+| search          | 🕡    | 🕡  |
+| selector        | 🕡    | 🕡  |
+| slider          | 🕡    | 🕡  |
+| stepper         | 🕡    | 🕡  |
+| switch          | 🕡    | 🕡  |
+| text-area       | 🕡    | 🕡  |
+| action-sheet    | 🕡    | 🕡  |
+| dialog          | 🕡    | 🕡  |
+| empty           | 🕡    | 🕡  |
+| error-block     | 🕡    | 🕡  |
+| loading         | 🕡    | 🕡  |
+| mask            | 🕡    | 🕡  |
+| progress-bar    | 🕡    | 🕡  |
+| progress-circle | 🕡    | 🕡  |
+| pull-to-refresh | 🕡    | 🕡  |
+| result          | 🕡    | 🕡  |
+| swipe-action    | 🕡    | 🕡  |
+| toast           | 🕡    | 🕡  |
+| capsule-tabs    | 🕡    | 🕡  |
+| collapse        | 🕡    | 🕡  |
+| divider         | 🕡    | 🕡  |
+| floating-panel  | 🕡    | 🕡  |
+| grid            | 🕡    | 🕡  |
+| index-bar       | 🕡    | 🕡  |
+| jumbo-tabs      | 🕡    | 🕡  |
+| nav-bar         | 🕡    | 🕡  |
+| popup           | 🕡    | 🕡  |
+| side-bar        | 🕡    | 🕡  |
+| tab-bar         | 🕡    | 🕡  |
+| tabs            | 🕡    | 🕡  |
+| config-provider | 🕡    | 🕡  |
+| auto-center     | 🕡    | 🕡  |
+| desense-text    | 🕡    | 🕡  |
+| dropdown        | 🕡    | 🕡  |
+| ellipsis        | 🕡    | 🕡  |
+| image-uploader  | 🕡    | 🕡  |
+| number-keyboard | 🕡    | 🕡  |
+| picker-view     | 🕡    | 🕡  |
+| safe-area       | 🕡    | 🕡  |
+| tree-select     | 🕡    | 🕡  |
+| virtual-input   | 🕡    | 🕡  |

@@ -1,12 +1,13 @@
 const { resolve } = require('path');
 
+console.log(resolve(__dirname, '../../../', 'ant-mobile-taro/src'));
 const config = {
   projectName: 'taro-hooks',
   date: '2021-6-24',
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,
-    750: 1,
+    750: 2 / 1,
     828: 1.81 / 2,
   },
   sourceRoot: 'src',
@@ -24,6 +25,16 @@ const config = {
   alias: {
     '@components': resolve(__dirname, '../', 'src/components'),
     '@assets': resolve(__dirname, '../', 'src/assets'),
+    'ant-mobile-taro/es': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-taro/src',
+    ),
+    'ant-mobile-icon-taro': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-icon-taro/src/index.react',
+    ),
   },
   mini: {
     postcss: {

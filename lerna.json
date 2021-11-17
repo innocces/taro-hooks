@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/*", "ant-mobile-taro"],
+  "packages": ["packages/*", "ant-mobile-taro", "ant-mobile-icon-taro"],
   "command": {
     "version": {
       "allowBranch": "main",

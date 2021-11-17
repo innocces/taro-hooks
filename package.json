@@ -2,7 +2,8 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "ant-mobile-taro"
+    "ant-mobile-taro",
+    "ant-mobile-icon-taro"
   ],
   "version": "0.0.0",
   "license": "MIT",
@@ -12,10 +13,12 @@
     "docs:build:gh": "cross-env BUILD_TARGET=GH dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "app:dev": "cd ./packages/app && npm run dev:weapp",
+    "app:dev:prod": "cd ./packages/app && npm run dev:weapp:prod",
     "app:dev:h5": "cd ./packages/app && npm run dev:h5",
     "app:build:h5": "cd ./packages/app && npm run build:h5",
     "app:build": "lerna run build:weapp --scope=app --stream",
     "app:build:examine": "lerna run build:weapp:examine --scope=app --stream",
+    "icon:generate": "lerna run generate --scope=ant-mobile-icon-taro --stream",
     "build": "lerna run build --scope=taro-hooks --stream",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "release": "npm run build && npm run lerna:publish:major",

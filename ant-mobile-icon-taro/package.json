@@ -1,0 +1,52 @@
+{
+  "name": "ant-mobile-icon-taro",
+  "version": "0.0.0",
+  "description": "ant-mobile icon for taro",
+  "iconURI": "http://at.alicdn.com/t/font_2943084_mnj77jf56tr.js",
+  "scripts": {
+    "clean": "./scripts/cleanup.sh",
+    "generate": "rimraf src/icons && TS_NODE_PROJECT=scripts/tsconfig.json node -r ts-node/register scripts/generate.ts --target=icon",
+    "test": "TS_NODE_PROJECT=scripts/tsconfig.json node -r ts-node/register src/util.ts"
+  },
+  "main:react": "./lib/index.react.js",
+  "main:vue": "./lib/index.vue.js",
+  "module:react": "./es/index.react.js",
+  "module:vue": "./es/index.vue.js",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/innocces/taro-hooks/tree/main/ant-mobile-icon-taro"
+  },
+  "keywords": [
+    "antd-mobile-icons",
+    "antd",
+    "antd-mobile",
+    "taro",
+    "vue",
+    "react",
+    "icons",
+    "iconfont",
+    "weapp",
+    "h5"
+  ],
+  "author": "innocces <jiangjiangjiangxi@gmail.com> (https://github.com/innocces)",
+  "license": "MIT",
+  "devDependencies": {
+    "@tarojs/components": "^3.3.6",
+    "@tarojs/taro": "^3.3.6",
+    "cross-env": "^7.0.3",
+    "iconfont-parser": "^1.0.0",
+    "react": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4",
+    "vue": "^3.2.22"
+  },
+  "peerDependencies": {
+    "@tarojs/components": ">=3.x",
+    "@tarojs/taro": ">=3.x",
+    "react": ">=17.x",
+    "vue": ">=3.0.3"
+  },
+  "dependencies": {}
+}

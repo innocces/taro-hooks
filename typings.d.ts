@@ -7,6 +7,7 @@ declare module '*.png';
 declare module 'taro-hooks';
 declare module 'demos';
 declare module 'ant-mobile-taro';
+declare module 'ant-mobile-icon-taro';
 declare module '@tarojs/runtime';
 declare module 'mockjs';
 declare module 'lodash.throttle';

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import 'ant-mobile-taro/es/global';
 import './app.less';
 
 class App extends Component {
