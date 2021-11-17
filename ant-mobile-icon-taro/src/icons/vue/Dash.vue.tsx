@@ -29,7 +29,7 @@ export default defineComponent({
       const background = () => {
         const base64SVG = template(
           "<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width=<%= size %> height=<%= size %> aria-hidden='true' focusable='false'><path d='M112 476h160v72H112zM432 476h160v72H432zM752 476h160v72H752z' fill='<%= color %>' /></svg>",
-          { size: renderSize, color: hex2rgb(color || '') },
+          { size: renderSize(), color: hex2rgb(color || '') },
         );
         const escape = base64SVG.replace(/<|>/g, (str: string) =>
           encodeURIComponent(str),
@@ -45,9 +45,9 @@ export default defineComponent({
           {...restProps}
           style={{
             ...style,
-            background,
-            width: renderSize,
-            height: renderSize,
+            background: background(),
+            width: renderSize(),
+            height: renderSize(),
           }}
         ></view>
       );

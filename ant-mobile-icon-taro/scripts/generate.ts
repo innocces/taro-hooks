@@ -202,14 +202,14 @@ export default defineComponent({
       }
 
       const background = () => {
-        const base64SVG = template("${iconSVG}", { size: renderSize, color: hex2rgb(color || '') });
+        const base64SVG = template("${iconSVG}", { size: renderSize(), color: hex2rgb(color || '') });
         const escape = base64SVG.replace(/<|>/g, (str: string) => encodeURIComponent(str));
         return \`url("data:image/svg+xml, \${escape\}") no-repeat\`;
       };
 
       return (
         // @ts-ignore
-        <view onClick={onClick} class="adm-icon" {...restProps} style={{...style, background, width: renderSize, height: renderSize}}></view>
+        <view onClick={onClick} class="adm-icon" {...restProps} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></view>
       )
     }
   }
