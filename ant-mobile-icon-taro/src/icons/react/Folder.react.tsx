@@ -1,3 +1,4 @@
+
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 
@@ -9,6 +10,7 @@ import { template, hex2rgb } from '../../util';
 import type { ITaroIconProps } from '../../type';
 import '../../style/icon.less';
 
+
 const Folder: FC<ITaroIconProps> = ({
   size,
   style = {},
@@ -16,37 +18,27 @@ const Folder: FC<ITaroIconProps> = ({
   usePX,
   ...props
 }) => {
+
   const renderSize = useMemo(() => {
-    return usePX
-      ? pxTransform(size!).replace(/rpx|rem/gi, 'px')
-      : pxTransform(size!);
-  }, [usePX, size, style]);
+    return usePX ? pxTransform(size!).replace(/rpx|rem/ig, 'px') : pxTransform(size!);
+  }, [usePX, size, style])
 
   const background = useMemo(() => {
-    const base64SVG = template(
-      "<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width=<%= size %> height=<%= size %> aria-hidden='true' focusable='false'><path d='M880 298.4H521L403.7 186.2c-1.5-1.4-3.5-2.2-5.5-2.2H144c-17.7 0-32 14.3-32 32v592c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V330.4c0-17.7-14.3-32-32-32zM840 768H184V256h188.5l119.6 114.4H840V768z' fill='<%= color %>' /></svg>",
-      { size: renderSize, color: hex2rgb(color || '') },
-    );
-    const escape = base64SVG.replace(/<|>/g, (str: string) =>
-      encodeURIComponent(str),
-    );
+    const base64SVG = template("<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width=<%= size %> height=<%= size %> aria-hidden='true' focusable='false'><path d='M880 298.4H521L403.7 186.2c-1.5-1.4-3.5-2.2-5.5-2.2H144c-17.7 0-32 14.3-32 32v592c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V330.4c0-17.7-14.3-32-32-32zM840 768H184V256h188.5l119.6 114.4H840V768z' fill='<%= color %>' /></svg>", { size: renderSize, color: hex2rgb(color || '') });
+    const escape = base64SVG.replace(/<|>/g, (str: string) => encodeURIComponent(str));
     return `url("data:image/svg+xml, ${escape}") no-repeat`;
   }, [color, renderSize]);
 
   return (
-    <View
-      className="adm-icon"
-      style={{ ...style, background, width: renderSize, height: renderSize }}
-      {...props}
-    ></View>
-  );
-};
+    <View className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></View>
+  )
+}
 
 Folder.displayName = 'Folder';
 
 Folder.defaultProps = {
   size: 18,
-  style: {},
-};
+  style: {}
+}
 
 export default Folder;

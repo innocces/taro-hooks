@@ -1,3 +1,4 @@
+
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 
@@ -9,6 +10,7 @@ import { template, hex2rgb } from '../../util';
 import type { ITaroIconProps } from '../../type';
 import '../../style/icon.less';
 
+
 const Plus: FC<ITaroIconProps> = ({
   size,
   style = {},
@@ -16,37 +18,27 @@ const Plus: FC<ITaroIconProps> = ({
   usePX,
   ...props
 }) => {
+
   const renderSize = useMemo(() => {
-    return usePX
-      ? pxTransform(size!).replace(/rpx|rem/gi, 'px')
-      : pxTransform(size!);
-  }, [usePX, size, style]);
+    return usePX ? pxTransform(size!).replace(/rpx|rem/ig, 'px') : pxTransform(size!);
+  }, [usePX, size, style])
 
   const background = useMemo(() => {
-    const base64SVG = template(
-      "<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width=<%= size %> height=<%= size %> aria-hidden='true' focusable='false'><path d='M474 152m8 0l60 0q8 0 8 8l0 704q0 8-8 8l-60 0q-8 0-8-8l0-704q0-8 8-8Z' fill='<%= color %>' /><path d='M168 474m8 0l672 0q8 0 8 8l0 60q0 8-8 8l-672 0q-8 0-8-8l0-60q0-8 8-8Z' fill='<%= color %>' /></svg>",
-      { size: renderSize, color: hex2rgb(color || '') },
-    );
-    const escape = base64SVG.replace(/<|>/g, (str: string) =>
-      encodeURIComponent(str),
-    );
+    const base64SVG = template("<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width=<%= size %> height=<%= size %> aria-hidden='true' focusable='false'><path d='M474 152m8 0l60 0q8 0 8 8l0 704q0 8-8 8l-60 0q-8 0-8-8l0-704q0-8 8-8Z' fill='<%= color %>' /><path d='M168 474m8 0l672 0q8 0 8 8l0 60q0 8-8 8l-672 0q-8 0-8-8l0-60q0-8 8-8Z' fill='<%= color %>' /></svg>", { size: renderSize, color: hex2rgb(color || '') });
+    const escape = base64SVG.replace(/<|>/g, (str: string) => encodeURIComponent(str));
     return `url("data:image/svg+xml, ${escape}") no-repeat`;
   }, [color, renderSize]);
 
   return (
-    <View
-      className="adm-icon"
-      style={{ ...style, background, width: renderSize, height: renderSize }}
-      {...props}
-    ></View>
-  );
-};
+    <View className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></View>
+  )
+}
 
 Plus.displayName = 'Plus';
 
 Plus.defaultProps = {
   size: 18,
-  style: {},
-};
+  style: {}
+}
 
 export default Plus;

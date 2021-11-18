@@ -6,3 +6,7 @@ package.json
 .umi-production
 .umi-test
 app-dist
+
+# do not format icon
+ant-mobile-icon-taro/src/icons/vue/*.vue.tsx
+ant-mobile-icon-taro/src/icons/react/*.react.tsx

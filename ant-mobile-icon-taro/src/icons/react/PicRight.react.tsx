@@ -1,3 +1,4 @@
+
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 
@@ -9,6 +10,7 @@ import { template, hex2rgb } from '../../util';
 import type { ITaroIconProps } from '../../type';
 import '../../style/icon.less';
 
+
 const PicRight: FC<ITaroIconProps> = ({
   size,
   style = {},
@@ -16,37 +18,27 @@ const PicRight: FC<ITaroIconProps> = ({
   usePX,
   ...props
 }) => {
+
   const renderSize = useMemo(() => {
-    return usePX
-      ? pxTransform(size!).replace(/rpx|rem/gi, 'px')
-      : pxTransform(size!);
-  }, [usePX, size, style]);
+    return usePX ? pxTransform(size!).replace(/rpx|rem/ig, 'px') : pxTransform(size!);
+  }, [usePX, size, style])
 
   const background = useMemo(() => {
-    const base64SVG = template(
-      "<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width=<%= size %> height=<%= size %> aria-hidden='true' focusable='false'><path d='M952 792H72c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h880c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM952 160H72c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h880c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM928 660c8.8 0 16-7.2 16-16V380c0-8.8-7.2-16-16-16H416c-8.8 0-16 7.2-16 16v264c0 8.8 7.2 16 16 16h512zM472 436h400v152H472V436zM80 646c0 4.4 3.6 8 8 8h224c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H88c-4.4 0-8 3.6-8 8v56zM88 442h224c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H88c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8z' fill='<%= color %>' /></svg>",
-      { size: renderSize, color: hex2rgb(color || '') },
-    );
-    const escape = base64SVG.replace(/<|>/g, (str: string) =>
-      encodeURIComponent(str),
-    );
+    const base64SVG = template("<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width=<%= size %> height=<%= size %> aria-hidden='true' focusable='false'><path d='M952 792H72c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h880c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM952 160H72c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h880c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM928 660c8.8 0 16-7.2 16-16V380c0-8.8-7.2-16-16-16H416c-8.8 0-16 7.2-16 16v264c0 8.8 7.2 16 16 16h512zM472 436h400v152H472V436zM80 646c0 4.4 3.6 8 8 8h224c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H88c-4.4 0-8 3.6-8 8v56zM88 442h224c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H88c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8z' fill='<%= color %>' /></svg>", { size: renderSize, color: hex2rgb(color || '') });
+    const escape = base64SVG.replace(/<|>/g, (str: string) => encodeURIComponent(str));
     return `url("data:image/svg+xml, ${escape}") no-repeat`;
   }, [color, renderSize]);
 
   return (
-    <View
-      className="adm-icon"
-      style={{ ...style, background, width: renderSize, height: renderSize }}
-      {...props}
-    ></View>
-  );
-};
+    <View className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></View>
+  )
+}
 
 PicRight.displayName = 'PicRight';
 
 PicRight.defaultProps = {
   size: 18,
-  style: {},
-};
+  style: {}
+}
 
 export default PicRight;
