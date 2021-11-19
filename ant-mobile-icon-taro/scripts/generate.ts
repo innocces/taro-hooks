@@ -154,6 +154,7 @@ const ${iconName}: FC<ITaroIconProps> = ({
   }, [color, renderSize]);
 
   return (
+    // @ts-ignore
     <View className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></View>
   )
 }
@@ -173,6 +174,7 @@ const vueIconTemplate = (iconName: string, iconSVG: string): string => `
 // DON NOT EDIT IT MANUALLY
 
 import { defineComponent } from 'vue';
+import { View } from '@tarojs/components';
 import { pxTransform } from '@tarojs/taro';
 // @ts-ignore
 import { template, hex2rgb } from '../../util';
@@ -209,7 +211,7 @@ export default defineComponent({
 
       return (
         // @ts-ignore
-        <view onClick={onClick} class="adm-icon" {...restProps} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></view>
+        <View onClick={onClick} class="adm-icon" {...restProps} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></View>
       )
     }
   }

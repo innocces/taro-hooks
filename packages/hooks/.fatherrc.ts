@@ -1,4 +1,5 @@
 export default {
+  entry: ['src/index.ts'],
   esm: {
     type: 'babel',
     file: 'taro-hooks',

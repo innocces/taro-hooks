@@ -30,6 +30,7 @@ const RedenvelopeFill: FC<ITaroIconProps> = ({
   }, [color, renderSize]);
 
   return (
+    // @ts-ignore
     <View className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></View>
   )
 }
