@@ -18,7 +18,7 @@ $ npm i ant-mobile-icon-taro
 
 由于同时支持`vue`和`react`. 故入口做了特殊处理. 若遇到无法识别类型可自行引入.
 
-```json
+```json | pure
 {
   "main:react": "lib/index.react.js",
   "main:vue": "lib/index.vue.js",
@@ -35,7 +35,7 @@ $ npm i ant-mobile-icon-taro
 
 - 使用 alias
 
-```js
+```js | pure
 // config/index.js
 const config = {
   alias: {
@@ -49,7 +49,7 @@ const config = {
 
 - 使用[`babel-plugin-import`](https://github.com/ant-design/babel-plugin-import)
 
-```js
+```js | pure
 // babel.config.js
 module.exports = {
   plugins: [
@@ -71,7 +71,7 @@ module.exports = {
 
 - 在代码中显示的引用对应版本
 
-```tsx
+```tsx | pure
 // vue
 import { Home } from 'ant-mobile-icon-taro/es/index.vue';
 import Home from 'ant-mobile-icon-taro/es/icons/vue/Home.vue';
@@ -79,6 +79,8 @@ import Home from 'ant-mobile-icon-taro/es/icons/vue/Home.vue';
 import { Home } from 'ant-mobile-icon-taro/es/index.react';
 import Home from 'ant-mobile-icon-taro/es/icons/react/Home';
 ```
+
+由于主流的构建工具会自动做 Tree-Shaking，所以最终被打包进来的只有你用到的那些图标，不必担心包体积问题。
 
 ## props
 

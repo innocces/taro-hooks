@@ -13,19 +13,17 @@ group:
 图标是在一个单独的 npm 包中，如果你想使用图标，需要先安装它：
 
 ```bash
-npm install --save antd-mobile-icons
+npm install --save ant-mobile-icon-taro
 # or
-yarn add antd-mobile-icons
+yarn add ant-mobile-icon-taro
 ```
 
-然后从这个包中引入你所需要的图标即可：
-
-```js
-import { AntOutline } from 'antd-mobile-icons';
-```
-
-由于主流的构建工具会自动做 Tree-Shaking，所以最终被打包进来的只有你用到的那些图标，不必担心包体积问题。
+<embed src="../../../../ant-mobile-taro/README.md#L19-L84"></embed>
 
 <code src="./demo-single.tsx"></code>
 
 <code src="./demo-all.tsx"></code>
+
+## 属性
+
+<embed src="../../../../ant-mobile-taro/README.md#L87-L93"></embed>
