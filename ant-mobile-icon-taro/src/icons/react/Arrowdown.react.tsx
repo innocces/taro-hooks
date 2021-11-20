@@ -1,4 +1,3 @@
-
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 
@@ -31,7 +30,7 @@ const Arrowdown: FC<ITaroIconProps> = ({
 
   return (
     // @ts-ignore
-    <Text className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></Text>
+    <Text {...props} className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}}></Text>
   )
 }
 

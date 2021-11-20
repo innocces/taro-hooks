@@ -155,7 +155,7 @@ const ${iconName}: FC<ITaroIconProps> = ({
 
   return (
     // @ts-ignore
-    <Text className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></Text>
+    <Text {...props} className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}}></Text>
   )
 }
 
@@ -211,7 +211,7 @@ export default defineComponent({
 
       return (
         // @ts-ignore
-        <Text onClick={onClick} class="adm-icon" {...restProps} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></Text>
+        <Text {...restProps} className="adm-icon" onClick={onClick} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></Text>
       )
     }
   }
@@ -273,8 +273,8 @@ async function checkBaseDIR(type: string) {
         writeFileSync(
           resolve(__dirname, `../src/icons/${i}/${name}.${i}.tsx`),
           i === 'react'
-            ? reactIconTemplate(name, svg)
-            : vueIconTemplate(name, svg),
+            ? reactIconTemplate(name, svg).trim()
+            : vueIconTemplate(name, svg).trim(),
         );
       }, svgInfo);
       // generate entry
@@ -290,7 +290,7 @@ async function checkBaseDIR(type: string) {
 // GENERATE BY ./scripts/generate.ts
 // DON NOT EDIT IT MANUALLY
 ${entryTemplate}
-    `,
+    `.trim(),
       );
     }
   }

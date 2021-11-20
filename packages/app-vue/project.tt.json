@@ -1,0 +1,9 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "app-vue",
+  "appid": "touristappid",
+  "setting": {
+    "es6": false,
+    "minified": false
+  }
+}
