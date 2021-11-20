@@ -127,7 +127,7 @@ const reactIconTemplate = (iconName: string, iconSVG: string): string => `
 // DON NOT EDIT IT MANUALLY
 
 import React, { FC, useMemo } from 'react';
-import { View } from '@tarojs/components';
+import { Text } from '@tarojs/components';
 import { pxTransform } from '@tarojs/taro';
 // @ts-ignore
 import { template, hex2rgb } from '../../util';
@@ -155,7 +155,7 @@ const ${iconName}: FC<ITaroIconProps> = ({
 
   return (
     // @ts-ignore
-    <View className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></View>
+    <Text className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></Text>
   )
 }
 
@@ -174,7 +174,7 @@ const vueIconTemplate = (iconName: string, iconSVG: string): string => `
 // DON NOT EDIT IT MANUALLY
 
 import { defineComponent } from 'vue';
-import { View } from '@tarojs/components';
+import { Text } from '@tarojs/components';
 import { pxTransform } from '@tarojs/taro';
 // @ts-ignore
 import { template, hex2rgb } from '../../util';
@@ -211,7 +211,7 @@ export default defineComponent({
 
       return (
         // @ts-ignore
-        <View onClick={onClick} class="adm-icon" {...restProps} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></View>
+        <Text onClick={onClick} class="adm-icon" {...restProps} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></Text>
       )
     }
   }

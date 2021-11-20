@@ -3,7 +3,7 @@
 // DON NOT EDIT IT MANUALLY
 
 import React, { FC, useMemo } from 'react';
-import { View } from '@tarojs/components';
+import { Text } from '@tarojs/components';
 import { pxTransform } from '@tarojs/taro';
 // @ts-ignore
 import { template, hex2rgb } from '../../util';
@@ -31,7 +31,7 @@ const InterationFill: FC<ITaroIconProps> = ({
 
   return (
     // @ts-ignore
-    <View className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></View>
+    <Text className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}} {...props}></Text>
   )
 }
 
