@@ -21,6 +21,7 @@ export default (props: IPreviewerProps) => {
       // 如果是vue就直接吞吐对应的vue展示页面
       const componentName = props.identifier
         .replace('-demos', '')
+        .replace('ui-', '')
         .split('-')
         .map((v) =>
           v.replace(/^\S/, (replaceString) => replaceString.toUpperCase()),

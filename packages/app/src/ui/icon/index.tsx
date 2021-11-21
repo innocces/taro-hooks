@@ -1,7 +1,8 @@
 import React, { ComponentType } from 'react';
 import { View } from '@tarojs/components';
-import * as TaroIcons from 'ant-mobile-icon-taro';
+import * as TaroIcons from 'ant-mobile-icon-taro/src/index.react';
 import DemoBlock from '@components/DemoBlock';
+
 import './index.less';
 
 const { Heart, RocketFill } = TaroIcons;

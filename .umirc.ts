@@ -1,5 +1,4 @@
 import { defineConfig } from 'dumi';
-import { components } from './components';
 
 const { resolve } = require('path');
 const isProd = process.env.NODE_ENV === 'production';
@@ -36,6 +35,7 @@ export default defineConfig({
     '@tarojs/taro': '@tarojs/taro-h5',
     '@tarojs/runtime': 'taro-runtime-docs',
     '@pages': __dirname + '/packages/app/src/pages',
+    '@ui': __dirname + '/packages/app/src/ui',
     '@components': __dirname + '/packages/app/src/components',
     '@assets': __dirname + '/packages/app/src/assets',
     '@project': __dirname,
@@ -71,6 +71,17 @@ export default defineConfig({
         libraryDirectory: 'src',
       },
       'taro-hooks',
+    ],
+    [
+      'import',
+      {
+        libraryName: 'ant-mobile-icon-taro',
+        camel2DashComponentName: false,
+        customName: (name) => {
+          return 'ant-mobile-icon-taro/src/icons/react/' + name + '.react';
+        },
+      },
+      'ant-mobile-icon-taro',
     ],
     [
       'import',

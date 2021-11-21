@@ -28,7 +28,7 @@ export default defineComponent({
       } = props;
 
       const renderSize = () => {
-        return usePX ? pxTransform(size!).replace(/rpx|rem/ig, 'px') : pxTransform(size!);
+        return usePX ? (size + 'px') : pxTransform(size!);
       }
 
       const background = () => {

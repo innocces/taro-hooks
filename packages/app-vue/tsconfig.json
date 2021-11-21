@@ -27,7 +27,13 @@
       "shims-tsx.d.ts",
       "node_modules/@tarojs/plugin-platform-weapp/types",
       "../../ant-mobile-icon-taro/dist/index.vue.d.ts"
-    ]
+    ],
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["./src/components/*"],
+      "demos": ["ant-mobile-taro/src/demos/*"],
+      "ant-mobile-taro": ["ant-mobile-taro/src/*"]
+    }
   },
   "exclude": ["node_modules", "dist"],
   "compileOnSave": false

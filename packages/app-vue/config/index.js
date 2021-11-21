@@ -1,4 +1,6 @@
 const { resolve } = require('path');
+const enablePostCss = process.env.POSTCSS;
+console.log('enablePostCss', enablePostCss, enablePostCss != 1);
 const config = {
   projectName: 'ant-mobile-taro@vue',
   date: '2021-11-20',
@@ -9,14 +11,31 @@ const config = {
     828: 1.81 / 2,
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: '../../app-vue-dist',
   plugins: [],
   defineConstants: {},
   copy: {
     patterns: [],
     options: {},
   },
+  defineConstants: {
+    'process.env.BASEFONT': JSON.stringify(enablePostCss),
+  },
   framework: 'vue3',
+  alias: {
+    '@components': resolve(__dirname, '../', 'src/components'),
+    '@assets': resolve(__dirname, '../', 'src/assets'),
+    'ant-mobile-taro/es': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-taro/src',
+    ),
+    'ant-mobile-icon-taro': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-icon-taro/src/index.vue',
+    ),
+  },
   mini: {
     postcss: {
       pxtransform: {
@@ -46,6 +65,9 @@ const config = {
     publicPath: '/',
     staticDirectory: 'static',
     postcss: {
+      pxtransform: {
+        enable: enablePostCss != 1,
+      },
       autoprefixer: {
         enable: true,
         config: {},

@@ -58,10 +58,12 @@ module.exports = {
       {
         libraryName: 'ant-mobile-icon-taro',
         camel2DashComponentName: false,
-        // react
-        libraryDirectory: 'es/icons/react',
-        // vue
-        libraryDirectory: 'es/icons/vue',
+        customName: (name) => {
+          // vue
+          return 'ant-mobile-icon-taro/es/icons/vue/' + name + '.vue';
+          // react
+          return 'ant-mobile-icon-taro/es/icons/react/' + name + '.react';
+        },
       },
       'ant-mobile-icon-taro',
     ],

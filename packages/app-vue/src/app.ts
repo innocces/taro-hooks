@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import 'ant-mobile-taro/es/global';
 import './app.less';
 
 const App = createApp({

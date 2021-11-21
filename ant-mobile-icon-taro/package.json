@@ -52,8 +52,8 @@
   "author": "innocces <jiangjiangjiangxi@gmail.com> (https://github.com/innocces)",
   "license": "MIT",
   "devDependencies": {
-    "@tarojs/components": "^3.3.6",
-    "@tarojs/taro": "^3.3.6",
+    "@tarojs/components": "^3.3.14",
+    "@tarojs/taro": "^3.3.14",
     "cross-env": "^7.0.3",
     "father-build-offline": "^1.20.4",
     "iconfont-parser": "^1.0.0",

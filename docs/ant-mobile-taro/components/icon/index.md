@@ -20,9 +20,7 @@ yarn add ant-mobile-icon-taro
 
 <embed src="../../../../ant-mobile-icon-taro/README.md#L19-L84"></embed>
 
-<code src="./demo-single.tsx"></code>
-
-<code src="./demo-all.tsx"></code>
+<code src="@ui/Icon"></code>
 
 ## 属性
 
