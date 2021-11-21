@@ -34,7 +34,7 @@ export default defineConfig({
   alias: {
     '@tarojs/components$': '@tarojs/components/dist-h5/react',
     '@tarojs/taro': '@tarojs/taro-h5',
-    '@tarojs/runtime': '@taro-hooks/website-runtime',
+    '@tarojs/runtime': 'taro-runtime-docs',
     '@pages': __dirname + '/packages/app/src/pages',
     '@components': __dirname + '/packages/app/src/components',
     '@assets': __dirname + '/packages/app/src/assets',

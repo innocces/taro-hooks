@@ -90,6 +90,7 @@
     "postcss-pxtransform": "^3.2.13",
     "prettier": "^2.2.1",
     "qrcode.react": "^1.0.1",
+    "taro-runtime-docs": "^3.3.14",
     "yorkie": "^2.0.0"
   },
   "resolutions": {

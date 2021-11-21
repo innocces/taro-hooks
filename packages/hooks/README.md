@@ -15,6 +15,13 @@
 [vercel](https://taro-hooks-innocces.vercel.app)  
 [gh-page](https://innocces.github.io/taro-hooks)
 
+## 内置 UI 库
+
+| 项目                                                                                          | 描述                                                    |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [ant-mobile-taro](https://github.com/innocces/taro-hooks/tree/main/ant-mobile-taro)           | `antd-mobile@next` `taro` 实现, 同时支持`Vue`和`React`  |
+| [ant-mobile-icon-taro](https://github.com/innocces/taro-hooks/tree/main/ant-mobile-icon-taro) | `antd-mobile-icons` `taro` 实现, 同时支持`Vue`和`React` |
+
 ## 使用案例
 
 欢迎大家多多使用, 可将使用案例贡献在[Who are using taro-hooks?](https://github.com/innocces/taro-hooks/issues/4). 我们会在文档和 README 展示出来.
@@ -137,9 +144,6 @@ $ yarn app:dev:h5
 打开浏览器 - [http://localhost:12345](http://localhost:12345)  
 若开启 h5 预览 - [http://0.0.0.0:10086](http://0.0.0.0:10086)  
 更多贡献详情见[官网文档](https://taro-hooks-innocces.vercel.app)
-
-> 注: `packages/taro-runtime`是为了配合文档单独使用生命周期 hook 独立保存的。遇更新会随时更新。无需关心。
-> `father-build`同理。
 
 ## 交流讨论
 

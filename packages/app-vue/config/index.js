@@ -39,6 +39,10 @@ const config = {
     },
   },
   h5: {
+    devServer: {
+      port: 10089,
+      https: true,
+    },
     publicPath: '/',
     staticDirectory: 'static',
     postcss: {
