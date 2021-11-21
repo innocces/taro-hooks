@@ -46,6 +46,9 @@ export default defineConfig({
     'process.env.TARO_ENV': 'h5',
     LOCATION_APIKEY: JSON.stringify('J3OBZ-WBJKG-M5DQZ-IJQ4V-FSK2H-BTBZV'),
     BUILD_MODE: JSON.stringify(undefined),
+    'process.env.VUE_HOST': isProd
+      ? 'https://ant-mobile-taro-vue-demo-innocces.vercel.app'
+      : 'https://192.168.101.4:10089',
   },
   extraPostCSSPlugins: [
     // require('postcss-pxtorem')({
@@ -101,10 +104,10 @@ export default defineConfig({
     loading: resolve(__dirname, 'components/Loading'),
   },
   exportStatic: {},
-  nodeModulesTransform: {
-    type: 'none',
-    exclude: [],
-  },
+  // nodeModulesTransform: {
+  //   type: 'none',
+  //   exclude: [],
+  // },
   navs: [
     null,
     { title: 'GitHub', path: 'https://github.com/innocces/taro-hooks' },

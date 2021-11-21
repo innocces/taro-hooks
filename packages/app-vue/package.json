@@ -22,7 +22,7 @@
     "dev:swan": "npm run build:swan -- --watch",
     "dev:alipay": "npm run build:alipay -- --watch",
     "dev:tt": "npm run build:tt -- --watch",
-    "dev:h5": "npm run build:h5 -- --watch",
+    "dev:h5": "cross-env POSTCSS=1 npm run build:h5 -- --watch",
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
@@ -39,6 +39,8 @@
     "@tarojs/components": "3.3.14",
     "@tarojs/runtime": "3.3.14",
     "@tarojs/taro": "3.3.14",
+    "ant-mobile-icon-taro": "^0.0.0",
+    "ant-mobile-taro": "^0.0.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -52,6 +54,7 @@
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-preset-taro": "3.3.14",
+    "cross-env": "^7.0.3",
     "eslint": "^6.8.0",
     "eslint-config-taro": "3.3.14",
     "eslint-plugin-vue": "^7.0.0",

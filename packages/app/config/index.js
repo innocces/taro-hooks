@@ -1,6 +1,5 @@
 const { resolve } = require('path');
 
-console.log(resolve(__dirname, '../../../', 'ant-mobile-taro/src'));
 const config = {
   projectName: 'taro-hooks',
   date: '2021-6-24',

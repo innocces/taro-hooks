@@ -14,6 +14,7 @@
 /dist
 /docs-dist
 /app-dist
+/app-vue-dist
 /packages/hooks/lib
 /packages/hooks/es
 /packages/hooks/dist

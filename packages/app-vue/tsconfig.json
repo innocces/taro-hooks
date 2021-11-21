@@ -25,7 +25,8 @@
       "node_modules/@types",
       "global.d.ts",
       "shims-tsx.d.ts",
-      "node_modules/@tarojs/plugin-platform-weapp/types"
+      "node_modules/@tarojs/plugin-platform-weapp/types",
+      "../../ant-mobile-icon-taro/dist/index.vue.d.ts"
     ]
   },
   "exclude": ["node_modules", "dist"],
