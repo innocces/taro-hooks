@@ -2,6 +2,12 @@ import 'vue';
 
 type EventHandler = (...args: any[]) => void;
 
+declare module '*.vue.tsx' {
+  import type { DefineComponent } from 'vue';
+  const component: DefineComponent<{}, {}, any>;
+  export default component;
+}
+
 declare module 'vue' {
   interface ComponentCustomProps {
     role?: string;

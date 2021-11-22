@@ -1,3 +1,4 @@
 package.json
 /.yarn/
 /.yarnrc.yml
+/src/components/**/*.vue.tsx

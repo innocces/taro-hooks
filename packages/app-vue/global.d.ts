@@ -1,4 +1,4 @@
-/// <reference path="node_modules/@tarojs/plugin-platform-weapp/types/shims-weapp.d.ts" />
+/// <reference path="../../node_modules/@tarojs/plugin-platform-weapp/types/shims-weapp.d.ts" />
 
 declare module '*.png';
 declare module '*.gif';
@@ -10,6 +10,9 @@ declare module '*.less';
 declare module '*.scss';
 declare module '*.sass';
 declare module '*.styl';
+
+declare module 'ant-mobile-icon-taro';
+declare module 'ant-mobile-taro';
 
 declare namespace NodeJS {
   interface ProcessEnv {

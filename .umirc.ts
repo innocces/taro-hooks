@@ -48,7 +48,7 @@ export default defineConfig({
     BUILD_MODE: JSON.stringify(undefined),
     'process.env.VUE_HOST': isProd
       ? 'https://ant-mobile-taro-vue-demo-innocces.vercel.app'
-      : 'https://192.168.101.4:10089',
+      : 'https://localhost:10089',
   },
   extraPostCSSPlugins: [
     // require('postcss-pxtorem')({

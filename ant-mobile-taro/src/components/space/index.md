@@ -10,7 +10,7 @@ group:
 
 # Space 间距
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/Space"></code>
 
 ### 属性
 

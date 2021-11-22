@@ -1,18 +1,18 @@
-import React from 'react'
-import { Space, Button } from 'ant-mobile-taro'
-import { DemoBlock } from 'demos'
+import React from 'react';
+import { Space, Button } from 'ant-mobile-taro';
+import DemoBlock from '@components/DemoBlock';
 
 export default () => {
   return (
     <>
-      <DemoBlock title='水平方向的间距'>
+      <DemoBlock title="水平方向的间距">
         <Space>
           <Button>按钮1</Button>
           <Button>按钮2</Button>
           <Button>按钮3</Button>
         </Space>
       </DemoBlock>
-      <DemoBlock title='换行'>
+      <DemoBlock title="换行">
         <Space wrap>
           <Button>按钮1</Button>
           <Button>按钮2</Button>
@@ -27,14 +27,14 @@ export default () => {
           <Button>按钮11</Button>
         </Space>
       </DemoBlock>
-      <DemoBlock title='垂直方向的间距'>
-        <Space direction='vertical'>
+      <DemoBlock title="垂直方向的间距">
+        <Space direction="vertical">
           <Button>按钮1</Button>
           <Button>按钮2</Button>
           <Button>按钮3</Button>
         </Space>
       </DemoBlock>
-      <DemoBlock title='自定义间距大小'>
+      <DemoBlock title="自定义间距大小">
         <Space style={{ '--gap': '24px' }}>
           <Button>按钮1</Button>
           <Button>按钮2</Button>
@@ -42,15 +42,15 @@ export default () => {
         </Space>
       </DemoBlock>
 
-      <DemoBlock title='渲染为块级元素'>
-        <Space direction='vertical' block>
+      <DemoBlock title="渲染为块级元素">
+        <Space direction="vertical" block>
           <Button>按钮1</Button>
           <Button>按钮2</Button>
           <Button>按钮3</Button>
         </Space>
       </DemoBlock>
-      <DemoBlock title='主轴对齐方式'>
-        <Space justify='center' block>
+      <DemoBlock title="主轴对齐方式">
+        <Space justify="center" block>
           <Button>1</Button>
           <Button>
             2<br />2
@@ -60,8 +60,8 @@ export default () => {
           </Button>
         </Space>
       </DemoBlock>
-      <DemoBlock title='交叉轴对齐方式'>
-        <Space align='end'>
+      <DemoBlock title="交叉轴对齐方式">
+        <Space align="end">
           <Button>1</Button>
           <Button>
             2<br />2
@@ -72,5 +72,5 @@ export default () => {
         </Space>
       </DemoBlock>
     </>
-  )
-}
+  );
+};

@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import classNames from 'classnames'
+import { View } from '@tarojs/components'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
 
@@ -29,7 +30,7 @@ export const Space: FC<SpaceProps> = p => {
   const { direction } = props
   return withNativeProps(
     props,
-    <div
+    <View
       className={classNames(classPrefix, {
         [`${classPrefix}-wrap`]: props.wrap,
         [`${classPrefix}-block`]: props.block,
@@ -42,10 +43,10 @@ export const Space: FC<SpaceProps> = p => {
         return (
           child !== null &&
           child !== undefined && (
-            <div className={`${classPrefix}-item`}>{child}</div>
+            <View className={`${classPrefix}-item`}>{child}</View>
           )
         )
       })}
-    </div>
+    </View>
   )
 }

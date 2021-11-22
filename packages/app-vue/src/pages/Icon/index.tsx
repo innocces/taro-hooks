@@ -1,6 +1,7 @@
 import { defineComponent } from 'vue';
 import { View } from '@tarojs/components';
 import * as TaroIcons from 'ant-mobile-icon-taro';
+import { Space } from 'ant-mobile-taro';
 import DemoBlock from '@components/DemoBlock';
 
 import './index.less';
@@ -30,31 +31,31 @@ export default defineComponent({
       return (
         <>
           <DemoBlock title="基础用法">
-            {/* <Space wrap> */}
-            <Heart usePX size={36} />
-            <RocketFill usePX size={36} />
-            {/* </Space> */}
+            <Space wrap>
+              <Heart usePX size={36} />
+              <RocketFill usePX size={36} />
+            </Space>
           </DemoBlock>
           <DemoBlock title="大小">
-            {/* <Space wrap align="center"> */}
-            <RocketFill usePX size={12} />
-            <RocketFill usePX size={24} />
-            <RocketFill usePX size={36} />
-            <RocketFill usePX size={48} />
-            {/* </Space> */}
+            <Space wrap align="center">
+              <RocketFill usePX size={12} />
+              <RocketFill usePX size={24} />
+              <RocketFill usePX size={36} />
+              <RocketFill usePX size={48} />
+            </Space>
           </DemoBlock>
           <DemoBlock title="颜色">
-            {/* <Space wrap > */}
-            <RocketFill
-              usePX
-              size={36}
-              color="var(--adm-color-primary)"
-              style={{ color: 'var(--adm-color-primary)' }}
-            />
-            <RocketFill usePX size={36} color="#1677ff" />
-            <RocketFill usePX size={36} color="#999" />
-            <RocketFill usePX size={36} color="#ff3141" />
-            {/* </Space> */}
+            <Space wrap>
+              <RocketFill
+                usePX
+                size={36}
+                color="var(--adm-color-primary)"
+                style={{ color: 'var(--adm-color-primary)' }}
+              />
+              <RocketFill usePX size={36} color="#1677ff" />
+              <RocketFill usePX size={36} color="#999" />
+              <RocketFill usePX size={36} color="#ff3141" />
+            </Space>
           </DemoBlock>
 
           <View className="container">

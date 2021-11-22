@@ -51,6 +51,7 @@
 		"axios": "^0.21.1",
 		"axios-miniprogram-adapter": "^0.3.2",
 		"lodash": "^4.17.21",
+		"lorem-ipsum": "^2.0.4",
 		"mockjs": "^1.1.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
