@@ -1,0 +1,23 @@
+// reset taro info
+
+Button,
+taro-button-core {
+  overflow: visible;
+  width: auto;
+  &[disabled] {
+    color: var(--text-color);
+  }
+
+  &:after {
+    display: none;
+  }
+
+  &:not([disabled]):active {
+    color: var(--text-color);
+    background-color: var(--background-color);
+  }
+
+  &:not([size='mini']) {
+    width: auto !important;
+  }
+}

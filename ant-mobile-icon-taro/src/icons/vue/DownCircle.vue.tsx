@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'DownCircle',
   props: taroIconProps,
   emits: ['click'],
-  setup(props, { emit }) {
+  setup(props, { emit, attrs }) {
     const onClick = (event: MouseEvent) => {
       emit('click', event);
     };
@@ -39,7 +39,7 @@ export default defineComponent({
 
       return (
         // @ts-ignore
-        <Text {...restProps} className="adm-icon" onClick={onClick} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></Text>
+        <Text {...restProps} {...attrs} className={`adm-icon ${restProps.className} ${attrs.class}`} onClick={onClick} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></Text>
       )
     }
   }

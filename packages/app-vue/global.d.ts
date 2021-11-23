@@ -10,6 +10,7 @@ declare module '*.less';
 declare module '*.scss';
 declare module '*.sass';
 declare module '*.styl';
+declare module '*.vue';
 
 declare module 'ant-mobile-icon-taro';
 declare module 'ant-mobile-taro';

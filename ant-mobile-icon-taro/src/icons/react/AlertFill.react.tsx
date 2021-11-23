@@ -30,7 +30,7 @@ const AlertFill: FC<ITaroIconProps> = ({
 
   return (
     // @ts-ignore
-    <Text {...props} className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}}></Text>
+    <Text {...props} className={`adm-icon ${props.className}`} style={{...style, background, width: renderSize, height: renderSize}}></Text>
   )
 }
 

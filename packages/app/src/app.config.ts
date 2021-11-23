@@ -91,7 +91,7 @@ export default {
   subPackages: [
     {
       root: 'ui',
-      pages: ['Button/index', 'Icon/index', 'Space/index'],
+      pages: ['Button/index', 'Icon/index', 'Space/index', 'Loading/index'],
     },
   ],
   window: {

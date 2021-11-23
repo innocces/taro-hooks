@@ -155,7 +155,7 @@ const ${iconName}: FC<ITaroIconProps> = ({
 
   return (
     // @ts-ignore
-    <Text {...props} className="adm-icon" style={{...style, background, width: renderSize, height: renderSize}}></Text>
+    <Text {...props} className={\`adm-icon \${props.className\}\`} style={{...style, background, width: renderSize, height: renderSize}}></Text>
   )
 }
 
@@ -185,7 +185,7 @@ export default defineComponent({
   name: '${iconName}',
   props: taroIconProps,
   emits: ['click'],
-  setup(props, { emit }) {
+  setup(props, { emit, attrs }) {
     const onClick = (event: MouseEvent) => {
       emit('click', event);
     };
@@ -211,7 +211,7 @@ export default defineComponent({
 
       return (
         // @ts-ignore
-        <Text {...restProps} className="adm-icon" onClick={onClick} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></Text>
+        <Text {...restProps} {...attrs} className={\`adm-icon \${restProps.className\} \${attrs.class\}\`} onClick={onClick} style={{...style, background: background(), width: renderSize(), height: renderSize()}}></Text>
       )
     }
   }

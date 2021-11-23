@@ -29,10 +29,10 @@ const config = {
       '../../../',
       'ant-mobile-taro/src',
     ),
-    'ant-mobile-icon-taro': resolve(
+    'ant-mobile-taro': resolve(
       __dirname,
       '../../../',
-      'ant-mobile-icon-taro/src/index.react',
+      'ant-mobile-taro/src/index.ts',
     ),
   },
   mini: {

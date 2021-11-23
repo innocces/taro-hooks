@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue'
 import classNames from 'classnames'
 import { View } from '@tarojs/components'
+import { ISetupContext } from '../../utils/native-props.vue'
 
 const classPrefix = `adm-space`
 
@@ -37,18 +38,28 @@ const SpaceProps = {
 export default defineComponent({
   name: 'Space',
   props: SpaceProps,
-  setup(props, { attrs, slots }) {
-    console.log(props, attrs, slots.default?.length)
+  setup(
+    props,
+    {
+      attrs,
+      slots,
+    }: ISetupContext<'--gap' | '--gap-vertical' | '--gap-horizontal'>
+  ) {
     return () => (
       <View
-        className={classNames(classPrefix, {
-          [`${classPrefix}-wrap`]: props.wrap,
-          [`${classPrefix}-block`]: props.block,
-          [`${classPrefix}-${props.direction}`]: true,
-          [`${classPrefix}-align-${props.align}`]: !!props.align,
-          [`${classPrefix}-justify-${props.justify}`]: !!props.justify,
-        })}
         {...attrs}
+        className={classNames(
+          classPrefix,
+          {
+            [`${classPrefix}-wrap`]: props.wrap,
+            [`${classPrefix}-block`]: props.block,
+            [`${classPrefix}-${props.direction}`]: true,
+            [`${classPrefix}-align-${props.align}`]: !!props.align,
+            [`${classPrefix}-justify-${props.justify}`]: !!props.justify,
+          },
+          attrs.class,
+          attrs.className
+        )}
       >
         {slots.default &&
           slots.default().map(child => {

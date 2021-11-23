@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from '@tarojs/components';
 import { Space, Button } from 'ant-mobile-taro';
 import DemoBlock from '@components/DemoBlock';
 
@@ -53,10 +54,13 @@ export default () => {
         <Space justify="center" block>
           <Button>1</Button>
           <Button>
-            2<br />2
+            <View>2</View>
+            <View>2</View>
           </Button>
           <Button>
-            3<br />3<br />3
+            <View>3</View>
+            <View>3</View>
+            <View>3</View>
           </Button>
         </Space>
       </DemoBlock>
@@ -64,10 +68,13 @@ export default () => {
         <Space align="end">
           <Button>1</Button>
           <Button>
-            2<br />2
+            <View>2</View>
+            <View>2</View>
           </Button>
           <Button>
-            3<br />3<br />3
+            <View>3</View>
+            <View>3</View>
+            <View>3</View>
           </Button>
         </Space>
       </DemoBlock>
