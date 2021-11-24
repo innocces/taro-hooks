@@ -1,7 +1,10 @@
+/// <reference path="node_modules/@tarojs/plugin-platform-weapp/types/shims-weapp.d.ts" />
+
 declare module '*.css';
 declare module '*.less';
 
 declare module '*.png';
+declare module '*.vue';
 
 // mock typings
 declare module 'taro-hooks';

@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import { View } from '@tarojs/components';
 import { Space, Button } from 'ant-mobile-taro';
-import DemoBlock from '@components/DemoBlock';
+import DemoBlock from '@components/DemoBlock/index.vue';
 
 export default defineComponent({
   name: 'SpaceDemo',
