@@ -5,7 +5,11 @@ module.exports = function loader(source) {
   const matchStartTag = /<(View|Text|Input|Image|TextArea|TaroButton)/gm;
   const matchEndTag = /<\/(View|Text|Input|Image|TextArea|TaroButton)>/gm;
   function replacer(match, tag) {
-    return match.replace(tag, 'taro-' + tag.toLocaleLowerCase());
+    // 有些会写别名, 那先replace一下别名(统一都是Taro, 放到replace里面，不然会无限递归。)
+    return match.replace(
+      tag,
+      'taro-' + tag.replace('Taro', '').toLocaleLowerCase(),
+    );
   }
   source = source.replace(matchStartTag, replacer);
   source = source.replace(matchEndTag, replacer);
