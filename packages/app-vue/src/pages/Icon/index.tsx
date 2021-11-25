@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import { View } from '@tarojs/components';
 import * as TaroIcons from 'ant-mobile-icon-taro';
-import { Space } from 'ant-mobile-taro';
+import { Space, Grid } from 'ant-mobile-taro';
 import DemoBlock from '@components/DemoBlock';
 
 import './index.less';
@@ -57,22 +57,23 @@ export default defineComponent({
               <RocketFill usePX size={36} color="#ff3141" />
             </Space>
           </DemoBlock>
-
-          <View className="container">
-            {/* <Grid columns={4}> */}
-            {items.map((item) => (
-              // <Grid.Item key={item.name} className="item">
-              <View key={item.name} className="item">
-                <View className="icon">
-                  {/* @ts-ignore */}
-                  <item.component size={36} usePX />
-                </View>
-                <View className="label">{item.name}</View>
-              </View>
-              // {/* </Grid.Item> */}
-            ))}
-            {/* </Grid> */}
-          </View>
+          <DemoBlock title="全部ICON">
+            <View className="container">
+              <Grid columns={4}>
+                {items.map((item) => (
+                  <Grid.Item key={item.name} className="item">
+                    <View key={item.name} className="item">
+                      <View className="icon">
+                        {/* @ts-ignore */}
+                        <item.component size={36} usePX />
+                      </View>
+                      <View className="label">{item.name}</View>
+                    </View>
+                  </Grid.Item>
+                ))}
+              </Grid>
+            </View>
+          </DemoBlock>
         </>
       );
     };

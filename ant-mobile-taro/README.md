@@ -56,7 +56,7 @@
 | collapse        | 🕡    | 🕡  |
 | divider         | 🕡    | 🕡  |
 | floating-panel  | 🕡    | 🕡  |
-| grid            | 🕡    | 🕡  |
+| grid            | ✅    | ✅  |
 | index-bar       | 🕡    | 🕡  |
 | jumbo-tabs      | 🕡    | 🕡  |
 | nav-bar         | 🕡    | 🕡  |

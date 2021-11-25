@@ -1,7 +1,8 @@
-import { mergeProps } from '../../utils/with-default-props'
 import React, { FC } from 'react'
+import { ITouchEvent, View } from '@tarojs/components'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { toCSSLength } from '../../utils/to-css-length'
+import { mergeProps } from '../../utils/with-default-props'
 
 const classPrefix = `adm-grid`
 
@@ -26,15 +27,15 @@ export const Grid: FC<GridProps> = props => {
 
   return withNativeProps(
     props,
-    <div className={classPrefix} style={style}>
+    <View className={classPrefix} style={style}>
       {props.children}
-    </div>
+    </View>
   )
 }
 
 export type GridItemProps = {
   span?: number
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onClick?: (event: ITouchEvent) => void
 } & NativeProps
 
 type GridItemStyle = React.CSSProperties &
@@ -48,12 +49,12 @@ export const GridItem: FC<GridItemProps> = p => {
   }
   return withNativeProps(
     props,
-    <div
+    <View
       className={`${classPrefix}-item`}
       style={itemStyle}
       onClick={props.onClick}
     >
       {props.children}
-    </div>
+    </View>
   )
 }
