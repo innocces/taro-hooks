@@ -10,17 +10,4 @@ module.exports = {
       },
     ],
   ],
-  plugins: [
-    // [
-    //   'import',
-    //   {
-    //     libraryName: 'ant-mobile-icon-taro',
-    //     camel2DashComponentName: false,
-    //     customName: (name) => {
-    //       return 'ant-mobile-icon-taro/src/icons/vue/' + name + '.vue.tsx';
-    //     },
-    //   },
-    //   'ant-mobile-icon-taro',
-    // ],
-  ],
 };

@@ -1,54 +1,35 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { defineComponent } from 'vue'
+import { toRefs, PropType } from 'vue'
 import { Button as TaroButton, View } from '@tarojs/components'
-import type { ButtonProps as TaroButtonProps } from '@tarojs/components'
+import type { ITouchEvent } from '@tarojs/components'
 import Loading from '../loading/index.vue'
 import classNames from 'classnames'
-import { ISetupContext } from '../../utils/native-props.vue'
+import { ISetupContext, withNativeProps } from '../../utils/native-props.vue'
 
 const classPrefix = `adm-button`
 
-// Partial<
-//   Pick<
-//     TaroButtonProps,
-//     | 'openType'
-//     | 'lang'
-//     | 'appParameter'
-//     | 'sendMessageImg'
-//     | 'sendMessageTitle'
-//     | 'sendMessagePath'
-//     | 'sessionFrom'
-//     | 'showMessageCard'
-//     | 'onClick'
-//     | 'onGetAuthorize'
-//     | 'onGetPhoneNumber'
-//     | 'onGetUserInfo'
-//     | 'onContact'
-//     | 'onGetRealnameAuthInfo'
-//     | 'onError'
-//     | 'onOpenSetting'
-//     | 'onLaunchapp'
-//   >
+export type ButtonColor =
+  | 'default'
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+export type ButtonFill = 'solid' | 'outline' | 'none'
+export type ButtonSize = 'mini' | 'small' | 'middle' | 'large'
+export type ButtonType = 'submit' | 'reset'
+export type ButtonShape = 'default' | 'rounded' | 'rectangular'
 
 const ButtonProps = {
   color: {
-    validator(value: string) {
-      return ['default', 'primary', 'success', 'warning', 'danger'].includes(
-        value
-      )
-    },
+    type: String as PropType<ButtonColor>,
     default: 'default',
   },
   fill: {
-    validator(value: string) {
-      return ['solid', 'outline', 'none'].includes(value)
-    },
+    type: String as PropType<ButtonFill>,
     default: 'solid',
   },
   size: {
-    validator(value: string) {
-      return ['mini', 'small', 'middle', 'large'].includes(value)
-    },
+    type: String as PropType<ButtonSize>,
     default: 'middle',
   },
   block: {
@@ -59,30 +40,28 @@ const ButtonProps = {
     type: Boolean,
     default: false,
   },
-  loadingElement: Function,
+  loadingElement: [Function, Object],
   loadingText: String,
   disabled: Boolean,
   type: {
-    validator(value: string) {
-      return ['submit', 'reset'].includes(value)
-    },
+    type: String as PropType<ButtonType>,
   },
   shape: {
-    validator(value: string) {
-      return ['default', 'rounded', 'rectangular'].includes(value)
-    },
+    type: String as PropType<ButtonShape>,
     default: 'default',
   },
 }
 
-export default defineComponent({
+export default withNativeProps({
   name: 'Button',
   props: ButtonProps,
+  emits: ['click'],
   setup(
     props,
     {
       attrs,
       slots,
+      emit,
     }: ISetupContext<
       | '--text-color'
       | '--background-color'
@@ -99,41 +78,49 @@ export default defineComponent({
       block,
       fill,
       size,
-      loadingElement = <Loading color={color} />,
+      loadingElement,
       loadingText,
       shape,
       type,
       ...restProps
-    } = props
-    const buttonDisabled = disabled || loading
+    } = toRefs(props)
+    const buttonDisabled = disabled.value || loading.value
+
+    const handleClick = (event: ITouchEvent) => {
+      if (!buttonDisabled) {
+        emit('click', event)
+      }
+    }
+
     return () => (
       <TaroButton
         {...restProps}
         {...attrs}
-        formType={type}
+        {...(type?.value ? { formType: type?.value } : {})}
         className={classNames(
           classPrefix,
-          color ? `${classPrefix}-${color}` : null,
+          color.value ? `${classPrefix}-${color.value}` : null,
           {
-            [`${classPrefix}-block`]: block,
+            [`${classPrefix}-block`]: block.value,
             [`${classPrefix}-disabled`]: buttonDisabled,
-            [`${classPrefix}-fill-outline`]: fill === 'outline',
-            [`${classPrefix}-fill-none`]: fill === 'none',
-            [`${classPrefix}-mini`]: size === 'mini',
-            [`${classPrefix}-small`]: size === 'small',
-            [`${classPrefix}-large`]: size === 'large',
-            [`${classPrefix}-loading`]: loading,
+            [`${classPrefix}-fill-outline`]: fill.value === 'outline',
+            [`${classPrefix}-fill-none`]: fill.value === 'none',
+            [`${classPrefix}-mini`]: size.value === 'mini',
+            [`${classPrefix}-small`]: size.value === 'small',
+            [`${classPrefix}-large`]: size.value === 'large',
+            [`${classPrefix}-loading`]: loading.value,
           },
-          `${classPrefix}-shape-${shape}`,
+          `${classPrefix}-shape-${shape.value}`,
           attrs.class,
           attrs.className
         )}
         disabled={buttonDisabled}
+        onClick={handleClick}
       >
-        {loading ? (
+        {loading.value ? (
           <View className={`${classPrefix}-loading-wrapper`}>
-            {loadingElement}
-            {loadingText}
+            {loadingElement?.value || <Loading color={color} />}
+            {loadingText?.value}
           </View>
         ) : (
           slots.default && slots.default()

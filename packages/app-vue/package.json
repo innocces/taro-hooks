@@ -37,6 +37,7 @@
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@tarojs/components": "3.3.14",
+    "@tarojs/plugin-html": "3.3.14",
     "@tarojs/runtime": "3.3.14",
     "@tarojs/taro": "3.3.14",
     "ant-mobile-icon-taro": "^0.0.0",

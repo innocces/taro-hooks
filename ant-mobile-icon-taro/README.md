@@ -31,6 +31,14 @@ $ npm i ant-mobile-icon-taro
 }
 ```
 
+由于内部是使用`click`. 故使用`Vue`版本的小伙伴若需要支持点击事件需安装对应版本的`@tarojs/plugin-html`, 并在配置中增加:
+
+```js
+{
+  plugins: ['@tarojs/plugin-html'],
+}
+```
+
 在对应框架内需要手动指定入口. 具体入口文件如下(任选一种方式即可):
 
 - 使用 alias

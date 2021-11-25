@@ -26,12 +26,10 @@ export default defineComponent({
     border: String,
   },
   setup(props) {
-    const { padding, background, border } = props;
     return {
-      style: `padding: ${padding}; background: ${background}; ${
-        border ? 'border: ' + border : ''
+      style: `padding: ${props.padding}; background: ${props.background}; ${
+        props.border ? 'border: ' + props.border : ''
       }`,
-      title: props.title,
     };
   },
 });

@@ -12,7 +12,7 @@
 | 组件名称        | React | Vue |
 | --------------- | ----- | --- |
 | icon            | ✅    | ✅  |
-| button          | 🕡    | 🕡  |
+| button          | ✅    | ✅  |
 | list            | 🕡    | 🕡  |
 | space           | ✅    | ✅  |
 | badge           | 🕡    | 🕡  |
@@ -44,7 +44,7 @@
 | dialog          | 🕡    | 🕡  |
 | empty           | 🕡    | 🕡  |
 | error-block     | 🕡    | 🕡  |
-| loading         | 🕡    | 🕡  |
+| loading         | ✅    | ✅  |
 | mask            | 🕡    | 🕡  |
 | progress-bar    | 🕡    | 🕡  |
 | progress-circle | 🕡    | 🕡  |

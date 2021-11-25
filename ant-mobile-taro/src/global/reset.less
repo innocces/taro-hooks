@@ -5,7 +5,7 @@ taro-button-core {
   overflow: visible;
   width: auto;
   &[disabled] {
-    color: var(--text-color);
+    color: var(--text-color) !important;
   }
 
   &:after {
@@ -13,8 +13,8 @@ taro-button-core {
   }
 
   &:not([disabled]):active {
-    color: var(--text-color);
-    background-color: var(--background-color);
+    color: var(--text-color) !important;
+    background-color: var(--background-color) !important;
   }
 
   &:not([size='mini']) {

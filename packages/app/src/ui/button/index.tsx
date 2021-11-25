@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Space } from 'ant-mobile-taro';
 import { Text } from '@tarojs/components';
-import { showToast } from '@tarojs/taro';
+import { showToast, showModal } from '@tarojs/taro';
 import DemoBlock from '@components/DemoBlock';
 import { Search, Sync } from 'ant-mobile-icon-taro/src/index.react';
 
@@ -100,6 +100,16 @@ export default () => {
             Rectangular Button
           </Button>
         </Space>
+      </DemoBlock>
+      <DemoBlock title="微信功能">
+        <Button
+          openType="getPhoneNumber"
+          onGetPhoneNumber={(e) =>
+            showModal({ title: '获取结果', content: JSON.stringify(e.detail) })
+          }
+        >
+          获取用户手机号码
+        </Button>
       </DemoBlock>
     </>
   );

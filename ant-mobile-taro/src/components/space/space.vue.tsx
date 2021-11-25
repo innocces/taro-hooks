@@ -1,41 +1,38 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { defineComponent } from 'vue'
+import { PropType } from 'vue'
 import classNames from 'classnames'
 import { View } from '@tarojs/components'
-import { ISetupContext } from '../../utils/native-props.vue'
+import { ISetupContext, withNativeProps } from '../../utils/native-props.vue'
 
 const classPrefix = `adm-space`
 
+export type SpaceDirection = 'horizontal' | 'vertical'
+export type SpaceJustify =
+  | 'start'
+  | 'end'
+  | 'center'
+  | 'between'
+  | 'around'
+  | 'evenly'
+  | 'stretch'
+export type SpaceAlign = 'start' | 'end' | 'center' | 'baseline'
+
 const SpaceProps = {
   direction: {
-    validator(value: string) {
-      return ['horizontal', 'vertical'].includes(value)
-    },
+    type: String as PropType<SpaceDirection>,
     default: 'horizontal',
   },
   justify: {
-    validator(value: string) {
-      return [
-        'start',
-        'end',
-        'center',
-        'between',
-        'around',
-        'evenly',
-        'stretch',
-      ].includes(value)
-    },
+    type: String as PropType<SpaceJustify>,
   },
   align: {
-    validator(value: string) {
-      return ['start', 'end', 'center', 'baseline'].includes(value)
-    },
+    type: String as PropType<SpaceAlign>,
   },
   block: Boolean,
   wrap: Boolean,
 }
 
-export default defineComponent({
+export default withNativeProps({
   name: 'Space',
   props: SpaceProps,
   setup(

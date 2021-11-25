@@ -11,8 +11,11 @@ const config = {
     828: 1.81 / 2,
   },
   sourceRoot: 'src',
-  outputRoot: '../../app-vue-dist',
-  plugins: [],
+  outputRoot:
+    process.env.TARO_ENV === 'weapp'
+      ? '../../app-vue-dist'
+      : '../../app-vue-dist-h5',
+  plugins: ['@tarojs/plugin-html'],
   defineConstants: {},
   copy: {
     patterns: [],

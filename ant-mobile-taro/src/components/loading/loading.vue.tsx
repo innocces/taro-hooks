@@ -1,8 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { defineComponent } from 'vue'
+import { PropType } from 'vue'
 import classNames from 'classnames'
 import { View } from '@tarojs/components'
-import { ISetupContext } from '../../utils/native-props.vue'
+import { withNativeProps } from '../../utils/native-props.vue'
 import hex2rgb from '../../utils/hex2rgb'
 import loadingContent from './icon'
 
@@ -14,22 +14,19 @@ const colorRecord: Record<string, string> = {
   white: '#ffffff',
 }
 
+export type LoadingColor = 'default' | 'primary' | 'white' | string
+
 const LoadingProps = {
   color: {
-    validator(value: string) {
-      return (
-        typeof value === 'string' ||
-        ['default', 'primary', 'white'].includes(value)
-      )
-    },
+    type: String as PropType<LoadingColor>,
     default: 'default',
   },
 }
 
-export default defineComponent({
+export default withNativeProps({
   name: 'Loading',
   props: LoadingProps,
-  setup(props, { attrs }: ISetupContext) {
+  setup(props, { attrs }) {
     const loadingColor = hex2rgb(colorRecord[props.color] ?? props.color)
     return () => (
       <View

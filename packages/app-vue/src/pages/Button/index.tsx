@@ -103,6 +103,9 @@ export default defineComponent({
             </Button>
           </Space>
         </DemoBlock>
+        <DemoBlock title="微信功能">
+          <Text>事件传递有些问题, Vue 暂不支持</Text>
+        </DemoBlock>
       </>
     );
   },
