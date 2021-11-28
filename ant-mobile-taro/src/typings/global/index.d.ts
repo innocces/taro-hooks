@@ -8,6 +8,8 @@ declare module '*.less' {
 declare module '*.png'
 
 declare module '*.svg'
+declare module 'ant-mobile-icon-taro/es/index.react'
+declare module 'ant-mobile-icon-taro/es/index.vue'
 
 declare module '*.vue.tsx' {
   import type { DefineComponent } from 'vue'

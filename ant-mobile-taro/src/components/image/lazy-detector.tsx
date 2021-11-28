@@ -1,4 +1,6 @@
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef, ComponentType } from 'react'
+import { View } from '@tarojs/components'
+import type { ViewProps } from '@tarojs/components/types/View'
 import { useInViewport } from 'ahooks'
 
 type Props = {
@@ -6,7 +8,7 @@ type Props = {
 }
 
 export const LazyDetector: FC<Props> = props => {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<ComponentType<ViewProps>>(null)
   const inViewport = useInViewport(ref)
 
   useEffect(() => {
@@ -15,5 +17,5 @@ export const LazyDetector: FC<Props> = props => {
     }
   }, [inViewport])
 
-  return <div ref={ref} />
+  return <View ref={ref} />
 }

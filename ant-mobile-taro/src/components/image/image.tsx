@@ -1,11 +1,16 @@
-import { mergeProps } from '../../utils/with-default-props'
-import React, { ReactNode, useState, useRef } from 'react'
-import { NativeProps, withNativeProps } from '../../utils/native-props'
-import { PictureOutline, PictureWrongOutline } from 'antd-mobile-icons'
+import React, { ReactNode, useState, useRef, ComponentType } from 'react'
+import { View, Image as TaroImage } from '@tarojs/components'
+import type { ITouchEvent, CommonEventFunction } from '@tarojs/components'
+import type { ImageProps as TaroImageProps } from '@tarojs/components/types/Image'
+import type { ViewProps } from '@tarojs/components/types/View'
+import { Meh, Frown } from 'ant-mobile-icon-taro/es/index.react'
+import { useUpdateLayoutEffect } from 'ahooks'
 import { staged } from 'staged-components'
 import { toCSSLength } from '../../utils/to-css-length'
+import { NativeProps, withNativeProps } from '../../utils/native-props'
+import { mergeProps } from '../../utils/with-default-props'
 import { LazyDetector } from './lazy-detector'
-import { useUpdateLayoutEffect } from 'ahooks'
+import { isWeapp } from '../../utils/use-env'
 
 const classPrefix = `adm-image`
 
@@ -14,12 +19,26 @@ export type ImageProps = {
   alt?: string
   width?: number | string
   height?: number | string
-  fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
+  fit?:
+    | 'scaleToFill'
+    | 'aspectFit'
+    | 'aspectFill'
+    | 'widthFix'
+    | 'heightFix'
+    | 'top'
+    | 'bottom'
+    | 'center'
+    | 'left'
+    | 'right'
+    | 'top left'
+    | 'top right'
+    | 'bottom left'
+    | 'bottom right'
   placeholder?: ReactNode
   fallback?: ReactNode
   lazy?: boolean
-  onClick?: (event: React.MouseEvent<HTMLImageElement, Event>) => void
-  onError?: (event: React.SyntheticEvent<HTMLImageElement, Event>) => void
+  onClick?: (event: ITouchEvent) => void
+  onError?: CommonEventFunction<TaroImageProps.onErrorEventDetail>
 } & NativeProps<'--width' | '--height'> &
   Pick<
     React.ImgHTMLAttributes<HTMLImageElement>,
@@ -33,16 +52,16 @@ export type ImageProps = {
   >
 
 const defaultProps = {
-  fit: 'fill',
+  fit: 'scaleToFill',
   placeholder: (
-    <div className={`${classPrefix}-tip`}>
-      <PictureOutline />
-    </div>
+    <View className={`${classPrefix}-tip`}>
+      <Meh usePX />
+    </View>
   ),
   fallback: (
-    <div className={`${classPrefix}-tip`}>
-      <PictureWrongOutline />
-    </div>
+    <View className={`${classPrefix}-tip`}>
+      <Frown usePX />
+    </View>
   ),
   lazy: false,
 }
@@ -52,16 +71,17 @@ export const Image = staged<ImageProps>(p => {
 
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
+  const weappEnv = isWeapp()
 
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<ComponentType<ViewProps>>(null)
 
   let src: string | undefined = props.src
   let srcSet: string | undefined = props.srcSet
 
   const [initialized, setInitialized] = useState(!props.lazy)
 
-  src = initialized ? props.src : undefined
-  srcSet = initialized ? props.srcSet : undefined
+  src = weappEnv || initialized ? props.src : undefined
+  srcSet = weappEnv || initialized ? props.srcSet : undefined
 
   useUpdateLayoutEffect(() => {
     setLoaded(false)
@@ -73,10 +93,9 @@ export const Image = staged<ImageProps>(p => {
       return <>{props.fallback}</>
     }
     const img = (
-      <img
+      <TaroImage
         className={`${classPrefix}-img`}
-        src={src}
-        alt={props.alt}
+        src={src!}
         onClick={props.onClick}
         onLoad={() => {
           setLoaded(true)
@@ -85,17 +104,21 @@ export const Image = staged<ImageProps>(p => {
           setFailed(true)
           props.onError?.(e)
         }}
+        mode={props.fit}
         style={{
-          objectFit: props.fit,
           display: loaded ? 'block' : 'none',
         }}
-        crossOrigin={props.crossOrigin}
-        decoding={props.decoding}
-        loading={props.loading}
-        referrerPolicy={props.referrerPolicy}
-        sizes={props.sizes}
-        srcSet={srcSet}
-        useMap={props.useMap}
+        {...(weappEnv ? { lazyLoad: props.lazy } : {})}
+        nativeProps={{
+          crossOrigin: props.crossOrigin,
+          alt: props.alt,
+          decoding: props.decoding,
+          loading: props.loading,
+          referrerPolicy: props.referrerPolicy,
+          srcSet: srcSet,
+          sizes: props.sizes,
+          useMap: props.useMap,
+        }}
       />
     )
     return (
@@ -113,10 +136,11 @@ export const Image = staged<ImageProps>(p => {
   if (props.height) {
     style['--height'] = toCSSLength(props.height)
   }
+  console.log(props)
   return withNativeProps(
     props,
-    <div ref={ref} className={classPrefix} style={style}>
-      {props.lazy && !initialized && (
+    <View ref={ref} className={classPrefix} style={style}>
+      {props.lazy && !initialized && !weappEnv && (
         <LazyDetector
           onActive={() => {
             setInitialized(true)
@@ -124,6 +148,6 @@ export const Image = staged<ImageProps>(p => {
         />
       )}
       {renderInner()}
-    </div>
+    </View>
   )
 })

@@ -33,10 +33,20 @@ const config = {
       '../../../',
       'ant-mobile-taro/src',
     ),
+    'ant-mobile-taro/es/index.vue': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-taro/src/index.vue.ts',
+    ),
     'ant-mobile-taro': resolve(
       __dirname,
       '../../../',
       'ant-mobile-taro/src/index.vue',
+    ),
+    'ant-mobile-icon-taro/es/index.vue': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-icon-taro/src/index.vue.ts',
     ),
     'ant-mobile-icon-taro': resolve(
       __dirname,

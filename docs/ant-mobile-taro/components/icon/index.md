@@ -24,4 +24,4 @@ yarn add ant-mobile-icon-taro
 
 ## 属性
 
-<embed src="../../../../ant-mobile-icon-taro/README.md#L87-L93"></embed>
+<embed src="../../../../ant-mobile-icon-taro/README.md#L96-L103"></embed>

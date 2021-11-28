@@ -17,7 +17,7 @@
 | space           | ✅    | ✅  |
 | badge           | 🕡    | 🕡  |
 | card            | 🕡    | 🕡  |
-| image           | 🕡    | 🕡  |
+| image           | ✅    | ✅  |
 | image-viewer    | 🕡    | 🕡  |
 | infinite-scroll | 🕡    | 🕡  |
 | notice-bar      | 🕡    | 🕡  |

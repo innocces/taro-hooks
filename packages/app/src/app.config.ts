@@ -97,6 +97,7 @@ export default {
         'Space/index',
         'Loading/index',
         'Grid/index',
+        'Image/index',
       ],
     },
   ],
