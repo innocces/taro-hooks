@@ -1,5 +1,5 @@
 export default function (hex: string): string {
-  if (!hex || !hex.length || hex.includes('rgb')) {
+  if (!hex || !hex.length || hex.includes('rgb') || hex.startsWith('var')) {
     return hex
   }
 

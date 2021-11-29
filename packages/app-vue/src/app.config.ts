@@ -7,6 +7,7 @@ export default {
     'pages/Space/index',
     'pages/Grid/index',
     'pages/Image/index',
+    'pages/List/index',
   ],
   window: {
     backgroundTextStyle: 'light',

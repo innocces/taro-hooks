@@ -54,16 +54,24 @@
       font-size: 16px;
     }
   }
+
   &-disabled {
-    && > .adm-list-item-content > * {
-      cursor: not-allowed;
-      opacity: 0.6;
-      pointer-events: none;
-    }
+    // 通配在weapp里不能使用。而且条件编译在less里貌似没命中。这里就笨一点用each循环一下
+    @list: View, Text, Button, Swiper, Picker, taro-view-core, taro-button-core,
+      taro-text-core;
+
+    each(@list, {
+      && > .adm-list-item-content > @{value} {
+        cursor: not-allowed;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+    });
   }
 }
 
-a.adm-list-item {
+View.adm-list-item.adm-plain-anchor,
+taro-view-core.adm-list-item.adm-plain-anchor {
   &:active {
     background-color: var(--active-background-color);
   }

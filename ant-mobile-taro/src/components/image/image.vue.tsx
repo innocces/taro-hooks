@@ -140,7 +140,6 @@ export default withNativeProps({
       >
         {props.lazy && !initialized.value && !weappEnv && (
           <>
-            <View>123</View>
             <LazyDetector onActive={() => (initialized.value = true)} />
           </>
         )}

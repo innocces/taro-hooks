@@ -2,7 +2,7 @@ import { defineComponent } from 'vue';
 import { Image as AntImage, Space } from 'ant-mobile-taro';
 import { View } from '@tarojs/components';
 import DemoBlock from '@components/DemoBlock/index.vue';
-import demoImage from './image.jpg';
+import demoImage from '../../assets/image/image.jpg';
 
 import './index.less';
 

@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 
 export interface ITaroIconProps {
-  size?: number;
+  size?: number | string;
   color?: string;
   usePX?: boolean;
   style?: CSSProperties;

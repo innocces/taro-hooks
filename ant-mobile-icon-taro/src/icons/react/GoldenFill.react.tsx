@@ -19,7 +19,7 @@ const GoldenFill: FC<ITaroIconProps> = ({
 }) => {
 
   const renderSize = useMemo(() => {
-    return usePX ?  (size + 'px') : pxTransform(size!);
+    return typeof size === 'number' ? usePX ?  (size + 'px') : pxTransform(size!) : size;
   }, [usePX, size, style])
 
   const background = useMemo(() => {
@@ -37,7 +37,7 @@ const GoldenFill: FC<ITaroIconProps> = ({
 GoldenFill.displayName = 'GoldenFill';
 
 GoldenFill.defaultProps = {
-  size: 18,
+  size: '1em',
   style: {}
 }
 

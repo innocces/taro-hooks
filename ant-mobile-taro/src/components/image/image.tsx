@@ -136,7 +136,7 @@ export const Image = staged<ImageProps>(p => {
   if (props.height) {
     style['--height'] = toCSSLength(props.height)
   }
-  console.log(props)
+
   return withNativeProps(
     props,
     <View ref={ref} className={classPrefix} style={style}>

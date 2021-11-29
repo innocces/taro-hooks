@@ -144,7 +144,7 @@ const ${iconName}: FC<ITaroIconProps> = ({
 }) => {
 
   const renderSize = useMemo(() => {
-    return usePX ?  (size + 'px') : pxTransform(size!);
+    return typeof size === 'number' ? usePX ?  (size + 'px') : pxTransform(size!) : size;
   }, [usePX, size, style])
 
   const background = useMemo(() => {
@@ -162,7 +162,7 @@ const ${iconName}: FC<ITaroIconProps> = ({
 ${iconName}.displayName = '${iconName}';
 
 ${iconName}.defaultProps = {
-  size: 18,
+  size: '1em',
   style: {}
 }
 
@@ -192,15 +192,15 @@ export default defineComponent({
 
     return () => {
       const {
-        size = 18,
-        style = {},
+        size,
+        style,
         color,
         usePX,
         ...restProps
       } = props;
 
       const renderSize = () => {
-        return usePX ? (size + 'px') : pxTransform(size!);
+        return typeof size === 'number' ? usePX ? (size + 'px') : pxTransform(size!) : size;
       }
 
       const background = () => {

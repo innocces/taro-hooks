@@ -10,7 +10,7 @@ group:
 
 # Tag 标签
 
-<code src="./demos/index.tsx">
+<code src="@ui/List">
 
 ## API
 

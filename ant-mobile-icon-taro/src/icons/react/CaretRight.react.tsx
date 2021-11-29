@@ -19,7 +19,7 @@ const CaretRight: FC<ITaroIconProps> = ({
 }) => {
 
   const renderSize = useMemo(() => {
-    return usePX ?  (size + 'px') : pxTransform(size!);
+    return typeof size === 'number' ? usePX ?  (size + 'px') : pxTransform(size!) : size;
   }, [usePX, size, style])
 
   const background = useMemo(() => {
@@ -37,7 +37,7 @@ const CaretRight: FC<ITaroIconProps> = ({
 CaretRight.displayName = 'CaretRight';
 
 CaretRight.defaultProps = {
-  size: 18,
+  size: '1em',
   style: {}
 }
 

@@ -1,4 +1,4 @@
-import { ref, defineComponent, watch } from 'vue'
+import { ref, defineComponent, watchEffect } from 'vue'
 import { View } from '@tarojs/components'
 import useInViewport from '../../utils/use-in-viewport.vue'
 
@@ -8,18 +8,15 @@ export const LazyDetector = defineComponent({
   setup(props, { emit }) {
     const viewRef = ref(null)
 
-    watch(viewRef, () => {
-      console.log(viewRef.value)
-    })
-
-    const inViewport = useInViewport(viewRef)
+    const [inViewport] = useInViewport(viewRef)
 
     const handleActive = () => {
       emit('active')
     }
 
-    watch(inViewport, (_, newValue) => {
-      if (newValue) {
+    // maybe start in view, use watchEffect replace watch to execute in time
+    watchEffect(() => {
+      if (inViewport.value) {
         handleActive()
       }
     })

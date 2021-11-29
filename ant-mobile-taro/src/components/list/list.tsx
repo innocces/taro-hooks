@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import classNames from 'classnames'
+import { View } from '@tarojs/components'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
 
@@ -19,8 +20,8 @@ export const List: FC<ListProps> = p => {
   const props = mergeProps(defaultProps, p)
   return withNativeProps(
     props,
-    <div className={classNames(classPrefix, `${classPrefix}-${props.mode}`)}>
-      <div className={`${classPrefix}-inner`}>{props.children}</div>
-    </div>
+    <View className={classNames(classPrefix, `${classPrefix}-${props.mode}`)}>
+      <View className={`${classPrefix}-inner`}>{props.children}</View>
+    </View>
   )
 }

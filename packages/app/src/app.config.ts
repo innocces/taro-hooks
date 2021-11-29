@@ -98,6 +98,7 @@ export default {
         'Loading/index',
         'Grid/index',
         'Image/index',
+        'List/index',
       ],
     },
   ],

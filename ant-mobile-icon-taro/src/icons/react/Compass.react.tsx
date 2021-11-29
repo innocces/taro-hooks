@@ -19,7 +19,7 @@ const Compass: FC<ITaroIconProps> = ({
 }) => {
 
   const renderSize = useMemo(() => {
-    return usePX ?  (size + 'px') : pxTransform(size!);
+    return typeof size === 'number' ? usePX ?  (size + 'px') : pxTransform(size!) : size;
   }, [usePX, size, style])
 
   const background = useMemo(() => {
@@ -37,7 +37,7 @@ const Compass: FC<ITaroIconProps> = ({
 Compass.displayName = 'Compass';
 
 Compass.defaultProps = {
-  size: 18,
+  size: '1em',
   style: {}
 }
 

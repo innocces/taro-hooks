@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Space } from 'ant-mobile-taro';
 import { View } from '@tarojs/components';
 import DemoBlock from '@components/DemoBlock';
-import demoImage from './image.jpg';
+import demoImage from '../../assets/image/image.jpg';
 
 import './index.less';
 

@@ -5,8 +5,14 @@ export interface ITaroIconType extends FunctionalComponent {
 }
 
 export const taroIconProps = {
-  size: Number,
+  size: {
+    type: [Number, String],
+    default: '1em',
+  },
   color: String,
   usePX: Boolean,
-  style: Object,
+  style: {
+    type: Object,
+    default: () => ({}),
+  },
 };

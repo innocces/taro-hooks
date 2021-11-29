@@ -24,6 +24,11 @@ const config = {
   alias: {
     '@components': resolve(__dirname, '../', 'src/components'),
     '@assets': resolve(__dirname, '../', 'src/assets'),
+    'ant-mobile-taro/es/index.react': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-taro/src/index.react.ts',
+    ),
     'ant-mobile-taro/es': resolve(
       __dirname,
       '../../../',

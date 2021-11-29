@@ -19,7 +19,7 @@ const LinkedinFill: FC<ITaroIconProps> = ({
 }) => {
 
   const renderSize = useMemo(() => {
-    return usePX ?  (size + 'px') : pxTransform(size!);
+    return typeof size === 'number' ? usePX ?  (size + 'px') : pxTransform(size!) : size;
   }, [usePX, size, style])
 
   const background = useMemo(() => {
@@ -37,7 +37,7 @@ const LinkedinFill: FC<ITaroIconProps> = ({
 LinkedinFill.displayName = 'LinkedinFill';
 
 LinkedinFill.defaultProps = {
-  size: 18,
+  size: '1em',
   style: {}
 }
 

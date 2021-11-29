@@ -20,15 +20,15 @@ export default defineComponent({
 
     return () => {
       const {
-        size = 18,
-        style = {},
+        size,
+        style,
         color,
         usePX,
         ...restProps
       } = props;
 
       const renderSize = () => {
-        return usePX ? (size + 'px') : pxTransform(size!);
+        return typeof size === 'number' ? usePX ? (size + 'px') : pxTransform(size!) : size;
       }
 
       const background = () => {

@@ -94,12 +94,12 @@ import Home from 'ant-mobile-icon-taro/es/icons/react/Home';
 
 ## props
 
-| 属性  | 说明                                                                   | 类型            | 默认值         |
-| ----- | ---------------------------------------------------------------------- | --------------- | -------------- |
-| size  | 图标大小                                                               | `number`        | `18`           |
-| color | 图标颜色                                                               | `string`        | `currentColor` |
-| style | 图标额外样式                                                           | `CSSProperties` | `{}`           |
-| usePX | 是否强制使用`px`为单位(默认会在内部使用`taro.pxTransform`去转换`size`) | `boolean`       | `false`        |
+| 属性  | 说明                                                                   | 类型             | 默认值         |
+| ----- | ---------------------------------------------------------------------- | ---------------- | -------------- |
+| size  | 图标大小(若自带单位则不会去转换)                                       | `number\|string` | `1em`          |
+| color | 图标颜色                                                               | `string`         | `currentColor` |
+| style | 图标额外样式                                                           | `CSSProperties`  | `{}`           |
+| usePX | 是否强制使用`px`为单位(默认会在内部使用`taro.pxTransform`去转换`size`) | `boolean`        | `false`        |
 
 [1]: https://www.npmjs.com/package/ant-mobile-icon-taro
 [2]: https://npmjs.org/package/ant-mobile-icon-taro
