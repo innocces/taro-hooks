@@ -4,7 +4,7 @@ nav:
   path: /ant-mobile-taro
   order: 5
 hero:
-  image: https://gw.alipayobjects.com/zos/bmw-prod/cadedaff-8c88-4af2-870f-0574d322761c.svg
+  image: /image/ant-icon.svg
   title: ANT-MOBILE-TARO
   desc: ant-design-mobile-v5 Taro实现. 同时支持 Vue 和 React
   actions:

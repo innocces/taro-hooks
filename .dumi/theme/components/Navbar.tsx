@@ -24,12 +24,19 @@ const Navbar: FC<INavbarProps> = ({
     nav: navItems,
   } = useContext(context);
   const [version, setVersion] = useState<string>(taroHooksPackages.version);
+  const [renderLogo, setLogo] = useState<string | boolean>(logo);
 
   useEffect(() => {
-    if (location.pathname.includes('ant-mobile-taro')) {
+    if (
+      ['ant-mobile-taro', 'components'].some((v) =>
+        location.pathname.includes(v),
+      )
+    ) {
       setVersion(amtPackages.version);
+      setLogo('/image/ant-icon.svg');
     } else {
       setVersion(taroHooksPackages.version);
+      setLogo(logo);
     }
   }, [location]);
 
@@ -45,7 +52,7 @@ const Navbar: FC<INavbarProps> = ({
         <Link
           className="__dumi-default-navbar-logo"
           style={{
-            backgroundImage: logo ? `url('${logo}')` : undefined,
+            backgroundImage: logo ? `url('${renderLogo}')` : undefined,
           }}
           to={base}
           data-plaintext={logo === false || undefined}
