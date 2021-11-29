@@ -99,6 +99,8 @@ export default {
         'Grid/index',
         'Image/index',
         'List/index',
+        'Tag/index',
+        'Badge/index',
       ],
     },
   ],

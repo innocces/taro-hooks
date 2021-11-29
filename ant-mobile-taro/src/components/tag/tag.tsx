@@ -1,4 +1,5 @@
 import React, { CSSProperties, FC } from 'react'
+import { Text } from '@tarojs/components'
 import { mergeProps } from '../../utils/with-default-props'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import classNames from 'classnames'
@@ -43,7 +44,7 @@ export const Tag: FC<TagProps> = p => {
   }
   return withNativeProps(
     props,
-    <span
+    <Text
       style={style}
       onClick={props.onClick}
       className={classNames(classPrefix, {
@@ -52,6 +53,6 @@ export const Tag: FC<TagProps> = p => {
       })}
     >
       {props.children}
-    </span>
+    </Text>
   )
 }

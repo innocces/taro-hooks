@@ -8,6 +8,8 @@ export default {
     'pages/Grid/index',
     'pages/Image/index',
     'pages/List/index',
+    'pages/Tag/index',
+    'pages/Badge/index',
   ],
   window: {
     backgroundTextStyle: 'light',

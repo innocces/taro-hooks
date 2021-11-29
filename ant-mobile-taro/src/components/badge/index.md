@@ -10,7 +10,7 @@ group:
 
 # Badge 徽标
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/Badge"></code>
 
 ### 属性
 

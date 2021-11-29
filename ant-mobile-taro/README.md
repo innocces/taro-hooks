@@ -15,7 +15,7 @@
 | button          | ✅    | ✅  |
 | list            | ✅    | ✅  |
 | space           | ✅    | ✅  |
-| badge           | 🕡    | 🕡  |
+| badge           | ✅    | ✅  |
 | card            | 🕡    | 🕡  |
 | image           | ✅    | ✅  |
 | image-viewer    | 🕡    | 🕡  |
@@ -25,7 +25,7 @@
 | popover         | 🕡    | 🕡  |
 | steps           | 🕡    | 🕡  |
 | swiper          | 🕡    | 🕡  |
-| tag             | 🕡    | 🕡  |
+| tag             | ✅    | ✅  |
 | water-mark      | 🕡    | 🕡  |
 | check-list      | 🕡    | 🕡  |
 | checkbox        | 🕡    | 🕡  |

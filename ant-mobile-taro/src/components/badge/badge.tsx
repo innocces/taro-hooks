@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React, { FC } from 'react'
+import { View } from '@tarojs/components'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
 
@@ -26,22 +27,22 @@ export const Badge: FC<BadgeProps> = p => {
   const element = content
     ? withNativeProps(
         props,
-        <div
+        <View
           className={badgeCls}
           style={{
             backgroundColor: color,
           }}
         >
           {!isDot && content}
-        </div>
+        </View>
       )
     : null
 
   return children ? (
-    <div className={`${classPrefix}-wrap`}>
+    <View className={`${classPrefix}-wrap`}>
       {children}
       {element}
-    </div>
+    </View>
   ) : (
     element
   )
