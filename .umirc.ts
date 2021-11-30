@@ -146,7 +146,8 @@ export default defineConfig({
   scripts: [
     `if (location.pathname.startsWith('/~demos/')) {
       document.body.style.background = '#f5f7fa'
-    }`,
+    }
+    `,
   ],
   metas: [
     {

@@ -25,18 +25,26 @@ const Navbar: FC<INavbarProps> = ({
   } = useContext(context);
   const [version, setVersion] = useState<string>(taroHooksPackages.version);
   const [renderLogo, setLogo] = useState<string | boolean>(logo);
+  const [renderTitle, setTitle] = useState<string>(title);
 
   useEffect(() => {
+    const linkRef: HTMLLinkElement = document.head.querySelector(
+      'link[rel="shortcut icon"]',
+    );
     if (
-      ['ant-mobile-taro', 'components'].some((v) =>
+      ['ant-mobile-taro', 'components', '/~demos/ui-'].some((v) =>
         location.pathname.includes(v),
       )
     ) {
       setVersion(amtPackages.version);
-      setLogo('/image/ant-icon.svg');
+      setLogo('/image/ant-ico.png');
+      setTitle('ANT-MOBILE-TARO');
+      linkRef.href = '/image/ant-ico.png';
     } else {
       setVersion(taroHooksPackages.version);
       setLogo(logo);
+      setTitle(title);
+      linkRef.href = '/image/hook.png';
     }
   }, [location]);
 
@@ -53,11 +61,12 @@ const Navbar: FC<INavbarProps> = ({
           className="__dumi-default-navbar-logo"
           style={{
             backgroundImage: logo ? `url('${renderLogo}')` : undefined,
+            color: version === amtPackages.version ? '#080e29' : 'transparent',
           }}
           to={base}
           data-plaintext={logo === false || undefined}
         >
-          {title}
+          {renderTitle}
         </Link>
         <div className="__dumi-default-navbar-version">{`v${version}`}</div>
       </div>
