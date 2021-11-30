@@ -10,7 +10,7 @@ group:
 
 # Card 卡片
 
-<code src="./demos/index.tsx">
+<code src="@ui/Card">
 
 ## API
 

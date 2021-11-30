@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react'
+import { ITouchEvent, View } from '@tarojs/components'
 import classNames from 'classnames'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 
@@ -11,9 +12,9 @@ export type CardProps = {
   headerClassName?: string
   bodyStyle?: React.CSSProperties
   bodyClassName?: string
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-  onBodyClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-  onHeaderClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onClick?: (event: ITouchEvent) => void
+  onBodyClick?: (event: ITouchEvent) => void
+  onHeaderClick?: (event: ITouchEvent) => void
 } & NativeProps
 
 export const Card: FC<CardProps> = props => {
@@ -22,14 +23,14 @@ export const Card: FC<CardProps> = props => {
       return null
     }
     return (
-      <div
+      <View
         className={classNames(`${classPrefix}-header`, props.headerClassName)}
         style={props.headerStyle}
         onClick={props.onHeaderClick}
       >
-        <div className={`${classPrefix}-header-title`}>{props.title}</div>
+        <View className={`${classPrefix}-header-title`}>{props.title}</View>
         {props.extra}
-      </div>
+      </View>
     )
   }
 
@@ -38,21 +39,21 @@ export const Card: FC<CardProps> = props => {
       return null
     }
     return (
-      <div
+      <View
         className={classNames(`${classPrefix}-body`, props.bodyClassName)}
         style={props.bodyStyle}
         onClick={props.onBodyClick}
       >
         {props.children}
-      </div>
+      </View>
     )
   }
 
   return withNativeProps(
     props,
-    <div className={classPrefix} onClick={props.onClick}>
+    <View className={classPrefix} onClick={props.onClick}>
       {renderHeader()}
       {renderBody()}
-    </div>
+    </View>
   )
 }

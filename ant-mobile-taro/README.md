@@ -16,7 +16,7 @@
 | list            | ✅    | ✅  |
 | space           | ✅    | ✅  |
 | badge           | ✅    | ✅  |
-| card            | 🕡    | 🕡  |
+| card            | ✅    | ✅  |
 | image           | ✅    | ✅  |
 | image-viewer    | 🕡    | 🕡  |
 | infinite-scroll | 🕡    | 🕡  |

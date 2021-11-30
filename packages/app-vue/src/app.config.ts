@@ -10,6 +10,7 @@ export default {
     'pages/List/index',
     'pages/Tag/index',
     'pages/Badge/index',
+    'pages/Card/index',
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -101,6 +101,7 @@ export default {
         'List/index',
         'Tag/index',
         'Badge/index',
+        'Card/index',
       ],
     },
   ],
