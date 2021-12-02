@@ -69,7 +69,7 @@ export const Button: FC<ButtonProps> = p => {
     block,
     fill,
     size,
-    loadingElement = <Loading color={color} />,
+    loadingElement = <Loading color='currentColor' />,
     loadingText,
     shape,
     type,

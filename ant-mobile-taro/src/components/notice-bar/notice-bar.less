@@ -17,7 +17,8 @@
   border-right: none;
   background-color: var(--background-color);
   color: var(--text-color);
-  & > span[role='img'] {
+  & > Text[role='img'],
+  & > taro-text-core[role='img'] {
     color: var(--text-color);
   }
 
@@ -52,7 +53,10 @@
     & .@{class-prefix-notice-bar}-content-inner {
       width: fit-content;
       transition-timing-function: linear;
-      position: absolute;
+      display: block;
+      // position: absolute;
+      // miniprograme need init top
+      // top: 0;
       padding: 0 4px;
       white-space: nowrap;
     }
@@ -60,5 +64,7 @@
   & .@{class-prefix-notice-bar}-right {
     flex-shrink: 0;
     margin-left: 12px;
+    position: relative;
+    z-index: 60;
   }
 }

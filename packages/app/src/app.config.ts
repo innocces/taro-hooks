@@ -102,6 +102,7 @@ export default {
         'Tag/index',
         'Badge/index',
         'Card/index',
+        'NoticeBar/index',
       ],
     },
   ],

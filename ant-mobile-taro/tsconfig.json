@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "rootDir": "src",
-    "target": "ES6",
+    "target": "ESNEXT",
     "moduleResolution": "node",
     "jsx": "react",
     "allowJs": true,
@@ -15,7 +15,7 @@
       "./node_modules/@types",
       "../node_modules/@types"
     ],
-    "lib": ["ES2015", "DOM"],
+    "lib": ["esnext", "DOM"],
     "paths": {
       "ant-mobile-taro": ["src/index.ts"],
       "ant-mobile-taro/src/*": ["src/*"],

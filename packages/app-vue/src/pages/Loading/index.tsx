@@ -1,7 +1,9 @@
 import { defineComponent } from 'vue';
-import { Loading } from 'ant-mobile-taro';
+import { Loading, Space } from 'ant-mobile-taro';
 import { View, Text } from '@tarojs/components';
-import DemoBlock from '@components/DemoBlock';
+import DemoBlock from '@components/DemoBlock/index.vue';
+
+import './index.less';
 
 export default defineComponent({
   name: 'LoadingDemo',
@@ -19,15 +21,17 @@ export default defineComponent({
             <Loading color="rgb(255, 255, 255)" />
           </DemoBlock>
           <DemoBlock title="自动适配当前字号">
-            <Text style={{ fontSize: 14 }}>
-              <Loading />
-            </Text>
-            <Text style={{ fontSize: 18 }}>
-              <Loading />
-            </Text>
-            <Text style={{ fontSize: 24 }}>
-              <Loading />
-            </Text>
+            <Space align="center">
+              <View className="font-14px">
+                <Loading />
+              </View>
+              <View className="font-18px">
+                <Loading />
+              </View>
+              <View className="font-24px">
+                <Loading />
+              </View>
+            </Space>
           </DemoBlock>
           <DemoBlock title="配合文本颜色使用">
             <View style={{ color: '#00b578' }}>

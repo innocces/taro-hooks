@@ -11,6 +11,7 @@ export default {
     'pages/Tag/index',
     'pages/Badge/index',
     'pages/Card/index',
+    'pages/NoticeBar/index',
   ],
   window: {
     backgroundTextStyle: 'light',

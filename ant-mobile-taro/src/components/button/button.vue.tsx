@@ -119,7 +119,7 @@ export default withNativeProps({
       >
         {loading.value ? (
           <View className={`${classPrefix}-loading-wrapper`}>
-            {loadingElement?.value || <Loading color={color} />}
+            {loadingElement?.value || <Loading color='currentColor' />}
             {loadingText?.value}
           </View>
         ) : (

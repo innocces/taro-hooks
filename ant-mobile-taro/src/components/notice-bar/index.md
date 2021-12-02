@@ -10,7 +10,7 @@ group:
 
 # NoticeBar 通告栏
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/NoticeBar"></code>
 
 ## 属性
 

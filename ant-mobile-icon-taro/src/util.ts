@@ -1,7 +1,9 @@
 import type { TRecord } from './type';
 export function hex2rgb(hex: string): string {
   const rgb: number[] = [];
-
+  if (hex && hex.startsWith('rgb')) {
+    return hex;
+  }
   //去除前缀 # 号
   hex = hex.substr(1);
 

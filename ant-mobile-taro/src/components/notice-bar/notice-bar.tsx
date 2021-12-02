@@ -1,11 +1,24 @@
-import React, { useState, useRef, memo } from 'react'
+import React, {
+  useState,
+  useRef,
+  memo,
+  ComponentType,
+  cloneElement,
+  useEffect,
+  useCallback,
+} from 'react'
 import classNames from 'classnames'
-import { CloseOutline, SoundOutline } from 'antd-mobile-icons'
+import { View, Text } from '@tarojs/components'
+import type { TextProps } from '@tarojs/components/types/Text'
+import { nextTick } from '@tarojs/taro'
+import { Close, Sound } from 'ant-mobile-icon-taro/es/index.react'
 import { useTimeout } from 'ahooks'
 import { mergeProps } from '../../utils/with-default-props'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { useResizeEffect } from '../../utils/use-resize-effect'
 import { useMutationEffect } from '../../utils/use-mutation-effect'
+import { getClientRect, getColor } from '../../utils/get-client-rect'
+import { uuid, nextTickDelay, FRAMETIME } from '../../utils/tool'
 
 const classPrefix = `adm-notice-bar`
 
@@ -37,24 +50,31 @@ const defaultProps = {
 export const NoticeBar = memo<NoticeBarProps>(p => {
   const props = mergeProps(defaultProps, p)
 
-  const containerRef = useRef<HTMLSpanElement>(null)
-  const textRef = useRef<HTMLSpanElement>(null)
+  // due to query cannot use in scope. use uuid to be uniq
+  const containerUUID = useRef(uuid(`${classPrefix}-content`))
+  const textUUID = useRef(uuid(`${classPrefix}-content-inner`))
+
+  const containerRef = useRef<ComponentType<TextProps>>(null)
+  const textRef = useRef<ComponentType<TextProps>>(null)
 
   const [visible, setVisible] = useState(true)
+  const [iconColor, setIconColor] = useState<string>()
 
   const speed = props.speed
 
   const delayLockRef = useRef(true)
   const animatingRef = useRef(false)
 
-  function start() {
+  async function start() {
     if (delayLockRef.current) return
 
     const container = containerRef.current
     const text = textRef.current
     if (!container || !text) return
-
-    if (container.offsetWidth >= text.offsetWidth) {
+    const containerRect = await getClientRect(`#${containerUUID.current}`)
+    const textRect = await getClientRect(`#${textUUID.current}`)
+    console.log(containerRect.width, textRect.width)
+    if (containerRect.width >= textRect.width) {
       animatingRef.current = false
       text.style.removeProperty('transition-duration')
       text.style.removeProperty('transform')
@@ -62,77 +82,101 @@ export const NoticeBar = memo<NoticeBarProps>(p => {
     }
 
     if (animatingRef.current) return
-
+    console.log('mark animation')
     const initial = !text.style.transform
     text.style.transitionDuration = '0s'
     if (initial) {
       text.style.transform = 'translateX(0)'
     } else {
-      text.style.transform = `translateX(${container.offsetWidth}px)`
+      text.style.transform = `translateX(${containerRect.width}px)`
     }
     const distance = initial
-      ? text.offsetWidth
-      : container.offsetWidth + text.offsetWidth
+      ? textRect.width
+      : containerRect.width + textRect.width
     animatingRef.current = true
-    text.style.transitionDuration = `${Math.round(distance / speed)}s`
-    text.style.transform = `translateX(-${text.offsetWidth}px)`
+    // maybe batch, use timeout to micro
+    nextTickDelay(
+      () => {
+        text.style.transitionDuration = `${Math.round(distance / speed)}s`
+        text.style.transform = `translateX(-${textRect.width}px)`
+      },
+      false,
+      FRAMETIME
+    )
   }
+
+  useEffect(() => {
+    getIconColor()
+  }, [props.color, props.style])
 
   useTimeout(() => {
     delayLockRef.current = false
     start()
   }, props.delay)
 
-  useResizeEffect(text => {
-    start()
+  useResizeEffect(() => {
+    nextTick(() => {
+      start()
+    })
   }, containerRef)
 
-  useMutationEffect(
-    () => {
-      console.log('text mutation effect')
+  useMutationEffect(() => {
+    console.log('text mutation effect')
+    nextTick(() => {
       start()
-    },
-    textRef,
-    {
-      subtree: true,
-      childList: true,
-      characterData: true,
-    }
-  )
+    })
+  }, textRef)
+
+  const getIconColor = useCallback(async () => {
+    const inheritColor = await getColor(`#${containerUUID.current}`)
+    setIconColor(
+      props.style?.['--text-color'] ?? inheritColor ?? 'currentColor'
+    )
+  }, [props.color, props.style])
 
   if (!visible) return null
 
   return withNativeProps(
     props,
-    <div className={classNames(classPrefix, `${classPrefix}-${props.color}`)}>
-      <span className={`${classPrefix}-left`}>
-        {'icon' in props ? props.icon : <SoundOutline />}
-      </span>
-      <span ref={containerRef} className={`${classPrefix}-content`}>
-        <span
+    <View className={classNames(classPrefix, `${classPrefix}-${props.color}`)}>
+      <Text className={`${classPrefix}-left`}>
+        {'icon' in props ? (
+          cloneElement(props.icon, { color: iconColor })
+        ) : (
+          <Sound color={iconColor} onClick={console.log} />
+        )}
+      </Text>
+      <View
+        ref={containerRef}
+        className={`${classPrefix}-content`}
+        id={containerUUID.current}
+      >
+        <View
           onTransitionEnd={() => {
             animatingRef.current = false
             start()
           }}
           ref={textRef}
+          id={textUUID.current}
           className={`${classPrefix}-content-inner`}
         >
           {props.content}
-        </span>
-      </span>
+        </View>
+      </View>
       {(props.closeable || props.extra) && (
-        <span className={`${classPrefix}-right`}>
-          {props.extra}
+        <View className={`${classPrefix}-right`}>
+          {props.extra && cloneElement(props.extra, { color: iconColor })}
           {props.closeable && (
-            <CloseOutline
+            <Close
+              color={iconColor}
               onClick={() => {
                 setVisible(false)
                 props.onClose?.()
               }}
             />
           )}
-        </span>
+        </View>
       )}
-    </div>
+    </View>
   )
 })

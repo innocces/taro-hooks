@@ -78,6 +78,9 @@ export default () => {
             Loading
           </Button>
           <Button loading>默认Loading</Button>
+          <Button color="primary" loading>
+            默认Loading
+          </Button>
         </Space>
       </DemoBlock>
       <DemoBlock title="带图标的按钮">
