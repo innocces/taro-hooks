@@ -1,4 +1,5 @@
 import React, { memo, ReactElement } from 'react'
+import { View } from '@tarojs/components'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import classNames from 'classnames'
 import { mergeProps } from '../../utils/with-default-props'
@@ -31,7 +32,7 @@ export const PageIndicator = memo<PageIndicatorProps>(p => {
   const dots: ReactElement[] = []
   for (let i = 0; i < props.total; i++) {
     dots.push(
-      <div
+      <View
         key={i}
         className={classNames(`${classPrefix}-dot`, {
           [`${classPrefix}-dot-active`]: props.current === i,
@@ -42,7 +43,7 @@ export const PageIndicator = memo<PageIndicatorProps>(p => {
 
   return withNativeProps(
     props,
-    <div
+    <View
       className={classNames(
         classPrefix,
         `${classPrefix}-${props.direction}`,
@@ -50,6 +51,6 @@ export const PageIndicator = memo<PageIndicatorProps>(p => {
       )}
     >
       {dots}
-    </div>
+    </View>
   )
 })

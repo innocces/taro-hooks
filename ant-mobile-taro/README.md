@@ -20,8 +20,8 @@
 | image           | ✅    | ✅  |
 | image-viewer    | 🕡    | 🕡  |
 | infinite-scroll | 🕡    | 🕡  |
-| notice-bar      | 🕡    | 🕡  |
-| page-indicator  | 🕡    | 🕡  |
+| notice-bar      | ✅    | ✅  |
+| page-indicator  | ✅    | ✅  |
 | popover         | 🕡    | 🕡  |
 | steps           | 🕡    | 🕡  |
 | swiper          | 🕡    | 🕡  |

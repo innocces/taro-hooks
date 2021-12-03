@@ -103,6 +103,7 @@ export default {
         'Badge/index',
         'Card/index',
         'NoticeBar/index',
+        'PageIndicator/index',
       ],
     },
   ],
