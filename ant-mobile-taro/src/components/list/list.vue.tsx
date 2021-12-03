@@ -24,7 +24,13 @@ export const List = withNativeProps({
       attrs,
       slots,
     }: ISetupContext<
-      '--prefix-width' | '--align-items' | '--active-background-color'
+      | '--prefix-width'
+      | '--align-items'
+      | '--active-background-color'
+      | '--border-inner'
+      | '--border-top'
+      | '--border-bottom'
+      | '--padding-left'
     >
   ) {
     return () => (

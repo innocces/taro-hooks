@@ -77,7 +77,6 @@ export const NoticeBar = withNativeProps({
       }
 
       if (animatingRef.value) return
-      console.log('mark animation')
       const initial = !style.value.transform
       style.value.transitionDuration = '0s'
       if (initial) {
@@ -129,7 +128,6 @@ export const NoticeBar = withNativeProps({
     }
 
     const handleTransitionEnd = () => {
-      console.log('animation end')
       animatingRef.value = false
       start()
     }

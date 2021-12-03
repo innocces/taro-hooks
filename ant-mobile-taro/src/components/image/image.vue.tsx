@@ -89,7 +89,7 @@ export default withNativeProps({
   name: 'Image',
   props: ImageProps,
   emits: ['click', 'error'],
-  setup(props, { attrs, emit }: ISetupContext<'--width' | '--height'>) {
+  setup(props, { attrs, emit, slots }: ISetupContext<'--width' | '--height'>) {
     const loaded = ref(false)
     const failed = ref(false)
     const listenSrc = ref(props.src)
@@ -144,10 +144,10 @@ export default withNativeProps({
           </>
         )}
         {failed.value ? (
-          props.fallback
+          props.fallback || slots.fallback?.()
         ) : (
           <>
-            {!loaded.value && props.placeholder}
+            {!loaded.value && (props.placeholder || slots.placeholder?.())}
             <TaroImage
               className={`${classPrefix}-img`}
               src={src.value}

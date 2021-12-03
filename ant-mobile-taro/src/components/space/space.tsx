@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import classNames from 'classnames'
-import { View } from '@tarojs/components'
+import { ITouchEvent, View } from '@tarojs/components'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
 
@@ -19,6 +19,7 @@ export type SpaceProps = {
     | 'stretch'
   wrap?: boolean
   block?: boolean
+  onClick?: (event: ITouchEvent) => void
 } & NativeProps<'--gap' | '--gap-vertical' | '--gap-horizontal'>
 
 const defaultProps = {
@@ -38,6 +39,7 @@ export const Space: FC<SpaceProps> = p => {
         [`${classPrefix}-align-${props.align}`]: !!props.align,
         [`${classPrefix}-justify-${props.justify}`]: !!props.justify,
       })}
+      onClick={props.onClick}
     >
       {React.Children.map(props.children, child => {
         return (

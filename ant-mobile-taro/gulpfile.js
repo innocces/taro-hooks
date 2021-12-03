@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const gulp = require('gulp')
 const less = require('gulp-less')
 const path = require('path')
@@ -88,10 +89,10 @@ function umdWebpack() {
       webpackStream(
         {
           output: {
-            filename: 'ao-ui.js',
+            filename: 'ant-mobile-taro.js',
             library: {
               type: 'umd',
-              name: 'AOUI',
+              name: 'AntMobileTaro',
             },
           },
           mode: 'production',

@@ -13,7 +13,7 @@ export default () => {
       <DemoBlock title="默认提供 5 种通用标签颜色">
         <Space>
           <Tag color="default">Default</Tag>
-          <Tag color="primary">Primary</Tag>
+          <Tag color="primary">测试</Tag>
           <Tag color="success">Success</Tag>
           <Tag color="warning">Warning</Tag>
           <Tag color="danger">Danger</Tag>
@@ -45,6 +45,38 @@ export default () => {
         <Tag round color="#2db7f5">
           kongxin
         </Tag>
+      </DemoBlock>
+
+      <DemoBlock title="通过 CSS 变量进行个性化">
+        <Space>
+          <Tag
+            color="primary"
+            fill="outline"
+            style={{ '--border-radius': '6px' }}
+          >
+            Primary
+          </Tag>
+          <Tag
+            color="success"
+            fill="outline"
+            style={{ '--background-color': '#c8f7c5' }}
+          >
+            Success
+          </Tag>
+          <Tag
+            color="warning"
+            style={{ '--text-color': 'var(--adm-color-text)' }}
+          >
+            Warning
+          </Tag>
+          <Tag
+            color="danger"
+            fill="outline"
+            style={{ '--border-color': 'var(--adm-color-weak)' }}
+          >
+            Danger
+          </Tag>
+        </Space>
       </DemoBlock>
     </View>
   );

@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { PropType } from 'vue'
 import classNames from 'classnames'
-import { View } from '@tarojs/components'
+import { ITouchEvent, View } from '@tarojs/components'
 import { ISetupContext, withNativeProps } from '../../utils/native-props.vue'
 
 const classPrefix = `adm-space`
@@ -35,13 +35,18 @@ const SpaceProps = {
 export default withNativeProps({
   name: 'Space',
   props: SpaceProps,
+  emits: ['click'],
   setup(
     props,
     {
       attrs,
       slots,
+      emit,
     }: ISetupContext<'--gap' | '--gap-vertical' | '--gap-horizontal'>
   ) {
+    const handleClick = (event: ITouchEvent) => {
+      emit('click', event)
+    }
     return () => (
       <View
         {...attrs}
@@ -57,6 +62,7 @@ export default withNativeProps({
           attrs.class,
           attrs.className
         )}
+        onClick={handleClick}
       >
         {slots.default &&
           slots.default().map(child => {

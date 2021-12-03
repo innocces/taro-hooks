@@ -119,11 +119,13 @@ export default withNativeProps({
       >
         {loading.value ? (
           <View className={`${classPrefix}-loading-wrapper`}>
-            {loadingElement?.value || <Loading color='currentColor' />}
+            {loadingElement?.value || slots.loadingElement?.() || (
+              <Loading color='currentColor' />
+            )}
             {loadingText?.value}
           </View>
         ) : (
-          slots.default && slots.default()
+          slots.default?.()
         )}
       </TaroButton>
     )

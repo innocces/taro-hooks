@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { PropType, CSSProperties } from 'vue'
+import { PropType, CSSProperties, computed } from 'vue'
 import { ITouchEvent, Text } from '@tarojs/components'
-import { withNativeProps } from '../../utils/native-props.vue'
+import { withNativeProps, ISetupContext } from '../../utils/native-props.vue'
 import classNames from 'classnames'
 
 const classPrefix = `adm-tag`
@@ -43,15 +43,35 @@ export const Tag = withNativeProps({
   name: 'Tag',
   emits: ['click'],
   props: TagProps,
-  setup(props, { attrs, slots, emit }) {
+  setup(
+    props,
+    {
+      attrs,
+      slots,
+      emit,
+    }: ISetupContext<
+      | '--border-color'
+      | '--background-color'
+      | '--text-color'
+      | '--border-radius'
+    >
+  ) {
     const handleClick = (event: ITouchEvent) => {
       emit('click', event)
     }
+    const color = computed(() => {
+      return colorRecord[props.color] ?? props.color
+    })
     const style: CSSProperties & {
-      '--color': string
+      '--border-color': string
+      '--text-color': string
+      '--background-color': string
     } = {
       ...attrs.style,
-      '--color': colorRecord[props.color] ?? props.color,
+      '--border-color': color.value,
+      '--text-color': props.fill === 'outline' ? color.value : '#ffffff',
+      '--background-color':
+        props.fill === 'outline' ? 'transparent' : color.value,
     }
     return () => (
       <Text
@@ -62,13 +82,12 @@ export const Tag = withNativeProps({
           classPrefix,
           {
             [`${classPrefix}-round`]: props.round,
-            [`${classPrefix}-outline`]: props.fill === 'outline',
           },
           attrs.class,
           attrs.className
         )}
       >
-        {slots.default && slots.default()}
+        {slots.default?.()}
       </Text>
     )
   },

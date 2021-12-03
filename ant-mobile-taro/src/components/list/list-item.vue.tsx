@@ -38,7 +38,10 @@ export const ListItem = withNativeProps({
       }
     }
 
-    const arrow = props.arrow === undefined ? props.clickable : props.arrow
+    const arrow =
+      typeof props.arrow === 'boolean' && !props.arrow
+        ? props.clickable
+        : props.arrow || slots.arrow?.()
 
     return () => (
       <View
@@ -52,25 +55,27 @@ export const ListItem = withNativeProps({
         onClick={handleClick}
       >
         <View className={`${classPrefix}-content`}>
-          {props.prefix && (
+          {(props.prefix || slots.prefix) && (
             <View className={`${classPrefix}-content-prefix`}>
-              {props.prefix}
+              {props.prefix || slots.prefix?.()}
             </View>
           )}
           <View className={`${classPrefix}-content-main`}>
-            {props.title && (
-              <View className={`${classPrefix}-title`}>{props.title}</View>
+            {(props.title || slots.title) && (
+              <View className={`${classPrefix}-title`}>
+                {props.title || slots.title?.()}
+              </View>
             )}
-            {slots.default && slots.default()}
-            {props.description && (
+            {slots.default?.()}
+            {(props.description || slots.description) && (
               <View className={`${classPrefix}-description`}>
-                {props.description}
+                {props.description ?? slots.description?.()}
               </View>
             )}
           </View>
-          {props.extra && (
+          {(props.extra || slots.extra) && (
             <View className={`${classPrefix}-content-extra`}>
-              {props.extra}
+              {props.extra || slots.extra?.()}
             </View>
           )}
           {arrow && (
