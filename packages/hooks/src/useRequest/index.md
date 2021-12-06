@@ -196,7 +196,7 @@ const { loading, run } = useRequest(
   (username) => ({
     url: '/api/changeUsername',
     method: 'post',
-    body: JSON.stringify({ username }),
+    data: { username },
   }),
   {
     manual: true,
