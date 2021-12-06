@@ -13,6 +13,7 @@ export default {
     'pages/Card/index',
     'pages/NoticeBar/index',
     'pages/PageIndicator/index',
+    'pages/Steps/index',
   ],
   window: {
     backgroundTextStyle: 'light',

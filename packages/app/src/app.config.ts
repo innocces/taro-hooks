@@ -104,6 +104,7 @@ export default {
         'Card/index',
         'NoticeBar/index',
         'PageIndicator/index',
+        'Steps/index',
       ],
     },
   ],

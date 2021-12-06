@@ -23,7 +23,7 @@
 | notice-bar      | ✅    | ✅  |
 | page-indicator  | ✅    | ✅  |
 | popover         | 🕡    | 🕡  |
-| steps           | 🕡    | 🕡  |
+| steps           | ✅    | ✅  |
 | swiper          | 🕡    | 🕡  |
 | tag             | ✅    | ✅  |
 | water-mark      | 🕡    | 🕡  |

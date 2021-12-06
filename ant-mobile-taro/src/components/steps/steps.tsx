@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { View, Text } from '@tarojs/components'
 import classNames from 'classnames'
 import { StepProps } from './step'
 import { mergeProps } from '../../utils/with-default-props'
@@ -7,7 +8,7 @@ import { NativeProps, withNativeProps } from '../../utils/native-props'
 const classPrefix = `adm-steps`
 const stepClassPrefix = `adm-step`
 
-const defaultIcon = <span className={`${stepClassPrefix}-icon-dot`} />
+const defaultIcon = <Text className={`${stepClassPrefix}-icon-dot`} />
 
 type Direction = 'horizontal' | 'vertical'
 
@@ -28,7 +29,7 @@ export const Steps: FC<StepsProps> = p => {
 
   return withNativeProps(
     props,
-    <div className={classString}>
+    <View className={classString}>
       {React.Children.map(props.children, (child, index) => {
         if (!React.isValidElement(child)) {
           return child
@@ -49,6 +50,6 @@ export const Steps: FC<StepsProps> = p => {
           icon,
         })
       })}
-    </div>
+    </View>
   )
 }

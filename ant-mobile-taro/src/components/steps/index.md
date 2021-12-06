@@ -10,7 +10,7 @@ group:
 
 # Steps 步骤条
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/Steps"></code>
 
 ## 属性
 
