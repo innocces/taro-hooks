@@ -17,6 +17,7 @@ export default {
     'pages/Empty/index',
     'pages/SafeArea/index',
     'pages/Divider/index',
+    'pages/Result/index',
   ],
   window: {
     backgroundTextStyle: 'light',

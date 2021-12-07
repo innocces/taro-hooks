@@ -49,7 +49,7 @@
 | progress-bar    | 🕡    | 🕡  |
 | progress-circle | 🕡    | 🕡  |
 | pull-to-refresh | 🕡    | 🕡  |
-| result          | 🕡    | 🕡  |
+| result          | ✅    | ✅  |
 | swipe-action    | 🕡    | 🕡  |
 | toast           | 🕡    | 🕡  |
 | capsule-tabs    | 🕡    | 🕡  |

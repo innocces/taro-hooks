@@ -1,22 +1,27 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactNode, useRef, useState, useEffect } from 'react'
 import classNames from 'classnames'
+import { View } from '@tarojs/components'
+import { nextTick } from '@tarojs/taro'
 import {
   CheckCircleFill,
   CloseCircleFill,
-  InformationCircleFill,
-  ClockCircleFill,
-  ExclamationCircleFill,
-} from 'antd-mobile-icons'
+  InfoCircleFill,
+  TimeCircleFill,
+  WarningCircleFill,
+} from 'ant-mobile-icon-taro/es/index.react'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
+import { uuid } from '../../utils/tool'
+import { getColor } from '../../utils/get-client-rect'
+import hex2rgb from '../../utils/hex2rgb'
 
 const classPrefix = `adm-result`
 
 const iconRecord = {
-  success: CheckCircleFill,
-  error: CloseCircleFill,
-  info: InformationCircleFill,
-  waiting: ClockCircleFill,
-  warning: ExclamationCircleFill,
+  success: <CheckCircleFill />,
+  error: <CloseCircleFill />,
+  info: <InfoCircleFill />,
+  waiting: <TimeCircleFill />,
+  warning: <WarningCircleFill />,
 }
 
 export type ResultProps = {
@@ -28,17 +33,34 @@ export type ResultProps = {
 
 export const Result: FC<ResultProps> = props => {
   const { status, title, description, icon } = props
+  const resultUUID = useRef(uuid(classPrefix))
+  const [iconColor, setIconColor] = useState('currentColor')
   if (!status) return null
-  const resultIcon = icon || React.createElement(iconRecord[status])
+
+  useEffect(() => {
+    nextTick(() =>
+      getColor(`#${resultUUID.current}`).then(color => {
+        setIconColor(hex2rgb(color))
+      })
+    )
+  }, [props.status])
+
+  const resultIcon = React.cloneElement(icon || iconRecord[status], {
+    size: 52,
+    usePX: true,
+    color: iconColor,
+  })
 
   return withNativeProps(
     props,
-    <div className={classNames(classPrefix, `${classPrefix}-${status}`)}>
-      <div className={`${classPrefix}-icon`}>{resultIcon}</div>
-      <div className={`${classPrefix}-title`}>{title}</div>
+    <View className={classNames(classPrefix, `${classPrefix}-${status}`)}>
+      <View className={`${classPrefix}-icon`} id={resultUUID.current}>
+        {resultIcon}
+      </View>
+      <View className={`${classPrefix}-title`}>{title}</View>
       {description ? (
-        <div className={`${classPrefix}-description`}>{description}</div>
+        <View className={`${classPrefix}-description`}>{description}</View>
       ) : null}
-    </div>
+    </View>
   )
 }

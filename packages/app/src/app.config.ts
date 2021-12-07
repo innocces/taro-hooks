@@ -108,6 +108,7 @@ export default {
         'Empty/index',
         'SafeArea/index',
         'Divider/index',
+        'Result/index',
       ],
     },
   ],

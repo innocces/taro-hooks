@@ -10,7 +10,7 @@ group:
 
 # Result 结果
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/Result"></code>
 
 # API
 
