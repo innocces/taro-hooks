@@ -10,7 +10,7 @@ group:
 
 # Divider 分割线
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/Divider"></code>
 
 # API
 

@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react'
+import { Image, View } from '@tarojs/components'
 import classNames from 'classnames'
 import { mergeProps } from '../../utils/with-default-props'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
-import EmptyIcon from '../../assets/empty-icon.svg'
+import EmptyIcon from '../../assets/empty-icon.png'
 
 const classPrefix = `adm-empty`
 
@@ -21,11 +22,14 @@ export const Empty: React.FC<EmptyProps> = p => {
 
   const imageNode =
     typeof props.image === 'string' ? (
-      <img
+      <Image
         className={`${classPrefix}-image`}
         style={props.imageStyle}
+        mode='widthFix'
         src={props.image}
-        alt='empty'
+        imgProps={{
+          alt: 'empty',
+        }}
       />
     ) : (
       props.image
@@ -33,13 +37,13 @@ export const Empty: React.FC<EmptyProps> = p => {
 
   return withNativeProps(
     props,
-    <div className={classPrefix}>
-      <div className={`${classPrefix}-image-container`}>{imageNode}</div>
+    <View className={classPrefix}>
+      <View className={`${classPrefix}-image-container`}>{imageNode}</View>
       {props.description && (
-        <div className={classNames(`${classPrefix}-description`)}>
+        <View className={classNames(`${classPrefix}-description`)}>
           {props.description}
-        </div>
+        </View>
       )}
-    </div>
+    </View>
   )
 }

@@ -42,7 +42,7 @@
 | text-area       | 🕡    | 🕡  |
 | action-sheet    | 🕡    | 🕡  |
 | dialog          | 🕡    | 🕡  |
-| empty           | 🕡    | 🕡  |
+| empty           | ✅    | ✅  |
 | error-block     | 🕡    | 🕡  |
 | loading         | ✅    | ✅  |
 | mask            | 🕡    | 🕡  |
@@ -54,7 +54,7 @@
 | toast           | 🕡    | 🕡  |
 | capsule-tabs    | 🕡    | 🕡  |
 | collapse        | 🕡    | 🕡  |
-| divider         | 🕡    | 🕡  |
+| divider         | ✅    | ✅  |
 | floating-panel  | 🕡    | 🕡  |
 | grid            | ✅    | ✅  |
 | index-bar       | 🕡    | 🕡  |
@@ -72,6 +72,6 @@
 | image-uploader  | 🕡    | 🕡  |
 | number-keyboard | 🕡    | 🕡  |
 | picker-view     | 🕡    | 🕡  |
-| safe-area       | 🕡    | 🕡  |
+| safe-area       | ✅    | ✅  |
 | tree-select     | 🕡    | 🕡  |
 | virtual-input   | 🕡    | 🕡  |

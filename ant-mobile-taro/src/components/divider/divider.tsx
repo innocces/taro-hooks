@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
@@ -17,15 +18,15 @@ export const Divider: FC<DividerProps> = p => {
   const props = mergeProps(defaultProps, p)
   return withNativeProps(
     props,
-    <div
+    <View
       className={classNames(
         classPrefix,
         `${classPrefix}-${props.contentPosition}`
       )}
     >
       {props.children && (
-        <div className={`${classPrefix}-content`}>{props.children}</div>
+        <View className={`${classPrefix}-content`}>{props.children}</View>
       )}
-    </div>
+    </View>
   )
 }

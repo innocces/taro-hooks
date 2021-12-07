@@ -109,7 +109,7 @@ export const Image = staged<ImageProps>(p => {
           display: loaded ? 'block' : 'none',
         }}
         {...(weappEnv ? { lazyLoad: props.lazy } : {})}
-        nativeProps={{
+        imgProps={{
           crossOrigin: props.crossOrigin,
           alt: props.alt,
           decoding: props.decoding,

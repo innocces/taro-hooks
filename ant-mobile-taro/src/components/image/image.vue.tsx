@@ -164,7 +164,7 @@ export default withNativeProps({
                 display: loaded.value ? 'block' : 'none',
               }}
               {...(weappEnv ? { lazyLoad: props.lazy } : {})}
-              nativeProps={{
+              imgProps={{
                 crossOrigin: props.crossOrigin,
                 alt: props.alt,
                 decoding: props.decoding,

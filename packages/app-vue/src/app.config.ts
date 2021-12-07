@@ -14,6 +14,9 @@ export default {
     'pages/NoticeBar/index',
     'pages/PageIndicator/index',
     'pages/Steps/index',
+    'pages/Empty/index',
+    'pages/SafeArea/index',
+    'pages/Divider/index',
   ],
   window: {
     backgroundTextStyle: 'light',

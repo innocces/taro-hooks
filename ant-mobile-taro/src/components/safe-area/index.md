@@ -10,7 +10,7 @@ group:
 
 # SafeArea 安全区
 
-<code src="./demos/demo1.tsx"></code>
+<code src="@ui/SafeArea"></code>
 
 ### 属性
 
