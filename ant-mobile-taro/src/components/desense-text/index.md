@@ -10,7 +10,7 @@ group:
 
 # DesenseText 脱敏
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/DesenseText"></code>
 
 # API
 

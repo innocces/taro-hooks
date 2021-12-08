@@ -109,6 +109,8 @@ export default {
         'SafeArea/index',
         'Divider/index',
         'Result/index',
+        'AutoCenter/index',
+        'DesenseText/index',
       ],
     },
   ],

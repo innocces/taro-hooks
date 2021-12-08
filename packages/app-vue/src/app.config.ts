@@ -18,6 +18,8 @@ export default {
     'pages/SafeArea/index',
     'pages/Divider/index',
     'pages/Result/index',
+    'pages/AutoCenter/index',
+    'pages/DesenseText/index',
   ],
   window: {
     backgroundTextStyle: 'light',

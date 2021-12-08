@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import classnames from 'classnames'
+import { View } from '@tarojs/components'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
-import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons'
+import { EyeClose, Eye } from 'ant-mobile-icon-taro/es/index.react'
 import { usePropsValue } from '../../utils/use-props-value'
 
 const classPrefix = 'adm-desense-text'
@@ -30,16 +31,16 @@ export const DesenseText: FC<DesenseTextProps> = p => {
   })
   return withNativeProps(
     props,
-    <span className={classPrefix}>
+    <View className={classPrefix}>
       {isDesense ? desenseText : text}
-      <a
+      <View
         className={classnames(`${classPrefix}-icon-wrap`, 'adm-plain-anchor')}
         onClick={() => {
           setIsDesense(!isDesense)
         }}
       >
-        {isDesense ? <EyeInvisibleOutline /> : <EyeOutline />}
-      </a>
-    </span>
+        {isDesense ? <EyeClose /> : <Eye />}
+      </View>
+    </View>
   )
 }
