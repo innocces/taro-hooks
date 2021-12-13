@@ -111,6 +111,7 @@ export default {
         'Result/index',
         'AutoCenter/index',
         'DesenseText/index',
+        'NavBar/index',
       ],
     },
   ],

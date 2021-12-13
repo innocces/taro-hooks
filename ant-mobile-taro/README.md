@@ -59,14 +59,14 @@
 | grid            | ✅    | ✅  |
 | index-bar       | 🕡    | 🕡  |
 | jumbo-tabs      | 🕡    | 🕡  |
-| nav-bar         | 🕡    | 🕡  |
+| nav-bar         | ✅    | ✅  |
 | popup           | 🕡    | 🕡  |
 | side-bar        | 🕡    | 🕡  |
 | tab-bar         | 🕡    | 🕡  |
 | tabs            | 🕡    | 🕡  |
 | config-provider | 🕡    | 🕡  |
-| auto-center     | 🕡    | 🕡  |
-| desense-text    | 🕡    | 🕡  |
+| auto-center     | ✅    | ✅  |
+| desense-text    | ✅    | ✅  |
 | dropdown        | 🕡    | 🕡  |
 | ellipsis        | 🕡    | 🕡  |
 | image-uploader  | 🕡    | 🕡  |

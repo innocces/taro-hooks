@@ -10,7 +10,7 @@ group:
 
 # NavBar 导航栏
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/NavBar"></code>
 
 ## 属性
 

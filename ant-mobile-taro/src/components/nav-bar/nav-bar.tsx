@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import classNames from 'classnames'
-import { LeftOutline } from 'antd-mobile-icons'
+import { View, Text } from '@tarojs/components'
+import { Left } from 'ant-mobile-icon-taro/es/index.react'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
 
@@ -24,22 +25,22 @@ export const NavBar: FC<NavBarProps> = p => {
 
   return withNativeProps(
     props,
-    <div className={classNames(classPrefix)}>
-      <div className={`${classPrefix}-left`} role='button'>
+    <View className={classNames(classPrefix)}>
+      <View className={`${classPrefix}-left`} role='button'>
         {back !== null && (
-          <div className={`${classPrefix}-back`} onClick={props.onBack}>
+          <View className={`${classPrefix}-back`} onClick={props.onBack}>
             {backArrow && (
-              <span className={`${classPrefix}-back-arrow`}>
-                {backArrow === true ? <LeftOutline /> : backArrow}
-              </span>
+              <Text className={`${classPrefix}-back-arrow`}>
+                {backArrow === true ? <Left /> : backArrow}
+              </Text>
             )}
-            <span aria-hidden='true'>{back}</span>
-          </div>
+            <Text aria-hidden='true'>{back}</Text>
+          </View>
         )}
         {props.left}
-      </div>
-      <div className={`${classPrefix}-title`}>{props.children}</div>
-      <div className={`${classPrefix}-right`}>{props.right}</div>
-    </div>
+      </View>
+      <View className={`${classPrefix}-title`}>{props.children}</View>
+      <View className={`${classPrefix}-right`}>{props.right}</View>
+    </View>
   )
 }

@@ -20,6 +20,7 @@ export default {
     'pages/Result/index',
     'pages/AutoCenter/index',
     'pages/DesenseText/index',
+    'pages/NavBar/index',
   ],
   window: {
     backgroundTextStyle: 'light',
