@@ -10,7 +10,7 @@ group:
 
 # ProgressCircle 进度圈
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/ProgressCircle"></code>
 
 ### 属性
 

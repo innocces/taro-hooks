@@ -67,3 +67,31 @@ export const getColor = (selector: string): Promise<string> => {
     }
   })
 }
+
+export const getComputedStyle = (
+  selector: string,
+  fields: string[]
+): Promise<Record<string, string>> => {
+  const query = createSelectorQuery()
+
+  return new Promise((resolve, reject) => {
+    try {
+      nextTickDelay(() =>
+        query
+          .select(selector)
+          .fields(
+            {
+              computedStyle: fields,
+            },
+            fields => {
+              console.log(fields)
+              resolve(fields)
+            }
+          )
+          .exec()
+      )
+    } catch (e) {
+      reject(e)
+    }
+  })
+}

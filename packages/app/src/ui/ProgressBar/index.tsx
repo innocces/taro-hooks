@@ -1,39 +1,41 @@
-import React, { useState } from 'react'
-import { DemoBlock } from 'demos'
-import { Button, ProgressBar, Space } from 'ant-mobile-taro'
+import React, { useState } from 'react';
+import { View } from '@tarojs/components';
+import { Button, ProgressBar, Space } from 'ant-mobile-taro';
+import DemoBlock from '@components/DemoBlock';
 
 export default () => {
-  const [percent, setPercent] = useState<number>(10)
+  const [percent, setPercent] = useState<number>(10);
   return (
     <>
-      <DemoBlock title='基本用法'>
-        <Space direction='vertical' block>
-          <div>
+      <DemoBlock title="基本用法">
+        <Space direction="vertical" block>
+          <View>
             <Button
-              color='primary'
+              color="primary"
               disabled={percent === 100}
               onClick={() => {
-                setPercent(pre => pre + 10)
+                setPercent((pre) => pre + 10);
               }}
               style={{ marginRight: '8px' }}
             >
               进度+10
             </Button>
             <Button
-              color='primary'
-              fill='outline'
+              color="primary"
+              fill="outline"
               onClick={() => {
-                setPercent(10)
+                setPercent(10);
               }}
             >
               重置
             </Button>
-          </div>
+          </View>
           <ProgressBar percent={percent} />
         </Space>
       </DemoBlock>
-      <DemoBlock title='指定线条宽度'>
-        <Space direction='vertical' block>
+
+      <DemoBlock title="指定线条宽度">
+        <Space direction="vertical" block>
           <ProgressBar
             percent={50}
             style={{
@@ -54,7 +56,8 @@ export default () => {
           />
         </Space>
       </DemoBlock>
-      <DemoBlock title='指定颜色'>
+
+      <DemoBlock title="指定颜色">
         <ProgressBar
           percent={100}
           style={{
@@ -63,5 +66,5 @@ export default () => {
         />
       </DemoBlock>
     </>
-  )
-}
+  );
+};

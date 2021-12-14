@@ -46,8 +46,8 @@
 | error-block     | 🕡    | 🕡  |
 | loading         | ✅    | ✅  |
 | mask            | 🕡    | 🕡  |
-| progress-bar    | 🕡    | 🕡  |
-| progress-circle | 🕡    | 🕡  |
+| progress-bar    | ✅    | ✅  |
+| progress-circle | ✅    | ✅  |
 | pull-to-refresh | 🕡    | 🕡  |
 | result          | ✅    | ✅  |
 | swipe-action    | 🕡    | 🕡  |

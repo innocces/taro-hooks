@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { View } from '@tarojs/components'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import { mergeProps } from '../../utils/with-default-props'
 
@@ -16,10 +17,10 @@ export const ProgressBar: FC<ProgressBarProps> = p => {
 
   return withNativeProps(
     props,
-    <div className={classPrefix}>
-      <div className={`${classPrefix}-trail`}>
-        <div className={`${classPrefix}-fill`} style={fillStyle} />
-      </div>
-    </div>
+    <View className={classPrefix}>
+      <View className={`${classPrefix}-trail`}>
+        <View className={`${classPrefix}-fill`} style={fillStyle} />
+      </View>
+    </View>
   )
 }

@@ -10,7 +10,7 @@ group:
 
 # ProgressBar 进度条
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/ProgressBar"></code>
 
 ### 属性
 

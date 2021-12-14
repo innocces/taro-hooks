@@ -112,6 +112,8 @@ export default {
         'AutoCenter/index',
         'DesenseText/index',
         'NavBar/index',
+        'ProgressBar/index',
+        'ProgressCircle/index',
       ],
     },
   ],

@@ -21,6 +21,8 @@ export default {
     'pages/AutoCenter/index',
     'pages/DesenseText/index',
     'pages/NavBar/index',
+    'pages/ProgressBar/index',
+    'pages/ProgressCircle/index',
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -1,16 +1,19 @@
-import React from 'react'
-import { DemoBlock } from 'demos'
-import styles from './index.less'
-import { ProgressCircle, Space } from 'ant-mobile-taro'
-import { CloseOutline } from 'antd-mobile-icons'
+import React from 'react';
+import { ProgressCircle, Space } from 'ant-mobile-taro';
+import { Text } from '@tarojs/components';
+import DemoBlock from '@components/DemoBlock';
+import { Close } from 'ant-mobile-icon-taro/es/index.react';
+
+import './index.less';
 
 export default () => {
   return (
     <>
-      <DemoBlock title='基本用法'>
+      <DemoBlock title="基本用法">
         <ProgressCircle percent={50}>50%</ProgressCircle>
       </DemoBlock>
-      <DemoBlock title='指定线条宽度'>
+
+      <DemoBlock title="指定线条宽度">
         <Space style={{ '--gap': '24px' }}>
           <ProgressCircle percent={75} style={{ '--track-width': '2px' }}>
             75%
@@ -23,20 +26,22 @@ export default () => {
           </ProgressCircle>
         </Space>
       </DemoBlock>
-      <DemoBlock title='指定画布宽高'>
-        <Space style={{ '--gap': '24px' }} align='center'>
+
+      <DemoBlock title="指定画布宽高">
+        <Space style={{ '--gap': '24px' }} align="center">
           <ProgressCircle percent={50} style={{ '--size': '40px' }}>
-            <span className={styles.small}>50%</span>
+            <Text className="small">50%</Text>
           </ProgressCircle>
           <ProgressCircle percent={75} style={{ '--size': '60px' }}>
-            <span className={styles.middle}>75%</span>
+            <Text className="middle">75%</Text>
           </ProgressCircle>
           <ProgressCircle percent={100} style={{ '--size': '90px' }}>
-            <span className={styles.large}>100%</span>
+            <Text className="large">100%</Text>
           </ProgressCircle>
         </Space>
       </DemoBlock>
-      <DemoBlock title='自定义'>
+
+      <DemoBlock title="自定义">
         <Space style={{ '--gap': '24px' }}>
           <ProgressCircle
             percent={50}
@@ -44,20 +49,19 @@ export default () => {
               '--fill-color': '#FF3141',
             }}
           >
-            <CloseOutline style={{ color: '#FF3141', fontSize: '18px' }} />
+            <Close color="#FF3141" size={18} usePX />
           </ProgressCircle>
           <ProgressCircle percent={100} style={{ '--fill-color': '#00B578' }}>
-            <span className={styles.success}>Done</span>
+            <Text className="success">Done</Text>
           </ProgressCircle>
-          <ProgressCircle percent={30} style={{ '--fill-color': 'orange' }}>
-            <span className={styles.warning}>
-              30
-              <br />
-              次/天
-            </span>
+          <ProgressCircle percent={30} style={{ '--fill-color': '#ffa500' }}>
+            <Text className="warning">
+              <Text style="display: block">30</Text>
+              <Text style="display: block">次/天</Text>
+            </Text>
           </ProgressCircle>
         </Space>
       </DemoBlock>
     </>
-  )
-}
+  );
+};
