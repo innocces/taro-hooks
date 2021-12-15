@@ -10,7 +10,7 @@ group:
 
 # SideBar 侧边导航
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/SideBar"></code>
 
 ## API
 

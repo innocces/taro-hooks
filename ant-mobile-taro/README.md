@@ -61,7 +61,7 @@
 | jumbo-tabs      | 🕡    | 🕡  |
 | nav-bar         | ✅    | ✅  |
 | popup           | 🕡    | 🕡  |
-| side-bar        | 🕡    | 🕡  |
+| side-bar        | ✅    | ✅  |
 | tab-bar         | 🕡    | 🕡  |
 | tabs            | 🕡    | 🕡  |
 | config-provider | 🕡    | 🕡  |

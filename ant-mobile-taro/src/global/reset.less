@@ -21,3 +21,9 @@ taro-button-core {
     width: auto !important;
   }
 }
+
+// fill hidden attrs, weapp don’t support hidden custom attr, use data-hidden ins
+View[data-hidden='true'],
+taro-view-core[data-hidden='true'] {
+  display: none;
+}

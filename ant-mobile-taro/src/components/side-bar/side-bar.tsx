@@ -1,5 +1,6 @@
 import { FC, ReactNode, ReactElement, ComponentProps } from 'react'
 import React from 'react'
+import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import Badge from '../badge'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
@@ -46,12 +47,12 @@ export const SideBar: FC<SideBarProps> = props => {
 
   return withNativeProps(
     props,
-    <div className={classNames(classPrefix)}>
+    <View className={classNames(classPrefix)}>
       {items.map(item => {
         const active = item.key === activeKey
         return withNativeProps(
           item.props,
-          <div
+          <View
             key={item.key}
             onClick={() => {
               const { key } = item
@@ -65,13 +66,13 @@ export const SideBar: FC<SideBarProps> = props => {
             })}
           >
             <Badge content={item.props.badge}>
-              <div className={`${classPrefix}-item-title`}>
+              <View className={`${classPrefix}-item-title`}>
                 {item.props.title}
-              </div>
+              </View>
             </Badge>
-          </div>
+          </View>
         )
       })}
-    </div>
+    </View>
   )
 }

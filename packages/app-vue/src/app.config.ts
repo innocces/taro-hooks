@@ -23,6 +23,7 @@ export default {
     'pages/NavBar/index',
     'pages/ProgressBar/index',
     'pages/ProgressCircle/index',
+    'pages/SideBar/index',
   ],
   window: {
     backgroundTextStyle: 'light',

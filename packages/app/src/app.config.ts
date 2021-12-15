@@ -114,6 +114,7 @@ export default {
         'NavBar/index',
         'ProgressBar/index',
         'ProgressCircle/index',
+        'SideBar/index',
       ],
     },
   ],
