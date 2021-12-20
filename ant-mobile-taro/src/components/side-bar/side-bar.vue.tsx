@@ -19,7 +19,7 @@ export const SideBarItem = withNativeProps({
   name: 'SideBarItem',
   props: SideBarItemProps,
   emits: ['click'],
-  setup(props, { slots, emit }) {
+  setup(props, { slots, emit, attrs }) {
     const handleClick = (key: string) => {
       emit('click', key)
     }
@@ -37,10 +37,17 @@ export const SideBarItem = withNativeProps({
           if (key === undefined || key === null || props.disabled) return
           handleClick(key.toString())
         }}
-        className={classNames(`${classPrefix}-item`, {
-          [`${classPrefix}-item-active`]: props.active,
-          [`${classPrefix}-item-disabled`]: props.disabled,
-        })}
+        className={classNames(
+          `${classPrefix}-item`,
+          attrs.class,
+          attrs.className,
+          // when change cls, hydrated will remove auto. ?????
+          'hydrated',
+          {
+            [`${classPrefix}-item-active`]: props.active,
+            [`${classPrefix}-item-disabled`]: props.disabled,
+          }
+        )}
       >
         <Badge content={badge.value}>
           <View className={`${classPrefix}-item-title`}>{props.title}</View>
