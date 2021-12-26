@@ -7,8 +7,11 @@
 /yarn.lock
 /package-lock.json
 /packages/*/node_modules
+/*/node_modules
 
 /packages/taro-runtime/dist/*
+
+lerna-debug.log
 
 # production
 /dist

@@ -48,9 +48,9 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.14.6",
+    "ahooks": "^3.1.1",
     "compressorjs": "^1.0.7",
-    "lodash.debounce": "^4.0.8",
-    "lodash.throttle": "^4.1.1",
+    "lodash-wechat": "^1.0.0",
     "lodash.uniq": "^4.5.0",
     "querystring": "^0.2.1"
   },

@@ -1,5 +1,4 @@
-import debounce from 'lodash.debounce';
-import throttle from 'lodash.throttle';
+import { debounce, throttle } from 'lodash-wechat';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   BaseOptions,
