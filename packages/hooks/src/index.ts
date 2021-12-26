@@ -15,6 +15,10 @@ import useVisible from './useVisible';
 import useSelectorQuery from './useSelectorQuery';
 import useStorage from './useStorage';
 import useFrom from './useFrom';
+import useDebounce from './useDebounce';
+import useDebounceFn from './useDebounceFn';
+import useThrottle from './useThrottle';
+import useThrottleFn from './useThrottleFn';
 
 // layout
 import useBackground from './useBackground';
@@ -74,6 +78,10 @@ export {
   useLaunchOptions,
   useRouter,
   useFrom,
+  useDebounce,
+  useDebounceFn,
+  useThrottle,
+  useThrottleFn,
   usePromise,
   useBase64ToArrayBuffer,
   useArrayBufferToBase64,

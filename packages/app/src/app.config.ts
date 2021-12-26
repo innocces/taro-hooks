@@ -25,6 +25,10 @@ export default {
     'pages/useSelectorQuery/getContext/index',
     'pages/useSelectorQuery/getScrollOffset/index',
     'pages/useStorage/index',
+    'pages/useDebounce/index',
+    'pages/useDebounceFn/index',
+    'pages/useThrottle/index',
+    'pages/useThrottleFn/index',
     // layout
     'pages/useBackground/index',
     'pages/useTabBar/index',

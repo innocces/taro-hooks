@@ -129,6 +129,22 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useStorage',
       name: 'useStorage 数据缓存',
     },
+    {
+      id: 'useDebounce',
+      name: 'useDebounce 防抖值',
+    },
+    {
+      id: 'useDebounceFn',
+      name: 'useDebounceFn 防抖函数',
+    },
+    {
+      id: 'useThrottle',
+      name: 'useThrottle 节流值',
+    },
+    {
+      id: 'useThrottleFn',
+      name: 'useThrottleFn 节流函数',
+    },
   ],
   [APIChildrenName.layout]: [
     {
