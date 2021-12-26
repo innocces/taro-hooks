@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.0...taro-hooks-v1.5.1) (2021-12-26)
+
+### Bug Fixes
+
+- **lodash:** use lodash-wechat instand lodash for globalThis error ([58dea32](https://github.com/innocces/taro-hooks/commit/58dea32ac59e12dcab0e5a8f6d0e67bb3cd2bbc3))
+
+### Features
+
+- **usethrottle & usedebounce:** add useThrottle & useDebounce hooks & demo ([d4cbeda](https://github.com/innocces/taro-hooks/commit/d4cbedaf5f8d83e3f15f299992954923a76747b1))
+
 # [1.5.0](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.4.8...taro-hooks-v1.5.0) (2021-11-01)
 
 ### Features
