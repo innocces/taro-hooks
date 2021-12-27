@@ -62,6 +62,7 @@
 | nav-bar         | ✅    | ✅  |
 | popup           | 🕡    | 🕡  |
 | side-bar        | ✅    | ✅  |
+| index-bar       | ✅    | ✅  |
 | tab-bar         | 🕡    | 🕡  |
 | tabs            | 🕡    | 🕡  |
 | config-provider | 🕡    | 🕡  |
