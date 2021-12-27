@@ -115,6 +115,8 @@ export default {
         'ProgressBar/index',
         'ProgressCircle/index',
         'SideBar/index',
+        'IndexBar/UnControlled/index',
+        'IndexBar/Controlled/index',
       ],
     },
   ],

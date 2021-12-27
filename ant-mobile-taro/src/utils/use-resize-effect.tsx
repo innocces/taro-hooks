@@ -1,12 +1,12 @@
 import { RefObject, useLayoutEffect, ComponentType } from 'react'
 import { onWindowResize, offWindowResize } from '@tarojs/taro'
-import { usePersistFn } from 'ahooks'
+import { useMemoizedFn } from 'ahooks'
 
 export function useResizeEffect<T extends ComponentType<any>>(
   effect: (target: T) => void,
   targetRef: RefObject<T>
 ) {
-  const fn = usePersistFn(effect)
+  const fn = useMemoizedFn(effect)
   useLayoutEffect(() => {
     const target = targetRef.current
     if (!target) return

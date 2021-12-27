@@ -37,3 +37,11 @@ export const nextTickDelay = (
 export const getVueElement = (vueOrTaroElement: any) => {
   return vueOrTaroElement?.$el ?? vueOrTaroElement
 }
+
+export const getVueChildren = (vueOrTaroElement: any) => {
+  return (
+    vueOrTaroElement?.$el?.children ??
+    vueOrTaroElement?.__vnode?.el?.children ??
+    vueOrTaroElement?.childNodes
+  )
+}

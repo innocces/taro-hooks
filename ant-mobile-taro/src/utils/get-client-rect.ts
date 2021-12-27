@@ -70,21 +70,19 @@ export const getColor = (selector: string): Promise<string> => {
 
 export const getComputedStyle = (
   selector: string,
-  fields: string[]
-): Promise<Record<string, string>> => {
+  fields: string[],
+  all = false
+): Promise<Record<string, string> | Record<string, string>[]> => {
   const query = createSelectorQuery()
-
   return new Promise((resolve, reject) => {
     try {
       nextTickDelay(() =>
-        query
-          .select(selector)
+        query[all ? 'selectAll' : 'select'](selector)
           .fields(
             {
               computedStyle: fields,
             },
             fields => {
-              console.log(fields)
               resolve(fields)
             }
           )

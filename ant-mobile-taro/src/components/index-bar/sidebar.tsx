@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react'
+import { View } from '@tarojs/components'
 import classNames from 'classnames'
+import { isWeapp } from '../../utils/use-env'
 
 const classPrefix = `adm-index-bar`
 
@@ -13,7 +15,7 @@ export const Sidebar: FC<SidebarProps> = props => {
   const [interacting, setInteracting] = useState(false)
 
   return (
-    <div
+    <View
       className={classNames(`${classPrefix}-sidebar`, {
         [`${classPrefix}-sidebar-interacting`]: interacting,
       })}
@@ -30,6 +32,7 @@ export const Sidebar: FC<SidebarProps> = props => {
         setInteracting(false)
       }}
       onTouchMove={e => {
+        if (isWeapp()) return
         if (!interacting) return
         const { clientX, clientY } = e.touches[0]
         const target = document.elementFromPoint(
@@ -46,7 +49,7 @@ export const Sidebar: FC<SidebarProps> = props => {
       {props.indexes.map((index: string) => {
         const active = index === props.activeIndex
         return (
-          <div
+          <View
             className={`${classPrefix}-sidebar-row`}
             onMouseDown={() => {
               props.onActive(index)
@@ -63,19 +66,19 @@ export const Sidebar: FC<SidebarProps> = props => {
             key={index}
           >
             {interacting && active && (
-              <div className={`${classPrefix}-sidebar-bubble`}>{index}</div>
+              <View className={`${classPrefix}-sidebar-bubble`}>{index}</View>
             )}
-            <div
+            <View
               className={classNames(`${classPrefix}-sidebar-item`, {
                 [`${classPrefix}-sidebar-item-active`]: active,
               })}
               data-index={index}
             >
-              <div>{index}</div>
-            </div>
-          </div>
+              <View>{index}</View>
+            </View>
+          </View>
         )
       })}
-    </div>
+    </View>
   )
 }

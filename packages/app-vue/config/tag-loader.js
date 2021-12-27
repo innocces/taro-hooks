@@ -3,14 +3,17 @@ module.exports = function loader(source) {
   // 基本就是把组件换成 taro-${tag.toLowercase()}
   // _(:з」∠)_  忘记类型会被匹配到
   const matchStartTag =
-    /<(View|Text|Input|Image|TextArea|TaroButton|TaroImage)/gm;
+    /<(View|Text|Input|Image|TextArea|TaroButton|TaroImage|ScrollView)/gm;
   const matchEndTag =
-    /<\/(View|Text|Input|Image|TextArea|TaroButton|TaroImage)>/gm;
+    /<\/(View|Text|Input|Image|TextArea|TaroButton|TaroImage|ScrollView)>/gm;
   function replacer(match, tag) {
     // 有些会写别名, 那先replace一下别名(统一都是Taro, 放到replace里面，不然会无限递归。)
     return match.replace(
       tag,
-      'taro-' + tag.replace('Taro', '').toLocaleLowerCase(),
+      'taro-' +
+        tag.replace('Taro', '').replace(/[A-Z]/gm, (match, index) => {
+          return (!index ? '' : '-') + match.toLowerCase();
+        }),
     );
   }
   source = source.replace(matchStartTag, replacer);

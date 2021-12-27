@@ -24,6 +24,8 @@ export default {
     'pages/ProgressBar/index',
     'pages/ProgressCircle/index',
     'pages/SideBar/index',
+    'pages/IndexBar/UnControlled/index',
+    'pages/IndexBar/Controlled/index',
   ],
   window: {
     backgroundTextStyle: 'light',
