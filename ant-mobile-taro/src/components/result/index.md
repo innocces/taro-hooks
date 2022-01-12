@@ -1,0 +1,22 @@
+---
+nav:
+  title: 组件
+  path: /components
+  order: 6
+group:
+  title: 反馈
+  path: /feedback
+---
+
+# Result 结果
+
+<code src="@ui/Result"></code>
+
+# API
+
+| 属性        | 说明          | 类型                                                       | 默认值 |
+| ----------- | ------------- | ---------------------------------------------------------- | ------ |
+| status      | 状态类型      | `'success' \| 'error' \| 'info' \| 'waiting' \| 'warning'` | -      |
+| title       | 标题          | `string`                                                   | -      |
+| description | 描述          | `string`                                                   | ''     |
+| icon        | 自定义 `icon` | `ReactNode`                                                | -      |

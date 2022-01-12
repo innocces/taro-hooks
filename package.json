@@ -1,20 +1,32 @@
 {
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "ant-mobile-taro",
+    "ant-mobile-icon-taro"
   ],
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "dumi dev",
+    "start": "NODE_OPTIONS=--max_old_space_size=4096 dumi dev",
     "docs:build": "dumi build",
     "docs:build:gh": "cross-env BUILD_TARGET=GH dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "app:dev": "cd ./packages/app && npm run dev:weapp",
+    "app:dev:prod": "cd ./packages/app && npm run dev:weapp:prod",
     "app:dev:h5": "cd ./packages/app && npm run dev:h5",
     "app:build:h5": "cd ./packages/app && npm run build:h5",
     "app:build": "lerna run build:weapp --scope=app --stream",
     "app:build:examine": "lerna run build:weapp:examine --scope=app --stream",
+    "app:vue:dev": "lerna run dev:weapp --scope=app-vue --stream",
+    "app:vue:dev:prod": "lerna run dev:weapp:prod --scope=app-vue --stream",
+    "app:vue:dev:h5": "lerna run dev:h5 --scope=app-vue --stream",
+    "app:vue:build:h5": "lerna run build:h5 --scope=app-vue --stream",
+    "app:vue:build": "lerna run build:weapp --scope=app-vue --stream",
+    "app:vue:build:examine": "lerna run build:weapp:examine --scope=app-vue --stream",
+    "vue-demo:start": "lerna run dev:h5 --scope=app-vue --stream",
+    "icon:generate": "lerna run generate --scope=ant-mobile-icon-taro --stream",
+    "icon:build": "lerna run build --scope=ant-mobile-icon-taro --stream",
     "build": "lerna run build --scope=taro-hooks --stream",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "release": "npm run build && npm run lerna:publish:major",
@@ -62,6 +74,7 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@docsearch/react": "^3.0.0-alpha.41",
     "@types/react": "^17.0.2",
     "@umijs/plugin-esbuild": "^1.3.1",
     "@umijs/plugin-sass": "^1.1.1",
@@ -74,9 +87,8 @@
     "conventional-changelog-cli": "^2.1.1",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
-    "dumi": "^1.1.19",
-    "dumi-theme-mobile": "^1.1.3",
-    "father-build": "^1.19.6",
+    "dumi": "^1.1.32",
+    "father-build-offline": "^1.20.4",
     "gh-pages": "^3.0.0",
     "lerna": "^4.0.0",
     "lint-staged": "^10.0.7",
@@ -84,6 +96,8 @@
     "postcss-pxtorem": "5.1.1",
     "postcss-pxtransform": "^3.2.13",
     "prettier": "^2.2.1",
+    "qrcode.react": "^1.0.1",
+    "taro-runtime-docs": "^3.3.14",
     "yorkie": "^2.0.0"
   },
   "resolutions": {

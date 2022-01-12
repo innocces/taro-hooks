@@ -6,7 +6,7 @@ const config = {
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,
-    750: 1,
+    750: 2 / 1,
     828: 1.81 / 2,
   },
   sourceRoot: 'src',
@@ -24,6 +24,21 @@ const config = {
   alias: {
     '@components': resolve(__dirname, '../', 'src/components'),
     '@assets': resolve(__dirname, '../', 'src/assets'),
+    'ant-mobile-taro/es/index.react': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-taro/src/index.react.ts',
+    ),
+    'ant-mobile-taro/es': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-taro/src',
+    ),
+    'ant-mobile-taro': resolve(
+      __dirname,
+      '../../../',
+      'ant-mobile-taro/src/index.ts',
+    ),
   },
   mini: {
     postcss: {

@@ -1,10 +1,18 @@
+/// <reference path="node_modules/@tarojs/plugin-platform-weapp/types/shims-weapp.d.ts" />
+
 declare module '*.css';
 declare module '*.less';
 
 declare module '*.png';
+declare module '*.vue';
 
 // mock typings
 declare module 'taro-hooks';
+declare module 'demos';
+declare module 'ant-mobile-taro';
+declare module 'ant-mobile-icon-taro';
+declare module 'ant-mobile-icon-taro/es/index.react';
+declare module 'ant-mobile-icon-taro/es/index.vue';
 declare module '@tarojs/runtime';
 declare module 'mockjs';
 declare module 'lodash.throttle';

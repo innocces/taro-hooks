@@ -6,6 +6,7 @@ const specialItem = ['list-item', 'countdown-item', 'action-sheet-item'];
 const specialItemMap = {
   'action-sheet-item': 'action-sheet/body/item',
 };
+
 export default defineConfig({
   title: 'Taro-hooks',
   favicon: '/image/hook.png',
@@ -24,31 +25,42 @@ export default defineConfig({
     port: 12345,
     https: true,
   },
+  devtool: 'eval',
+  resolve: {
+    includes: ['docs', 'packages/hooks/src', 'ant-mobile-taro/src'],
+    passivePreview: true,
+  },
   alias: {
     '@tarojs/components$': '@tarojs/components/dist-h5/react',
     '@tarojs/taro': '@tarojs/taro-h5',
-    '@tarojs/runtime': '@taro-hooks/website-runtime',
+    '@tarojs/runtime': 'taro-runtime-docs',
     '@pages': __dirname + '/packages/app/src/pages',
+    '@ui': __dirname + '/packages/app/src/ui',
     '@components': __dirname + '/packages/app/src/components',
     '@assets': __dirname + '/packages/app/src/assets',
     '@project': __dirname,
+    'ant-mobile-taro/es': process.cwd() + '/ant-mobile-taro/src',
+    demos: process.cwd() + '/ant-mobile-taro/src/demos/index.ts',
   },
   define: {
     'process.env.TARO_ENV': 'h5',
     LOCATION_APIKEY: JSON.stringify('J3OBZ-WBJKG-M5DQZ-IJQ4V-FSK2H-BTBZV'),
     BUILD_MODE: JSON.stringify(undefined),
+    'process.env.VUE_HOST': isProd
+      ? 'https://ant-mobile-taro-vue-demo-innocces.vercel.app'
+      : 'https://localhost:10089',
   },
   extraPostCSSPlugins: [
-    require('postcss-pxtorem')({
-      exclude: /packages\/hooks|.dumi|docs/i,
-      rootValue: 100,
-      unitPrecision: 5,
-      propList: ['*'],
-      selectorBlackList: [],
-      replace: true,
-      mediaQuery: true,
-      minPixelValue: 0,
-    }),
+    // require('postcss-pxtorem')({
+    //   exclude: /packages\/hooks|.dumi|docs/i,
+    //   rootValue: 100,
+    //   unitPrecision: 5,
+    //   propList: ['*'],
+    //   selectorBlackList: [],
+    //   replace: true,
+    //   mediaQuery: true,
+    //   minPixelValue: 0,
+    // }),
   ],
   extraBabelPlugins: [
     [
@@ -59,6 +71,17 @@ export default defineConfig({
         libraryDirectory: 'src',
       },
       'taro-hooks',
+    ],
+    [
+      'import',
+      {
+        libraryName: 'ant-mobile-icon-taro',
+        camel2DashComponentName: false,
+        customName: (name) => {
+          return 'ant-mobile-icon-taro/src/icons/react/' + name + '.react';
+        },
+      },
+      'ant-mobile-icon-taro',
     ],
     [
       'import',
@@ -92,6 +115,10 @@ export default defineConfig({
     loading: resolve(__dirname, 'components/Loading'),
   },
   exportStatic: {},
+  // nodeModulesTransform: {
+  //   type: 'none',
+  //   exclude: [],
+  // },
   navs: [
     null,
     { title: 'GitHub', path: 'https://github.com/innocces/taro-hooks' },
@@ -116,11 +143,34 @@ export default defineConfig({
       'data-y_margin': '18',
     },
   ],
+  scripts: [
+    `if (location.pathname.startsWith('/~demos/')) {
+      document.body.style.background = '#f5f7fa'
+    }
+    `,
+  ],
+  metas: [
+    {
+      name: 'viewport',
+      content:
+        'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover',
+    },
+  ],
+  styles: [
+    `
+    #root .__dumi-default-mobile-demo-layout {
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+    }
+    `,
+  ],
   themeConfig: {
     hd: {
       rules: [
-        { maxWidth: 375, mode: 'vw', options: [100, 750] },
-        { minWidth: 376, maxWidth: 750, mode: 'vw', options: [100, 1500] },
+        // { maxWidth: 375, mode: 'vw', options: [100, 750] },
+        // { minWidth: 376, maxWidth: 750, mode: 'vw', options: [100, 1500] },
       ],
       // 更多 rule 配置访问 https://github.com/umijs/dumi/blob/master/packages/theme-mobile/src/typings/config.d.ts#L7
     },

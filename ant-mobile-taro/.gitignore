@@ -1,0 +1,30 @@
+/node_modules/
+/npm-debug.log
+/yarn-error.log
+/coverage/
+.DS_Store
+.doc/
+.umi/
+.umi-production/
+
+# build
+/dist/
+/lib/
+/es/
+/cjs/
+/umd/
+
+# dumi assets meta data
+/assets.json
+
+/.vscode/
+/.idea/
+
+# yarn https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

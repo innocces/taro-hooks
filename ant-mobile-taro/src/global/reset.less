@@ -1,0 +1,29 @@
+// reset taro info
+
+Button,
+taro-button-core {
+  overflow: visible;
+  width: auto;
+  &[disabled] {
+    color: var(--text-color) !important;
+  }
+
+  &:after {
+    display: none;
+  }
+
+  &:not([disabled]):active {
+    color: var(--text-color) !important;
+    background-color: var(--background-color) !important;
+  }
+
+  &:not([size='mini']) {
+    width: auto !important;
+  }
+}
+
+// fill hidden attrs, weapp don’t support hidden custom attr, use data-hidden ins
+View[data-hidden='true'],
+taro-view-core[data-hidden='true'] {
+  display: none;
+}

@@ -5,6 +5,8 @@ nav:
 title: 介绍
 ---
 
+<code src="@pages/index" />
+
 ## 什么是 Taro-hooks?
 
 `Taro-hooks` - 一款对标`Taro API`开发的`Hooks Library`. 覆盖几乎所有`Taro API`以及方法.
@@ -43,5 +45,3 @@ $ npm run dev:weapp --watch
 ### 构建及部署
 
 参考[taro build](https://taro-docs.jd.com/taro/docs/config)
-
-<code hidden="1" src="@pages/index"/>

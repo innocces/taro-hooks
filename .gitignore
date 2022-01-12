@@ -18,6 +18,8 @@ lerna-debug.log
 /dist
 /docs-dist
 /app-dist
+/app-vue-dist
+/app-vue-dist-h5
 /packages/hooks/lib
 /packages/hooks/es
 /packages/hooks/dist
