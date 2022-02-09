@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.1...taro-hooks-v1.5.2) (2022-02-09)
+
+### Features
+
+- **uselatest & useunmount:** remove deps ahooks, add useLatest & useUnmount ([32708ff](https://github.com/innocces/taro-hooks/commit/32708fffecadc4ff7a1ea0f27fac376278b4ed3a))
+
 ## [1.5.1](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.0...taro-hooks-v1.5.1) (2021-12-26)
 
 ### Bug Fixes
