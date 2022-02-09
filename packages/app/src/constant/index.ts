@@ -145,6 +145,14 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useThrottleFn',
       name: 'useThrottleFn 节流函数',
     },
+    {
+      id: 'useLatest',
+      name: 'useLatest 返回最新值',
+    },
+    {
+      id: 'useUnmount',
+      name: 'useUnmount 卸载执行',
+    },
   ],
   [APIChildrenName.layout]: [
     {

@@ -29,6 +29,8 @@ export default {
     'pages/useDebounceFn/index',
     'pages/useThrottle/index',
     'pages/useThrottleFn/index',
+    'pages/useLatest/index',
+    'pages/useUnmount/index',
     // layout
     'pages/useBackground/index',
     'pages/useTabBar/index',

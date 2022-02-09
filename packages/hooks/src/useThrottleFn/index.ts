@@ -1,6 +1,7 @@
 import { throttle } from 'lodash-wechat';
 import { useMemo } from 'react';
-import { useLatest, useUnmount } from 'ahooks';
+import useLatest from '../useLatest';
+import useUnmount from '../useUnmount';
 import type { ThrottleOptions } from '../useThrottle/throttleOptions';
 
 type noop = (...args: any) => any;

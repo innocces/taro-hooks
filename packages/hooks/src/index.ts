@@ -19,6 +19,8 @@ import useDebounce from './useDebounce';
 import useDebounceFn from './useDebounceFn';
 import useThrottle from './useThrottle';
 import useThrottleFn from './useThrottleFn';
+import useLatest from './useLatest';
+import useUnmount from './useUnmount';
 
 // layout
 import useBackground from './useBackground';
@@ -82,6 +84,8 @@ export {
   useDebounceFn,
   useThrottle,
   useThrottleFn,
+  useLatest,
+  useUnmount,
   usePromise,
   useBase64ToArrayBuffer,
   useArrayBufferToBase64,

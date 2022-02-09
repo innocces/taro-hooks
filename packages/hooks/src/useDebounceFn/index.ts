@@ -1,7 +1,8 @@
 import { debounce } from 'lodash-wechat';
 import { useMemo } from 'react';
 import type { DebounceOptions } from '../useDebounce/debounceOptions';
-import { useLatest, useUnmount } from 'ahooks';
+import useLatest from '../useLatest';
+import useUnmount from '../useUnmount';
 
 type noop = (...args: any) => any;
 
