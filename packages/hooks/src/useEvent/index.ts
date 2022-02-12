@@ -1,4 +1,4 @@
-import { useCallback, useContext, useReducer } from 'react';
+import { Dispatch, useCallback, useContext, useReducer } from 'react';
 import { context, wrapperEvent } from '../context';
 import { typeOf } from '../utils/tool';
 import uniq from 'lodash.uniq';
@@ -29,6 +29,33 @@ export interface IState {
   eventNameQueue: string[];
 }
 
+export type TSetListenerAction = (
+  eventName: string,
+  ...handlers: eventHandler[]
+) => void;
+
+export type TSetListenerOnceAction = (
+  eventName: string,
+  handler: eventHandler,
+) => void;
+
+export type TRemoveListenerAction = (
+  eventName?: string,
+  handler?: eventHandler,
+) => void;
+
+export type TEmitEventAction = (eventName: string, ...params: any[]) => void;
+export type TClearListenerAction = (eventName?: string) => void;
+
+export interface ICallback {
+  dispatch: Dispatch<IAction>;
+  setListener: TSetListenerAction;
+  setListenerOnce: TSetListenerOnceAction;
+  removeListener: TRemoveListenerAction;
+  emitEvent: TEmitEventAction;
+  clearListener: TClearListenerAction;
+}
+
 export enum IActionType {
   ON = 'on',
   OFF = 'off',
@@ -56,11 +83,11 @@ const initState: IState = {
   eventNameQueue: [],
 };
 
-function useEvent(namespace: string) {
+function useEvent(namespace: string): [IState, ICallback] {
   const { eventBus } = useContext(context);
 
-  const setListener = useCallback(
-    (eventName: string, ...handlers: eventHandler[]) => {
+  const setListener = useCallback<TSetListenerAction>(
+    (eventName, ...handlers) => {
       if (!eventName || safeNamespace.some((v) => eventName.startsWith(v))) {
         console.warn('eventName not valid. listen failed');
       } else if (!handlers.length) {
@@ -78,8 +105,8 @@ function useEvent(namespace: string) {
     [],
   );
 
-  const setListenerOnce = useCallback(
-    (eventName: string, handler: eventHandler) => {
+  const setListenerOnce = useCallback<TSetListenerOnceAction>(
+    (eventName, handler) => {
       if (!eventName || !handler) {
         console.warn('you must provide eventName and handler');
         return;
@@ -93,7 +120,7 @@ function useEvent(namespace: string) {
     [],
   );
 
-  const emitEvent = useCallback((eventName: string, ...params: any[]) => {
+  const emitEvent = useCallback<TEmitEventAction>((eventName, ...params) => {
     if (!eventName || !params.length) {
       console.warn('eventName or args not provide');
       return;
@@ -109,7 +136,7 @@ function useEvent(namespace: string) {
     });
   }, []);
 
-  const clearListener = useCallback((eventName?: string) => {
+  const clearListener = useCallback<TClearListenerAction>((eventName) => {
     removeListener(eventName);
   }, []);
 
@@ -255,8 +282,8 @@ function useEvent(namespace: string) {
   );
   const [state, dispatch] = useReducer(reducer, initState);
 
-  const removeListener = useCallback(
-    (eventName?: string, handler?: eventHandler) => {
+  const removeListener = useCallback<TRemoveListenerAction>(
+    (eventName, handler) => {
       const realEventName = eventName && wrapperEvent(namespace, eventName);
 
       dispatch({
