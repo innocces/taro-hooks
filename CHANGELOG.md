@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.2...taro-hooks-v1.5.3) (2022-02-12)
+
+### Bug Fixes
+
+- **#17:** fix useEvent return type error ([e3e7a8c](https://github.com/innocces/taro-hooks/commit/e3e7a8cc139164fc62a8fc34a39c053b994ce0d5))
+- **env_type:** fix useEnv ENV_TYPE error ([cb1f8d1](https://github.com/innocces/taro-hooks/commit/cb1f8d1e6f8ba66e0db973ac04f7a2297e514e97))
+
+### Performance Improvements
+
+- **bump version:** bump taro version to 3.3.14 & remove runtime + build privite packages ([f7c183d](https://github.com/innocces/taro-hooks/commit/f7c183dc8309ff0581fdac99e079215a62ae7d16))
+
 ## [1.5.2](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.1...taro-hooks-v1.5.2) (2022-02-09)
 
 ### Features
