@@ -1,12 +1,8 @@
-import {
-  setBackgroundColor,
-  setBackgroundTextStyle,
-  General,
-  ENV_TYPE,
-} from '@tarojs/taro';
+import { setBackgroundColor, setBackgroundTextStyle } from '@tarojs/taro';
 import { isPlainObject } from '../utils/tool';
 import { useCallback, useEffect } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export type TTextStyle = 'dark' | 'light';
 
@@ -22,10 +18,10 @@ export interface IOption extends IBackgroundColorOption {
 
 export type TSetBackgroundColor = (
   setOption?: IBackgroundColorOption,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 export type TSetBackgroundTextStyle = (
   textStyle: TTextStyle,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 function useBackground(
   option?: IOption,

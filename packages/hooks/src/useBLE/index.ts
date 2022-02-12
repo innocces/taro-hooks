@@ -1,5 +1,4 @@
 import {
-  ENV_TYPE,
   createBLEConnection,
   closeBLEConnection,
   writeBLECharacteristicValue,
@@ -11,8 +10,8 @@ import {
   getBLEDeviceServices,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
-import type { General } from '@tarojs/taro';
 import type { TGeneralCallback } from '../type';
+import { ENV_TYPE } from '../constant';
 
 import useEnv from '../useEnv';
 
@@ -50,49 +49,49 @@ export interface ICharacteristicValueChangeCallbackResult {
 export type TCreateBLEConnection = (
   deviceId: string,
   timeout?: number,
-) => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError>;
 
 export type TCloseBLEConnection = (
   deviceId: string,
-) => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError>;
 
 export type TGetBLEDeviceServices = (
   deviceId: string,
-) => Promise<IService[] | General.BluetoothError>;
+) => Promise<IService[] | TaroGeneral.BluetoothError>;
 
 export type TGetBLEDeviceCharacteristics = (
   deviceId: string,
   serviceId?: string,
-) => Promise<ICharacteristic[] | General.BluetoothError>;
+) => Promise<ICharacteristic[] | TaroGeneral.BluetoothError>;
 
 export type TNotifyBLECharacteristicValueChange = (
   deviceId: string,
   state: boolean,
   serviceId?: string | boolean,
   characteristicId?: string,
-) => Promise<ICharacteristic[] | General.BluetoothError>;
+) => Promise<ICharacteristic[] | TaroGeneral.BluetoothError>;
 
 export type TGetBLEDeviceRSSI = (
   deviceId: string,
-) => Promise<number | General.BluetoothError>;
+) => Promise<number | TaroGeneral.BluetoothError>;
 
 export type TReadBLECharacteristicValue = (
   deviceId: string,
   serviceId?: string | boolean,
   characteristicId?: string,
-) => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError>;
 
 export type TWriteBLECharacteristicValue = (
   value: ArrayBuffer,
   deviceId: string,
   serviceId?: string | boolean,
   characteristicId?: string,
-) => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError>;
 
 export type TSetBLEMTU = (
   deviceId: string,
   mtu: number,
-) => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError>;
 
 export interface IBLE {
   deviceId: string;

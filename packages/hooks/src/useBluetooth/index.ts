@@ -1,5 +1,4 @@
 import {
-  ENV_TYPE,
   openBluetoothAdapter,
   closeBluetoothAdapter,
   startBluetoothDevicesDiscovery,
@@ -11,7 +10,6 @@ import {
   getConnectedBluetoothDevices,
 } from '@tarojs/taro';
 import type {
-  General,
   openBluetoothAdapter as openBluetoothAdapterNamespace,
   getBluetoothAdapterState as getBluetoothAdapterStateNamespace,
   onBluetoothAdapterStateChange as onBluetoothAdapterStateChangeNamespace,
@@ -23,6 +21,7 @@ import type {
 import type { TNormalAction } from '../type';
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 declare var wx: any;
 
@@ -33,38 +32,38 @@ export interface IAdapter {
 }
 export type TOpenBluetoothAdapterType = 'central' | 'peripheral';
 export interface IOpenBluetoothAdapterFailResult
-  extends General.BluetoothError {
+  extends TaroGeneral.BluetoothError {
   state?: 0 | 1 | 2 | 3 | 4;
 }
 export type TOpenBluetoothAdapter = (
   mode?: TOpenBluetoothAdapterType,
-) => Promise<General.BluetoothError | IOpenBluetoothAdapterFailResult>;
+) => Promise<TaroGeneral.BluetoothError | IOpenBluetoothAdapterFailResult>;
 export interface IPolyOpenBluetoothAdapterOption
   extends openBluetoothAdapterNamespace.Option {
   mode?: TOpenBluetoothAdapterType;
 }
 export type TPolyOpenBluetoothAdapter = (
   option: IPolyOpenBluetoothAdapterOption,
-) => Promise<General.BluetoothError | IOpenBluetoothAdapterFailResult>;
-export type TCloseBluetoothAdapter = () => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError | IOpenBluetoothAdapterFailResult>;
+export type TCloseBluetoothAdapter = () => Promise<TaroGeneral.BluetoothError>;
 export type TGetBluetoothAdapterState = () => Promise<
   | getBluetoothAdapterStateNamespace.SuccessCallbackResult
-  | General.BluetoothError
+  | TaroGeneral.BluetoothError
 >;
 export type TOnBluetoothAdapterStateChange = (
   callback?: onBluetoothAdapterStateChangeNamespace.Callback,
 ) => void;
 export type TOffBluetoothAdapterStateChange = (
-  callback?: General.EventCallback,
+  callback?: TaroGeneral.EventCallback,
 ) => void;
 export type TGetBluetoothDevices = () => Promise<
-  | General.BluetoothError
+  | TaroGeneral.BluetoothError
   | getBluetoothDevicesNamespace.SuccessCallbackResultBlueToothDevice[]
 >;
 export type TGetConnectedBluetoothDevices = (
   services: string[],
 ) => Promise<
-  | General.BluetoothError
+  | TaroGeneral.BluetoothError
   | getConnectedBluetoothDevicesNamespace.BluetoothDeviceInfo[]
 >;
 export type TBluetoothDeviceFound = (
@@ -81,7 +80,7 @@ export interface IStartBluetoothDevicesDiscoveryOption {
 }
 export type TStartBluetoothDevicesDiscovery = (
   option?: IStartBluetoothDevicesDiscoveryOption,
-) => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError>;
 export interface IPolyStartBluetoothDevicesDiscoveryOption
   extends startBluetoothDevicesDiscoveryNamespace.Option {
   powerLevel?: TPowerLevel;
@@ -93,10 +92,10 @@ export type TMakeBluetoothPair = (
   deviceId: string,
   pin: string,
   timeout?: number,
-) => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError>;
 export type TIsBluetoothDevicePaired = (
   deviceId: string,
-) => Promise<General.BluetoothError>;
+) => Promise<TaroGeneral.BluetoothError>;
 
 function useBluetooth(): [
   {
@@ -115,7 +114,7 @@ function useBluetooth(): [
     onDeviceFound: TBluetoothDeviceFound;
     offDeviceFound: TBluetoothDeviceFound;
     startDiscovery: TStartBluetoothDevicesDiscovery;
-    stopDiscovery: TNormalAction<General.BluetoothError>;
+    stopDiscovery: TNormalAction<TaroGeneral.BluetoothError>;
     makePair: TMakeBluetoothPair;
     isBluetoothDevicePaired: TIsBluetoothDevicePaired;
   },
@@ -308,7 +307,7 @@ function useBluetooth(): [
   );
 
   const stopDiscovery = useCallback<
-    TNormalAction<General.BluetoothError>
+    TNormalAction<TaroGeneral.BluetoothError>
   >(() => {
     return new Promise((resolve, reject) => {
       if (env !== ENV_TYPE.WEAPP) {

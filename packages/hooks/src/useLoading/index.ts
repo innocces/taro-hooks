@@ -1,4 +1,4 @@
-import { showLoading, hideLoading, General } from '@tarojs/taro';
+import { showLoading, hideLoading } from '@tarojs/taro';
 import { useCallback, useEffect, useRef } from 'react';
 
 export interface LoadingOption {
@@ -8,8 +8,8 @@ export interface LoadingOption {
 
 export type ShowLoading = (
   option?: Partial<LoadingOption>,
-) => Promise<General.CallbackResult>;
-export type HideLoading = () => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
+export type HideLoading = () => Promise<TaroGeneral.CallbackResult>;
 
 function useLoading(
   option?: Partial<LoadingOption>,

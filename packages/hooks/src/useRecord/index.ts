@@ -1,11 +1,7 @@
-import {
-  General,
-  ENV_TYPE,
-  getRecorderManager,
-  RecorderManager,
-} from '@tarojs/taro';
+import { getRecorderManager, RecorderManager } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export type IRecorderManager = RecorderManager | undefined;
 
@@ -30,13 +26,13 @@ export type IOnFrameRecorded = (
 
 export type IOnStopAction = (callback: RecorderManager.OnStopCallback) => void;
 
-export type INormalAction = (callback: General.EventCallback) => void;
+export type INormalAction = (callback: TaroGeneral.EventCallback) => void;
 
 export type IStartRecordAction = (
   option: RecorderManager.StartOption,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
-export type INormalPromiseAction = () => Promise<General.CallbackResult>;
+export type INormalPromiseAction = () => Promise<TaroGeneral.CallbackResult>;
 
 export interface IAction {
   onError: IOnErrorAction;

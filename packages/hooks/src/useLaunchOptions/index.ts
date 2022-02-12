@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { ENV_TYPE, getLaunchOptionsSync, General } from '@tarojs/taro';
+import { getLaunchOptionsSync } from '@tarojs/taro';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
-export type Result = General.LaunchOptionsApp | undefined;
+export type Result = TaroGeneral.LaunchOptionsApp | undefined;
 
 function useLaunchOptions(): Result {
   const env = useEnv();

@@ -8,7 +8,7 @@ import {
   LoadMoreOptions,
 } from './types';
 import useUpdateEffect from './utils/useUpdateEffect';
-import { ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE } from '../constant';
 import { BaseEventOrig } from '@tarojs/components';
 import { ScrollViewProps } from '@tarojs/components/types/ScrollView';
 import useEnv from '../useEnv';

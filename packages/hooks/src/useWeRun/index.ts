@@ -1,10 +1,10 @@
-import { ENV_TYPE, getWeRunData, General } from '@tarojs/taro';
+import { getWeRunData } from '@tarojs/taro';
 import { useCallback } from 'react';
 import useEnv from '../useEnv';
 import { typeOf } from '../utils/tool';
+import { ENV_TYPE } from '../constant';
 
 declare var wx: any;
-
 export interface IGetWeRunDataSuccessResult {
   encryptedData: string;
   iv: string;
@@ -19,12 +19,12 @@ export interface IRecordListItem {
 }
 
 export type TGetWeRunData = () => Promise<
-  IGetWeRunDataSuccessResult | General.CallbackResult
+  IGetWeRunDataSuccessResult | TaroGeneral.CallbackResult
 >;
 
 export type TShareToWeRun = (
   recordList: IRecordListItem[],
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 function useWeRun(): [TGetWeRunData, TShareToWeRun] {
   const env = useEnv();
@@ -39,7 +39,7 @@ function useWeRun(): [TGetWeRunData, TShareToWeRun] {
             success: (res) => {
               const { errMsg, ...result } =
                 res as unknown as IGetWeRunDataSuccessResult &
-                  General.CallbackResult;
+                  TaroGeneral.CallbackResult;
               resolve(result);
             },
             fail: reject,

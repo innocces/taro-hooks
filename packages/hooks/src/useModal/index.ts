@@ -1,5 +1,5 @@
 import { showModal } from '@tarojs/taro';
-import type { showModal as showModalNamespace, General } from '@tarojs/taro';
+import type { showModal as showModalNamespace } from '@tarojs/taro';
 import { useCallback, useEffect, useRef } from 'react';
 
 export interface ModalOption {
@@ -15,7 +15,9 @@ export interface ModalOption {
 
 export type ShowModal = (
   option?: ModalOption,
-) => Promise<showModalNamespace.SuccessCallbackResult | General.CallbackResult>;
+) => Promise<
+  showModalNamespace.SuccessCallbackResult | TaroGeneral.CallbackResult
+>;
 
 function useModal(option?: ModalOption): [ShowModal] {
   const initialOption = useRef<ModalOption>();

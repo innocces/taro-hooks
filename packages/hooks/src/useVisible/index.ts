@@ -1,6 +1,6 @@
 import { useDidHide, useDidShow } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
-import { ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE } from '../constant';
 import useEnv from '../useEnv';
 
 function useVisible(): boolean {

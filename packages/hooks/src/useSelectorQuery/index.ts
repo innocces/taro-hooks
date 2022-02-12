@@ -2,7 +2,6 @@ import { useCallback, useRef } from 'react';
 
 import {
   createSelectorQuery,
-  General,
   NodesRef,
   PageInstance,
   SelectorQuery,
@@ -17,18 +16,18 @@ export type getBoundingClientRectType = (
 export type getContextType = (
   selector: string,
   scope?: PageInstance,
-) => Promise<General.IAnyObject>;
+) => Promise<TaroGeneral.IAnyObject>;
 
 export type getFieldsType = (
   selector: string,
   fields: NodesRef.Fields,
   scope?: PageInstance,
-) => Promise<General.IAnyObject>;
+) => Promise<TaroGeneral.IAnyObject>;
 
 export type getNodeType = (
   selector: string,
   scope?: PageInstance,
-) => Promise<General.IAnyObject>;
+) => Promise<TaroGeneral.IAnyObject>;
 
 export type getScrollOffsetType = (
   selector: string,

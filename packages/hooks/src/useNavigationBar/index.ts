@@ -4,11 +4,10 @@ import {
   setNavigationBarColor,
   setNavigationBarTitle,
   hideHomeButton,
-  General,
-  ENV_TYPE,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useRef } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export interface ISetColorOption {
   backgroundColor: string;
@@ -22,11 +21,11 @@ export interface Option extends Partial<ISetColorOption> {
   hideHomeButton?: boolean;
 }
 
-export type Action = () => Promise<General.CallbackResult>;
-export type SetTitle = (title: string) => Promise<General.CallbackResult>;
+export type Action = () => Promise<TaroGeneral.CallbackResult>;
+export type SetTitle = (title: string) => Promise<TaroGeneral.CallbackResult>;
 export type SetColor = (
   option: ISetColorOption,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export interface IAction {
   toggleLoading: Action;

@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { getCurrentInstance, getCurrentPages } from '@tarojs/taro';
 import type { Current, Page, PageInstance } from '@tarojs/taro';
-
-import type { General } from '@tarojs/taro';
 
 export interface IPage extends PageInstance {
   selectComponent: (selector: string) => PageInstance;
@@ -13,7 +11,7 @@ export type TUseScope = (selector?: string) => PageInstance | null;
 export type TSetGlobalData = (
   key: string,
   value: unknown,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 function usePage(): [
   stackLength: number,

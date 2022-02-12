@@ -1,16 +1,11 @@
-import {
-  UserInfo,
-  getUserInfo,
-  getUserProfile,
-  General,
-  ENV_TYPE,
-} from '@tarojs/taro';
+import { UserInfo, getUserInfo, getUserProfile } from '@tarojs/taro';
 import type {
   getUserInfo as getUserInfoNamespace,
   getUserProfile as getUserProfileNamespace,
 } from '@tarojs/taro';
 import { useCallback, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export interface IUserInfo extends Partial<UserInfo> {
   rawData?: string;
@@ -34,11 +29,11 @@ export interface IProfileOption {
 
 export type INormalAction = (
   option?: IOption,
-) => Promise<IUserInfo | General.CallbackResult>;
+) => Promise<IUserInfo | TaroGeneral.CallbackResult>;
 
 export type IProfileAction = (
   option: IProfileOption,
-) => Promise<IUserInfo | General.CallbackResult>;
+) => Promise<IUserInfo | TaroGeneral.CallbackResult>;
 
 const INITOPTION: IOption = { withCredentials: false, lang: 'en' };
 

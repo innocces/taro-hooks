@@ -5,13 +5,12 @@ import Taro, {
   compressImage,
   chooseImage,
   chooseMessageFile,
-  General,
-  ENV_TYPE,
 } from '@tarojs/taro';
 import { useCallback, useState } from 'react';
 import Compressor from 'compressorjs';
 import useEnv from '../useEnv';
 import { saveImageForH5, downloadImage, generateBlobUrl } from './utils';
+import { ENV_TYPE } from '../constant';
 
 export type ChooseImageOption = Partial<
   Pick<chooseImage.Option, 'count' | 'sizeType' | 'sourceType'>
@@ -25,11 +24,11 @@ export type ChooseImageAction = (
 
 export type PreviewImageAction = (
   option: PreviewImageOption,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type SaveImageToPhotosAlbumAction = (
   filePath: string,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type GetImageInfoAction = (
   src: string,

@@ -1,12 +1,11 @@
 import {
-  General,
-  ENV_TYPE,
   createCameraContext,
   CameraContext,
   CameraFrameListener,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export type ICameraContext = CameraContext | undefined;
 
@@ -14,10 +13,10 @@ export type CreateContextAction = () => ICameraContext;
 
 export type IStartRecordAction = (
   callback?: CameraContext.StartRecordTimeoutCallback,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type IStopRecordAction = () => Promise<
-  General.CallbackResult | CameraContext.StopRecordSuccessCallbackResult
+  TaroGeneral.CallbackResult | CameraContext.StopRecordSuccessCallbackResult
 >;
 
 export type ITakePhotoAction = (

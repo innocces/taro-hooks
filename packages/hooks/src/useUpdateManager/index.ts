@@ -1,6 +1,7 @@
-import { ENV_TYPE, getUpdateManager, UpdateManager } from '@tarojs/taro';
+import { getUpdateManager, UpdateManager } from '@tarojs/taro';
 import { useCallback, useEffect, useRef } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export type Result = UpdateManager | undefined;
 

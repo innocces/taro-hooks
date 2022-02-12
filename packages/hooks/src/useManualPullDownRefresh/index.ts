@@ -1,14 +1,10 @@
-import {
-  startPullDownRefresh,
-  stopPullDownRefresh,
-  General,
-} from '@tarojs/taro';
+import { startPullDownRefresh, stopPullDownRefresh } from '@tarojs/taro';
 import { useCallback, useRef } from 'react';
 
 export type TStartPullDownRefresh = (
   duration?: number,
-) => Promise<General.CallbackResult>;
-export type TAction = () => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
+export type TAction = () => Promise<TaroGeneral.CallbackResult>;
 
 function useManualPullDownRefresh(): [TStartPullDownRefresh, TAction] {
   const timer = useRef<NodeJS.Timeout>();

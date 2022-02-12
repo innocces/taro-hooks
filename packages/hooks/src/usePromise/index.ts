@@ -1,14 +1,15 @@
-import Taro, { General } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 
 function usePromise(
-  options: General.IAnyObject,
+  options: TaroGeneral.IAnyObject,
   Instance: typeof Taro,
-): Promise<General.CallbackResult> {
+): Promise<TaroGeneral.CallbackResult> {
   return new Promise((resolve, reject) => {
     try {
       if (typeof Instance === 'string' && Taro[Instance]) {
-        const methodInstance: (options: General.IAnyObject) => Promise<any> =
-          Taro[Instance];
+        const methodInstance: (
+          options: TaroGeneral.IAnyObject,
+        ) => Promise<any> = Taro[Instance];
         methodInstance({
           ...(options || {}),
           success: resolve,

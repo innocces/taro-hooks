@@ -1,16 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import {
-  getSetting,
-  openSetting,
-  AuthSetting,
-  authorize,
-  General,
-  ENV_TYPE,
-} from '@tarojs/taro';
+import { getSetting, openSetting, AuthSetting, authorize } from '@tarojs/taro';
 import useEnv from '../useEnv';
 import useVisible from '../useVisible';
 import { typeOf } from '../utils/tool';
 import type { TAuthResultType } from '../type';
+import { ENV_TYPE } from '../constant';
 
 declare var wx: any;
 
@@ -62,7 +56,7 @@ export interface IAuthSettingForMiniProgram {
 export type IAuthorizeAction = (
   scope: keyof AuthSetting | keyof IAuthSettingForMiniProgram,
   miniprogram?: boolean,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export interface IAction {
   openSetting: IOpenSettingAction;

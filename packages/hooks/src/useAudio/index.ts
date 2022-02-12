@@ -1,13 +1,13 @@
 import {
-  General,
-  ENV_TYPE,
   createInnerAudioContext,
   setInnerAudioOption,
   getAvailableAudioSources,
   InnerAudioContext,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
+import type { getAvailableAudioSources as IGetAvailableAudioSources } from '@tarojs/taro';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export interface ICreateInnerAudioContextOption {
   useWebAudioImplement?: boolean;
@@ -18,7 +18,7 @@ export type ICreateInnerAudioContext = (
 export type IAudioContext = InnerAudioContext | undefined;
 
 export type IAudioSource =
-  | getAvailableAudioSources.SuccessCallbackResult['audioSources']
+  | IGetAvailableAudioSources.SuccessCallbackResult['audioSources']
   | undefined;
 export interface IOption
   extends Partial<setInnerAudioOption.Option & ICreateInnerAudioContextOption> {
@@ -34,7 +34,7 @@ export type ICreateAction = (createOption?: Partial<IOption>) => IAudioContext;
 export type ISetOptionAction = (
   option?: Partial<IOption>,
   instance?: InnerAudioContext,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type IGetAudioSourceAction =
   () => Promise<getAvailableAudioSources.SuccessCallbackResult>;

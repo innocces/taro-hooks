@@ -7,8 +7,6 @@ import Taro, {
   startLocationUpdate,
   startLocationUpdateBackground,
   stopLocationUpdate,
-  ENV_TYPE,
-  General,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import useEnv from '../useEnv';
@@ -18,6 +16,7 @@ import type {
   IPositionOption,
   INormalCallback,
 } from './utils';
+import { ENV_TYPE } from '../constant';
 
 export type ILocation =
   | getLocation.SuccessCallbackResult
@@ -28,7 +27,7 @@ export type IGetLocationOption = IPositionOption & { altitude?: boolean };
 
 export type IGetLocationAction = (
   getLocationOption?: IGetLocationOption,
-) => Promise<General.CallbackResult | ILocation>;
+) => Promise<TaroGeneral.CallbackResult | ILocation>;
 
 export type IChooseLocationAction = (
   chooseLocationOption?: Pick<chooseLocation.Option, 'latitude' | 'longitude'>,
@@ -43,9 +42,9 @@ export type IOpenLocationAction = (
     openLocation.Option,
     'address' | 'latitude' | 'longitude' | 'name' | 'scale'
   >,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
-export type INormalPromiseAction = () => Promise<General.CallbackResult>;
+export type INormalPromiseAction = () => Promise<TaroGeneral.CallbackResult>;
 export interface IAction {
   getLocation: IGetLocationAction;
   chooseLocation: IChooseLocationAction;

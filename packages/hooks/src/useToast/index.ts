@@ -1,4 +1,4 @@
-import { showToast, hideToast, General } from '@tarojs/taro';
+import { showToast, hideToast } from '@tarojs/taro';
 import { useCallback, useEffect, useRef } from 'react';
 
 export interface ToastOption {
@@ -11,8 +11,8 @@ export interface ToastOption {
 
 export type ShowToast = (
   option?: Partial<ToastOption>,
-) => Promise<General.CallbackResult>;
-export type HideToast = () => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
+export type HideToast = () => Promise<TaroGeneral.CallbackResult>;
 
 function useToast(option?: Partial<ToastOption>): [ShowToast, HideToast] {
   const initialOption = useRef<Partial<ToastOption>>();

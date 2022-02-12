@@ -1,5 +1,6 @@
-import { getEnv, ENV_TYPE } from '@tarojs/taro';
+import { getEnv } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
+import { ENV_TYPE } from '../constant';
 
 export type Result = ENV_TYPE | '';
 

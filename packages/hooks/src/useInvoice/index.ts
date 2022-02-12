@@ -1,11 +1,7 @@
-import {
-  ENV_TYPE,
-  chooseInvoice,
-  chooseInvoiceTitle,
-  General,
-} from '@tarojs/taro';
+import { chooseInvoice, chooseInvoiceTitle } from '@tarojs/taro';
 import { useCallback } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export interface IChooseInvoiceSuccessResult {
   card_id: string;
@@ -22,11 +18,11 @@ export interface IChooseInvoiceTitleSuccessResult {
   type: 0 | 1;
 }
 export type TChooseInvoice = () => Promise<
-  IChooseInvoiceSuccessResult[] | General.CallbackResult
+  IChooseInvoiceSuccessResult[] | TaroGeneral.CallbackResult
 >;
 
 export type TChooseInvoiceTitle = () => Promise<
-  IChooseInvoiceTitleSuccessResult | General.CallbackResult
+  IChooseInvoiceTitleSuccessResult | TaroGeneral.CallbackResult
 >;
 
 function useInvoice(): [TChooseInvoice, TChooseInvoiceTitle] {

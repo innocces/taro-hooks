@@ -1,4 +1,4 @@
-import { uploadFile, downloadFile, General } from '@tarojs/taro';
+import { uploadFile, downloadFile } from '@tarojs/taro';
 import { useCallback } from 'react';
 
 export interface IUploadOption {
@@ -19,11 +19,13 @@ export interface IDownloadOption {
 
 export type IUploadFileAction = (
   option: IUploadOption,
-) => Promise<uploadFile.SuccessCallbackResult | General.CallbackResult>;
+) => Promise<uploadFile.SuccessCallbackResult | TaroGeneral.CallbackResult>;
 
 export type IDownloadFileAction = (
   option: IDownloadOption,
-) => Promise<downloadFile.FileSuccessCallbackResult | General.CallbackResult>;
+) => Promise<
+  downloadFile.FileSuccessCallbackResult | TaroGeneral.CallbackResult
+>;
 
 export interface IAction {
   upload: IUploadFileAction;

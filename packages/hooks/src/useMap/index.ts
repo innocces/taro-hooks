@@ -1,6 +1,6 @@
-import { createMapContext, General, MapContext } from '@tarojs/taro';
+import { createMapContext, MapContext } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
-import { ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE } from '../constant';
 import useEnv from '../useEnv';
 
 export type IMapContext = MapContext | undefined;
@@ -10,32 +10,32 @@ export type ICreateAction = (
 ) => IMapContext;
 
 export type IGetCenterLocationAction = () => Promise<
-  MapContext.GetCenterLocationSuccessCallbackResult | General.CallbackResult
+  MapContext.GetCenterLocationSuccessCallbackResult | TaroGeneral.CallbackResult
 >;
 
 export type IGetRegionAction = () => Promise<
-  MapContext.GetRegionSuccessCallbackResult | General.CallbackResult
+  MapContext.GetRegionSuccessCallbackResult | TaroGeneral.CallbackResult
 >;
 
 export type IGetRotateAction = () => Promise<
-  MapContext.GetRotateSuccessCallbackResult | General.CallbackResult
+  MapContext.GetRotateSuccessCallbackResult | TaroGeneral.CallbackResult
 >;
 
 export type IGetScaleAction = () => Promise<
-  MapContext.GetScaleSuccessCallbackResult | General.CallbackResult
+  MapContext.GetScaleSuccessCallbackResult | TaroGeneral.CallbackResult
 >;
 
 export type IGetSkewAction = () => Promise<
-  MapContext.GetSkewSuccessCallbackResult | General.CallbackResult
+  MapContext.GetSkewSuccessCallbackResult | TaroGeneral.CallbackResult
 >;
 
 export type IIncludePointsAction = (
   points: MapContext.MapPostion[],
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type IMoveToLocation = (
   options?: Pick<MapContext.MoveToLocationOption, 'longitude' | 'latitude'>,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type ITranslatMarker = (
   options: Pick<
@@ -47,7 +47,7 @@ export type ITranslatMarker = (
     | 'markerId'
     | 'rotate'
   >,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export interface IAction {
   create: ICreateAction;

@@ -3,11 +3,10 @@ import {
   saveVideoToPhotosAlbum,
   createVideoContext,
   VideoContext,
-  General,
-  ENV_TYPE,
 } from '@tarojs/taro';
 import { useCallback, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 import { saveImageForH5 } from '../useImage/utils';
 
@@ -29,7 +28,7 @@ export type CreateContextAction = (
 
 export type SaveVideoAction = (
   filePath: string,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export interface IAction {
   choose: ChooseVideoAction;

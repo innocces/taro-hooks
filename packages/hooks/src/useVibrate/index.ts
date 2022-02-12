@@ -1,9 +1,9 @@
-import { General, vibrateLong, vibrateShort } from '@tarojs/taro';
+import { vibrateLong, vibrateShort } from '@tarojs/taro';
 import { useCallback, useRef, useEffect } from 'react';
 
 export type VibrateAction = (
   long?: boolean,
-) => Promise<General.CallbackResult | undefined>;
+) => Promise<TaroGeneral.CallbackResult | undefined>;
 
 export type StopVibrateAction = () => void;
 

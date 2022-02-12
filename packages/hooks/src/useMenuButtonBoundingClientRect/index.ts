@@ -1,7 +1,8 @@
-import { ENV_TYPE, getMenuButtonBoundingClientRect } from '@tarojs/taro';
+import { getMenuButtonBoundingClientRect } from '@tarojs/taro';
 import type { getMenuButtonBoundingClientRect as getMenuButtonBoundingClientRectNamespace } from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export type TRect = getMenuButtonBoundingClientRectNamespace.Rect | undefined;
 

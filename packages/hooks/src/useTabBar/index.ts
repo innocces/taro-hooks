@@ -6,18 +6,17 @@ import {
   setTabBarStyle,
   setTabBarBadge,
   removeTabBarBadge,
-  General,
   setTabBarItem,
 } from '@tarojs/taro';
 import { typeOf } from '../utils/tool';
 import { useCallback } from 'react';
 
-export type Result = General.CallbackResult & { data?: unknown };
+export type Result = TaroGeneral.CallbackResult & { data?: unknown };
 
 export type TSetTabBarVisible = (
   visible: boolean,
   animation?: boolean,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type TSetRedDotVisible = (
   visible: boolean,
@@ -50,7 +49,7 @@ export interface ISetTabBarStyleOption {
 }
 export type TSetTabBarStyle = (
   option: ISetTabBarStyleOption,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 function useTabBar(): {
   setTabBarVisible: TSetTabBarVisible;

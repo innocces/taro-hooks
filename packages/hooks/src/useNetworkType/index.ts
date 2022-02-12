@@ -2,10 +2,10 @@ import {
   getNetworkType,
   onNetworkStatusChange,
   offNetworkStatusChange,
-  ENV_TYPE,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export enum NetworkType {
   wifi = 'wifi',

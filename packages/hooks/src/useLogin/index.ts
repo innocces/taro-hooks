@@ -1,10 +1,10 @@
-import { login, checkSession, General } from '@tarojs/taro';
+import { login, checkSession } from '@tarojs/taro';
 import { useCallback } from 'react';
-import { ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE } from '../constant';
 import useEnv from '../useEnv';
 
 export type ILogin = (needCheck?: boolean) => Promise<string | undefined>;
-export type IAction = () => Promise<General.CallbackResult>;
+export type IAction = () => Promise<TaroGeneral.CallbackResult>;
 
 function useLogin(): [ILogin, IAction] {
   const env = useEnv();

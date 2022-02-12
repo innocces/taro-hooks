@@ -1,6 +1,7 @@
-import { ENV_TYPE, canIUse } from '@tarojs/taro';
+import { canIUse } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 function useAPICheck(scheme: string): [boolean, (scheme: string) => void] {
   const env = useEnv();

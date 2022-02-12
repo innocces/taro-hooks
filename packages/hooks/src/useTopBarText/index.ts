@@ -1,10 +1,11 @@
-import { ENV_TYPE, setTopBarText, General } from '@tarojs/taro';
+import { setTopBarText } from '@tarojs/taro';
 import { useCallback, useEffect } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
 export type TSetTopBarText = (
   topBarText: string,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 function useTopBarText(text?: string): [TSetTopBarText] {
   const env = useEnv();

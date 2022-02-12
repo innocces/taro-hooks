@@ -1,14 +1,13 @@
 import {
-  ENV_TYPE,
-  General,
   getScreenBrightness,
   setScreenBrightness,
   setKeepScreenOn,
 } from '@tarojs/taro';
 import { useCallback, useEffect, useState } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 
-export type IAction = (value: number) => Promise<General.CallbackResult>;
+export type IAction = (value: number) => Promise<TaroGeneral.CallbackResult>;
 
 function useBrightness(keepon?: boolean): [number, IAction] {
   const [brightness, setBrightness] = useState<number>(0);

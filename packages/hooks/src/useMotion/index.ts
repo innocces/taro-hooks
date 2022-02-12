@@ -1,10 +1,10 @@
 import {
-  ENV_TYPE,
   startDeviceMotionListening,
   stopDeviceMotionListening,
   onDeviceMotionChange,
   offDeviceMotionChange,
 } from '@tarojs/taro';
+import { ENV_TYPE } from '../constant';
 import { useCallback, useEffect, useState } from 'react';
 
 import useEnv from '../useEnv';

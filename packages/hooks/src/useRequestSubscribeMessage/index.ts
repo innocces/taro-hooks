@@ -1,7 +1,8 @@
-import { ENV_TYPE, requestSubscribeMessage } from '@tarojs/taro';
+import { requestSubscribeMessage } from '@tarojs/taro';
 import type { requestSubscribeMessage as requestSubscribeMessageNamespace } from '@tarojs/taro';
 import { useCallback } from 'react';
 import useEnv from '../useEnv';
+import { ENV_TYPE } from '../constant';
 import type { TAuthResultType } from '../type';
 
 export type TSuccessResult = { [tmplId: string]: TAuthResultType };

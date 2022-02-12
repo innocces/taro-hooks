@@ -1,5 +1,3 @@
-import { General } from '@tarojs/taro';
-
 const checkLocationAvailable = () => {
   return navigator && 'geolocation' in navigator;
 };
@@ -68,7 +66,7 @@ export const getLocation = (
   });
 };
 
-export type INormalCallback = (result: General.CallbackResult) => void;
+export type INormalCallback = (result: TaroGeneral.CallbackResult) => void;
 
 export const onLocationChange = (
   callback: INormalCallback,

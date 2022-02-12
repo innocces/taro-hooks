@@ -1,7 +1,5 @@
 import {
-  RouterInfo,
   useRouter as useTaroRouter,
-  General,
   switchTab,
   reLaunch,
   redirectTo,
@@ -21,7 +19,7 @@ export interface RouterInfoResult extends TRouteInfo {
 export type NavigateBackSync = (
   deltaOrMark?: number | boolean,
   extraData?: TRecord,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 export interface INavigateToMiniProgramSyncOptions {
   appId?: string;
   path?: string;
@@ -32,12 +30,12 @@ export interface INavigateToMiniProgramSyncOptions {
 export type CommonRouteWithOptionsSync = (
   url: string,
   options?: TRecord,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type NavigateToSync = (
   urlOrMark: string | boolean,
   options?: TRecord | INavigateToMiniProgramSyncOptions,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 export interface ResultMethods {
   switchTab: CommonRouteWithOptionsSync;
   relaunch: CommonRouteWithOptionsSync;

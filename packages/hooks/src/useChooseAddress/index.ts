@@ -1,7 +1,8 @@
-import { ENV_TYPE, chooseAddress, General } from '@tarojs/taro';
+import { chooseAddress } from '@tarojs/taro';
 import { useCallback } from 'react';
 import useEnv from '../useEnv';
 import { typeOf } from '../utils/tool';
+import { ENV_TYPE } from '../constant';
 
 declare var wx: any;
 
@@ -15,7 +16,9 @@ export interface ISuccessResult {
   telNumber: string;
   userName: string;
 }
-export type IAction = () => Promise<ISuccessResult | General.CallbackResult>;
+export type IAction = () => Promise<
+  ISuccessResult | TaroGeneral.CallbackResult
+>;
 
 function useChooseAddress(): [IAction] {
   const env = useEnv();

@@ -1,4 +1,4 @@
-import { showActionSheet, General } from '@tarojs/taro';
+import { showActionSheet } from '@tarojs/taro';
 import { useCallback, useEffect, useRef } from 'react';
 
 export interface ActionSheetOption {
@@ -9,7 +9,7 @@ export interface ActionSheetOption {
 
 export type ShowActionSheet = (
   option?: Partial<ActionSheetOption>,
-) => Promise<General.CallbackResult>;
+) => Promise<TaroGeneral.CallbackResult>;
 
 export type onActionItemTap = (
   tapIndex: number,
