@@ -1,13 +1,25 @@
-import React, { FC, ReactElement, ComponentProps, useRef } from 'react'
+import React, {
+  FC,
+  ReactElement,
+  ComponentProps,
+  useRef,
+  useState,
+} from 'react'
 import { NativeProps, withNativeProps } from '../../utils/native-props'
 import List from '../list'
-import { RightOutline } from 'antd-mobile-icons'
+import { Right } from 'ant-mobile-icon-taro/es/index.react'
 import classNames from 'classnames'
+import { View } from '@tarojs/components'
 import { useSpring, animated } from '@react-spring/web'
+import Animated from '../animated'
 import { usePropsValue } from '../../utils/use-props-value'
 import { useMount, useUpdateLayoutEffect } from 'ahooks'
 import { useShouldRender } from '../../utils/use-should-render'
-
+import { getComputedStyle } from '../../utils/get-client-rect'
+import { uuid } from '../../utils/tool'
+import { nextTick } from '@tarojs/taro'
+const AnimatedView = Animated.View
+console.log(AnimatedView)
 const classPrefix = `adm-collapse`
 
 export type CollapsePanelProps = {
@@ -17,6 +29,7 @@ export type CollapsePanelProps = {
   forceRender?: boolean
   destroyOnClose?: boolean
   onClick?: (event: React.MouseEvent<Element, MouseEvent>) => void
+  arrow?: React.ReactNode | ((active: boolean) => React.ReactNode)
 } & NativeProps
 
 export const CollapsePanel: FC<CollapsePanelProps> = () => {
@@ -29,6 +42,8 @@ const CollapsePanelContent: FC<{
   destroyOnClose: boolean
 }> = props => {
   const { visible } = props
+  const contentUUID = useRef<string>(uuid(`${classPrefix}-panel-content-inner`))
+  const [offsetHeight, setOffsetTop] = useState<number | string>(0)
   const innerRef = useRef<HTMLDivElement>(null)
   const shouldRender = useShouldRender(
     visible,
@@ -40,6 +55,12 @@ const CollapsePanelContent: FC<{
   }))
 
   useMount(() => {
+    // nextTick(async () => {
+    //   const { height } = (await getComputedStyle(`#${contentUUID.current}`, [
+    //     'height',
+    //   ])) as any
+    //   setOffsetTop(height)
+    // })
     if (!visible) return
     const inner = innerRef.current
     if (!inner) return
@@ -68,7 +89,7 @@ const CollapsePanelContent: FC<{
   }, [visible])
 
   return (
-    <animated.div
+    <AnimatedView
       className={`${classPrefix}-panel-content`}
       style={{
         height: height.to(v => {
@@ -80,10 +101,14 @@ const CollapsePanelContent: FC<{
         }),
       }}
     >
-      <div className={`${classPrefix}-panel-content-inner`} ref={innerRef}>
+      <View
+        id={contentUUID.current}
+        className={`${classPrefix}-panel-content-inner`}
+        ref={innerRef}
+      >
         <List.Item>{shouldRender && props.children}</List.Item>
-      </div>
-    </animated.div>
+      </View>
+    </AnimatedView>
   )
 }
 
@@ -91,6 +116,7 @@ type ValueProps<T> = {
   activeKey?: T
   defaultActiveKey?: T
   onChange?: (activeKey: T) => void
+  arrow?: React.ReactNode | ((active: boolean) => React.ReactNode)
 }
 
 export type CollapseProps = (
@@ -141,7 +167,7 @@ export const Collapse: FC<CollapseProps> = props => {
 
   return withNativeProps(
     props,
-    <div className={classPrefix}>
+    <View className={classPrefix}>
       <List>
         {panels.map(panel => {
           const key = panel.key as string
@@ -164,6 +190,27 @@ export const Collapse: FC<CollapseProps> = props => {
             panel.props.onClick?.(event)
           }
 
+          const renderArrow = () => {
+            let arrow: CollapseProps['arrow'] = <Right />
+            if (props.arrow !== undefined) {
+              arrow = props.arrow
+            }
+            if (panel.props.arrow !== undefined) {
+              arrow = panel.props.arrow
+            }
+            return typeof arrow === 'function' ? (
+              arrow(active)
+            ) : (
+              <View
+                className={classNames(`${classPrefix}-arrow`, {
+                  [`${classPrefix}-arrow-active`]: active,
+                })}
+              >
+                {arrow}
+              </View>
+            )
+          }
+
           return (
             <React.Fragment key={key}>
               {withNativeProps(
@@ -174,15 +221,7 @@ export const Collapse: FC<CollapseProps> = props => {
                       panel.props.disabled,
                   })}
                   onClick={panel.props.disabled ? undefined : handleClick}
-                  arrow={
-                    <div
-                      className={classNames(`${classPrefix}-arrow`, {
-                        [`${classPrefix}-arrow-active`]: active,
-                      })}
-                    >
-                      <RightOutline />
-                    </div>
-                  }
+                  arrow={renderArrow()}
                 >
                   {panel.props.title}
                 </List.Item>
@@ -198,6 +237,6 @@ export const Collapse: FC<CollapseProps> = props => {
           )
         })}
       </List>
-    </div>
+    </View>
   )
 }

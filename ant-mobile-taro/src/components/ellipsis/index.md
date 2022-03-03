@@ -10,7 +10,7 @@ group:
 
 # Ellipsis 文本省略
 
-<code src="./demos/index.tsx"></code>
+<code src="@ui/Ellipsis"></code>
 
 ## API
 

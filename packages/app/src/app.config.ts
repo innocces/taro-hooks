@@ -117,6 +117,8 @@ export default {
         'SideBar/index',
         'IndexBar/UnControlled/index',
         'IndexBar/Controlled/index',
+        'Ellipsis/index',
+        'Collapse/index',
       ],
     },
   ],

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Ellipsis, Space } from 'ant-mobile-taro'
+import { Ellipsis, Space } from 'antd-mobile'
 import { DemoBlock } from 'demos'
 
 const content =
@@ -7,19 +7,23 @@ const content =
 
 export default () => {
   return (
-    <div>
+    <>
       <DemoBlock title='尾部省略'>
         <Ellipsis direction='end' content={content} />
       </DemoBlock>
+
       <DemoBlock title='头部省略'>
         <Ellipsis direction='start' content={content} />
       </DemoBlock>
+
       <DemoBlock title='中间省略'>
         <Ellipsis direction='middle' content={content} />
       </DemoBlock>
+
       <DemoBlock title='多行省略'>
         <Ellipsis direction='end' rows={3} content={content} />
       </DemoBlock>
+
       <DemoBlock title='展开收起'>
         <Ellipsis
           direction='end'
@@ -28,6 +32,7 @@ export default () => {
           collapseText='收起'
         />
       </DemoBlock>
+
       <DemoBlock title='仅展开'>
         <Space block direction='vertical'>
           <Ellipsis direction='end' content={content} expandText='展开' />
@@ -35,6 +40,6 @@ export default () => {
           <Ellipsis direction='middle' content={content} expandText='展开' />
         </Space>
       </DemoBlock>
-    </div>
+    </>
   )
 }

@@ -19,6 +19,8 @@ export function useResizeEffect<T extends ComponentType<any>>(
         observer.disconnect()
       }
     } else {
+      // need manal start once
+      fn(target)
       onWindowResize(() => {
         fn(target)
       })

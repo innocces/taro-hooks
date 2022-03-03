@@ -3,4 +3,20 @@
 .@{class-prefix-ellipsis} {
   overflow: hidden;
   line-height: 1.5;
+
+  &-rect {
+    position: fixed;
+    left: 999999px;
+    top: 999999px;
+    z-index: -1000;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    max-height: auto;
+    text-overflow: clip;
+    white-space: normal;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    display: block;
+  }
 }
