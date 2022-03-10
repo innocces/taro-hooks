@@ -43,11 +43,7 @@ function useClipboardData(): Result {
       try {
         getClipboardData({
           success: (res) => {
-            const data = JSON.parse(
-              typeof res.data === 'string'
-                ? res.data
-                : (res.data as { data: string }).data,
-            );
+            const data = res.data
             changeClipborardData(data);
             resolve(data);
           },
