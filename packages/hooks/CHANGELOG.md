@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.3...taro-hooks-v1.5.4) (2022-03-21)
+
+### Bug Fixes
+
+- **useimage:** fix compressor track due to toBlob error ([f320557](https://github.com/innocces/taro-hooks/commit/f3205570fbe9f5936a60871c70d2e8f0c558c62e))
+
+### Features
+
+- **usetoast:** useToast add error type & update qr ([13df359](https://github.com/innocces/taro-hooks/commit/13df359966f3160eff67ad3c26afbe9af9676b54))
+
 ## [1.5.3](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.2...taro-hooks-v1.5.3) (2022-02-12)
 
 ### Bug Fixes
