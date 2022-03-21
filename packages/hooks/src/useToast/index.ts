@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from 'react';
 export interface ToastOption {
   title: string;
   duration?: number;
-  icon?: 'success' | 'loading' | 'none';
+  icon?: 'success' | 'loading' | 'none' | 'error';
   image?: string;
   mask?: boolean;
 }

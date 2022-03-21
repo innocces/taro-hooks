@@ -1,5 +1,5 @@
 import { getClipboardData, setClipboardData } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export type setClipboard = (text: any) => Promise<any>;
 export type getClipboard = () => Promise<any>;

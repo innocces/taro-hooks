@@ -145,7 +145,7 @@ $ yarn app:dev:h5
 
 ### WeChat
 
-<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2022-02-19/1645256160636-qrcode.png" alt="wechat code" width="300"/>
+<img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2022-03-21/1647870789124-qrcode.png" alt="wechat code" width="300"/>
     
 > 若失效可点击[Welcome to discuss in wechat](https://github.com/innocces/taro-hooks/issues/12)获取最新二维码
 
