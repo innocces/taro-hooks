@@ -7,9 +7,8 @@ import Taro, {
   chooseMessageFile,
 } from '@tarojs/taro';
 import { useCallback, useState } from 'react';
-import Compressor from 'compressorjs';
 import useEnv from '../useEnv';
-import { saveImageForH5, downloadImage, generateBlobUrl } from './utils';
+import { saveImageForH5, downloadImage, compressForH5 } from './utils';
 import { ENV_TYPE } from '../constant';
 
 export type ChooseImageOption = Partial<
@@ -193,17 +192,7 @@ function useImage(options: ChooseImageOption): [IFileInfo, IAction] {
         try {
           if (env === ENV_TYPE.WEB) {
             const blob = await downloadImage(src);
-            new Compressor(blob, {
-              quality: (quality || 80) / 100,
-              success: (res) => {
-                const tempFilePath = generateBlobUrl(res);
-                resolve({
-                  tempFilePath,
-                  errMsg: 'compressImage:ok',
-                });
-              },
-              error: reject,
-            });
+            compressForH5(blob, quality).then(resolve, reject);
           } else {
             Taro.compressImage({
               src,

@@ -1,3 +1,5 @@
+import Compressor from 'compressorjs';
+
 export const downloadImage = async (filePath: string) => {
   const responese = await fetch(filePath);
   const blob = await responese.blob();
@@ -31,4 +33,20 @@ export const saveImageForH5 = async (filePath: string) => {
     return result;
   }
   return false;
+};
+
+export const compressForH5 = (blob: Blob, quality?: number) => {
+  return new Promise((resolve, reject) => {
+    new Compressor(blob, {
+      quality: (quality || 80) / 100,
+      success: (res) => {
+        const tempFilePath = generateBlobUrl(res);
+        resolve({
+          tempFilePath,
+          errMsg: 'compressImage:ok',
+        });
+      },
+      error: reject,
+    });
+  });
 };
