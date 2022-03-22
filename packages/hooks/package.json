@@ -48,7 +48,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.14.6",
-    "compressorjs-global": "^1.1.1",
+    "compressorjs-global": "^1.1.2",
     "lodash-wechat": "^1.0.0",
     "lodash.uniq": "^4.5.0",
     "querystring": "^0.2.1"
