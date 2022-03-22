@@ -1,4 +1,4 @@
-import Compressor from 'compressorjs';
+import Compressor from 'compressorjs-global';
 
 export const downloadImage = async (filePath: string) => {
   const responese = await fetch(filePath);
