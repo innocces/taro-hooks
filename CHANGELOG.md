@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.6](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.5...taro-hooks-v1.5.6) (2022-03-22)
+
+### Bug Fixes
+
+- **compressorjs:** update compressor-global to 1.1.2 to fix toBlob error ([387e898](https://github.com/innocces/taro-hooks/commit/387e898ec8d9bc32e33d92efd95e1684c7394887))
+
 ## [1.5.5](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.4...taro-hooks-v1.5.5) (2022-03-22)
 
 ### Bug Fixes
