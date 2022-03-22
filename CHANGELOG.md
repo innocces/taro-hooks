@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.5](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.4...taro-hooks-v1.5.5) (2022-03-22)
+
+### Bug Fixes
+
+- **deps:** replace deps import error ([c42d839](https://github.com/innocces/taro-hooks/commit/c42d8390fa18cc4f8706e76c42e9ac6ace24f050))
+
 ## [1.5.4](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.3...taro-hooks-v1.5.4) (2022-03-21)
 
 ### Bug Fixes
