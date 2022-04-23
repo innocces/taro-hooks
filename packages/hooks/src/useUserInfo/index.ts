@@ -107,7 +107,7 @@ function useUserInfo(): [
                 resolve(info);
               },
               fail: reject,
-            });
+            }).catch(reject); // manal catch promise reject
           } catch (e) {
             reject({ errMsg: 'getUserProfile: fail', data: e });
           }
