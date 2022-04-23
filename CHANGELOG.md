@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.8](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.7...taro-hooks-v1.5.8) (2022-04-23)
+
+### Bug Fixes
+
+- **#22:** add manul catch profile reject ([aea3267](https://github.com/innocces/taro-hooks/commit/aea32674e6a563a08828de46be9317ad604e4c7f)), closes [#22](https://github.com/innocces/taro-hooks/issues/22)
+
 ## [1.5.7](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.6...taro-hooks-v1.5.7) (2022-04-23)
 
 ### Bug Fixes
