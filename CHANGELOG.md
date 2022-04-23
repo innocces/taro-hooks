@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.7](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.6...taro-hooks-v1.5.7) (2022-04-23)
+
+### Bug Fixes
+
+- **#21:** fix useClipboardData json error. hold origin struct ([134d84e](https://github.com/innocces/taro-hooks/commit/134d84eaec7345b038fe28d5cee0407d6387e689))
+
 ## [1.5.6](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.5...taro-hooks-v1.5.6) (2022-03-22)
 
 ### Bug Fixes
