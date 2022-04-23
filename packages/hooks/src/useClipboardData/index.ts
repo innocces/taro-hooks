@@ -11,19 +11,20 @@ export type SuccessResult = {
   errMsg: string;
   data: string | { data: string; errMsg: string };
 };
-export type Result = [string, clipboardAction];
+export type Result = [unknown, clipboardAction];
 
 function useClipboardData(): Result {
-  const [clipboardData, changeClipborardData] = useState<string>('');
+  const [clipboardData, changeClipborardData] = useState<unknown>('');
 
-  const setClipboard = useCallback<setClipboard>((text: any) => {
+  const setClipboard = useCallback<setClipboard>((text: unknown) => {
     if (!text) {
       console.warn('please enter a text');
       return Promise.reject(text);
     }
     return new Promise((resolve, reject) => {
       try {
-        const data = JSON.stringify(text);
+        // save data as object with struct { clip: text }
+        const data = JSON.stringify({ clip: text });
         setClipboardData({
           data,
           success: (res) => {
@@ -43,13 +44,9 @@ function useClipboardData(): Result {
       try {
         getClipboardData({
           success: (res) => {
-            const data = JSON.parse(
-              typeof res.data === 'string'
-                ? res.data
-                : (res.data as { data: string }).data,
-            );
-            changeClipborardData(data);
-            resolve(data);
+            const { clip = '' } = JSON.parse(res.data);
+            changeClipborardData(clip);
+            resolve(clip);
           },
           fail: reject,
         }).catch(reject);

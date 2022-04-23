@@ -10,6 +10,7 @@
     "docs:build": "dumi build",
     "docs:build:gh": "cross-env BUILD_TARGET=GH dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
+    "app:dev:map": "lerna run dev:weapp:map --scope=app --stream",
     "app:dev": "cd ./packages/app && npm run dev:weapp",
     "app:dev:h5": "cd ./packages/app && npm run dev:h5",
     "app:build:h5": "cd ./packages/app && npm run build:h5",
