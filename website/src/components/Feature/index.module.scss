@@ -1,0 +1,101 @@
+$prefix: feature;
+
+.#{$prefix} {
+  padding-bottom: 100px;
+  background: url('/img/wave.svg') bottom no-repeat;
+
+  &Wrapper {
+    padding: 60px 0 0 190px;
+    position: relative;
+    margin-bottom: 50px;
+
+    &:last-child {
+      padding: 60px 0 0 290px;
+
+      .#{$prefix}Title {
+        left: 130px;
+      }
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        cursor: pointer;
+        position: relative;
+        float: left;
+        width: 190px;
+        height: 280px;
+        margin: 0 0 0 10px;
+        border-radius: 10px;
+        background-color: white;
+        overflow: hidden;
+        box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+        padding-top: 30px;
+
+        img {
+          display: block;
+          width: 90px;
+          height: 90px;
+          margin: 0 auto 10px;
+        }
+
+        h4 {
+          position: relative;
+          height: 75px;
+          padding-bottom: 40px;
+          letter-spacing: 2px;
+          font-size: 18px;
+          line-height: 35px;
+          margin: 0;
+          color: var(--ifm-color-primary-light);
+
+          &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 32px;
+            width: 20px;
+            height: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--ifm-color-primary-lighter);
+          }
+        }
+
+        p {
+          font-size: 14px;
+          line-height: 26px;
+          color: gray;
+          margin: 0;
+        }
+
+        &:hover {
+          .#{$prefix}Mask {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  &Mask {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 60px;
+    height: 120px;
+    background: url('/img/feature-item.svg');
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  &Title {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    z-index: 1;
+  }
+}

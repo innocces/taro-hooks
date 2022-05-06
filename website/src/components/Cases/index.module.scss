@@ -1,0 +1,159 @@
+$prefix: cases;
+
+.#{$prefix} {
+  position: relative;
+  margin: 0 auto 50px;
+  min-height: 443px;
+  height: max-content;
+
+  &Left {
+    height: 313px;
+    position: relative;
+    z-index: 1;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-primary-lightest));
+    padding: 0 35px 0 0!important;
+
+    &Inner {
+      position: absolute;
+      width: 65%;
+      top: 39px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      h2 {
+        color: white;
+        line-height: 30px;
+        height: 30px;
+        margin-bottom: 5px;
+        font-size: 20px;
+      }
+
+      p {
+        color: white;
+        font-size: 14px;
+        margin-bottom: 30px;
+        height: 30px;
+        line-height: 30px;
+      }
+
+      &Qr {
+        position: relative;
+        width: 140px;
+        height: 140px;
+
+        img {
+          position: relative;
+          display: block;
+          width: 100%;
+          height: 100%;
+          padding: 15px;
+          border-radius: 20px;
+          background: white;
+          z-index: 1;
+        }
+
+        &::before {
+          position: absolute;
+          z-index: 2;
+          width: 30px;
+          height: 30px;
+          font-size: 32px;
+          top: -15px;
+          left: 120px;
+          color: #0000c2;
+          background: white;
+          display: flex;
+          align-items: center;
+          border-radius: 50%;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          z-index: 0;
+          right: -8px;
+          width: 128px;
+          height: 128px;
+          background: var(--ifm-color-primary-lightest);
+          border-radius: 20px;
+          transform: rotate(12deg);
+        }
+      }
+    }
+  }
+
+  &Right {
+    border-radius: 40px 0 0 40px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    position: relative;
+    left: -29px;
+    padding: 0!important;
+  }
+
+  &Frame {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 210px;
+    height: 432px;
+    top: 50%;
+    left: calc(4 / 12 * 100% - 35px);
+    transform: translateY(-50%);
+    background: url('/img/iphone-border.svg') no-repeat center center / contain;
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+    border-radius: 30px;
+  }
+
+  &Swiper {
+    &Item {
+      width: 210px;
+      margin: 10px 0;
+      float: left;
+
+      img {
+        display: block;
+        width: 190px;
+        height: 413px;
+        margin: 0 auto;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+        transform: scale(.96);
+        transform-origin: 200% 50%;
+        transition: transform .5s ease;
+
+        &.active {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  &Button {
+    position: absolute;
+    bottom: 0;
+    right: 45px;
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+    overflow: hidden;
+    border: none;
+    color: transparent;
+    cursor: pointer;
+    background: rgba(black, .03) url('/img/left.svg') no-repeat center center / 20px 8px;
+    transition: opacity .5s ease;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &Right {
+      right: -20px;
+      background: rgba(black, .03) url('/img/right.svg') no-repeat center center / 20px 8px;
+    }
+  }
+}

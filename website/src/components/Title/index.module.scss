@@ -1,0 +1,38 @@
+$prefix: title;
+$font-size: 30px;
+
+.#{$prefix} {
+  position: relative;
+  height: 150px;
+  letter-spacing: 20px;
+  font-weight: 700;
+  padding: 50px 0 20px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    width: 80px;
+    height: 4px;
+    transform: translateX(-50%);
+    font-size: 0;
+    background: var(--ifm-color-primary);
+  }
+
+  &Cn {
+    font-size: $font-size;
+    padding-top: 20px;
+    line-height: 62px;
+  }
+
+  &En {
+    position: absolute;
+    width: 100%;
+    font-size: $font-size;
+    top: 50px;
+    opacity: .2;
+    color: #90b0ca;
+    text-transform: uppercase;
+  }
+}

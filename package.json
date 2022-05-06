@@ -6,6 +6,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "docusaurus:bootstrap": "cd website && yarn",
+    "bootstrap": "yarn && lerna bootstrap && yarn docusaurus:bootstrap",
+    "docusaurus:start": "cd website && yarn start",
+    "docusaurus:build": "cd website && yarn build",
+    "docusaurus:build:gh": "cd website && cross-env BUILD_TARGET=GH yarn build",
     "start": "dumi dev",
     "docs:build": "dumi build",
     "docs:build:gh": "cross-env BUILD_TARGET=GH dumi build",
@@ -20,9 +25,6 @@
     "deploy": "npm run docs:build && npm run docs:deploy",
     "release": "npm run build && npm run lerna:publish:major",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "test": "umi-test",
-    "test:coverage": "umi-test --coverage",
-    "bootstrap": "lerna bootstrap",
     "lerna": "lerna init",
     "lerna:publish": "lerna publish --no-private",
     "lerna:publish:major": "lerna publish major --no-private",
@@ -94,7 +96,7 @@
     "typescript": "~4.2.3"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "repository": {
     "branch": "main",
