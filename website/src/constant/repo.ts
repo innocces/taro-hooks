@@ -1,5 +1,3 @@
-export const TOKEN = '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';
-
 export const USERNAMESPACE = 'innocces';
 
 export const CASESORG = 'taro-hooks';
