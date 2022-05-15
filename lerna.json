@@ -1,8 +1,8 @@
 {
-  "packages": ["packages/*"],
+  "packages": ["packages/*", "examples/*", "website"],
   "command": {
     "version": {
-      "allowBranch": "main",
+      "allowBranch": "next",
       "includeMergedTags": true,
       "message": "chore(release): publish %s",
       "conventionalCommits": true
@@ -12,7 +12,6 @@
       "message": "chore(release): publish %s"
     }
   },
-  "useWorkspaces": true,
   "ignoreChanges": ["**/*.md", "**/es/*", "**/lib/*", "**/dist/*"],
   "version": "1.5.6",
   "tagVersionPrefix": "taro-hooks-v",

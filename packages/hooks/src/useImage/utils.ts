@@ -1,4 +1,4 @@
-import Compressor from 'compressorjs-global';
+import Compressor from '@taro-hooks/compressorjs';
 
 export const downloadImage = async (filePath: string) => {
   const responese = await fetch(filePath);

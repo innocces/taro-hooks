@@ -1,6 +1,5 @@
 import { defineConfig } from 'dumi';
 
-const { resolve } = require('path');
 const isProd = process.env.NODE_ENV === 'production';
 const specialItem = ['list-item', 'countdown-item', 'action-sheet-item'];
 const specialItemMap = {
@@ -88,9 +87,6 @@ export default defineConfig({
       'taro-ui',
     ],
   ],
-  dynamicImport: {
-    loading: resolve(__dirname, 'components/Loading'),
-  },
   exportStatic: {},
   navs: [
     null,

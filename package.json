@@ -2,38 +2,36 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "examples/*"
+    "examples/*",
+    "website"
   ],
-  "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "docusaurus:bootstrap": "cd website && yarn",
-    "bootstrap": "yarn && lerna bootstrap && yarn docusaurus:bootstrap",
-    "docusaurus:start": "cd website && yarn start",
-    "docusaurus:build": "cd website && yarn build",
-    "docusaurus:build:gh": "cd website && cross-env BUILD_TARGET=GH yarn build",
-    "start": "dumi dev",
-    "docs:build": "dumi build",
-    "docs:build:gh": "cross-env BUILD_TARGET=GH dumi build",
-    "docs:deploy": "gh-pages -d docs-dist",
+    "bootstrap": "yarn",
+    "clean": "rm -rf node_modules && rm -rf .yarn/cache && rm -rf yarn.lock",
+    "clean-modules": "rm -rf packages/*/node_modules && rm -rf packages/*/package-lock.json && rm -rf website/node_modules && rm -rf examples/*/node_modules",
+    "docusaurus:start": "lerna run start --scope=@taro-hooks/website --stream",
+    "docusaurus:build": "lerna run build --scope=@taro-hooks/website --stream",
+    "docusaurus:build:gh": "cross-env BUILD_TARGET=GH yarn docusaurus:build",
+    "docs:deploy": "gh-pages -d website/build",
     "generate-template": "TS_NODE_PROJECT=scripts/tsconfig.json node -r ts-node/register scripts/generate-templ.ts",
     "app:dev": "cd ./packages/app && npm run dev:weapp",
     "app:dev:h5": "cd ./packages/app && npm run dev:h5",
     "app:build:h5": "cd ./packages/app && npm run build:h5",
-    "app:build": "lerna run build:weapp --scope=app --stream",
-    "app:build:examine": "lerna run build:weapp:examine --scope=app --stream",
+    "app:build": "lerna run build:weapp --scope=@taro-hooks/example --stream",
+    "app:build:examine": "lerna run build:weapp:examine --scope=@taro-hooks/example --stream",
     "build": "lerna run build --scope=taro-hooks --stream",
-    "deploy": "npm run docs:build && npm run docs:deploy",
+    "deploy": "yarn docusaurus:build && yarn docs:deploy",
     "release": "npm run build && npm run lerna:publish:major",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "lerna": "lerna init",
     "lerna:publish": "lerna publish --no-private",
     "lerna:publish:major": "lerna publish major --no-private",
     "lerna:publish:minor": "lerna publish minor --no-private",
     "lerna:publish:patch": "lerna publish patch --no-private",
     "log": "./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s -r 0",
     "postversion": "npm run log",
-    "contributors:generate": "all-contributors generate"
+    "contributors:generate": "all-contributors generate",
+    "upgrade-yarn": "yarn policies set-version stable"
   },
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -60,7 +58,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",
-    "@react-spring/web": "^9.2.5",
     "base-64": "^1.0.0",
     "lodash": "^4.17.21",
     "react": "17.0.2",
@@ -73,19 +70,13 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.2",
     "@types/react": "^17.0.2",
-    "@umijs/plugin-esbuild": "^1.3.1",
-    "@umijs/plugin-sass": "^1.1.1",
-    "@umijs/test": "^3.4.14",
     "all-contributors-cli": "^6.20.0",
-    "babel-plugin-const-enum": "^1.1.0",
     "babel-plugin-import": "^1.13.3",
-    "babel-preset-taro": "^3.2.13",
+    "babel-preset-taro": "^3.4.8",
     "commitizen": "^4.2.4",
     "conventional-changelog-cli": "^2.1.1",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
-    "dumi": "^1.1.19",
-    "dumi-theme-mobile": "^1.1.3",
     "father-build-offline": "^1.20.4",
     "gh-pages": "^3.0.0",
     "lerna": "^4.0.0",
@@ -99,14 +90,12 @@
     "rollup-plugin-typescript2": "^0.31.2",
     "shelljs": "^0.8.5",
     "ts-node": "^10.7.0",
+    "typescript": "^4.6.3",
     "yorkie": "^2.0.0"
   },
-  "resolutions": {
-    "@types/react": "^17.0.2",
-    "typescript": "~4.2.3"
-  },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=14.0.0",
+    "yarn": ">=3.0.0"
   },
   "repository": {
     "branch": "main",
@@ -116,5 +105,6 @@
   },
   "authors": [
     "innocces <jiangjiangjiangxi@gmail.com> (https://github.com/innocces)"
-  ]
+  ],
+  "packageManager": "yarn@3.2.1"
 }

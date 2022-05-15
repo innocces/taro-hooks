@@ -90,6 +90,7 @@ $prefix: feature;
     height: 120px;
     background: url('/img/feature-item.svg');
     transition: opacity 0.3s ease-in-out;
+    opacity: 0;
   }
 
   &Title {
@@ -97,5 +98,9 @@ $prefix: feature;
     top: 40px;
     left: 30px;
     z-index: 1;
+  }
+
+  &Button {
+    background: linear-gradient(119deg, var(--ifm-color-primary) 11%, var(--ifm-color-primary-lightest) 55%)
   }
 }

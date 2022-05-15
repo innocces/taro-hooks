@@ -9,6 +9,9 @@
 /package-lock.json
 /packages/*/node_modules
 /*/node_modules
+.pnpm-debug.log
+.yarn/cache
+.yarn/*.gz
 
 /packages/taro-runtime/dist/*
 

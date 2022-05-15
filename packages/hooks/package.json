@@ -35,7 +35,7 @@
   "repository": "https://github.com/innocces/taro-hooks",
   "homepage": "https://innocces.github.io/taro-hooks/",
   "scripts": {
-    "build": "yarn father-build",
+    "build": "father-build",
     "postinstall": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
   "files": [
@@ -47,14 +47,14 @@
     "postinstall.js"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.14.6",
-    "compressorjs-global": "^1.1.2",
+    "@babel/runtime": "^7.7.7",
+    "@taro-hooks/compressorjs": "^1.5.6",
     "lodash-wechat": "^1.0.0",
     "lodash.uniq": "^4.5.0",
     "querystring": "^0.2.1"
   },
   "devDependencies": {
-    "@tarojs/taro": "3.3.14",
+    "@tarojs/taro": "3.4.8",
     "react": "^17.0.2"
   },
   "peerDependencies": {

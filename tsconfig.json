@@ -15,7 +15,6 @@
       "@components/*": ["packages/app/src/components/*"],
       "@project/*": ["./*"]
     },
-    "typeRoots": ["node_modules/@types", "typings.d.ts"],
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "declaration": false,
