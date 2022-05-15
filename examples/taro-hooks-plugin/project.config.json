@@ -2,7 +2,7 @@
   "miniprogramRoot": "dist/",
   "projectname": "taro-hooks-plugin",
   "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "appid": "touristappid",
+  "appid": "wx15171eb44c7567ae",
   "setting": {
     "urlCheck": true,
     "es6": false,
@@ -26,14 +26,14 @@
     "useStaticServer": true,
     "showES6CompileOption": false,
     "checkInvalidKey": true,
-    "compileHotReLoad": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
     "disableUseStrict": false,
-    "useCompilerPlugins": false
+    "useCompilerPlugins": false,
+    "minifyWXML": true
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",

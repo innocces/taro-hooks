@@ -1,20 +1,16 @@
-import {
-  useEffect,
-  useState,
-  useCallback,
-  useContext,
-  useReducer,
-  useRef,
-} from 'react';
+import { container, SERVICE_IDENTIFIER } from '@tarojs/runtime';
+import * as taroHooks from './hooks';
 
-export const useTaroEffect = useEffect;
+import type { IHooks } from '@tarojs/runtime';
 
-export const useTaroState = useState;
+const hooks = container.get<IHooks>(SERVICE_IDENTIFIER.Hooks);
 
-export const useTaroCallback = useCallback;
+hooks.initNativeApiImpls ||= [];
+hooks.initNativeApiImpls.push((taro) => {
+  for (const hook in taroHooks) {
+    // @ts-ignore
+    taro[hook] = taroHooks[hook];
+  }
+});
 
-export const useTaroContext = useContext;
-
-export const useTaroReducer = useReducer;
-
-export const useTaroRef = useRef;
+export * from './hooks';

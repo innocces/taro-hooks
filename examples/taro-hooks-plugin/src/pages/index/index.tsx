@@ -1,9 +1,12 @@
 import React, { useCallback } from 'react';
 import { View, Text, Button, Image } from '@tarojs/components';
+import { useTaroEffect } from '@tarojs/taro';
 import { useEnv, useNavigationBar, useModal, useToast } from 'taro-hooks';
 import logo from './hook.png';
 
 import './index.css';
+
+console.log(useTaroEffect);
 
 const Index = () => {
   const env = useEnv();
@@ -22,6 +25,10 @@ const Index = () => {
       showToast({ title: '点击了支持!' });
     });
   }, [show, showToast]);
+
+  useTaroEffect(() => {
+    console.log('env change', env);
+  }, [env]);
 
   return (
     <View className="wrapper">
