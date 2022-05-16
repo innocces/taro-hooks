@@ -3,12 +3,13 @@
   "version": "1.5.6",
   "description": "React/Preact/Nerv 框架插件",
   "author": "innocces",
-  "homepage": "https://innocces.github.io/taro-hooks",
+  "homepage": "https://github.com/innocces/taro-hooks/blob/next/packages/plugin-react/README.md",
   "license": "MIT",
   "main": "index.js",
   "typings": "types/index.d.ts",
   "keywords": [
     "taro-hooks",
+    "hooks",
     "react",
     "taro"
   ],

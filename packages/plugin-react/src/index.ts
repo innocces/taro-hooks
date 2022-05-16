@@ -8,7 +8,11 @@ export default (ctx: IPluginContext) => {
 
   ctx.modifyWebpackChain(({ chain, webpack }) => {
     setDefinePlugin(chain, webpack);
-    console.log(chalk.blue('✨ 逮到一个使用taro-hooks的小可爱~'));
+    console.log(
+      chalk.blue(
+        '✨ 逮到一个使用taro-hooks的小可爱~ \n 当前使用的框架是: React',
+      ),
+    );
     if (process.env.TARO_ENV === 'h5') {
       chain.merge({
         module: {

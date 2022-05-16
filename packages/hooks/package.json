@@ -10,6 +10,8 @@
     "tarojs-hooks",
     "react",
     "react-hooks",
+    "vue",
+    "composition-api",
     "javascript",
     "lerna",
     "monorepo",
