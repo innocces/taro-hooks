@@ -1,5 +1,6 @@
 import { chalk } from '@tarojs/helper';
-import { IPluginContext } from '@tarojs/service';
+import { isString, isArray } from '@tarojs/shared';
+import { IPluginContext, TaroPlatformBase } from '@tarojs/service';
 
 export default (ctx: IPluginContext) => {
   const { framework } = ctx.initialConfig;
@@ -21,6 +22,21 @@ export default (ctx: IPluginContext) => {
       });
     }
   });
+
+  if (process.env.TARO_ENV === 'weapp') {
+    ctx.registerMethod({
+      name: 'onSetupClose',
+      fn(platform: TaroPlatformBase) {
+        const pluginRuntimePath = '@taro-hooks/plugin-react/dist/runtime';
+        const runtimePath = platform.runtimePath;
+        if (isArray(runtimePath)) {
+          runtimePath.push(pluginRuntimePath);
+        } else if (isString(runtimePath)) {
+          platform.runtimePath = [runtimePath, pluginRuntimePath];
+        }
+      },
+    });
+  }
 };
 
 function setDefinePlugin(chain: any, webpack: any) {
