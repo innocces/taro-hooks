@@ -1,0 +1,49 @@
+{
+  "name": "@taro-hooks/plugin-vue",
+  "version": "1.5.6",
+  "description": "vue3 框架插件",
+  "author": "innocces",
+  "homepage": "https://github.com/innocces/taro-hooks/blob/next/packages/plugin-vue/README.md",
+  "license": "MIT",
+  "main": "index.js",
+  "typings": "types/index.d.ts",
+  "keywords": [
+    "taro-hooks",
+    "hooks",
+    "vue",
+    "vue3",
+    "composition-api",
+    "taro"
+  ],
+  "files": [
+    "index.js",
+    "dist",
+    "types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innocces/taro-hooks"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "bugs": {
+    "url": "https://github.com/innocces/taro-hooks/issues"
+  },
+  "dependencies": {
+    "@tarojs/runtime": "3.4.8",
+    "@tarojs/shared": "3.4.8",
+    "acorn": "^8.0.4",
+    "acorn-walk": "^8.0.0"
+  },
+  "devDependencies": {
+    "@tarojs/service": "3.4.8",
+    "@tarojs/taro": "3.4.8",
+    "vue": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@tarojs/taro": ">=3.x",
+    "vue": ">=3.x"
+  }
+}
