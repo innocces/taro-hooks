@@ -6,6 +6,7 @@ declare module '*.png';
 
 // mock typings
 declare module 'taro-hooks';
+declare module '@taro-hooks/shared';
 declare module '@tarojs/runtime';
 declare module 'mockjs';
 declare module 'lodash.throttle';

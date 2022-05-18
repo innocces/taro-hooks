@@ -7,7 +7,8 @@ export default function (str: string): string {
     useTaroCallback,
     useTaroMemo,
     useTaroLayoutEffect,
-    useTaroContext
+    useTaroContext,
+    useWatchEffect
   } from '@taro-hooks/plugin-vue/dist/runtime';
   ${str}
 
@@ -19,6 +20,7 @@ export default function (str: string): string {
   taro.useTaroMemo = useTaroMemo;
   taro.useTaroLayoutEffect = useTaroLayoutEffect;
   taro.useTaroContext = useTaroContext;
+  taro.useWatchEffect = useWatchEffect;
 
   export {
     useTaroState,
@@ -28,7 +30,8 @@ export default function (str: string): string {
     useTaroCallback,
     useTaroMemo,
     useTaroLayoutEffect,
-    useTaroContext
+    useTaroContext,
+    useWatchEffect
   }
   `;
 }

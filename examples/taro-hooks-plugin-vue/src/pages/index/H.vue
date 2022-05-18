@@ -1,38 +1,30 @@
 <template>
   <view class="index" @click="handleChangeMsg()">
     <text>{{ msg }}</text>
-    <H v-if="visible" />
   </view>
 </template>
 
 <script>
 import { ref } from 'vue';
-import H from './H';
 import { useTaroEffect } from '@tarojs/taro';
 import './index.css';
 
 export default {
-  components: {
-    H,
-  },
   setup() {
     const msg = ref('Hello world');
-    const visible = ref(false);
     const handleChangeMsg = () => {
       msg.value = msg.value + Date.now();
-      visible.value = !visible.value;
     };
     useTaroEffect(() => {
       console.log('msg change', msg.value);
 
       return () => {
-        console.log('component will unmount');
+        console.log('component H will unmount');
       };
     }, [msg]);
     return {
       msg,
       handleChangeMsg,
-      visible,
     };
   },
 };

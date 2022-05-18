@@ -27,6 +27,8 @@
     "develop:vue-plugin": "lerna run dev:h5 --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
     "develop:vue-plugin:weapp": "lerna run dev:weapp --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
     "dev:vue-plugin": "lerna run dev --scope=@taro-hooks/plugin-vue --stream",
+    "dev:shared": "lerna run dev --scope=@taro-hooks/shared --stream",
+    "build:shared": "lerna run build --scope=@taro-hooks/shared --stream",
     "deploy": "yarn docusaurus:build && yarn docs:deploy",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "lerna:publish": "lerna publish --no-private",
