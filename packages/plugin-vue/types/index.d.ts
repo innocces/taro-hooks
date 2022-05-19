@@ -1,17 +1,26 @@
 import Taro from '@tarojs/taro';
-import { useTaroEffect, useWatchEffect } from '../src/runtime/hooks';
-type Noop = () => void;
+import {
+  useTaroEffect,
+  useWatchEffect,
+  useTaroCallback,
+  useTaroMemo,
+  useTaroLayoutEffect,
+  useTaroContext,
+  useTaroState,
+  useTaroRef,
+  useTaroReducer,
+} from '../src/runtime/hooks';
 
 declare module '@tarojs/taro' {
   interface TaroStatic {
-    useTaroState: Noop;
+    useTaroState: typeof useTaroState;
     useTaroEffect: typeof useTaroEffect;
     useWatchEffect: typeof useWatchEffect;
-    useTaroRef: Noop;
-    useTaroReducer: Noop;
-    useTaroCallback: Noop;
-    useTaroMemo: Noop;
-    useTaroLayoutEffect: Noop;
-    useTaroContext: Noop;
+    useTaroRef: typeof useTaroRef;
+    useTaroReducer: typeof useTaroReducer;
+    useTaroCallback: typeof useTaroCallback;
+    useTaroMemo: typeof useTaroMemo;
+    useTaroLayoutEffect: typeof useTaroLayoutEffect;
+    useTaroContext: typeof useTaroContext;
   }
 }

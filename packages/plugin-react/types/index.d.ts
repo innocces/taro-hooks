@@ -14,6 +14,7 @@ declare module '@tarojs/taro' {
   interface TaroStatic {
     useTaroState: typeof useState;
     useTaroEffect: typeof useEffect;
+    useWatchEffect: typeof useEffect;
     useTaroRef: typeof useRef;
     useTaroReducer: typeof useReducer;
     useTaroCallback: typeof useCallback;

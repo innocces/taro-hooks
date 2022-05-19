@@ -11,6 +11,8 @@ import {
 
 export const useTaroEffect = useEffect;
 
+export const useWatchEffect = useEffect;
+
 export const useTaroState = useState;
 
 export const useTaroCallback = useCallback;
