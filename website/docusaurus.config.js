@@ -60,7 +60,7 @@ const config = {
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/innocces/taro-hooks/edit/main/website/',
+          editUrl: 'https://github.com/innocces/taro-hooks/edit/next/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),
@@ -138,6 +138,15 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Taro-hooks, Inc. Built with Innocces.`,
       },
+      announcementBar: {
+        id: 'announce current progress info',
+        content: `
+          <div class="general-announcement"><code>taro-hooks@next</code> 即将推出 🎉</div>
+        `,
+        textColor: '#333333',
+        backgroundColor: 'var(--ifm-color-primary)',
+        isCloseable: false,
+      },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
@@ -181,34 +190,40 @@ const config = {
       [
         {
           name: '自定义模板',
-          path: '/guide/quick-start',
+          path: '/docs/quick/intro',
+          icon: 'img/features/template.svg',
           description: ['多种模板预设', '快速开始使用'],
         },
         {
-          name: '自定义模板',
-          path: '/guide/quick-start',
-          description: ['多种模板预设', '快速开始使用'],
+          name: '插件化多框架',
+          path: '/docs/quick/intro',
+          icon: 'img/features/plugin.svg',
+          description: ['框架插件', '高效瘦身'],
         },
         {
-          name: '自定义模板',
-          path: '/guide/quick-start',
-          description: ['多种模板预设', '快速开始使用'],
+          name: '完整示例文档',
+          path: '/docs/quick/intro',
+          icon: 'img/features/doc.svg',
+          description: ['类型解释', '用法说明'],
         },
       ],
       [
         {
           name: 'typescript',
           tag: 'tsc check',
+          icon: 'img/features/typescript.svg',
           description: ['使用typescript开发', '完整类型定义'],
         },
         {
           name: 'ahooks',
           tag: 'ahooks >= 3.x',
+          icon: 'img/features/ahooks.svg',
           description: ['useRequest', '结合ahooks扩展日常需要'],
         },
         {
           name: 'Taro API',
           tag: 'coverage all api',
+          icon: 'img/features/taro.svg',
           description: ['全api接入', '完全hook'],
         },
       ],

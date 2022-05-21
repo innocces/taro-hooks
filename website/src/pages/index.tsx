@@ -1,13 +1,15 @@
 import React from 'react';
 import clsx from 'clsx';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import styles from './index.module.css';
 import Cases from '@site/src/components/Cases';
 import Title from '@site/src/components/Title';
 import Intro from '@site/src/components/Intro';
 import Feature from '@site/src/components/Feature';
+
+import styles from './index.module.css';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();

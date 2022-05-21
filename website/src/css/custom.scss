@@ -27,6 +27,18 @@
   --ifm-color-primary-lightest: #ba92f1;
 }
 
+.markdown > h1 {
+  font-size: 2rem;
+}
+
+.markdown > h2 {
+  --ifm-h2-font-size: 1.75rem;
+}
+
+.markdown > h3 {
+  --ifm-h3-font-size: 1.375rem;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
@@ -79,6 +91,16 @@
   text-align: center;
   letter-spacing: 6px;
   background: url('/img/title-background.svg');
+}
+
+@keyframes pulse {
+  50% {
+      opacity: .5
+  }
+}
+
+.general-announcement {
+  animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite
 }
 
 .clearfix {

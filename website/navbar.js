@@ -3,7 +3,7 @@ module.exports = [
     type: 'doc',
     docId: 'intro',
     position: 'left',
-    label: 'Tutorial',
+    label: '文档',
   },
   { to: '/blog', label: 'Blog', position: 'left' },
   {
@@ -17,5 +17,11 @@ module.exports = [
     position: 'right',
     className: 'header-nav-link icon-gitee',
     'aria-label': 'GiTee repository',
+  },
+  {
+    href: 'https://taro-hooks-innocces.vercel.app',
+    position: 'right',
+    label: '1.x',
+    'aria-label': 'v1.x',
   },
 ];

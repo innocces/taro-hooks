@@ -10,6 +10,7 @@ interface IFeatureItem {
   name: string;
   path?: string;
   tag?: string;
+  icon?: string;
   description: string[];
 }
 
@@ -31,30 +32,32 @@ export default function Feature(): JSX.Element {
             {FEATURETITLES[index]}
           </h3>
           <ul className="clearfix">
-            {item.map(({ name, tag, description, path }: IFeatureItem) => (
-              <li className="text--center" key={name}>
-                <img />
-                <h4>{name}</h4>
-                {description.map((desc) => (
-                  <p key={desc}>{desc}</p>
-                ))}
-                <div className={styles.featureMask}>
-                  {tag ? (
-                    <code>{tag}</code>
-                  ) : (
-                    <Link
-                      className={clsx(
-                        'button button--active button--sm',
-                        styles.featureButton,
-                      )}
-                      to={path}
-                    >
-                      去看看
-                    </Link>
-                  )}
-                </div>
-              </li>
-            ))}
+            {item.map(
+              ({ name, tag, description, path, icon }: IFeatureItem) => (
+                <li className="text--center" key={name}>
+                  <img src={icon} alt={name} />
+                  <h4>{name}</h4>
+                  {description.map((desc) => (
+                    <p key={desc}>{desc}</p>
+                  ))}
+                  <div className={styles.featureMask}>
+                    {tag ? (
+                      <code>{tag}</code>
+                    ) : (
+                      <Link
+                        className={clsx(
+                          'button button--active button--sm',
+                          styles.featureButton,
+                        )}
+                        to={path}
+                      >
+                        去看看
+                      </Link>
+                    )}
+                  </div>
+                </li>
+              ),
+            )}
           </ul>
         </div>
       ))}
