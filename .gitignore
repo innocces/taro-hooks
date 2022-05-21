@@ -5,7 +5,7 @@
 /npm-debug.log*
 /yarn-error.log
 /packages/*/yarn-error.log
-/yarn.lock
+# /yarn.lock
 /package-lock.json
 /packages/*/node_modules
 /*/node_modules
