@@ -18,6 +18,14 @@ export type Dispatch<A> = (action: A) => void;
 
 const noop = () => {};
 
+/**
+ * @see https://next-version-taro-hooks.vercel.app/
+ * @version taro-hooks >= 2.0.0
+ * @description deal sideEffect when deps change, like mounted, updated, unmounted
+ * @param {() => (() => void) | void} create sideEffect function
+ * @param {Array<unknown> | void | null} deps sideEffect deps
+ * @returns {void}
+ */
 function useEffect(
   create: () => (() => void) | void,
   deps: Array<unknown> | void | null,
@@ -63,6 +71,13 @@ function useEffect(
   );
 }
 
+/**
+ * @see https://next-version-taro-hooks.vercel.app/
+ * @version taro-hooks >= 2.0.0
+ * @description deal sideEffect when deps(auto recieve) change, like mounted, updated, unmounted
+ * @param {() => (() => void) | void} create sideEffect function
+ * @returns {void}
+ */
 function useWatchEffect(create: () => (() => void) | void): void {
   log('useWatchEffect always clean sideEffect when deps change,');
 
@@ -87,6 +102,14 @@ function useWatchEffect(create: () => (() => void) | void): void {
   );
 }
 
+/**
+ * @see https://next-version-taro-hooks.vercel.app/
+ * @version taro-hooks >= 2.0.0
+ * @description deal sideEffect when deps change, both dom update. like mounted, updated, unmounted
+ * @param {() => (() => void) | void} create sideEffect function
+ * @param {Array<unknown> | void | null} deps sideEffect deps
+ * @returns {void}
+ */
 function useLayoutEffect(
   create: () => (() => void) | void,
   deps: Array<unknown> | void | null,
@@ -135,6 +158,14 @@ function useLayoutEffect(
   );
 }
 
+/**
+ * @see https://next-version-taro-hooks.vercel.app/
+ * @version taro-hooks >= 2.0.0
+ * @description memo function when deps change
+ * @param {function} callback function
+ * @param {Array<unknown> | void | null} deps sideEffect deps
+ * @returns {void}
+ */
 function useCallback<T>(callback: T, deps: Array<unknown> | void | null): T {
   log('vue.ver useCallback is use watch to simulation.');
 
@@ -159,6 +190,14 @@ function useCallback<T>(callback: T, deps: Array<unknown> | void | null): T {
   return callbackRef.value;
 }
 
+/**
+ * @see https://next-version-taro-hooks.vercel.app/
+ * @version taro-hooks >= 2.0.0
+ * @description memo variable when deps change to recaculate it
+ * @param {() => (() => void) | void} create sideEffect function
+ * @param {Array<unknown> | void | null} deps sideEffect deps
+ * @returns {T} memo variable
+ */
 function useMemo<T>(
   create: () => T,
   deps: Array<unknown> | void | null,
@@ -190,6 +229,13 @@ function useMemo<T>(
   return reactive(memoRef);
 }
 
+/**
+ * @see https://next-version-taro-hooks.vercel.app/
+ * @version taro-hooks >= 2.0.0
+ * @description a latest reactive value
+ * @param {T} initialValue initialValue
+ * @returns {T} ref of value
+ */
 function useRef<T>(initialValue: T): UnwrapRef<{
   current: T;
 }> {
