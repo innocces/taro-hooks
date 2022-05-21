@@ -166,7 +166,7 @@ const config = {
       ],
     }),
 
-  stylesheets: ['http://at.alicdn.com/t/font_3373489_imvarji5zu.css'],
+  stylesheets: ['//at.alicdn.com/t/font_3373489_imvarji5zu.css'],
 
   scripts: [
     '/scripts/hotjar.js',
