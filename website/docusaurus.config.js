@@ -205,19 +205,19 @@ const config = {
       [
         {
           name: '自定义模板',
-          path: '/docs/quick/intro',
+          path: '/docs/quick/install-start',
           icon: 'img/features/template.svg',
           description: ['多种模板预设', '快速开始使用'],
         },
         {
           name: '插件化多框架',
-          path: '/docs/quick/intro',
+          path: '/docs/intro',
           icon: 'img/features/plugin.svg',
           description: ['框架插件', '高效瘦身'],
         },
         {
           name: '完整示例文档',
-          path: '/docs/quick/intro',
+          path: '/docs/quick/install-start',
           icon: 'img/features/doc.svg',
           description: ['类型解释', '用法说明'],
         },
