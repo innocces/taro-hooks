@@ -1,3 +1,5 @@
+const latestStabVersion = 'V1.5.8';
+
 module.exports = [
   {
     type: 'doc',
@@ -5,7 +7,22 @@ module.exports = [
     position: 'left',
     label: '文档',
   },
-  { to: '/blog', label: 'Blog', position: 'left' },
+  { to: '/blog', label: '博客', position: 'left' },
+  {
+    type: 'docsVersionDropdown',
+    position: 'right',
+    dropdownActiveClassDisabled: true,
+    dropdownItemsAfter: [
+      {
+        type: 'html',
+        value: '<hr class="dropdown-separator">',
+      },
+      {
+        href: 'https://taro-hooks-innocces.vercel.app',
+        label: latestStabVersion,
+      },
+    ],
+  },
   {
     href: 'https://github.com/innocces/taro-hooks',
     position: 'right',
@@ -17,11 +34,5 @@ module.exports = [
     position: 'right',
     className: 'header-nav-link icon-gitee',
     'aria-label': 'GiTee repository',
-  },
-  {
-    href: 'https://taro-hooks-innocces.vercel.app',
-    position: 'right',
-    label: '1.x',
-    'aria-label': 'v1.x',
   },
 ];

@@ -27,7 +27,11 @@
   --ifm-color-primary-lightest: #ba92f1;
 }
 
-.markdown > h1 {
+.dropdown-separator {
+  margin: 0.3rem 0;
+}
+
+.markdown header h1 {
   font-size: 2rem;
 }
 

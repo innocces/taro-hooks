@@ -3,7 +3,14 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
+const { join } = require('path');
+const { version } = require(join(
+  process.cwd(),
+  '../',
+  'packages',
+  'hooks',
+  'package.json',
+));
 const navbarItem = require('./navbar');
 
 // env
@@ -57,6 +64,12 @@ const config = {
           editUrl: 'https://github.com/innocces/taro-hooks/edit/main/website/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: `${version} 🤖`,
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -141,9 +154,11 @@ const config = {
       announcementBar: {
         id: 'announce current progress info',
         content: `
-          <div class="general-announcement"><code>taro-hooks@next</code> 即将推出 🎉</div>
+          <div class="general-announcement">
+            <a target="__blank" href="https://github.com/innocces/taro-hooks/tree/next"><b>taro-hooks@next</b></a> 暂处于beta🤖阶段! 即将推出 🎉
+          </div>
         `,
-        textColor: '#333333',
+        textColor: 'var(--ifm-color-white)',
         backgroundColor: 'var(--ifm-color-primary)',
         isCloseable: false,
       },

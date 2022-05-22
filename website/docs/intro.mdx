@@ -1,0 +1,104 @@
+---
+title: Taro-hooks 介绍
+sidebar_position: 1
+---
+
+:::info
+
+新版本的**Taro-hooks**全新升级. 同时支持 **React/Vue** . 仅需要安装对应的插件即可进行快捷使用. 见[安装及使用](/docs/quick/install-start)
+
+:::
+
+## 简介
+
+**Taro-hooks** - 一款对标 **Taro API** 开发的 **Hooks Library**. 覆盖几乎所有 **Taro API** 以及方法. 并且结合 **ahooks** 扩展了多端共用的 **hooks** 库.
+
+新的版本跟随 **Taro** 的设计理念, 进行了 **runtime + plugin** 化. 最大化减少额外依赖的加入. 只需要引入对应框架的插件即可完美使用本库.
+
+## 特性
+
+### 基础特性预览
+
+- 全面匹配 **Taro API**.
+- 结合 **ahooks** 扩展常用 **hook** (其中 **useRequest** 已被单独抽离. 可独立安装使用).
+- 使用 **ts** 开发. 更好的类型提示
+- 扩展 **h5** 部分缺失的功能 (但不保证兼容度)
+
+### 框架支持
+
+在 **taro-hooks@next** 中可以使用 **React/Vue** 开发体验, 具体请参考:
+
+- [基础教程 ———— React](/docs/quick/react-useage)
+- [基础教程 ———— Vue](/docs/quick/vue-useage)
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs defaultValue="React" groupId="codeExample">
+  <TabItem value="React" label="React">
+
+```bash
+$ npm i @taro-hooks/plugin-react
+```
+```js {3} title="project/config/index.js"
+const config = {
+  // ....
++ plugins: ['@taro-hooks/plugin-react'],
+  // ...
+}
+```
+```tsx title="project/pages/index/index.tsx"
+import React from 'react';
+import { View } from '@tarojs/components';
+import { useEnv } from 'taro-hooks';
+
+export default () => {
+  const env = useEnv();
+  return <View>{env}<View>
+}
+```
+
+  </TabItem>
+  <TabItem value="Vue" label="Vue">
+
+```bash
+$ npm i @taro-hooks/plugin-vue
+```
+```js {3} title="project/config/index.js"
+const config = {
+  // ....
++ plugins: ['@taro-hooks/plugin-vue'],
+  // ...
+}
+```
+```html title="project/pages/index/index.vue"
+<template>
+  <view class="index">
+    <text>{{ env }}</text>
+  </view>
+</template>
+
+<script>
+import { useEnv } from 'taro-hooks'
+
+export default {
+  setup() {
+    const env = useEnv();
+    return {
+      env
+    }
+  },
+};
+</script>
+```
+
+  </TabItem>
+</Tabs>
+
+## 使用案例
+
+配套的示例项目和一个简单的 **Todo** 是目前作者提供的完整线上项目.
+
+[查看更多的案例, 请点击](https://github.com/taro-hooks/user-cases/blob/main/cases.json)
+
+若你的项目中也使用了 **taro-hooks** . 可点击[提交指南](https://github.com/taro-hooks/user-cases)进行提交. 提交成功后会在首页展示.
