@@ -350,7 +350,7 @@ function createContext<T>(defaultValue: T): VueContext<T> {
     },
   };
   return {
-    $$inject: defaultValue,
+    [INJECTKEY]: defaultValue,
     Provider: h(ProviderElement),
     Consumer: h({
       render() {
