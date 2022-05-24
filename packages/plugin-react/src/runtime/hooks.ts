@@ -7,6 +7,7 @@ import {
   useRef,
   useMemo,
   useLayoutEffect,
+  createContext,
 } from 'react';
 
 export const useTaroEffect = useEffect;
@@ -26,3 +27,5 @@ export const useTaroRef = useRef;
 export const useTaroMemo = useMemo;
 
 export const useTaroLayoutEffect = useLayoutEffect;
+
+export const taroCreateContext = createContext;

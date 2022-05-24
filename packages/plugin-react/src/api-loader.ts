@@ -8,7 +8,8 @@ export default function (str: string): string {
     useTaroMemo,
     useTaroLayoutEffect,
     useTaroContext,
-    useWatchEffect
+    useWatchEffect,
+    taroCreateContext
   } from '@taro-hooks/plugin-react/dist/runtime';
   ${str}
 
@@ -21,6 +22,7 @@ export default function (str: string): string {
   taro.useTaroLayoutEffect = useTaroLayoutEffect;
   taro.useTaroContext = useTaroContext;
   taro.useWatchEffect = useWatchEffect;
+  taro.taroCreateContext = taroCreateContext
 
   export {
     useTaroState,
@@ -31,7 +33,8 @@ export default function (str: string): string {
     useTaroMemo,
     useTaroLayoutEffect,
     useTaroContext,
-    useWatchEffect
+    useWatchEffect,
+    taroCreateContext
   }
   `;
 }

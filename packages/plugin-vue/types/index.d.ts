@@ -9,6 +9,7 @@ import {
   useTaroState,
   useTaroRef,
   useTaroReducer,
+  taroCreateContext,
 } from '../src/runtime/hooks';
 
 declare module '@tarojs/taro' {
@@ -22,5 +23,6 @@ declare module '@tarojs/taro' {
     useTaroMemo: typeof useTaroMemo;
     useTaroLayoutEffect: typeof useTaroLayoutEffect;
     useTaroContext: typeof useTaroContext;
+    taroCreateContext: typeof taroCreateContext;
   }
 }

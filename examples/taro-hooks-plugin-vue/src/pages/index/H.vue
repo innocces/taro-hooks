@@ -6,11 +6,14 @@
 
 <script>
 import { ref } from 'vue';
-import { useTaroEffect } from '@tarojs/taro';
+import { useTaroEffect, useTaroContext } from '@tarojs/taro';
+import context from './context';
 import './index.css';
 
 export default {
   setup() {
+    const selfContext = useTaroContext(context);
+    console.log(selfContext);
     const msg = ref('Hello world');
     const handleChangeMsg = () => {
       msg.value = msg.value + Date.now();

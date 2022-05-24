@@ -8,6 +8,7 @@ import {
   useMemo,
   useLayoutEffect,
   useContext,
+  createContext,
 } from 'react';
 
 declare module '@tarojs/taro' {
@@ -21,5 +22,6 @@ declare module '@tarojs/taro' {
     useTaroMemo: typeof useMemo;
     useTaroLayoutEffect: typeof useLayoutEffect;
     useTaroContext: typeof useContext;
+    taroCreateContext: typeof createContext;
   }
 }

@@ -1,5 +1,5 @@
-import { isFunction, isArray } from '@tarojs/shared';
-import { log } from '@taro-hooks/shared';
+import { isFunction, isArray, isObject } from '@tarojs/shared';
+import { log, INJECTKEY } from '@taro-hooks/shared';
 import {
   ref,
   onMounted,
@@ -9,17 +9,26 @@ import {
   watch,
   nextTick,
   reactive,
+  unref,
+  inject,
+  provide,
+  h,
 } from 'vue';
 
-import type { Ref, UnwrapRef } from 'vue';
+import type {
+  Ref,
+  UnwrapRef,
+  VNode,
+  RendererNode,
+  RendererElement,
+  ComponentOptions,
+} from 'vue';
 
 export type BasicStateAction<S> = ((state: S) => S) | S;
 export type Dispatch<A> = (action: A) => void;
 
-const noop = () => {};
-
 /**
- * @see https://next-version-taro-hooks.vercel.app/
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
  * @version taro-hooks >= 2.0.0
  * @description deal sideEffect when deps change, like mounted, updated, unmounted
  * @param {() => (() => void) | void} create sideEffect function
@@ -72,7 +81,7 @@ function useEffect(
 }
 
 /**
- * @see https://next-version-taro-hooks.vercel.app/
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
  * @version taro-hooks >= 2.0.0
  * @description deal sideEffect when deps(auto recieve) change, like mounted, updated, unmounted
  * @param {() => (() => void) | void} create sideEffect function
@@ -103,7 +112,7 @@ function useWatchEffect(create: () => (() => void) | void): void {
 }
 
 /**
- * @see https://next-version-taro-hooks.vercel.app/
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
  * @version taro-hooks >= 2.0.0
  * @description deal sideEffect when deps change, both dom update. like mounted, updated, unmounted
  * @param {() => (() => void) | void} create sideEffect function
@@ -159,7 +168,7 @@ function useLayoutEffect(
 }
 
 /**
- * @see https://next-version-taro-hooks.vercel.app/
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
  * @version taro-hooks >= 2.0.0
  * @description memo function when deps change
  * @param {function} callback function
@@ -191,7 +200,7 @@ function useCallback<T>(callback: T, deps: Array<unknown> | void | null): T {
 }
 
 /**
- * @see https://next-version-taro-hooks.vercel.app/
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
  * @version taro-hooks >= 2.0.0
  * @description memo variable when deps change to recaculate it
  * @param {() => (() => void) | void} create sideEffect function
@@ -230,7 +239,7 @@ function useMemo<T>(
 }
 
 /**
- * @see https://next-version-taro-hooks.vercel.app/
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
  * @version taro-hooks >= 2.0.0
  * @description a latest reactive value
  * @param {T} initialValue initialValue
@@ -244,20 +253,146 @@ function useRef<T>(initialValue: T): UnwrapRef<{
   return reactiveRef;
 }
 
+/**
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
+ * @version taro-hooks >= 2.0.0
+ * @description lets you add a state variable to your component
+ * @param {unknown} initialState initialState
+ * @returns {[state, dispatch]} state and dispatch
+ */
+function useState<S>(
+  initialState: (() => S) | S,
+): [Ref<S>, Dispatch<BasicStateAction<S>>] {
+  log('vue.ver useState is use customRef to simulation.');
+
+  let state = initialState;
+  if (isFunction(initialState)) {
+    state = initialState();
+  }
+
+  const reactiveState = ref(state) as Ref<S>;
+
+  const dispatchAction = (actionOrState: ((prevState: S) => S) | S) => {
+    if (isFunction(actionOrState)) {
+      reactiveState.value = actionOrState(reactiveState.value);
+    } else {
+      reactiveState.value = actionOrState;
+    }
+  };
+
+  return [reactiveState, dispatchAction];
+}
+
+/**
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
+ * @version taro-hooks >= 2.0.0
+ * @description lets you add a reducer to your component.
+ * @param {(initState, action) => S} reducer
+ * @param {unknown} initialArg initialArg
+ * @returns {[state, dispatch]} state and dispatch
+ */
+function useReducer<S, A>(
+  reducer: (initState: S, action: A) => S,
+  initialArg: S,
+  init?: (initialArg: S) => S,
+): [Ref<S>, Dispatch<A>] {
+  if (!isFunction(reducer)) {
+    throw new TypeError(
+      'useReducer only accept a function as the first argument.',
+    );
+  }
+
+  if (!isObject(initialArg)) {
+    log('recommand the initialArg is object');
+  }
+
+  let initialState = initialArg;
+
+  // tirgger init
+  if (isFunction(init)) {
+    initialState = init(initialState);
+  }
+
+  const state = ref(initialState) as Ref<S>;
+
+  const dispatch = (action: A) => {
+    state.value = reducer(unref(state), action);
+  };
+
+  return [reactive(state), dispatch];
+}
+
+export interface IProviderProps<T> {
+  value?: T;
+}
+export type VueContext<T> = {
+  $$inject: T;
+  Provider: VNode<RendererNode, RendererElement, IProviderProps<T>>;
+  Consumer: VNode;
+};
+
+/**
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
+ * @version taro-hooks >= 2.0.0
+ * @description vue.ver createContext
+ * @param {T} defaultValue init or defaultValue
+ * @returns {VueContext<T>} vue context
+ */
+function createContext<T>(defaultValue: T): VueContext<T> {
+  const ProviderElement: ComponentOptions<IProviderProps<T>> = {
+    name: '$$Provider',
+    setup(props, context) {
+      // props.value => attrs.value => defaultValue
+      provide(INJECTKEY, props?.value ?? context?.attrs?.value ?? defaultValue);
+    },
+    render() {
+      return this.$slots.default();
+    },
+  };
+  return {
+    $$inject: defaultValue,
+    Provider: h(ProviderElement),
+    Consumer: h({
+      render() {
+        return this.$slots.default();
+      },
+    }),
+  };
+}
+
+/**
+ * @see https://next-version-taro-hooks.vercel.app/docs/quick/vue-useage
+ * @version taro-hooks >= 2.0.0
+ * @description  lets you read and subscribe to context from your component
+ * @param {VueContext<T>} Context
+ * @returns {T} context
+ */
+function useContext<T>(Context: VueContext<T>): T {
+  if (!isObject(Context) || !Context.$$inject) {
+    throw new TypeError(
+      'useContext only accept a context as the first argument.',
+    );
+  }
+
+  return inject(INJECTKEY) as T;
+}
+
 export const useTaroEffect = useEffect;
 
 export { useWatchEffect };
 
-export const useTaroState = noop;
+export const useTaroState = useState;
 
 export const useTaroCallback = useCallback;
 
-export const useTaroContext = noop;
+export const useTaroContext = useContext;
 
-export const useTaroReducer = noop;
+export const useTaroReducer = useReducer;
 
 export const useTaroRef = useRef;
 
 export const useTaroMemo = useMemo;
 
 export const useTaroLayoutEffect = useLayoutEffect;
+
+export const taroCreateContext = createContext;

@@ -13,6 +13,7 @@ declare module 'lodash.throttle';
 declare module 'compressorjs-global';
 
 declare var BUILD_MODE: string | undefined;
+declare var __TARO_HOOKS_VUE__: boolean;
 
 interface INavigator extends Navigator {
   getBattery: () => Promise<any>;
