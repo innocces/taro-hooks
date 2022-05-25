@@ -1,0 +1,7 @@
+page, body {
+  margin: 20px;
+}
+
+.taro_page {
+  overflow: auto;
+}
