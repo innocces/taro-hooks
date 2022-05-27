@@ -2,12 +2,12 @@ tasks:
   - name: dependencies
     init: >
       yarn global add lerna &&
-      yarn bootstrap &&
+      yarn &&
       gp sync-done bundle
   - name: dev server
     init: gp sync-await bundle
-    command: yarn start
+    command: yarn docusaurus:start
 
 ports:
-  - port: 12345
+  - port: 3000
     onOpen: open-preview

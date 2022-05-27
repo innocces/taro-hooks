@@ -23,6 +23,8 @@
     "develop:react-plugin": "lerna run dev:h5 --scope=@taro-hooks/taro-hooks-plugin --stream",
     "develop:react-plugin:weapp": "lerna run dev:weapp --scope=@taro-hooks/taro-hooks-plugin --stream",
     "dev:react-plugin": "lerna run dev --scope=@taro-hooks/plugin-react --stream",
+    "develop:sandpack": "lerna run dev --scope=@taro-hooks/sandpack --stream",
+    "build:sandpack": "lerna run build --scope=@taro-hooks/sandpack --stream",
     "build": "lerna run build --scope=taro-hooks --stream",
     "develop:vue-plugin": "lerna run dev:h5 --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
     "develop:vue-plugin:weapp": "lerna run dev:weapp --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
