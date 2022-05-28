@@ -47,7 +47,28 @@ const config = {
     }),
   },
 
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    [
+      '@taro-hooks/plugin-docusaurus',
+      {
+        alias: {
+          '@vue-demo': join(
+            process.cwd(),
+            '..',
+            'examples',
+            'taro-hooks-plugin-vue/src/pages',
+          ),
+          '@react-demo': join(
+            process.cwd(),
+            '..',
+            'examples',
+            'taro-hooks-plugin/src/pages',
+          ),
+        },
+      },
+    ],
+  ],
 
   i18n: {
     defaultLocale: 'zh-Hans',

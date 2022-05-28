@@ -3,6 +3,9 @@
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "typeRoots": ["typings.d.ts"]
+    "typeRoots": ["typings.d.ts"],
+    "paths": {
+      "@vue-demo/**": ["../examples/taro-hooks-plugin-vue/src/pages/**"]
+    }
   }
 }

@@ -7,13 +7,10 @@
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
-    "baseUrl": "./",
-    "strict": true,
+    "baseUrl": ".",
+    "downlevelIteration": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": ["src/.umi/*"],
-      "@components/*": ["packages/app/src/components/*"],
-      "@project/*": ["./*"]
+      "@/*": ["src/*"]
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
@@ -29,6 +26,7 @@
     "**/__test__",
     "test",
     "docs",
-    "tests"
+    "tests",
+    "gulpfile.js"
   ]
 }

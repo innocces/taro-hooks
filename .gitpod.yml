@@ -1,7 +1,6 @@
 tasks:
   - name: dependencies
     init: >
-      yarn global add lerna &&
       yarn &&
       gp sync-done bundle
   - name: dev server
