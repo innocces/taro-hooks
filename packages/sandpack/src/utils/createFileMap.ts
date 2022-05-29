@@ -15,8 +15,8 @@ export const createFileMap = (codeSnippets: any) => {
         const [name, ...params] = props.metastring.split(' ');
         const fileName = name.startsWith('title')
           ? name.replace(/title=|"/g, '')
-          : '/' + name;
-        filePath = fileName;
+          : name;
+        filePath = '/' + fileName;
         if (params.includes('hidden')) {
           fileHidden = true;
         }

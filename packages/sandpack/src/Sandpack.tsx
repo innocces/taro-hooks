@@ -1,17 +1,24 @@
-import React, { lazy, memo } from 'react';
-import { SandpackProvider } from '@codesandbox/sandpack-react';
-import { SandpackLogLevel } from '@codesandbox/sandpack-client';
+import React, { memo } from 'react';
 import ErrorBoundary from './component/ErrorBoundary';
 import SandpackRoot from './component/SandpackRoot';
+import type { SandpackRootProps } from './component/SandpackRoot';
 
-import { createFileMap } from './utils/createFileMap';
+import './style/index.less';
 
-import { sandpackStyle } from './style';
+type SandpackProps = {
+  /**
+   * @description a fallback children when sandpack failed to load
+   */
+  fallback?: React.ReactNode;
+};
 
-function Sandpack(props: any): any {
+function Sandpack({
+  fallback,
+  ...props
+}: SandpackProps & SandpackRootProps): JSX.Element {
   return (
     // @ts-ignore
-    <ErrorBoundary fallback={<div>fail load</div>}>
+    <ErrorBoundary fallback={fallback ?? props.children}>
       <SandpackRoot {...props} />
     </ErrorBoundary>
   );

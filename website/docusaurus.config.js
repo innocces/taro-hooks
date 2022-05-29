@@ -13,6 +13,21 @@ const { version } = require(join(
 ));
 const navbarItem = require('./navbar');
 
+const pluginOptionAlias = {
+  '@vue-demo': join(
+    process.cwd(),
+    '..',
+    'examples',
+    'taro-hooks-plugin-vue/src/pages',
+  ),
+  '@react-demo': join(
+    process.cwd(),
+    '..',
+    'examples',
+    'taro-hooks-plugin/src/pages',
+  ),
+};
+
 // env
 const buildTarget = process.env.BUILD_TARGET;
 
@@ -52,19 +67,11 @@ const config = {
     [
       '@taro-hooks/plugin-docusaurus',
       {
-        alias: {
-          '@vue-demo': join(
-            process.cwd(),
-            '..',
-            'examples',
-            'taro-hooks-plugin-vue/src/pages',
-          ),
-          '@react-demo': join(
-            process.cwd(),
-            '..',
-            'examples',
-            'taro-hooks-plugin/src/pages',
-          ),
+        alias: pluginOptionAlias,
+        vue: {
+          alias: pluginOptionAlias['@vue-demo'],
+          openTarget:
+            'https://github.com/innocces/taro-hooks/edit/next/examples/taro-hooks-plugin-vue/src/pages',
         },
       },
     ],
@@ -82,7 +89,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/innocces/taro-hooks/edit/main/website/',
+          editUrl: 'https://github.com/innocces/taro-hooks/edit/next/website/',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           lastVersion: 'current',

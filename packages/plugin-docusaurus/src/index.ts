@@ -4,12 +4,17 @@ import type {
   DocusaurusContext,
   OptionValidationContext,
 } from '@docusaurus/types';
+import type { Options as VueOptions } from './vue-loader';
 
 type Options = {
   /**
    * @description webpack alias map
    */
   alias: Record<string, string>;
+  /**
+   * @description vue-loader options
+   */
+  vue: VueOptions;
 };
 
 /**
@@ -22,15 +27,10 @@ function pluginDecusaurus(
   context: DocusaurusContext,
   options: Options,
 ): Plugin<void> {
-  const { alias } = options;
+  const { alias, vue } = options;
   return {
     name: 'plugin-docusaurus-taro-hooks',
-    contentLoaded({ content, actions }) {
-      console.log('contentLoaded', content);
-    },
-    configureWebpack(config, isServer, utils, content) {
-      console.log('alias', __dirname, alias);
-
+    configureWebpack(config, isServer, utils) {
       return {
         module: {
           rules: [
@@ -38,7 +38,10 @@ function pluginDecusaurus(
               test: /\.vue$/,
               use: [
                 utils.getJSLoader({ isServer }),
-                require.resolve('./vue-loader'),
+                {
+                  loader: require.resolve('./vue-loader'),
+                  options: vue,
+                },
               ],
             },
           ],

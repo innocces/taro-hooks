@@ -12,6 +12,7 @@
   "include": "**/*.js",
   "exclude": "**/*.ts",
   "plugins": [
-    "babel-plugin-transform-async-to-promises"
+    "babel-plugin-transform-async-to-promises",
+    "./babel-transform-less-to-css"
   ]
 }

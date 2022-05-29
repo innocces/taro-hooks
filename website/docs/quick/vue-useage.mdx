@@ -4,6 +4,7 @@ sidebar_position: 3
 ---
 
 import { Sandpack } from '@taro-hooks/sandpack'
+import SourceCode from '@vue-demo/useState/index.vue'
 
 :::caution
 
@@ -81,13 +82,5 @@ const config = {
 **useTaroState** 帮助您快速创建一个响应式数据和更改它的方法
 但这里需要注意的是, 它内部使用的是 **Ref**. 在 **template** 内会被自动解包. 但在 **setup** 内使用依然需要显式的使用 **state.value** 来获取值. 当然我们也提供了一个工具来抹平差异. 在下面的示例中有体现
 
-<Sandpack>
-
-```html title="useState/index.vue"
-<template>
-  <view>123</view>
-</template>
-```
-
-</Sandpack>
+<SourceCode />
 

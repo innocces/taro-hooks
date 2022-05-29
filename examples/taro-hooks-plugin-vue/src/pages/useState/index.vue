@@ -6,9 +6,9 @@
     <input :value="text" @input="handleChange($event)" />
     <view>You typed: {{ text }}</view>
     <button @click="handleChange({ detail: { value: 'hello' } })">Reset</button>
-    <view @click="handleChangeLiked()"
-      >3. Checkbox is not well. use toggle instand(boolean)</view
-    >
+    <view @click="handleChangeLiked()">
+      3. Checkbox is not well. use toggle instand(boolean)
+    </view>
     <view v-if="liked">click up title to toggle me!</view>
     <view>4. Form(two variables) above all.</view>
   </view>
