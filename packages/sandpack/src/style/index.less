@@ -78,7 +78,7 @@
 
     > .sp-stack {
       min-width: 431px;
-      max-height: 406px;
+      max-height: inherit;
       flex: 1;
 
       &:not(:first-child) {
@@ -93,6 +93,19 @@
       overflow: auto;
       max-height: unset;
     }
+  }
+
+  &__footer {
+    @rotate-deg: 0deg, 180deg;
+    @rotate-selector: 0, 180;
+
+    each(@rotate-selector, {
+      .rotate-@{value} {
+        transform: rotate(extract(@rotate-deg, @index));
+      }
+    });
+
+    border-top: 1px solid var(--ifm-color-emphasis-300);
   }
 
   &__iframe {

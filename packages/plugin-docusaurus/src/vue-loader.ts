@@ -22,10 +22,11 @@ export default function (this: LoaderContext<Options>, source: string): string {
   const filePath = resourcePath?.replace(alias ?? '', '')?.replace(/\\/g, '/');
 
   const dependencies = {
-    '@taro-hooks/plugin-vue': mode === 'development' ? '' : 'latest',
+    '@taro-hooks/plugin-vue':
+      mode === 'development'
+        ? 'node_modules/@taro-hooks/plugin-vue/index.js'
+        : 'latest',
   };
-
-  console.log('resourcepath', resourcePath, alias, dependencies);
 
   return `
   import React from 'react';

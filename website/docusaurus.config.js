@@ -35,7 +35,7 @@ const buildTarget = process.env.BUILD_TARGET;
 const config = {
   title: 'Taro-hooks',
   tagline: '为 Taro 而设计的 Hooks Library',
-  url: 'https://taro-hooks-innocces.vercel.app',
+  url: 'https://next-version-taro-hooks.vercel.app',
   baseUrl: buildTarget === 'GH' ? '/taro-hooks/' : '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',

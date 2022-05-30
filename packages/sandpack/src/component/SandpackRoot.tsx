@@ -12,6 +12,7 @@ import { SandpackLogLevel } from '@codesandbox/sandpack-client';
 
 import NavigationBar from './NavigationBar';
 import Preview from './Preview';
+import IconChevron from './IconChevron';
 
 import { createFileMap } from '../utils/createFileMap';
 import { dealSubFilePath } from '../utils';
@@ -53,18 +54,31 @@ function SandpackRoot(props: SandpackRootProps) {
   const { children, code, filePath, frameWork, dependencies, editUrl, theme } =
     props;
   const template = frameWork || 'react';
+
+  const sandpackProviderOptions: SandpackInternalOptions = {
+    autorun: true,
+    logLevel: SandpackLogLevel.None,
+    initMode: 'user-visible',
+    initModeObserverOptions: { rootMargin: '1400px 0px' },
+    externalResources: [window.origin + '/style/sandpack.css'],
+  };
+
   const codeSnippets = Children.toArray(children);
   const files = createFileMap(codeSnippets);
   if (code) {
-    const extraFilePath = filePath
-      ? dealSubFilePath(filePath.slice(1))
-      : `/App/index.${template === 'react' ? 'tsx' : 'vue'}`;
+    const extraFilePath =
+      filePath ?? `/App/index.${template === 'react' ? 'tsx' : 'vue'}`;
     files[extraFilePath] = {
       code,
-      active: false,
+      active: true,
       hidden: false,
       editUrl,
     };
+
+    if (filePath) {
+      sandpackProviderOptions.activeFile = filePath;
+      sandpackProviderOptions.visibleFiles = [filePath];
+    }
   }
 
   files['/styles.css'] = {
@@ -72,12 +86,6 @@ function SandpackRoot(props: SandpackRootProps) {
     hidden: true,
   };
 
-  const sandpackProviderOptions: SandpackInternalOptions = {
-    autorun: true,
-    logLevel: SandpackLogLevel.None,
-    initMode: 'user-visible',
-    initModeObserverOptions: { rootMargin: '1400px 0px' },
-  };
   return (
     <div className="taro-hooks--sandpack" translate="no">
       {/* @ts-ignore */}
@@ -114,7 +122,10 @@ function SandpackContent() {
   return (
     <>
       <NavigationBar />
-      <div className="taro-hooks--sandpack__layout flex sp-layout sp-declaration">
+      <div
+        className="taro-hooks--sandpack__layout flex sp-layout sp-declaration"
+        style={isExpanded ? { maxHeight: 'unset' } : {}}
+      >
         {/* @ts-ignore */}
         <SandpackCodeEditor
           showLineNumbers
@@ -124,6 +135,20 @@ function SandpackContent() {
         />
         <Preview isExpanded={isExpanded} />
       </div>
+      {isExpandable && (
+        <div className="taro-hooks--sandpack__footer flex items-center">
+          <button
+            className="button button--active button--link"
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            <span className="flex">
+              {/* @ts-ignore */}
+              <IconChevron displayDirection={isExpanded ? 'up' : 'down'} />
+              {isExpanded ? '收起' : '展开'}
+            </span>
+          </button>
+        </div>
+      )}
       {showDevTools && <SandpackReactDevTools onLoadedData={console.log} />}
     </>
   );
