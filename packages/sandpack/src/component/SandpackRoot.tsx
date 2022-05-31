@@ -7,6 +7,7 @@ import {
   SandpackReactDevTools,
   useSandpack,
   useActiveCode,
+  SandpackSetup,
 } from '@codesandbox/sandpack-react';
 import { SandpackLogLevel } from '@codesandbox/sandpack-client';
 
@@ -15,8 +16,7 @@ import Preview from './Preview';
 import IconChevron from './IconChevron';
 
 import { createFileMap } from '../utils/createFileMap';
-import { dealSubFilePath } from '../utils';
-import { CustomTheme } from './theme';
+import { getDeps, getDevDeps, addOnFiles } from '../utils/getDeps';
 import { sandpackStyle } from '../style';
 
 export type SandpackRootProps = {
@@ -77,11 +77,18 @@ function SandpackRoot(props: SandpackRootProps) {
     showOpenInCodeSandbox: false,
   };
 
+  const customSetup: SandpackSetup = {
+    dependencies: getDeps(template, dependencies),
+    devDependencies: getDevDeps(template),
+    entry: '/src/app.ts',
+  };
+
   const codeSnippets = Children.toArray(children);
   const files = createFileMap(codeSnippets);
   if (code) {
-    const extraFilePath =
-      filePath ?? `/App/index.${template === 'react' ? 'tsx' : 'vue'}`;
+    const extraFilePath = `/src/pages/index/index.${
+      template === 'react' ? 'tsx' : 'vue'
+    }`;
     files[extraFilePath] = {
       code,
       active: true,
@@ -95,18 +102,23 @@ function SandpackRoot(props: SandpackRootProps) {
     }
   }
 
-  files['/styles.css'] = {
-    code: [sandpackStyle, files['/styles.css']?.code ?? ''].join('\n\n'),
+  // addon styles.css
+  files['/src/app.css'] = {
+    code: [sandpackStyle, files['/app.css']?.code ?? ''].join('\n\n'),
     hidden: true,
   };
+
+  // add extra setting files
+  addOnFiles(files, template);
 
   return (
     <div className="taro-hooks--sandpack" translate="no">
       {/* @ts-ignore */}
       <SandpackProvider
-        template={template}
+        template={template === 'react' ? 'react-ts' : template}
         files={files}
         options={sandpackProviderOptions}
+        customSetup={customSetup}
       >
         {/* @ts-ignore */}
         <SandpackThemeProvider theme={theme}>
@@ -135,7 +147,10 @@ function SandpackContent() {
 
   return (
     <>
-      <NavigationBar />
+      <NavigationBar
+        showDevTools={showDevTools}
+        changeShowDevTools={changeShowDevTools}
+      />
       <div
         className="taro-hooks--sandpack__layout flex sp-layout sp-declaration"
         style={isExpanded ? { maxHeight: 'unset' } : {}}

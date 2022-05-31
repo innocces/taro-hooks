@@ -7,7 +7,15 @@ import {
 import IconReset from './IconReset';
 import IconGitHub from './IconGithub';
 
-export default function NavigationBar() {
+export interface INavigatorProps {
+  showDevTools: boolean;
+  changeShowDevTools: (devToolsLoaded: boolean) => void;
+}
+
+export default function NavigationBar({
+  showDevTools,
+  changeShowDevTools,
+}: INavigatorProps) {
   const { sandpack } = useSandpack();
   const { clients, activeFile, files } = sandpack;
 
@@ -30,9 +38,15 @@ export default function NavigationBar() {
         <FileTabs />
       </div>
       <div>
+        <button
+          className="button button--sm button--outline button--primary"
+          onClick={() => changeShowDevTools(!showDevTools)}
+        >
+          {showDevTools ? '关闭调试' : '打开调试'}
+        </button>
         {openGithubEditUrl && (
           <a
-            className="button button--sm button--active button--link"
+            className="button button--sm button--outline button--link"
             href={openGithubEditUrl}
             target="__blank"
           >
@@ -43,7 +57,7 @@ export default function NavigationBar() {
         <button
           onClick={handleReset}
           type="button"
-          className="button button--sm button--active button--link"
+          className="button button--sm button--outline button--link"
         >
           {/* @ts-ignore */}
           <IconReset /> 重置
