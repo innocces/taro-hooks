@@ -33,20 +33,31 @@ export default function (this: LoaderContext<Options>, source: string): string {
   import CodeBlock from '@theme/CodeBlock';
   import { Sandpack } from '@taro-hooks/sandpack';
   import {useColorMode} from '@docusaurus/theme-common';
+  import BrowserOnly from '@docusaurus/BrowserOnly';
 
   export default () => {
     const {colorMode} = useColorMode();
 
     return (
-      <Sandpack
-        frameWork="vue3"
-        code={\`${source}\`}
-        filePath="${filePath}"
-        editUrl="${openTarget}${filePath}"
-        dependencies='${JSON.stringify(dependencies)}'
-        theme={colorMode}
-        fallback={<CodeBlock language="html" title="${filePath}" showLineNumbers>{\`${source}\`}</CodeBlock>}
-      />
+      <BrowserOnly>
+      {
+        () => {
+          const sandpackCss = window.location.origin + '/style/sandpack.css';
+          return (
+            <Sandpack
+              frameWork="vue3"
+              code={\`${source}\`}
+              filePath="${filePath}"
+              editUrl="${openTarget}${filePath}"
+              dependencies='${JSON.stringify(dependencies)}'
+              externalResources={[sandpackCss]}
+              theme={colorMode}
+              fallback={<CodeBlock language="html" title="${filePath}" showLineNumbers>{\`${source}\`}</CodeBlock>}
+            />
+          )
+        }
+      }
+      </BrowserOnly>
     )
   }
   `;

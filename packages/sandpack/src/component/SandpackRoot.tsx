@@ -48,11 +48,23 @@ export type SandpackRootProps = {
    * @description custom sandpack theme
    */
   theme?: 'dark' | 'light';
+  /**
+   * @description custom sandpack externalResources
+   */
+  externalResources?: string[];
 };
 
 function SandpackRoot(props: SandpackRootProps) {
-  const { children, code, filePath, frameWork, dependencies, editUrl, theme } =
-    props;
+  const {
+    children,
+    code,
+    filePath,
+    frameWork,
+    dependencies,
+    editUrl,
+    theme,
+    externalResources = [],
+  } = props;
   const template = frameWork || 'react';
 
   const sandpackProviderOptions: SandpackInternalOptions = {
@@ -60,7 +72,9 @@ function SandpackRoot(props: SandpackRootProps) {
     logLevel: SandpackLogLevel.None,
     initMode: 'user-visible',
     initModeObserverOptions: { rootMargin: '1400px 0px' },
-    externalResources: [window.origin + '/style/sandpack.css'],
+    externalResources,
+    // @ts-ignore
+    showOpenInCodeSandbox: false,
   };
 
   const codeSnippets = Children.toArray(children);
