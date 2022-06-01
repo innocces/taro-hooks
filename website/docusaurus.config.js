@@ -72,6 +72,7 @@ const config = {
           alias: pluginOptionAlias['@vue-demo'],
           openTarget:
             'https://github.com/innocces/taro-hooks/edit/next/examples/taro-hooks-plugin-vue/src/pages',
+          previewOptions: require('./project.env'),
         },
       },
     ],

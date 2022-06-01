@@ -84,7 +84,7 @@ function SandpackRoot(props: SandpackRootProps) {
   };
 
   const codeSnippets = Children.toArray(children);
-  const files = createFileMap(codeSnippets);
+  let files = createFileMap(codeSnippets);
   if (code) {
     const extraFilePath = `/src/pages/index/index.${
       template === 'react' ? 'tsx' : 'vue'
@@ -97,8 +97,8 @@ function SandpackRoot(props: SandpackRootProps) {
     };
 
     if (filePath) {
-      sandpackProviderOptions.activeFile = filePath;
-      sandpackProviderOptions.visibleFiles = [filePath];
+      sandpackProviderOptions.activeFile = extraFilePath;
+      sandpackProviderOptions.visibleFiles = [extraFilePath];
     }
   }
 
@@ -109,7 +109,7 @@ function SandpackRoot(props: SandpackRootProps) {
   };
 
   // add extra setting files
-  addOnFiles(files, template);
+  files = addOnFiles(files, template);
 
   return (
     <div className="taro-hooks--sandpack" translate="no">
@@ -137,13 +137,12 @@ function SandpackContent() {
   const { code } = useActiveCode();
   const { sandpack } = useSandpack();
   const { activeFile } = sandpack;
-  if (!lineCountRef.current[activeFile]) {
-    lineCountRef.current[activeFile] = code.split('\n').length;
+  if (!lineCountRef.current[activeFile] && code) {
+    console.log('active', code);
+    lineCountRef.current[activeFile] = code?.split?.('\n')?.length;
   }
   const lineCount = lineCountRef.current[activeFile];
   const isExpandable = lineCount > 16 || isExpanded;
-
-  console.log('sandpack', sandpack);
 
   return (
     <>

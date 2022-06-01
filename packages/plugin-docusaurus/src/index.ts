@@ -40,7 +40,9 @@ function pluginDecusaurus(
                 utils.getJSLoader({ isServer }),
                 {
                   loader: require.resolve('./vue-loader'),
-                  options: vue,
+                  options: {
+                    ...vue,
+                  },
                 },
               ],
             },
@@ -76,6 +78,7 @@ export function validateOptions({
       Joi.string().invalid(...INVALIDALIAS),
       Joi.string(),
     ),
+    vue: Joi.object<VueOptions>(),
   });
 
   return validate(optionsScheme, options);

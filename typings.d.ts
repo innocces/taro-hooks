@@ -12,6 +12,7 @@ declare module '@tarojs/runtime';
 declare module 'mockjs';
 declare module 'lodash.throttle';
 declare module 'compressorjs-global';
+declare module 'qrcode';
 
 declare var BUILD_MODE: string | undefined;
 declare var __TARO_HOOKS_VUE__: boolean;

@@ -1,11 +1,12 @@
 const prod = process.env.NODE_ENV === 'production';
 
-const devProjectMap = {
-  react: {
-    port: 10086,
-  },
-};
+const reactDevDemoHost = 'http://localhost:12557';
+const vueDevDemoHost = 'http://localhost:10086';
 
-const generateEnvURI = (project) => {
-  const proto = prod ? '//' : '';
+const reactProdDemoHost = 'https://react-demo-taro-hooks.vercel.app';
+const vueProdDemoHost = 'https://vue-demo-taro-hooks.vercel.app';
+
+module.exports = {
+  vue: prod ? vueProdDemoHost : vueDevDemoHost,
+  react: prod ? reactProdDemoHost : reactDevDemoHost,
 };

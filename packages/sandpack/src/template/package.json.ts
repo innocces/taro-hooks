@@ -6,6 +6,7 @@ export default {
     typescript: true,
     css: 'none',
   },
+  main: '/src/app.ts',
   scripts: {
     'build:weapp': 'taro build --type weapp',
     'build:swan': 'taro build --type swan',
