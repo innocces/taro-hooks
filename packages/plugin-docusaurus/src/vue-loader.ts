@@ -26,7 +26,7 @@ export default function (this: LoaderContext<Options>, source: string): string {
   const filePath = resourcePath?.replace(alias ?? '', '')?.replace(/\\/g, '/');
 
   const iframeUrl =
-    previewOptions.vue + '/pages' + filePath.replace(/\.vue$/, '');
+    previewOptions.vue + '/#/pages' + filePath.replace(/\.vue$/, '');
 
   const dependencies = {
     '@taro-hooks/plugin-vue':
@@ -38,14 +38,13 @@ export default function (this: LoaderContext<Options>, source: string): string {
   return `
   import React from 'react';
   import CodeDisplay from '@site/src/components/CodeDisplay';
-  // import BrowserOnly from '@docusaurus/BrowserOnly';
 
   export default () => {
     return (
       <CodeDisplay
         language="html"
         title="${filePath}"
-        openUrl="${openTarget + '/' + filePath}"
+        openUrl="${openTarget + filePath}"
         url="${iframeUrl}"
       >
         {\`${source}\`}

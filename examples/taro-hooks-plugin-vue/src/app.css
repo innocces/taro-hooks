@@ -1,7 +1,32 @@
-page, body {
-  margin: 20px;
+page {
+  padding: 20px;
 }
 
 .taro_page {
   overflow: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 28px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.gap {
+  margin-bottom: 15px;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+ /* taro-button bug */
+taro-button-core[size=mini]+taro-button-core[size=mini] {
+  margin-top: 0;
+}
+
+.weui-input:focus {
+  border: 1px solid #ccc;
 }

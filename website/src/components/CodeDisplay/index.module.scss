@@ -2,11 +2,23 @@ $prefix: codeDisplay;
 
 $devices-width: 375px;
 $min-height: 700px;
+$iframeHeight: calc(100% - 40px);
+
+@keyframes pulse {
+  50% {
+      opacity: .5
+  }
+}
+
 
 .#{$prefix} {
   height: $min-height;
   margin: 0;
   border-radius: var(--ifm-code-border-radius);
+
+  &:not(:last-child) {
+    margin-bottom: var(--ifm-leading);
+  }
 
   :global {
     .col {
@@ -35,13 +47,31 @@ $min-height: 700px;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--ifm-color-emphasis-300);
+
+    &Loading {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: $iframeHeight;
+        background: rgba(white, .8) url(/img/hook.png) center center / 64px no-repeat;
+        animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite
+      }
+    }
   }
 
   &Frame {
     width: 100%;
     margin: 0;
-    height: calc(100% - 40px);
+    height: $iframeHeight;
     border-top-right-radius: var(--ifm-code-border-radius);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &Action {
       margin: 0;

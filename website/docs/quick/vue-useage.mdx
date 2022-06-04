@@ -4,7 +4,12 @@ sidebar_position: 3
 ---
 
 import { Sandpack } from '@taro-hooks/sandpack'
-import SourceCode from '@vue-demo/useState/index.vue'
+import Alert from '@site/src/components/Alert'
+import UseTaroState from '@vue-demo/useState/index.vue'
+import UseTaroEffect from '@vue-demo/useEffect/index.vue'
+import UseTaroRef from '@vue-demo/useRef/index.vue'
+import UseTaroReducer from '@vue-demo/useReducer/index.vue'
+import UseTaroContext from '@vue-demo/useContext/index.vue'
 
 :::caution
 
@@ -48,7 +53,7 @@ const config = {
 
 所有的 **Hooks** 均在运行时注入到了 **@tarojs/taro** 内部, 并使用了 **useTaro** 的标准前缀.
 
-```html title="example/index.vue"
+```html title="example/index.vue" showLineNumbers
 <script>
   import {
     useTaroState,
@@ -82,5 +87,73 @@ const config = {
 **useTaroState** 帮助您快速创建一个响应式数据和更改它的方法
 但这里需要注意的是, 它内部使用的是 **Ref**. 在 **template** 内会被自动解包. 但在 **setup** 内使用依然需要显式的使用 **state.value** 来获取值. 当然我们也提供了一个工具来抹平差异. 在下面的示例中有体现
 
-<SourceCode />
+<UseTaroState />
 
+:::caution
+
+注意: **useTaroEffect** 、 **useWatchEffect** 、 **useTaroRef**、 **useTaroCallback**、 **useTaroMemo** 内部均使用 **watchEffect** 收集依赖变化. 它满足 [**与watch共享的行为**](https://v3.cn.vuejs.org/guide/reactivity-computed-watchers.html#%E4%B8%8E-watcheffect-%E5%85%B1%E4%BA%AB%E7%9A%84%E8%A1%8C%E4%B8%BA). 应尽量避免在 **hooks** 外单独处理依赖清除
+:::
+
+### **useTaroEffect**
+
+**useTaroEffect** 帮助您给函数组件增加操作副作用的能力. 它和 **componentDidMount|DidUpdate|WillUnmount** 具有相同的用途.
+
+<UseTaroEffect />
+
+### **useTaroRef**
+
+**useTaroRef** 帮助您创建一个不会触发重新渲染的引用. 它和 **React.createRef** 具有相同的用途.
+
+<UseTaroRef />
+
+### **useTaroReducer**
+
+**useTaroReducer** 帮助您创建一个 **reducer** (**eventBus**) 在组件中使用.
+
+<UseTaroReducer />
+
+### **useTaroCallback**
+
+**useTaroCallback** 返回一个 [**memoized**](https://en.wikipedia.org/wiki/Memoization) 回调函数
+
+```js showLineNumbers title="/useCallback/index.vue"
+const memoizedCallback = useTaroCallback(
+  () => {
+    doSomething(a, b);
+  },
+  [a, b],
+);
+```
+
+### **useTaroMemo**
+
+**useTaroMemo** 返回一个 [**memoized**](https://en.wikipedia.org/wiki/Memoization) 回调函数
+
+```js showLineNumbers title="/useMemo/index.vue"
+const memoizedValue = useTaroMemo(
+  () => computeExpensiveValue(a, b),
+  [a, b]
+);
+```
+
+<Alert type="warning">
+你可以把 useTaroMemo 作为性能优化的手段，但不要把它当成语义上的保证
+</Alert>
+
+### **useTaroLayoutEffect**
+
+**useTaroLayoutEffect** 函数签名和 **useTaroEffect** 相同. 但它会在所有的 DOM 变更之后同步调用 effect。可以使用它来读取 DOM 布局并同步触发重渲染
+
+<Alert type="danger">
+请尽可能的减少使用此 hook 的次数，因为它会导致额外的性能开销
+</Alert>
+
+### **useTaroContext**
+
+**useTaroContext** 帮助您读取和订阅组件的上下文.
+
+<UseTaroContext />
+
+<Alert type="danger">
+注意: <strong>context</strong> 必须设置为对象的形式. 为了达到多层继承的目的. 继承的动作由 <code>taroCreateContext</code> 来完成. 内部实则走的是扩展合并.
+</Alert>

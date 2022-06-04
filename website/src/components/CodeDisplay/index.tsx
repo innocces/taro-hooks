@@ -2,7 +2,7 @@
  * @description due to sandpack limitations, we need to use a different way to import the code
  * @description this is the code that will be displayed in the code display component
  */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import cn from 'classnames';
 import CodeBlock from '@theme/CodeBlock';
 import BrowserOnly from '@docusaurus/BrowserOnly';
@@ -28,6 +28,18 @@ function CodeDisplay({
   qrcodeUrl,
   ...props
 }: ICodeDisplayProps) {
+  const [iframeUrl, setIframeUrl] = useState<string>();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setIframeUrl(url);
+  }, [url]);
+
+  const handleRefresh = () => {
+    setLoading(true);
+    setIframeUrl(url + '?refresh=' + Date.now());
+  };
+
   return (
     <div className={cn('row shadow--md', styles.codeDisplay)}>
       <div className="col">
@@ -41,7 +53,6 @@ function CodeDisplay({
       </div>
       <BrowserOnly>
         {() => {
-          const iframeRef = useRef<HTMLIFrameElement>();
           const canvasRef = useRef<HTMLCanvasElement>();
 
           useEffect(() => {
@@ -50,17 +61,19 @@ function CodeDisplay({
             }
           }, [canvasRef.current !== null]);
 
-          const handleRefresh = () => {
-            iframeRef.current?.contentWindow?.location?.reload();
-          };
-
           return (
-            <div className={styles.codeDisplayDevices}>
+            <div
+              className={cn(styles.codeDisplayDevices, {
+                [styles.codeDisplayDevicesLoading]: loading,
+              })}
+            >
               <iframe
+                allowFullScreen
+                allow="geolocation, microphone, camera, location, origin"
                 title="taro-hooks-codeDisplay"
-                ref={iframeRef}
                 className={styles.codeDisplayFrame}
-                src={url}
+                src={iframeUrl}
+                onLoad={() => setLoading(false)}
               />
               <div className={cn('row', styles.codeDisplayFrameAction)}>
                 <a onClick={handleRefresh}>

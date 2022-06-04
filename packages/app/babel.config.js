@@ -20,7 +20,7 @@ module.exports = {
       {
         libraryName: 'taro-hooks',
         camel2DashComponentName: false,
-        libraryDirectory: 'src',
+        libraryDirectory: 'es',
       },
       'taro-hooks',
     ],

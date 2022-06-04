@@ -13,6 +13,7 @@ import {
   inject,
   provide,
   h,
+  isRef,
 } from 'vue';
 
 import type {
@@ -322,7 +323,7 @@ function useReducer<S, A>(
   return [reactive(state), dispatch];
 }
 
-export interface IProviderProps<T> {
+export interface IProviderProps<T = Record<string, any>> {
   value?: T;
 }
 export type VueContext<T> = {
@@ -338,12 +339,32 @@ export type VueContext<T> = {
  * @param {T} defaultValue init or defaultValue
  * @returns {VueContext<T>} vue context
  */
-function createContext<T>(defaultValue: T): VueContext<T> {
+function createContext<T = Record<string, any>>(
+  defaultValue: T,
+): VueContext<T> {
   const ProviderElement: ComponentOptions<IProviderProps<T>> = {
     name: '$$Provider',
+    props: {
+      value: Object,
+    },
     setup(props, context) {
+      const provideValue = ref(
+        props?.value ?? context?.attrs?.value ?? defaultValue,
+      );
+      const prevProvider = inject(INJECTKEY, ref({}));
+      watchEffect(() => {
+        // fetch prev provide value
+        provideValue.value = {
+          ...(prevProvider.value as object),
+
+          ...((props?.value ??
+            context?.attrs?.value ??
+            defaultValue) as object),
+        };
+      });
+
       // props.value => attrs.value => defaultValue
-      provide(INJECTKEY, props?.value ?? context?.attrs?.value ?? defaultValue);
+      provide(INJECTKEY, provideValue);
     },
     render() {
       return this.$slots.default();
