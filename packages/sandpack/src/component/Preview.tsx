@@ -79,6 +79,7 @@ export default function Preview({ isExpanded }: IPreviewProps) {
         />
       </div>
       <LoadingOverlay
+        showOpenInCodeSandbox={false}
         clientId={clientId.current}
         loading={!isReady && iframeComputedHeight === null}
       />

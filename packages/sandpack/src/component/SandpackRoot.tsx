@@ -73,8 +73,6 @@ function SandpackRoot(props: SandpackRootProps) {
     initMode: 'user-visible',
     initModeObserverOptions: { rootMargin: '1400px 0px' },
     externalResources,
-    // @ts-ignore
-    showOpenInCodeSandbox: false,
   };
 
   const customSetup: SandpackSetup = {
