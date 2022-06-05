@@ -24,13 +24,13 @@ module.exports = [
     ],
   },
   {
-    href: 'https://github.com/innocces/taro-hooks',
+    href: 'https://github.com/innocces/taro-hooks/tree/next',
     position: 'right',
     className: 'header-nav-link header-github-link',
     'aria-label': 'GitHub repository',
   },
   {
-    href: 'https://gitee.com/inocces/taro-hooks',
+    href: 'https://gitee.com/inocces/taro-hooks/tree/next',
     position: 'right',
     className: 'header-nav-link icon-gitee',
     'aria-label': 'GiTee repository',

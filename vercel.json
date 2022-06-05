@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/site"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/vue/pages/*/*",
+      "destination": "/vue/index.html"
+    }
+  ]
+}
