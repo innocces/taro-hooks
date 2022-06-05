@@ -38,8 +38,12 @@ const config = {
     },
   },
   h5: {
-    publicPath: '/',
+    publicPath: '/vue',
     staticDirectory: 'static',
+    router: {
+      mode: 'browser',
+      basename: '/vue',
+    },
     postcss: {
       autoprefixer: {
         enable: true,

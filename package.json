@@ -13,8 +13,11 @@
     "docusaurus:start": "lerna run start --scope=@taro-hooks/website --stream",
     "docusaurus:build": "lerna run build --scope=@taro-hooks/website --stream",
     "docusaurus:build:gh": "cross-env BUILD_TARGET=GH yarn docusaurus:build",
+    "docs:build": "yarn bootstrap && yarn docusaurus:build && yarn build:vue-plugin && yarn generate-docs",
+    "docs:build:gh": "cross-env BUILD_TARGET=GH yarn docs:build",
     "docs:deploy": "gh-pages -d website/build",
     "generate-template": "TS_NODE_PROJECT=scripts/tsconfig.json node -r ts-node/register scripts/generate-templ.ts",
+    "generate-docs": "node scripts/build-docs.mjs",
     "app:dev": "cd ./packages/app && npm run dev:weapp",
     "app:dev:h5": "cd ./packages/app && npm run dev:h5",
     "app:build:h5": "cd ./packages/app && npm run build:h5",
@@ -29,6 +32,7 @@
     "build:docusaurus": "lerna run build --scope=@taro-hooks/plugin-docusaurus --stream",
     "build": "lerna run build --no-private --stream",
     "develop:vue-plugin": "lerna run dev:h5 --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
+    "build:vue-plugin": "lerna run build:h5 --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
     "develop:vue-plugin:weapp": "lerna run dev:weapp --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
     "dev:vue-plugin": "lerna run dev --scope=@taro-hooks/plugin-vue --stream",
     "dev:shared": "lerna run dev --scope=@taro-hooks/shared --stream",
@@ -107,7 +111,7 @@
     "zx": "^6.1.0"
   },
   "engines": {
-    "node": ">=14.0.0",
+    "node": ">=16.0.0",
     "yarn": ">=3.0.0"
   },
   "repository": {

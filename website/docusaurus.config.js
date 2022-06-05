@@ -12,6 +12,8 @@ const { version } = require(join(
   'package.json',
 ));
 const navbarItem = require('./navbar');
+const prod = process.env.NODE_ENV === 'production';
+const baseURI = 'https://next-version-taro-hooks.vercel.app';
 
 const pluginOptionAlias = {
   '@vue-demo': join(
@@ -35,8 +37,8 @@ const buildTarget = process.env.BUILD_TARGET;
 const config = {
   title: 'Taro-hooks',
   tagline: '为 Taro 而设计的 Hooks Library',
-  url: 'https://next-version-taro-hooks.vercel.app',
-  baseUrl: buildTarget === 'GH' ? '/taro-hooks/' : '/',
+  url: baseURI,
+  baseUrl: buildTarget === 'GH' ? '/taro-hooks/' : '/site/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/hook.png',
@@ -72,7 +74,7 @@ const config = {
           alias: pluginOptionAlias['@vue-demo'],
           openTarget:
             'https://github.com/innocces/taro-hooks/edit/next/examples/taro-hooks-plugin-vue/src/pages',
-          previewOptions: require('./project.env'),
+          previewOptions: require('./project.env')(prod, baseURI),
         },
       },
     ],

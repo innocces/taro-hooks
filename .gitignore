@@ -25,6 +25,7 @@ lerna-debug.log
 /packages/**/es
 /coverage
 packages/**/dist
+/hooks-docs
 
 # misc
 .DS_Store
