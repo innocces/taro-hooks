@@ -7,7 +7,7 @@
   ],
   "rewrites": [
     {
-      "source": "/vue/pages/*/*",
+      "source": "/vue/pages/:type/:index*",
       "destination": "/vue/index.html"
     }
   ]
