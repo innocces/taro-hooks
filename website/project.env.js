@@ -1,5 +1,5 @@
 const reactDevDemoHost = 'http://localhost:12557';
-const vueDevDemoHost = 'http://localhost:10086';
+const vueDevDemoHost = 'http://localhost:10086/vue';
 
 function generateURIWithFrame(baseURI, frame) {
   return baseURI + '/' + frame;

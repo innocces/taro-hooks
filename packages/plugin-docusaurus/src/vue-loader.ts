@@ -26,7 +26,7 @@ export default function (this: LoaderContext<Options>, source: string): string {
   const filePath = resourcePath?.replace(alias ?? '', '')?.replace(/\\/g, '/');
 
   const iframeUrl =
-    previewOptions.vue + '/vue/pages' + filePath.replace(/\.vue$/, '');
+    previewOptions.vue + '/pages' + filePath.replace(/\.vue$/, '');
 
   const dependencies = {
     '@taro-hooks/plugin-vue':
