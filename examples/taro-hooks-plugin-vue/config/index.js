@@ -1,3 +1,5 @@
+const gh = process.env.BUILD_TARGET === 'GH';
+
 const config = {
   projectName: 'taro-hooks-plugin-vue',
   date: '2022-5-16',
@@ -38,11 +40,11 @@ const config = {
     },
   },
   h5: {
-    publicPath: '/vue',
+    publicPath: (gh ? '/taro-hooks' : '') + '/vue',
     staticDirectory: 'static',
     router: {
       mode: 'browser',
-      basename: '/vue',
+      basename: (gh ? '/taro-hooks' : '') + '/vue',
     },
     postcss: {
       autoprefixer: {

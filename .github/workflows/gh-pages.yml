@@ -13,9 +13,9 @@ jobs:
       - run: npm i -g yarn
       - run: npm i -g lerna
       - run: yarn install --no-immutable
-      - run: yarn docusaurus:build:gh
+      - run: yarn docs:build:gh
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website/build
+          publish_dir: ./hooks-docs

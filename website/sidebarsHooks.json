@@ -1,0 +1,116 @@
+{
+  "hooks": [
+    {
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "label": "小程序",
+      "items": [
+        "useAccountInfo",
+        "useAPICheck",
+        "useAuthorize",
+        "useChooseAddress",
+        "useInvoice",
+        "useLaunchOptions",
+        "useLogin",
+        "useMenuButtonBoundingClientRect",
+        "useRequestSubscribeMessage",
+        "useTopBarText",
+        "useUpdateManager",
+        "useUserInfo",
+        "useWeRun"
+      ]
+    },
+    {
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "label": "操作反馈",
+      "items": [
+        "useActionSheet",
+        "useLoading",
+        "useModal",
+        "useNavigationBar",
+        "useToast"
+      ]
+    },
+    {
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "label": "基础",
+      "items": [
+        "useApp",
+        "useArrayBufferToBase64",
+        "useBase64ToArrayBuffer",
+        "useClipboardData",
+        "useDebounce",
+        "useDebounceFn",
+        "useEvent",
+        "useFrom",
+        "useLatest",
+        "usePage",
+        "usePromise",
+        "useRouter",
+        "useSelectorQuery",
+        "useStorage",
+        "useSystemInfo",
+        "useThrottle",
+        "useThrottleFn",
+        "useUnmount",
+        "useVisible"
+      ]
+    },
+    {
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "label": "媒体",
+      "items": [
+        "useAudio",
+        "useCamera",
+        "useImage",
+        "useMap",
+        "useRecord",
+        "useVideo"
+      ]
+    },
+    {
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "label": "布局",
+      "items": ["useBackground", "useManualPullDownRefresh", "useTabBar"]
+    },
+    {
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "label": "设备",
+      "items": [
+        "useBattery",
+        "useBLE",
+        "useBluetooth",
+        "useBrightness",
+        "useLocation",
+        "useMotion",
+        "useScanCode",
+        "useVibrate"
+      ]
+    },
+    {
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "label": "环境判断",
+      "items": ["useEnv"]
+    },
+    {
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "label": "网络",
+      "items": ["useFile", "useNetworkType", "useOnline", "useRequest"]
+    }
+  ]
+}

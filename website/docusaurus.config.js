@@ -13,7 +13,14 @@ const { version } = require(join(
 ));
 const navbarItem = require('./navbar');
 const prod = process.env.NODE_ENV === 'production';
-const baseURI = 'https://next-version-taro-hooks.vercel.app';
+// env
+const buildTarget = process.env.BUILD_TARGET;
+const gh = buildTarget === 'GH';
+const urlPrefix = (gh ? '/taro-hooks' : '') + '/site';
+const baseURI =
+  'https://next-version-taro-hooks.vercel.app' + (gh ? '/taro-hooks' : '');
+const githubURL = 'https://github.com/innocces/taro-hooks';
+const githubURLWithBranch = `${githubURL}/edit/next`;
 
 const pluginOptionAlias = {
   '@vue-demo': join(
@@ -30,15 +37,12 @@ const pluginOptionAlias = {
   ),
 };
 
-// env
-const buildTarget = process.env.BUILD_TARGET;
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Taro-hooks',
   tagline: '为 Taro 而设计的 Hooks Library',
   url: baseURI,
-  baseUrl: buildTarget === 'GH' ? '/taro-hooks/' : '/site/',
+  baseUrl: `${urlPrefix}/`,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/hook.png',
@@ -72,11 +76,21 @@ const config = {
         alias: pluginOptionAlias,
         vue: {
           alias: pluginOptionAlias['@vue-demo'],
-          openTarget:
-            'https://github.com/innocces/taro-hooks/edit/next/examples/taro-hooks-plugin-vue/src/pages',
+          openTarget: `${githubURLWithBranch}/examples/taro-hooks-plugin-vue/src/pages`,
           previewOptions: require('./project.env')(prod, baseURI),
         },
       },
+    ],
+    [
+      'content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'hooks',
+        path: '../packages/hooks/src',
+        routeBasePath: '/hooks',
+        sidebarPath: require.resolve('./sidebarsHooks.json'),
+        ...generateDocsOptions('src'),
+      }),
     ],
   ],
 
@@ -92,7 +106,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/innocces/taro-hooks/edit/next/website/',
+          editUrl: `${githubURLWithBranch}/website/`,
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           lastVersion: 'current',
@@ -104,7 +118,7 @@ const config = {
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/innocces/taro-hooks/edit/next/website/',
+          editUrl: `${githubURLWithBranch}/website/`,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),
@@ -196,6 +210,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['shell-session', 'http'],
       },
       algolia: {
         appId: 'IRP4IYNFNW',
@@ -215,7 +230,7 @@ const config = {
   stylesheets: ['//at.alicdn.com/t/font_3373489_imvarji5zu.css'],
 
   scripts: [
-    '/scripts/hotjar.js',
+    `${urlPrefix}/scripts/hotjar.js`,
     {
       'data-name': 'BMC-Widget',
       'data-cfasync': 'false',
@@ -278,3 +293,12 @@ const config = {
 };
 
 module.exports = config;
+
+function generateDocsOptions(dir) {
+  return {
+    editUrl: `${githubURLWithBranch}/${dir}/`,
+    showLastUpdateAuthor: true,
+    showLastUpdateTime: true,
+    sidebarPath: require.resolve('./sidebars.js'),
+  };
+}
