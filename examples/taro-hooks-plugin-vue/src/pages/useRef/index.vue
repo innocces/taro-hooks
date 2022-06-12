@@ -1,14 +1,29 @@
 <template>
-  <view>
-    <view>1. click counter</view>
-    <button @click="handleClick()">Click me!</button>
-    <view>2. a stop watch</view>
-    <view>{{
-      startTime != null && now != null ? (now - startTime) / 1000 : 0
-    }}</view>
-    <button @click="handleStart()">Start</button>
-    <button @click="handleStop()">Stop</button>
-  </view>
+  <block>
+    <demo-content title="1. click counter">
+      <nut-button shape="square" type="primary" block @click="handleClick()"
+        >Click me!</nut-button
+      >
+    </demo-content>
+
+    <demo-content title="1. click counter">
+      <view class="control-input">{{
+        startTime != null && now != null ? (now - startTime) / 1000 : 0
+      }}</view>
+      <nut-row type="flex" :gutter="4">
+        <nut-col
+          ><nut-button shape="square" type="info" block @click="handleStart()"
+            >Start!</nut-button
+          ></nut-col
+        >
+        <nut-col
+          ><nut-button shape="square" type="primary" block @click="handleStop()"
+            >Stop!</nut-button
+          ></nut-col
+        >
+      </nut-row>
+    </demo-content>
+  </block>
 </template>
 
 <script>

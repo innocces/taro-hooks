@@ -1,24 +1,31 @@
 <template>
   <ThemeProvider :value="theme">
     <UserProvider :value="useProviderValue">
-      <view>
-        <view>attention: this example is a multiple contexts</view>
-        <ThemeContent />
-        <view>1. Updating a value via context</view>
-        <checkbox-group class="gap" @change="handleChange($event)">
-          <label>
-            <checkbox :checked="theme === 'dark'" />
-            <text>Use dark mode</text>
-          </label>
-        </checkbox-group>
-        <view>2. Updating an object via context</view>
-      </view>
+      <block>
+        <demo-content title="attention: this example is a multiple contexts">
+          <ThemeContent />
+        </demo-content>
+
+        <demo-content title="1. Updating a value via context">
+          <nut-checkbox v-model="memoTheme" @change="handleChange"
+            >Use dark mode</nut-checkbox
+          >
+        </demo-content>
+
+        <demo-content title="2. Updating an object via context" />
+      </block>
     </UserProvider>
   </ThemeProvider>
 </template>
 
 <script>
-import { useTaroState, useTaroContext, taroCreateContext } from '@tarojs/taro';
+import { escapeState } from '@taro-hooks/shared';
+import {
+  useTaroState,
+  useTaroContext,
+  taroCreateContext,
+  useTaroMemo,
+} from '@tarojs/taro';
 import ThemeContent from './ThemeContent.vue';
 
 export const themeContext = taroCreateContext({ theme: 'light' });
@@ -42,8 +49,12 @@ export default {
     const currentTheme = useTaroContext(themeContext);
 
     const handleChange = (event) => {
-      setTheme({ theme: !!event.detail.value.length ? 'dark' : 'light' });
+      setTheme({ theme: event ? 'dark' : 'light' });
     };
+
+    const memoTheme = useTaroMemo(() => {
+      return escapeState(theme).theme === 'dark';
+    }, [theme]);
 
     // 2. Updating an object via context
     const [user, setUser] = useTaroState({ name: null });
@@ -58,6 +69,7 @@ export default {
       setTheme,
       handleChange,
       useProviderValue,
+      memoTheme,
     };
   },
 };

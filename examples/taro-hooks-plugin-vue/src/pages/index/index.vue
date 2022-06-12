@@ -1,6 +1,7 @@
 <template>
   <view class="index">
     <text>{{ msg }}</text>
+    <nut-button type="primary" @click="test($event)">123</nut-button>
   </view>
 </template>
 
@@ -13,6 +14,7 @@ export default {
 
     return {
       msg,
+      test: console.log,
     };
   },
 };

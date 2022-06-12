@@ -1,3 +1,5 @@
+const gh = process.env.BUILD_TARGET === 'GH';
+
 const config = {
   projectName: 'taro-hooks-plugin',
   date: '2022-5-6',
@@ -38,7 +40,12 @@ const config = {
     },
   },
   h5: {
-    publicPath: '/',
+    publicPath: (gh ? '/taro-hooks' : '') + '/react',
+    staticDirectory: 'static',
+    router: {
+      mode: 'browser',
+      basename: (gh ? '/taro-hooks' : '') + '/react',
+    },
     staticDirectory: 'static',
     devServer: {
       port: '12557',

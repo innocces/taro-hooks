@@ -4,7 +4,7 @@ page {
 
 .taro_page {
   overflow: auto;
-  padding: 20px;
+  /* padding: 20px; */
   box-sizing: border-box;
   font-size: 28px;
 }
@@ -27,6 +27,6 @@ taro-button-core[size=mini]+taro-button-core[size=mini] {
   margin-top: 0;
 }
 
-.weui-input:focus {
+/* .weui-input:focus {
   border: 1px solid #ccc;
-}
+} */

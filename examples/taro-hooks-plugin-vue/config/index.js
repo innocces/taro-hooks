@@ -11,7 +11,7 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: ['@taro-hooks/plugin-vue'],
+  plugins: ['@taro-hooks/plugin-vue', '@tarojs/plugin-html'],
   defineConstants: {},
   copy: {
     patterns: [],

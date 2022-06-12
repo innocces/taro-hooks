@@ -1,12 +1,17 @@
 <template>
-  <view>
-    <view>1. without sideEffect</view>
-    <button @click="handleClick()">{{ count }}</button>
-    <view>2. with sideEffect</view>
-    <view>{{
-      isOnline === null ? 'Loading...' : isOnline ? 'Online' : 'Offline'
-    }}</view>
-  </view>
+  <block>
+    <demo-content title="1. without sideEffect">
+      <nut-button shape="square" type="primary" block @click="handleClick()">{{
+        count
+      }}</nut-button>
+    </demo-content>
+
+    <demo-content title="2. with sideEffect">
+      <view class="control-input">{{
+        isOnline === null ? 'Loading...' : isOnline ? 'Online' : 'Offline'
+      }}</view>
+    </demo-content>
+  </block>
 </template>
 
 <script>

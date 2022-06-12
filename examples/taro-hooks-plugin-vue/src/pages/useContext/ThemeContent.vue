@@ -2,15 +2,14 @@
   <view class="content-box" :class="theme?.theme">
     <view class="content-title">Welcome</view>
     <view v-if="user?.user?.name">You logged in as {{ user?.user?.name }}</view>
-    <button
+    <nut-button
       v-else
+      shape="square"
       type="primary"
-      size="mini"
-      class="content-button"
       @click="user?.setUser?.({ name: 'Advika' })"
     >
       Log in Advika
-    </button>
+    </nut-button>
   </view>
 </template>
 

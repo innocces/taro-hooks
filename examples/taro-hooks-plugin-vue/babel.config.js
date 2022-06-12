@@ -10,4 +10,15 @@ module.exports = {
       },
     ],
   ],
+  plugins: [
+    [
+      'import',
+      {
+        libraryName: 'taro-hooks',
+        libraryDirectory: 'src',
+        camel2DashComponentName: false,
+      },
+      'taro-hooks',
+    ],
+  ],
 };

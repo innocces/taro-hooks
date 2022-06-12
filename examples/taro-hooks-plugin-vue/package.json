@@ -36,13 +36,16 @@
   "author": "",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
+    "@nutui/nutui-taro": "^3.1.21",
     "@taro-hooks/plugin-vue": "^1.5.6",
     "@taro-hooks/shared": "^1.5.6",
     "@tarojs/cli": "3.4.8",
     "@tarojs/components": "3.4.8",
     "@tarojs/plugin-framework-vue3": "3.4.8",
+    "@tarojs/plugin-html": "^3.4.11",
     "@tarojs/runtime": "3.4.8",
     "@tarojs/taro": "3.4.8",
+    "taro-hooks": "^1.5.6",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -53,6 +56,7 @@
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "babel-plugin-import": "^1.13.5",
     "babel-preset-taro": "3.4.8",
     "eslint": "^8.12.0",
     "eslint-config-taro": "3.4.8",

@@ -1,25 +1,39 @@
 <template>
-  <view class="flex gap">
-    <checkbox-group
-      @change="handleChange('done', !!$event.detail.value.length)"
-      class="flex-1"
-    >
-      <label class="flex">
-        <checkbox :checked="done" />
-        <text class="flex-1" v-if="!edit">{{ text }}</text>
-        <input
-          v-else
-          :value="text"
-          @input="handleChange('text', $event.detail.value)"
-          @blur="setEdit(false)"
-          class="flex-1"
-        />
-      </label>
-    </checkbox-group>
-
-    <button @click="setEdit(true)" size="mini">Edit</button>
-    <button @click="handleDelete()" size="mini" type="warn">Delete</button>
-  </view>
+  <nut-row
+    type="flex"
+    :gutter="8"
+    justify="between"
+    align="center"
+    class="reducer-item"
+  >
+    <nut-col :span="2">
+      <nut-checkbox v-model="done" @change="handleCheckboxChange" />
+    </nut-col>
+    <nut-col :span="13">
+      <text v-if="!edit">{{ text }}</text>
+      <control-input
+        v-else
+        :value="text"
+        @input="handleChange('text', $event)"
+        @blur="setEdit(false)"
+      />
+    </nut-col>
+    <nut-col :span="4">
+      <nut-button block shape="square" @click="setEdit(true)" size="mini"
+        >Edit</nut-button
+      >
+    </nut-col>
+    <nut-col :span="5">
+      <nut-button
+        block
+        shape="square"
+        @click="handleDelete()"
+        size="mini"
+        type="danger"
+        >Delete</nut-button
+      >
+    </nut-col>
+  </nut-row>
 </template>
 
 <script>
@@ -34,6 +48,10 @@ export default {
   emits: ['taskChange', 'taskDelete'],
   setup(props, { emit }) {
     const [edit, setEdit] = useTaroState(false);
+
+    const handleCheckboxChange = (done) => {
+      handleChange('done', done);
+    };
 
     const handleChange = (type, value) => {
       const { id, text, done } = props;
@@ -54,7 +72,14 @@ export default {
       setEdit,
       handleChange,
       handleDelete,
+      handleCheckboxChange,
     };
   },
 };
 </script>
+
+<style>
+.reducer-item {
+  min-height: 80px;
+}
+</style>

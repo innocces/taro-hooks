@@ -4,6 +4,7 @@ declare module '*.scss';
 
 declare module '*.png';
 declare module '*.json';
+declare module '*.vue';
 
 // mock typings
 declare module 'taro-hooks';

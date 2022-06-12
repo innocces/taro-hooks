@@ -1,26 +1,41 @@
 <template>
-  <view>
-    <view>1. Form (Object)</view>
-    <input
-      class="gap"
-      @input="handleNameChange($event)"
-      :value="formState.name"
-    />
-    <button @click="handleIncrementAge()">Increment Age</button>
-    <view>Hello, {{ formState.name }}. You are {{ formState.age }}.</view>
-    <view>2. Todo list (Array)</view>
-    <view class="flex gap">
-      <input
-        class="flex-1"
-        placeholder="Add task"
-        :value="currentAddTask"
-        @input="setCurrentAddTask($event.detail.value)"
+  <block>
+    <demo-content title="1. Form (Object)">
+      <control-input
+        @input="handleNameChange($event)"
+        :value="formState.name"
       />
-      <button type="primary" size="mini" @click="handleAddTask(currentAddTask)">
-        Add
-      </button>
-    </view>
-    <view>
+      <view class="control-input"
+        >Hello, {{ formState.name }}. You are {{ formState.age }}.</view
+      >
+      <nut-button
+        shape="square"
+        type="primary"
+        block
+        @click="handleIncrementAge()"
+        >Increment Age</nut-button
+      >
+    </demo-content>
+
+    <demo-content title="2. Todo list (Array)">
+      <nut-row type="flex" :gutter="4">
+        <nut-col :span="18">
+          <control-input
+            placeholder="Add task"
+            :value="currentAddTask"
+            @input="setCurrentAddTask($event)"
+          />
+        </nut-col>
+        <nut-col :span="6">
+          <nut-button
+            shape="square"
+            type="info"
+            block
+            @click="handleAddTask(currentAddTask)"
+            >Add</nut-button
+          >
+        </nut-col>
+      </nut-row>
       <ListItem
         v-for="item in tasks"
         :key="item.id"
@@ -30,20 +45,17 @@
         @taskChange="handleChangeTask($event)"
         @taskDelete="handleDeleteTask($event)"
       />
-    </view>
-    <view>3. Writing concise update logic with Immer. write self</view>
-  </view>
+    </demo-content>
+
+    <demo-content
+      title="3. Writing concise update logic with Immer. write self"
+    />
+  </block>
 </template>
 
 <script>
-import {
-  useTaroState,
-  useTaroEffect,
-  useTaroReducer,
-  showToast,
-} from '@tarojs/taro';
+import { useTaroState, useTaroReducer } from '@tarojs/taro';
 import Item from './Item.vue';
-import { escapeState } from '@taro-hooks/shared';
 
 // 1. Form (Object)
 function formReducer(state, action) {
@@ -121,7 +133,7 @@ export default {
     };
 
     const handleNameChange = (e) => {
-      formDispatch({ type: 'changed_name', nextName: e.detail.value });
+      formDispatch({ type: 'changed_name', nextName: e });
     };
 
     // 2. Todo list (Array)
