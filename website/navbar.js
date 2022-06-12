@@ -7,7 +7,7 @@ module.exports = [
     position: 'left',
     label: '文档',
   },
-  { to: '/hooks', label: 'Hooks', position: 'left' },
+  { to: '/hooks/intro', label: 'Hooks', position: 'left' },
   { to: '/blog', label: '博客', position: 'left' },
   {
     type: 'docsVersionDropdown',

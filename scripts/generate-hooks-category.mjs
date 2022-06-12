@@ -15,6 +15,17 @@ import remarkStringify from 'remark-stringify';
 const baseDIR = resolve(cwd(), 'packages/hooks/src');
 const categoryURI = resolve(cwd(), 'website', 'sidebarsHooks.json');
 
+const PATH2LABEL = {
+  basic: '基础',
+  device: '设备',
+  env: '环境判断',
+  feedback: '操作反馈',
+  layout: '布局',
+  media: '媒体',
+  network: '网络',
+  wechat: '小程序',
+};
+
 async function main() {
   try {
     console.log(chalk.yellow(`start to scan dir: ${baseDIR}`));
@@ -82,16 +93,21 @@ async function main() {
               title,
             } = yaml.load(remarkFrontMatterString);
             const currentCategorySetting = hooksCategory[groupTitle];
+            const pageCategoryPath = title + '/index';
             if (!currentCategorySetting) {
+              const linkSlugPath = Object.entries(PATH2LABEL).find(
+                (v) => v[1] === groupTitle,
+              )?.[0];
               hooksCategory[groupTitle] = {
                 ...commonOptions,
+                link: generateGuidePageLink(groupTitle, linkSlugPath),
                 label: groupTitle,
-                items: [title],
+                items: [pageCategoryPath],
               };
             } else {
               hooksCategory[groupTitle] = {
                 ...currentCategorySetting,
-                items: [...currentCategorySetting.items, title],
+                items: [...currentCategorySetting.items, pageCategoryPath],
               };
             }
           }
@@ -113,6 +129,16 @@ async function main() {
 
 function isHooksDIR(dirName) {
   return dirName.startsWith('use');
+}
+
+function generateGuidePageLink(title, slug) {
+  return {
+    type: 'generated-index',
+    title,
+    description: `导航 - ${title} `,
+    slug: `/category/${slug}`,
+    keywords: [title, 'hooks'],
+  };
 }
 
 main();

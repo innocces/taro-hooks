@@ -1,116 +1,182 @@
 {
   "hooks": [
+    "intro",
     {
       "type": "category",
       "collapsed": false,
       "collapsible": true,
+      "link": {
+        "type": "generated-index",
+        "title": "小程序",
+        "description": "导航 - 小程序 ",
+        "slug": "/category/wechat",
+        "keywords": ["小程序", "hooks"]
+      },
       "label": "小程序",
       "items": [
-        "useAccountInfo",
-        "useAPICheck",
-        "useAuthorize",
-        "useChooseAddress",
-        "useInvoice",
-        "useLaunchOptions",
-        "useLogin",
-        "useMenuButtonBoundingClientRect",
-        "useRequestSubscribeMessage",
-        "useTopBarText",
-        "useUpdateManager",
-        "useUserInfo",
-        "useWeRun"
+        "useAccountInfo/index",
+        "useAPICheck/index",
+        "useAuthorize/index",
+        "useChooseAddress/index",
+        "useInvoice/index",
+        "useLaunchOptions/index",
+        "useLogin/index",
+        "useMenuButtonBoundingClientRect/index",
+        "useRequestSubscribeMessage/index",
+        "useTopBarText/index",
+        "useUpdateManager/index",
+        "useUserInfo/index",
+        "useWeRun/index"
       ]
     },
     {
       "type": "category",
       "collapsed": false,
       "collapsible": true,
+      "link": {
+        "type": "generated-index",
+        "title": "操作反馈",
+        "description": "导航 - 操作反馈 ",
+        "slug": "/category/feedback",
+        "keywords": ["操作反馈", "hooks"]
+      },
       "label": "操作反馈",
       "items": [
-        "useActionSheet",
-        "useLoading",
-        "useModal",
-        "useNavigationBar",
-        "useToast"
+        "useActionSheet/index",
+        "useLoading/index",
+        "useModal/index",
+        "useNavigationBar/index",
+        "useToast/index"
       ]
     },
     {
       "type": "category",
       "collapsed": false,
       "collapsible": true,
+      "link": {
+        "type": "generated-index",
+        "title": "基础",
+        "description": "导航 - 基础 ",
+        "slug": "/category/basic",
+        "keywords": ["基础", "hooks"]
+      },
       "label": "基础",
       "items": [
-        "useApp",
-        "useArrayBufferToBase64",
-        "useBase64ToArrayBuffer",
-        "useClipboardData",
-        "useDebounce",
-        "useDebounceFn",
-        "useEvent",
-        "useFrom",
-        "useLatest",
-        "usePage",
-        "usePromise",
-        "useRouter",
-        "useSelectorQuery",
-        "useStorage",
-        "useSystemInfo",
-        "useThrottle",
-        "useThrottleFn",
-        "useUnmount",
-        "useVisible"
+        "useApp/index",
+        "useArrayBufferToBase64/index",
+        "useBase64ToArrayBuffer/index",
+        "useClipboardData/index",
+        "useDebounce/index",
+        "useDebounceFn/index",
+        "useEvent/index",
+        "useFrom/index",
+        "useLatest/index",
+        "usePage/index",
+        "usePromise/index",
+        "useRouter/index",
+        "useSelectorQuery/index",
+        "useStorage/index",
+        "useSystemInfo/index",
+        "useThrottle/index",
+        "useThrottleFn/index",
+        "useUnmount/index",
+        "useVisible/index"
       ]
     },
     {
       "type": "category",
       "collapsed": false,
       "collapsible": true,
+      "link": {
+        "type": "generated-index",
+        "title": "媒体",
+        "description": "导航 - 媒体 ",
+        "slug": "/category/media",
+        "keywords": ["媒体", "hooks"]
+      },
       "label": "媒体",
       "items": [
-        "useAudio",
-        "useCamera",
-        "useImage",
-        "useMap",
-        "useRecord",
-        "useVideo"
+        "useAudio/index",
+        "useCamera/index",
+        "useImage/index",
+        "useMap/index",
+        "useRecord/index",
+        "useVideo/index"
       ]
     },
     {
       "type": "category",
       "collapsed": false,
       "collapsible": true,
+      "link": {
+        "type": "generated-index",
+        "title": "布局",
+        "description": "导航 - 布局 ",
+        "slug": "/category/layout",
+        "keywords": ["布局", "hooks"]
+      },
       "label": "布局",
-      "items": ["useBackground", "useManualPullDownRefresh", "useTabBar"]
+      "items": [
+        "useBackground/index",
+        "useManualPullDownRefresh/index",
+        "useTabBar/index"
+      ]
     },
     {
       "type": "category",
       "collapsed": false,
       "collapsible": true,
+      "link": {
+        "type": "generated-index",
+        "title": "设备",
+        "description": "导航 - 设备 ",
+        "slug": "/category/device",
+        "keywords": ["设备", "hooks"]
+      },
       "label": "设备",
       "items": [
-        "useBattery",
-        "useBLE",
-        "useBluetooth",
-        "useBrightness",
-        "useLocation",
-        "useMotion",
-        "useScanCode",
-        "useVibrate"
+        "useBattery/index",
+        "useBLE/index",
+        "useBluetooth/index",
+        "useBrightness/index",
+        "useLocation/index",
+        "useMotion/index",
+        "useScanCode/index",
+        "useVibrate/index"
       ]
     },
     {
       "type": "category",
       "collapsed": false,
       "collapsible": true,
+      "link": {
+        "type": "generated-index",
+        "title": "环境判断",
+        "description": "导航 - 环境判断 ",
+        "slug": "/category/env",
+        "keywords": ["环境判断", "hooks"]
+      },
       "label": "环境判断",
-      "items": ["useEnv"]
+      "items": ["useEnv/index"]
     },
     {
       "type": "category",
       "collapsed": false,
       "collapsible": true,
+      "link": {
+        "type": "generated-index",
+        "title": "网络",
+        "description": "导航 - 网络 ",
+        "slug": "/category/network",
+        "keywords": ["网络", "hooks"]
+      },
       "label": "网络",
-      "items": ["useFile", "useNetworkType", "useOnline", "useRequest"]
+      "items": [
+        "useFile/index",
+        "useNetworkType/index",
+        "useOnline/index",
+        "useRequest/index"
+      ]
     }
   ]
 }

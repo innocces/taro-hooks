@@ -25,7 +25,6 @@ function Alert({
   children,
 }: IAlertProps): JSX.Element {
   const [visible, setVisible] = React.useState<boolean>(true);
-
   if (!visible) return null;
 
   return (
