@@ -5,6 +5,7 @@ $prefix: cases;
   margin: 0 auto 50px;
   min-height: 443px;
   height: max-content;
+  justify-content: center;
 
   &Left {
     height: 313px;
@@ -86,6 +87,7 @@ $prefix: cases;
   }
 
   &Right {
+    width: 200px;
     border-radius: 40px 0 0 40px;
     overflow: hidden;
     list-style: none;
@@ -102,7 +104,7 @@ $prefix: cases;
     width: 210px;
     height: 432px;
     top: 50%;
-    left: calc(4 / 12 * 100% - 35px);
+    left: calc(50% + 64px);
     transform: translateY(-50%);
     background: url('/img/iphone-border.svg') no-repeat center center / contain;
     box-shadow: 0 0 10px rgb(0 0 0 / 20%);

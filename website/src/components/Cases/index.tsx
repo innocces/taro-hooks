@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import { Virtual } from 'swiper';
+import swiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperClass } from 'swiper/types';
 import clsx from 'clsx';
@@ -13,6 +13,8 @@ import { getUserCases, ICasesItem } from '@site/src/services/repo';
 import styles from './index.module.scss';
 import 'swiper/css';
 import 'swiper/css/virtual';
+
+swiperCore.use([Autoplay]);
 
 export default function Cases(): JSX.Element {
   const swiperRef = useRef<SwiperClass>();
@@ -91,17 +93,14 @@ export default function Cases(): JSX.Element {
       </div>
       <div className={styles.casesFrame} />
       {showCases && (
-        <div className={clsx('col', 'col--8', styles.casesRight)}>
+        <div className={styles.casesRight}>
           <Swiper
             loop
-            virtual
-            modules={[Virtual]}
+            // autoplay
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             onSlideChange={(swiper) =>
               setCurrentCases(Object.values(cases)[swiper.realIndex])
             }
-            slidesPerView={4}
-            loopedSlides={4}
           >
             {Object.values(cases).map(
               ({ name, screenshot, description }, index) => (
