@@ -32,6 +32,7 @@
     "develop:docusaurus": "lerna run dev --scope=@taro-hooks/plugin-docusaurus --stream",
     "build:docusaurus": "lerna run build --scope=@taro-hooks/plugin-docusaurus --stream",
     "build:use-request": "lerna run build --scope=@taro-hooks/use-request --stream",
+    "build:ahooks": "lerna run build --scope=@taro-hooks/ahooks --stream",
     "build": "lerna run build --no-private --stream",
     "develop:vue-plugin": "lerna run dev:h5 --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
     "build:vue-plugin": "lerna run build:h5 --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
