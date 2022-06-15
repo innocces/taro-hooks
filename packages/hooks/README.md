@@ -3,7 +3,7 @@
 <div align="center">
   <img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/2021-8-16/1629044969573-hook.png" alt="taro hooks logo"/>
 
-#### 为 **Taro** 而设计的 **Hooks Library**
+## 为 **Taro** 而设计的 **Hooks Library**
 
   <br />
 
@@ -31,7 +31,7 @@
 
 </div>
 
-[文档](https://next-version-taro-hooks.vercel.app/)
+## [文档](https://next-version-taro-hooks.vercel.app/)
 
 ## 特性
 
@@ -80,34 +80,36 @@ module.exports = {
 
 ## 参与贡献
 
-务必保证预装`lerna`
+务必保证预装 **Lerna** & **yarn**, 保证 **Node >= 14**
 
 ```bash
 $ git clone git@github.com:innocces/taro-hooks.git
 $ cd taro-hooks
+# 安装依赖
+$ yarn
+# 预编译文件
 $ yarn bootstrap
-$ yarn start
-# 启动小程序预览
-$ yarn app:dev
-# 启动H5预览
-$ yarn app:dev:h5
+# 开发文档
+$ yarn docusaurus:start
+# 启动Vue预览
+$ yarn develop:vue-plugin
+# 启动Vue 小程序 预览
+$ yarn develop:vue-plugin:weapp
+# 启动React预览
+$ yarn develop:react-plugin
+# 启动React 小程序 预览
+$ yarn develop:react-plugin:weapp
 ```
 
-打开浏览器 - [http://localhost:12345](http://localhost:12345)  
-若开启 h5 预览 - [http://0.0.0.0:10086](http://0.0.0.0:10086)  
-更多贡献详情见[官网文档](https://taro-hooks-innocces.vercel.app)
-
-> 注: `packages/taro-runtime`是为了配合文档单独使用生命周期 hook 独立保存的。遇更新会随时更新。无需关心。
-> `father-build`同理。
+打开浏览器 - [http://localhost:3000](http://localhost:3000)  
+若开启 vue 预览 - [http://localhost:10086](http://0.0.0.0:10086)  
+若开启 react 预览 - [http://localhost:12557](http://localhost:12557)  
+更多贡献详情见[官网文档](https://next-version-taro-hooks.vercel.app)
 
 ## 交流讨论
 
 - [![Gitter](https://img.shields.io/badge/chat-on%20gitter-blueviolet?style=for-the-badge)](https://gitter.im/hooks/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 - 点击[Welcome to discuss in wechat](https://github.com/innocces/taro-hooks/issues/12)获取最新二维码
-
-### monthly
-
-每个月都会发一篇关于`taro-hooks`的更新内容. 可至[monthly](https://github.com/taro-hooks/monthly)查看全部内容.
 
 ## CHANGELOG
 
