@@ -1,3 +1,4 @@
+const { resolve } = require('path');
 const gh = process.env.BUILD_TARGET === 'GH';
 
 const config = {
@@ -38,6 +39,9 @@ const config = {
         },
       },
     },
+  },
+  sass: {
+    resource: [resolve(__dirname, '..', 'src/style', 'custom-theme.scss')],
   },
   h5: {
     publicPath: (gh ? '/taro-hooks' : '') + '/vue',

@@ -4,7 +4,7 @@ import NutUI from '@nutui/nutui-taro';
 import DemoContent from './components/DemoContent/index.vue';
 import ControlInput from './components/ControlInput/index.vue';
 
-import '@nutui/nutui-taro/dist/style.css';
+import '@nutui/nutui-taro/dist/styles/themes/default.scss';
 import './app.css';
 
 const App = createApp({
