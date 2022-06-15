@@ -182,6 +182,10 @@ const config = {
                 label: 'innocces',
                 href: 'https://github.com/innocces',
               },
+              {
+                label: 'ryan-117',
+                href: 'https://github.com/ryan-117',
+              },
             ],
           },
           {

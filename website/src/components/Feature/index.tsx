@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
 import styles from './index.module.scss';
 
 const FEATURETITLES = ['框架周边', '框架特性'];
@@ -21,6 +22,8 @@ export default function Feature(): JSX.Element {
     },
   } = useDocusaurusContext();
 
+  const { withBaseUrl } = useBaseUrlUtils();
+
   return (
     <section className={styles.feature}>
       {(features as IFeatureItem[][]).map((item, index) => (
@@ -35,7 +38,7 @@ export default function Feature(): JSX.Element {
             {item.map(
               ({ name, tag, description, path, icon }: IFeatureItem) => (
                 <li className="text--center" key={name}>
-                  <img src={icon} alt={name} />
+                  <img src={withBaseUrl(icon)} alt={name} />
                   <h4>{name}</h4>
                   {description.map((desc) => (
                     <p key={desc}>{desc}</p>
