@@ -93,10 +93,11 @@ export default function Cases(): JSX.Element {
       </div>
       <div className={styles.casesFrame} />
       {showCases && (
-        <div className={styles.casesRight}>
+        <div className={clsx('col', 'col--8', styles.casesRight)}>
           <Swiper
-            loop
+            // loop
             // autoplay
+            slidesPerView={3}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             onSlideChange={(swiper) =>
               setCurrentCases(Object.values(cases)[swiper.realIndex])
@@ -106,8 +107,7 @@ export default function Cases(): JSX.Element {
               ({ name, screenshot, description }, index) => (
                 <SwiperSlide
                   className={styles.casesSwiperItem}
-                  key={name}
-                  virtualIndex={index}
+                  key={name + index}
                 >
                   {({ isActive }) => (
                     <img

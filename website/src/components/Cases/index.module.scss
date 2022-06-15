@@ -10,7 +10,7 @@ $prefix: cases;
   &Left {
     height: 313px;
     position: relative;
-    z-index: 1;
+    z-index: 0;
     border-radius: 10px;
     background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-primary-lightest));
     padding: 0 35px 0 0!important;
@@ -95,6 +95,7 @@ $prefix: cases;
     position: relative;
     left: -29px;
     padding: 0!important;
+    background-color: white;
   }
 
   &Frame {
@@ -104,7 +105,7 @@ $prefix: cases;
     width: 210px;
     height: 432px;
     top: 50%;
-    left: calc(50% + 64px);
+    left: calc(4 / 12 * 100% - 34px);
     transform: translateY(-50%);
     background: url('/img/iphone-border.svg') no-repeat center center / contain;
     box-shadow: 0 0 10px rgb(0 0 0 / 20%);
@@ -119,9 +120,9 @@ $prefix: cases;
 
       img {
         display: block;
-        width: 190px;
-        height: 413px;
-        margin: 0 auto;
+        width: 195px;
+        height: 414px;
+        margin: 0;
         border-radius: 10px;
         box-shadow: 0 0 5px rgb(0 0 0 / 10%);
         transform: scale(.96);
