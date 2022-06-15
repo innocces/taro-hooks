@@ -1,7 +1,10 @@
 {
   "projectName": "taro-hooks",
   "projectOwner": "innocces",
-  "files": ["README.md", "CONTRIBUTORS.md"],
+  "files": [
+    "README.md",
+    "CONTRIBUTORS.md"
+  ],
   "imageSize": 50,
   "contributorsPerLine": 10,
   "commit": true,
@@ -24,6 +27,18 @@
         "platform",
         "eventOrganizing",
         "design"
+      ]
+    },
+    {
+      "login": "ryan-117",
+      "name": "ryan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24773896?v=4",
+      "profile": "https://github.com/ryan-117",
+      "contributions": [
+        "doc",
+        "talk",
+        "ideas",
+        "code"
       ]
     }
   ]
