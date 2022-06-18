@@ -31,16 +31,20 @@
 
 </div>
 
-## [文档](https://next-version-taro-hooks.vercel.app/)
+[document](https://next-version-taro-hooks.vercel.app)
+
+## 简介
+
+**Taro-hooks** - 一款对标 **Taro API** 开发的 **Hooks Library**. 覆盖几乎所有 **Taro API** 以及方法. 并且结合 **ahooks** 扩展了多端共用的 **hooks** 库.
+
+新的版本跟随 **Taro** 的设计理念, 进行了 **runtime + plugin** 化. 最大化减少额外依赖的加入. 只需要引入对应框架的插件即可完美使用本库.
 
 ## 特性
 
-- 全面匹配`Taro API`.
-- **Vue3** & **React**
-- 结合`ahooks`扩展常用`hook`.
-- 完整的类型定义文件
-- 按需加载
-- 更易用的方式
+- 全面匹配 **Taro API**.
+- 结合 **ahooks** 扩展常用 **hook** (其中 **useRequest** 已被单独抽离. 可独立安装使用).
+- 使用 **ts** 开发. 更好的类型提示
+- 扩展 **h5** 部分缺失的功能 (但不保证兼容度)
 
 ## taro init
 
