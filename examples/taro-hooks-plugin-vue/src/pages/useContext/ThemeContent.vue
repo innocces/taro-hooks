@@ -15,7 +15,7 @@
 
 <script>
 import { useTaroContext } from '@tarojs/taro';
-import { themeContext, userContext } from './index.vue';
+import { themeContext, userContext } from './context';
 
 export default {
   setup() {
@@ -32,8 +32,8 @@ export default {
 <style>
 .content-box {
   background: white;
-  padding: 20px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 5px;
   color: #222;
   border: 1px solid #222;
 }
@@ -42,9 +42,9 @@ export default {
   background: rgb(23, 32, 42);
 }
 .content-title {
-  font-size: 40px;
+  font-size: 20px;
 }
 .content-button {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 </style>

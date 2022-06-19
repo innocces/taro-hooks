@@ -17,7 +17,7 @@ export default {
   setup() {
     const demoRef = useTaroRef();
 
-    console.log(demoRef);
+    console.log(demoRef.current);
 
     return {
       demoRef,
@@ -28,13 +28,13 @@ export default {
 
 <style>
 .demo-content {
-  padding: 17px;
+  padding: 8px;
   background: white;
 }
 
 .demo-content-title {
-  margin: 30px auto 10px;
-  font-size: 28px;
+  margin: 15px auto 5px;
+  font-size: 14px;
   color: #909ca4;
   font-weight: 400;
 }
@@ -44,7 +44,7 @@ export default {
 }
 
 .demo-content-wrapper {
-  font-size: 28px;
+  font-size: 14px;
   font-weight: 400;
 }
 </style>

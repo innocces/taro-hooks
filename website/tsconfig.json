@@ -5,7 +5,7 @@
     "baseUrl": ".",
     "typeRoots": ["typings.d.ts"],
     "paths": {
-      "@vue-demo/**": ["../examples/taro-hooks-plugin-vue/src/pages/**"]
+      "@vue-demo/*": ["../examples/taro-hooks-plugin-vue/src/pages/*"]
     }
   }
 }

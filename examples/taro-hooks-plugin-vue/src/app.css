@@ -1,12 +1,8 @@
-page {
-  padding: 20px;
-}
-
-.taro_page {
+page, .taro_page {
   overflow: auto;
   /* padding: 20px; */
   box-sizing: border-box;
-  font-size: 28px;
+  font-size: 14px;
 }
 
 .flex {
@@ -15,7 +11,7 @@ page {
 }
 
 .gap {
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 .flex-1 {

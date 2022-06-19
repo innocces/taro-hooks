@@ -20,19 +20,11 @@
 
 <script>
 import { escapeState } from '@taro-hooks/shared';
-import {
-  useTaroState,
-  useTaroContext,
-  taroCreateContext,
-  useTaroMemo,
-} from '@tarojs/taro';
+import { useTaroState, useTaroContext, useTaroMemo } from '@tarojs/taro';
 import ThemeContent from './ThemeContent.vue';
-
-export const themeContext = taroCreateContext({ theme: 'light' });
+import { themeContext, userContext } from './context';
 
 const { Provider: ThemeProvider } = themeContext;
-
-export const userContext = taroCreateContext({ name: null });
 
 const { Provider: UserProvider } = userContext;
 

@@ -1,19 +1,24 @@
 const { resolve } = require('path');
 const gh = process.env.BUILD_TARGET === 'GH';
+const weapp = process.env.TARO_ENV === 'weapp';
 
 const config = {
   projectName: 'taro-hooks-plugin-vue',
   date: '2022-5-16',
-  designWidth: 750,
+  designWidth: 375,
   deviceRatio: {
     640: 2.34 / 2,
     750: 1,
     828: 1.81 / 2,
+    375: 2 / 1,
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: weapp ? 'dist-weapp' : 'dist',
   plugins: ['@taro-hooks/plugin-vue', '@tarojs/plugin-html'],
   defineConstants: {},
+  alias: {
+    '@root': resolve(__dirname, '..', '..', '..'),
+  },
   copy: {
     patterns: [],
     options: {},
@@ -23,7 +28,9 @@ const config = {
     postcss: {
       pxtransform: {
         enable: true,
-        config: {},
+        config: {
+          selectorBlackList: ['nut-'],
+        },
       },
       url: {
         enable: true,
@@ -41,11 +48,13 @@ const config = {
     },
   },
   sass: {
+    data: `@import "@nutui/nutui-taro/dist/styles/variables.scss";`,
     resource: [resolve(__dirname, '..', 'src/style', 'custom-theme.scss')],
   },
   h5: {
     publicPath: (gh ? '/taro-hooks' : '') + '/vue',
     staticDirectory: 'static',
+    esnextModules: ['nutui-taro'],
     router: {
       mode: 'browser',
       basename: (gh ? '/taro-hooks' : '') + '/vue',

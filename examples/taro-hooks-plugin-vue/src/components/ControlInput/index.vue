@@ -39,6 +39,6 @@ export default {
 
 <style>
 .control-input {
-  padding: 20px !important;
+  padding: 10px !important;
 }
 </style>

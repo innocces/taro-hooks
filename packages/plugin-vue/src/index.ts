@@ -18,7 +18,7 @@ export default (ctx: IPluginContext) => {
       chain.merge({
         module: {
           rule: {
-            'process-import-taro': {
+            'process-import-taro-hooks': {
               test: /taro-h5[\\/]dist[\\/]index/,
               loader: require.resolve('./api-loader'),
             },
