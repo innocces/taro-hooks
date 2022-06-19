@@ -5547,7 +5547,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@taro-hooks/ahooks@workspace:packages/ahooks":
+"@taro-hooks/ahooks@^1.5.6, @taro-hooks/ahooks@workspace:packages/ahooks":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/ahooks@workspace:packages/ahooks"
   dependencies:
@@ -5732,6 +5732,7 @@ __metadata:
     "@nutui/nutui-taro": ^3.1.21
     "@taro-hooks/plugin-vue": ^1.5.6
     "@taro-hooks/shared": ^1.5.6
+    "@taro-hooks/use-request": ^1.5.6
     "@tarojs/cli": 3.4.8
     "@tarojs/components": 3.4.8
     "@tarojs/mini-runner": 3.4.8
@@ -5749,6 +5750,7 @@ __metadata:
     eslint: ^8.12.0
     eslint-config-taro: 3.4.8
     eslint-plugin-vue: ^8.0.0
+    mockjs: ^1.1.0
     stylelint: ^14.4.0
     taro-hooks: ^1.5.6
     typescript: ^4.6.3
@@ -5796,6 +5798,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@taro-hooks/use-request@workspace:packages/use-request"
   dependencies:
+    "@taro-hooks/ahooks": ^1.5.6
     "@taro-hooks/shared": ^1.5.6
     vue: ">3.0"
   peerDependencies:

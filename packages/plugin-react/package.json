@@ -40,7 +40,7 @@
     "@tarojs/taro": "3.4.8"
   },
   "peerDependencies": {
-    "@tarojs/taro": ">=3.x",
+    "@tarojs/taro": ">=3.4.x",
     "react": ">=16.9"
   }
 }

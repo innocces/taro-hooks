@@ -1,0 +1,50 @@
+{
+  "name": "@taro-hooks/use-request",
+  "version": "1.5.6",
+  "description": "useRequest hook for Taro",
+  "keywords": [
+    "ahooks",
+    "taro-hooks",
+    "react",
+    "hooks",
+    "vue",
+    "vue3",
+    "composition-api",
+    "taro"
+  ],
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "types": "./lib/index.d.ts",
+  "sideEffects": false,
+  "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": "https://github.com/innocces/taro-hooks",
+  "homepage": "https://innocces.github.io/taro-hooks/packages/use-request",
+  "scripts": {
+    "build": "gulp"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "@taro-hooks/ahooks": "^1.5.6",
+    "@taro-hooks/shared": "^1.5.6"
+  },
+  "peerDependencies": {
+    "@tarojs/taro": ">3.4.0"
+  },
+  "optionalDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "vue": ">3.0"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "license": "MIT"
+}

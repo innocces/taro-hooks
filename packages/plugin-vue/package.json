@@ -44,7 +44,7 @@
     "vue": "^3.0.0"
   },
   "peerDependencies": {
-    "@tarojs/taro": ">=3.x",
+    "@tarojs/taro": ">=3.4.x",
     "vue": ">=3.x"
   }
 }

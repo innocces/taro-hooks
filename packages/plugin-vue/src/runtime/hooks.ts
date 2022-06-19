@@ -13,6 +13,7 @@ import {
   inject,
   provide,
   h,
+  customRef,
   isRef,
 } from 'vue';
 
@@ -244,13 +245,38 @@ function useMemo<T>(
  * @version taro-hooks >= 2.0.0
  * @description a latest reactive value
  * @param {T} initialValue initialValue
+ * @param {boolean} needEscape when u need use it with active in ref.current
  * @returns {T} ref of value
  */
-function useRef<T>(initialValue: T): UnwrapRef<{
+function useRef<T>(
+  initialValue: T,
+  needEscape?: boolean,
+): UnwrapRef<{
   current: T;
 }> {
   log('vue.ver useRef is use reactive to simulation.');
-  const reactiveRef = reactive({ current: initialValue });
+
+  const refCurrent = ref(initialValue);
+
+  const currentCustomRef = customRef((track, tirrger) => {
+    return {
+      get() {
+        track();
+        return refCurrent;
+      },
+      set(currentSetValue) {
+        refCurrent.value = isRef(currentSetValue)
+          ? currentSetValue.value
+          : currentSetValue;
+        tirrger();
+      },
+    };
+  });
+
+  const reactiveRef = reactive({
+    current: needEscape ? currentCustomRef : initialValue,
+  });
+  // @ts-ignore
   return reactiveRef;
 }
 
