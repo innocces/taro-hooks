@@ -5,6 +5,7 @@
   "author": "innocces",
   "homepage": "https://github.com/innocces/taro-hooks/blob/next/packages/shared/README.md",
   "license": "MIT",
+  "typedocMain": "./src/index.ts",
   "main": "dist/index.js",
   "module": "dist/shared.esm.js",
   "typings": "dist/index.d.ts",

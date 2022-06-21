@@ -4,6 +4,7 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const { join } = require('path');
+const { readdirSync } = require('fs');
 const { version } = require(join(
   process.cwd(),
   '../',
@@ -36,6 +37,15 @@ const pluginOptionAlias = {
     'taro-hooks-plugin/src/pages',
   ),
 };
+
+const packagesPath = join(process.cwd(), '..', 'packages');
+
+const typeDocEntries = readdirSync(packagesPath)
+  .filter(
+    (v) =>
+      !['hooks', 'app', 'blueimp-canvas-to-blob', 'compressorjs'].includes(v),
+  )
+  .map((v) => join(packagesPath, v));
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -91,6 +101,84 @@ const config = {
         ...generateDocsOptions('src'),
         sidebarPath: require.resolve('./sidebarsHooks.json'),
       }),
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        entryPoints: typeDocEntries,
+        entryPointStrategy: 'packages',
+        // watch: process.env.TYPEDOC_WATCH,
+        logLevel: 'Verbose',
+        name: 'All - TypeDoc',
+        readme: 'none',
+        gitRevision: 'next',
+        cleanOutputDir: !prod,
+
+        sidebar: {
+          categoryLabel: 'TypeDoc',
+          position: 10,
+          fullNames: true,
+        },
+      },
+    ],
+    [
+      'pwa',
+      {
+        debug: true,
+        offlineModeActivationStrategies: [
+          'appInstalled',
+          'standalone',
+          'queryString',
+        ],
+        pwaHead: [
+          {
+            tagName: 'link',
+            rel: 'icon',
+            href: 'img/hook.png',
+          },
+          {
+            tagName: 'link',
+            rel: 'manifest',
+            href: 'manifest.json',
+          },
+          {
+            tagName: 'meta',
+            name: 'theme-color',
+            content: '#792be4',
+          },
+          {
+            tagName: 'meta',
+            name: 'apple-mobile-web-app-capable',
+            content: 'yes',
+          },
+          {
+            tagName: 'meta',
+            name: 'apple-mobile-web-app-status-bar-style',
+            content: '#000',
+          },
+          {
+            tagName: 'link',
+            rel: 'apple-touch-icon',
+            href: 'img/hook.png',
+          },
+          {
+            tagName: 'link',
+            rel: 'mask-icon',
+            href: 'img/hook.png',
+            color: '#792be4',
+          },
+          {
+            tagName: 'meta',
+            name: 'msapplication-TileImage',
+            content: 'img/hook.png',
+          },
+          {
+            tagName: 'meta',
+            name: 'msapplication-TileColor',
+            content: '#000',
+          },
+        ],
+      },
     ],
   ],
 
@@ -216,12 +304,12 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['shell-session', 'http'],
       },
-      algolia: {
-        appId: 'IRP4IYNFNW',
-        apiKey: '714b0bc6e684aac4abddf2973530c87b',
-        indexName: 'taro-hooks_query_suggestions',
-        contextualSearch: true,
-      },
+      // algolia: {
+      //   appId: 'IRP4IYNFNW',
+      //   apiKey: '714b0bc6e684aac4abddf2973530c87b',
+      //   indexName: 'taro-hooks_query_suggestions',
+      //   contextualSearch: true,
+      // },
       metadata: [
         {
           name: 'keywords',
@@ -248,6 +336,19 @@ const config = {
       'data-y_margin': '18',
       defer: true,
     },
+  ],
+
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: ['en', 'zh'],
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        docsDir: ['docs', '../packages/hooks/src'],
+      },
+    ],
   ],
 
   customFields: {

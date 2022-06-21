@@ -6,6 +6,8 @@ import {
   useUnmount,
   useUpdate,
 } from '@taro-hooks/ahooks';
+import { useTaroMemo } from '@tarojs/taro';
+import { escapeState } from '@taro-hooks/shared';
 
 import Fetch from './Fetch';
 import type { Options, Plugin, Result, Service } from './types';
@@ -26,50 +28,65 @@ function useRequestImplement<TData, TParams extends any[]>(
 
   const update = useUpdate();
 
-  const fetchInstance = useCreation(() => {
+  const fetchInstance = useTaroMemo(() => {
     const initState = plugins
       .map((p) => p?.onInit?.(fetchOptions))
       .filter(Boolean);
 
-    return new Fetch<TData, TParams>(
+    const fetch = new Fetch<TData, TParams>(
       serviceRef,
       fetchOptions,
       update,
       Object.assign({}, ...initState),
     );
+    fetch.options = fetchOptions;
+    // run all plugins hooks
+    fetch.pluginImpls = plugins.map((p) => p(fetchInstance, fetchOptions));
+
+    return fetch;
   }, []);
-  fetchInstance.options = fetchOptions;
-  // run all plugins hooks
-  fetchInstance.pluginImpls = plugins.map((p) =>
-    p(fetchInstance, fetchOptions),
-  );
 
   useMount(() => {
     if (!manual) {
       // useCachePlugin can set fetchInstance.state.params from cache when init
-      const params = fetchInstance.state.params || options.defaultParams || [];
+      const instance = escapeState(fetchInstance);
+      const params = instance.state.params || options.defaultParams || [];
       // @ts-ignore
-      fetchInstance.run(...params);
+      instance.run(...params);
     }
   });
 
   useUnmount(() => {
-    fetchInstance.cancel();
+    escapeState(fetchInstance).cancel();
   });
+
+  // due to vue reactive, need reduce single for useMemo
+  const loading = useTaroMemo(() => {
+    return escapeState(fetchInstance).state.loading;
+  }, [fetchInstance]);
+  const data = useTaroMemo(() => {
+    return escapeState(fetchInstance).state.data;
+  }, [fetchInstance]);
+  const error = useTaroMemo(() => {
+    return escapeState(fetchInstance).state.error;
+  }, [fetchInstance]);
+  const params = useTaroMemo(() => {
+    return escapeState(fetchInstance).state.params || [];
+  }, [fetchInstance]);
 
   console.log('useRequestImplement', fetchInstance);
 
   return {
-    loading: fetchInstance.state.loading,
-    data: fetchInstance.state.data,
-    error: fetchInstance.state.error,
-    params: fetchInstance.state.params || [],
-    cancel: useMemoizedFn(fetchInstance.cancel.bind(fetchInstance)),
-    refresh: useMemoizedFn(fetchInstance.refresh.bind(fetchInstance)),
-    refreshAsync: useMemoizedFn(fetchInstance.refreshAsync.bind(fetchInstance)),
-    run: useMemoizedFn(fetchInstance.run.bind(fetchInstance)),
-    runAsync: useMemoizedFn(fetchInstance.runAsync.bind(fetchInstance)),
-    mutate: useMemoizedFn(fetchInstance.mutate.bind(fetchInstance)),
+    loading,
+    data,
+    error,
+    params,
+    // cancel: useMemoizedFn(fetchInstance.cancel.bind(fetchInstance)),
+    // refresh: useMemoizedFn(fetchInstance.refresh.bind(fetchInstance)),
+    // refreshAsync: useMemoizedFn(fetchInstance.refreshAsync.bind(fetchInstance)),
+    // run: useMemoizedFn(fetchInstance.run.bind(fetchInstance)),
+    // runAsync: useMemoizedFn(fetchInstance.runAsync.bind(fetchInstance)),
+    // mutate: useMemoizedFn(fetchInstance.mutate.bind(fetchInstance)),
   } as Result<TData, TParams>;
 }
 

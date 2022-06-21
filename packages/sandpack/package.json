@@ -5,6 +5,7 @@
   "author": "innocces",
   "homepage": "https://github.com/innocces/taro-hooks/blob/next/packages/sandpack/README.md",
   "license": "MIT",
+  "typedocMain": "./src/index.ts",
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "types": "./lib/index.d.ts",

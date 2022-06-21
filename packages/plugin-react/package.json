@@ -5,6 +5,7 @@
   "author": "innocces",
   "homepage": "https://github.com/innocces/taro-hooks/blob/next/packages/plugin-react/README.md",
   "license": "MIT",
+  "typedocMain": "./src/runtime/hooks.ts",
   "main": "index.js",
   "typings": "types/index.d.ts",
   "keywords": [

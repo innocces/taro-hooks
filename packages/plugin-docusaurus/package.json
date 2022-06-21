@@ -6,6 +6,7 @@
   "homepage": "https://github.com/innocces/taro-hooks/blob/next/packages/plugin-docusaurus/README.md",
   "license": "MIT",
   "main": "index.js",
+  "typedocMain": "./src/index.ts",
   "module": "dist/index.es.js",
   "keywords": [
     "taro-hooks",

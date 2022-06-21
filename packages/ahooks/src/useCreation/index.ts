@@ -1,4 +1,5 @@
 import { useTaroRef } from '@tarojs/taro';
+import { escapeState } from '@taro-hooks/shared';
 import type { DependencyList } from '../type';
 import { depsAreSame } from '../utils';
 
@@ -13,12 +14,14 @@ export default function useCreation<T>(factory: () => T, deps: DependencyList) {
     true,
   );
   if (
-    creation.current.initialized === false ||
-    !depsAreSame(creation.current.deps, deps)
+    escapeState(creation.current).initialized === false ||
+    !depsAreSame(escapeState(creation.current).deps, deps)
   ) {
-    creation.current.deps = deps;
-    creation.current.obj = factory();
-    creation.current.initialized = true;
+    creation.current = {
+      deps,
+      obj: factory(),
+      initialized: true,
+    };
   }
-  return creation.current.obj as T;
+  return escapeState(creation.current).obj as T;
 }
