@@ -102,25 +102,25 @@ const config = {
         sidebarPath: require.resolve('./sidebarsHooks.json'),
       }),
     ],
-    [
-      'docusaurus-plugin-typedoc',
-      {
-        entryPoints: typeDocEntries,
-        entryPointStrategy: 'packages',
-        // watch: process.env.TYPEDOC_WATCH,
-        logLevel: 'Verbose',
-        name: 'All - TypeDoc',
-        readme: 'none',
-        gitRevision: 'next',
-        cleanOutputDir: !prod,
+    // [
+    //   'docusaurus-plugin-typedoc',
+    //   {
+    //     entryPoints: typeDocEntries,
+    //     entryPointStrategy: 'packages',
+    //     // watch: process.env.TYPEDOC_WATCH,
+    //     logLevel: 'Verbose',
+    //     name: 'All - TypeDoc',
+    //     readme: 'none',
+    //     gitRevision: 'next',
+    //     cleanOutputDir: !prod,
 
-        sidebar: {
-          categoryLabel: 'TypeDoc',
-          position: 10,
-          fullNames: true,
-        },
-      },
-    ],
+    //     sidebar: {
+    //       categoryLabel: 'TypeDoc',
+    //       position: 10,
+    //       fullNames: true,
+    //     },
+    //   },
+    // ],
     [
       'pwa',
       {

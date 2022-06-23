@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "yarn build:shared && lerna run build --scope @taro-hooks/plugin-react --scope @taro-hooks/plugin-vue --stream && yarn build:docusaurus && yarn build:sandpack",
-    "clean": "rm -rf node_modules && rm -rf .yarn/cache && rm -rf yarn.lock",
+    "clean": "lerna clean --yes && rm -rf .yarn/cache && rm -rf yarn.lock",
     "clean-modules": "rm -rf packages/*/node_modules && rm -rf packages/*/package-lock.json && rm -rf website/node_modules && rm -rf examples/*/node_modules",
     "docusaurus:start": "lerna run start --scope=@taro-hooks/website --stream",
     "docusaurus:build": "lerna run build --scope=@taro-hooks/website --stream",
