@@ -6477,6 +6477,7 @@ __metadata:
     sass: ^1.51.0
     swc-loader: ^0.2.0
     swiper: ^8.1.4
+    typed.js: ^2.0.12
     typedoc: ^0.22.17
     typedoc-plugin-markdown: ^3.12.1
     typescript: ^4.6.3
@@ -33151,6 +33152,13 @@ __metadata:
   version: 2.6.0
   resolution: "type@npm:2.6.0"
   checksum: 80da01fcc0f6ed5a253dc326530e134000a8f66ea44b6d9687cde2f894f0d0b2486595b0cd040a64f7f79dc3120784236f8c9ef667a8aef03984e049b447cfb4
+  languageName: node
+  linkType: hard
+
+"typed.js@npm:^2.0.12":
+  version: 2.0.12
+  resolution: "typed.js@npm:2.0.12"
+  checksum: ea753bf8e01fd6e37390f8d02de58cc084e7b11620e937e75a6cad58829dd55a9273954191529cddad58ab102479f097db4587c6790ba4ff2dabc5d4fb6192d8
   languageName: node
   linkType: hard
 

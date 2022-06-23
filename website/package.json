@@ -30,7 +30,8 @@
     "react-dom": "^17.0.2",
     "sass": "^1.51.0",
     "swc-loader": "^0.2.0",
-    "swiper": "^8.1.4"
+    "swiper": "^8.1.4",
+    "typed.js": "^2.0.12"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-beta.20",

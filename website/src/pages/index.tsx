@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Typed from 'typed.js';
 
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -13,18 +14,46 @@ import styles from './index.module.css';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
+  const el = React.useRef(null);
+  const typedEl = React.useRef(null);
+  React.useEffect(() => {
+    typedEl.current = new Typed(el.current, {
+      // strings: ['npm install^1000 <br> `installing components...` ^500<br> `Fetching from source...` ^500<br> `Fetching from source...` ^500<br> `Fetching from source...` ^500<br> `Fetching from source...`'],
+      stringsElement: '#typed',
+      typeSpeed: 50,
+      backSpeed: 0,
+      loop: true,
+    });
+
+    return () => {
+      typedEl.current.destroy();
+    };
+  }, []);
+
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            快速开始
-          </Link>
+      <div className={clsx('container', styles.terminal)}>
+        <div className={styles.typedContainer}>
+          <span ref={el}></span>
+        </div>
+        <div id="typed">
+          <p>
+            🤖 npm i @taro-hooks/plugin-react^500 <br /> 🔍 Installing
+            library...^500 <br /> 🚚 Fetching from source...^500 <br /> 🔨
+            Building...^500 <br /> ✨ Done in 3.25s.
+          </p>
+        </div>
+        <div className={styles.headerContainer}>
+          <h1 className="hero__title">{siteConfig.title}</h1>
+          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <div className={styles.buttons}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/docs/intro"
+            >
+              快速开始
+            </Link>
+          </div>
         </div>
       </div>
     </header>
