@@ -1,6 +1,7 @@
 <template>
   <view class="demo-content">
     <view class="demo-content-title">{{ title }}</view>
+    <view class="demo-content-desc">{{ desc }}</view>
     <view class="demo-content-wrapper">
       <slot />
     </view>
@@ -13,6 +14,7 @@ export default {
   name: 'DemoContent',
   props: {
     title: String,
+    desc: String,
   },
   setup() {
     const demoRef = useTaroRef();
@@ -35,6 +37,13 @@ export default {
 .demo-content-title {
   margin: 15px auto 5px;
   font-size: 14px;
+  color: #909ca4;
+  font-weight: 600;
+}
+
+.demo-content-desc {
+  margin: 0 auto 5px;
+  font-size: 12px;
   color: #909ca4;
   font-weight: 400;
 }

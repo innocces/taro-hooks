@@ -1,7 +1,7 @@
 /**
  * major job for shims differs between react and vue
  */
-import { FRAMEWORK } from './constant';
+import { isRef } from './helper';
 
 /**
  * due to useState vue.ver use customRef to simulate. so need auto release value to caculate
@@ -9,5 +9,5 @@ import { FRAMEWORK } from './constant';
  * @returns {any}
  */
 export const escapeState = (state: any): any => {
-  return FRAMEWORK === 'vue' ? state.value : state;
+  return isRef(state) ? state.value : state;
 };

@@ -80,6 +80,6 @@ export default {
 
 <style>
 .reducer-item {
-  min-height: 80px;
+  min-height: 40px;
 }
 </style>
