@@ -36,6 +36,14 @@ export default {
         name: 'basic/refresh',
         title: '刷新（重复上一次请求）',
       },
+      {
+        name: 'basic/mutate',
+        title: '立即变更数据',
+      },
+      {
+        name: 'basic/params',
+        title: '参数管理',
+      },
     ];
 
     const handleNavigate = (path, needIndex) => {
