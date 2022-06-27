@@ -106,6 +106,10 @@ const config = {
 
 <UseTaroRef />
 
+<Alert type="warning">
+注意<strong>useTaroRef</strong>内部是默认使用<strong>reactive</strong>来生成. 若需要在视图内保活, 请不要解构.
+</Alert>
+
 ### **useTaroReducer**
 
 **useTaroReducer** 帮助您创建一个 **reducer** (**eventBus**) 在组件中使用.
