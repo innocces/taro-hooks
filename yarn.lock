@@ -6415,6 +6415,7 @@ __metadata:
     "@tarojs/taro": 3.4.8
     "@tarojs/webpack-runner": 3.4.8
     "@types/react": ^17.0.2
+    "@types/react-dom": ^17.0.2
     "@types/webpack-env": ^1.13.6
     "@typescript-eslint/eslint-plugin": ^5.20.0
     "@typescript-eslint/parser": ^5.20.0
@@ -6425,6 +6426,7 @@ __metadata:
     eslint-plugin-import: ^2.12.0
     eslint-plugin-react: ^7.8.2
     eslint-plugin-react-hooks: ^4.2.0
+    mockjs: ^1.1.0
     react: ^17.0.2
     react-dom: ^17.0.2
     stylelint: 9.3.0
@@ -7546,6 +7548,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:^17.0.2":
+  version: 17.0.17
+  resolution: "@types/react-dom@npm:17.0.17"
+  dependencies:
+    "@types/react": ^17
+  checksum: 23caf98aa03e968811560f92a2c8f451694253ebe16b670929b24eaf0e7fa62ba549abe9db0ac028a9d8a9086acd6ab9c6c773f163fa21224845edbc00ba6232
+  languageName: node
+  linkType: hard
+
 "@types/react-router-config@npm:*":
   version: 5.0.6
   resolution: "@types/react-router-config@npm:5.0.6"
@@ -7586,6 +7597,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: a2138d6929c36a398b0b43eb815b4e67c4f15aeebbdf8b1959edac56b8662d7409020a00540369b4eb1054579b1e8c9549447ae9b0335d5d1ec4ed4e1be2d628
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^17":
+  version: 17.0.47
+  resolution: "@types/react@npm:17.0.47"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 2e7fe0eb630cb77da03b6da308c58728c01b38e878118e9ff5cd8045181c8d4f32dc936e328f46a62cadb56e1fe4c5a911b5113584f93a99e1f35df7f059246b
   languageName: node
   linkType: hard
 
