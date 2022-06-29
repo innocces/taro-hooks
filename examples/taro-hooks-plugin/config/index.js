@@ -1,5 +1,6 @@
 const { resolve } = require('path');
 const gh = process.env.BUILD_TARGET === 'GH';
+const weapp = process.env.TARO_ENV === 'weapp';
 
 const config = {
   projectName: 'taro-hooks-plugin',
@@ -11,7 +12,7 @@ const config = {
     828: 1.81 / 2,
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: weapp ? 'dist-weapp' : 'dist',
   plugins: ['@taro-hooks/plugin-react'],
   defineConstants: {},
   alias: {

@@ -9,6 +9,18 @@
     {
       "source": "/vue/pages/:type/:index*",
       "destination": "/vue/index.html"
+    },
+    {
+      "source": "/vue/pages/:type/:index/:second*",
+      "destination": "/vue/index.html"
+    },
+    {
+      "source": "/react/pages/:type/:index*",
+      "destination": "/react/index.html"
+    },
+    {
+      "source": "/react/pages/:type/:index/:second*",
+      "destination": "/react/index.html"
     }
   ]
 }
