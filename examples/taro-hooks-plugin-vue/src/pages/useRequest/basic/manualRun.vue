@@ -2,7 +2,7 @@
   <block>
     <demo-content
       title="Basic - 手动触发"
-      desc="在这个例子中，我们通过 `run(username)` 来修改用户名，通过 `onSuccess` 和 `onError` 来处理成功和失败"
+      desc="在这个例子中，我们通过 run(username) 来修改用户名，通过 onSuccess 和 onError 来处理成功和失败"
     >
       <nut-input
         :disabled="request.loading"

@@ -1,6 +1,12 @@
-import { useLatest, useMount, useUnmount, useUpdate } from '@taro-hooks/ahooks';
-import { useTaroMemo, useTaroRef } from '@tarojs/taro';
-import { escapeState } from '@taro-hooks/shared';
+import {
+  useLatest,
+  useMount,
+  useUnmount,
+  useUpdate,
+  useMemoizedFn,
+} from '@taro-hooks/ahooks';
+import { useTaroMemo } from '@tarojs/taro';
+import { escapeState, FRAMEWORK } from '@taro-hooks/shared';
 
 import Fetch from './Fetch';
 import type { Options, Plugin, Result, Service } from './types';
@@ -32,12 +38,24 @@ function useRequestImplement<TData, TParams extends any[]>(
       update,
       Object.assign({}, ...initState),
     );
-    fetch.options = fetchOptions;
-    // run all plugins hooks
-    fetch.pluginImpls = plugins.map((p) => p(fetch, fetchOptions));
+
+    if (FRAMEWORK === 'vue') {
+      fetch.options = fetchOptions;
+      // run all plugins hooks
+      fetch.pluginImpls = plugins.map((p) => p(fetch, fetchOptions));
+    }
 
     return fetch;
   }, []);
+
+  // react can not call hooks in other hooks. we use env to fix it
+  if (FRAMEWORK === 'react') {
+    fetchInstance.options = fetchOptions;
+    // run all plugins hooks
+    fetchInstance.pluginImpls = plugins.map((p) =>
+      p(fetchInstance, fetchOptions),
+    );
+  }
 
   useMount(() => {
     if (!manual) {
@@ -55,7 +73,7 @@ function useRequestImplement<TData, TParams extends any[]>(
 
   // due to vue reactive, need reduce single for useMemo
   // ugly
-  const refResult = useTaroMemo(
+  const vueRefResult = useTaroMemo(
     () => ({
       loading: escapeState(fetchInstance).state.loading,
       data: escapeState(fetchInstance).state.data,
@@ -81,7 +99,26 @@ function useRequestImplement<TData, TParams extends any[]>(
     [fetchInstance],
   );
 
-  return refResult as Result<TData, TParams>;
+  if (FRAMEWORK === 'vue') {
+    return vueRefResult as Result<TData, TParams>;
+  }
+
+  if (FRAMEWORK === 'react') {
+    return {
+      loading: fetchInstance.state.loading,
+      data: fetchInstance.state.data,
+      error: fetchInstance.state.error,
+      params: fetchInstance.state.params || [],
+      cancel: useMemoizedFn(fetchInstance.cancel.bind(fetchInstance)),
+      refresh: useMemoizedFn(fetchInstance.refresh.bind(fetchInstance)),
+      refreshAsync: useMemoizedFn(
+        fetchInstance.refreshAsync.bind(fetchInstance),
+      ),
+      run: useMemoizedFn(fetchInstance.run.bind(fetchInstance)),
+      runAsync: useMemoizedFn(fetchInstance.runAsync.bind(fetchInstance)),
+      mutate: useMemoizedFn(fetchInstance.mutate.bind(fetchInstance)),
+    } as Result<TData, TParams>;
+  }
 }
 
 export default useRequestImplement;

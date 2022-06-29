@@ -1,5 +1,6 @@
 /**
  * auto generate hooks category.json -> docusairus
+ * already generate category. do not run again!
  */
 
 import 'zx/globals';

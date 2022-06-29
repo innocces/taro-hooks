@@ -2,8 +2,12 @@ export const PREFIX = '🎮[taro-hooks]';
 
 export const INJECTKEY = '$$inject';
 
-declare var __TARO_HOOKS_VUE__: boolean;
-export const FRAMEWORK = __TARO_HOOKS_VUE__ ? 'vue' : 'react';
+export const FRAMEWORK: 'vue' | 'react' | null = process?.env
+  ?.__TARO_HOOKS_VUE__
+  ? 'vue'
+  : process?.env?.__TARO_HOOKS_REACT__
+  ? 'react'
+  : null;
 
 // =.-  remarkFrontmatter can't resolve chinese words. so path will lose. a map resolve it
 export type HooksPath =
@@ -25,6 +29,7 @@ export type HooksLabel =
   | '媒体'
   | '网络'
   | '小程序';
+
 export const PATH2LABEL: Record<HooksPath, HooksLabel> = {
   basic: '基础',
   device: '设备',

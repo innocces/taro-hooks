@@ -121,7 +121,7 @@ const config = {
     //     },
     //   },
     // ],
-    [
+    prod && [
       'pwa',
       {
         debug: true,

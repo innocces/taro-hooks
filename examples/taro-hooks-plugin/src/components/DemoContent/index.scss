@@ -1,0 +1,27 @@
+.demo-content {
+  padding: 16px;
+  background: white;
+}
+
+.demo-content-title {
+  margin: 30px auto 10px;
+  font-size: 28px;
+  color: #909ca4;
+  font-weight: 600;
+}
+
+.demo-content-desc {
+  margin: 0 auto 10px;
+  font-size: 24px;
+  color: #909ca4;
+  font-weight: 400;
+}
+
+.demo-content-title:first-child {
+  margin-top: 0;
+}
+
+.demo-content-wrapper {
+  font-size: 24px;
+  font-weight: 400;
+}

@@ -46,7 +46,7 @@ export default (ctx: IPluginContext) => {
 function setDefinePlugin(chain: any, webpack: any) {
   chain.plugin('defined').use(webpack.DefinePlugin, [
     {
-      __TARO_HOOKS_REACT__: JSON.stringify(true),
+      'process.env.__TARO_HOOKS_REACT__': JSON.stringify(true),
     },
   ]);
 }

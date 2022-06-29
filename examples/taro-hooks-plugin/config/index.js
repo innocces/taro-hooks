@@ -1,3 +1,4 @@
+const { resolve } = require('path');
 const gh = process.env.BUILD_TARGET === 'GH';
 
 const config = {
@@ -13,6 +14,10 @@ const config = {
   outputRoot: 'dist',
   plugins: ['@taro-hooks/plugin-react'],
   defineConstants: {},
+  alias: {
+    '@root': resolve(__dirname, '..', '..', '..'),
+    '@src': resolve(__dirname, '..', 'src'),
+  },
   copy: {
     patterns: [],
     options: {},
@@ -42,6 +47,7 @@ const config = {
   h5: {
     publicPath: (gh ? '/taro-hooks' : '') + '/react',
     staticDirectory: 'static',
+    esnextModules: ['@taroify'],
     router: {
       mode: 'browser',
       basename: (gh ? '/taro-hooks' : '') + '/react',

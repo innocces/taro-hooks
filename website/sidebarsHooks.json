@@ -175,7 +175,13 @@
         "useFile/index",
         "useNetworkType/index",
         "useOnline/index",
-        "useRequest/index"
+        {
+          "type": "category",
+          "collapsed": false,
+          "collapsible": true,
+          "label": "useRequest",
+          "items": ["useRequest/index", "useRequest/basic"]
+        }
       ]
     }
   ]
