@@ -43,7 +43,7 @@
     "build:vue-demo": "lerna run build:h5 --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
     "develop:vue-plugin:weapp": "lerna run dev:weapp --scope=@taro-hooks/taro-hooks-plugin-vue --stream",
     "dev:vue-plugin": "lerna run dev --scope=@taro-hooks/plugin-vue --stream",
-    "build:vue-plugin": "lerna run dev --scope=@taro-hooks/plugin-vue --stream",
+    "build:vue-plugin": "lerna run build --scope=@taro-hooks/plugin-vue --stream",
     "dev:shared": "lerna run dev --scope=@taro-hooks/shared --stream",
     "build:shared": "lerna run build --scope=@taro-hooks/shared --stream",
     "deploy": "yarn docusaurus:build && yarn docs:deploy",
