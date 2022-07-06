@@ -21,7 +21,7 @@
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "@root/*": ["../../*"],
-      "@src/*": ["./src/**"]
+      "@src/*": ["./src/*"]
     }
   },
   "include": ["./src", "global.d.ts"],
