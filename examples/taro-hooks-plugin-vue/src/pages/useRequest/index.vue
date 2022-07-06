@@ -44,6 +44,10 @@ export default {
         name: 'basic/params',
         title: '参数管理',
       },
+      {
+        name: 'basic/cancel',
+        title: '取消请求',
+      },
     ];
 
     const handleNavigate = (path, needIndex) => {

@@ -1,6 +1,5 @@
 <template>
   <view class="index">
-    <text>{{ msg }}</text>
     <nut-collapse
       v-model:active="activeCollapseItem"
       :accordion="true"

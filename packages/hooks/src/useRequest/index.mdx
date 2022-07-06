@@ -9,7 +9,7 @@ sidebar_position: 1
 
 :::
 
-`useRequest` 是一个强大的异步数据管理的 Hooks，React 项目中的网络请求场景使用 `useRequest` 就够了。
+`useRequest` 是一个强大的异步数据管理的 Hooks，Taro 项目中的网络请求场景使用 `useRequest` 就够了。
 
 `useRequest` 通过插件式组织代码，核心代码极其简单，并且可以很方便的扩展出更高级的功能。目前已有能力包括：
 
@@ -33,15 +33,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
+import CombineTabs from '@site/src/components/Tabs';
+
 <Tabs groupId="codeDisplayGroup">
-<TabItem value="react" label="react">
+<TabItem value="React" label="React">
 
 ```jsx showLineNumbers
 const { data, error, loading } = useRequest(getUsername);
 ```
 
 </TabItem>
-<TabItem value="vue" label="vue">
+<TabItem value="Vue" label="Vue">
 
 ```html showLineNumbers
 <template>
@@ -68,12 +70,14 @@ const { data, error, loading } = useRequest(getUsername);
 </TabItem>
 </Tabs>
 
+<code src="useRequest/basic/index" />
+
 ### 手动触发
 
 如果设置了 `options.manual = true`，则 useRequest 不会默认执行，需要通过 `run` 来触发执行。
 
 <Tabs groupId="codeDisplayGroup">
-<TabItem value="react" label="react">
+<TabItem value="React" label="React">
 
 ```jsx showLineNumbers
 const { loading, run } = useRequest(changeUsername, {
@@ -82,7 +86,7 @@ const { loading, run } = useRequest(changeUsername, {
 ```
 
 </TabItem>
-<TabItem value="vue" label="vue">
+<TabItem value="Vue" label="Vue">
 
 ```html showLineNumbers
 <template>
@@ -109,5 +113,7 @@ const { loading, run } = useRequest(changeUsername, {
 
 </TabItem>
 </Tabs>
+
+<code src="useRequest/basic/manualRun" />
 
 上面两个例子，我们演示了 `useRequest` 最基础的用法，接下来的我们开始逐个详细介绍 `useRequest` 的特性。

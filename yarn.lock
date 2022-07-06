@@ -6470,6 +6470,8 @@ __metadata:
     "@tsconfig/docusaurus": ^1.0.5
     clsx: ^1.1.1
     docusaurus-plugin-sass: ^0.2.2
+    hast-util-has-property: ^2.0.0
+    hast-util-is-element: ^2.1.2
     octokit: ^1.7.1
     prism-react-renderer: ^1.3.1
     qrcode: ^1.5.0
@@ -6481,6 +6483,7 @@ __metadata:
     typedoc: ^0.22.17
     typedoc-plugin-markdown: ^3.12.1
     typescript: ^4.6.3
+    unist-util-find: ^1.0.2
   languageName: unknown
   linkType: soft
 
@@ -18886,6 +18889,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hast-util-has-property@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "hast-util-has-property@npm:2.0.0"
+  checksum: 6f35c11445a02927a731c34cadce81d1b01db814e336d61624c9a9f78440e555bf1819ea340964f0c283f47aa9c1f50fcd94c1b13f2c73e53bd820efca55f79a
+  languageName: node
+  linkType: hard
+
+"hast-util-is-element@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "hast-util-is-element@npm:2.1.2"
+  dependencies:
+    "@types/hast": ^2.0.0
+    "@types/unist": ^2.0.0
+  checksum: c5fe9f7cde3775d4cbe19a9a55631a80b7a4ea0131fc2e3d097ebe228a35f09b9219f64b788b7a9cf819e6dcb6d1fc7830fd2f10ad536649e436e8c83da41e00
+  languageName: node
+  linkType: hard
+
 "hast-util-parse-selector@npm:^2.0.0":
   version: 2.2.5
   resolution: "hast-util-parse-selector@npm:2.2.5"
@@ -22392,6 +22412,13 @@ __metadata:
   version: 4.0.1
   resolution: "lodash.isstring@npm:4.0.1"
   checksum: eaac87ae9636848af08021083d796e2eea3d02e80082ab8a9955309569cb3a463ce97fd281d7dc119e402b2e7d8c54a23914b15d2fc7fff56461511dc8937ba0
+  languageName: node
+  linkType: hard
+
+"lodash.iteratee@npm:^4.5.0":
+  version: 4.7.0
+  resolution: "lodash.iteratee@npm:4.7.0"
+  checksum: 900e8f9c2f37361aa50f880139e92a00a5c1a000a45c78f00f64f83591090ccd9644800d6869fc563ef47907d9914ec19e871433d7be8e272b7b0516b44910d7
   languageName: node
   linkType: hard
 
@@ -33569,6 +33596,16 @@ __metadata:
   dependencies:
     unist-util-is: ^4.0.0
   checksum: 74b1fe81e3a980cc281b8d46a4cbc41940ece45608cae41d8021f245a73e7ed885222b80c1a2391137e04d2cda4de009416356aa7f4462d5e875c61579e33981
+  languageName: node
+  linkType: hard
+
+"unist-util-find@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "unist-util-find@npm:1.0.2"
+  dependencies:
+    lodash.iteratee: ^4.5.0
+    unist-util-visit: ^1.1.0
+  checksum: d13b92e65a94f8f8280ddddb030456e080d64179c6594e028f0a22c8c86b98744fc2336dfa322c817d7f356b42e46eab13321f7824e4529a5b51e538566587a5
   languageName: node
   linkType: hard
 

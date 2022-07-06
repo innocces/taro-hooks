@@ -34,6 +34,10 @@ const useRequestDemoItem = [
     name: 'basic/params',
     title: '参数管理',
   },
+  {
+    name: 'basic/cancel',
+    title: '取消请求',
+  },
 ];
 
 function UseRequest() {

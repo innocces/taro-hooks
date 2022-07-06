@@ -14,6 +14,7 @@ export default defineAppConfig({
     'pages/useRequest/basic/refresh',
     'pages/useRequest/basic/mutate',
     'pages/useRequest/basic/params',
+    'pages/useRequest/basic/cancel',
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -5,7 +5,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 export const CodeTabs = ({ children, ...props }) => {
   return (
-    <Tabs groupId="codeExample" {...props}>
+    <Tabs groupId="codeDisplayGroup" {...props}>
       {children}
     </Tabs>
   );
@@ -46,3 +46,16 @@ export const CodeTabItem = ({
     </TabItem>
   );
 };
+
+export default function CombineTabs({ ReactTab, VueTab }) {
+  return (
+    <CodeTabs>
+      <TabItem value="React" label="React">
+        {ReactTab}
+      </TabItem>
+      <TabItem value="Vue" label="Vue">
+        {VueTab}
+      </TabItem>
+    </CodeTabs>
+  );
+}

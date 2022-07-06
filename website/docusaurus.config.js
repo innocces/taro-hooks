@@ -23,20 +23,31 @@ const baseURI =
 const githubURL = 'https://github.com/innocces/taro-hooks';
 const githubURLWithBranch = `${githubURL}/edit/next`;
 
-const pluginOptionAlias = {
-  '@vue-demo': join(
-    process.cwd(),
-    '..',
-    'examples',
-    'taro-hooks-plugin-vue/src/pages',
-  ),
-  '@react-demo': join(
-    process.cwd(),
-    '..',
-    'examples',
-    'taro-hooks-plugin/src/pages',
-  ),
+const demoPaths = {
+  '@vue-demo': 'examples/taro-hooks-plugin-vue/src/pages',
+  '@react-demo': 'examples/taro-hooks-plugin/src/pages',
 };
+
+const pluginOptionAlias = Object.fromEntries(
+  Object.entries(demoPaths).map(([key, path]) => [
+    key,
+    join(process.cwd(), '..', path),
+  ]),
+);
+
+function getOptions(vue) {
+  const openTarget = Object.fromEntries(
+    Object.entries(demoPaths).map(([key, path]) => [
+      key,
+      `${githubURLWithBranch}/${path}`,
+    ]),
+  );
+  return {
+    alias: vue ? pluginOptionAlias['@vue-demo'] : pluginOptionAlias,
+    openTarget: vue ? openTarget['@vue-demo'] : openTarget,
+    previewOptions: require('./project.env')(prod, baseURI),
+  };
+}
 
 const packagesPath = join(process.cwd(), '..', 'packages');
 
@@ -84,11 +95,7 @@ const config = {
       '@taro-hooks/plugin-docusaurus',
       {
         alias: pluginOptionAlias,
-        vue: {
-          alias: pluginOptionAlias['@vue-demo'],
-          openTarget: `${githubURLWithBranch}/examples/taro-hooks-plugin-vue/src/pages`,
-          previewOptions: require('./project.env')(prod, baseURI),
-        },
+        vue: getOptions(true),
       },
     ],
     [
@@ -100,6 +107,7 @@ const config = {
         routeBasePath: '/hooks',
         ...generateDocsOptions('src'),
         sidebarPath: require.resolve('./sidebarsHooks.json'),
+        beforeDefaultRemarkPlugins: [[require('./remark/code'), getOptions()]],
       }),
     ],
     // [

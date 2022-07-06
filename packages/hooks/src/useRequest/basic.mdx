@@ -14,14 +14,14 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 <Tabs groupId="codeDisplayGroup">
-<TabItem value="react" label="react">
+<TabItem value="React" label="React">
 
 ```jsx showLineNumbers
 const { data, error, loading } = useRequest(getUsername);
 ```
 
 </TabItem>
-<TabItem value="vue" label="vue">
+<TabItem value="Vue" label="Vue">
 
 ```html showLineNumbers
 <template>
@@ -48,13 +48,16 @@ const { data, error, loading } = useRequest(getUsername);
 </TabItem>
 </Tabs>
 
-<code src="./demo/default.tsx" />
+<code src="useRequest/basic/index" />
 
 ## 手动触发
 
 如果设置了 `options.manual = true`，则 `useRequest` 不会默认执行，需要通过 `run` 或者 `runAsync` 来触发执行。
 
-```tsx | pure
+<Tabs groupId="codeDisplayGroup">
+<TabItem value="React" label="React">
+
+```jsx showLineNumbers
 const { loading, run, runAsync } = useRequest(service, {
   manual: true,
 });
@@ -63,6 +66,36 @@ const { loading, run, runAsync } = useRequest(service, {
   {loading ? 'Loading' : 'Edit'}
 </button>;
 ```
+
+</TabItem>
+<TabItem value="Vue" label="Vue">
+
+```html showLineNumbers
+<template>
+  <block>
+    <button @click="request.run()">
+      {{request.loading ? 'Loading' : 'Edit'}}
+    </button>
+  </block>
+</template>
+<script>
+  export default {
+    setup() {
+      // 由于要保证request内部的变量不失活。 这里简单的可以将request直接抛出
+      const request = useRequest(service, {
+        manual: true,
+      });
+
+      return {
+        request,
+      };
+    },
+  };
+</script>
+```
+
+</TabItem>
+</Tabs>
 
 `run` 与 `runAsync` 的区别在于：
 
@@ -81,9 +114,9 @@ const { loading, run, runAsync } = useRequest(service, {
 
 接下来我们通过修改用户名这个简单的场景，来演示 useRequest 手动触发模式，以及 `run` 与 `runAsync` 的区别。
 
-<code src="./demo/manual-run.tsx" />
+<code src="useRequest/basic/manualRun" />
 
-<code src="./demo/manual-runAsync.tsx" />
+<code src="useRequest/basic/manualRunAsync" />
 
 ## 生命周期
 
@@ -94,7 +127,7 @@ const { loading, run, runAsync } = useRequest(service, {
 - `onError`：请求失败触发
 - `onFinally`：请求完成触发
 
-<code src="./demo/lifeCycle.tsx" />
+<code src="useRequest/basic/lifeCycle" />
 
 ## 刷新（重复上一次请求）
 
@@ -106,7 +139,7 @@ const { loading, run, runAsync } = useRequest(service, {
 2. 我们通过某种手段更新了用户信息
 3. 我们想重新发起上一次的请求，那我们就可以使用 `refresh` 来代替 `run(1)`，这在复杂参数的场景中是非常有用的
 
-<code src="./demo/refresh.tsx" />
+<code src="useRequest/basic/refresh" />
 
 当然 `refresh` 和 `refreshAsync` 的区别和 `run` 和 `runAsync` 是一致的。
 
@@ -120,7 +153,7 @@ const { loading, run, runAsync } = useRequest(service, {
 
 我们修改了用户名，但是我们不希望等编辑接口调用成功之后，才给用户反馈。而是直接修改页面数据，同时在背后去调用修改接口，等修改接口返回之后，另外提供反馈。
 
-<code src="./demo/mutate.tsx" />
+<code src="useRequest/basic/mutate" />
 
 ## 取消请求
 
@@ -129,7 +162,7 @@ const { loading, run, runAsync } = useRequest(service, {
 - 组件卸载时，取消正在进行的请求
 - 竞态取消，当上一次请求还没返回时，又发起了下一次请求，则会取消上一次请求
 
-<code src="./demo/cancel.tsx" />
+<code src="useRequest/basic/cancel" />
 
 ## 参数管理
 
@@ -137,9 +170,15 @@ const { loading, run, runAsync } = useRequest(service, {
 
 如果我们设置了 `options.manual = false`，则首次调用 `service` 的参数可以通过 `options.defaultParams` 来设置。
 
-<code src="./demo/params.tsx" />
+<code src="useRequest/basic/params" />
 
 ## API
+
+:::caution
+
+**Vue**中不推荐解构再导出. 或者可以自行**toRefs**. 不然会导致失去响应. (因为**request**在**Vue**中是一个**Ref**)
+
+:::
 
 ```ts
 const {
