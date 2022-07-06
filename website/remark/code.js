@@ -91,6 +91,7 @@ module.exports = function codePlugin(options) {
             value: `<CombineTabs VueTab={${vueTab}} ReactTab={${reactTab}} />`,
           };
           replaceNodes.push(tabsNode);
+          console.log('mark code transform: ', fileAbsPath);
           root.children.splice(index, 1, ...replaceNodes);
         }
       });
