@@ -23,27 +23,18 @@
   justify-content: center;
 }
 
-.headerContainer {
-  position: absolute;
-  z-index: 2;
-  right: 80px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 .terminal {
   position: relative;
 }
 
 .typedContainer {
   padding: 8px;
+  height: 230px;
   color: rgba(215, 223, 233, 1);
   width: 100%;
-  height: 300px;
   border: 1px solid rgba(1, 34, 59, 1);
   border-radius: 8px;
   background-color: rgba(0, 8, 15, 1);
-  margin: 20px auto 0;
   text-align: left;
   font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
 }

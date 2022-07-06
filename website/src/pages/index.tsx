@@ -32,27 +32,33 @@ function HomepageHeader() {
 
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className={clsx('container', styles.terminal)}>
-        <div className={styles.typedContainer}>
-          <span ref={el}></span>
-        </div>
-        <div id="typed">
-          <p>
-            🤖 npm i @taro-hooks/plugin-react^500 <br /> 🔍 Installing
-            library...^500 <br /> 🚚 Fetching from source...^500 <br /> 🔨
-            Building...^500 <br /> ✨ Done in 3.25s.
-          </p>
-        </div>
-        <div className={styles.headerContainer}>
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div className={styles.buttons}>
-            <Link
-              className="button button--secondary button--lg"
-              to="/docs/intro"
-            >
-              快速开始
-            </Link>
+      <div className="container">
+        <div className="row">
+          <div className="col col--6">
+            <h1 className="hero__title">{siteConfig.title}</h1>
+            <p className="hero__subtitle">{siteConfig.tagline}</p>
+            <div className={styles.buttons}>
+              <Link
+                className="button button--secondary button--lg"
+                to="/docs/intro"
+              >
+                快速开始
+              </Link>
+            </div>
+          </div>
+          <div className="col col--6">
+            <div className={styles.terminal}>
+              <div className={styles.typedContainer}>
+                <span ref={el}></span>
+              </div>
+              <div id="typed">
+                <p>
+                  🤖 npm i taro-hooks^500 <br /> 🔍 Installing library...^500{' '}
+                  <br /> 🚚 Fetching from source...^500 <br /> 🔨
+                  Building...^500 <br /> ✨ Done in 3.25s.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
