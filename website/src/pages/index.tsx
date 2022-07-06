@@ -51,7 +51,8 @@ function HomepageHeader() {
               <div className={styles.typedContainer}>
                 <span ref={el}></span>
               </div>
-              <div id="typed">
+              {/* make sure hidden when css not loaded */}
+              <div id="typed" style={{ display: 'none' }}>
                 <p>
                   🤖 npm i taro-hooks^500 <br /> 🔍 Installing library...^500{' '}
                   <br /> 🚚 Fetching from source...^500 <br /> 🔨

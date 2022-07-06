@@ -53,7 +53,11 @@ module.exports = function codePlugin(options) {
       visit(root, 'jsx', (node, index) => {
         const isCodeJSX = matchREG.test(node.value);
         const fileAbsPath = node?.value?.match?.(matchREG)?.[1];
-        if (isCodeJSX && fileAbsPath?.length && fileAbsPath.startsWith('use')) {
+        if (
+          isCodeJSX &&
+          fileAbsPath?.length &&
+          fileAbsPath?.startsWith?.('use')
+        ) {
           // match code; insert new combine tabs & codeDisplayBlock with newLine
           const replaceNodes = [];
           if (!importCodeDisplay) {

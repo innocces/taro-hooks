@@ -41,7 +41,7 @@ $iframeHeight: calc(100% - 40px);
   &Devices {
     max-width: $devices-width;
     width: $devices-width;
-    height: 100%;
+    height: $min-height;
     border-top-right-radius: var(--ifm-code-border-radius);
     border-bottom-right-radius: var(--ifm-code-border-radius);
     display: flex;
@@ -96,6 +96,24 @@ $iframeHeight: calc(100% - 40px);
         height: 48px;
         margin: 0 auto;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 996px) {
+  .#{$prefix} {
+    height: $min-height * 2;
+
+    &Block {
+      border-top-right-radius: var(--ifm-code-border-radius);
+      border-bottom-left-radius: 0;
+    }
+
+    &Devices {
+      width: 100%;
+      max-width: 100%;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: var(--ifm-code-border-radius);
     }
   }
 }
