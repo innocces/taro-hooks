@@ -1,3 +1,4 @@
+const slash = require('slash');
 const visit = require('unist-util-visit');
 const find = require('unist-util-find');
 const { readFileSync, existsSync } = require('fs');
@@ -27,7 +28,7 @@ module.exports = function codePlugin(options) {
    * */
   return async (root, vFile) => {
     // just deal hooks dir
-    if (vFile?.path?.includes('\\packages\\hooks\\src\\')) {
+    if (vFile?.path?.includes(slash('\\packages\\hooks\\src\\'))) {
       /**
        * find import node, check source code
        * like:
