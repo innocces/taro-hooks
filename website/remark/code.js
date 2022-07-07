@@ -1,4 +1,4 @@
-const slash = require('slash');
+const slash = require('./utils/slash');
 const visit = require('unist-util-visit');
 const find = require('unist-util-find');
 const { readFileSync, existsSync } = require('fs');
@@ -28,7 +28,9 @@ module.exports = function codePlugin(options) {
    * */
   return async (root, vFile) => {
     // just deal hooks dir
-    if (vFile?.path?.includes(slash('\\packages\\hooks\\src\\'))) {
+    const slashPath = slash(vFile?.path ?? '');
+    const hooksDIR = '/packages/hooks/src/';
+    if (slashPath?.includes(hooksDIR)) {
       /**
        * find import node, check source code
        * like:
