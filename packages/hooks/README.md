@@ -158,6 +158,10 @@ $ yarn develop:react-plugin:weapp
 | Buy Me A Coffee | <a href="https://www.buymeacoffee.com/innocces" target="_blank"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee 🎉&emoji=&slug=innocces&button_colour=BD5FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00"></a> |
 | Issuehunt       | [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/379632117)                                                                                                                                 |
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=innocces/taro-hooks&type=Date)](https://star-history.com/#innocces/taro-hooks&Date)
+
 [1]: https://www.npmjs.com/package/taro-hooks
 [2]: https://npmjs.org/package/taro-hooks
 [3]: https://gitpod.io/#https://github.com/innocces/taro-hooks
