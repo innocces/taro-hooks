@@ -1,0 +1,65 @@
+---
+title: Loading Delay
+sidebar_position: 3
+---
+
+通过设置 `options.loadingDelay` ，可以延迟 `loading` 变成 `true` 的时间，有效防止闪烁。
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+<Tabs groupId="codeDisplayGroup">
+<TabItem value="React" label="React">
+
+```jsx showLineNumbers
+const { loading, data } = useRequest(getUsername, {
+  loadingDelay: 300,
+});
+
+return <div>{loading ? 'Loading...' : data}</div>;
+```
+
+</TabItem>
+<TabItem value="Vue" label="Vue">
+
+```html showLineNumbers
+<template>
+  <block>
+    <view>{{request.loading ? 'Loading...' : request.data}}</view>
+  </block>
+</template>
+<script>
+  export default {
+    setup() {
+      // 由于要保证request内部的变量不失活。 这里简单的可以将request直接抛出
+      const request = useRequest(getUsername, {
+        loadingDelay: 300,
+      });
+
+      return {
+        request,
+      };
+    },
+  };
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+例如上面的场景，假如 `getUsername` 在 300ms 内返回，则 `loading` 不会变成 `true`，避免了页面展示 `Loading...` 的情况。
+
+你可以快速点击下面示例中的按钮以体验效果
+
+<code src="useRequest/loadingDelay/index" />
+
+### API
+
+| 参数         | 说明                                  | 类型     | 默认值 |
+| ------------ | ------------------------------------- | -------- | ------ |
+| loadingDelay | 设置 `loading` 变成 `true` 的延迟时间 | `number` | `0`    |
+
+### 备注
+
+`options.loadingDelay` 支持动态变化。

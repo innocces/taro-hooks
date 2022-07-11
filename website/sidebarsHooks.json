@@ -180,7 +180,15 @@
           "collapsed": false,
           "collapsible": true,
           "label": "useRequest",
-          "items": ["useRequest/index", "useRequest/basic"]
+          "items": [
+            "useRequest/index",
+            "useRequest/basic",
+            "useRequest/loadingDelay",
+            "useRequest/polling",
+            "useRequest/ready",
+            "useRequest/refreshDeps",
+            "useRequest/refreshOnWindowFocus"
+          ]
         }
       ]
     }

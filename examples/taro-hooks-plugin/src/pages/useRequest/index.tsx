@@ -38,6 +38,35 @@ const useRequestDemoItem = [
     name: 'basic/cancel',
     title: '取消请求',
   },
+  {
+    name: 'loadingDelay',
+    title: 'loading Delay',
+    needIndex: true,
+  },
+  {
+    name: 'polling',
+    title: '轮询',
+    needIndex: true,
+  },
+  {
+    name: 'ready',
+    title: 'Ready - 自动模式',
+    needIndex: true,
+  },
+  {
+    name: 'ready/manualReady',
+    title: 'Ready - 手动模式',
+  },
+  {
+    name: 'refreshDeps',
+    title: '依赖刷新',
+    needIndex: true,
+  },
+  {
+    name: 'refreshOnWindowFocus',
+    title: '屏幕聚焦重新请求',
+    needIndex: true,
+  },
 ];
 
 function UseRequest() {

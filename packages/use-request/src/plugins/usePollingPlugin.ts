@@ -9,7 +9,13 @@ const usePollingPlugin: Plugin<any, any[]> = (
   { pollingInterval, pollingWhenHidden = true },
 ) => {
   const timerRef = useTaroRef<Timeout>();
+  const unsubscribeReVisible = subscribeReVisible(() => {
+    if (!pollingWhenHidden && !documentVisible) {
+      fetchInstance.refresh();
+    }
+  });
   const unsubscribeRef = useTaroRef<() => void>();
+  const documentVisible = isDocumentVisible();
 
   const stopPolling = () => {
     if (timerRef.current) {
@@ -34,10 +40,8 @@ const usePollingPlugin: Plugin<any, any[]> = (
     },
     onFinally: () => {
       // if pollingWhenHidden = false && document is hidden, then stop polling and subscribe revisable
-      if (!pollingWhenHidden && !isDocumentVisible()) {
-        unsubscribeRef.current = subscribeReVisible(() => {
-          fetchInstance.refresh();
-        });
+      if (!pollingWhenHidden && !documentVisible) {
+        unsubscribeRef.current = unsubscribeReVisible;
         return;
       }
 

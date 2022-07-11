@@ -6,6 +6,8 @@ import useUnmount from './useUnmount';
 import useUpdate from './useUpdate';
 import useUpdateEffect from './useUpdateEffect';
 
+import useToggle from './useToggle';
+
 import { createUpdateEffect } from './createUpdateEffect';
 
 export { createUpdateEffect };
@@ -18,4 +20,5 @@ export {
   useUnmount,
   useUpdate,
   useUpdateEffect,
+  useToggle,
 };
