@@ -1,0 +1,28 @@
+- label: 'Setup'
+  message: 'Completed'
+  color: 'green'
+
+- label: 'Label'
+  message: 'Feature'
+  when: "$labels.includes('Feature')"
+
+- label: 'Description length'
+  message: '$payload.pull_request.body.length'
+  color: 'green'
+
+- label: 'Branch'
+  message: '$payload.pull_request.head.ref'
+  color: 'red'
+
+- label: 'Contributor'
+  message: '$payload.pull_request.user.login'
+  color: 'blue'
+
+- label: 'ChangeFiles'
+  message: '$payload.pull_request.changed_files'
+  color: 'orange'
+
+- label: 'PR Size'
+  message: 'Large'
+  color: 'red'
+  when: '$additions > 500'
