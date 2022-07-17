@@ -25,6 +25,22 @@ export default (ctx: IPluginContext) => {
         },
       });
     }
+
+    // MultiPlatformPlugin
+    chain.resolve.plugin('MultiPlatformPlugin').tap((args) => {
+      const needConcat = needConcatArgs();
+      if (!needConcat) {
+        args[2]['include'] = ['taro-hooks'];
+        return args;
+      } else {
+        return [
+          ...args,
+          {
+            include: ['taro-hooks'],
+          },
+        ];
+      }
+    });
   });
 
   if (process.env.TARO_ENV === 'weapp') {
@@ -49,6 +65,18 @@ function setDefinePlugin(chain: any, webpack: any) {
       'process.env.__TARO_HOOKS_REACT__': JSON.stringify(true),
     },
   ]);
+}
+
+// check version > 3.3
+function needConcatArgs(): boolean {
+  try {
+    const pkgPath = require.resolve('@tarojs/taro/package.json', {
+      paths: [process.cwd()],
+    });
+    return require(pkgPath).version?.replace(/\./gi, '') < 330;
+  } catch (e) {
+    return false;
+  }
 }
 
 export function getReactPath(): string {
