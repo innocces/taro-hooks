@@ -38,7 +38,7 @@
   "repository": "https://github.com/innocces/taro-hooks",
   "homepage": "https://innocces.github.io/taro-hooks/",
   "scripts": {
-    "build": "father-build",
+    "build": "gulp",
     "postinstall": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
   "files": [

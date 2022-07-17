@@ -187,7 +187,11 @@
             "useRequest/polling",
             "useRequest/ready",
             "useRequest/refreshDeps",
-            "useRequest/refreshOnWindowFocus"
+            "useRequest/refreshOnWindowFocus",
+            "useRequest/debounce",
+            "useRequest/throttle",
+            "useRequest/cache",
+            "useRequest/retry"
           ]
         }
       ]

@@ -300,7 +300,7 @@ const config = {
         id: 'announce current progress info',
         content: `
           <div class="general-announcement">
-            <a target="__blank" href="https://github.com/innocces/taro-hooks/tree/next"><b>taro-hooks@next</b></a> 暂处于beta🤖阶段! 即将推出 🎉
+            <a target="__blank" href="https://github.com/innocces/taro-hooks/tree/next"><b>taro-hooks@next</b> 代号: Serro👻</a> 暂处于beta🤖阶段! 即将推出 🎉
           </div>
         `,
         textColor: 'var(--ifm-color-white)',

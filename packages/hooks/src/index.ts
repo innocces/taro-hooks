@@ -54,6 +54,7 @@ import useNetworkType from './useNetworkType';
 import useOnline from './useOnline';
 import useRequest from './useRequest';
 import useFile from './useFile';
+import clearCache from './clearCache';
 
 // device
 import useBattery from './useBattery';
@@ -99,6 +100,7 @@ export {
   useNetworkType,
   useOnline,
   useRequest,
+  clearCache,
   useFile,
   useToast,
   useModal,

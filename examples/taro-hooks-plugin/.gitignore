@@ -1,4 +1,5 @@
 dist/
+dist-weapp/
 deploy_versions/
 .temp/
 .rn_temp/

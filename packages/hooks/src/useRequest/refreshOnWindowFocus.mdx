@@ -3,6 +3,15 @@ title: 屏幕聚焦重新请求
 sidebar_position: 7
 ---
 
+:::caution
+
+在这里要区分一下**h5**和**miniprograme**的聚焦定义.
+
+- **h5**: 当浏览器聚焦或者**tab**切换当前页卡. 即**visibilitychange|focus**
+- **miniprograme**: 宿主 APP 切前台, 或者进入页面. 即**useDidShow**
+
+:::
+
 通过设置 `options.refreshOnWindowFocus`，在浏览器窗口 `refocus` 和 `revisible` 时，会重新发起请求。
 
 ```jsx showLineNumbers

@@ -67,6 +67,45 @@ const useRequestDemoItem = [
     title: '屏幕聚焦重新请求',
     needIndex: true,
   },
+  {
+    name: 'debounce',
+    title: '防抖',
+    needIndex: true,
+  },
+  {
+    name: 'throttle',
+    title: '节流',
+    needIndex: true,
+  },
+  {
+    name: 'cache/cacheKey',
+    title: '缓存 & SWR',
+  },
+  {
+    name: 'cache/clearCache',
+    title: '缓存 & SWR - 删除缓存',
+  },
+  {
+    name: 'cache/params',
+    title: '缓存 & SWR - 参数缓存',
+  },
+  {
+    name: 'cache/setCache',
+    title: '缓存 & SWR - 自定义缓存',
+  },
+  {
+    name: 'cache/share',
+    title: '缓存 & SWR - 数据共享',
+  },
+  {
+    name: 'cache/staleTime',
+    title: '缓存 & SWR - 数据保持新鲜',
+  },
+  {
+    name: 'retry',
+    title: '错误重试',
+    needIndex: true,
+  },
 ];
 
 function UseRequest() {

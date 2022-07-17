@@ -9,7 +9,7 @@ import Mock from 'mockjs';
 function getUsername(): Promise<string> {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(Mock.mock('@name'));
+      resolve(Mock.mock('@name()'));
     }, 1000);
   });
 }

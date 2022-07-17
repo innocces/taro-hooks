@@ -9,7 +9,7 @@ function getUsername(): Promise<string> {
   console.log('polling getUsername');
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(Mock.mock('@name'));
+      resolve(Mock.mock('@name()'));
     }, 1000);
   });
 }

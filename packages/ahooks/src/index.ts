@@ -7,6 +7,7 @@ import useUpdate from './useUpdate';
 import useUpdateEffect from './useUpdateEffect';
 
 import useToggle from './useToggle';
+import useBoolean from './useBoolean';
 
 import { createUpdateEffect } from './createUpdateEffect';
 
@@ -21,4 +22,5 @@ export {
   useUpdate,
   useUpdateEffect,
   useToggle,
+  useBoolean,
 };
