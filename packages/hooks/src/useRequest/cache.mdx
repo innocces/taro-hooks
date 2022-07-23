@@ -44,7 +44,13 @@ sidebar_position: 10
 
 ### 删除缓存
 
-ahooks 提供了一个 `clearCache` 方法，可以清除指定 `cacheKey` 的缓存数据。
+taro-hooks 提供了一个 `clearCache` 方法，可以清除指定 `cacheKey` 的缓存数据。
+
+:::caution
+
+**vue**中清除缓存的例子不太好实现. 组件卸载原则的问题.
+
+:::
 
 <code src="useRequest/cache/clearCache" />
 

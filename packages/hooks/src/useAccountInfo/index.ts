@@ -1,25 +1,15 @@
+/**
+ * api: getAccountInfoSync
+ */
+
 import { getAccountInfoSync } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = getAccountInfoSync.AccountInfo | undefined;
+export type Result = Taro.getAccountInfoSync.AccountInfo;
 
-function useAccountInfo(): Result {
-  const [accountInfo, setAccountInfo] = useState<Result>();
-
-  useEffect(() => {
-    getAccountInfo();
-  }, []);
-
-  const getAccountInfo = useCallback(() => {
-    try {
-      const info = getAccountInfoSync();
-      setAccountInfo(info);
-    } catch (e) {
-      setAccountInfo({});
-    }
-  }, []);
-
-  return accountInfo;
-}
+const useAccountInfo = createUseInfoHook<
+  Taro.getAccountInfoSync.AccountInfo,
+  {}
+>(getAccountInfoSync, {});
 
 export default useAccountInfo;

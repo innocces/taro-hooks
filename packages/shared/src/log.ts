@@ -6,9 +6,9 @@ export function logCtor(style = ''): (...args: unknown[]) => void {
   return (...args: unknown[]) => {
     args.forEach((logMsg) => {
       if (typeof logMsg === 'string') {
-        console.log(`%c${PREFIX}---${logMsg}`, baseLogStyle + style);
+        console.debug(`%c${PREFIX}---${logMsg}`, baseLogStyle + style);
       } else {
-        console.log(PREFIX, '---', logMsg);
+        console.debug(PREFIX, '---', logMsg);
       }
     });
   };

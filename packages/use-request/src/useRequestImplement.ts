@@ -39,12 +39,6 @@ function useRequestImplement<TData, TParams extends any[]>(
       Object.assign({}, ...initState),
     );
 
-    if (FRAMEWORK === 'vue') {
-      fetch.options = fetchOptions;
-      // run all plugins hooks
-      fetch.pluginImpls = plugins.map((p) => p(fetch, fetchOptions));
-    }
-
     return fetch;
   }, []);
 
@@ -54,6 +48,16 @@ function useRequestImplement<TData, TParams extends any[]>(
     // run all plugins hooks
     fetchInstance.pluginImpls = plugins.map((p) =>
       p(fetchInstance, fetchOptions),
+    );
+  } else if (FRAMEWORK === 'vue') {
+    // TODO: maybe find a better way to hold reactive
+    // @ts-ignore
+    fetchInstance.value.options = fetchOptions;
+    // run all plugins hooks
+    // @ts-ignore
+    fetchInstance.value.pluginImpls = plugins.map((p) =>
+      // @ts-ignore
+      p(fetchInstance.value, fetchOptions),
     );
   }
 

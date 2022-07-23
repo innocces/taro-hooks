@@ -3,6 +3,8 @@ const babel = require('gulp-babel');
 const ts = require('gulp-typescript');
 const del = require('del');
 
+const isWatch = process.argv[2] === '-w';
+
 gulp.task('clean', async function () {
   await del('lib/**');
   await del('es/**');
@@ -50,6 +52,16 @@ gulp.task('declaration', function () {
     .pipe(gulp.dest('lib/'));
 });
 
+gulp.task('watch', function () {
+  gulp.watch(
+    ['src/*', 'src/*/*'],
+    { events: 'all', delay: 200, ignoreInitial: false, depth: 5 },
+    gulp.series('cjs', 'es', 'declaration'),
+  );
+});
+
 exports.watchSeries = gulp.series('cjs', 'es', 'declaration');
 
-exports.default = gulp.series('clean', 'cjs', 'es', 'declaration');
+exports.default = isWatch
+  ? gulp.series('watch')
+  : gulp.series('clean', 'cjs', 'es', 'declaration');

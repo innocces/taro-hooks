@@ -1,5 +1,6 @@
 import { useTaroRef } from '@tarojs/taro';
 import { useUpdateEffect } from '@taro-hooks/ahooks';
+import { escapeState, FRAMEWORK } from '@taro-hooks/shared';
 import type { Plugin } from '../types';
 
 // support refreshDeps & ready
@@ -17,7 +18,7 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
   hasAutoRun.current = false;
 
   useUpdateEffect(() => {
-    if (!manual && ready) {
+    if (!manual && escapeState(ready)) {
       hasAutoRun.current = true;
       fetchInstance.run(...defaultParams);
     }
@@ -27,19 +28,24 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
     if (hasAutoRun.current) {
       return;
     }
+
     if (!manual) {
       hasAutoRun.current = true;
       if (refreshDepsAction) {
         refreshDepsAction();
       } else {
+        // due to vue not run every time for plugins. so remark hasAutoRun be folse
         fetchInstance.refresh();
+        if (FRAMEWORK === 'vue') {
+          hasAutoRun.current = false;
+        }
       }
     }
   }, [...refreshDeps]);
 
   return {
     onBefore: () => {
-      if (!ready) {
+      if (!escapeState(ready)) {
         return {
           stopNow: true,
         };
@@ -50,7 +56,7 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
 
 useAutoRunPlugin.onInit = ({ ready = true, manual }) => {
   return {
-    loading: !manual && ready,
+    loading: !manual && escapeState(ready),
   };
 };
 

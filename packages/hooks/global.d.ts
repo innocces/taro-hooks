@@ -11,3 +11,5 @@ declare var wx: any;
 declare type TRecord<T = unknown> = {
   [_: string | number]: T;
 };
+
+declare type TCallback<T = void> = () => T;
