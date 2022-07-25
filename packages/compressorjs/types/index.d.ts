@@ -30,6 +30,6 @@ declare class Compressor {
   static setDefaults(options: Compressor.Options): void;
 }
 
-declare module 'compressorjs' {
+declare module '@taro-hooks/compressorjs' {
   export default Compressor;
 }

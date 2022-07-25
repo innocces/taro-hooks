@@ -4,6 +4,7 @@ const ts = require('gulp-typescript');
 const del = require('del');
 
 const isWatch = process.argv[2] === '-w';
+const isSkipTS = process.argv[3] === '-skip';
 
 gulp.task('clean', async function () {
   await del('lib/**');
@@ -53,10 +54,14 @@ gulp.task('declaration', function () {
 });
 
 gulp.task('watch', function () {
+  const tasks = ['cjs', 'es'];
+  if (!isSkipTS) {
+    tasks.push('declaration');
+  }
   gulp.watch(
     ['src/*', 'src/*/*'],
     { events: 'all', delay: 200, ignoreInitial: false, depth: 5 },
-    gulp.series('cjs', 'es', 'declaration'),
+    gulp.series(...tasks),
   );
 });
 
