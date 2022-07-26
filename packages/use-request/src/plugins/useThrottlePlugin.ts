@@ -1,5 +1,5 @@
 import type { DebouncedFunc, ThrottleSettings } from 'lodash';
-import throttle from 'lodash/throttle';
+import { throttle } from 'lodash-wechat';
 import { useTaroEffect, useTaroRef } from '@tarojs/taro';
 import type { Plugin } from '../types';
 
@@ -21,6 +21,7 @@ const useThrottlePlugin: Plugin<any, any[]> = (
     if (throttleWait) {
       const _originRunAsync = fetchInstance.runAsync.bind(fetchInstance);
 
+      // @ts-ignore
       throttledRef.current = throttle(
         (callback) => {
           callback();

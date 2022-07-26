@@ -36,7 +36,8 @@
   ],
   "dependencies": {
     "@taro-hooks/ahooks": "^1.5.6",
-    "@taro-hooks/shared": "^1.5.6"
+    "@taro-hooks/shared": "^1.5.6",
+    "lodash-wechat": "^1.0.0"
   },
   "peerDependencies": {
     "@tarojs/taro": ">3.4.0"

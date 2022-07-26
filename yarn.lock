@@ -6189,6 +6189,7 @@ __metadata:
   resolution: "@taro-hooks/ahooks@workspace:packages/ahooks"
   dependencies:
     "@taro-hooks/shared": ^1.5.6
+    lodash-wechat: ^1.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     vue: ">3.0"
   peerDependencies:
@@ -6441,6 +6442,7 @@ __metadata:
   dependencies:
     "@taro-hooks/ahooks": ^1.5.6
     "@taro-hooks/shared": ^1.5.6
+    lodash-wechat: ^1.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     vue: ">3.0"
   peerDependencies:
@@ -32295,7 +32297,7 @@ __metadata:
     lodash-wechat: ^1.0.0
     lodash.uniq: ^4.5.0
     querystring: ^0.2.1
-    react: ^17.0.2
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
     vue: ">3.0"
   peerDependencies:
     "@tarojs/taro": ">= 3.4.x"

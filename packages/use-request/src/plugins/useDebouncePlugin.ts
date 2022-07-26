@@ -1,5 +1,5 @@
 import type { DebouncedFunc, DebounceSettings } from 'lodash';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash-wechat';
 import { useTaroEffect, useTaroMemo, useTaroRef } from '@tarojs/taro';
 import type { Plugin } from '../types';
 
@@ -27,6 +27,7 @@ const useDebouncePlugin: Plugin<any, any[]> = (
     if (debounceWait) {
       const _originRunAsync = fetchInstance.runAsync.bind(fetchInstance);
 
+      // @ts-ignore
       debouncedRef.current = debounce(
         (callback) => {
           callback();
