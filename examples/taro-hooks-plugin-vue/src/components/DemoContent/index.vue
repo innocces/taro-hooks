@@ -1,6 +1,6 @@
 <template>
   <view class="demo-content">
-    <view class="demo-content-title">{{ title }}</view>
+    <view class="demo-content-title">{{ title || params.title }}</view>
     <view class="demo-content-desc">{{ desc }}</view>
     <view class="demo-content-wrapper">
       <slot />
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { useTaroRef } from '@tarojs/taro';
+import { useTaroRef, useRouter } from '@tarojs/taro';
 export default {
   name: 'DemoContent',
   props: {
@@ -18,11 +18,19 @@ export default {
   },
   setup() {
     const demoRef = useTaroRef();
+    const { params = {} } = useRouter();
 
-    console.log(demoRef.current);
+    function transferParams(params) {
+      return Object.fromEntries(
+        Object.entries(params).map(([key, value]) => [
+          key,
+          decodeURIComponent(value),
+        ]),
+      );
+    }
 
     return {
-      demoRef,
+      params: transferParams(params),
     };
   },
 };

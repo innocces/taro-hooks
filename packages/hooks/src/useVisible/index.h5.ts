@@ -8,12 +8,14 @@ function useVisible(): boolean {
   };
 
   useTaroEffect(() => {
-    document.addEventListener('visibilitychange', listenVisible);
-    document.addEventListener('focus', listenVisible);
+    window.addEventListener('visibilitychange', listenVisible, false);
+    window.addEventListener('focus', listenVisible, false);
+    window.addEventListener('blur', listenVisible, false);
 
     return () => {
-      document.removeEventListener('visibilitychange', listenVisible);
-      document.removeEventListener('focus', listenVisible);
+      window.removeEventListener('visibilitychange', listenVisible, false);
+      window.removeEventListener('focus', listenVisible, false);
+      window.removeEventListener('blur', listenVisible, false);
     };
   }, []);
 

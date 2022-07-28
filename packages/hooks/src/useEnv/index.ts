@@ -1,16 +1,8 @@
-import { getEnv, ENV_TYPE } from '@tarojs/taro';
-import { useEffect, useState } from 'react';
+import { getEnv } from '@tarojs/taro';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = ENV_TYPE | '';
+export type Result = TaroGeneral.ENV_TYPE;
 
-function useEnv(): Result {
-  const [env, setEnv] = useState<Result>('');
-
-  useEffect(() => {
-    setEnv(getEnv());
-  }, []);
-
-  return env;
-}
+const useEnv = createUseInfoHook<Result, undefined>(getEnv, undefined);
 
 export default useEnv;

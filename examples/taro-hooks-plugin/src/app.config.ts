@@ -25,6 +25,10 @@ export default {
     'pages/useRequest/refreshOnWindowFocus/index',
     'pages/useRequest/retry/index',
     'pages/useRequest/throttle/index',
+    // env
+    'pages/environment/useEnv/index',
+    // basic
+    'pages/basic/useVisible/index',
   ],
   window: {
     backgroundTextStyle: 'light',

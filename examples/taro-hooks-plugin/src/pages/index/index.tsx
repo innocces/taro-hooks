@@ -4,12 +4,14 @@ import { View } from '@tarojs/components';
 import { Collapse, Cell } from '@taroify/core';
 // @ts-ignore
 import { generateIndexMenu } from '@root/public/constant';
+// @ts-ignore
+import type { MenuItem } from '@root/public/constant';
 
 const Index = () => {
   const [activeCollapseItem, setActiveCollapseItem] = useTaroState(0);
 
-  const handleNavigate = (path: string) => {
-    navigateTo({ url: path });
+  const handleNavigate = ({ path, name }: MenuItem) => {
+    navigateTo({ url: `${path}?title=${name}` });
   };
 
   return (
@@ -19,14 +21,14 @@ const Index = () => {
         value={activeCollapseItem}
         onChange={setActiveCollapseItem}
       >
-        {generateIndexMenu().map(({ groupName, menu }) => (
-          <Collapse.Item title={groupName} key={groupName}>
+        {generateIndexMenu().map(({ groupName, menu, tip }) => (
+          <Collapse.Item title={groupName} key={groupName} extra={tip}>
             {menu.map(({ name, path }) => (
               <Cell
                 title={name}
                 key={name}
                 clickable
-                onClick={() => handleNavigate(path)}
+                onClick={() => handleNavigate({ name, path })}
               ></Cell>
             ))}
           </Collapse.Item>

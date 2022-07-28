@@ -1,3 +1,4 @@
+import { useTaroRef } from '@tarojs/taro';
 import { logError } from '@taro-hooks/shared';
 export type Result<T, R = undefined> = T | R;
 
@@ -11,12 +12,16 @@ export function createUseInfoHook<T, S = undefined, R = TCallback<T>>(
   defaultReturn?: S,
 ): TCallback<Result<T, S | undefined>> {
   return () => {
-    try {
-      // @ts-ignore
-      return fn();
-    } catch (e) {
-      logError(`[createUseInfoHook]: ${e.message}. ${String(fn)}`);
-      return defaultReturn;
-    }
+    const safeExcute = () => {
+      try {
+        // @ts-ignore
+        return fn();
+      } catch (e) {
+        logError(`[createUseInfoHook]: ${e.message}. ${String(fn)}`);
+        return defaultReturn;
+      }
+    };
+
+    return useTaroRef(safeExcute()).current;
   };
 }

@@ -15,6 +15,12 @@ group:
 
 ## 何时使用
 
+:::info
+
+由于**WEB**的页面隐藏和小程序的时机不一样. 在**WEB**端主要是使用**document.visibilityState**来判断当前的页面状态
+
+:::
+
 当需要根据页面显隐进行判断
 
 ## API
@@ -31,7 +37,7 @@ const visible: boolean = useVisible();
 
 ## 代码演示
 
-<code src="@pages/useVisible" />
+<code src="useVisible/index" group="basic" />
 
 ## Hook 支持度
 

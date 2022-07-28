@@ -20,7 +20,7 @@ group:
 ## API
 
 ```jsx | pure
-() => Taro.ENV_TYPE;
+const env: ENV_TYPE = useEnv();
 ```
 
 ## 返回值说明
@@ -31,7 +31,7 @@ group:
 
 ## 代码演示
 
-<code src="@pages/useEnv" />
+<code src="useEnv/index" group="environment" />
 
 ## Hook 支持度
 

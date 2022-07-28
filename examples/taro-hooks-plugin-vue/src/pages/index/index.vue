@@ -9,6 +9,7 @@
         v-for="item in collapseData"
         :key="item.groupName"
         :title="item.groupName"
+        :sub-title="item.tip"
         :name="item.groupName"
         class="demo-collapse-item"
       >
@@ -16,7 +17,7 @@
           v-for="menuItem in item.menu"
           :key="menuItem.name"
           :title="menuItem.name"
-          @click="handleNavigate(menuItem.path)"
+          @click="handleNavigate(menuItem)"
         ></nut-cell>
       </nut-collapse-item>
     </nut-collapse>
@@ -28,23 +29,22 @@ import { navigateTo } from '@tarojs/taro';
 import { ref } from 'vue';
 // @ts-ignore
 import { generateIndexMenu } from '@root/public/constant';
+// @ts-ignore
+import type { MenuItem } from '@root/public/constant';
 
 export default {
   setup() {
-    const msg = ref('Hello world');
     const collapseData = generateIndexMenu(true);
     const activeCollapseItem = ref('');
 
-    const handleNavigate = (path: string) => {
-      navigateTo({ url: path });
+    const handleNavigate = ({ path, name }: MenuItem) => {
+      navigateTo({ url: `${path}?title=${name}` });
     };
 
     return {
-      msg,
       activeCollapseItem,
       collapseData,
       handleNavigate,
-      test: console.log,
     };
   },
 };
