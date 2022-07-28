@@ -10,11 +10,12 @@ declare module '*.json';
 declare module '*.vue';
 
 // mock typings
-declare module 'taro-hooks';
-declare module '@tarojs/runtime';
-declare module 'mockjs';
 declare module 'lodash.throttle';
 declare module 'qrcode';
+
+declare module 'mockjs' {
+  export * from '@types/mockjs';
+}
 
 declare var BUILD_MODE: string | undefined;
 declare var __TARO_HOOKS_VUE__: boolean;

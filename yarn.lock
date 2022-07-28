@@ -7477,6 +7477,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mockjs@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@types/mockjs@npm:1.0.6"
+  checksum: 11de1823d29f1531d3dcd2b1cfe543ec4fa058e7733c7eabd4fcd8ffea942e98cf5ce75e859808c1e7ad5db1a20256ea31c72d133519f4b64b10a306dc43b6b9
+  languageName: node
+  linkType: hard
+
 "@types/ms@npm:*":
   version: 0.7.31
   resolution: "@types/ms@npm:0.7.31"
@@ -29719,6 +29726,7 @@ __metadata:
     "@rollup/plugin-commonjs": ^22.0.0
     "@rollup/plugin-node-resolve": ^13.3.0
     "@rollup/plugin-typescript": ^8.3.2
+    "@types/mockjs": ^1.0.6
     "@types/react": ^17.0.2
     all-contributors-cli: ^6.20.0
     babel-plugin-import: ^1.13.3

@@ -12,8 +12,6 @@ declare module '*.scss';
 declare module '*.sass';
 declare module '*.styl';
 
-declare module 'taro-hooks';
-
 declare namespace NodeJS {
   interface ProcessEnv {
     TARO_ENV:
