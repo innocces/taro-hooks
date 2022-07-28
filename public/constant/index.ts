@@ -5,6 +5,8 @@
 export type MenuItem = {
   name: string;
   path: string;
+  tabBar?: boolean;
+  onlyMini?: boolean;
 };
 
 export type CollapseItem = {
@@ -30,6 +32,7 @@ export interface APIChildrenItem {
   id: string;
   name: string;
   tabBar?: boolean;
+  onlyMini?: boolean;
 }
 
 export enum APIChildrenName {
@@ -161,6 +164,7 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useAccountInfo',
       name: 'useAccountInfo 账号信息',
+      onlyMini: true,
     },
     {
       id: 'useAuthorize',
@@ -328,9 +332,10 @@ const MENU: CollapseItem[] = [
 export function generateMenuItem(key: APIChildrenName): MenuItem[] {
   const menuList = ChildrenList[key];
 
-  return menuList.map(({ id, name }) => ({
+  return menuList.map(({ id, name, ...item }) => ({
     name,
     path: `/pages/${key}/${id}/index`,
+    ...item,
   }));
 }
 

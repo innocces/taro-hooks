@@ -37,8 +37,8 @@ export default {
     const collapseData = generateIndexMenu(true);
     const activeCollapseItem = ref('');
 
-    const handleNavigate = ({ path, name }: MenuItem) => {
-      navigateTo({ url: `${path}?title=${name}` });
+    const handleNavigate = ({ path, name, onlyMini = false }: MenuItem) => {
+      navigateTo({ url: `${path}?title=${name}&onlyMini=${Number(onlyMini)}` });
     };
 
     return {

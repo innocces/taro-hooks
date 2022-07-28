@@ -10,8 +10,8 @@ import type { MenuItem } from '@root/public/constant';
 const Index = () => {
   const [activeCollapseItem, setActiveCollapseItem] = useTaroState(0);
 
-  const handleNavigate = ({ path, name }: MenuItem) => {
-    navigateTo({ url: `${path}?title=${name}` });
+  const handleNavigate = ({ path, name, onlyMini = false }: MenuItem) => {
+    navigateTo({ url: `${path}?title=${name}&onlyMini=${Number(onlyMini)}` });
   };
 
   return (
@@ -23,12 +23,12 @@ const Index = () => {
       >
         {generateIndexMenu().map(({ groupName, menu, tip }) => (
           <Collapse.Item title={groupName} key={groupName} extra={tip}>
-            {menu.map(({ name, path }) => (
+            {menu.map(({ name, path, onlyMini }) => (
               <Cell
                 title={name}
                 key={name}
                 clickable
-                onClick={() => handleNavigate({ name, path })}
+                onClick={() => handleNavigate({ name, path, onlyMini })}
               ></Cell>
             ))}
           </Collapse.Item>

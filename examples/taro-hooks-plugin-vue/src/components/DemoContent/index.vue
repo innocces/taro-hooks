@@ -1,11 +1,18 @@
 <template>
-  <view class="demo-content">
-    <view class="demo-content-title">{{ title || params.title }}</view>
-    <view class="demo-content-desc">{{ desc }}</view>
-    <view class="demo-content-wrapper">
-      <slot />
+  <block>
+    <nut-noticebar
+      v-show="params.onlyMini === '1'"
+      text="该hook仅可在小程序使用"
+      :scrollable="true"
+    ></nut-noticebar>
+    <view class="demo-content">
+      <view class="demo-content-title">{{ title || params.title }}</view>
+      <view class="demo-content-desc">{{ desc }}</view>
+      <view class="demo-content-wrapper">
+        <slot />
+      </view>
     </view>
-  </view>
+  </block>
 </template>
 
 <script>
