@@ -15,11 +15,19 @@
       "destination": "/vue/index.html"
     },
     {
+      "source": "/vue/pages/:type/:index/:second/:main*",
+      "destination": "/vue/index.html"
+    },
+    {
       "source": "/react/pages/:type/:index*",
       "destination": "/react/index.html"
     },
     {
       "source": "/react/pages/:type/:index/:second*",
+      "destination": "/react/index.html"
+    },
+    {
+      "source": "/react/pages/:type/:index/:second/:main*",
       "destination": "/react/index.html"
     }
   ]

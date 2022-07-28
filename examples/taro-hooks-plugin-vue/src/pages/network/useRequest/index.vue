@@ -120,7 +120,7 @@ export default {
 
     const handleNavigate = (path, needIndex) => {
       navigateTo({
-        url: '/pages/useRequest/' + path + (needIndex ? '/index' : ''),
+        url: '/pages/network/useRequest/' + path + (needIndex ? '/index' : ''),
       });
     };
     return {

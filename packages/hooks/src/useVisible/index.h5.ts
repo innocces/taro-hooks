@@ -1,4 +1,4 @@
-import { useTaroState, useTaroEffect } from '@tarojs/taro';
+import { useTaroState, useTaroEffect, useDidHide } from '@tarojs/taro';
 
 function useVisible(): boolean {
   const [visible, changeVisible] = useTaroState<boolean>(true);
@@ -18,6 +18,11 @@ function useVisible(): boolean {
       window.removeEventListener('blur', listenVisible, false);
     };
   }, []);
+
+  // unmount change false
+  useDidHide(() => {
+    changeVisible(false);
+  });
 
   return visible;
 }

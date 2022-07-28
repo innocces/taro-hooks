@@ -1,7 +1,8 @@
 import { useTaroRef } from '@tarojs/taro';
 import { useUpdateEffect } from '@taro-hooks/ahooks';
+import { escapeState } from '@taro-hooks/shared';
+import { useVisible } from 'taro-hooks';
 import type { Plugin, Timeout } from '../types';
-import isDocumentVisible from '../utils/isDocumentVisible';
 import subscribeReVisible from '../utils/subscribeReVisible';
 
 const usePollingPlugin: Plugin<any, any[]> = (
@@ -9,13 +10,13 @@ const usePollingPlugin: Plugin<any, any[]> = (
   { pollingInterval, pollingWhenHidden = true },
 ) => {
   const timerRef = useTaroRef<Timeout>();
+  const unsubscribeRef = useTaroRef<() => void>();
+  const documentVisible = useVisible();
   const unsubscribeReVisible = subscribeReVisible(() => {
-    if (!pollingWhenHidden && !documentVisible) {
+    if (!pollingWhenHidden && !escapeState(documentVisible)) {
       fetchInstance.refresh();
     }
   });
-  const unsubscribeRef = useTaroRef<() => void>();
-  const documentVisible = isDocumentVisible();
 
   const stopPolling = () => {
     if (timerRef.current) {
@@ -40,7 +41,7 @@ const usePollingPlugin: Plugin<any, any[]> = (
     },
     onFinally: () => {
       // if pollingWhenHidden = false && document is hidden, then stop polling and subscribe revisable
-      if (!pollingWhenHidden && !documentVisible) {
+      if (!pollingWhenHidden && !escapeState(documentVisible)) {
         unsubscribeRef.current = unsubscribeReVisible;
         return;
       }

@@ -6444,6 +6444,7 @@ __metadata:
     "@taro-hooks/shared": ^1.5.6
     lodash-wechat: ^1.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    taro-hooks: ^1.5.6
     vue: ">3.0"
   peerDependencies:
     "@tarojs/taro": ">3.4.0"

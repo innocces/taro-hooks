@@ -48,7 +48,7 @@ const { data, error, loading } = useRequest(getUsername);
 </TabItem>
 </Tabs>
 
-<code src="useRequest/basic/index" />
+<code src="useRequest/basic/index" group="network" />
 
 ## 手动触发
 
@@ -114,9 +114,9 @@ const { loading, run, runAsync } = useRequest(service, {
 
 接下来我们通过修改用户名这个简单的场景，来演示 useRequest 手动触发模式，以及 `run` 与 `runAsync` 的区别。
 
-<code src="useRequest/basic/manualRun" />
+<code src="useRequest/basic/manualRun" group="network" />
 
-<code src="useRequest/basic/manualRunAsync" />
+<code src="useRequest/basic/manualRunAsync" group="network" />
 
 ## 生命周期
 
@@ -127,7 +127,7 @@ const { loading, run, runAsync } = useRequest(service, {
 - `onError`：请求失败触发
 - `onFinally`：请求完成触发
 
-<code src="useRequest/basic/lifeCycle" />
+<code src="useRequest/basic/lifeCycle" group="network" />
 
 ## 刷新（重复上一次请求）
 
@@ -139,7 +139,7 @@ const { loading, run, runAsync } = useRequest(service, {
 2. 我们通过某种手段更新了用户信息
 3. 我们想重新发起上一次的请求，那我们就可以使用 `refresh` 来代替 `run(1)`，这在复杂参数的场景中是非常有用的
 
-<code src="useRequest/basic/refresh" />
+<code src="useRequest/basic/refresh" group="network" />
 
 当然 `refresh` 和 `refreshAsync` 的区别和 `run` 和 `runAsync` 是一致的。
 
@@ -153,7 +153,7 @@ const { loading, run, runAsync } = useRequest(service, {
 
 我们修改了用户名，但是我们不希望等编辑接口调用成功之后，才给用户反馈。而是直接修改页面数据，同时在背后去调用修改接口，等修改接口返回之后，另外提供反馈。
 
-<code src="useRequest/basic/mutate" />
+<code src="useRequest/basic/mutate" group="network" />
 
 ## 取消请求
 
@@ -162,7 +162,7 @@ const { loading, run, runAsync } = useRequest(service, {
 - 组件卸载时，取消正在进行的请求
 - 竞态取消，当上一次请求还没返回时，又发起了下一次请求，则会取消上一次请求
 
-<code src="useRequest/basic/cancel" />
+<code src="useRequest/basic/cancel" group="network" />
 
 ## 参数管理
 
@@ -170,7 +170,7 @@ const { loading, run, runAsync } = useRequest(service, {
 
 如果我们设置了 `options.manual = false`，则首次调用 `service` 的参数可以通过 `options.defaultParams` 来设置。
 
-<code src="useRequest/basic/params" />
+<code src="useRequest/basic/params" group="network" />
 
 ## API
 

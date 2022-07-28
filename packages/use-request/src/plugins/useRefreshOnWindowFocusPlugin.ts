@@ -5,9 +5,10 @@ import {
   useDidHide,
 } from '@tarojs/taro';
 import { useUnmount } from '@taro-hooks/ahooks';
+import { escapeState } from '@taro-hooks/shared';
+import { useVisible } from 'taro-hooks';
 import type { Plugin } from '../types';
 import limit from '../utils/limit';
-import isDocumentVisible from '../utils/isDocumentVisible';
 import isOnline from '../utils/isOnline';
 
 const listeners: any[] = [];
@@ -25,7 +26,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
   { refreshOnWindowFocus, focusTimespan = 5000 },
 ) => {
   const unsubscribeRef = useTaroRef<() => void>();
-  const visible = isDocumentVisible();
+  const visible = useVisible();
 
   const stopSubscribe = () => {
     unsubscribeRef.current?.();
@@ -33,7 +34,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
 
   const subscribeFocus = async () => {
     const online = await isOnline();
-    if (!visible || !online) return;
+    if (!escapeState(visible) || !online) return;
     for (let i = 0; i < listeners.length; i++) {
       const listener = listeners[i];
       listener();
