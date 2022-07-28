@@ -4,7 +4,7 @@ const find = require('unist-util-find');
 const { readFileSync, existsSync } = require('fs');
 const { join } = require('path');
 
-const matchREG = /^<code src="(.+)".+\/>$/;
+const matchREG = /^<code src="(\S+)"( group="(\S+)")?.+\/>$/;
 
 const fakeImportCombineTabsNode = {
   type: 'import',
@@ -56,6 +56,7 @@ module.exports = function codePlugin(options) {
       visit(root, 'jsx', (node, index) => {
         const isCodeJSX = matchREG.test(node.value);
         const fileAbsPath = node?.value?.match?.(matchREG)?.[1];
+        const group = node?.value?.match?.(matchREG)?.[3];
         if (
           isCodeJSX &&
           fileAbsPath?.length &&
@@ -77,7 +78,10 @@ module.exports = function codePlugin(options) {
           const {
             vue: { source: vueSource, ...vueProps },
             react: { source: reactSource, ...reactProps },
-          } = getSourceCodeWithOptions(fileAbsPath, options);
+          } = getSourceCodeWithOptions(
+            (group ? `${group}/` : '') + fileAbsPath,
+            options,
+          );
           function parseObjectPropsToStr(props) {
             return Object.entries(props)
               .map(([key, value]) => `${key}="${value}"`)
@@ -94,7 +98,7 @@ module.exports = function codePlugin(options) {
             value: `<CombineTabs VueTab={${vueTab}} ReactTab={${reactTab}} />`,
           };
           replaceNodes.push(tabsNode);
-          console.log('mark code transform: ', fileAbsPath);
+          console.log('mark code transform: ', fileAbsPath, group);
           root.children.splice(index, 1, ...replaceNodes);
         }
       });
