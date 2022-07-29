@@ -35,7 +35,7 @@ const batteryInfo = useBattery();
 
 ## 代码演示
 
-<code src="@pages/useBattery" />
+<code src="useBattery/index" group="device" />
 
 ## Hook 支持度
 

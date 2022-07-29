@@ -37,6 +37,8 @@ export default defineAppConfig({
     'pages/basic/useVisible/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
+    // devices
+    'pages/device/useBattery/index',
   ],
   window: {
     backgroundTextStyle: 'light',
