@@ -60,16 +60,10 @@ const accountInfo = useAccountInfo();
 
 ## 代码演示
 
-<code src="@pages/useAccountInfo" />
+<code src="useAccountInfo/index" group="wechat" />
 
 ## Hook 支持度
 
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     |     |             |
-
-## FAQ
-
-### 1. 更多说明
-
-- [getAccountInfoSync](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/account-info/wx.getAccountInfoSync.html)

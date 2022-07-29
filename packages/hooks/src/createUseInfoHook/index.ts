@@ -1,5 +1,5 @@
 import { useTaroRef } from '@tarojs/taro';
-import { logError } from '@taro-hooks/shared';
+import { logError, log } from '@taro-hooks/shared';
 export type Result<T, R = undefined> = T | R;
 
 /**
@@ -14,6 +14,12 @@ export function createUseInfoHook<T, S = undefined, R = TCallback<T>>(
   return () => {
     const safeExcute = () => {
       try {
+        if (process.env.NODE_ENV !== 'production') {
+          // dev mode will sync function will return a promise result
+          // @ts-ignore
+          const result = fn().then(log, log);
+          return 'then' in result ? defaultReturn : result;
+        }
         // @ts-ignore
         return fn();
       } catch (e) {

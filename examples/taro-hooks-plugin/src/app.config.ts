@@ -30,6 +30,8 @@ export default {
     'pages/environment/useEnv/index',
     // basic
     'pages/basic/useVisible/index',
+    // wechat
+    'pages/wechat/useAccountInfo/index',
   ],
   window: {
     backgroundTextStyle: 'light',
