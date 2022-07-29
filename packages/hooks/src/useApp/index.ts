@@ -6,15 +6,13 @@ import { isUndefined } from '../utils/tool';
 import type { App } from '@tarojs/taro';
 import type { TRecord } from '../type';
 
-export type TSetGlobalData = (
-  key: string,
-  value: unknown,
+export type TSetGlobalData<G extends Record<string, any> = TRecord> = (
+  key: keyof G,
+  value: G[keyof G],
 ) => Promise<TaroGeneral.CallbackResult>;
 
-function useApp(
-  allDefault?: boolean,
-): [AppInstance: App, globalData: TRecord, setGlobalData: TSetGlobalData] {
-  const [globalData, setGlobalData] = useState<TRecord>({});
+function useApp<G extends Record<string, any> = TRecord>(allDefault?: boolean) {
+  const [globalData, setGlobalData] = useState<G>({} as G);
   const appInstance = useRef<App>(
     getApp({ allowDefault: Boolean(allDefault) }),
   );
@@ -25,7 +23,7 @@ function useApp(
     }
   }, [appInstance]);
 
-  const setGlobalDataAsync = useCallback<TSetGlobalData>(
+  const setGlobalDataAsync = useCallback<TSetGlobalData<G>>(
     (key, value) => {
       return new Promise((resolve, reject) => {
         if (isUndefined(key)) {
@@ -46,7 +44,7 @@ function useApp(
     [globalData, appInstance],
   );
 
-  return [appInstance.current, globalData, setGlobalDataAsync];
+  return [appInstance.current, globalData, setGlobalDataAsync] as const;
 }
 
 export default useApp;
