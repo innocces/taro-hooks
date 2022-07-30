@@ -30,6 +30,7 @@ export default {
     'pages/environment/useEnv/index',
     // basic
     'pages/basic/useVisible/index',
+    'pages/basic/usePromise/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
     // devices

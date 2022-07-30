@@ -15,54 +15,63 @@ group:
 
 ## 何时使用
 
+:::caution
+
+**1x**版本为直接执行传入的方法. 在**新版本**中则采用吞吐自定义**hook**的形式. 这是一个**break change**  
+不过现在大部分的**API**官方已经提供了**Promise**的调用形式. 这里更推荐大家直接使用官方的**Promise**
+
+:::
+
 想异步形式调用当前方法时
 
 ## API
 
 主要适用于原先由以下方式调用的方法:
 
-```javascript
-xx.xxx({
-  ....options,
-  success: void,
-  fail: void,
-  complete: void
+```jsx
+Taro.makePhoneCall({
+  phoneNumber: '110',
 });
 ```
 
 转换后使用方式:
 
-```jsx | pure
-const methodPromise = usePromise(options, methodName);
-methodPromise.then(success).catch(fail).finally(complete);
+```tsx
+import { makePhoneCall } from '@tarojs/taro';
+type Option = Taro.makePhoneCall.Option;
+const makePhoneCall = usePromise<Option>('makePhoneCall');
+
+// 在组件中使用
+const handleMakePhoneCall = () => {
+  makePhoneCall({ phoneNumber: '110' }).then(
+    () => {
+      console.log('makePhoneCall success');
+    },
+    ({ errMsg }) => {
+      console.log('makePhoneCall failed', errMsg);
+    },
+  );
+};
 ```
 
 ## 参数说明
 
-| 参数       | 说明                           | 类型                 | 默认值 |
-| ---------- | ------------------------------ | -------------------- | ------ |
-| options    | 对应方法除对应事件外的所有参数 | `General.IAnyObject` | -      |
-| methodName | 对应方法名称                   | `String`             | -      |
+| 参数            | 说明         | 类型      | 默认值 |
+| --------------- | ------------ | --------- | ------ |
+| implementMethod | 待执行的方法 | `unknown` | -      |
 
 ## 返回值说明
 
-| 返回值        | 说明       | 类型                              |
-| ------------- | ---------- | --------------------------------- |
-| methodPromise | `执行结果` | `Promise<General.CallbackResult>` |
+| 返回值       | 说明             | 类型                                                  |
+| ------------ | ---------------- | ----------------------------------------------------- |
+| promiseMetod | `Promise方式API` | `(option?: T) => Promise<TaroGeneral.CallbackResult>` |
 
 ## 代码演示
 
-<code src="@pages/usePromise" />
+<code src="usePromise/index" group="basic" />
 
 ## Hook 支持度
 
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     | ✔️  |     ✔️      |
-
-## FAQ
-
-### 1. 更多说明
-
-见[小程序相关文档](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/system-info/wx.getSystemInfo.html)  
-见[Taro 文档](https://taro-docs.jd.com/taro/docs/hooks#userouter)
