@@ -34,14 +34,14 @@
   },
   "dependencies": {
     "@taro-hooks/shared": "^1.5.6",
-    "@tarojs/runtime": "3.4.8",
-    "@tarojs/shared": "3.4.8",
+    "@tarojs/runtime": "3.4.14",
+    "@tarojs/shared": "3.4.14",
     "acorn": "^8.0.4",
     "acorn-walk": "^8.0.0"
   },
   "devDependencies": {
-    "@tarojs/service": "3.4.8",
-    "@tarojs/taro": "3.4.8",
+    "@tarojs/service": "3.4.14",
+    "@tarojs/taro": "3.4.14",
     "vue": "^3.0.0"
   },
   "peerDependencies": {

@@ -60,7 +60,7 @@
     "querystring": "^0.2.1"
   },
   "devDependencies": {
-    "@tarojs/taro": "3.4.8"
+    "@tarojs/taro": "3.4.14"
   },
   "peerDependencies": {
     "@tarojs/taro": ">= 3.4.x"
