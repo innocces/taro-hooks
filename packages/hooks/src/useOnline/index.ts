@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
-import useNetworkType, { NetworkType } from '../useNetworkType';
+import { useTaroEffect, useTaroState } from '@tarojs/taro';
+import { escapeState } from '@taro-hooks/shared';
+import useNetworkType from '../useNetworkType';
 
-function useOnline(): boolean | undefined {
-  const [online, changeOnline] = useState<boolean>();
+function useOnline(): boolean {
+  const [online, changeOnline] = useTaroState<boolean>(true);
   const networkType = useNetworkType();
 
-  useEffect(() => {
-    if (networkType && networkType !== NetworkType.none) {
+  useTaroEffect(() => {
+    const currentNetworkType = escapeState(networkType);
+    if (currentNetworkType && currentNetworkType !== 'none') {
       changeOnline(true);
     } else {
       changeOnline(false);

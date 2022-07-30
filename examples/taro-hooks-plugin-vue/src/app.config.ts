@@ -31,6 +31,8 @@ export default defineAppConfig({
     'pages/network/useRequest/refreshOnWindowFocus/index',
     'pages/network/useRequest/retry/index',
     'pages/network/useRequest/throttle/index',
+    'pages/network/useNetworkType/index',
+    'pages/network/useOnline/index',
     // env
     'pages/environment/useEnv/index',
     // basic

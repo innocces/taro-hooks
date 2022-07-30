@@ -2,44 +2,48 @@ import {
   getNetworkType,
   onNetworkStatusChange,
   offNetworkStatusChange,
+  useTaroState,
+  useTaroEffect,
 } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import { logError } from '@taro-hooks/shared';
+import usePromise from '../usePromise';
 
-export enum NetworkType {
-  wifi = 'wifi',
-  '2g' = '2g',
-  '3g' = '3g',
-  '4g' = '4g',
-  '5g' = '5g',
-  unknown = 'unknown',
-  none = 'none',
-}
+export type NetworkType = keyof Taro.getNetworkType.NetworkType;
 
-function useNetworkType(): keyof getNetworkType.networkType | undefined {
-  const [type, setType] = useState<keyof getNetworkType.networkType>();
-  const env = useEnv();
+function useNetworkType(autoListen = true): NetworkType {
+  const [networkType, setNetworkType] = useTaroState<NetworkType>('unknown');
+  const asyncGetNetworkType = usePromise<
+    null,
+    Taro.getNetworkType.SuccessCallbackResult
+  >(getNetworkType);
 
-  useEffect(() => {
-    if (!env) return;
-    getNetworkType().then(({ networkType }) => setType(networkType));
+  useTaroEffect(() => {
+    asyncGetNetworkType().then(
+      (response) => {
+        setNetworkType(response.networkType);
+      },
+      ({ errMsg }) => {
+        logError(errMsg);
+        setNetworkType('unknown');
+      },
+    );
+  }, []);
 
-    onNetworkStatusChange(listenNetworkStatusChange);
+  const listener: Taro.onNetworkStatusChange.Callback = (response) => {
+    setNetworkType(response.networkType);
+  };
 
-    return () => {
-      env !== ENV_TYPE.WEB && offNetworkStatusChange(listenNetworkStatusChange);
-    };
-  }, [env]);
+  useTaroEffect(() => {
+    if (autoListen) {
+      onNetworkStatusChange(listener);
 
-  const listenNetworkStatusChange = useCallback(
-    ({ networkType }) => {
-      setType(networkType);
-    },
-    [setType],
-  );
+      return () => {
+        offNetworkStatusChange(listener);
+      };
+    }
+  }, [autoListen]);
 
-  return type;
+  return networkType;
 }
 
 export default useNetworkType;

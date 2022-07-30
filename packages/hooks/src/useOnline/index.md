@@ -9,7 +9,11 @@ group:
   path: /network
 ---
 
-<Alert><code>useNetworkType</code>衍生 hook, 方便用户是否需要判断当前网络是否可用. 初始值为<code>undefined</code>.若业务中可做初始判空处理. 且该状态为自动监听</Alert>
+:::caution
+
+**useNetworkType**衍生 hook, 方便用户是否需要判断当前网络是否可用. 初始值为**true**. 且该状态为自动监听
+
+:::
 
 # useOnline
 
@@ -33,7 +37,7 @@ const online: boolean = useOnline();
 
 ## 代码演示
 
-<code src="@pages/useOnline" />
+<code src="useOnline/index" group="network" />
 
 ## Hook 支持度
 

@@ -9,7 +9,11 @@ group:
   path: /network
 ---
 
-<Alert>由于获取网络信息为异步, 故初始值为<code>undefined</code>。若业务中可做初始判空处理。 此外改 hook 会自动监听当前环境 networkType</Alert>
+:::caution
+
+由于获取网络信息为异步, 故初始值为**unknown**. 该 hook 会自动监听当前环境 networkType
+
+:::
 
 # useNetworkType
 
@@ -21,15 +25,21 @@ group:
 
 ## API
 
-```jsx | pure
-const networkType: NetworkType = useNetworkType();
+```ts
+const networkType: keyof NetworkType = useNetworkType(autoListen?: boolean);
 ```
+
+## 参数说明
+
+| 参数       | 说明             | 类型      | 默认值 |
+| ---------- | ---------------- | --------- | ------ |
+| autoListen | 是否自动开始监听 | `boolean` | `true` |
 
 ## 返回值说明
 
-| 返回值      | 说明         | 类型          |
-| ----------- | ------------ | ------------- |
-| networkType | 当前网络类型 | `NetworkType` |
+| 返回值      | 说明         | 类型                |
+| ----------- | ------------ | ------------------- |
+| networkType | 当前网络类型 | `keyof NetworkType` |
 
 ### NetworkType
 
@@ -45,7 +55,7 @@ const networkType: NetworkType = useNetworkType();
 
 ## 代码演示
 
-<code src="@pages/useNetworkType" />
+<code src="useNetworkType/index" group="network" />
 
 ## Hook 支持度
 
