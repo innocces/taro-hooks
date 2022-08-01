@@ -312,12 +312,12 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['shell-session', 'http'],
       },
-      // algolia: {
-      //   appId: 'IRP4IYNFNW',
-      //   apiKey: '714b0bc6e684aac4abddf2973530c87b',
-      //   indexName: 'taro-hooks_query_suggestions',
-      //   contextualSearch: true,
-      // },
+      algolia: {
+        appId: 'HIV804W7Z6',
+        apiKey: '409a0690d65dac63b8f71447f88083fe',
+        indexName: 'taro-hooks',
+        contextualSearch: true,
+      },
       metadata: [
         {
           name: 'keywords',
@@ -346,18 +346,18 @@ const config = {
     },
   ],
 
-  themes: [
-    [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      {
-        hashed: true,
-        language: ['en', 'zh'],
-        highlightSearchTermsOnTargetPage: true,
-        explicitSearchResultPath: true,
-        docsDir: ['docs', '../packages/hooks/src'],
-      },
-    ],
-  ],
+  // themes: [
+  //   [
+  //     require.resolve('@easyops-cn/docusaurus-search-local'),
+  //     {
+  //       hashed: true,
+  //       language: ['en', 'zh'],
+  //       highlightSearchTermsOnTargetPage: true,
+  //       explicitSearchResultPath: true,
+  //       docsDir: ['docs', '../packages/hooks/src'],
+  //     },
+  //   ],
+  // ],
 
   customFields: {
     features: [
