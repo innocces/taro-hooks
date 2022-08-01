@@ -19,8 +19,8 @@ group:
 
 ## API
 
-```jsx | pure
-() => SystemInfo;
+```tsx
+const systemInfo = useSystemInfo();
 ```
 
 ## 参数说明
@@ -64,16 +64,10 @@ group:
 
 ## 代码演示
 
-<code src="@pages/useSystemInfo" />
+<code src="useSystemInfo/index" group="basic" />
 
 ## Hook 支持度
 
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     | ✔️  |     ✔️      |
-
-## FAQ
-
-### 1. 更多说明
-
-见[小程序相关文档](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/system-info/wx.getSystemInfo.html)

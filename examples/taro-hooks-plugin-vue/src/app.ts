@@ -14,6 +14,16 @@ const App = createApp({
 
 App.use(NutUI);
 
+App.config.globalProperties.$filters = {
+  stringify(value) {
+    try {
+      return JSON.stringify(value);
+    } catch (error) {
+      return value;
+    }
+  },
+};
+
 App.component('demo-content', DemoContent);
 App.component('control-input', ControlInput);
 

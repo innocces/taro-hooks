@@ -1,27 +1,8 @@
-import { getSystemInfo } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
+import { getSystemInfoSync } from '@tarojs/taro';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = getSystemInfo.Result | undefined;
+export type Result = Taro.getSystemInfoSync.Result;
 
-function useSystemInfo(): Result {
-  const [systemInfo, setSystemInfo] = useState<Result>();
-
-  useEffect(() => {
-    getSystemInfoSync();
-  }, []);
-
-  const getSystemInfoSync = useCallback(() => {
-    try {
-      getSystemInfo({
-        success: setSystemInfo,
-        fail: () => console.error({ errMsg: 'getSystemInfo: fail' }),
-      });
-    } catch (e) {
-      console.error({ errMsg: 'getSystemInfo: fail', data: e });
-    }
-  }, []);
-
-  return systemInfo;
-}
+const useSystemInfo = createUseInfoHook<Result, {}>(getSystemInfoSync, {});
 
 export default useSystemInfo;

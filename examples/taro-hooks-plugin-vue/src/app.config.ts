@@ -38,6 +38,9 @@ export default defineAppConfig({
     // basic
     'pages/basic/useVisible/index',
     'pages/basic/usePromise/index',
+    'pages/basic/useSystemInfo/index',
+    'pages/basic/useDeviceInfo/index',
+    'pages/basic/useWindowInfo/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
     // devices
