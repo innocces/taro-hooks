@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.9](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.8...taro-hooks-v1.5.9) (2022-08-02)
+
+### Features
+
+- **useApp:** add globalData generic type support ([724243e](https://github.com/innocces/taro-hooks/commit/724243e291b044589090afe3bffd57e84cf818b0))
+
 ## [1.5.8](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.7...taro-hooks-v1.5.8) (2022-04-23)
 
 ### Bug Fixes
