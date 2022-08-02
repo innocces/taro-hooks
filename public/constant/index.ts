@@ -49,6 +49,10 @@ export enum APIChildrenName {
 export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
   [APIChildrenName.basic]: [
     {
+      id: 'useWebp',
+      name: 'useWebp 判断WebP是否可用',
+    },
+    {
       id: 'useApp',
       name: 'useApp 应用实例',
     },
@@ -83,6 +87,14 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useSystemInfo',
       name: 'useSystemInfo 系统信息',
+    },
+    {
+      id: 'useDeviceInfo',
+      name: 'useDeviceInfo 设备基础信息',
+    },
+    {
+      id: 'useWindowInfo',
+      name: 'useWindowInfo 窗口信息',
     },
     {
       id: 'useVisible',
@@ -285,6 +297,16 @@ export const PRODUCTIONDISABLEPANEL: string[] = [
   'useWeRun',
   'useInvoice',
 ];
+
+export const NETWORKTYPE = {
+  wifi: 'wifi',
+  '2g': '2g',
+  '3g': '3g',
+  '4g': '4g',
+  '5g': '5g',
+  unknown: 'unknown',
+  none: 'none',
+};
 
 const MENU: CollapseItem[] = [
   {

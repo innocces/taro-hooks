@@ -13,3 +13,10 @@ export type TGeneralCallback<T = TaroGeneral.CallbackResult, R = void> = (
 export type TRouteInfo = RouterInfo<Partial<Record<string, string>>>;
 
 export type TPartialRouteInfo<R = {}> = TRouteInfo | R;
+
+export type UnionResult<R> = R | TaroGeneral.CallbackResult;
+
+// omit general callback function for Option
+export type ExcludeOption<R> = Omit<R, 'success' | 'fail' | 'complete'>;
+
+export type PromiseAction<R, T> = (option: T) => Promise<UnionResult<R>>;

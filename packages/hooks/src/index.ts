@@ -2,6 +2,7 @@
 import useEnv from './useEnv';
 
 // basic
+import useWebp from './useWebp';
 import useApp from './useApp';
 import usePage from './usePage';
 import useRouter from './useRouter';
@@ -10,17 +11,13 @@ import useBase64ToArrayBuffer from './useBase64ToArrayBuffer';
 import useArrayBufferToBase64 from './useArrayBufferToBase64';
 import useClipboardData from './useClipboardData';
 import useSystemInfo from './useSystemInfo';
+import useWindowInfo from './useWindowInfo';
+import useDeviceInfo from './useDeviceInfo';
 import useEvent from './useEvent';
 import useVisible from './useVisible';
 import useSelectorQuery from './useSelectorQuery';
 import useStorage from './useStorage';
 import useFrom from './useFrom';
-import useDebounce from './useDebounce';
-import useDebounceFn from './useDebounceFn';
-import useThrottle from './useThrottle';
-import useThrottleFn from './useThrottleFn';
-import useLatest from './useLatest';
-import useUnmount from './useUnmount';
 
 // layout
 import useBackground from './useBackground';
@@ -76,22 +73,19 @@ import useMap from './useMap';
 
 export {
   useEnv,
+  useWebp,
   useApp,
   usePage,
   useLaunchOptions,
   useRouter,
   useFrom,
-  useDebounce,
-  useDebounceFn,
-  useThrottle,
-  useThrottleFn,
-  useLatest,
-  useUnmount,
   usePromise,
   useBase64ToArrayBuffer,
   useArrayBufferToBase64,
   useClipboardData,
   useSystemInfo,
+  useWindowInfo,
+  useDeviceInfo,
   useEvent,
   useVisible,
   useSelectorQuery,

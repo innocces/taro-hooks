@@ -31,6 +31,7 @@ export default {
     // env
     'pages/environment/useEnv/index',
     // basic
+    'pages/basic/useWebp/index',
     'pages/basic/useVisible/index',
     'pages/basic/usePromise/index',
     'pages/basic/useSystemInfo/index',
