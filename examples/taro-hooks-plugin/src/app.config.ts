@@ -28,6 +28,7 @@ export default {
     'pages/network/useRequest/throttle/index',
     'pages/network/useNetworkType/index',
     'pages/network/useOnline/index',
+    'pages/network/useFile/index',
     // env
     'pages/environment/useEnv/index',
     // basic
