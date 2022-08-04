@@ -131,7 +131,7 @@ function getSourceCodeWithOptions(
       url: vue + '/pages/' + fileAbsPath,
     },
     react: {
-      language: 'jsx',
+      language: 'tsx',
       source: escapeTemplateMarkString(reactSource),
       title: fileAbsPath,
       openUrl: reactTarget + '/' + fileAbsPath + '.tsx',
