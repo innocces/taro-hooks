@@ -1,73 +1,66 @@
-import { showActionSheet } from '@tarojs/taro';
-import { useCallback, useEffect, useRef } from 'react';
+import {
+  showActionSheet,
+  useTaroRef,
+  useTaroEffect,
+  useTaroState,
+} from '@tarojs/taro';
+import usePromise from '../usePromise';
 
-export interface ActionSheetOption {
-  itemList: string[];
-  itemColor?: string;
-  onActionItemTap?: onActionItemTap;
-}
+import { combineOptions, generateGeneralFail } from '../utils/tool';
 
-export type ShowActionSheet = (
-  option?: Partial<ActionSheetOption>,
-) => Promise<TaroGeneral.CallbackResult>;
+import type { PromiseOptionalAction, ExcludeOption } from '../type';
 
-export type onActionItemTap = (
-  tapIndex: number,
-  tapItem: string | undefined,
-) => any;
+export type ActionSheetOption = Partial<
+  ExcludeOption<Taro.showActionSheet.Option>
+>;
 
-function useActionSheet(
-  option?: Partial<ActionSheetOption>,
-): [ShowActionSheet] {
-  const initialOption = useRef<Partial<ActionSheetOption>>();
+export type ActionSheetResult = Taro.showActionSheet.SuccessCallbackResult;
 
-  useEffect(() => {
-    initialOption.current = option;
+export type ActionSheetTapItem = Omit<ActionSheetResult, 'errMsg'> & {
+  tapItem: string;
+};
+
+export type Show = PromiseOptionalAction<ActionSheetOption, ActionSheetTapItem>;
+
+function useActionSheet(option?: ActionSheetOption): {
+  tapItem: ActionSheetTapItem | undefined;
+  show: Show;
+} {
+  const generalOption = useTaroRef<ActionSheetOption | undefined>(option);
+  const [tapItem, setTapItem] = useTaroState<ActionSheetTapItem>();
+
+  useTaroEffect(() => {
+    generalOption.current = option;
   }, [option]);
 
-  const showActionSheetAsync = useCallback<ShowActionSheet>(
-    (option?: Partial<ActionSheetOption>) => {
-      return new Promise((resolve, reject) => {
-        try {
-          if (!option && !initialOption.current) {
-            console.warn('please provide a option');
-            return reject(new Error('please provide a option'));
-          } else {
-            const { onActionItemTap, ...options } = Object.assign(
-              {},
-              initialOption.current || {},
-              option || {},
-            );
-            if (!options.itemList) {
-              reject({ errMsg: 'showActionSheet: fail' });
-            } else {
-              showActionSheet({
-                ...(options as ActionSheetOption),
-                success: (res) => {
-                  if (onActionItemTap) {
-                    const tapIndex = res.tapIndex;
-                    onActionItemTap(
-                      tapIndex,
-                      (options as ActionSheetOption).itemList.find(
-                        (v, i) => i === tapIndex,
-                      ),
-                    );
-                  }
-                  resolve(res);
-                },
-                fail: reject,
-              }).catch(reject);
-            }
-          }
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [initialOption],
+  const showActionSheetAsync = usePromise<ActionSheetOption, ActionSheetResult>(
+    showActionSheet,
   );
 
-  return [showActionSheetAsync];
+  const show: Show = (option) => {
+    if (!option && !generalOption.current)
+      return Promise.reject(
+        generateGeneralFail('showToast', 'please provide a option'),
+      );
+
+    const actionSheetOption = combineOptions<ActionSheetOption>(
+      generalOption.current,
+      option,
+    );
+
+    return showActionSheetAsync(actionSheetOption).then(({ tapIndex }) => {
+      const currentTapItemString = actionSheetOption?.itemList?.[tapIndex];
+      const currentTapItem = {
+        tapIndex,
+        tapItem: currentTapItemString!,
+      };
+      setTapItem(currentTapItem);
+
+      return currentTapItem;
+    });
+  };
+
+  return { tapItem, show };
 }
 
 export default useActionSheet;

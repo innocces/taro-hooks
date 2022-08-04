@@ -1,59 +1,41 @@
-import { showModal } from '@tarojs/taro';
-import type { showModal as showModalNamespace } from '@tarojs/taro';
-import { useCallback, useEffect, useRef } from 'react';
+import { showModal, useTaroRef, useTaroEffect } from '@tarojs/taro';
+import usePromise from '../usePromise';
 
-export interface ModalOption {
-  title?: string;
-  content?: string;
-  mask?: boolean;
-  cancelColor?: string;
-  cancelText?: string;
-  confirmColor?: string;
-  confirmText?: string;
-  showCancel?: boolean;
-}
+import { combineOptions, generateGeneralFail } from '../utils/tool';
 
-export type ShowModal = (
-  option?: ModalOption,
-) => Promise<
-  showModalNamespace.SuccessCallbackResult | TaroGeneral.CallbackResult
+import type { PromiseOptionalAction, ExcludeOption } from '../type';
+
+export type ShowModalOption = Partial<ExcludeOption<Taro.showModal.Option>>;
+
+export type Show = PromiseOptionalAction<
+  ShowModalOption,
+  Taro.showModal.SuccessCallbackResult
 >;
 
-function useModal(option?: ModalOption): [ShowModal] {
-  const initialOption = useRef<ModalOption>();
+function useModal(option?: ShowModalOption): Show {
+  const generalOption = useTaroRef<ShowModalOption | undefined>(option);
 
-  useEffect(() => {
-    initialOption.current = option;
+  useTaroEffect(() => {
+    generalOption.current = option;
   }, [option]);
 
-  const showModalAsync = useCallback<ShowModal>(
-    (option?: ModalOption) => {
-      return new Promise((resolve, reject) => {
-        try {
-          if (!option && !initialOption.current) {
-            console.warn('please provide a option');
-            return reject(new Error('please provide a option'));
-          } else {
-            const options = Object.assign(
-              {},
-              initialOption.current || {},
-              option || {},
-            );
-            showModal({
-              ...options,
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
-          }
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [initialOption],
-  );
+  const showModalAsync = usePromise<ShowModalOption>(showModal);
 
-  return [showModalAsync];
+  const show: Show = (option) => {
+    if (!option && !generalOption.current)
+      return Promise.reject(
+        generateGeneralFail('showModal', 'please provide a option'),
+      );
+
+    const modalOption = combineOptions<ShowModalOption>(
+      generalOption.current,
+      option,
+    );
+
+    return showModalAsync(modalOption);
+  };
+
+  return show;
 }
 
 export default useModal;

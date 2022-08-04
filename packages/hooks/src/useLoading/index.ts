@@ -1,70 +1,57 @@
-import { showLoading, hideLoading } from '@tarojs/taro';
-import { useCallback, useEffect, useRef } from 'react';
+import {
+  showLoading,
+  hideLoading,
+  useTaroEffect,
+  useTaroRef,
+} from '@tarojs/taro';
 
-export interface LoadingOption {
-  title: string;
-  mask?: boolean;
-}
+import usePromise from '../usePromise';
 
-export type ShowLoading = (
-  option?: Partial<LoadingOption>,
-) => Promise<TaroGeneral.CallbackResult>;
-export type HideLoading = () => Promise<TaroGeneral.CallbackResult>;
+import type {
+  ExcludeOption,
+  PromiseOptionalAction,
+  PromiseWithoutOptionAction,
+} from '../type';
 
-function useLoading(
-  option?: Partial<LoadingOption>,
-): [ShowLoading, HideLoading] {
-  const initialOption = useRef<Partial<LoadingOption>>();
+import { generateGeneralFail, combineOptions } from '../utils/tool';
 
-  useEffect(() => {
-    initialOption.current = option;
+export type LoadingOption = ExcludeOption<Taro.showLoading.Option>;
+
+export type PartialLoadingOption = Partial<LoadingOption>;
+
+export type Show = PromiseOptionalAction<
+  TaroGeneral.CallbackResult,
+  PartialLoadingOption
+>;
+
+export type Hide = PromiseWithoutOptionAction;
+
+function useLoading(option?: PartialLoadingOption): { show: Show; hide: Hide } {
+  const generalOption = useTaroRef<PartialLoadingOption | undefined>(option);
+
+  useTaroEffect(() => {
+    generalOption.current = option;
   }, [option]);
 
-  const showLoadingAsync = useCallback<ShowLoading>(
-    (option) => {
-      return new Promise((resolve, reject) => {
-        try {
-          if (!option && !initialOption.current) {
-            console.warn('please provide a option');
-            return reject(new Error('please provide a option'));
-          } else {
-            const options = Object.assign(
-              {},
-              initialOption.current || {},
-              option || {},
-            );
-            if (!options.title) {
-              reject({ errMsg: 'showLoading: fail' });
-            } else {
-              showLoading({
-                ...(options as LoadingOption),
-                success: resolve,
-                fail: reject,
-              }).catch(reject);
-            }
-          }
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [initialOption],
-  );
+  const showLoadingAsync = usePromise<PartialLoadingOption>(showLoading);
 
-  const hideLoadingAsync = useCallback<HideLoading>(() => {
-    return new Promise((resolve, reject) => {
-      try {
-        hideLoading({
-          success: resolve,
-          fail: reject,
-        });
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }, []);
+  const show: Show = (option) => {
+    if (!option && !generalOption.current)
+      return Promise.reject(
+        generateGeneralFail('showLoading', 'please provide a option'),
+      );
 
-  return [showLoadingAsync, hideLoadingAsync];
+    const loadingOption = combineOptions<PartialLoadingOption>(
+      generalOption.current,
+      option,
+    );
+
+    return showLoadingAsync(loadingOption);
+  };
+
+  const hide: Hide = usePromise<{}>(hideLoading);
+
+  return { show, hide };
 }
 
 export default useLoading;

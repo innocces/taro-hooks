@@ -22,19 +22,13 @@ export type DownloadOption = ExcludeOption<Taro.downloadFile.Option> &
   CommonOption<DownloadTask>;
 
 export type Upload = PromiseAction<
-  Taro.uploadFile.SuccessCallbackResult,
-  UploadOption
+  UploadOption,
+  Taro.uploadFile.SuccessCallbackResult
 >;
 
 export type Download = PromiseAction<
-  Taro.downloadFile.FileSuccessCallbackResult,
-  DownloadOption
->;
-
-export type IDownloadFileAction = (
-  option: DownloadOption,
-) => Promise<
-  Taro.downloadFile.FileSuccessCallbackResult | TaroGeneral.CallbackResult
+  DownloadOption,
+  Taro.downloadFile.FileSuccessCallbackResult
 >;
 
 function useFile(): { upload: Upload; download: Download } {

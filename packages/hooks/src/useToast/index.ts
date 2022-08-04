@@ -1,71 +1,46 @@
-import { showToast, hideToast } from '@tarojs/taro';
-import { useCallback, useEffect, useRef } from 'react';
+import { showToast, hideToast, useTaroRef, useTaroEffect } from '@tarojs/taro';
+import usePromise from '../usePromise';
 
-export interface ToastOption {
-  title: string;
-  duration?: number;
-  icon?: 'success' | 'loading' | 'none' | 'error';
-  image?: string;
-  mask?: boolean;
-}
+import { combineOptions, generateGeneralFail } from '../utils/tool';
 
-export type ShowToast = (
-  option?: Partial<ToastOption>,
-) => Promise<TaroGeneral.CallbackResult>;
-export type HideToast = () => Promise<TaroGeneral.CallbackResult>;
+import type {
+  PromiseOptionalAction,
+  PromiseWithoutOptionAction,
+  ExcludeOption,
+} from '../type';
 
-function useToast(option?: Partial<ToastOption>): [ShowToast, HideToast] {
-  const initialOption = useRef<Partial<ToastOption>>();
+export type ToastOption = Partial<ExcludeOption<Taro.showToast.Option>>;
 
-  useEffect(() => {
-    initialOption.current = option;
+export type Show = PromiseOptionalAction<ToastOption>;
+
+export type Hide = PromiseWithoutOptionAction;
+
+function useToast(option?: ToastOption): { show: Show; hide: Hide } {
+  const generalOption = useTaroRef<ToastOption | undefined>(option);
+
+  useTaroEffect(() => {
+    generalOption.current = option;
   }, [option]);
 
-  const showToastAsync = useCallback<ShowToast>(
-    (option?: Partial<ToastOption>) => {
-      return new Promise((resolve, reject) => {
-        try {
-          if (!option && !initialOption.current) {
-            console.warn('please provide a option');
-            return reject(new Error('please provide a option'));
-          } else {
-            const options = Object.assign(
-              {},
-              initialOption.current || {},
-              option || {},
-            );
-            if (!options.title) {
-              reject({ errMsg: 'showToast: fail' });
-            } else {
-              showToast({
-                ...(options as ToastOption),
-                success: resolve,
-                fail: reject,
-              }).catch(reject);
-            }
-          }
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [initialOption],
-  );
+  const showToastAsync = usePromise<ToastOption>(showToast);
 
-  const hideToastAsync = useCallback<HideToast>(() => {
-    return new Promise((resolve, reject) => {
-      try {
-        hideToast({
-          success: resolve,
-          fail: reject,
-        });
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }, []);
+  const show: Show = (option) => {
+    if (!option && !generalOption.current)
+      return Promise.reject(
+        generateGeneralFail('showToast', 'please provide a option'),
+      );
 
-  return [showToastAsync, hideToastAsync];
+    const modalOption = combineOptions<ToastOption>(
+      generalOption.current,
+      option,
+    );
+
+    return showToastAsync(modalOption);
+  };
+
+  const hide: Hide = usePromise(hideToast);
+
+  return { show, hide };
 }
 
 export default useToast;

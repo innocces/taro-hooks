@@ -33,8 +33,8 @@ const { download, upload } = useFile();
 
 | 返回值   | 说明     | 类型                                                                         |
 | -------- | -------- | ---------------------------------------------------------------------------- |
-| download | 下载文件 | `PromiseAction<Taro.downloadFile.FileSuccessCallbackResult, DownloadOption>` |
-| upload   | 上传文件 | `PromiseAction<Taro.uploadFile.SuccessCallbackResult, UploadOption>`         |
+| download | 下载文件 | `PromiseAction<DownloadOption, Taro.downloadFile.FileSuccessCallbackResult>` |
+| upload   | 上传文件 | `PromiseAction<UploadOption, Taro.uploadFile.SuccessCallbackResult>`         |
 
 ### DownloadOption
 
@@ -71,3 +71,21 @@ const { download, upload } = useFile();
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     | ✔️  |     ✔️      |
+
+## FAQ
+
+1. 如何**abort**下载或上传?
+
+   可以使用**afterSend**监听方法获取到**xxxTask.xxxTaskPromise**.
+
+   ```tsx showLineNumbers
+   import { useTaroRef } from '@tarojs/taro';
+
+   const task = useTaroRef<UploadTask.UploadTaskPromise>();
+
+   const afterSend = (concurrentTask) => (task.current = concurrentTask);
+
+   // then
+
+   task.current.abort();
+   ```

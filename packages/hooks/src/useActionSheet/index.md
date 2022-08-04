@@ -19,25 +19,39 @@ group:
 
 ## API
 
-```jsx | pure
-const [show] = useActionSheet(initialOption);
+```tsx
+const { tapItem, show } = useActionSheet(initialOption);
 ```
 
 ## 参数说明
 
-| 参数          | 说明                                     | 类型                 | 默认值 |
-| ------------- | ---------------------------------------- | -------------------- | ------ |
-| initialOption | 初始操作菜单(若指定后面可与新的配置合并) | `General.IAnyObject` | -      |
+### `initialOption: ActionSheetOption`
+
+初始操作菜单配置(若指定后面可与新的配置合并)
+
+| 参数      | 说明                             | 类型       | 默认值 |
+| --------- | -------------------------------- | ---------- | ------ |
+| alertText | 警示文案                         | `string`   | -      |
+| itemList  | 按钮的文字数组，数组长度最大为 6 | `string[]` | -      |
+| itemColor | 按钮的文字颜色                   | `string`   | -      |
 
 ## 返回值说明
 
-| 返回值 | 说明         | 类型                                             |
-| ------ | ------------ | ------------------------------------------------ |
-| show   | 显示操作菜单 | `(options?: General.IAnyObject) => Promise<any>` |
+| 返回值  | 说明         | 类型                                                           |
+| ------- | ------------ | -------------------------------------------------------------- |
+| show    | 显示操作菜单 | `PromiseOptionalAction<ActionSheetOption, ActionSheetTapItem>` |
+| tapItem | 当前选中数据 | `ActionSheetTapItem`                                           |
+
+### tapItem
+
+| 返回值   | 说明                                          | 类型     |
+| -------- | --------------------------------------------- | -------- |
+| tapIndex | 用户点击的按钮序号，从上到下的顺序，从 0 开始 | `number` |
+| tapItem  | 用户点击的按钮序号对应 itemList 的字符串      | `string` |
 
 ## 代码演示
 
-<code src="@pages/useActionSheet" />
+<code src="useActionSheet/index" group="feedback" />
 
 ## Hook 支持度
 
