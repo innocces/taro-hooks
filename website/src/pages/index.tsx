@@ -9,6 +9,7 @@ import Cases from '@site/src/components/Cases';
 import Title from '@site/src/components/Title';
 import Intro from '@site/src/components/Intro';
 import Feature from '@site/src/components/Feature';
+import Chat from '@site/src/components/Chat';
 
 import styles from './index.module.css';
 
@@ -71,6 +72,7 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
+      <Chat />
       <HomepageHeader />
       <main>
         <Intro />
