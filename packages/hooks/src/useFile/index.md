@@ -11,7 +11,7 @@ group:
 
 :::info
 
-新版本的**useFile**新增了相关事件的参数配置. 但和小程序中的事件略有出入. 由于**taro-hooks**采用的是**Promise**的方式编写. 这边事件名称分别要看下面的描述来区分
+新版本的**useFile**新增了相关事件的参数配置. 但和小程序中的事件略有出入. 由于**taro-hooks**采用的是**Promise**的方式编写. 这边事件名称分别[见](https://github.com/NervJS/taro/issues/509#issuecomment-415254183)
 
 :::
 

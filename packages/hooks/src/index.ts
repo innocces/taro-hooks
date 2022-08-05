@@ -30,6 +30,7 @@ import useModal from './useModal';
 import useLoading from './useLoading';
 import useActionSheet from './useActionSheet';
 import useNavigationBar from './useNavigationBar';
+import useAlertBeforeUnload from './useAlertBeforeUnload';
 
 // wechat
 import useAPICheck from './useAPICheck';
@@ -101,6 +102,7 @@ export {
   useLoading,
   useActionSheet,
   useNavigationBar,
+  useAlertBeforeUnload,
   useStorage,
   useBattery,
   useVibrate,

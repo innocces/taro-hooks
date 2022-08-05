@@ -37,3 +37,13 @@ export function generateGeneralFail<T = string>(
     errMsg,
   };
 }
+
+/**
+ * combine init and custom options
+ * @param generalOption init options
+ * @param option custom options
+ * @returns options
+ */
+export function combineOptions<T>(generalOption = {}, option = {}): T {
+  return Object.assign({}, generalOption, option) as T;
+}
