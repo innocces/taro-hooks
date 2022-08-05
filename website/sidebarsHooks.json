@@ -46,7 +46,8 @@
         "useLoading/index",
         "useModal/index",
         "useNavigationBar/index",
-        "useToast/index"
+        "useToast/index",
+        "useAlertBeforeUnload/index"
       ]
     },
     {
