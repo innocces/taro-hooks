@@ -10,6 +10,12 @@ class App extends Component {
 
   componentDidCatchError() {}
 
+  globalData = {
+    framework: 'React',
+    package: 'taro-hooks next',
+    basic: 'taro',
+  };
+
   // this.props.children 是将要会渲染的页面
   render() {
     return this.props.children;

@@ -149,6 +149,11 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useNavigationBar',
       name: 'useNavigationBar 导航条',
     },
+    {
+      id: 'useAlertBeforeUnload',
+      name: 'useAlertBeforeUnload 小程序关闭',
+      onlyMini: true,
+    },
   ],
   [APIChildrenName.environment]: [
     {
@@ -160,18 +165,22 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useAPICheck',
       name: 'useAPICheck 判断是否可用',
+      onlyMini: true,
     },
     {
       id: 'useUpdateManager',
       name: 'useUpdateManager 更新',
+      onlyMini: true,
     },
     {
       id: 'useLaunchOptions',
       name: 'useLaunchOptions 启动参数',
+      onlyMini: true,
     },
     {
       id: 'useUserInfo',
       name: 'useUserInfo 用户信息',
+      onlyMini: true,
     },
     {
       id: 'useAccountInfo',
@@ -181,10 +190,12 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useAuthorize',
       name: 'useAuthorize 用户授权',
+      onlyMini: true,
     },
     {
       id: 'useRequestSubscribeMessage',
       name: 'useRequestSubscribeMessage 订阅消息',
+      onlyMini: true,
     },
     {
       id: 'useChooseAddress',
@@ -193,18 +204,22 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useInvoice',
       name: 'useInvoice 发票(抬头)',
+      onlyMini: true,
     },
     {
       id: 'useWeRun',
       name: 'useWeRun 微信运动',
+      onlyMini: true,
     },
     {
       id: 'useTopBarText',
       name: 'useTopBarText 置顶信息',
+      onlyMini: true,
     },
     {
       id: 'useMenuButtonBoundingClientRect',
       name: 'useMenuButtonBoundingClientRect 胶囊位置',
+      onlyMini: true,
     },
   ],
   [APIChildrenName.media]: [

@@ -1,24 +1,20 @@
-import { canIUse } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import { canIUse, useTaroEffect, useTaroState } from '@tarojs/taro';
 
-function useAPICheck(scheme: string): [boolean, (scheme: string) => void] {
-  const env = useEnv();
-  const [apiValid, setApiValid] = useState(false);
+export type SetAPI = (scheme: string) => boolean;
 
-  const setAPI = useCallback(
-    (scheme: string) => {
-      if (env.length && env !== ENV_TYPE.WEB) {
-        setApiValid(canIUse(scheme));
-      }
-    },
-    [env],
-  );
+function useAPICheck(scheme: string): [boolean, SetAPI] {
+  const setAPI: SetAPI = (scheme) => {
+    if (!scheme) return false;
+    const valid = canIUse(scheme);
+    setApiValid(valid);
+    return valid;
+  };
 
-  useEffect(() => {
-    setAPI(scheme);
-  }, [env]);
+  const [apiValid, setApiValid] = useTaroState<boolean>(canIUse(scheme));
+
+  useTaroEffect(() => {
+    scheme && setAPI(scheme);
+  }, [scheme]);
 
   return [apiValid, setAPI];
 }

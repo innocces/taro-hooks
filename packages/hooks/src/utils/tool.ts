@@ -30,7 +30,7 @@ export function generateGeneralFail<T = string>(
   method: T,
   message?: string,
 ): TaroGeneral.CallbackResult {
-  message = '调用失败';
+  message = message || '调用失败';
   const errMsg = `[API ${method}] ${message}`;
   if (!isProd) logError(errMsg);
   return {

@@ -14,6 +14,8 @@ export type TRouteInfo = RouterInfo<Partial<Record<string, string>>>;
 
 export type TPartialRouteInfo<R = {}> = TRouteInfo | R;
 
+export type RecordData<R extends string = string, S = any> = Record<R, S>;
+
 export type UnionResult<R> = R | TaroGeneral.CallbackResult;
 
 // omit general callback function for Option

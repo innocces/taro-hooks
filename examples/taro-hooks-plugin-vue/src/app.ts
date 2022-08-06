@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import { setGlobalDataPlugin } from '@tarojs/taro';
 
 import NutUI from '@nutui/nutui-taro';
 import DemoContent from './components/DemoContent/index.vue';
@@ -10,6 +11,12 @@ import './app.css';
 const App = createApp({
   onShow(options) {},
   // 入口组件不需要实现 render 方法，即使实现了也会被 taro 所覆盖
+});
+
+App.use(setGlobalDataPlugin, {
+  framework: 'Vue3',
+  package: 'taro-hooks next',
+  basic: 'taro',
 });
 
 App.use(NutUI);

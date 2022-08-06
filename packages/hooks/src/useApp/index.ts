@@ -1,52 +1,84 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
-import { getApp } from '@tarojs/taro';
-
-import { isUndefined } from '../utils/tool';
+import { getApp, useTaroState, useTaroRef, useTaroEffect } from '@tarojs/taro';
+import { isUndef, escapeState } from '@taro-hooks/shared';
 
 import type { App } from '@tarojs/taro';
-import type { TRecord } from '../type';
+import type { RecordData } from '../type';
+import { generateGeneralFail } from '../utils/tool';
 
-export type TSetGlobalData = (
-  key: string,
-  value: unknown,
+export type Instance<T extends App> = Taro.getApp.Instance<T>;
+
+export type GlobalData<R extends RecordData> = R;
+
+export type SetGlobalData<R> = (
+  key: keyof R,
+  value: R[keyof R],
 ) => Promise<TaroGeneral.CallbackResult>;
 
-function useApp(
+function useApp<R extends RecordData = RecordData, T extends App = App>(
   allDefault?: boolean,
-): [AppInstance: App, globalData: TRecord, setGlobalData: TSetGlobalData] {
-  const [globalData, setGlobalData] = useState<TRecord>({});
-  const appInstance = useRef<App>(
-    getApp({ allowDefault: Boolean(allDefault) }),
+): {
+  app: Instance<T>;
+  globalData: GlobalData<R>;
+  setGlobalData: SetGlobalData<GlobalData<R>>;
+} {
+  const appInstance = useTaroRef<Instance<T>>(
+    getApp<T>({ allowDefault: Boolean(allDefault) }),
   );
 
-  useEffect(() => {
-    if (appInstance.current?.$app) {
-      setGlobalData(appInstance.current.$app.globalData || {});
+  const [globalData, setGlobalData] = useTaroState<GlobalData<R>>(
+    generateGlobalDataFromAppInstance(appInstance.current) as GlobalData<R>,
+  );
+
+  useTaroEffect(() => {
+    if (appInstance.current) {
+      setGlobalData(generateGlobalDataFromAppInstance(appInstance.current));
     }
   }, [appInstance]);
 
-  const setGlobalDataAsync = useCallback<TSetGlobalData>(
-    (key, value) => {
-      return new Promise((resolve, reject) => {
-        if (isUndefined(key)) {
-          reject({ errMsg: 'setGlobalData: fail' });
-        } else {
-          try {
-            const prevGlobalData = { ...globalData };
-            prevGlobalData[key] = value;
-            appInstance.current.$app.globalData = prevGlobalData;
-            setGlobalData(prevGlobalData);
-            resolve({ errMsg: 'setGlobalData: ok' });
-          } catch (e) {
-            reject({ errMsg: 'setGlobalData: fail', data: e });
-          }
-        }
-      });
-    },
-    [globalData, appInstance],
-  );
+  const setGlobalDataAsync: SetGlobalData<GlobalData<R>> = (key, value) => {
+    return new Promise((resolve, reject) => {
+      if (isUndef(key))
+        reject(generateGeneralFail('setGlobalData', 'please privide key'));
+      try {
+        const latestGobalData = {
+          ...escapeState(globalData),
+          [key]: value,
+        };
+        const $globalData =
+          appInstance.current?.$app?.globalData ?? appInstance.current;
 
-  return [appInstance.current, globalData, setGlobalDataAsync];
+        $globalData[key] = value;
+
+        setGlobalData(latestGobalData);
+
+        resolve(generateGeneralFail('setGlobalData', 'success'));
+      } catch (e) {
+        reject(generateGeneralFail('setGlobalData', e.message));
+      }
+    });
+  };
+
+  return {
+    app: appInstance.current,
+    globalData,
+    setGlobalData: setGlobalDataAsync,
+  };
 }
 
 export default useApp;
+
+// TODO: $app may not exists. filter normal key, rest is globalData
+function generateGlobalDataFromAppInstance<T extends App = App>(
+  app: Instance<T>,
+) {
+  const UNSAFE = ['config', 'onHide', 'onLaunch', 'onShow'];
+  const { $app } = app ?? {};
+
+  if ($app?.globalData) {
+    return $app?.globalData;
+  }
+
+  return Object.fromEntries(
+    Object.entries(app).filter((v) => !UNSAFE.includes(v[0])),
+  );
+}

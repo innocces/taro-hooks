@@ -37,6 +37,7 @@ export default defineAppConfig({
     // env
     'pages/environment/useEnv/index',
     // basic
+    'pages/basic/useApp/index',
     'pages/basic/useWebp/index',
     'pages/basic/useVisible/index',
     'pages/basic/usePromise/index',
@@ -45,6 +46,7 @@ export default defineAppConfig({
     'pages/basic/useWindowInfo/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
+    'pages/wechat/useAPICheck/index',
     // devices
     'pages/device/useBattery/index',
     // feedback
