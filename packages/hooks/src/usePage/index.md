@@ -20,25 +20,26 @@ group:
 ## API
 
 ```jsx | pure
-const [stackLength, { pageInstance, pageStack, useScope }] = usePage();
+const [stackLength, { pageInstance, pageStack }] = usePage(scope?: string);
 ```
 
 ## 参数
 
-无
+| 参数  | 说明           | 类型     | 默认值 |
+| ----- | -------------- | -------- | ------ |
+| scope | 组件内的选择器 | `string` | -      |
 
 ## 返回值说明
 
-| 返回值       | 说明                                                   | 类型                                  |
-| ------------ | ------------------------------------------------------ | ------------------------------------- |
-| stackLength  | 页面栈长度                                             | `number`                              |
-| pageInstance | 当前页面实例(包含`app`)                                | `Current`                             |
-| pageStack    | 页面栈(数组中第一个元素为首页，最后一个元素为当前页面) | `Page[]`                              |
-| useScope     | 获取当前`scope`(即页面实例)                            | `(selector?: string) => PageInstance` |
+| 返回值       | 说明                                                   | 类型      |
+| ------------ | ------------------------------------------------------ | --------- |
+| stackLength  | 页面栈长度                                             | `number`  |
+| pageInstance | 当前页面实例(包含`app`)                                | `Current` |
+| pageStack    | 页面栈(数组中第一个元素为首页，最后一个元素为当前页面) | `Page[]`  |
 
 ## 代码演示
 
-<code src="@pages/usePage" />
+<code src="usePage/index" group="basic" />
 
 ## Hook 支持度
 

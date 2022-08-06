@@ -1,41 +1,29 @@
-import { useCallback, useRef } from 'react';
-import { getCurrentInstance, getCurrentPages } from '@tarojs/taro';
-import type { Current, Page, PageInstance } from '@tarojs/taro';
+import { getCurrentInstance, getCurrentPages, useTaroRef } from '@tarojs/taro';
+import type { Current, Page } from '@tarojs/taro';
 
-export interface IPage extends PageInstance {
-  selectComponent: (selector: string) => PageInstance;
-}
-
-export type TUseScope = (selector?: string) => PageInstance | null;
-
-export type TSetGlobalData = (
-  key: string,
-  value: unknown,
-) => Promise<TaroGeneral.CallbackResult>;
-
-function usePage(): [
+function usePage(scope?: string): [
   stackLength: number,
-  Instance: { pageInstance: Current; pageStack: Page[]; useScope: TUseScope },
+  Instance: {
+    pageInstance: Current;
+    pageStack: Page[];
+  },
 ] {
-  const pageStack = useRef<Page[]>(getCurrentPages());
-  const pageInstance = useRef<Current>(getCurrentInstance());
+  const getPageInstance = (): Current => {
+    if (scope && typeof scope === 'string') {
+      return getCurrentInstance().page?.selectComponent?.(scope) as Current;
+    }
 
-  const useScope = useCallback<TUseScope>(
-    (selector) => {
-      // if selector, make CustomWrapper
-      return selector
-        ? (pageInstance.current.page as IPage)?.selectComponent(selector)
-        : pageInstance.current.page;
-    },
-    [pageInstance],
-  );
+    return getCurrentInstance();
+  };
+
+  const pageStack = useTaroRef<Page[]>(getCurrentPages());
+  const pageInstance = useTaroRef<Current>(getPageInstance());
 
   return [
     pageStack.current.length,
     {
       pageInstance: pageInstance.current,
       pageStack: pageStack.current,
-      useScope,
     },
   ];
 }
