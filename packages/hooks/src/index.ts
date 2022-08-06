@@ -7,8 +7,7 @@ import useApp from './useApp';
 import usePage from './usePage';
 import useRouter from './useRouter';
 import usePromise from './usePromise';
-import useBase64ToArrayBuffer from './useBase64ToArrayBuffer';
-import useArrayBufferToBase64 from './useArrayBufferToBase64';
+import useArrayBuffer from './useArrayBuffer';
 import useClipboardData from './useClipboardData';
 import useSystemInfo from './useSystemInfo';
 import useWindowInfo from './useWindowInfo';
@@ -81,8 +80,7 @@ export {
   useRouter,
   useFrom,
   usePromise,
-  useBase64ToArrayBuffer,
-  useArrayBufferToBase64,
+  useArrayBuffer,
   useClipboardData,
   useSystemInfo,
   useWindowInfo,

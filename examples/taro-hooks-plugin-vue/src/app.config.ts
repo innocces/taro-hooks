@@ -38,12 +38,14 @@ export default defineAppConfig({
     'pages/environment/useEnv/index',
     // basic
     'pages/basic/useApp/index',
+    'pages/basic/usePage/index',
     'pages/basic/useWebp/index',
     'pages/basic/useVisible/index',
     'pages/basic/usePromise/index',
     'pages/basic/useSystemInfo/index',
     'pages/basic/useDeviceInfo/index',
     'pages/basic/useWindowInfo/index',
+    'pages/basic/useArrayBuffer/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
     'pages/wechat/useAPICheck/index',

@@ -65,8 +65,7 @@
       "items": [
         "useWebp/index",
         "useApp/index",
-        "useArrayBufferToBase64/index",
-        "useBase64ToArrayBuffer/index",
+        "useArrayBuffer/index",
         "useClipboardData/index",
         "useEvent/index",
         "useFrom/index",

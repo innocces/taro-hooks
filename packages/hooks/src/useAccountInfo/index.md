@@ -5,7 +5,6 @@ nav:
   path: /hooks
   order: 2
 group:
-  xxxx: wechat
   title: 小程序
   path: /wechat
 ---

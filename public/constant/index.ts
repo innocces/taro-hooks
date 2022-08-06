@@ -73,12 +73,8 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useFrom 路由来源',
     },
     {
-      id: 'useBase64ToArrayBuffer',
-      name: 'useBase64ToArrayBuffer 转换base64',
-    },
-    {
-      id: 'useArrayBufferToBase64',
-      name: 'useArrayBufferToBase64 转换ArrayBuffer',
+      id: 'useArrayBuffer',
+      name: 'useArrayBuffer 转换',
     },
     {
       id: 'useClipboardData',

@@ -23,6 +23,10 @@ taro-button-core[size=mini]+taro-button-core[size=mini] {
   margin-top: 0;
 }
 
+.nut-cell__title-desc {
+  word-break: break-all;
+}
+
 /* .weui-input:focus {
   border: 1px solid #ccc;
 } */

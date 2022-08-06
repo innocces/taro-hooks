@@ -6,3 +6,7 @@
 .gap {
   margin-bottom: 8px!important;
 }
+
+.taroify-cell__brief {
+  word-break: break-all;
+}
