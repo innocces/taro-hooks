@@ -63,6 +63,11 @@ function useNavigationBar(option?: NavigationBarOption): {
       ? showNavigationBarLoadingAsync
       : hideNavigationBarLoadingAsync;
 
+    generalOption.current = {
+      ...(generalOption.current || {}),
+      loading,
+    };
+
     return toggleAction();
   };
 
