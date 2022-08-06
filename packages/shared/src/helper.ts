@@ -24,6 +24,20 @@ export function isUndef(value: unknown): value is undefined {
   return typeof value === 'undefined';
 }
 
+export function strictOf<R>(value: unknown, type: string): value is R {
+  return (
+    Object.prototype.toString.call(value) === `[object ${camelIndex(type)}]`
+  );
+}
+
+export function camelIndex(input: string): string {
+  return isString(input)
+    ? input.replace(/^([a-z]{1})/, (searchValue, matchValue) =>
+        matchValue ? matchValue?.toUpperCase?.() : null,
+      )
+    : input;
+}
+
 /**
  * single check isRef func
  * @param {any} value any value for check

@@ -46,6 +46,7 @@ export default defineAppConfig({
     'pages/basic/useDeviceInfo/index',
     'pages/basic/useWindowInfo/index',
     'pages/basic/useArrayBuffer/index',
+    'pages/basic/useClipboardData/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
     'pages/wechat/useAPICheck/index',

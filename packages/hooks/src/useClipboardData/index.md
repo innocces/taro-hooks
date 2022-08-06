@@ -19,7 +19,7 @@ group:
 
 ## API
 
-```jsx | pure
+```ts
 const [clipboardData, { set, get }] = useClipboardData();
 ```
 
@@ -29,15 +29,15 @@ const [clipboardData, { set, get }] = useClipboardData();
 
 ## 返回值说明
 
-| 返回值        | 说明                 | 类型                          |
-| ------------- | -------------------- | ----------------------------- |
-| clipboardData | `当前剪切板内容`     | `any`                         |
-| set           | `设置当前剪切板内容` | `(text: any) => Promise<any>` |
-| get           | `获取当前剪切板内容` | `() => Promise<any>`          |
+| 返回值        | 说明                 | 类型                                            |
+| ------------- | -------------------- | ----------------------------------------------- |
+| clipboardData | `当前剪切板内容`     | `any`                                           |
+| set           | `设置当前剪切板内容` | `PromiseAction<any>`                            |
+| get           | `获取当前剪切板内容` | `PromiseWithoutOptionAction<GetResult['data']>` |
 
 ## 代码演示
 
-<code src="@pages/useClipboardData" />
+<code src="useClipboardData/index" group="basic" />
 
 ## Hook 支持度
 
@@ -47,6 +47,7 @@ const [clipboardData, { set, get }] = useClipboardData();
 
 ## FAQ
 
-### 1. 更多说明
+1. 存储和返回有什么条件么?
 
-见[小程序相关文档](https://developers.weixin.qq.com/miniprogram/dev/api/device/clipboard/wx.getClipboardData.html)
+   除**function/null/undefined**. 基础类型均可在获取的时候被反序列化回来.  
+   除**string**所有的类型都会被序列化或者**JSON**之后再被存储

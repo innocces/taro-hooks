@@ -1,65 +1,67 @@
-import { getClipboardData, setClipboardData } from '@tarojs/taro';
-import { useCallback, useState } from 'react';
+import {
+  getClipboardData,
+  setClipboardData,
+  useTaroState,
+  useTaroEffect,
+} from '@tarojs/taro';
+import { strictOf, isString, isUndef, logError } from '@taro-hooks/shared';
+import usePromise from '../usePromise';
 
-export type setClipboard = (text: any) => Promise<any>;
-export type getClipboard = () => Promise<any>;
-export interface clipboardAction {
-  set: setClipboard;
-  get: getClipboard;
-}
-export type SuccessResult = {
-  errMsg: string;
-  data: string | { data: string; errMsg: string };
-};
-export type Result = [string, clipboardAction];
+import type {
+  PromiseAction,
+  PromiseWithoutOptionAction,
+  ExcludeOption,
+  WithUndefind,
+} from '../type';
 
-function useClipboardData(): Result {
-  const [clipboardData, changeClipborardData] = useState<string>('');
+export type GetResult = Taro.getClipboardData.SuccessCallbackOption;
 
-  const setClipboard = useCallback<setClipboard>((text: any) => {
-    if (!text) {
-      console.warn('please enter a text');
-      return Promise.reject(text);
+export type Get = PromiseWithoutOptionAction<GetResult['data']>;
+
+export type SetOption = ExcludeOption<Taro.setClipboardData.Option>;
+
+export type Set = PromiseAction<any>;
+
+function useClipboardData(): [WithUndefind<string>, { get: Get; set: Set }] {
+  const [clipboardData, changeClipborardData] = useTaroState<string>();
+
+  const getAsync = usePromise<{}, GetResult>(getClipboardData);
+
+  const setAsync = usePromise<SetOption>(setClipboardData);
+
+  const set: Set = (data: any) => {
+    let clipboard = data;
+    if (
+      strictOf<Record<string, any>>(data, 'Object') ||
+      isUndef(data) ||
+      strictOf<null>(data, 'Null')
+    ) {
+      clipboard = JSON.stringify(data);
+    } else if (!isString(data)) {
+      clipboard = data.toString();
     }
-    return new Promise((resolve, reject) => {
+    changeClipborardData(clipboard);
+    return setAsync({ data: clipboard });
+  };
+
+  const get: Get = () => {
+    return getAsync().then(({ data }) => {
+      let clipboard = data;
       try {
-        const data = JSON.stringify(text);
-        setClipboardData({
-          data,
-          success: (res) => {
-            changeClipborardData(text);
-            resolve(res);
-          },
-          fail: reject,
-        }).catch(reject);
+        clipboard = JSON.parse(data);
       } catch (e) {
-        reject(e);
+        logError(e);
       }
+      changeClipborardData(clipboard);
+      return clipboard;
     });
+  };
+
+  useTaroEffect(() => {
+    get();
   }, []);
 
-  const getClipboard = useCallback<getClipboard>(() => {
-    return new Promise((resolve, reject) => {
-      try {
-        getClipboardData({
-          success: (res) => {
-            const data = JSON.parse(
-              typeof res.data === 'string'
-                ? res.data
-                : (res.data as { data: string }).data,
-            );
-            changeClipborardData(data);
-            resolve(data);
-          },
-          fail: reject,
-        }).catch(reject);
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }, []);
-
-  return [clipboardData, { set: setClipboard, get: getClipboard }];
+  return [clipboardData, { set, get }];
 }
 
 export default useClipboardData;
