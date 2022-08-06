@@ -47,6 +47,13 @@ export default defineAppConfig({
     'pages/wechat/useAccountInfo/index',
     // devices
     'pages/device/useBattery/index',
+    // feedback
+    'pages/feedback/useActionSheet/index',
+    'pages/feedback/useLoading/index',
+    'pages/feedback/useModal/index',
+    'pages/feedback/useNavigationBar/index',
+    'pages/feedback/useToast/index',
+    'pages/feedback/useAlertBeforeUnload/index',
   ],
   window: {
     backgroundTextStyle: 'light',
