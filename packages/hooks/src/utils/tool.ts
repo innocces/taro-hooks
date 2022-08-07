@@ -1,5 +1,6 @@
-import { logError } from '@taro-hooks/shared';
-import type { TRecord } from '../type';
+import { logError, strictOf } from '@taro-hooks/shared';
+import { stringify } from 'querystring';
+import type { RecordData } from '../type';
 
 // prod constants
 export const isProd: boolean = process.env.NODE_ENV === 'production';
@@ -14,7 +15,7 @@ export const typeOf = (target: any, type: string | string[]): boolean => {
     .some((v) => Object.prototype.toString.call(target) === `[object ${v}]`);
 };
 
-export const isPlainObject = (payload: TRecord): boolean =>
+export const isPlainObject = (payload: RecordData): boolean =>
   !(payload && Object.entries(payload).length);
 
 export const isUndefined = (target: unknown): target is undefined =>
@@ -46,4 +47,22 @@ export function generateGeneralFail<T = string>(
  */
 export function combineOptions<T>(generalOption = {}, option = {}): T {
   return Object.assign({}, generalOption, option) as T;
+}
+
+/**
+ * make queryString URI
+ * @param url origin URI
+ * @param options unparse payload
+ * @returns {string} URIWithQS
+ */
+export function stringfiyUrl<R extends RecordData = RecordData>(
+  url: string,
+  options?: R,
+): string {
+  let stringfiyUrl = url;
+  if (options && strictOf<R>(options, 'Object')) {
+    const hasQuery = stringfiyUrl.includes('?');
+    stringfiyUrl += (hasQuery ? '&' : '?') + stringify(options);
+  }
+  return stringfiyUrl;
 }

@@ -1,5 +1,3 @@
-import type { RouterInfo } from '@tarojs/taro';
-
 export type TRecord<R = any> = { [_: string]: R };
 
 export type TAuthResultType = 'accept' | 'reject' | 'ban';
@@ -10,9 +8,7 @@ export type TGeneralCallback<T = TaroGeneral.CallbackResult, R = void> = (
   callbackResult: T,
 ) => R;
 
-export type TRouteInfo = RouterInfo<Partial<Record<string, string>>>;
-
-export type TPartialRouteInfo<R = {}> = TRouteInfo | R;
+export type Noop = (...args: any[]) => void;
 
 export type WithUndefind<R> = R | undefined;
 
@@ -26,6 +22,11 @@ export type ExcludeOption<R> = Omit<R, 'success' | 'fail' | 'complete'>;
 export type PromiseAction<T, R = TaroGeneral.CallbackResult> = (
   option: T,
 ) => Promise<UnionResult<R>>;
+
+export type PromiseParamsAction<
+  T extends Noop,
+  R = TaroGeneral.CallbackResult,
+> = (...args: Parameters<T>) => Promise<UnionResult<R>>;
 
 export type PromiseOptionalAction<T, R = TaroGeneral.CallbackResult> = (
   option?: T,

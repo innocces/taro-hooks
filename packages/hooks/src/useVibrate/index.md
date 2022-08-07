@@ -19,8 +19,8 @@ group:
 
 ## API
 
-```jsx | pure
-const [vibrateAction, stopVibrateAction] = useVibrate(interval?: boolean, gap?: number);
+```ts
+const { vibrate, clear } = useVibrate(interval?: boolean, gap?: number);
 ```
 
 ## 参数说明
@@ -32,14 +32,14 @@ const [vibrateAction, stopVibrateAction] = useVibrate(interval?: boolean, gap?: 
 
 ## 返回值说明
 
-| 返回值            | 说明                             | 类型                                                  |
-| ----------------- | -------------------------------- | ----------------------------------------------------- |
-| vibrateAction     | 操作函数, 可根据参数执行长短震动 | `(long?: boolean) => Promise<General.CallbackResult>` |
-| stopVibrateAction | 若为持续震动可取消震动           | `(long?: boolean) => Promise<General.CallbackResult>` |
+| 返回值  | 说明                             | 类型                                                  |
+| ------- | -------------------------------- | ----------------------------------------------------- |
+| vibrate | 操作函数, 可根据参数执行长短震动 | `(long?: boolean) => Promise<General.CallbackResult>` |
+| clear   | 若为持续震动可取消震动           | `() => void`                                          |
 
 ## 代码演示
 
-<code src="@pages/useVibrate" />
+<code src="useVibrate/index" group="device" />
 
 ## Hook 支持度
 

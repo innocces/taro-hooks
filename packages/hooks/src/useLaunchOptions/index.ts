@@ -1,21 +1,10 @@
-import { useEffect, useState } from 'react';
 import { getLaunchOptionsSync } from '@tarojs/taro';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
 
-export type Result = TaroGeneral.LaunchOptionsApp | undefined;
+import { createUseInfoHook } from '../createUseInfoHook';
 
-function useLaunchOptions(): Result {
-  const env = useEnv();
-  const [launchOptions, setLaunchOptions] = useState<Result>();
-
-  useEffect(() => {
-    if (env && env === ENV_TYPE.WEAPP) {
-      setLaunchOptions(getLaunchOptionsSync());
-    }
-  }, [env]);
-
-  return launchOptions;
-}
+const useLaunchOptions = createUseInfoHook<
+  Taro.getLaunchOptionsSync.LaunchOptions,
+  {}
+>(getLaunchOptionsSync, {});
 
 export default useLaunchOptions;

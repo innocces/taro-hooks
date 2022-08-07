@@ -29,23 +29,16 @@ const from = useFrom();
 
 ## 返回值说明
 
-| 返回值 | 说明             | 类型                                          |
-| ------ | ---------------- | --------------------------------------------- |
-| from   | 来源页面路由信息 | `RouterInfo<Partial<Record<string, string>>>` |
+| 返回值 | 说明             | 类型  |
+| ------ | ---------------- | ----- | ----- |
+| from   | 来源页面路由信息 | `Page | null` |
 
 ## 代码演示
 
-<code src="@pages/useFrom" />
+<code src="useFrom/index" group="basic" />
 
 ## Hook 支持度
 
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     | ✔️  |     ✔️      |
-
-## FAQ
-
-### 1. 更多说明
-
-见[小程序相关文档](https://developers.weixin.qq.com/miniprogram/dev/api/base/system/system-info/wx.getSystemInfo.html)  
-见[Taro 文档](https://taro-docs.jd.com/taro/docs/hooks#userouter)

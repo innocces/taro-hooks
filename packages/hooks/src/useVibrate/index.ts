@@ -1,63 +1,64 @@
-import { vibrateLong, vibrateShort } from '@tarojs/taro';
-import { useCallback, useRef, useEffect } from 'react';
+import {
+  vibrateLong,
+  vibrateShort,
+  useTaroRef,
+  useTaroEffect,
+} from '@tarojs/taro';
+import usePromise from '../usePromise';
+import type { PromiseOptionalAction, Noop } from '../type';
 
-export type VibrateAction = (
-  long?: boolean,
-) => Promise<TaroGeneral.CallbackResult | undefined>;
+export enum VIBRATEINTERVAL {
+  SHORT = 15,
+  LONG = 400,
+  DEFAULT = 200,
+}
 
-export type StopVibrateAction = () => void;
+export type Vibrate = PromiseOptionalAction<boolean>;
 
-const SHORTINTERVAL = 15;
-const LONGINTERVAL = 400;
-const DEFAULTGAP = 200;
+export type Clear = Noop;
 
 function useVibrate(
   interval?: boolean,
-  gap?: number,
-): [VibrateAction, StopVibrateAction] {
-  const timer = useRef<NodeJS.Timeout>();
+  gap = VIBRATEINTERVAL.DEFAULT,
+): { vibrate: Vibrate; clear: Clear } {
+  const timer = useTaroRef<NodeJS.Timeout>();
 
-  useEffect(() => {
+  const clear: Clear = () => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+      timer.current = undefined;
+    }
+  };
+
+  const vibrateLongAsync = usePromise(vibrateLong);
+  const vibrateShortAsync = usePromise(vibrateShort);
+
+  const vibrate: Vibrate = (useLong) => {
+    const implementMethod = useLong ? vibrateLongAsync : vibrateShortAsync;
+
+    return implementMethod().then((res) => {
+      if (interval) {
+        const vibrateInterval =
+          gap + (useLong ? VIBRATEINTERVAL.LONG : VIBRATEINTERVAL.SHORT);
+        clear();
+        timer.current = setTimeout(() => {
+          vibrate(useLong);
+        }, vibrateInterval);
+      }
+
+      return res;
+    });
+  };
+
+  useTaroEffect(() => {
     return () => {
       if (timer.current && interval) {
-        stopVibrateAction();
+        clear();
       }
     };
   }, [timer, interval]);
 
-  const stopVibrateAction = useCallback(() => {
-    timer.current && clearTimeout(timer.current);
-  }, [timer]);
-
-  const vibrateAction = useCallback<VibrateAction>(
-    (long) => {
-      return new Promise((resolve, reject) => {
-        try {
-          const vibrateMethod = long ? vibrateLong : vibrateShort;
-          vibrateMethod({
-            success: (res) => {
-              const computedGap =
-                (gap || DEFAULTGAP) + (long ? LONGINTERVAL : SHORTINTERVAL);
-              if (interval) {
-                // whether timer exist, clear first to fix multi vibrate
-                stopVibrateAction();
-                timer.current = setTimeout(() => {
-                  vibrateAction(long);
-                }, computedGap);
-              }
-              resolve(res);
-            },
-            fail: reject,
-          }).catch(reject);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [stopVibrateAction],
-  );
-
-  return [vibrateAction, stopVibrateAction];
+  return { vibrate, clear };
 }
 
 export default useVibrate;

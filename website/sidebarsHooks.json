@@ -20,6 +20,7 @@
         "useChooseAddress/index",
         "useInvoice/index",
         "useLaunchOptions/index",
+        "useEnterOptions/index",
         "useLogin/index",
         "useMenuButtonBoundingClientRect/index",
         "useRequestSubscribeMessage/index",

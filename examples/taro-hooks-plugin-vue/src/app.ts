@@ -24,7 +24,7 @@ App.use(NutUI);
 App.config.globalProperties.$filters = {
   stringify(value) {
     try {
-      return JSON.stringify(value);
+      return JSON.stringify(value, null, 2);
     } catch (error) {
       return value;
     }

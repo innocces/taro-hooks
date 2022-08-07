@@ -1,171 +1,145 @@
-import {
+import Taro, {
   useRouter as useTaroRouter,
-  switchTab,
+  switchTab as switchTaroTab,
   reLaunch,
   redirectTo,
   navigateTo,
   navigateBack,
   navigateToMiniProgram,
   navigateBackMiniProgram,
+  openEmbeddedMiniProgram,
+  exitMiniProgram,
+  useTaroRef,
 } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
-import { stringify } from 'querystring';
+
+import type { RouterInfo } from '@tarojs/taro';
+
 import useFrom from '../useFrom';
-import { typeOf } from '../utils/tool';
-import type { TRouteInfo, TRecord, TPartialRouteInfo } from '../type';
-export interface RouterInfoResult extends TRouteInfo {
-  from?: TPartialRouteInfo;
-}
-export type NavigateBackSync = (
-  deltaOrMark?: number | boolean,
-  extraData?: TRecord,
-) => Promise<TaroGeneral.CallbackResult>;
-export interface INavigateToMiniProgramSyncOptions {
-  appId?: string;
-  path?: string;
-  envVersion?: keyof navigateToMiniProgram.envVersion;
-  extraData?: TRecord;
-}
+import usePromise from '../usePromise';
 
-export type CommonRouteWithOptionsSync = (
+import { stringfiyUrl } from '../utils/tool';
+
+import type {
+  ExcludeOption,
+  PromiseAction,
+  PromiseParamsAction,
+  RecordData,
+  PromiseWithoutOptionAction,
+} from '../type';
+
+export type RouteOption<R = string | RecordData> = (
   url: string,
-  options?: TRecord,
-) => Promise<TaroGeneral.CallbackResult>;
+  payload?: R,
+  // open mini
+  mini?: boolean,
+  // open half screen
+  embedded?: boolean,
+) => void;
 
-export type NavigateToSync = (
-  urlOrMark: string | boolean,
-  options?: TRecord | INavigateToMiniProgramSyncOptions,
-) => Promise<TaroGeneral.CallbackResult>;
-export interface ResultMethods {
-  switchTab: CommonRouteWithOptionsSync;
-  relaunch: CommonRouteWithOptionsSync;
-  redirectTo: CommonRouteWithOptionsSync;
-  navigateTo: NavigateToSync;
-  navigateBack: NavigateBackSync;
-}
+export type RouteBaseOption = { url: string };
 
-export type Result = [RouterInfoResult, ResultMethods];
+export type RouteOptionWithParams<R, S = undefined> = R & { params: S };
 
-function stringfiyUrl(url: string, options?: TRecord): string {
-  let stringfiyUrl = url;
-  if (options && typeof options === 'object') {
-    const hasQuery = stringfiyUrl.includes('?');
-    stringfiyUrl += (hasQuery ? '&' : '?') + stringify(options);
-  }
-  return stringfiyUrl;
-}
+export type SwitchTab = PromiseAction<string>;
 
-function useRouter(): Result {
-  const [router, setRouter] = useState<RouterInfoResult>(useTaroRouter());
+export type RouteBackOption = (
+  payload?: number | Taro.navigateBackMiniProgram.Option['extraData'],
+  // open mini
+  mini?: boolean,
+) => void;
+
+export type Back = PromiseParamsAction<RouteBackOption>;
+
+export type Exit = PromiseWithoutOptionAction;
+
+export type RouteNavigate<R> = PromiseParamsAction<RouteOption<R>>;
+
+export type Route<R extends Partial<RecordData>> = RouterInfo<R> & {
+  from: ReturnType<typeof useFrom>;
+};
+
+function useRouter<R extends RecordData>(): [
+  Route<R>,
+  {
+    navigate: RouteNavigate<R>;
+    switchTab: SwitchTab;
+    back: Back;
+    redirect: RouteNavigate<R>;
+    relaunch: RouteNavigate<R>;
+    exit: Exit;
+  },
+] {
+  const router = useTaroRef<Omit<Route<R>, 'from'>>(useTaroRouter());
   const from = useFrom();
 
-  useEffect(() => {
-    setRouter({
-      ...router,
-      from,
+  const navigateToAsync =
+    usePromise<ExcludeOption<Taro.navigateTo.Option>>(navigateTo);
+  const navigateToMiniProgramAsync = usePromise<
+    ExcludeOption<Taro.navigateToMiniProgram.Option>
+  >(navigateToMiniProgram);
+  const openEmbeddedMiniProgramAsync =
+    usePromise<Taro.openEmbeddedMiniProgram.Option>(openEmbeddedMiniProgram);
+  const switchTabAsync = usePromise<RouteBaseOption>(switchTaroTab);
+  const relaunchAsync = usePromise<RouteBaseOption>(reLaunch);
+  const redirectToAsync = usePromise<RouteBaseOption>(redirectTo);
+  const navigateBackAsync =
+    usePromise<ExcludeOption<Taro.navigateBack.Option>>(navigateBack);
+  const navigateBackMiniProgramAsync = usePromise<
+    ExcludeOption<Taro.navigateBackMiniProgram.Option>
+  >(navigateBackMiniProgram);
+  const exitMiniProgramAsync = usePromise<{}>(exitMiniProgram);
+
+  const navigate: RouteNavigate<R> = (url, payload, mini, embedded) => {
+    if (mini) {
+      const { params = {}, ...extendsPayload } =
+        payload as unknown as RouteOptionWithParams<
+          Omit<ExcludeOption<Taro.navigateToMiniProgram.Option>, 'path'>
+        >;
+      const navigateURI = stringfiyUrl<typeof params>(url, params);
+      const options = { path: navigateURI, ...extendsPayload };
+      return embedded
+        ? openEmbeddedMiniProgramAsync(options)
+        : navigateToMiniProgramAsync(options);
+    }
+    const navigateURI = stringfiyUrl<R>(url, payload);
+    return navigateToAsync({ url: navigateURI });
+  };
+
+  const switchTab: SwitchTab = (url) => {
+    return switchTabAsync({ url });
+  };
+
+  const relaunch: RouteNavigate<R> = (url, payload) => {
+    const navigateURI = stringfiyUrl<R>(url, payload);
+    return relaunchAsync({ url: navigateURI });
+  };
+
+  const redirect: RouteNavigate<R> = (url, payload) => {
+    const navigateURI = stringfiyUrl<R>(url, payload);
+    return redirectToAsync({ url: navigateURI });
+  };
+
+  const back: Back = (payload, mini) => {
+    if (!mini) {
+      return navigateBackAsync({ delta: (payload || 1) as number });
+    }
+
+    return navigateBackMiniProgramAsync({
+      extraData: (payload || {}) as RecordData,
     });
-  }, [from]);
+  };
 
-  const switchTabSync = useCallback<CommonRouteWithOptionsSync>(
-    (url, options) => {
-      return new Promise((resolve, reject) => {
-        try {
-          url = stringfiyUrl(url, options);
-          switchTab({ url, success: resolve, fail: reject }).catch(reject);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [],
-  );
-
-  const relaunchSync = useCallback<CommonRouteWithOptionsSync>(
-    (url, options) => {
-      return new Promise((resolve, reject) => {
-        try {
-          url = stringfiyUrl(url, options);
-          reLaunch({ url, success: resolve, fail: reject }).catch(reject);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [],
-  );
-
-  const redirectToSync = useCallback<CommonRouteWithOptionsSync>(
-    (url, options) => {
-      return new Promise((resolve, reject) => {
-        try {
-          url = stringfiyUrl(url, options);
-          redirectTo({ url, success: resolve, fail: reject }).catch(reject);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [],
-  );
-
-  const navigateToSync = useCallback<NavigateToSync>((urlOrMark, options) => {
-    return new Promise((resolve, reject) => {
-      try {
-        const { appId } = options || {};
-        // if appid exist, use navigateToMiniprogram
-        if (appId && urlOrMark) {
-          navigateToMiniProgram({
-            ...options,
-            appId,
-            success: resolve,
-            fail: reject,
-          }).catch(reject);
-        } else if (typeOf(urlOrMark, 'String')) {
-          urlOrMark = stringfiyUrl(urlOrMark as string, options);
-          navigateTo({ url: urlOrMark, success: resolve, fail: reject }).catch(
-            reject,
-          );
-        }
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }, []);
-
-  const navigateBackSync = useCallback<NavigateBackSync>(
-    (deltaOrMark, extraData) => {
-      return new Promise((resolve, reject) => {
-        try {
-          // if deltaOrMark is boolean, use navigateBackMiniprogram
-          if (typeOf(deltaOrMark, 'Boolean') && deltaOrMark) {
-            navigateBackMiniProgram({
-              ...(extraData ? { extraData } : {}),
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
-          } else {
-            navigateBack({
-              ...(deltaOrMark ? { deltaOrMark } : {}),
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
-          }
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [],
-  );
+  const exit: Exit = exitMiniProgramAsync;
 
   return [
-    router,
+    { ...router.current, from },
     {
-      switchTab: switchTabSync,
-      relaunch: relaunchSync,
-      redirectTo: redirectToSync,
-      navigateTo: navigateToSync,
-      navigateBack: navigateBackSync,
+      navigate,
+      switchTab,
+      relaunch,
+      redirect,
+      back,
+      exit,
     },
   ];
 }

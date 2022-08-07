@@ -47,11 +47,16 @@ export default defineAppConfig({
     'pages/basic/useWindowInfo/index',
     'pages/basic/useArrayBuffer/index',
     'pages/basic/useClipboardData/index',
+    'pages/basic/useRouter/index',
+    'pages/basic/useFrom/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
     'pages/wechat/useAPICheck/index',
+    'pages/wechat/useLaunchOptions/index',
+    'pages/wechat/useEnterOptions/index',
     // devices
     'pages/device/useBattery/index',
+    'pages/device/useVibrate/index',
     // feedback
     'pages/feedback/useActionSheet/index',
     'pages/feedback/useLoading/index',

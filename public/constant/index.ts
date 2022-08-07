@@ -174,6 +174,11 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       onlyMini: true,
     },
     {
+      id: 'useEnterOptions',
+      name: 'useEnterOptions 启动参数',
+      onlyMini: true,
+    },
+    {
       id: 'useUserInfo',
       name: 'useUserInfo 用户信息',
       onlyMini: true,
