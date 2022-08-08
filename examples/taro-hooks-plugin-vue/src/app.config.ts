@@ -54,9 +54,11 @@ export default defineAppConfig({
     'pages/wechat/useAPICheck/index',
     'pages/wechat/useLaunchOptions/index',
     'pages/wechat/useEnterOptions/index',
+    'pages/wechat/useTopBarText/index',
     // devices
     'pages/device/useBattery/index',
     'pages/device/useVibrate/index',
+    'pages/device/useBrightness/index',
     // feedback
     'pages/feedback/useActionSheet/index',
     'pages/feedback/useLoading/index',

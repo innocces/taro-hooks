@@ -2,58 +2,62 @@ import {
   getScreenBrightness,
   setScreenBrightness,
   setKeepScreenOn,
+  useTaroState,
+  useTaroEffect,
 } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import { isNumber } from '@taro-hooks/shared';
+import usePromise from '../usePromise';
 
-export type IAction = (value: number) => Promise<TaroGeneral.CallbackResult>;
+import type {
+  PromiseAction,
+  PromiseWithoutOptionAction,
+  ExcludeOption,
+  WithUndefind,
+} from '../type';
 
-function useBrightness(keepon?: boolean): [number, IAction] {
-  const [brightness, setBrightness] = useState<number>(0);
-  const env = useEnv();
+export type SetKeepOn = Promise<ExcludeOption<Taro.setKeepScreenOn.Option>>;
 
-  useEffect(() => {
-    if (env) {
-      getBrightness();
+export type GetBrightness =
+  PromiseWithoutOptionAction<Taro.getScreenBrightness.SuccessCallbackOption>;
+
+export type setBrightness = PromiseAction<number>;
+
+function useBrightness(
+  keepon?: boolean,
+): [WithUndefind<number>, setBrightness] {
+  const [brightness, changeBrightness] = useTaroState<number>();
+
+  const getAsync = usePromise<
+    {},
+    Taro.getScreenBrightness.SuccessCallbackOption
+  >(getScreenBrightness);
+
+  const setAsync =
+    usePromise<ExcludeOption<Taro.setScreenBrightness.Option>>(
+      setScreenBrightness,
+    );
+
+  const getBrightness: GetBrightness = () => {
+    return getAsync().then((res) => {
+      if (isNumber(res?.value)) {
+        changeBrightness(res.value);
+      }
+      return res;
+    });
+  };
+
+  const setBrightness: setBrightness = (value) => {
+    return setAsync({ value });
+  };
+
+  useTaroEffect(() => {
+    getBrightness();
+    if (keepon) {
+      setKeepScreenOn({ keepScreenOn: keepon });
     }
-  }, [env]);
+  }, []);
 
-  const getBrightness = useCallback(async () => {
-    if (env !== ENV_TYPE.WEB) {
-      const { value: brightness } = await getScreenBrightness();
-      setBrightness(brightness);
-      keepon && setKeepScreenOn({ keepScreenOn: keepon });
-    }
-  }, [env, keepon]);
-
-  const setBrightnessAsync = useCallback<IAction>(
-    (value) => {
-      return new Promise((resolve, reject) => {
-        try {
-          if (env === ENV_TYPE.WEB) {
-            reject('please use hook in weapp or app');
-          } else if (value < 0 || value > 1) {
-            reject('please input a valid number');
-          } else {
-            setScreenBrightness({
-              value,
-              success: (res) => {
-                resolve(res);
-                setBrightness(value);
-              },
-              fail: reject,
-            }).catch(reject);
-          }
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [env],
-  );
-
-  return [brightness, setBrightnessAsync];
+  return [brightness, setBrightness];
 }
 
 export default useBrightness;

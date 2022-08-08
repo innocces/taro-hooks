@@ -19,7 +19,7 @@ group:
 
 ## API
 
-```jsx | pure
+```ts
 const [brightness, setBrightness] = useBrightness(keepon?: boolean);
 ```
 
@@ -38,7 +38,7 @@ const [brightness, setBrightness] = useBrightness(keepon?: boolean);
 
 ## 代码演示
 
-<code src="@pages/useBrightness" />
+<code src="useBrightness/index" group="device" />
 
 ## Hook 支持度
 
