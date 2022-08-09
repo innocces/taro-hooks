@@ -1,43 +1,48 @@
-import { requestSubscribeMessage } from '@tarojs/taro';
-import type { requestSubscribeMessage as requestSubscribeMessageNamespace } from '@tarojs/taro';
-import { useCallback } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
-import type { TAuthResultType } from '../type';
+import {
+  requestSubscribeMessage,
+  requestSubscribeDeviceMessage,
+} from '@tarojs/taro';
+import usePromise from '../usePromise';
 
-export type TSuccessResult = { [tmplId: string]: TAuthResultType };
-export type IAction = (
-  tmplIds: (keyof TSuccessResult)[],
-) => Promise<
-  TSuccessResult | requestSubscribeMessageNamespace.FailCallbackResult
+import type { ExcludeOption, PromiseAction } from '../type';
+
+export type SubscribeOption =
+  ExcludeOption<Taro.requestSubscribeMessage.Option>;
+
+export type Subscribe = PromiseAction<
+  SubscribeOption['tmplIds'],
+  Taro.requestSubscribeMessage.SuccessCallbackResult
 >;
 
-function useRequestSubscribeMessage(): [IAction] {
-  const env = useEnv();
+export type SubscribeDeviceOption =
+  ExcludeOption<Taro.requestSubscribeDeviceMessage.Option>;
 
-  const requestSubscribeMessageAsync = useCallback<IAction>(
-    (tmplIds) => {
-      return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEAPP || !tmplIds?.length) {
-          reject({ errMsg: 'requestSubscribeMessage: fail' });
-        } else {
-          try {
-            requestSubscribeMessage({
-              tmplIds,
-              success: ({ errMsg, ...result }) =>
-                resolve(result as TSuccessResult),
-              fail: reject,
-            }).catch(reject);
-          } catch (e) {
-            reject({ errMsg: 'requestSubscribeMessage: fail', data: e });
-          }
-        }
-      });
-    },
-    [env],
-  );
+export type SubscribeDevice = PromiseAction<
+  SubscribeDeviceOption,
+  Taro.requestSubscribeDeviceMessage.SuccessCallbackResult
+>;
 
-  return [requestSubscribeMessageAsync];
+function useRequestSubscribeMessage(): {
+  subscribe: Subscribe;
+  subscribeDevice: SubscribeDevice;
+} {
+  const subscribeAsync = usePromise<
+    SubscribeOption,
+    Taro.requestSubscribeMessage.SuccessCallbackResult
+  >(requestSubscribeMessage);
+  const subscribeDevice: SubscribeDevice = usePromise<
+    SubscribeDeviceOption,
+    Taro.requestSubscribeDeviceMessage.SuccessCallbackResult
+  >(requestSubscribeDeviceMessage);
+
+  const subscribe: Subscribe = (tmplIds) => {
+    return subscribeAsync({ tmplIds });
+  };
+
+  return {
+    subscribe,
+    subscribeDevice,
+  };
 }
 
 export default useRequestSubscribeMessage;

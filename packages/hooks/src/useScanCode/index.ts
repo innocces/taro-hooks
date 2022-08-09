@@ -1,64 +1,40 @@
 import { scanCode } from '@tarojs/taro';
-import { useCallback } from 'react';
+import usePromise from '../usePromise';
 
-export interface IOptions {
-  onlyFromCamera?: boolean;
-  scanType?: keyof scanCode.ScanType;
-}
+import type { ExcludeOption, PromiseOptionalAction } from '../type';
 
-export type IScanAction = (
-  options?: IOptions,
-) => Promise<scanCode.SuccessCallbackResult>;
+export type Option = ExcludeOption<Taro.scanCode.Option>;
 
-export type ICameraScanAction = (
-  scanType?: keyof scanCode.ScanType,
-) => Promise<scanCode.SuccessCallbackResult>;
+export type Scan = PromiseOptionalAction<
+  Option,
+  Taro.scanCode.SuccessCallbackResult
+>;
 
-function useScanCode({ onlyFromCamera, scanType }: IOptions = {}): [
-  IScanAction,
-  ICameraScanAction,
-] {
-  const scan = useCallback<IScanAction>(
-    (option = {}) => {
-      return new Promise((resolve, reject) => {
-        try {
-          const {
-            onlyFromCamera: personalOnlyFromCamera,
-            scanType: personalScanType,
-          } = option;
-          const payload = Object.fromEntries(
-            Object.entries({
-              onlyFromCamera: personalOnlyFromCamera || onlyFromCamera,
-              scanType: personalScanType || scanType,
-            }).filter((v) => typeof v[1] !== 'undefined'),
-          );
-          scanCode({
-            ...payload,
-            success: resolve,
-            fail: reject,
-          }).catch(reject);
-        } catch (e) {
-          reject({
-            errMsg: 'scanCode:fail',
-            message: e,
-          });
-        }
-      });
-    },
-    [scanType, onlyFromCamera],
+export type CameraScan = PromiseOptionalAction<
+  Taro.scanCode.Option['scanType'],
+  Taro.scanCode.SuccessCallbackResult
+>;
+
+function useScanCode(initialOption: Option = {}): {
+  scan: Scan;
+  cameraScan: CameraScan;
+} {
+  const scanAsync = usePromise<Option, Taro.scanCode.SuccessCallbackResult>(
+    scanCode,
   );
 
-  const cameraScan = useCallback<ICameraScanAction>(
-    (cameraScanType) => {
-      return scan({
-        onlyFromCamera: true,
-        scanType: cameraScanType || scanType,
-      });
-    },
-    [scanType, scan],
-  );
+  const scan: Scan = (option = {}) => {
+    return scanAsync({ ...initialOption, ...option });
+  };
 
-  return [scan, cameraScan];
+  const cameraScan: CameraScan = (type) => {
+    return scanAsync({
+      scanType: type ?? initialOption?.scanType,
+      onlyFromCamera: true,
+    });
+  };
+
+  return { scan, cameraScan };
 }
 
 export default useScanCode;
