@@ -51,6 +51,7 @@ export default {
     'pages/wechat/useEnterOptions/index',
     'pages/wechat/useTopBarText/index',
     'pages/wechat/useRequestSubscribeMessage/index',
+    'pages/wechat/useMenuButtonBoundingClientRect/index',
     // devices
     'pages/device/useBattery/index',
     'pages/device/useVibrate/index',
@@ -63,6 +64,8 @@ export default {
     'pages/feedback/useNavigationBar/index',
     'pages/feedback/useToast/index',
     'pages/feedback/useAlertBeforeUnload/index',
+    // layout
+    'pages/layout/useManualPullDownRefresh/index',
   ],
   window: {
     backgroundTextStyle: 'light',

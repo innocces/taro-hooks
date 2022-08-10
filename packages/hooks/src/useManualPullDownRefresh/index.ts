@@ -1,52 +1,41 @@
-import { startPullDownRefresh, stopPullDownRefresh } from '@tarojs/taro';
-import { useCallback, useRef } from 'react';
+import {
+  startPullDownRefresh,
+  stopPullDownRefresh,
+  useTaroRef,
+} from '@tarojs/taro';
+import { isNumber } from '@taro-hooks/shared';
+import usePromise from '../usePromise';
 
-export type TStartPullDownRefresh = (
-  duration?: number,
-) => Promise<TaroGeneral.CallbackResult>;
-export type TAction = () => Promise<TaroGeneral.CallbackResult>;
+import type {
+  PromiseWithoutOptionAction,
+  PromiseOptionalAction,
+} from '../type';
 
-function useManualPullDownRefresh(): [TStartPullDownRefresh, TAction] {
-  const timer = useRef<NodeJS.Timeout>();
-  const startPullDownRefreshAsync = useCallback<TStartPullDownRefresh>(
-    (duration) => {
-      return new Promise((resolve, reject) => {
-        try {
+export type Start = PromiseOptionalAction<number>;
+
+export type Stop = PromiseWithoutOptionAction;
+
+function useManualPullDownRefresh(): [Start, Stop] {
+  const timer = useTaroRef<NodeJS.Timeout>();
+
+  const startAsync = usePromise<{}>(startPullDownRefresh);
+
+  const stop: Stop = usePromise<{}>(stopPullDownRefresh);
+
+  const start: Start = (duration) => {
+    timer.current && clearTimeout(timer.current);
+    return startAsync().then((res) => {
+      if (isNumber(duration) && duration) {
+        timer.current = setTimeout(() => {
+          stop();
           timer.current && clearTimeout(timer.current);
-          startPullDownRefresh({
-            success: (res) => {
-              if (typeof duration === 'number' && duration > 0) {
-                timer.current = setTimeout(() => {
-                  stopPullDownRefreshAsync();
-                  timer.current && clearTimeout(timer.current);
-                }, duration);
-              }
-              resolve(res);
-            },
-            fail: reject,
-          });
-        } catch (e) {
-          reject({ errMsg: 'startPullDownRefresh: fail', data: e });
-        }
-      });
-    },
-    [timer],
-  );
-
-  const stopPullDownRefreshAsync = useCallback<TAction>(() => {
-    return new Promise((resolve, reject) => {
-      try {
-        stopPullDownRefresh({
-          success: resolve,
-          fail: reject,
-        });
-      } catch (e) {
-        reject({ errMsg: 'stopPullDownRefresh: fail', data: e });
+        }, duration);
       }
+      return res;
     });
-  }, []);
+  };
 
-  return [startPullDownRefreshAsync, stopPullDownRefreshAsync];
+  return [start, stop];
 }
 
 export default useManualPullDownRefresh;

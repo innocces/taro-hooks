@@ -19,7 +19,7 @@ group:
 
 ## API
 
-```jsx | pure
+```ts
 const [setBackgroundColor, setBackgroundTextColor] = useBackground(option?);
 ```
 
@@ -32,7 +32,7 @@ const [setBackgroundColor, setBackgroundTextColor] = useBackground(option?);
 | backgroundColorBottom | 底部窗口的背景色，必须为十六进制颜色值，仅 iOS 支持 | `string`     | -      |
 | textStyle             | 下拉背景字体、loading 图的样式                      | `TTextStyle` | -      |
 
-### TTextStyle
+### TextStyle
 
 | 参数  | 类型    | 说明       |
 | ----- | ------- | ---------- |
@@ -41,12 +41,12 @@ const [setBackgroundColor, setBackgroundTextColor] = useBackground(option?);
 
 ## 返回值说明
 
-| 参数                   | 类型                                                                      | 说明                                                 |
-| ---------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------- |
-| setBackgroundColor     | `(setOption?: IBackgroundColorOption) => Promise<General.CallbackResult>` | 动态设置下拉背景字体、loading 图的样式 ( `RN仅iOS` ) |
-| setBackgroundTextColor | `(textStyle: TTextStyle) => Promise<General.CallbackResult>`              | 动态设置窗口的背景色( `RN仅Android` )                |
+| 参数                   | 类型                                                                     | 说明                                                 |
+| ---------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------- |
+| setBackgroundColor     | `(setOption?: BackgroundColorOption) => Promise<General.CallbackResult>` | 动态设置下拉背景字体、loading 图的样式 ( `RN仅iOS` ) |
+| setBackgroundTextColor | `(textStyle: TextStyle) => Promise<General.CallbackResult>`              | 动态设置窗口的背景色( `RN仅Android` )                |
 
-### IBackgroundColorOption
+### BackgroundColorOption
 
 | 参数                  | 说明                                                | 类型     | 默认值 |
 | --------------------- | --------------------------------------------------- | -------- | ------ |
@@ -56,17 +56,10 @@ const [setBackgroundColor, setBackgroundTextColor] = useBackground(option?);
 
 ## 代码演示
 
-<code src="@pages/useBackground" />
+<code src="useManualPullDownRefresh/index" group="layout" />
 
 ## Hook 支持度
 
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     |     |     ✔️      |
-
-## FAQ
-
-### 1. 更多说明
-
-- [setBackgroundTextStyle](https://developers.weixin.qq.com/miniprogram/dev/api/ui/background/wx.setBackgroundTextStyle.html)
-- [setBackgroundColor](https://developers.weixin.qq.com/miniprogram/dev/api/ui/background/wx.setBackgroundColor.html)

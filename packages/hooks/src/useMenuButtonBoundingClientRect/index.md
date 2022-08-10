@@ -19,7 +19,7 @@ group:
 
 ## API
 
-```jsx | pure
+```ts
 const rect = useMenuButtonBoundingClientRect();
 ```
 
@@ -29,11 +29,11 @@ const rect = useMenuButtonBoundingClientRect();
 
 ## 返回值说明
 
-| 返回值 | 说明         | 类型    |
-| ------ | ------------ | ------- |
-| rect   | 布局位置信息 | `TRect` |
+| 返回值 | 说明         | 类型   |
+| ------ | ------------ | ------ |
+| rect   | 布局位置信息 | `Rect` |
 
-### TRect
+### Rect
 
 | 返回值 | 说明                 | 类型     |
 | ------ | -------------------- | -------- |
@@ -46,16 +46,10 @@ const rect = useMenuButtonBoundingClientRect();
 
 ## 代码演示
 
-<code src="@pages/useMenuButtonBoundingClientRect" />
+<code src="useMenuButtonBoundingClientRect/index" group="wechat" />
 
 ## Hook 支持度
 
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     |     |             |
-
-## FAQ
-
-### 1. 更多说明
-
-见[小程序相关文档](https://developers.weixin.qq.com/miniprogram/dev/api/ui/menu/wx.getMenuButtonBoundingClientRect.html)

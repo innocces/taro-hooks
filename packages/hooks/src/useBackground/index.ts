@@ -1,83 +1,44 @@
-import { setBackgroundColor, setBackgroundTextStyle } from '@tarojs/taro';
-import { isPlainObject } from '../utils/tool';
-import { useCallback, useEffect } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import {
+  setBackgroundColor,
+  setBackgroundTextStyle,
+  useTaroEffect,
+} from '@tarojs/taro';
+import usePromise from '../usePromise';
 
-export type TTextStyle = 'dark' | 'light';
+import type {
+  ExcludeOption,
+  PromiseOptionalAction,
+  PromiseAction,
+} from '../type';
 
-export interface IBackgroundColorOption {
-  backgroundColor?: string;
-  backgroundColorBottom?: string;
-  backgroundColorTop?: string;
-}
+export type ColorOption = ExcludeOption<Taro.setBackgroundColor.Option>;
 
-export interface IOption extends IBackgroundColorOption {
-  textStyle?: TTextStyle;
-}
+export type SetColor = PromiseOptionalAction<ColorOption>;
 
-export type TSetBackgroundColor = (
-  setOption?: IBackgroundColorOption,
-) => Promise<TaroGeneral.CallbackResult>;
-export type TSetBackgroundTextStyle = (
-  textStyle: TTextStyle,
-) => Promise<TaroGeneral.CallbackResult>;
+export type StyleOption = ExcludeOption<Taro.setBackgroundTextStyle.Option>;
 
-function useBackground(
-  option?: IOption,
-): [TSetBackgroundColor, TSetBackgroundTextStyle] {
-  const env = useEnv();
+export type SetStyle = PromiseAction<StyleOption['textStyle']>;
 
-  useEffect(() => {
+export type Option = ColorOption & StyleOption;
+
+function useBackground(option?: Option): [SetColor, SetStyle] {
+  const setColor: SetColor = usePromise<ColorOption>(setBackgroundColor);
+
+  const setStyleAsync = usePromise<StyleOption>(setBackgroundTextStyle);
+
+  const setStyle: SetStyle = (textStyle) => {
+    return setStyleAsync({ textStyle });
+  };
+
+  useTaroEffect(() => {
     if (option) {
-      setBackgroundColorAsync(option);
-      option.textStyle && setBackgroundTextStyleAsync(option.textStyle);
+      const { textStyle, ...colorOption } = option;
+      setColor(colorOption);
+      textStyle && setStyle(textStyle);
     }
   }, [option]);
 
-  const setBackgroundColorAsync = useCallback<TSetBackgroundColor>(
-    (setOption = {}) => {
-      return new Promise((resolve, reject) => {
-        if (isPlainObject(setOption) || env === ENV_TYPE.WEB) {
-          reject({ errMsg: 'setBackgroundColor: fail' });
-        } else {
-          try {
-            setBackgroundColor({
-              ...setOption,
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
-          } catch (e) {
-            reject({ errMsg: 'setBackgroundColor: fail', data: e });
-          }
-        }
-      });
-    },
-    [option, env],
-  );
-
-  const setBackgroundTextStyleAsync = useCallback<TSetBackgroundTextStyle>(
-    (textStyle) => {
-      return new Promise((resolve, reject) => {
-        if (!textStyle || env === ENV_TYPE.WEB) {
-          reject({ errMsg: 'setBackgroundTextStyle: fail' });
-        } else {
-          try {
-            setBackgroundTextStyle({
-              textStyle,
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
-          } catch (e) {
-            reject({ errMsg: 'setBackgroundTextStyle: fail', data: e });
-          }
-        }
-      });
-    },
-    [option, env],
-  );
-
-  return [setBackgroundColorAsync, setBackgroundTextStyleAsync];
+  return [setColor, setStyle];
 }
 
 export default useBackground;

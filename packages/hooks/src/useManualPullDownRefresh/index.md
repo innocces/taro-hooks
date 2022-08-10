@@ -9,11 +9,11 @@ group:
   path: /layout
 ---
 
-<Alert>
-  区分官方的<code>usePullDownRefresh</code>, 官方为监听下拉刷新, 而本hook则为手动控制界面展示下拉刷新
-</Alert>
+:::caution
 
-# useManualPullDownRefresh
+区分官方的`usePullDownRefresh`, 官方为监听下拉刷新, 而本 hook 则为手动控制界面展示下拉刷新
+
+:::
 
 手动下拉刷新
 
@@ -23,7 +23,7 @@ group:
 
 ## API
 
-```jsx | pure
+```ts
 const [start, stop] = useManualPullDownRefresh();
 ```
 
@@ -40,17 +40,10 @@ const [start, stop] = useManualPullDownRefresh();
 
 ## 代码演示
 
-<code src="@pages/useManualPullDownRefresh" />
+<code src="useManualPullDownRefresh/index" group="layout" />
 
 ## Hook 支持度
 
 | 微信小程序 | H5  |  ReactNative   |
 | :--------: | :-: | :------------: |
 |     ✔️     | ✔️  | ✔️(无动画效果) |
-
-## FAQ
-
-### 1. 更多说明
-
-- [startPullDownRefresh](https://developers.weixin.qq.com/miniprogram/dev/api/ui/pull-down-refresh/wx.startPullDownRefresh.html)
-- [stopPullDownRefresh](https://developers.weixin.qq.com/miniprogram/dev/api/ui/pull-down-refresh/wx.stopPullDownRefresh.html)
