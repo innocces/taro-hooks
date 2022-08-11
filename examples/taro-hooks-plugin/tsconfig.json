@@ -22,7 +22,8 @@
     "paths": {
       "@root/*": ["../../*"],
       "@src/*": ["./src/*"]
-    }
+    },
+    "skipLibCheck": true
   },
   "include": ["./src", "global.d.ts"],
   "compileOnSave": false

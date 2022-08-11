@@ -21,7 +21,8 @@
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "@root/*": ["../../*"]
-    }
+    },
+    "skipLibCheck": true
   },
   "include": ["./src", "global.d.ts"],
   "compileOnSave": false

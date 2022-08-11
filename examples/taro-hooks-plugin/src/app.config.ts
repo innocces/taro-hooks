@@ -69,8 +69,16 @@ export default {
   ],
   window: {
     backgroundTextStyle: 'light',
+    backgroundColor: '#f8f8f8',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'Taro-Hooks',
+    navigationBarTitleText: 'Taro hooks',
     navigationBarTextStyle: 'black',
+    enablePullDownRefresh: true,
   },
+  permission: {
+    'scope.userLocation': {
+      desc: '您的位置信息将用于小程序位置接口展示',
+    },
+  },
+  requiredBackgroundModes: ['location', 'audio'],
 };
