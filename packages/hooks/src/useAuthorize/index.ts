@@ -1,177 +1,106 @@
-import { useCallback, useEffect, useState } from 'react';
-import { getSetting, openSetting, AuthSetting, authorize } from '@tarojs/taro';
-import useEnv from '../useEnv';
+import {
+  getSetting,
+  openSetting,
+  authorize as taroAuthorize,
+  authorizeForMiniProgram,
+  useTaroState,
+  useTaroEffect,
+} from '@tarojs/taro';
+import type { AuthSetting, SubscriptionsSetting } from '@tarojs/taro';
 import useVisible from '../useVisible';
-import { typeOf } from '../utils/tool';
-import type { TAuthResultType } from '../type';
-import { ENV_TYPE } from '../constant';
+import usePromise from '../usePromise';
 
-declare var wx: any;
+import type {
+  ExcludeOption,
+  PromiseOptionalAction,
+  PromiseParamsAction,
+} from '../type';
 
-// rewrite openSetting options
-interface ISubscriptionsSetting {
-  mainSwitch?: boolean;
-  itemSetting?: {
-    [_: string]: TAuthResultType;
-  };
-}
-interface IROpenSettingSuccessCallbackResult
-  extends openSetting.SuccessCallbackResult {
-  subscriptionsSetting?: ISubscriptionsSetting;
-}
+export type Authorize = PromiseParamsAction<
+  (scope: string, mini?: boolean) => void
+>;
 
-interface IOption {
-  withSubscriptions?: boolean;
-}
+export type Get = PromiseOptionalAction<
+  boolean,
+  Taro.getSetting.SuccessCallbackResult
+>;
 
-interface IROpenSettingOption extends openSetting.Option {
-  success?: (result: IROpenSettingSuccessCallbackResult) => void;
-}
-type ROpenSetting = (
-  options: IROpenSettingOption & IOption,
-) => Promise<IROpenSettingSuccessCallbackResult>;
+export type Open = PromiseOptionalAction<
+  boolean,
+  Taro.openSetting.SuccessCallbackResult
+>;
 
-interface IRGetSettingSuccessCallbackResult
-  extends openSetting.SuccessCallbackResult {
-  subscriptionsSetting?: ISubscriptionsSetting;
-  miniprogramAuthSetting?: AuthSetting;
-}
-interface IRGetSettingOption extends getSetting.Option {
-  success?: (result: IRGetSettingSuccessCallbackResult) => void;
-}
-type RGetSetting = (
-  options: IRGetSettingOption & IOption,
-) => Promise<IRGetSettingSuccessCallbackResult>;
+export type WithMiniAuthSetting = AuthSetting & { mini: AuthSetting };
 
-export type IOpenSettingAction = (
-  withSubscriptions?: boolean,
-) => Promise<IROpenSettingSuccessCallbackResult>;
-
-// plugin scope
-export interface IAuthSettingForMiniProgram {
-  'scope.record'?: boolean;
-  'scope.writePhotosAlbum'?: boolean;
-  'scope.camera'?: boolean;
-}
-export type IAuthorizeAction = (
-  scope: keyof AuthSetting | keyof IAuthSettingForMiniProgram,
-  miniprogram?: boolean,
-) => Promise<TaroGeneral.CallbackResult>;
-
-export interface IAction {
-  openSetting: IOpenSettingAction;
-  authorize: IAuthorizeAction;
-}
-
-export interface IResult {
-  authSetting: AuthSetting;
-  subscriptionsSetting: ISubscriptionsSetting;
-  miniprogramAuthSetting: AuthSetting;
-}
-
-function useAuthorize(option?: IOption): [IResult, IAction] {
-  const env = useEnv();
+function useAuthorize(withSubscriptions?: boolean): {
+  authSetting: WithMiniAuthSetting;
+  subscriptionsSetting: SubscriptionsSetting | {};
+  authorize: Authorize;
+  get: Get;
+  open: Open;
+} {
   const visible = useVisible();
-  const [authSetting, setAuthSetting] = useState<AuthSetting>({});
-  const [subscriptionsSetting, setSubscriptionsSetting] =
-    useState<ISubscriptionsSetting>({});
-  const [miniprogramAuthSetting, setMiniprogramAuthSetting] =
-    useState<AuthSetting>({});
+  const [authSetting, setAuthSetting] = useTaroState<WithMiniAuthSetting>({
+    mini: {},
+  });
+  const [subscriptionsSetting, setSubscriptionsSetting] = useTaroState<
+    SubscriptionsSetting | {}
+  >({});
 
-  useEffect(() => {
-    if (env === ENV_TYPE.WEAPP) {
-      getSettingAsync();
-    }
-  }, [env, visible]);
+  const authorizeAsync = usePromise<Taro.authorize.Option>(taroAuthorize);
+  const authorizeForMiniProgramAsync =
+    usePromise<Taro.authorizeForMiniProgram.Option>(authorizeForMiniProgram);
 
-  const getSettingAsync = useCallback(async () => {
-    try {
-      const { withSubscriptions = false } = option || {};
-      const {
-        authSetting: totalAuthSetting = {},
-        subscriptionsSetting: totalSubscriptionsSetting,
-        miniprogramAuthSetting: totalMiniprogramAuthSetting,
-      } = await (getSetting as RGetSetting)({
-        withSubscriptions,
+  const authorize: Authorize = (scope, mini) => {
+    const payload = { scope };
+
+    return mini
+      ? authorizeForMiniProgramAsync(payload)
+      : authorizeAsync(payload);
+  };
+
+  const getAsync = usePromise<
+    ExcludeOption<Taro.getSetting.Option>,
+    Taro.getSetting.SuccessCallbackResult
+  >(getSetting);
+
+  const get: Get = (withSubscriptions) => {
+    return getAsync({ withSubscriptions }).then((res) => {
+      const { authSetting, subscriptionsSetting, miniprogramAuthSetting } = res;
+      setAuthSetting({ ...authSetting, mini: miniprogramAuthSetting });
+      setSubscriptionsSetting(subscriptionsSetting);
+      return res;
+    });
+  };
+
+  const openAsync = usePromise<
+    ExcludeOption<Taro.openSetting.Option>,
+    Taro.openSetting.SuccessCallbackResult
+  >(openSetting);
+
+  const open: Open = (withSubscriptions) => {
+    return openAsync({ withSubscriptions }).then((res) => {
+      const { authSetting: openSettingAuthSetting, subscriptionsSetting } = res;
+      setAuthSetting({
+        ...openSettingAuthSetting,
+        mini: authSetting.mini,
       });
-      setAuthSetting(totalAuthSetting);
-      if (withSubscriptions && totalSubscriptionsSetting) {
-        setSubscriptionsSetting(totalSubscriptionsSetting);
-      }
-      totalMiniprogramAuthSetting &&
-        setMiniprogramAuthSetting(totalMiniprogramAuthSetting);
-    } catch (e) {
-      console.log(e);
-    }
-  }, [option]);
+      setSubscriptionsSetting(subscriptionsSetting);
+      return res;
+    });
+  };
 
-  const openSettingAsync = useCallback<IOpenSettingAction>(
-    (withSubscriptions = false) => {
-      return new Promise((resolve, reject) => {
-        if (env === ENV_TYPE.WEAPP) {
-          try {
-            (openSetting as ROpenSetting)({
-              withSubscriptions,
-              success: (res) => {
-                const {
-                  authSetting: totalAuthSetting,
-                  subscriptionsSetting: totalSubscriptionsSetting,
-                } = res;
-                if (withSubscriptions && totalSubscriptionsSetting) {
-                  setSubscriptionsSetting(totalSubscriptionsSetting);
-                }
-                setAuthSetting(totalAuthSetting);
-                resolve(res);
-              },
-              fail: reject,
-            }).catch(reject);
-          } catch (e) {
-            reject({ errMsg: e });
-          }
-        } else {
-          reject({ errMsg: 'openSetting:fail' });
-        }
-      });
-    },
-    [env],
-  );
+  useTaroEffect(() => {
+    get(withSubscriptions);
+  }, [visible]);
 
-  const authorizeAysnc = useCallback<IAuthorizeAction>(
-    (scope, miniprogram = false) => {
-      return new Promise((resolve, reject) => {
-        if (!scope || env === ENV_TYPE.WEAPP) {
-          try {
-            if (miniprogram && typeOf(wx, 'Object')) {
-              wx.authorizeForMiniProgram({
-                scope,
-                success: resolve,
-                fail: reject,
-              });
-            } else {
-              authorize({
-                scope,
-                success: resolve,
-                fail: reject,
-              }).catch(reject);
-            }
-          } catch (e) {
-            reject(e);
-          }
-        } else {
-          reject({ errMsg: 'authorize:fail' });
-        }
-      });
-    },
-    [authSetting, miniprogramAuthSetting],
-  );
-
-  return [
-    { authSetting, subscriptionsSetting, miniprogramAuthSetting },
-    {
-      openSetting: openSettingAsync,
-      authorize: authorizeAysnc,
-    },
-  ];
+  return {
+    authSetting,
+    subscriptionsSetting,
+    authorize,
+    get,
+    open,
+  };
 }
 
 export default useAuthorize;
