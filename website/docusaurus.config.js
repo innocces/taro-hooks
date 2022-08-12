@@ -215,6 +215,10 @@ const config = {
         blog: {
           showReadingTime: true,
           editUrl: `${githubURLWithBranch}/website/`,
+          feedOptions: {
+            type: 'all',
+            copyright: `Copyright © ${new Date().getFullYear()} Innocces, Inc.`,
+          },
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),
