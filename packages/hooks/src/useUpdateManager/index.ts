@@ -1,53 +1,38 @@
-import { getUpdateManager, UpdateManager } from '@tarojs/taro';
-import { useCallback, useEffect, useRef } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import { getUpdateManager, useTaroRef, useTaroEffect } from '@tarojs/taro';
 
-export type Result = UpdateManager | undefined;
+import type { UpdateManager } from '@tarojs/taro';
 
-export type IAction = (manager: UpdateManager) => void;
-export interface IUpdateManager {
-  onCheckForUpdate?: (
-    manager: UpdateManager,
-    result: UpdateManager.OnCheckForUpdateResult,
-  ) => void;
-  onUpdateReady?: IAction;
-  onUpdateFailed?: IAction;
-}
+export type UpdateInfo = {
+  hasUpdate?: boolean;
+  error?: boolean;
+  ready?: boolean;
+};
 
-function useUpdateManager({
-  onCheckForUpdate,
-  onUpdateReady,
-  onUpdateFailed,
-}: IUpdateManager): Result {
-  const env = useEnv();
-  const updateManager = useRef<Result>();
+export type Callback = (manager: UpdateManager, updateInfo: UpdateInfo) => void;
 
-  useEffect(() => {
-    if (env === ENV_TYPE.WEAPP) {
-      const updateManagerInstance = getUpdateManager();
-      addEventListener(updateManagerInstance);
-      updateManager.current = updateManagerInstance;
+function useUpdateManager(callback: Callback) {
+  const updateManager = useTaroRef<UpdateManager>(getUpdateManager());
+  const updateInfo = useTaroRef<UpdateInfo>({});
+
+  useTaroEffect(() => {
+    if (updateManager.current) {
+      updateManager.current.onCheckForUpdate((res) => {
+        updateInfo.current.hasUpdate = res.hasUpdate;
+      });
+
+      updateManager.current.onUpdateFailed(() => {
+        updateInfo.current.error = true;
+      });
+
+      updateManager.current.onUpdateReady(() => {
+        updateInfo.current.ready = true;
+      });
     }
-  }, [env]);
+  }, [updateManager.current]);
 
-  const addEventListener = useCallback((updateManagerInstance) => {
-    onCheckForUpdate &&
-      updateManagerInstance.onCheckForUpdate(
-        (result: UpdateManager.OnCheckForUpdateResult) =>
-          onCheckForUpdate(updateManagerInstance, result),
-      );
-    onUpdateReady &&
-      updateManagerInstance.onUpdateReady(() =>
-        onUpdateReady(updateManagerInstance),
-      );
-    onUpdateFailed &&
-      updateManagerInstance.onUpdateFailed(() =>
-        onUpdateFailed(updateManagerInstance),
-      );
-  }, []);
-
-  return updateManager.current;
+  useTaroEffect(() => {
+    callback?.(updateManager.current, updateInfo.current);
+  }, [updateInfo.current]);
 }
 
 export default useUpdateManager;

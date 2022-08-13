@@ -43,6 +43,20 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": 1101
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/wechat/useUpdateManager/index",
+                    "query": "title=useUpdateManager%20%E6%9B%B4%E6%96%B0&onlyMini=1",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

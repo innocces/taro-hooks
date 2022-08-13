@@ -20,32 +20,33 @@ group:
 ## API
 
 ```jsx | pure
-const updateManager = useUpdateManager({
-  onCheckForUpdate,
-  onUpdateReady,
-  onUpdateFailed,
+useUpdateManager((manager, updateInfo) => {
+  // do something
 });
 ```
 
-## 入参说明
+## 参数
 
-```tsx | pure
-function onCheckForUpdate(manager, res) {}
-
-function onUpdateReady(manager) {}
-
-function onUpdateFailed(manager) {}
-```
+当更新信息变化的回调
 
 ## 返回值说明
 
-| 返回值        | 说明           | 类型            |
-| ------------- | -------------- | --------------- |
-| updateManager | 更新管理器实例 | `UpdateManager` |
+| 返回值     | 说明               | 类型            |
+| ---------- | ------------------ | --------------- |
+| manager    | 更新管理器实例     | `UpdateManager` |
+| updateInfo | 当前更新信息的状态 | `UpdateInfo`    |
+
+### `UpdateInfo`
+
+| 返回值    | 说明             | 类型      |
+| --------- | ---------------- | --------- |
+| hasUpdate | 是否有新版本     | `boolean` |
+| error     | 是否申请更新失败 | `boolean` |
+| ready     | 是否准备好更新   | `boolean` |
 
 ## 代码演示
 
-<code src="@pages/useUpdateManager" />
+<code src="useUpdateManager/index" group="wechat" />
 
 ## Hook 支持度
 

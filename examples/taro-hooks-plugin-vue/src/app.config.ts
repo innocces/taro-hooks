@@ -59,6 +59,7 @@ export default defineAppConfig({
     'pages/wechat/useRequestSubscribeMessage/index',
     'pages/wechat/useMenuButtonBoundingClientRect/index',
     'pages/wechat/useAuthorize/index',
+    'pages/wechat/useUpdateManager/index',
     // devices
     'pages/device/useBattery/index',
     'pages/device/useVibrate/index',
