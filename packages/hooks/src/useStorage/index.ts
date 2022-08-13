@@ -1,216 +1,145 @@
-import {
+import Taro, {
   setStorage,
   getStorage,
   getStorageInfo,
   removeStorage,
   clearStorage,
+  useTaroEffect,
+  useTaroState,
 } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import { logError, escapeState, isString } from '@taro-hooks/shared';
+import usePromise from '../usePromise';
+import getStorageSpaceInfo from './utils';
+import type { SpaceInfo, SuccessCallbackResult } from './utils/spaceInfo.type';
 
-export interface IStorageSpace {
-  currentSize?: number;
-  limitSize?: number;
-}
+import type {
+  ExcludeOption,
+  RecordData,
+  PromiseParamsAction,
+  PromiseOptionalAction,
+  UnionResult,
+} from '../type';
+import { generateGeneralFail } from '../utils/tool';
 
-export interface IStorageInfo extends Required<IStorageSpace> {
-  keys: string[];
-  storage: { [_: string]: any };
-}
+export type Set<T = unknown> = PromiseParamsAction<
+  (key: string, data: T) => void
+>;
 
-export type setAction = (key: string, data: any) => Promise<boolean>;
-export type getAction = (key?: string) => Promise<any>;
-export type removeAction = (key?: string) => Promise<boolean>;
+export type Remove = PromiseOptionalAction<string>;
 
-type getStorageSyncAction = (key: string) => Promise<any>;
+export type StorageInfo = Taro.getStorageInfo.SuccessCallbackOption & {
+  storage: RecordData;
+};
 
-export interface IAction {
-  set: setAction;
-  get: getAction;
-  remove: removeAction;
-}
-
-const initStorageInfo: IStorageInfo = {
+const initStorageInfo: StorageInfo = {
   currentSize: 0,
   limitSize: 0,
   keys: [],
   storage: {},
 };
 
-function useStorage(): [IStorageInfo, IAction] {
-  const [storageInfo, setStorageInfo] = useState<IStorageInfo>(initStorageInfo);
-  const env = useEnv();
+function useStorage() {
+  const [storageInfo, setStorageInfo] =
+    useTaroState<StorageInfo>(initStorageInfo);
 
-  useEffect(() => {
-    if (env) {
+  async function get<T = RecordData>(
+    key?: string | string[],
+  ): Promise<UnionResult<T>> {
+    try {
+      let getKeys: string[] = [];
+      if (!key) {
+        const { keys } =
+          (await getStorageInfo()) as unknown as Taro.getStorageInfo.SuccessCallbackOption;
+        if (!keys?.length) {
+          return {} as T;
+        }
+        getKeys = keys;
+      } else {
+        getKeys = [key].flat();
+      }
+      const storageGroup = await Promise.all(
+        getKeys.map((payload) => getStorage({ key: payload })),
+      );
+      const storageMap = Object.fromEntries(
+        storageGroup.map((storage, index) => {
+          let data = storage?.data;
+          try {
+            data = JSON.parse(data);
+          } catch (e) {
+            logError('parse storage data failed', e);
+          }
+          return [getKeys[index], data];
+        }),
+      ) as T;
+
+      if (isString(key)) {
+        return storageMap[key];
+      }
+      return storageMap;
+    } catch (e) {
+      return generateGeneralFail('getStorage', e.errMsg || e.message);
+    }
+  }
+
+  const setAsync =
+    usePromise<ExcludeOption<Taro.setStorage.Option>>(setStorage);
+
+  function set<T = string>(
+    key: string,
+    data?: T,
+  ): Promise<UnionResult<TaroGeneral.CallbackResult>> {
+    let setStorageData: T | string | undefined = data;
+    try {
+      setStorageData = JSON.stringify(data);
+    } catch (e) {
+      logError('can not convert json, use empty string instaned', e);
+    }
+    return setAsync({ key, data: setStorageData }).then((res) => {
       generateStorageInfo();
-    }
-  }, [env]);
-
-  const generateStorageInfo = useCallback(() => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        getStorageInfo({
-          success: async (currentInfo) => {
-            const storage = await getStorageAsync();
-            let polyfillInfo = {};
-            if (env === ENV_TYPE.WEB) {
-              polyfillInfo = await getStorageSpaceForWeb();
-            }
-            const storageInfo = {
-              ...setStorageInfo,
-              storage: storage || {},
-              ...currentInfo,
-              ...polyfillInfo,
-            };
-            setStorageInfo(storageInfo);
-            resolve(storageInfo);
-          },
-          fail: reject,
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      return res;
     });
-  }, [storageInfo, env]);
+  }
 
-  const getStorageSpaceForWeb = useCallback<
-    () => Promise<IStorageSpace>
-  >(async () => {
-    let storageSpace = {};
-    if (
-      navigator &&
-      'storage' in navigator &&
-      'estimate' in navigator.storage
-    ) {
-      try {
-        const { usage = 0, quota = 0 } = await navigator.storage.estimate();
-        storageSpace = {
-          currentSize: usage,
-          limitSize: quota,
-        };
-      } catch (e) {
-        storageSpace = {
-          currentSize: Storage.length,
-          limitSize: 0,
-        };
-      }
-    }
-    return storageSpace;
-  }, [env]);
+  const removeAsync =
+    usePromise<ExcludeOption<Taro.removeStorage.Option>>(removeStorage);
+  const clearAsync = usePromise(clearStorage);
 
-  const getStorageSync = useCallback<getStorageSyncAction>((key) => {
-    return new Promise((resolve, reject) => {
-      try {
-        getStorage({
-          key,
-          success: ({ data }) => resolve(data),
-          fail: () => reject(undefined),
-        });
-      } catch (e) {
-        reject(undefined);
-      }
+  const remove: Remove = (key) => {
+    const removeHandler = key ? removeAsync({ key }) : clearAsync();
+    return removeHandler.then((res) => {
+      setStorageInfo({ ...escapeState(storageInfo), keys: [], storage: {} });
+      return res;
     });
+  };
+
+  const generateStorageInfo = async () => {
+    try {
+      const { keys } =
+        (await getStorageInfo()) as unknown as SuccessCallbackResult;
+      const spaceInfo = (await getStorageSpaceInfo()) as SpaceInfo;
+      const storage = (await get()) as RecordData;
+      setStorageInfo({
+        ...spaceInfo,
+        keys,
+        storage,
+      });
+    } catch (e) {
+      logError('generateStorageInfo failed', e);
+    }
+  };
+
+  useTaroEffect(() => {
+    generateStorageInfo();
   }, []);
-
-  const getStorageAsync = useCallback<getAction>(
-    (key) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          // 没有key默认全部获取
-          if (!key) {
-            getStorageInfo({
-              success: async ({ keys }) => {
-                if (!keys.length) {
-                  resolve(undefined);
-                } else {
-                  const result: { [_: string]: any } = {};
-                  for await (let currentKey of keys) {
-                    const data = await getStorageSync(currentKey);
-                    result[currentKey] = data;
-                  }
-                  resolve(result);
-                }
-              },
-              fail: () => reject(undefined),
-            });
-          } else {
-            const data = await getStorageSync(key);
-            resolve(data);
-          }
-        } catch (e) {
-          reject(undefined);
-        }
-      });
-    },
-    [storageInfo, env],
-  );
-
-  const setStorageAsync = useCallback<setAction>(
-    (key, data) => {
-      return new Promise((resolve, reject) => {
-        try {
-          if (!key) {
-            console.warn('please provide a option');
-            return reject(false);
-          } else {
-            setStorage({
-              key,
-              data,
-              success: () => {
-                generateStorageInfo();
-                resolve(true);
-              },
-              fail: () => reject(false),
-            });
-          }
-        } catch (e) {
-          reject(false);
-        }
-      });
-    },
-    [env],
-  );
-
-  const removeStorageAsync = useCallback<removeAction>(
-    (key) => {
-      return new Promise((resolve, reject) => {
-        const callbackOptions = {
-          success: () => {
-            generateStorageInfo();
-            resolve(true);
-          },
-          fail: () => reject(false),
-        };
-        try {
-          if (!key) {
-            clearStorage();
-            // why not add options to feedback success? because it is not worked!
-            generateStorageInfo();
-            resolve(true);
-          } else {
-            removeStorage({
-              key,
-              ...callbackOptions,
-            });
-          }
-        } catch (e) {
-          reject(false);
-        }
-      });
-    },
-    [env],
-  );
 
   return [
     storageInfo,
     {
-      set: setStorageAsync,
-      get: getStorageAsync,
-      remove: removeStorageAsync,
+      set,
+      get,
+      remove,
     },
-  ];
+  ] as const;
 }
 
 export default useStorage;

@@ -49,6 +49,7 @@ export default defineAppConfig({
     'pages/basic/useClipboardData/index',
     'pages/basic/useRouter/index',
     'pages/basic/useFrom/index',
+    'pages/basic/useStorage/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
     'pages/wechat/useAPICheck/index',
