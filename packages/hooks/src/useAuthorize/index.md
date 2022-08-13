@@ -25,8 +25,8 @@ const {
     subscriptionsSetting,
     authorize,
     get,
-    open,
-  } = useAuthorize(option?);
+    open
+} = useAuthorize(option?);
 ```
 
 ## 参数说明

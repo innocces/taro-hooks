@@ -1,14 +1,26 @@
 <template>
   <demo-content>
     <nut-cell v-if="!emptyInfo">暂无信息</nut-cell>
-    <nut-cell-group v-else>
-      <nut-cell
+    <template v-else>
+      <nut-cell-group
         v-for="(value, key) in accountInfo"
-        :key="key"
         :title="'小程序 - ' + key"
-        :desc="value"
-      ></nut-cell>
-    </nut-cell-group>
+        :key="key"
+      >
+        <nut-cell
+          v-if="typeof value === 'string'"
+          :title="'小程序 - ' + key"
+          :desc="value"
+        ></nut-cell>
+        <nut-cell
+          v-else
+          v-for="(subValue, subKey) in value"
+          :key="subKey"
+          :title="'小程序 - ' + subKey"
+          :desc="subValue"
+        ></nut-cell>
+      </nut-cell-group>
+    </template>
   </demo-content>
 </template>
 

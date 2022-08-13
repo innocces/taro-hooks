@@ -52,6 +52,7 @@ export default {
     'pages/wechat/useTopBarText/index',
     'pages/wechat/useRequestSubscribeMessage/index',
     'pages/wechat/useMenuButtonBoundingClientRect/index',
+    'pages/wechat/useAuthorize/index',
     // devices
     'pages/device/useBattery/index',
     'pages/device/useVibrate/index',
