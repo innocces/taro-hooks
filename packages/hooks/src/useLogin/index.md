@@ -19,16 +19,16 @@ group:
 
 ## API
 
-```jsx | pure
-const [login, checkSession] = useLogin();
+```ts
+const { check, login } = useLogin();
 ```
 
 ## 返回值说明
 
-| 返回值       | 说明                                                                    | 类型                                                        |
-| ------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------- |
-| login        | 获取登录凭证(若`needCheck`为`true`则自动检测当前登录状态来进行登录操作) | `(needCheck?: boolean) => Promise<string &#124; undefined>` |
-| checkSession | 检查登录状态                                                            | `() => Promise<General.CallbackResult>`                     |
+| 返回值 | 说明                                                                                                  | 类型                                                                                                     |
+| ------ | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| login  | 获取登录凭证(若`needCheck`为`true`则自动检测当前登录状态来进行登录操作, `plugin`为`true`则为插件登录) | `(needCheck?: boolean, plugin?: boolean, timeout?: number) => Promise<Taro.login.SuccessCallbackResult>` |
+| check  | 检查登录状态                                                                                          | `() => Promise<General.CallbackResult>`                                                                  |
 
 ## 代码演示
 
@@ -39,8 +39,3 @@ const [login, checkSession] = useLogin();
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
 |     ✔️     |     |             |
-
-## FAQ
-
-- [login](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html)
-- [checkSession](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.checkSession.html)

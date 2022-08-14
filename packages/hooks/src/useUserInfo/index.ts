@@ -1,128 +1,76 @@
-import { UserInfo, getUserInfo, getUserProfile } from '@tarojs/taro';
-import type {
-  getUserInfo as getUserInfoNamespace,
-  getUserProfile as getUserProfileNamespace,
+import {
+  getUserInfo as taroGetUserInfo,
+  getUserProfile as taroGetUserProfile,
+  useTaroState,
 } from '@tarojs/taro';
-import { useCallback, useState } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import usePromise from '../usePromise';
+import useAuthorize from '../useAuthorize';
+import { generateGeneralFail } from '../utils/tool';
 
-export interface IUserInfo extends Partial<UserInfo> {
-  rawData?: string;
-  signature?: string;
-  encryptedData?: string;
-  iv?: string;
-  cloudID?: string;
-}
+import type {
+  PromiseOptionalAction,
+  ExcludeOption,
+  WithUndefind,
+} from '../type';
 
-export type TLang = 'en' | 'zh_CN' | 'zh_TW';
+export type GetInfo = PromiseOptionalAction<
+  ExcludeOption<Taro.getUserInfo.Option>,
+  Taro.getUserInfo.SuccessCallbackResult
+>;
 
-export interface IOption {
-  withCredentials?: boolean;
-  lang?: TLang;
-}
+export type GetProfile = PromiseOptionalAction<
+  ExcludeOption<Taro.getUserProfile.Option>,
+  Taro.getUserProfile.SuccessCallbackResult
+>;
 
-export interface IProfileOption {
-  lang?: TLang;
-  desc: string;
-}
-
-export type INormalAction = (
-  option?: IOption,
-) => Promise<IUserInfo | TaroGeneral.CallbackResult>;
-
-export type IProfileAction = (
-  option: IProfileOption,
-) => Promise<IUserInfo | TaroGeneral.CallbackResult>;
-
-const INITOPTION: IOption = { withCredentials: false, lang: 'en' };
+export type UserInfo = WithUndefind<
+  Partial<Taro.getUserInfo.SuccessCallbackResult>
+>;
 
 function useUserInfo(): [
-  IUserInfo | undefined,
-  { getUserInfo: INormalAction; getUserProfile: IProfileAction },
+  UserInfo,
+  { getUserInfo: GetInfo; getUserProfile: GetProfile },
 ] {
-  const [userInfo, setUserInfo] = useState<IUserInfo>();
-  const env = useEnv();
+  const [userInfo, setUserInfo] = useTaroState<UserInfo>();
+  const { get } = useAuthorize();
 
-  const combineUserInfo = useCallback(
-    (
-      info:
-        | getUserInfoNamespace.SuccessCallbackResult
-        | getUserProfileNamespace.SuccessCallbackResult,
-    ): IUserInfo => {
-      const { userInfo, rawData, signature, encryptedData, iv, cloudID } =
-        info || {};
-      const painInfo = Object.fromEntries(
-        Object.entries({
-          rawData,
-          signature,
-          encryptedData,
-          iv,
-          cloudID,
-        }).filter((v) => v[1]),
+  const getInfo = usePromise<
+    ExcludeOption<Taro.getUserInfo.Option>,
+    Taro.getUserInfo.SuccessCallbackResult
+  >(taroGetUserInfo);
+
+  const getProfile = usePromise<
+    ExcludeOption<Taro.getUserProfile.Option>,
+    Taro.getUserProfile.SuccessCallbackResult
+  >(taroGetUserProfile);
+
+  const getUserInfo: GetInfo = (options) => {
+    return get().then((res) => {
+      if (
+        (res as Taro.getSetting.SuccessCallbackResult).authSetting[
+          'scope.userInfo'
+        ]
+      ) {
+        return getInfo(options).then((res) => {
+          setUserInfo(res);
+          return res;
+        });
+      }
+      return generateGeneralFail(
+        'getUserInfo',
+        'please auth scope.userInfo first',
       );
-      const finallyUserInfo = {
-        ...userInfo,
-        ...painInfo,
-      };
-      setUserInfo(finallyUserInfo);
-      return finallyUserInfo;
-    },
-    [],
-  );
+    });
+  };
 
-  const getUserInfoAsync = useCallback<INormalAction>(
-    (option = INITOPTION) => {
-      return new Promise((resolve, reject) => {
-        if (env === ENV_TYPE.WEAPP) {
-          try {
-            getUserInfo({
-              ...option,
-              success: (res) => {
-                const info = combineUserInfo(res);
-                resolve(info);
-              },
-              fail: reject,
-            }).catch((e) => reject({ errMsg: 'getUserInfo: fail', data: e }));
-          } catch (e) {
-            reject({ errMsg: 'getUserInfo: fail', data: e });
-          }
-        } else {
-          reject({ errMsg: 'getUserInfo: fail' });
-        }
-      });
-    },
-    [combineUserInfo, env],
-  );
+  const getUserProfile: GetProfile = (option) => {
+    return getProfile(option).then((res) => {
+      setUserInfo(res);
+      return res;
+    });
+  };
 
-  const getUserProfileAsync = useCallback<IProfileAction>(
-    (option) => {
-      return new Promise((resolve, reject) => {
-        if (env === ENV_TYPE.WEAPP) {
-          try {
-            getUserProfile({
-              ...option,
-              success: (res) => {
-                const info = combineUserInfo(res);
-                resolve(info);
-              },
-              fail: reject,
-            });
-          } catch (e) {
-            reject({ errMsg: 'getUserProfile: fail', data: e });
-          }
-        } else {
-          reject({ errMsg: 'getUserProfile: fail' });
-        }
-      });
-    },
-    [combineUserInfo, env],
-  );
-
-  return [
-    userInfo,
-    { getUserInfo: getUserInfoAsync, getUserProfile: getUserProfileAsync },
-  ];
+  return [userInfo, { getUserInfo, getUserProfile }];
 }
 
 export default useUserInfo;
