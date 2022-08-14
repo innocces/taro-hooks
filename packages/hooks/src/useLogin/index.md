@@ -32,7 +32,7 @@ const { check, login } = useLogin();
 
 ## 代码演示
 
-<code src="@pages/useLogin" />
+<code src="useWeRun/index" group="wechat" />
 
 ## Hook 支持度
 

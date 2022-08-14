@@ -60,6 +60,10 @@ export default defineAppConfig({
     'pages/wechat/useMenuButtonBoundingClientRect/index',
     'pages/wechat/useAuthorize/index',
     'pages/wechat/useUpdateManager/index',
+    'pages/wechat/useInvoice/index',
+    'pages/wechat/useChooseAddress/index',
+    'pages/wechat/useWeRun/index',
+    'pages/wechat/useUserInfo/index',
     // devices
     'pages/device/useBattery/index',
     'pages/device/useVibrate/index',
