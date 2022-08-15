@@ -9,7 +9,7 @@ import Taro, {
 } from '@tarojs/taro';
 import { logError, escapeState, isString } from '@taro-hooks/shared';
 import usePromise from '../usePromise';
-import getStorageSpaceInfo from './utils';
+import getStorageSpaceInfo from './utils/index';
 import type { SpaceInfo, SuccessCallbackResult } from './utils/spaceInfo.type';
 
 import type {
