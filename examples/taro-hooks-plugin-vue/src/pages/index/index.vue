@@ -1,5 +1,14 @@
 <template>
-  <view class="index">
+  <view class="demo-index">
+    <nut-row type="flex" justify="center" align="center">
+      <nut-badge value="beta:Serro" top="20">
+        <image
+          class="demo-index-icon"
+          :src="require('@root/public/image/hook.png')"
+          mode="widthFix"
+        />
+      </nut-badge>
+    </nut-row>
     <nut-collapse
       v-model:active="activeCollapseItem"
       :accordion="true"
@@ -25,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { navigateTo } from '@tarojs/taro';
+import { useRouter } from 'taro-hooks';
 import { ref } from 'vue';
 // @ts-ignore
 import { generateIndexMenu } from '@root/public/constant';
@@ -36,9 +45,11 @@ export default {
   setup() {
     const collapseData = generateIndexMenu(true);
     const activeCollapseItem = ref('');
+    const [, { navigate, switchTab }] = useRouter();
 
     const handleNavigate = ({ path, name, onlyMini = false }: MenuItem) => {
-      navigateTo({ url: `${path}?title=${name}&onlyMini=${Number(onlyMini)}` });
+      const navigateAction = path.includes('TabBar') ? switchTab : navigate;
+      navigateAction(path, { title: name, onlyMini: Number(onlyMini) });
     };
 
     return {
@@ -71,5 +82,9 @@ export default {
 
 .demo-collapse-item .nut-cell:last-child {
   margin-bottom: 0;
+}
+
+.demo-index-icon {
+  width: 200px;
 }
 </style>

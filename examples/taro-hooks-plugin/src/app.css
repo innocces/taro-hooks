@@ -10,3 +10,11 @@
 .taroify-cell__brief {
   word-break: break-all;
 }
+
+.taroify-badge--bottom-right {
+  transform: translate(100%, -360px)!important;
+}
+
+.demo-index-icon {
+  width: 400px;
+}

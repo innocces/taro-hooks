@@ -18,6 +18,10 @@ page, .taro_page {
   flex: 1;
 }
 
+.taro-tabbar__container .rmc-pull-to-refresh-content-wrapper {
+  min-height: 100%;
+}
+
  /* taro-button bug */
 taro-button-core[size=mini]+taro-button-core[size=mini] {
   margin-top: 0;

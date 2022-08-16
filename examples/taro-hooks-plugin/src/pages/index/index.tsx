@@ -1,21 +1,35 @@
 import React from 'react';
-import { navigateTo, useTaroState } from '@tarojs/taro';
-import { View } from '@tarojs/components';
-import { Collapse, Cell } from '@taroify/core';
+import { useTaroState } from '@tarojs/taro';
+import { useRouter } from 'taro-hooks';
+import { View, Image } from '@tarojs/components';
+import { Collapse, Cell, Flex, Badge } from '@taroify/core';
 // @ts-ignore
 import { generateIndexMenu } from '@root/public/constant';
+// @ts-ignore
+import Icon from '@root/public/image/hook.png';
 // @ts-ignore
 import type { MenuItem } from '@root/public/constant';
 
 const Index = () => {
-  const [activeCollapseItem, setActiveCollapseItem] = useTaroState(0);
+  const [activeCollapseItem, setActiveCollapseItem] = useTaroState();
+  const [, { navigate, switchTab }] = useRouter();
 
   const handleNavigate = ({ path, name, onlyMini = false }: MenuItem) => {
-    navigateTo({ url: `${path}?title=${name}&onlyMini=${Number(onlyMini)}` });
+    const navigateAction = path.includes('TabBar') ? switchTab : navigate;
+    navigateAction(path, { title: name, onlyMini: Number(onlyMini) });
   };
 
   return (
     <View className="index">
+      <Flex align="center" justify="center">
+        <Badge
+          content="beta:Serro"
+          position="bottom-right"
+          style={{ '--badge-background-color': 'var(--primary-color)' }}
+        >
+          <Image className="demo-index-icon" src={Icon} mode="widthFix" />
+        </Badge>
+      </Flex>
       <Collapse
         accordion
         value={activeCollapseItem}

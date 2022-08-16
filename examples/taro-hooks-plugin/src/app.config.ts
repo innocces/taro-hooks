@@ -73,6 +73,7 @@ export default {
     'pages/feedback/useAlertBeforeUnload/index',
     // layout
     'pages/layout/useManualPullDownRefresh/index',
+    'pages/layout/useTabBar/index',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -81,6 +82,26 @@ export default {
     navigationBarTitleText: 'Taro hooks',
     navigationBarTextStyle: 'black',
     enablePullDownRefresh: true,
+  },
+  tabBar: {
+    color: '#666666',
+    selectedColor: '#792be4',
+    backgroundColor: '#ffffff',
+    borderStyle: 'white',
+    list: [
+      {
+        pagePath: 'pages/index/index',
+        text: '首页',
+        iconPath: './assets/tabbar/NO.0001.png',
+        selectedIconPath: './assets/tabbar/NO.0001-active.png',
+      },
+      {
+        pagePath: 'pages/layout/useTabBar/index',
+        text: 'useTabBar',
+        iconPath: './assets/tabbar/NO.0005.png',
+        selectedIconPath: './assets/tabbar/NO.0005-active.png',
+      },
+    ],
   },
   permission: {
     'scope.userLocation': {
