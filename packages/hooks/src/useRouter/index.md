@@ -33,8 +33,8 @@ const [routerInfo, { navigate, switchTab, relaunch, redirect, back, exit }] =
 | 返回值     | 说明                                                   | 类型               |
 | ---------- | ------------------------------------------------------ | ------------------ |
 | routerInfo | 当前页面路由信息                                       | `Route<R>`         |
-| navigate   | 异步跳转 tabBar 页面                                   | `RouteNavigate<R>` |
-| switchTab  | 异步关闭所有页面，打开到应用内的某个页面               | `SwitchTab`        |
+| navigate   | 打开到应用内的某个页面                                 | `RouteNavigate<R>` |
+| switchTab  | 异步跳转 tabBar 页面                                   | `SwitchTab`        |
 | relaunch   | 异步关闭当前页面，跳转到应用内的某个页面               | `RouteNavigate<R>` |
 | redirect   | 异步保留当前页面，跳转到应用内的某个页面或跳转至小程序 | `RouteNavigate<R>` |
 | back       | 异步关闭当前页面，返回上一页面或多级页面或返回小程序   | `Back`             |
