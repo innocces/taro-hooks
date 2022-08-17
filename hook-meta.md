@@ -60,7 +60,7 @@
 - [x] useTopBarText
 - [x] useBackground
 - [x] useManualPullDownRefresh
-- [ ] useTabBar
+- [x] useTabBar
 
 ---
 

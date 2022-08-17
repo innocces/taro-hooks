@@ -83,7 +83,8 @@ function useTabBar(): {
   const hideTabBarAsync =
     usePromise<ExcludeOption<Taro.hideTabBar.Option>>(hideTabBar);
 
-  const toggle: Toggle = (animation) => {
+  // must give animation define default value. h5 will error in undefined
+  const toggle: Toggle = (animation = false) => {
     const toggleAction = memoVisible.current
       ? hideTabBarAsync
       : showTabBarAsync;
