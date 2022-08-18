@@ -1,223 +1,153 @@
 import Taro, {
-  saveImageToPhotosAlbum,
   previewImage,
+  previewMedia as taroPreviewMedia,
   getImageInfo,
-  compressImage,
   chooseImage,
   chooseMessageFile,
+  editImage,
+  useTaroState,
 } from '@tarojs/taro';
-import { useCallback, useState } from 'react';
-import useEnv from '../useEnv';
-import { saveImageForH5, downloadImage, compressForH5 } from './utils';
-import { ENV_TYPE } from '../constant';
+import usePromise from '../usePromise';
 
-export type ChooseImageOption = Partial<
-  Pick<chooseImage.Option, 'count' | 'sizeType' | 'sourceType'>
+import type {
+  PromiseAction,
+  PromiseParamsAction,
+  PromiseOptionalAction,
+  UnionResult,
+  ExcludeOption,
+} from '../type';
+import { saveImageToPhotosAlbum, compressImage } from './utils/index';
+
+export type CompressImage = typeof compressImage;
+
+export type CompressSuccessResult = Taro.compressImage.SuccessCallbackResult;
+
+export type CompressResult = UnionResult<CompressSuccessResult>;
+
+export type Compress = PromiseParamsAction<
+  (src: string, quality?: number) => void,
+  CompressSuccessResult
 >;
 
-export type PreviewImageOption = Pick<previewImage.Option, 'current' | 'urls'>;
+export type SaveImage = typeof saveImageToPhotosAlbum;
 
-export type ChooseImageAction = (
-  option?: ChooseImageOption,
-) => Promise<chooseImage.SuccessCallbackResult>;
+export type ChooseOption = ExcludeOption<Taro.chooseImage.Option>;
 
-export type PreviewImageAction = (
-  option: PreviewImageOption,
-) => Promise<TaroGeneral.CallbackResult>;
-
-export type SaveImageToPhotosAlbumAction = (
-  filePath: string,
-) => Promise<TaroGeneral.CallbackResult>;
-
-export type GetImageInfoAction = (
-  src: string,
-) => Promise<getImageInfo.SuccessCallbackResult>;
-
-export type ChooseMessageFileAction = (
-  count: number,
-  type?: Pick<chooseMessageFile.Option, 'type'>,
-  extend?: Pick<chooseMessageFile.Option, 'extension'>,
-) => Promise<chooseMessageFile.SuccessCallbackResult>;
-
-export type CompressImageAction = (
-  src: string,
-  quality?: number,
-) => Promise<compressImage.SuccessCallbackResult>;
-
-export type IFileInfo = Partial<
-  Pick<chooseImage.SuccessCallbackResult, 'tempFilePaths' | 'tempFiles'>
+export type Choose = PromiseParamsAction<
+  (
+    option?: ChooseOption | ExcludeOption<Taro.chooseMessageFile.Option>,
+    messageFile?: boolean,
+  ) => void,
+  | Taro.chooseImage.SuccessCallbackResult
+  | Taro.chooseMessageFile.SuccessCallbackResult
 >;
 
-export interface IAction {
-  choose: ChooseImageAction;
-  chooseMessageFile: ChooseMessageFileAction;
-  preview: PreviewImageAction;
-  save: SaveImageToPhotosAlbumAction;
-  getInfo: GetImageInfoAction;
-  compress: CompressImageAction;
-}
+export type Edit = PromiseAction<string, Taro.editImage.SuccessCallbackResult>;
 
-function useImage(options: ChooseImageOption): [IFileInfo, IAction] {
-  const [fileInfo, setFileInfo] = useState<IFileInfo>({});
-  const env = useEnv();
+export type Save = PromiseAction<string>;
 
-  const chooseImageAsync = useCallback<ChooseImageAction>((option = {}) => {
-    const { count, sizeType, sourceType } = options;
-    const finalOptions = Object.assign(
-      {},
-      Object.fromEntries(
-        [
-          ['count', count],
-          ['sizeType', sizeType],
-          ['sourceType', sourceType],
-        ].filter((v) => v[1]) || [],
-      ),
-      option || {},
-    );
-    return new Promise((resolve, reject) => {
-      try {
-        chooseImage({
-          ...finalOptions,
-          success: (res) => {
-            const { errMsg, ...fileInfo } = res;
-            setFileInfo(fileInfo);
-            resolve(res);
-          },
-          fail: reject,
-        }).catch(reject);
-      } catch (e) {
-        reject(e);
-      }
+export type Preview = PromiseAction<ExcludeOption<Taro.previewImage.Option>>;
+
+export type PreviewMedia = PromiseAction<
+  ExcludeOption<Taro.previewMedia.Option>
+>;
+
+export type Get = PromiseAction<
+  string,
+  Taro.getImageInfo.SuccessCallbackResult
+>;
+
+export type FileInfo = Omit<Taro.chooseImage.SuccessCallbackResult, 'errMsg'>;
+
+const INIT: FileInfo = {
+  tempFilePaths: [],
+  tempFiles: [],
+};
+
+function useImage(options?: ChooseOption): [
+  FileInfo,
+  {
+    choose: Choose;
+    preview: Preview;
+    previewMedia: PreviewMedia;
+    save: Save;
+    get: Get;
+    compress: Compress;
+    edit: Edit;
+  },
+] {
+  const [fileInfo, setFileInfo] = useTaroState<FileInfo>(INIT);
+
+  const chooseAsync = usePromise<
+    ChooseOption,
+    Taro.chooseImage.SuccessCallbackResult
+  >(chooseImage);
+  const chooseMessageAsync = usePromise<
+    ExcludeOption<Taro.chooseMessageFile.Option>,
+    Taro.chooseMessageFile.SuccessCallbackResult
+  >(chooseMessageFile);
+
+  const choose: Choose = (chooseOption = {}, messageFile) => {
+    if (messageFile) {
+      return chooseMessageAsync({ count: 1, ...chooseOption });
+    }
+
+    return chooseAsync({ ...(options ?? {}), ...chooseOption }).then((res) => {
+      const { tempFilePaths, tempFiles } = res;
+      setFileInfo({ tempFilePaths, tempFiles });
+      return res;
     });
-  }, []);
+  };
 
-  const previewImageAsync = useCallback<PreviewImageAction>((option) => {
-    return new Promise((resolve, reject) => {
-      try {
-        previewImage({
-          ...option,
-          success: resolve,
-          fail: reject,
-        }).catch(reject);
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }, []);
+  const compressAsync = usePromise<
+    ExcludeOption<Taro.compressImage.Option>,
+    CompressResult
+  >(compressImage);
 
-  const saveImageToPhotosAlbumAsync = useCallback<SaveImageToPhotosAlbumAction>(
-    (filePath) => {
-      return new Promise(async (resolve, reject) => {
-        if (!filePath) {
-          reject('you must provide filePath');
-        } else {
-          try {
-            if (env === ENV_TYPE.WEB) {
-              const result = await saveImageForH5(filePath);
-              if (result) {
-                resolve({
-                  errMsg: 'save success',
-                });
-              } else {
-                reject('save fail');
-              }
-            } else {
-              saveImageToPhotosAlbum({
-                filePath,
-                success: resolve,
-                fail: reject,
-              }).catch(reject);
-            }
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [env],
-  );
+  const compress: Compress = (src, quality = 80) => {
+    return compressAsync({ src, quality });
+  };
 
-  const getImageInfoAsync = useCallback<GetImageInfoAction>((src) => {
-    return new Promise((resolve, reject) => {
-      if (!src) {
-        reject('please enter a valid path');
-      } else {
-        try {
-          getImageInfo({
-            src,
-            success: resolve,
-            fail: reject,
-          }).catch(reject);
-        } catch (e) {
-          reject(e);
-        }
-      }
-    });
-  }, []);
+  const getAsync = usePromise<
+    ExcludeOption<Taro.getImageInfo.Option>,
+    Taro.getImageInfo.SuccessCallbackResult
+  >(getImageInfo);
 
-  const chooseMessageFileAsync = useCallback<ChooseMessageFileAction>(
-    (count, type, extension) => {
-      return new Promise((resolve, reject) => {
-        if (!count || env !== ENV_TYPE.WEAPP) {
-          reject('you must provide count');
-        } else {
-          try {
-            const payload = Object.fromEntries(
-              [
-                ['type', type],
-                ['extension', extension],
-              ].filter((v) => v[1]) || [],
-            );
-            Taro.chooseMessageFile({
-              count,
-              ...payload,
-              success: resolve,
-              fail: reject,
-            });
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [env],
-  );
+  const get: Get = (src) => {
+    return getAsync({ src });
+  };
 
-  const compressImageAsync = useCallback<CompressImageAction>(
-    (src, quality) => {
-      return new Promise(async (resolve, reject) => {
-        if (!src) {
-          reject('you must provide src');
-        }
-        try {
-          if (env === ENV_TYPE.WEB) {
-            const blob = await downloadImage(src);
-            compressForH5(blob, quality).then(resolve, reject);
-          } else {
-            Taro.compressImage({
-              src,
-              ...(quality ? { quality } : {}),
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
-          }
-        } catch (e) {
-          reject(e);
-        }
-      });
-    },
-    [env],
-  );
+  const saveAsync = usePromise<
+    ExcludeOption<Taro.saveImageToPhotosAlbum.Option>
+  >(saveImageToPhotosAlbum);
+
+  const save: Save = (filePath) => {
+    return saveAsync({ filePath });
+  };
+
+  const preview: Preview =
+    usePromise<ExcludeOption<Taro.previewImage.Option>>(previewImage);
+  const previewMedia: PreviewMedia =
+    usePromise<ExcludeOption<Taro.previewMedia.Option>>(taroPreviewMedia);
+
+  const editAsync = usePromise<
+    ExcludeOption<Taro.editImage.Option>,
+    Taro.editImage.SuccessCallbackResult
+  >(editImage);
+  const edit: Edit = (src) => {
+    return editAsync({ src });
+  };
 
   return [
     fileInfo,
     {
-      choose: chooseImageAsync,
-      chooseMessageFile: chooseMessageFileAsync,
-      preview: previewImageAsync,
-      save: saveImageToPhotosAlbumAsync,
-      getInfo: getImageInfoAsync,
-      compress: compressImageAsync,
+      choose,
+      compress,
+      get,
+      preview,
+      previewMedia,
+      save,
+      edit,
     },
   ];
 }
