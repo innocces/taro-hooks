@@ -43,7 +43,7 @@
 - [ ] useBluetooth
 - [ ] useBLE
 - [ ] useImage
-- [ ] useVideo
+- [x] useVideo
 - [ ] useCamera
 - [ ] useAudio
 - [ ] useRecord

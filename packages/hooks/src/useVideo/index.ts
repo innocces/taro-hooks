@@ -1,108 +1,124 @@
-// @ts-nocheck
-import {
+import Taro, {
   chooseVideo,
-  saveVideoToPhotosAlbum,
+  chooseMedia as taroChooseMedia,
+  compressVideo,
   createVideoContext,
-  VideoContext,
+  getVideoInfo,
+  openVideoEditor,
+  useTaroRef,
 } from '@tarojs/taro';
-import { useCallback, useState } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import type { VideoContext } from '@tarojs/taro';
+import type {
+  ExcludeOption,
+  PromiseOptionalAction,
+  PromiseAction,
+} from '../type';
 
-import { saveImageForH5 } from '../useImage/utils';
+import usePromise from '../usePromise';
+import { saveVideoToPhotosAlbum } from './utils/index';
 
-export type IOptions = Pick<
-  chooseVideo.Option,
-  'camera' | 'sourceType' | 'maxDuration'
+export type ChooseOption = ExcludeOption<Taro.chooseVideo.Option>;
+
+export type Choose = PromiseOptionalAction<
+  ChooseOption,
+  Taro.chooseVideo.SuccessCallbackResult
 >;
 
-export type IVideoContext = VideoContext | undefined;
+export type ChooseMedia = PromiseOptionalAction<
+  ExcludeOption<Taro.chooseMedia.Option>,
+  Taro.chooseMedia.SuccessCallbackResult
+>;
 
-export type ChooseVideoAction = (
-  option?: IOptions,
-) => Promise<chooseVideo.SuccessCallbackResult>;
+export type Save = PromiseAction<string>;
 
-export type CreateContextAction = (
+export type Get = PromiseAction<
+  string,
+  Taro.getVideoInfo.SuccessCallbackResult
+>;
+
+export type Open = PromiseAction<
+  string,
+  Taro.openVideoEditor.SuccessCallbackResult
+>;
+
+export type Compress = PromiseAction<
+  ExcludeOption<Taro.compressVideo.Option>,
+  Taro.compressVideo.SuccessCallbackResult
+>;
+
+export type Option = {
+  component?: TaroGeneral.IAnyObject;
+} & ChooseOption;
+
+function useVideo(
   id: string,
-  component?: Record<string, any>,
-) => IVideoContext;
-
-export type SaveVideoAction = (
-  filePath: string,
-) => Promise<TaroGeneral.CallbackResult>;
-
-export interface IAction {
-  choose: ChooseVideoAction;
-  create: CreateContextAction;
-  save: SaveVideoAction;
-}
-
-function useVideo(options?: IOptions): [IVideoContext, IAction] {
-  const [videoContext, setVideoContext] = useState<IVideoContext>();
-  const env = useEnv();
-
-  const chooseVideoAsync = useCallback<ChooseVideoAction>(
-    (option) => {
-      const payload = Object.assign({}, options || {}, option);
-      return new Promise((resolve, reject) => {
-        if (env === ENV_TYPE.WEB) {
-          reject({ errMsg: 'not support for web' });
-        } else {
-          chooseVideo({
-            ...payload,
-            success: resolve,
-            fail: reject,
-          }).catch(reject);
-        }
-      });
-    },
-    [env],
+  option?: Option,
+): [
+  VideoContext,
+  {
+    choose: Choose;
+    chooseMedia: ChooseMedia;
+    get: Get;
+    open: Open;
+    save: Save;
+    compress: Compress;
+  },
+] {
+  const videoContext = useTaroRef<VideoContext>(
+    createVideoContext(id, option?.component),
   );
 
-  const createVideoContextAsync = useCallback<CreateContextAction>(
-    (id, component) => {
-      if (env !== ENV_TYPE.WEB) {
-        const videoContext = createVideoContext(id, component);
-        if (videoContext) setVideoContext(videoContext);
-        return videoContext;
-      }
-    },
-    [env],
-  );
+  const chooseAsync = usePromise<
+    ExcludeOption<ChooseOption>,
+    Taro.chooseVideo.SuccessCallbackResult
+  >(chooseVideo);
+  const choose: Choose = (chooseOption = {}) => {
+    const { component, ...restOption } = option ?? {};
+    return chooseAsync({ ...chooseOption, ...restOption });
+  };
 
-  const saveVideoAsync = useCallback<SaveVideoAction>(
-    (filePath) => {
-      return new Promise((resolve, reject) => {
-        if (!filePath) {
-          reject('please input a filepath to save');
-        } else {
-          if (env === ENV_TYPE.WEB) {
-            saveImageForH5(filePath)
-              .then((saveResult) => {
-                resolve({
-                  errMsg: saveResult ? '保存成功' : '保存失败',
-                });
-              })
-              .catch(reject);
-          } else {
-            saveVideoToPhotosAlbum({
-              filePath,
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
-          }
-        }
-      });
-    },
-    [env],
-  );
+  const chooseMedia: ChooseMedia = usePromise<
+    ExcludeOption<Taro.chooseMedia.Option>,
+    Taro.chooseMedia.SuccessCallbackResult
+  >(taroChooseMedia);
+
+  const openAsync = usePromise<
+    ExcludeOption<Taro.openVideoEditor.Option>,
+    Taro.openVideoEditor.SuccessCallbackResult
+  >(openVideoEditor);
+  const open = (filePath) => {
+    return openAsync({ filePath });
+  };
+
+  const saveAsync = usePromise<
+    ExcludeOption<Taro.saveVideoToPhotosAlbum.Option>
+  >(saveVideoToPhotosAlbum);
+  const save: Save = (filePath) => {
+    return saveAsync({ filePath });
+  };
+
+  const compress: Compress = usePromise<
+    ExcludeOption<Taro.compressVideo.Option>,
+    Taro.compressVideo.SuccessCallbackResult
+  >(compressVideo);
+
+  const getAsync = usePromise<
+    ExcludeOption<Taro.getVideoInfo.Option>,
+    Taro.getVideoInfo.SuccessCallbackResult
+  >(getVideoInfo);
+  const get: Get = (src) => {
+    return getAsync({ src });
+  };
 
   return [
-    videoContext,
+    videoContext.current,
     {
-      choose: chooseVideoAsync,
-      create: createVideoContextAsync,
-      save: saveVideoAsync,
+      choose,
+      chooseMedia,
+      open,
+      save,
+      compress,
+      get,
     },
   ];
 }
