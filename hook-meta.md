@@ -42,7 +42,7 @@
 - [x] useScanCode
 - [ ] useBluetooth
 - [ ] useBLE
-- [ ] useImage
+- [x] useImage
 - [x] useVideo
 - [ ] useCamera
 - [ ] useAudio

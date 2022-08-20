@@ -74,6 +74,9 @@ export default {
     // layout
     'pages/layout/useManualPullDownRefresh/index',
     'pages/layout/useTabBar/index',
+    // media
+    'pages/media/useVideo/index',
+    'pages/media/useImage/index',
   ],
   window: {
     backgroundTextStyle: 'light',

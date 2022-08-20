@@ -3,16 +3,34 @@ import { generateGeneralFail } from '../../utils/tool';
 
 import type { CompressImage, CompressSuccessResult, SaveImage } from '../';
 
+function checkBase64Prefix(url: string): boolean {
+  return url.startsWith('data:');
+}
+
+function dataURITOBlob(url: string): Blob {
+  const [mimeString, dataString] = url.split(',');
+  const mime = mimeString?.match?.(/:(.*?);/)?.[1];
+  let length = dataString.length;
+  const unitArray8 = new Uint8Array(length);
+
+  while (length--) {
+    unitArray8[length] = dataString.charCodeAt(length);
+  }
+
+  return new Blob([unitArray8], { type: mime });
+}
+
 export const downloadImage = async (filePath: string) => {
+  if (checkBase64Prefix(filePath)) {
+    return dataURITOBlob(filePath);
+  }
   const responese = await fetch(filePath);
   const blob = await responese.blob();
   return blob;
 };
 
 export const generateBlobUrl = (blob: Blob): string => {
-  const blobInstance = new Blob([blob], {
-    type: 'application/octet-stream',
-  });
+  const blobInstance = new Blob([blob], { type: blob.type });
   const href = window.URL.createObjectURL(blobInstance);
   return href;
 };
@@ -29,7 +47,8 @@ export const saveImageToPhotosAlbum: SaveImage = async ({
       const href = generateBlobUrl(blob);
       const downloadElement = document.createElement('a');
       downloadElement.href = href;
-      downloadElement.download = filePath.split('/').reverse()[0];
+      // base64 not have name, make random name
+      downloadElement.download = Date.now() + '';
       document.body.appendChild(downloadElement);
       downloadElement.click();
       document.body.removeChild(downloadElement);

@@ -18,3 +18,7 @@
 .demo-index-icon {
   width: 400px;
 }
+
+.taro-tabbar__container .rmc-pull-to-refresh-content-wrapper {
+  min-height: 100%;
+}

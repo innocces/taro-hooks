@@ -59,7 +59,7 @@ gulp.task('watch', function () {
     tasks.push('declaration');
   }
   gulp.watch(
-    ['src/*', 'src/*/*'],
+    ['src/*', 'src/*/*', 'src/*/*/*'],
     { events: 'all', delay: 200, ignoreInitial: false, depth: 5 },
     gulp.series(...tasks),
   );

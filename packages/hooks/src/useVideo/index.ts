@@ -5,13 +5,15 @@ import Taro, {
   createVideoContext,
   getVideoInfo,
   openVideoEditor,
-  useTaroRef,
+  useTaroState,
+  useReady,
 } from '@tarojs/taro';
 import type { VideoContext } from '@tarojs/taro';
 import type {
   ExcludeOption,
   PromiseOptionalAction,
   PromiseAction,
+  WithUndefind,
 } from '../type';
 
 import usePromise from '../usePromise';
@@ -54,7 +56,7 @@ function useVideo(
   id: string,
   option?: Option,
 ): [
-  VideoContext,
+  WithUndefind<VideoContext>,
   {
     choose: Choose;
     chooseMedia: ChooseMedia;
@@ -64,9 +66,11 @@ function useVideo(
     compress: Compress;
   },
 ] {
-  const videoContext = useTaroRef<VideoContext>(
-    createVideoContext(id, option?.component),
-  );
+  const [videoContext, setVideoContext] = useTaroState<VideoContext>();
+
+  useReady(() => {
+    setVideoContext(createVideoContext(id, option?.component));
+  });
 
   const chooseAsync = usePromise<
     ExcludeOption<ChooseOption>,
@@ -111,7 +115,7 @@ function useVideo(
   };
 
   return [
-    videoContext.current,
+    videoContext,
     {
       choose,
       chooseMedia,
