@@ -11,23 +11,23 @@ group:
 
 # useMotion
 
-提供震动反馈
+监听设备方向
 
 ## 何时使用
 
-当需要操作或者使用震动时
+当需要监听设备方向时
 
 ## API
 
-```jsx | pure
+```ts
 const [
-  motionInfo,
+  motion,
   {
-    stop,
     start,
-    addListener,
-    removeListener
-  }
+    stop,
+    add,
+    off,
+  },
 ] = useMotion(
   autoListen?: boolean,
   interval?: interval
@@ -43,17 +43,17 @@ const [
 
 ## 返回值说明
 
-| 返回值         | 说明                                                                   | 类型                                                |
-| -------------- | ---------------------------------------------------------------------- | --------------------------------------------------- |
-| motionInfo     | 设备方向信息                                                           | `{ alpha: number; beta: number; gamma: number; }`   |
-| start          | 开启监听(若初始未设置`autoListen`需在调用`addListener`之前调用`start`) | `(interval?: interval) => Promise<boolean>`         |
-| stop           | 停止监听                                                               | `(callback) => void`                                |
-| addListener    | 设置监听函数                                                           | `(callback: onDeviceMotionChange.Callback) => void` |
-| removeListener | 移除监听函数                                                           | `(callback) => void`                                |
+| 返回值 | 说明                                                                   | 类型                                                |
+| ------ | ---------------------------------------------------------------------- | --------------------------------------------------- |
+| motion | 设备方向信息                                                           | `{ alpha: number; beta: number; gamma: number; }`   |
+| start  | 开启监听(若初始未设置`autoListen`需在调用`addListener`之前调用`start`) | `(interval?: Interval) => Promise<boolean>`         |
+| stop   | 停止监听(会清空之前设置的所有监听函数)                                 | `(callback) => void`                                |
+| add    | 设置监听函数(可队列设置. 每次设置的都会被队列监听)                     | `(callback: onDeviceMotionChange.Callback) => void` |
+| off    | 移除监听函数(移除匹配的监听函数)                                       | `(callback) => void`                                |
 
 ## 代码演示
 
-<code src="@pages/useMotion" />
+<code src="useMotion/index" group="device" />
 
 ## Hook 支持度
 

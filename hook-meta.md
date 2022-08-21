@@ -36,7 +36,7 @@
 - [x] useStorage
 - [x] useBattery
 - [x] useVibrate
-- [ ] useMotion
+- [x] useMotion
 - [x] useBrightness
 - [ ] useLocation
 - [x] useScanCode

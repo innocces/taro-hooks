@@ -3,123 +3,131 @@ import {
   stopDeviceMotionListening,
   onDeviceMotionChange,
   offDeviceMotionChange,
+  useTaroRef,
+  useTaroEffect,
+  useTaroState,
 } from '@tarojs/taro';
-import { ENV_TYPE } from '../constant';
-import { useCallback, useEffect, useState } from 'react';
+import usePromise from '../usePromise';
 
-import useEnv from '../useEnv';
+import { generateGeneralFail } from '../utils/tool';
 
-export type interval = keyof startDeviceMotionListening.interval;
+import type {
+  PromiseOptionalAction,
+  PromiseAction,
+  PromiseWithoutOptionAction,
+  ExcludeOption,
+  WithUndefind,
+  Noop,
+} from '../type';
 
-export type IMotion = onDeviceMotionChange.CallbackResult | {};
+export type Interval = keyof Taro.startDeviceMotionListening.Interval;
 
-export type Callaback = (...arg: any[]) => any;
+export type Motion = WithUndefind<Taro.onDeviceMotionChange.CallbackResult>;
 
-export type IStartListen = (interval?: interval) => Promise<boolean>;
+export type Start = PromiseOptionalAction<Interval, boolean>;
 
-export type IAddListener = (callback: onDeviceMotionChange.Callback) => void;
+export type Stop = PromiseWithoutOptionAction<boolean>;
 
-export interface IAction {
-  start: IStartListen;
-  stop: () => void;
-  addListener: IAddListener;
-  removeListener: (callback: Callaback) => void;
-}
+export type Callback = (
+  motion: Taro.onDeviceMotionChange.CallbackResult,
+) => void;
+
+export type Add = PromiseAction<Callback>;
+export type Off = PromiseAction<Noop>;
 
 function useMotion(
   autoListen?: boolean,
-  interval?: interval,
-): [IMotion, IAction] {
-  const [motion, setMotion] = useState<IMotion>({});
-  const env = useEnv();
+  interval?: Interval,
+): [
+  Motion,
+  {
+    start: Start;
+    stop: Stop;
+    add: Add;
+    off: Off;
+  },
+] {
+  const [motion, setMotion] = useTaroState<Motion>();
+  const listenStatus = useTaroRef<boolean>(false);
+  const callbackQueen = useTaroRef<Callback[]>([]);
 
-  useEffect(() => {
+  const privateListener: Callback = (callbackMotion) => {
+    setMotion(callbackMotion);
+    callbackQueen.current.forEach((callback) => callback?.(callbackMotion));
+  };
+
+  const add: Add = (callback) => {
+    if (!listenStatus.current) {
+      onDeviceMotionChange(privateListener);
+      listenStatus.current = true;
+    }
+    callbackQueen.current = [...callbackQueen.current, callback];
+    return Promise.resolve(generateGeneralFail('add', 'success'));
+  };
+
+  const off: Off = (callback) => {
+    if (callbackQueen.current.length === 1) {
+      offDeviceMotionChange(privateListener);
+      listenStatus.current = false;
+    }
+    callbackQueen.current = callbackQueen.current.filter(
+      (queenCallback) => queenCallback === callback,
+    );
+    return Promise.resolve(generateGeneralFail('off', 'success'));
+  };
+
+  const startAsync = usePromise<
+    ExcludeOption<Taro.startDeviceMotionListening.Option>
+  >(startDeviceMotionListening);
+
+  const start: Start = (optionInterval) => {
+    const option = { interval: optionInterval ?? interval ?? 'normal' };
+    return startAsync(option).then(
+      () => true,
+      () => false,
+    );
+  };
+
+  const stopAsync = usePromise(stopDeviceMotionListening);
+
+  const stop: Stop = () => {
+    return stopAsync().then((res) => {
+      // clear callbackQueen
+      callbackQueen.current?.map?.((callback) => off(callback));
+      return res;
+    });
+  };
+
+  const manualListenMotion = async () => {
+    try {
+      const result = await start(interval);
+      if (result && !listenStatus.current) {
+        add(privateListener);
+      }
+    } catch (e) {
+      return generateGeneralFail('manualListenMotion');
+    }
+  };
+
+  useTaroEffect(() => {
     if (autoListen) {
-      init();
+      manualListenMotion();
     }
 
     return () => {
       if (autoListen) {
-        removeListener(initListen);
-        stopListen();
+        stop();
       }
     };
   }, [autoListen, interval]);
 
-  const init = useCallback(async () => {
-    const result = await startListen(interval);
-    if (result) {
-      addListener(initListen);
-    }
-  }, [interval]);
-
-  const initListen = useCallback((motion) => {
-    setMotion(motion);
-  }, []);
-
-  const startListen = useCallback<IStartListen>((interval = 'normal') => {
-    return new Promise((resolve, reject) => {
-      try {
-        startDeviceMotionListening({
-          interval,
-          success: () => {
-            resolve(true);
-          },
-          fail: () => {
-            reject(false);
-          },
-        });
-      } catch (e) {
-        reject(false);
-      }
-    });
-  }, []);
-
-  const stopListen = useCallback(() => {
-    return new Promise((resolve, reject) => {
-      try {
-        stopDeviceMotionListening({
-          success: () => {
-            resolve(true);
-          },
-          fail: () => {
-            reject(false);
-          },
-        });
-      } catch (e) {
-        reject(false);
-      }
-    });
-  }, []);
-
-  const addListener = useCallback<IAddListener>((callback) => {
-    try {
-      onDeviceMotionChange(callback);
-    } catch (e) {
-      console.warn('add listener fail: ', e);
-    }
-  }, []);
-
-  const removeListener = useCallback(
-    (callback: Callaback) => {
-      if (env !== ENV_TYPE.WEB) {
-        try {
-          offDeviceMotionChange(callback);
-        } catch (e) {
-          console.warn('remove listener fail: ', e);
-        }
-      }
-    },
-    [env],
-  );
-
   return [
     motion,
     {
-      start: startListen,
-      stop: stopListen,
-      addListener,
-      removeListener,
+      start,
+      stop,
+      add,
+      off,
     },
   ];
 }
