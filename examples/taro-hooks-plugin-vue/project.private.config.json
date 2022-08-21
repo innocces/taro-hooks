@@ -57,6 +57,13 @@
                     "query": "title=useUpdateManager%20%E6%9B%B4%E6%96%B0&onlyMini=1",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/media/useMap/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

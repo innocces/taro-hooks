@@ -19,48 +19,60 @@ group:
 
 ## API
 
-```jsx | pure
+:::caution
+
+在**React**中, **mapContext**不能作为方法可用的标准. 由于**context**创建的异步性. 请手动获取或者增加**delay**再调用方法
+
+:::
+
+```ts
 const [
   mapContext,
   {
-    create,
-    getCenterLocation,
-    getRegion,
-    getScale,
-    getRotate,
-    getSkew,
-    includePoints,
-    moveToLocation,
-    translateMarker,
+    get,
+    open,
+    include,
+    moveTo,
+    translate,
+    toggleMarkers,
   },
-] = useMap(mapId, scope?);
+] = useMap(mapId, component?);
 ```
 
 ## 参数说明
 
-| 参数  | 说明                       | 类型                  | 默认值 |
-| ----- | -------------------------- | --------------------- | ------ |
-| mapId | 对应`Map`组件 id           | `string`              | -      |
-| scope | 若为自定义组件对应组件实例 | `Record<string, any>` | -      |
+| 参数      | 说明                       | 类型                     | 默认值 |
+| --------- | -------------------------- | ------------------------ | ------ |
+| mapId     | 对应`Map`组件 id           | `string`                 | -      |
+| component | 若为自定义组件对应组件实例 | `TaroGeneral.IAnyObject` | -      |
 
 ## 返回值说明
 
-| 返回值            | 说明                                                               | 类型                                                                                                                                                                                                |
-| ----------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| mapContext        | 地图实例                                                           | `MapContext                                                                                                                                                                                         | undefined` |
-| create            | 指定 id、组件创建地图实例                                          | `(mapId: string,scope?: Record<string, any>) => IMapContext`                                                                                                                                        |
-| getCenterLocation | 获取当前地图中心的经纬度。返回的是 gcj02 坐标系                    | `() => Promise<MapContext.GetCenterLocationSuccessCallbackResult &#124; General.CallbackResult>`                                                                                                    |
-| getRegion         | 获取当前地图的视野范围                                             | `() => Promise<MapContext.GetRegionSuccessCallbackResult &#124; General.CallbackResult>`                                                                                                            |
-| getScale          | 获取当前地图的缩放级别                                             | `() => Promise<MapContext.GetScaleSuccessCallbackResult &#124; General.CallbackResult>`                                                                                                             |
-| getRotate         | 获取当前地图的旋转角                                               | `() => Promise<MapContext.GetRotateSuccessCallbackResult &#124; General.CallbackResult>`                                                                                                            |
-| getSkew           | 获取当前地图的倾斜角                                               | `() => Promise<MapContext.GetSkewSuccessCallbackResult &#124; General.CallbackResult>`                                                                                                              |
-| includePoints     | 缩放视野展示所有经纬度                                             | `(points: MapContext.MapPostion[]) => Promise<General.CallbackResult>`                                                                                                                              |
-| moveToLocation    | 将地图中心移置当前定位点，此时需设置地图组件 show-location 为 true | `(options?: Pick<MapContext.MoveToLocationOption, 'longitude' &#124; 'latitude'>) => Promise<General.CallbackResult>`                                                                               |
-| translateMarker   | 平移 marker，带动画                                                | `(options: Pick<MapContext.TranslateMarkerOption, 'animationEnd' &#124; 'autoRotate' &#124; 'destination' &#124; 'duration' &#124; 'markerId' &#124; 'rotate'>) => Promise<General.CallbackResult>` |
+| 返回值        | 说明                                                         | 类型                                                                                  |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| mapContext    | 地图实例                                                     | `MapContext \| undefined`                                                             |
+| get           | 获取当前地图中心的经纬度、范围视野、缩放级别、旋转角、倾斜角 | `PromiseOptionalAction<string, GetSuccessCallbackResult>;`                            |
+| open          | 拉起地图 APP 选择导航                                        | `PromiseAction<ExcludeOption<MapContext.OpenMapAppOption>>`                           |
+| include       | 缩放视野展示所有经纬度                                       | `PromiseParamsAction<(points: MapContext.MapPosition[], padding?: number[]) => void>` |
+| moveTo        | 将地图中心移置当前定位点                                     | `PromiseOptionalAction<ExcludeOption<MapContext.MoveToLocationOption>>`               |
+| translate     | 平移 marker，带动画                                          | `PromiseAction<ExcludeOption<MapContext.TranslateMarkerOption>>`                      |
+| toggleMarkers | 展示/移除 marker                                             | `PromiseParamsAction<(markers: Marker \| number[], clear?: boolean) => void>`         |
+
+### `GetSuccessCallbackResult`
+
+```ts
+export type GetSuccessCallbackResult = {
+  center: UnionResult<MapContext.GetCenterLocationSuccessCallbackResult>;
+  region: UnionResult<MapContext.GetRegionSuccessCallbackResult>;
+  rotate: UnionResult<MapContext.GetRotateSuccessCallbackResult>;
+  scale: UnionResult<MapContext.GetScaleSuccessCallbackResult>;
+  skew: UnionResult<MapContext.GetSkewSuccessCallbackResult>;
+};
+```
 
 ## 代码演示
 
-<code src="@pages/useMap" />
+<code src="useMap/index" group="media" />
 
 ## Hook 支持度
 

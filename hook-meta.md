@@ -47,7 +47,7 @@
 - [ ] useCamera
 - [ ] useAudio
 - [ ] useRecord
-- [ ] useMap
+- [x] useMap
 - [x] useAuthorize
 - [x] useAccountInfo
 - [x] useUserInfo

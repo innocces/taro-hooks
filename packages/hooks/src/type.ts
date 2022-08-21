@@ -19,6 +19,11 @@ export type UnionResult<R> = R | TaroGeneral.CallbackResult;
 // omit general callback function for Option
 export type ExcludeOption<R> = Omit<R, 'success' | 'fail' | 'complete'>;
 
+// omit successCallbackResult without errMsg
+export type ExcludeSuccess<R> = Omit<R, 'errMsg'>;
+
+export type ExcludeUnionSuceess<R> = UnionResult<ExcludeOption<R>>;
+
 export type PromiseAction<T, R = TaroGeneral.CallbackResult> = (
   option: T,
 ) => Promise<UnionResult<R>>;

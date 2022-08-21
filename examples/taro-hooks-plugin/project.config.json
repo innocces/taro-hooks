@@ -22,7 +22,7 @@
     "useMultiFrameRuntime": true,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
+    "minifyWXSS": false,
     "useStaticServer": true,
     "showES6CompileOption": false,
     "checkInvalidKey": true,

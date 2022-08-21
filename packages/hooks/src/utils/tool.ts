@@ -1,6 +1,6 @@
 import { logError, strictOf } from '@taro-hooks/shared';
 import { stringify } from 'querystring';
-import type { RecordData } from '../type';
+import type { RecordData, ExcludeSuccess } from '../type';
 
 // prod constants
 export const isProd: boolean = process.env.NODE_ENV === 'production';
@@ -65,4 +65,15 @@ export function stringfiyUrl<R extends RecordData = RecordData>(
     stringfiyUrl += (hasQuery ? '&' : '?') + stringify(options);
   }
   return stringfiyUrl;
+}
+
+/**
+ * filter orgin successCallbackResult errMsg Fields
+ * @param successResultArray
+ * @returns WithoutErrMsgArray
+ */
+export function filterErrMsgField<R extends { errMsg: string }>(
+  successResultArray: R[],
+): ExcludeSuccess<R>[] {
+  return successResultArray.map(({ errMsg, ...result }) => result);
 }

@@ -82,6 +82,7 @@ export default defineAppConfig({
     // media
     'pages/media/useVideo/index',
     'pages/media/useImage/index',
+    'pages/media/useMap/index',
   ],
   window: {
     backgroundTextStyle: 'light',

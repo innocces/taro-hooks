@@ -25,6 +25,9 @@ const config = {
   },
   framework: 'react',
   mini: {
+    miniCssExtractPluginOption: {
+      ignoreOrder: true,
+    },
     postcss: {
       pxtransform: {
         enable: true,
@@ -56,6 +59,9 @@ const config = {
     staticDirectory: 'static',
     devServer: {
       port: '12557',
+    },
+    miniCssExtractPluginOption: {
+      ignoreOrder: true,
     },
     postcss: {
       autoprefixer: {

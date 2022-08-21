@@ -1,217 +1,170 @@
-import { createMapContext, MapContext } from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
-import { ENV_TYPE } from '../constant';
-import useEnv from '../useEnv';
+import {
+  createMapContext,
+  useTaroState,
+  useReady,
+  useTaroEffect,
+} from '@tarojs/taro';
+import { isNumber, ISREACT } from '@taro-hooks/shared';
+import usePromise from '../utils/useActivePromise';
 
-export type IMapContext = MapContext | undefined;
-export type ICreateAction = (
+import type { MapContext } from '@tarojs/taro';
+import type {
+  WithUndefind,
+  PromiseOptionalAction,
+  PromiseParamsAction,
+  PromiseAction,
+  ExcludeOption,
+  UnionResult,
+} from '../type';
+
+export type Marker = MapContext.AddMarkersOption['markers'];
+
+export type GetSuccessCallbackResult = {
+  center: UnionResult<MapContext.GetCenterLocationSuccessCallbackResult>;
+  region: UnionResult<MapContext.GetRegionSuccessCallbackResult>;
+  rotate: UnionResult<MapContext.GetRotateSuccessCallbackResult>;
+  scale: UnionResult<MapContext.GetScaleSuccessCallbackResult>;
+  skew: UnionResult<MapContext.GetSkewSuccessCallbackResult>;
+};
+
+export type Get = PromiseOptionalAction<string, GetSuccessCallbackResult>;
+
+export type Open = PromiseAction<ExcludeOption<MapContext.OpenMapAppOption>>;
+
+export type Include = PromiseParamsAction<
+  (points: MapContext.MapPosition[], padding?: number[]) => void
+>;
+
+export type MoveTo = PromiseOptionalAction<
+  ExcludeOption<MapContext.MoveToLocationOption>
+>;
+
+export type Translate = PromiseAction<
+  ExcludeOption<MapContext.TranslateMarkerOption>
+>;
+
+export type ToggleMarkers = PromiseParamsAction<
+  (markers: Marker | number[], clear?: boolean) => void
+>;
+
+function useMap<R = TaroGeneral.IAnyObject>(
   mapId: string,
-  scope?: Record<string, any>,
-) => IMapContext;
+  component?: R,
+): [
+  WithUndefind<MapContext>,
+  {
+    get: Get;
+    open: Open;
+    include: Include;
+    moveTo: MoveTo;
+    translate: Translate;
+    toggleMarkers: ToggleMarkers;
+  },
+] {
+  const [mapContext, setMapContext] = useTaroState<MapContext>();
+  const [, forceUpdate] = useTaroState<{}>({});
 
-export type IGetCenterLocationAction = () => Promise<
-  MapContext.GetCenterLocationSuccessCallbackResult | TaroGeneral.CallbackResult
->;
+  useReady(() => {
+    setMapContext(
+      component ? createMapContext(mapId, component) : createMapContext(mapId),
+    );
+  });
 
-export type IGetRegionAction = () => Promise<
-  MapContext.GetRegionSuccessCallbackResult | TaroGeneral.CallbackResult
->;
-
-export type IGetRotateAction = () => Promise<
-  MapContext.GetRotateSuccessCallbackResult | TaroGeneral.CallbackResult
->;
-
-export type IGetScaleAction = () => Promise<
-  MapContext.GetScaleSuccessCallbackResult | TaroGeneral.CallbackResult
->;
-
-export type IGetSkewAction = () => Promise<
-  MapContext.GetSkewSuccessCallbackResult | TaroGeneral.CallbackResult
->;
-
-export type IIncludePointsAction = (
-  points: MapContext.MapPostion[],
-) => Promise<TaroGeneral.CallbackResult>;
-
-export type IMoveToLocation = (
-  options?: Pick<MapContext.MoveToLocationOption, 'longitude' | 'latitude'>,
-) => Promise<TaroGeneral.CallbackResult>;
-
-export type ITranslatMarker = (
-  options: Pick<
-    MapContext.TranslateMarkerOption,
-    | 'animationEnd'
-    | 'autoRotate'
-    | 'destination'
-    | 'duration'
-    | 'markerId'
-    | 'rotate'
-  >,
-) => Promise<TaroGeneral.CallbackResult>;
-
-export interface IAction {
-  create: ICreateAction;
-  getCenterLocation: IGetCenterLocationAction;
-  getRegion: IGetRegionAction;
-  getRotate: IGetRotateAction;
-  getScale: IGetScaleAction;
-  getSkew: IGetSkewAction;
-  includePoints: IIncludePointsAction;
-  moveToLocation: IMoveToLocation;
-  translateMarker: ITranslatMarker;
-}
-
-function useMap<R = Record<string, any>>(
-  mapId: string,
-  scope?: R,
-): [IMapContext, IAction] {
-  const env = useEnv();
-  const [map, setMap] = useState<IMapContext>();
-
-  useEffect(() => {
-    if (env && mapId && env === ENV_TYPE.WEAPP) {
-      const context = create(mapId, scope);
-      setMap(context);
+  useTaroEffect(() => {
+    if (mapContext && ISREACT) {
+      forceUpdate({});
     }
-  }, [env]);
+  }, [mapContext]);
 
-  const create = useCallback<ICreateAction>(
-    (mapId, scope) => {
-      if (env && mapId && env === ENV_TYPE.WEAPP) {
-        return createMapContext(mapId, scope);
-      }
-    },
-    [env],
+  const getCenterAsync = usePromise<
+    ExcludeOption<MapContext.GetCenterLocationOption>,
+    MapContext.GetCenterLocationSuccessCallbackResult
+  >('getCenterLocation', mapContext);
+  const getRegionAsync = usePromise<
+    {},
+    MapContext.GetRegionSuccessCallbackResult
+  >('getRegion', mapContext);
+  const getRotateAsync = usePromise<
+    {},
+    MapContext.GetRotateSuccessCallbackResult
+  >('getRotate', mapContext);
+  const getScaleAsync = usePromise<
+    {},
+    MapContext.GetScaleSuccessCallbackResult
+  >('getScale', mapContext);
+  const getSkewAsync = usePromise<{}, MapContext.GetSkewSuccessCallbackResult>(
+    'getSkew',
+    mapContext,
   );
 
-  const getCenterLocationAsync = useCallback<IGetCenterLocationAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env && env === ENV_TYPE.WEAPP && map) {
-        map.getCenterLocation({
-          success: resolve,
-          fail: reject,
-        });
-      } else {
-        reject({ errMsg: 'getCenterLocation: failed' });
-      }
+  const get: Get = (iconPath) => {
+    const getCenterLocationOption = iconPath ? { iconPath } : {};
+    return Promise.all([
+      getCenterAsync(getCenterLocationOption),
+      getRegionAsync(),
+      getRotateAsync(),
+      getScaleAsync(),
+      getSkewAsync(),
+    ]).then(([center, region, rotate, scale, skew]) => {
+      return {
+        center,
+        region,
+        rotate,
+        scale,
+        skew,
+      };
     });
-  }, [env, map]);
+  };
 
-  const getRegionAsync = useCallback<IGetRegionAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env && env === ENV_TYPE.WEAPP && map) {
-        map.getRegion({
-          success: resolve,
-          fail: reject,
-        });
-      } else {
-        reject({ errMsg: 'getRegion: failed' });
-      }
-    });
-  }, [env, map]);
-
-  const getScaleAsync = useCallback<IGetScaleAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env && env === ENV_TYPE.WEAPP && map) {
-        map.getScale({
-          success: resolve,
-          fail: reject,
-        });
-      } else {
-        reject({ errMsg: 'getScale: failed' });
-      }
-    });
-  }, [env, map]);
-
-  const getRotateAsync = useCallback<IGetRotateAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env && env === ENV_TYPE.WEAPP && map) {
-        map.getRotate({
-          success: resolve,
-          fail: reject,
-        });
-      } else {
-        reject({ errMsg: 'getRotate: failed' });
-      }
-    });
-  }, [env, map]);
-
-  const getSkewAsync = useCallback<IGetSkewAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env && env === ENV_TYPE.WEAPP && map) {
-        map.getSkew({
-          success: resolve,
-          fail: reject,
-        });
-      } else {
-        reject({ errMsg: 'getSkew: failed' });
-      }
-    });
-  }, [env, map]);
-
-  const includePointsAsync = useCallback<IIncludePointsAction>(
-    (points = []) => {
-      return new Promise((resolve, reject) => {
-        if (env && env === ENV_TYPE.WEAPP && map) {
-          map.includePoints({
-            points,
-            success: resolve,
-            fail: reject,
-          });
-        } else {
-          reject({ errMsg: 'includePoints: failed' });
-        }
-      });
-    },
-    [env, map],
+  const open: Open = usePromise<ExcludeOption<MapContext.OpenMapAppOption>>(
+    'openMapApp',
+    mapContext,
   );
 
-  const moveToLocationAsync = useCallback<IMoveToLocation>(
-    (options = {}) => {
-      return new Promise((resolve, reject) => {
-        if (env && env === ENV_TYPE.WEAPP && map) {
-          map.moveToLocation({
-            ...options,
-            success: resolve,
-            fail: reject,
-          });
-        } else {
-          reject({ errMsg: 'moveToLocation: failed' });
-        }
-      });
-    },
-    [env, map],
-  );
+  const includeAsync = usePromise<
+    ExcludeOption<MapContext.IncludePointsOption>
+  >('includePoints', mapContext);
 
-  const translateMarkerAsync = useCallback<ITranslatMarker>(
-    (options) => {
-      return new Promise((resolve, reject) => {
-        if (env && env === ENV_TYPE.WEAPP && map) {
-          map.translateMarker({
-            ...(options || {}),
-            success: resolve,
-            fail: reject,
-          });
-        } else {
-          reject({ errMsg: 'translateMarker: failed' });
-        }
-      });
-    },
-    [env, map],
-  );
+  const include: Include = (points, padding = []) => {
+    return includeAsync({ points, padding });
+  };
+
+  const moveTo: MoveTo = usePromise<
+    ExcludeOption<MapContext.MoveToLocationOption>
+  >('moveToLocation', mapContext);
+
+  const translate: Translate = usePromise<
+    ExcludeOption<MapContext.TranslateMarkerOption>
+  >('translateMarker', mapContext);
+
+  const addMarkersAsync = usePromise<
+    ExcludeOption<MapContext.AddMarkersOption>
+  >('addMarkers', mapContext);
+  const removeMarkersAsync = usePromise<
+    ExcludeOption<MapContext.RemoveMarkersOption>
+  >('removeMarkers', mapContext);
+
+  const toggleMarkers: ToggleMarkers = (markers, clear = false) => {
+    if (Array.isArray(markers) && (markers as number[]).every(isNumber)) {
+      // @ts-ignore (taro markers not safe for miniprogram, see: https://developers.weixin.qq.com/miniprogram/dev/component/map.html#marker )
+      return removeMarkersAsync({ markerIds: markers as number[] });
+    }
+    const option = {
+      markers: markers as Marker,
+      clear,
+    };
+    return addMarkersAsync(option);
+  };
 
   return [
-    map,
+    mapContext,
     {
-      create,
-      getCenterLocation: getCenterLocationAsync,
-      getRegion: getRegionAsync,
-      getScale: getScaleAsync,
-      getRotate: getRotateAsync,
-      getSkew: getSkewAsync,
-      includePoints: includePointsAsync,
-      moveToLocation: moveToLocationAsync,
-      translateMarker: translateMarkerAsync,
+      get,
+      open,
+      include,
+      moveTo,
+      translate,
+      toggleMarkers,
     },
   ];
 }
