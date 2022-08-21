@@ -10,6 +10,8 @@ export type TGeneralCallback<T = TaroGeneral.CallbackResult, R = void> = (
 
 export type Noop = (...args: any[]) => void;
 
+export type Callback<R = TaroGeneral.CallbackResult> = (res: R) => void;
+
 export type WithUndefind<R> = R | undefined;
 
 export type RecordData<R extends string = string, S = any> = Record<R, S>;

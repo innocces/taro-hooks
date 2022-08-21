@@ -1,222 +1,150 @@
 import Taro, {
-  getLocation,
   openLocation,
   chooseLocation,
-  onLocationChange,
-  offLocationChange,
+  choosePoi,
   startLocationUpdate,
   startLocationUpdateBackground,
   stopLocationUpdate,
+  useTaroState,
+  useTaroEffect,
 } from '@tarojs/taro';
-import { useCallback, useEffect, useState, useRef } from 'react';
-import useEnv from '../useEnv';
-import * as locationApi from './utils';
+import usePromise from '../usePromise';
+import {
+  getLocation,
+  onLocationChange,
+  offLocationChange,
+  onLocationChangeError,
+  offLocationChangeError,
+} from './utils/index';
+
 import type {
-  IGeolocationCoordinates,
-  IPositionOption,
-  INormalCallback,
-} from './utils';
-import { ENV_TYPE } from '../constant';
+  PromiseAction,
+  PromiseOptionalAction,
+  PromiseWithoutOptionAction,
+  PromiseParamsAction,
+  ExcludeOption,
+  WithUndefind,
+  Callback,
+} from '../type';
 
-export type ILocation =
-  | getLocation.SuccessCallbackResult
-  | IGeolocationCoordinates
-  | undefined;
+export type GetLocation = typeof getLocation;
+export type OnLocationChange = typeof onLocationChange;
+export type OffLocationChange = typeof offLocationChange;
+export type OnLocationChangeError = typeof onLocationChangeError;
+export type OffLocationChangeError = typeof offLocationChangeError;
 
-export type IGetLocationOption = IPositionOption & { altitude?: boolean };
+export type Option = ExcludeOption<Taro.getLocation.Option>;
+export type Location = WithUndefind<Taro.getLocation.SuccessCallbackResult>;
 
-export type IGetLocationAction = (
-  getLocationOption?: IGetLocationOption,
-) => Promise<TaroGeneral.CallbackResult | ILocation>;
+export type Get = PromiseOptionalAction<
+  Option,
+  Taro.getLocation.SuccessCallbackResult
+>;
 
-export type IChooseLocationAction = (
-  chooseLocationOption?: Pick<chooseLocation.Option, 'latitude' | 'longitude'>,
-) => Promise<chooseLocation.SuccessCallbackResult>;
+export type Choose = PromiseOptionalAction<
+  ExcludeOption<Taro.chooseLocation.Option>,
+  Taro.chooseLocation.SuccessCallbackResult
+>;
+export type ChoosePOI =
+  PromiseWithoutOptionAction<Taro.choosePoi.SuccessCallbackResult>;
 
-export type INormalAction = (
-  callback: INormalCallback | onLocationChange.Callback,
+export type Open = PromiseAction<ExcludeOption<Taro.openLocation.Option>>;
+
+export type ToggleUpdate = PromiseParamsAction<
+  (onOff?: boolean, background?: boolean) => void
+>;
+export type ChangeCallback = Taro.onLocationChange.Callback;
+export type ChangErrorCallback = Taro.onLocationChangeError.Callback;
+export type On = (
+  callback: ChangeCallback | ChangErrorCallback,
+  error?: boolean,
+) => void;
+export type Off = (
+  callback: Callback | ChangErrorCallback,
+  error?: boolean,
 ) => void;
 
-export type IOpenLocationAction = (
-  openLocationOption: Pick<
-    openLocation.Option,
-    'address' | 'latitude' | 'longitude' | 'name' | 'scale'
-  >,
-) => Promise<TaroGeneral.CallbackResult>;
+function useLocation(options?: Option): [
+  Location,
+  {
+    get: Get;
+    choose: Choose;
+    choosePOI: ChoosePOI;
+    open: Open;
+    toggleUpdate: ToggleUpdate;
+    on: On;
+    off: Off;
+  },
+] {
+  const [location, setLocation] = useTaroState<Location>();
 
-export type INormalPromiseAction = () => Promise<TaroGeneral.CallbackResult>;
-export interface IAction {
-  getLocation: IGetLocationAction;
-  chooseLocation: IChooseLocationAction;
-  openLocation: IOpenLocationAction;
-  onLocationChange: INormalAction;
-  offLocationChange: INormalAction;
-  startLocationUpdate: INormalPromiseAction;
-  startLocationUpdateBackground: INormalPromiseAction;
-  stopLocationUpdate: INormalPromiseAction;
-}
+  const getAsync = usePromise<Option, Taro.getLocation.SuccessCallbackResult>(
+    getLocation,
+  );
 
-function useLocation(options?: IGetLocationOption): [ILocation, IAction] {
-  const listenId = useRef<number>();
-  const [location, setLocation] = useState<ILocation>();
-  const env = useEnv();
+  const get: Get = (getOption) => {
+    return getAsync({ ...(options ?? {}), ...(getOption ?? {}) }).then(
+      (res) => {
+        setLocation(res);
+        return res;
+      },
+    );
+  };
 
-  useEffect(() => {
-    if (env) {
-      getLocationAsync();
+  const choose: Choose = usePromise<
+    ExcludeOption<Taro.chooseLocation.Option>,
+    Taro.chooseLocation.SuccessCallbackResult
+  >(chooseLocation);
+  const choosePOI: ChoosePOI = usePromise<
+    {},
+    Taro.choosePoi.SuccessCallbackResult
+  >(choosePoi);
+
+  const open: Open =
+    usePromise<ExcludeOption<Taro.openLocation.Option>>(openLocation);
+
+  const startUpdateAsync = usePromise(startLocationUpdate);
+  const startBackgroundAsync = usePromise(startLocationUpdateBackground);
+  const stopUpdateAsync = usePromise(stopLocationUpdate);
+
+  const toggleUpdate: ToggleUpdate = (onOff, background) => {
+    return onOff
+      ? background
+        ? startBackgroundAsync()
+        : startUpdateAsync()
+      : stopUpdateAsync();
+  };
+
+  const on: On = (callback, error) => {
+    if (error) {
+      onLocationChangeError(callback as ChangErrorCallback);
     }
-  }, [env]);
 
-  const getLocationAsync = useCallback<IGetLocationAction>(
-    (getLocationOption) => {
-      return new Promise((resolve, reject) => {
-        const payload = { ...(options || {}), ...(getLocationOption || {}) };
-        try {
-          if (env === ENV_TYPE.WEB) {
-            locationApi
-              .getLocation(payload)
-              .then((res) => {
-                setLocation(res);
-                resolve(res);
-              })
-              .catch(reject);
-          } else {
-            getLocation({
-              ...(payload as getLocation.Option),
-              success: (res) => {
-                setLocation(res);
-                resolve(res);
-              },
-              fail: reject,
-            }).catch(reject);
-          }
-        } catch (e) {
-          reject({ errMsg: e });
-        }
-      });
-    },
-    [env],
-  );
+    onLocationChange(callback as ChangeCallback);
+  };
 
-  const chooseLocationAsync = useCallback<IChooseLocationAction>(
-    (chooseLocationOption) => {
-      return new Promise((resolve, reject) => {
-        if (env === ENV_TYPE.RN) {
-          reject({ errMsg: 'rn not support' });
-        } else {
-          try {
-            chooseLocation({
-              ...(chooseLocationOption || {}),
-              success: resolve,
-              fail: reject,
-            }).catch(reject);
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [env],
-  );
+  const off: Off = (callback, error) => {
+    if (error) {
+      offLocationChangeError(callback as ChangErrorCallback);
+    }
 
-  const openLocationAsync = useCallback<IOpenLocationAction>(
-    (openLocationOption) => {
-      return new Promise((resolve, reject) => {
-        try {
-          openLocation({
-            ...(openLocationOption || {}),
-            success: resolve,
-            fail: reject,
-          }).catch(reject);
-        } catch (e) {
-          reject({ errMsg: e });
-        }
-      });
-    },
-    [env],
-  );
+    offLocationChange(callback as Callback);
+  };
 
-  const listenLocationChange = useCallback<INormalAction>(
-    (callback) => {
-      if (callback) {
-        if (env === ENV_TYPE.WEB) {
-          locationApi
-            .onLocationChange(<INormalCallback>callback, options || {})
-            .then((id) => {
-              listenId.current = id as number;
-            });
-        } else {
-          Taro.onLocationChange(<onLocationChange.Callback>callback);
-        }
-      }
-    },
-    [env],
-  );
-
-  const unlistenLocationChange = useCallback<INormalAction>(
-    (callback) => {
-      if (callback) {
-        if (env === ENV_TYPE.WEB && listenId.current) {
-          locationApi.offLocationChange(listenId.current);
-        } else {
-          offLocationChange(<INormalCallback>callback);
-        }
-      }
-    },
-    [env, listenId],
-  );
-
-  const startLocationUpdateAsync = useCallback<INormalPromiseAction>(() => {
-    return new Promise((resolve, reject) => {
-      try {
-        startLocationUpdate({
-          success: resolve,
-          fail: reject,
-        });
-      } catch (e) {
-        reject({ errMsg: e });
-      }
-    });
+  useTaroEffect(() => {
+    get();
   }, []);
-
-  const stopLocationUpdateAsync = useCallback<INormalPromiseAction>(() => {
-    return new Promise((resolve, reject) => {
-      try {
-        stopLocationUpdate({
-          success: resolve,
-          fail: reject,
-        });
-      } catch (e) {
-        reject({ errMsg: e });
-      }
-    });
-  }, []);
-
-  const startLocationUpdateBackgroundAsync =
-    useCallback<INormalPromiseAction>(() => {
-      return new Promise((resolve, reject) => {
-        try {
-          startLocationUpdateBackground({
-            success: resolve,
-            fail: reject,
-          });
-        } catch (e) {
-          reject({ errMsg: e });
-        }
-      });
-    }, []);
 
   return [
     location,
     {
-      getLocation: getLocationAsync,
-      chooseLocation: chooseLocationAsync,
-      openLocation: openLocationAsync,
-      onLocationChange: listenLocationChange,
-      offLocationChange: unlistenLocationChange,
-      startLocationUpdate: startLocationUpdateAsync,
-      stopLocationUpdate: stopLocationUpdateAsync,
-      startLocationUpdateBackground: startLocationUpdateBackgroundAsync,
+      get,
+      choose,
+      choosePOI,
+      open,
+      toggleUpdate,
+      on,
+      off,
     },
   ];
 }

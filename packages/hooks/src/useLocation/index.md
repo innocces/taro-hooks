@@ -19,45 +19,43 @@ group:
 
 ## API
 
-```jsx | pure
+```ts
 const [
   location,
   {
-    getLocation,
-    chooseLocation,
-    openLocation,
-    onLocationChange,
-    offLocationChange,
-    startLocationUpdate,
-    startLocationUpdateBackground,
-    stopLocationUpdate,
+    get,
+    choose,
+    choosePOI,
+    open,
+    toggleUpdate,
+    on,
+    off,
   },
 ] = useLocation(options?);
 ```
 
 ## 参数说明
 
-| 参数    | 说明                                         | 类型                                       | 默认值 |
-| ------- | -------------------------------------------- | ------------------------------------------ | ------ |
-| options | 获取地理信息配置(若指定后面可与新的配置合并) | `IPositionOption & { altitude?: boolean }` | -      |
+| 参数    | 说明                                         | 类型                                     | 默认值 |
+| ------- | -------------------------------------------- | ---------------------------------------- | ------ |
+| options | 获取地理信息配置(若指定后面可与新的配置合并) | `ExcludeOption<Taro.getLocation.Option>` | -      |
 
 ## 返回值说明
 
-| 返回值                        | 说明                                  | 类型                                                                                                                                                             |
-| ----------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| location                      | 根据初始化配置获取的地理信息          | `getLocation.SuccessCallbackResult &#124; IGeolocationCoordinates &#124; undefined`                                                                              |
-| getLocation                   | 获取当前的地理位置、速度(h5 支持)     | `(getLocationOption?: IGetLocationOption) => Promise<General.CallbackResult &#124;ILocation>`                                                                    |
-| chooseLocation                | 打开地图选择位置                      | `(chooseLocationOption?: Pick<chooseLocation.Option, 'latitude' &#124; 'longitude'>) => Promise<chooseLocation.SuccessCallbackResult>`                           |
-| openLocation                  | 使用微信内置地图查看位置              | `(openLocationOption: Pick<openLocation.Option,'address' &#124; 'latitude' &#124; 'longitude' &#124; 'name' &#124; 'scale'>) => Promise<General.CallbackResult>` |
-| onLocationChange              | 监听实时地理位置变化事件(h5 支持)     | `(callback: INormalCallback &#124; onLocationChange.Callback) => void`                                                                                           |
-| offLocationChange             | 取消监听实时地理位置变化事件(h5 支持) | `(callback: INormalCallback &#124; onLocationChange.Callback) => void`                                                                                           |
-| startLocationUpdate           | 开启小程序进入前台时接收位置消息      | `() => Promise<General.CallbackResult>`                                                                                                                          |
-| startLocationUpdateBackground | 开启小程序进入前后台时均接收位置消息  | `() => Promise<General.CallbackResult>`                                                                                                                          |
-| stopLocationUpdate            | 关闭监听实时位置变化                  | `() => Promise<General.CallbackResult>`                                                                                                                          |
+| 返回值       | 说明                                          | 类型                                                                                                           |
+| ------------ | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| location     | 根据初始化配置获取的地理信息                  | `WithUndefind<Taro.getLocation.SuccessCallbackResult>`                                                         |
+| get          | 获取当前的地理位置、速度(h5 支持)             | `PromiseOptionalAction<Option, Taro.getLocation.SuccessCallbackResult>`                                        |
+| choose       | 打开地图选择位置                              | `PromiseOptionalAction<ExcludeOption<Taro.chooseLocation.Option>, Taro。chooseLocation.SuccessCallbackResult>` |
+| choosePOI    | 打开地图选择位置                              | `PromiseWithoutOptionAction<Taro.choosePoi.SuccessCallbackResult>`                                             |
+| toggleUpdate | 开启/关闭小程序进入前台(或后台)时接收位置消息 | `PromiseParamsAction<(onOff?: boolean, background?: boolean) => void>`                                         |
+| open         | 使用微信内置地图查看位置                      | `PromiseAction<ExcludeOption<Taro.openLocation.Option>>`                                                       |
+| on           | 监听实时地理位置变化事件(h5 支持)             | `(callback: ChangeCallback \| ChangErrorCallback, error?: boolean) => void`                                    |
+| off          | 取消监听实时地理位置变化事件(h5 支持)         | `(callback: Callback \| ChangErrorCallback, error?: boolean) => void`                                          |
 
 ## 代码演示
 
-<code src="@pages/useLocation" />
+<code src="useLocation/index" group="device" />
 
 ## Hook 支持度
 
