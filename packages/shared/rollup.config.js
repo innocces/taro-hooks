@@ -11,6 +11,15 @@ const baseConfig = {
       format: 'cjs',
       sourcemap: true,
       exports: 'named',
+      banner: `
+/**
+ MIT License
+
+ Copyright (c) 2021 innocces
+
+ Power by TARO-HOOKS
+ */
+`,
     },
   ],
   plugins: [
