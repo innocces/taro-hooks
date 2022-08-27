@@ -65,6 +65,7 @@ export default {
     'pages/device/useBrightness/index',
     'pages/device/useScanCode/index',
     'pages/device/useMotion/index',
+    'pages/device/useLocation/index',
     // feedback
     'pages/feedback/useActionSheet/index',
     'pages/feedback/useLoading/index',
