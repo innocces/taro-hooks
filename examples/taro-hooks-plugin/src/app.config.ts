@@ -80,6 +80,7 @@ export default {
     'pages/media/useVideo/index',
     'pages/media/useImage/index',
     'pages/media/useMap/index',
+    'pages/media/useCamera/index',
   ],
   window: {
     backgroundTextStyle: 'light',

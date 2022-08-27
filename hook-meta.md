@@ -38,13 +38,13 @@
 - [x] useVibrate
 - [x] useMotion
 - [x] useBrightness
-- [ ] useLocation
+- [x] useLocation
 - [x] useScanCode
 - [ ] useBluetooth
 - [ ] useBLE
 - [x] useImage
 - [x] useVideo
-- [ ] useCamera
+- [x] useCamera
 - [ ] useAudio
 - [ ] useRecord
 - [x] useMap

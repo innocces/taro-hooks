@@ -1,134 +1,86 @@
-import {
-  createCameraContext,
-  CameraContext,
-  CameraFrameListener,
-} from '@tarojs/taro';
-import { useCallback, useEffect, useState } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+import { createCameraContext, useTaroRef } from '@tarojs/taro';
+import usePromise from '../usePromise';
 
-export type ICameraContext = CameraContext | undefined;
+import type { CameraContext, CameraFrameListener } from '@tarojs/taro';
+import type {
+  ExcludeOption,
+  PromiseAction,
+  PromiseOptionalAction,
+} from '../type';
 
-export type CreateContextAction = () => ICameraContext;
-
-export type IStartRecordAction = (
-  callback?: CameraContext.StartRecordTimeoutCallback,
-) => Promise<TaroGeneral.CallbackResult>;
-
-export type IStopRecordAction = () => Promise<
-  TaroGeneral.CallbackResult | CameraContext.StopRecordSuccessCallbackResult
+export type Zoom = PromiseAction<
+  number,
+  CameraContext.StartRecordSuccessCallbackResult
 >;
 
-export type ITakePhotoAction = (
-  option: Partial<Pick<CameraContext.TakePhotoOption, 'quality'>>,
-) => Promise<CameraContext.TakePhotoSuccessCallbackResult>;
+export type Start = PromiseOptionalAction<
+  ExcludeOption<CameraContext.StartRecordOption>
+>;
 
-export type IOnCameraFrameAction = (
+export type Stop = PromiseOptionalAction<
+  boolean,
+  CameraContext.StopRecordSuccessCallbackResult
+>;
+
+export type Take = PromiseOptionalAction<
+  ExcludeOption<CameraContext.TakePhotoOption>,
+  CameraContext.TakePhotoSuccessCallbackResult
+>;
+
+export type Listener = (
   callback: CameraContext.OnCameraFrameCallback,
-) => CameraFrameListener | undefined;
+) => CameraFrameListener;
 
-export interface IAction {
-  create: CreateContextAction;
-  startRecord: IStartRecordAction;
-  stopRecord: IStopRecordAction;
-  takePhoto: ITakePhotoAction;
-  onCameraFrame: IOnCameraFrameAction;
-}
+function useCamera(): [
+  CameraContext,
+  {
+    zoom: Zoom;
+    start: Start;
+    stop: Stop;
+    take: Take;
+    listener: Listener;
+  },
+] {
+  const cameraContext = useTaroRef<CameraContext>(createCameraContext());
 
-function useCamera(): [ICameraContext, IAction] {
-  const [cameraContext, setCameraContext] = useState<ICameraContext>();
-  const env = useEnv();
+  const zoomAsync = usePromise<
+    ExcludeOption<CameraContext.SetZoomOption>,
+    CameraContext.StartRecordSuccessCallbackResult
+  >(cameraContext.current.setZoom);
 
-  useEffect(() => {
-    if (env) {
-      create();
-    }
-  }, [env]);
+  const zoom: Zoom = (zoomNumber) => {
+    return zoomAsync({ zoom: zoomNumber });
+  };
 
-  const create = useCallback<CreateContextAction>(() => {
-    if (env !== ENV_TYPE.WEB) {
-      const context = createCameraContext();
-      setCameraContext(context);
-      return context;
-    }
-  }, [env]);
+  const start: Start = usePromise<
+    ExcludeOption<CameraContext.StartRecordOption>
+  >(cameraContext.current.startRecord);
 
-  const startRecord = useCallback<IStartRecordAction>(
-    (callback) => {
-      return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEB && cameraContext) {
-          try {
-            cameraContext.startRecord({
-              success: resolve,
-              fail: reject,
-              ...(callback ? { timeoutCallback: callback } : {}),
-            });
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [env, cameraContext],
-  );
+  const stopAsync = usePromise<
+    ExcludeOption<CameraContext.StopRecordOption>,
+    CameraContext.StopRecordSuccessCallbackResult
+  >(cameraContext.current.stopRecord);
+  const stop: Stop = (compressed) => {
+    return stopAsync({ compressed });
+  };
 
-  const stopRecord = useCallback<IStopRecordAction>(() => {
-    return new Promise((resolve, reject) => {
-      if (env !== ENV_TYPE.WEB && cameraContext) {
-        try {
-          cameraContext.stopRecord({
-            success: resolve,
-            fail: reject,
-          });
-        } catch (e) {
-          reject(e);
-        }
-      }
-    });
-  }, [env, cameraContext]);
+  const take: Take = usePromise<
+    ExcludeOption<CameraContext.TakePhotoOption>,
+    CameraContext.TakePhotoSuccessCallbackResult
+  >(cameraContext.current.takePhoto);
 
-  const takePhoto = useCallback<ITakePhotoAction>(
-    (option = {}) => {
-      return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEB && cameraContext) {
-          try {
-            cameraContext.takePhoto({
-              ...option,
-              success: resolve,
-              fail: reject,
-            });
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [env, cameraContext],
-  );
-
-  const onCameraFrame = useCallback<IOnCameraFrameAction>(
-    (callback) => {
-      if (env !== ENV_TYPE.WEB && cameraContext && callback) {
-        try {
-          const listener = cameraContext.onCameraFrame(callback);
-          listener.start();
-          return listener;
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    },
-    [env, cameraContext],
-  );
+  const listener: Listener = (callback) => {
+    return cameraContext.current.onCameraFrame(callback);
+  };
 
   return [
-    cameraContext,
+    cameraContext.current,
     {
-      create,
-      startRecord,
-      stopRecord,
-      takePhoto,
-      onCameraFrame,
+      zoom,
+      start,
+      stop,
+      take,
+      listener,
     },
   ];
 }
