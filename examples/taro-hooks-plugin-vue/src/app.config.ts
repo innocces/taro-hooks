@@ -86,6 +86,7 @@ export default defineAppConfig({
     'pages/media/useImage/index',
     'pages/media/useMap/index',
     'pages/media/useCamera/index',
+    'pages/media/useAudio/index',
   ],
   window: {
     backgroundTextStyle: 'light',

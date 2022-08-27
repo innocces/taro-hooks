@@ -26,7 +26,7 @@
 - [x] useOnline
 - [x] useRequest
 - [x] clearCache 🆕
-- [ ] useFile
+- [x] useFile
 - [x] useToast
 - [x] useModal
 - [x] useLoading
@@ -45,8 +45,8 @@
 - [x] useImage
 - [x] useVideo
 - [x] useCamera
-- [ ] useAudio
-- [ ] useRecord
+- [x] useAudio
+- [x] useRecord
 - [x] useMap
 - [x] useAuthorize
 - [x] useAccountInfo
