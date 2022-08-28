@@ -19,99 +19,43 @@ group:
 
 ## API
 
-```jsx | pure
+```ts
 const [
-    query,
-    {
-      in,
-      exec,
-      select,
-      selectAll,
-      selectViewport,
-      getBoundingClientRect,
-      getContext,
-      getFields,
-      getNode,
-      getScrollOffset,
-    },
-  ] = useSelectorQuery();
+  query,
+  {
+    querySelector,
+    querySelectorAll,
+    selectViewport,
+    in,
+    exec,
+    getBoundingClientRect,
+    getContext,
+    getFields,
+    getNode,
+    getScrollOffset,
+  }
+] = useSelectorQuery();
 ```
-
-## 代码演示
-
-<code src="@pages/useSelectorQuery" />
 
 ## 返回值说明
 
-| 返回值 | 说明                    | 类型            |
-| ------ | ----------------------- | --------------- |
-| query  | `SelectorQuery`对象实例 | `SelectorQuery` |
+| 返回值                | 说明                                                                           | 类型                                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| query                 | `SelectorQuery`对象实例                                                        | `SelectorQuery`                                                                                             |
+| querySelector         | 在当前页面下选择第一个匹配选择器 selector 的节点                               | `SelectorQuery['select']`                                                                                   |
+| querySelectorAll      | 在当前页面下选择匹配选择器 selector 的所有节点                                 | `SelectorQuery['selectAll']`                                                                                |
+| selectViewport        | 选择显示区域。可用于获取显示区域的尺寸、滚动位置等信息                         | `SelectorQuery['selectViewport']`                                                                           |
+| in                    | 将选择器的选取范围更改为自定义组件 component 内                                | `SelectorQuery['in']`                                                                                       |
+| exec                  | 执行所有的请求                                                                 | `SelectorQuery['exec']`                                                                                     |
+| getBoundingClientRect | 添加节点的布局位置的查询请求。相对于显示区域，以像素为单位                     | `PromiseParamsAction<(selector: string, all?: boolean) => void, NodesRef.BoundingClientRectCallbackResult>` |
+| getContext            | 添加节点的 Context 对象查询请求                                                | `PromiseAction<string, NodesRef.ContextCallbackResult>`                                                     |
+| getFields             | 获取节点的相关信息。需要获取的字段在 fields 中指定                             | `PromiseParamsAction<(selector: string, fields: NodesRef.Fields) => void, TaroGeneral.IAnyObject>`          |
+| getNode               | 获取 Node 节点实例                                                             | `PromiseAction<string, NodesRef.NodeCallbackResult>`                                                        |
+| getScrollOffset       | 添加节点的滚动位置查询请求。以像素为单位。节点必须是 scroll-view 或者 viewport | `PromiseAction<string, NodesRef.ScrollOffsetCallbackResult>`                                                |
 
-### in
+## 代码演示
 
-```javascript
-in(component)
-```
-
-### exec
-
-```javascript
-SelectorQuery.exec(callback?: void)
-```
-
-### select
-
-```javascript
-const node: NodesRef = select(selector: string, scope?: PageInstance);
-```
-
-### selectAll
-
-```javascript
-const nodes: NodesRef = select(selector: string, scope?: PageInstance);
-```
-
-### selectViewport
-
-```javascript
-const nodes: NodesRef = select(selector: string, scope?: PageInstance);
-```
-
-### getBoundingClientRect
-
-```javascript
-getBoundingClientRect(selector: string, all: boolean, scope?: PageInstance).then((nodes: NodesRef.boundingClientRectCallbackResult) => void)
-```
-
-<code src="@pages/useSelectorQuery/getBoundingClientRect" />
-
-### getContext
-
-```javascript
-getContext(selector: string, scope?: PageInstance).then(context)
-```
-
-### getFields
-
-```javascript
-getFields(selector: string, fields: NodesRef.Fields, scope?: PageInstance).then(fields)
-```
-
-<code src="@pages/useSelectorQuery/getFields" />
-
-### getNode
-
-```javascript
-getNode(selector: string, scope?: PageInstance).then(node)
-```
-
-### getScrollOffset
-
-```javascript
-getScrollOffset(selector: string, scope?: PageInstance).then((offsetInfo: NodesRef.scrollOffsetCallbackResult))
-```
-
-<code src="@pages/useSelectorQuery/getScrollOffset" />
+<code src="useSelectorQuery/index" group="basic" />
 
 ## Hook 支持度
 

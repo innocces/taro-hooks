@@ -1,182 +1,101 @@
-import { useCallback, useRef } from 'react';
+import { createSelectorQuery, useTaroRef } from '@tarojs/taro';
+import type { NodesRef, SelectorQuery } from '@tarojs/taro';
+import type { PromiseParamsAction, PromiseAction } from '../type';
+import { generateGeneralFail } from '../utils/tool';
 
-import {
-  createSelectorQuery,
-  NodesRef,
-  PageInstance,
+export type GetBoundingClientRect = PromiseParamsAction<
+  (selector: string, all?: boolean) => void,
+  NodesRef.BoundingClientRectCallbackResult
+>;
+
+export type GetContext = PromiseAction<string, NodesRef.ContextCallbackResult>;
+
+export type GetFields = PromiseParamsAction<
+  (selector: string, fields: NodesRef.Fields) => void,
+  TaroGeneral.IAnyObject
+>;
+
+export type GetNode = PromiseAction<string, NodesRef.NodeCallbackResult>;
+
+export type GetScrollOffset = PromiseAction<
+  string,
+  NodesRef.ScrollOffsetCallbackResult
+>;
+
+function useSelectorQuery(): [
   SelectorQuery,
-} from '@tarojs/taro';
+  {
+    querySelector: SelectorQuery['select'];
+    querySelectorAll: SelectorQuery['selectAll'];
+    selectViewport: SelectorQuery['selectViewport'];
+    in: SelectorQuery['in'];
+    exec: SelectorQuery['exec'];
+    getBoundingClientRect: GetBoundingClientRect;
+    getContext: GetContext;
+    getFields: GetFields;
+    getNode: GetNode;
+    getScrollOffset: GetScrollOffset;
+  },
+] {
+  const query = useTaroRef<SelectorQuery>(createSelectorQuery());
 
-export type getBoundingClientRectType = (
-  selector: string,
-  all?: boolean,
-  scope?: PageInstance,
-) => Promise<NodesRef.BoundingClientRectCallbackResult>;
+  const querySelector = (selector: string) => query.current.select(selector);
+  const querySelectorAll = (selector: string) =>
+    query.current.selectAll(selector);
 
-export type getContextType = (
-  selector: string,
-  scope?: PageInstance,
-) => Promise<TaroGeneral.IAnyObject>;
-
-export type getFieldsType = (
-  selector: string,
-  fields: NodesRef.Fields,
-  scope?: PageInstance,
-) => Promise<TaroGeneral.IAnyObject>;
-
-export type getNodeType = (
-  selector: string,
-  scope?: PageInstance,
-) => Promise<TaroGeneral.IAnyObject>;
-
-export type getScrollOffsetType = (
-  selector: string,
-  scope?: PageInstance,
-) => Promise<NodesRef.ScrollOffsetCallbackResult>;
-
-export interface ISelectorMethod extends SelectorQuery {
-  getBoundingClientRect: getBoundingClientRectType;
-  getContext: getContextType;
-  getFields: getFieldsType;
-  getNode: getNodeType;
-  getScrollOffset: getScrollOffsetType;
-}
-
-function useSelectorQuery(): [SelectorQuery, ISelectorMethod] {
-  const query = useRef<SelectorQuery>(createSelectorQuery());
-
-  const querySelector = useCallback(
-    (selector: string): NodesRef => {
-      return query.current.select(selector);
-    },
-    [query],
-  );
-
-  const querySelectorAll = useCallback(
-    (selector: string): NodesRef => {
-      return query.current.selectAll(selector);
-    },
-    [query],
-  );
-
-  const getBoundingClientRect = useCallback<getBoundingClientRectType>(
-    (selector, all, scope) => {
-      return new Promise((resolve, reject) => {
-        if (!selector) {
-          reject({});
+  function queryWithMethod<
+    T = TaroGeneral.IAnyObject,
+    R = TaroGeneral.IAnyObject,
+  >(method: string, selector: string, all?: boolean, params?: R) {
+    return new Promise<T>((resolve, reject) => {
+      try {
+        const withQuery = all ? querySelectorAll : querySelector;
+        if (params) {
+          withQuery(selector)[method](params, resolve).exec();
         } else {
-          try {
-            const select = all ? querySelectorAll : querySelector;
-            let selectorQuery = select(selector).boundingClientRect(resolve);
-            if (scope) {
-              selectorQuery = selectorQuery.in(scope);
-            }
-            selectorQuery.exec();
-          } catch (e) {
-            reject(e);
-          }
+          withQuery(selector)[method](resolve).exec();
         }
-      });
-    },
-    [query],
-  );
+      } catch (e) {
+        reject(
+          generateGeneralFail(`selectorQuery.${method}`, e.errMsg || e.message),
+        );
+      }
+    });
+  }
 
-  const getContext = useCallback<getContextType>(
-    (selector, scope) => {
-      return new Promise((resolve, reject) => {
-        if (!selector) {
-          reject({});
-        } else {
-          try {
-            let selectorQuery = querySelector(selector).context((res) =>
-              resolve(res.context),
-            );
-            if (scope) {
-              selectorQuery = selectorQuery.in(scope);
-            }
-            selectorQuery.exec();
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [query],
-  );
+  const getBoundingClientRect: GetBoundingClientRect = (
+    selector: string,
+    all?: boolean,
+  ) =>
+    queryWithMethod<NodesRef.BoundingClientRectCallbackResult>(
+      'boundingClientRect',
+      selector,
+      all,
+    );
 
-  const getFields = useCallback<getFieldsType>(
-    (selector, fields, scope) => {
-      return new Promise((resolve, reject) => {
-        if (!selector) {
-          reject({});
-        } else {
-          try {
-            let selectorQuery = querySelector(selector).fields(fields, resolve);
-            if (scope) {
-              selectorQuery = selectorQuery.in(scope);
-            }
-            selectorQuery.exec();
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [query],
-  );
+  const getContext: GetContext = (selector: string) =>
+    queryWithMethod<NodesRef.ContextCallbackResult>('context', selector);
 
-  const getNode = useCallback<getNodeType>(
-    (selector, scope) => {
-      return new Promise((resolve, reject) => {
-        if (!selector) {
-          reject({});
-        } else {
-          try {
-            let selectorQuery = querySelector(selector).node((res) =>
-              resolve(res.node),
-            );
-            if (scope) {
-              selectorQuery = selectorQuery.in(scope);
-            }
-            selectorQuery.exec();
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [query],
-  );
+  const getFields = (selector, fields) =>
+    queryWithMethod('fields', selector, false, fields);
 
-  const getScrollOffset = useCallback<getScrollOffsetType>(
-    (selector, scope) => {
-      return new Promise((resolve, reject) => {
-        if (!selector) {
-          reject({});
-        } else {
-          try {
-            let selectorQuery = querySelector(selector).scrollOffset(resolve);
-            if (scope) {
-              selectorQuery = selectorQuery.in(scope);
-            }
-            selectorQuery.exec();
-          } catch (e) {
-            reject(e);
-          }
-        }
-      });
-    },
-    [query],
-  );
+  const getNode: GetNode = (selector) =>
+    queryWithMethod<NodesRef.NodeCallbackResult>('node', selector);
+
+  const getScrollOffset: GetScrollOffset = (selector) =>
+    queryWithMethod<NodesRef.ScrollOffsetCallbackResult>(
+      'scrollOffset',
+      selector,
+    );
 
   return [
     query.current,
     {
+      querySelector,
+      querySelectorAll,
+      selectViewport: query.current.selectViewport,
       in: query.current.in,
       exec: query.current.exec,
-      select: query.current.select,
-      selectAll: query.current.selectAll,
-      selectViewport: query.current.selectViewport,
       getBoundingClientRect,
       getContext,
       getFields,

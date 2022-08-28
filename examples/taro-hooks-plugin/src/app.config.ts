@@ -46,6 +46,7 @@ export default {
     'pages/basic/useFrom/index',
     'pages/basic/useStorage/index',
     'pages/basic/useEvent/index',
+    'pages/basic/useSelectorQuery/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
     'pages/wechat/useAPICheck/index',

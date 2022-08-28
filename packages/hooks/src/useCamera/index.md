@@ -40,7 +40,7 @@ const [cameraContext, { zoom, start, stop, take, listener }] = useCamera();
 
 ## 代码演示
 
-<code src="useCamera/index" group="device" />
+<code src="useCamera/index" group="media" />
 
 ## Hook 支持度
 

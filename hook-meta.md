@@ -19,7 +19,7 @@
 - [x] useDeviceInfo 🆕
 - [x] useEvent
 - [x] useVisible
-- [ ] useSelectorQuery
+- [x] useSelectorQuery
 - [x] useAPICheck
 - [x] useUpdateManager
 - [x] useNetworkType
