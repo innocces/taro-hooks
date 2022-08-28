@@ -1,12 +1,12 @@
-export type TRecord<R = any> = { [_: string]: R };
-
-export type TAuthResultType = 'accept' | 'reject' | 'ban';
-
 export type TNormalAction<T = TaroGeneral.CallbackResult> = () => Promise<T>;
 
 export type TGeneralCallback<T = TaroGeneral.CallbackResult, R = void> = (
   callbackResult: T,
 ) => R;
+
+export type Dispatch<A> = (value: A) => void;
+
+export type Void = () => void;
 
 export type Noop = (...args: any[]) => void;
 

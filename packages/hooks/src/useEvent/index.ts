@@ -1,310 +1,70 @@
-import { Dispatch, useCallback, useContext, useReducer } from 'react';
-import { context, wrapperEvent } from '../context';
-import { typeOf } from '../utils/tool';
-import uniq from 'lodash.uniq';
+import { eventCenter } from '@tarojs/taro';
+import { generateGeneralFail } from '../utils/tool';
+import { isSafeEvent, prefixClsEvent, generateCheck } from './utils';
+import type { Noop, Void } from '../type';
 
-export type eventHandler = (...args: any[]) => void;
+export type Listen = (eventName: string, ...handlers: Noop[]) => void;
 
-export interface IEventQueue {
-  [_: string]: eventHandler[];
-}
-export interface IActionAddPayload {
-  eventName: string;
-  handlers: eventHandler[];
-  handler?: eventHandler;
-  params?: any[];
-}
-export interface IActionTriggerPayload {
-  eventName: string;
-  params: any[];
-}
+export type Trigger = (eventName: string, ...params: any[]) => void;
 
-export interface IActionOffPayload {
-  eventName: string;
-  handler?: eventHandler;
-}
+function useEvent(namespace: string): {
+  set: Listen;
+  setOnce: Listen;
+  off: Listen;
+  clear: Void;
+  trigger: Trigger;
+} {
+  const set: Listen = (eventName, ...handlers) => {
+    if (generateCheck(eventName, handlers)) {
+      handlers.forEach((handler) => {
+        eventCenter.on(prefixClsEvent(namespace, eventName), handler);
+      });
+    }
+  };
 
-export interface IState {
-  eventQueue: IEventQueue;
-  eventNameQueue: string[];
-}
+  const setOnce: Listen = (eventName, ...handlers) => {
+    if (generateCheck(eventName, handlers)) {
+      handlers.forEach((handler) => {
+        eventCenter.once(prefixClsEvent(namespace, eventName), handler);
+      });
+    }
+  };
 
-export type TSetListenerAction = (
-  eventName: string,
-  ...handlers: eventHandler[]
-) => void;
-
-export type TSetListenerOnceAction = (
-  eventName: string,
-  handler: eventHandler,
-) => void;
-
-export type TRemoveListenerAction = (
-  eventName?: string,
-  handler?: eventHandler,
-) => void;
-
-export type TEmitEventAction = (eventName: string, ...params: any[]) => void;
-export type TClearListenerAction = (eventName?: string) => void;
-
-export interface ICallback {
-  dispatch: Dispatch<IAction>;
-  setListener: TSetListenerAction;
-  setListenerOnce: TSetListenerOnceAction;
-  removeListener: TRemoveListenerAction;
-  emitEvent: TEmitEventAction;
-  clearListener: TClearListenerAction;
-}
-
-export enum IActionType {
-  ON = 'on',
-  OFF = 'off',
-  TRIGGER = 'trigger',
-  ONCE = 'once',
-  ADD = 'add',
-  CLEAR = 'clear',
-}
-
-export interface IAction {
-  type: IActionType;
-  payload:
-    | string
-    | string[]
-    | IActionAddPayload
-    | IActionTriggerPayload
-    | IActionOffPayload
-    | null;
-}
-
-export const safeNamespace = ['__taro', 'at'];
-
-const initState: IState = {
-  eventQueue: {},
-  eventNameQueue: [],
-};
-
-function useEvent(namespace: string): [IState, ICallback] {
-  const { eventBus } = useContext(context);
-
-  const setListener = useCallback<TSetListenerAction>(
-    (eventName, ...handlers) => {
-      if (!eventName || safeNamespace.some((v) => eventName.startsWith(v))) {
-        console.warn('eventName not valid. listen failed');
-      } else if (!handlers.length) {
-        console.warn('you mast provide one handler to listen. add failed');
-      } else {
-        dispatch({
-          type: IActionType.ADD,
-          payload: {
-            eventName: wrapperEvent(namespace, eventName),
-            handlers,
-          },
-        });
-      }
-    },
-    [],
-  );
-
-  const setListenerOnce = useCallback<TSetListenerOnceAction>(
-    (eventName, handler) => {
-      if (!eventName || !handler) {
-        console.warn('you must provide eventName and handler');
-        return;
-      }
-      const sideEffectHandler = (...args: any[]) => {
-        handler(...args);
-        removeListener(eventName, sideEffectHandler);
-      };
-      setListener(eventName, sideEffectHandler);
-    },
-    [],
-  );
-
-  const emitEvent = useCallback<TEmitEventAction>((eventName, ...params) => {
-    if (!eventName || !params.length) {
-      console.warn('eventName or args not provide');
+  const off: Listen = (eventName, ...handlers) => {
+    if (!isSafeEvent(eventName)) {
+      generateGeneralFail('EVENT CHANEL', `${eventName} is not valid`);
       return;
     }
-    const realEventName = wrapperEvent(namespace, eventName);
 
-    dispatch({
-      type: IActionType.TRIGGER,
-      payload: {
-        eventName: realEventName,
-        params,
-      },
-    });
-  }, []);
-
-  const clearListener = useCallback<TClearListenerAction>((eventName) => {
-    removeListener(eventName);
-  }, []);
-
-  const safeRemoveEvents = useCallback(
-    (
-      eventNameQueue: string[],
-      eventQueue,
-      ...handlers: eventHandler[]
-    ): IEventQueue => {
-      const removeEventName = eventNameQueue.filter(
-        (v) => !safeNamespace.some((n) => v.startsWith(n)),
-      );
-
-      removeEventName.forEach((v) => eventBus.off(v, ...(handlers || [])));
-      const offQueue: IEventQueue = {};
-      if (eventNameQueue.length === 1 && removeEventName.length) {
-        Object.keys(eventQueue).forEach((key) => {
-          // check if has handlers
-          if (handlers && eventNameQueue.includes(key)) {
-            offQueue[key] = eventQueue[key].filter(
-              (v: eventHandler) => !handlers.includes(v),
-            );
-          } else if (!eventNameQueue.includes(key)) {
-            offQueue[key] = eventQueue[key];
-          }
-        });
-      }
-      return offQueue;
-    },
-    [],
-  );
-
-  const reducer = useCallback(
-    (state: IState, { type, payload }: IAction): IState => {
-      switch (type) {
-        case IActionType.CLEAR:
-          if (!payload) {
-            safeRemoveEvents(state.eventNameQueue, state.eventQueue);
-            return {
-              eventQueue: {},
-              eventNameQueue: [],
-            };
-          } else if (!typeOf(payload, ['String', 'Array'])) {
-            return state;
-          } else {
-            return {
-              eventNameQueue: state.eventNameQueue.filter((v) => v !== payload),
-              eventQueue: safeRemoveEvents(
-                [payload as string],
-                state.eventQueue,
-              ),
-            };
-          }
-        case IActionType.OFF:
-          if (!payload) {
-            return state;
-          } else {
-            return {
-              eventNameQueue: state.eventNameQueue.filter(
-                (v) => v !== (payload as IActionOffPayload).eventName,
-              ),
-              eventQueue: safeRemoveEvents(
-                [(payload as IActionOffPayload).eventName],
-                state.eventQueue,
-                (payload as IActionOffPayload).handler as (
-                  ...args: any[]
-                ) => void,
-              ),
-            };
-          }
-        case IActionType.ADD:
-          if (
-            !payload ||
-            !(payload as IActionAddPayload).eventName ||
-            !(payload as IActionAddPayload).handlers
-          ) {
-            console.warn(
-              'you mast provider eventName and one handler to listen',
-            );
-            return {
-              ...state,
-            };
-          } else {
-            (payload as IActionAddPayload).handlers.forEach((handler) => {
-              eventBus.on((payload as IActionAddPayload).eventName, handler);
-            });
-            return {
-              eventNameQueue: [
-                ...uniq([
-                  ...state.eventNameQueue,
-                  (payload as IActionAddPayload).eventName,
-                ]),
-              ],
-              eventQueue: {
-                ...state.eventQueue,
-                [(payload as IActionAddPayload).eventName]: [
-                  ...(state.eventQueue[
-                    (payload as IActionAddPayload).eventName
-                  ] || []),
-                  ...(payload as IActionAddPayload).handlers,
-                ],
-              },
-            };
-          }
-        case IActionType.TRIGGER:
-          if (
-            !payload ||
-            !(payload as IActionTriggerPayload).eventName ||
-            !(payload as IActionTriggerPayload).params
-          ) {
-            console.warn('you mast provider eventName and one arg to trigger');
-            return {
-              ...state,
-            };
-          } else {
-            eventBus.trigger(
-              (payload as IActionTriggerPayload).eventName,
-              ...(payload as IActionTriggerPayload).params,
-            );
-            // compatible origin Events
-            eventBus.trigger(
-              (payload as IActionTriggerPayload).eventName.replace(
-                namespace,
-                '',
-              ),
-              ...(payload as IActionTriggerPayload).params,
-            );
-            return {
-              ...state,
-            };
-          }
-        case IActionType.ONCE:
-          setListenerOnce(
-            (payload as IActionAddPayload).eventName,
-            (payload as IActionAddPayload).handler as eventHandler,
-          );
-          return state;
-        default:
-          return state;
-      }
-    },
-    [],
-  );
-  const [state, dispatch] = useReducer(reducer, initState);
-
-  const removeListener = useCallback<TRemoveListenerAction>(
-    (eventName, handler) => {
-      const realEventName = eventName && wrapperEvent(namespace, eventName);
-
-      dispatch({
-        type: realEventName ? IActionType.OFF : IActionType.CLEAR,
-        payload: realEventName ? { eventName: realEventName, handler } : null,
+    if (!handlers?.length) {
+      eventCenter.off(prefixClsEvent(namespace, eventName));
+    } else {
+      handlers.forEach((handler) => {
+        eventCenter.off(prefixClsEvent(namespace, eventName), handler);
       });
-    },
-    [state],
-  );
+    }
+  };
 
-  return [
-    state,
-    {
-      dispatch,
-      setListener,
-      setListenerOnce,
-      removeListener,
-      emitEvent,
-      clearListener,
-    },
-  ];
+  const clear: Void = () => {
+    eventCenter.off();
+  };
+
+  const trigger: Trigger = (eventName, ...params) => {
+    if (!isSafeEvent(eventName)) {
+      generateGeneralFail('EVENT CHANEL', `${eventName} is not valid`);
+      return;
+    }
+
+    eventCenter.trigger(prefixClsEvent(namespace, eventName), ...params);
+  };
+
+  return {
+    set,
+    setOnce,
+    off,
+    clear,
+    trigger,
+  };
 }
 
 export default useEvent;

@@ -17,7 +17,7 @@
 - [x] useSystemInfo
 - [x] useWindowInfo 🆕
 - [x] useDeviceInfo 🆕
-- [ ] useEvent
+- [x] useEvent
 - [x] useVisible
 - [ ] useSelectorQuery
 - [x] useAPICheck

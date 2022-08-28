@@ -45,6 +45,7 @@ export default {
     'pages/basic/useRouter/index',
     'pages/basic/useFrom/index',
     'pages/basic/useStorage/index',
+    'pages/basic/useEvent/index',
     // wechat
     'pages/wechat/useAccountInfo/index',
     'pages/wechat/useAPICheck/index',

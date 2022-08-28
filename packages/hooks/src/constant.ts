@@ -8,3 +8,5 @@ export const ENV_TYPE = {
   QQ: 'QQ',
   JD: 'JD',
 } as const;
+
+export const BANNAMESPACE = ['__taro', 'at'] as const;
