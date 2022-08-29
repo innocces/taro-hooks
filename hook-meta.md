@@ -40,8 +40,7 @@
 - [x] useBrightness
 - [x] useLocation
 - [x] useScanCode
-- [ ] useBluetooth
-- [ ] useBLE
+- [x] useBluetooth
 - [x] useImage
 - [x] useVideo
 - [x] useCamera
