@@ -34,10 +34,13 @@
 </template>
 
 <script lang="ts">
-import { useRouter } from 'taro-hooks';
+import { useRouter, useModal } from 'taro-hooks';
 import { ref } from 'vue';
-// @ts-ignore
-import { generateIndexMenu } from '@root/public/constant';
+import {
+  generateIndexMenu,
+  PRODUCTIONDISABLEPANEL,
+  // @ts-ignore
+} from '@root/public/constant';
 // @ts-ignore
 import type { MenuItem } from '@root/public/constant';
 
@@ -46,9 +49,23 @@ export default {
     const collapseData = generateIndexMenu(true);
     const activeCollapseItem = ref('');
     const [, { navigate, switchTab }] = useRouter();
+    const show = useModal({
+      title: 'Taro-Hooks',
+      content: '由于个人账号限制. 暂无法使用线上示例!',
+      showCancel: false,
+      confirmText: '知道了',
+    });
 
-    const handleNavigate = ({ path, name, onlyMini = false }: MenuItem) => {
+    const handleNavigate = ({ path, name, id, onlyMini = false }: MenuItem) => {
       const navigateAction = path.includes('TabBar') ? switchTab : navigate;
+      if (
+        // @ts-ignore
+        process.env.NODE_ENV === 'production' &&
+        PRODUCTIONDISABLEPANEL.includes(id)
+      ) {
+        show();
+        return;
+      }
       navigateAction(path, { title: name, onlyMini: Number(onlyMini) });
     };
 

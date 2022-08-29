@@ -3,6 +3,7 @@
  */
 
 export type MenuItem = {
+  id: string;
   name: string;
   path: string;
   tabBar?: boolean;
@@ -26,6 +27,7 @@ const DEMOHOOKS = [
 export const HOOKSMENU: MenuItem[] = DEMOHOOKS.map((hooksName) => ({
   name: hooksName.replace('use', 'useTaro'),
   path: `/pages/${hooksName}/index`,
+  id: hooksName,
 }));
 
 export interface APIChildrenItem {
@@ -371,6 +373,7 @@ export function generateMenuItem(key: APIChildrenName): MenuItem[] {
   const menuList = ChildrenList[key];
 
   return menuList.map(({ id, name, ...item }) => ({
+    id,
     name,
     path: `/pages/${key}/${id}/index`,
     ...item,
