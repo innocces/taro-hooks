@@ -1,9 +1,3 @@
-export type TNormalAction<T = TaroGeneral.CallbackResult> = () => Promise<T>;
-
-export type TGeneralCallback<T = TaroGeneral.CallbackResult, R = void> = (
-  callbackResult: T,
-) => R;
-
 export type Dispatch<A> = (value: A) => void;
 
 export type Void = () => void;
@@ -11,6 +5,8 @@ export type Void = () => void;
 export type Noop = (...args: any[]) => void;
 
 export type Callback<R = TaroGeneral.CallbackResult> = (res: R) => void;
+
+export type CallbackResult<R = void> = () => R;
 
 export type WithUndefind<R> = R | undefined;
 

@@ -1,6 +1,7 @@
 import { useTaroRef } from '@tarojs/taro';
 import { logError, log } from '@taro-hooks/shared';
 import { typeOf, isProd } from '../utils/tool';
+import type { CallbackResult } from '../type';
 export type Result<T, R = undefined> = T | R;
 
 /**
@@ -8,10 +9,10 @@ export type Result<T, R = undefined> = T | R;
  * @param {TCallback<T>} fn
  * @returns {T}
  */
-export function createUseInfoHook<T, S = undefined, R = TCallback<T>>(
+export function createUseInfoHook<T, S = undefined, R = CallbackResult<T>>(
   fn: R,
   defaultReturn?: S,
-): TCallback<Result<T, S | undefined>> {
+): CallbackResult<Result<T, S | undefined>> {
   return () => {
     const safeExcute = () => {
       try {

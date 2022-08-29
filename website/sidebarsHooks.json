@@ -134,7 +134,6 @@
       "label": "设备",
       "items": [
         "useBattery/index",
-        "useBLE/index",
         "useBluetooth/index",
         "useBrightness/index",
         "useLocation/index",

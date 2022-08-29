@@ -34,7 +34,7 @@
     "disableUseStrict": false,
     "useCompilerPlugins": false,
     "minifyWXML": true,
-    "ignoreUploadUnusedFiles": true
+    "ignoreUploadUnusedFiles": false
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",

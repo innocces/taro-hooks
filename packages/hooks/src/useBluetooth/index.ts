@@ -1,442 +1,174 @@
 import {
-  openBluetoothAdapter,
-  closeBluetoothAdapter,
-  startBluetoothDevicesDiscovery,
   stopBluetoothDevicesDiscovery,
-  onBluetoothDeviceFound,
-  onBluetoothAdapterStateChange,
+  startBluetoothDevicesDiscovery,
+  openBluetoothAdapter,
+  makeBluetoothPair,
+  isBluetoothDevicePaired,
+  getConnectedBluetoothDevices,
   getBluetoothDevices,
   getBluetoothAdapterState,
-  getConnectedBluetoothDevices,
+  closeBluetoothAdapter,
+  useTaroState,
+  useTaroRef,
+  useTaroEffect,
 } from '@tarojs/taro';
+import { isBoolean, isString } from '@taro-hooks/shared';
+import usePromise from '../usePromise';
 import type {
-  openBluetoothAdapter as openBluetoothAdapterNamespace,
-  getBluetoothAdapterState as getBluetoothAdapterStateNamespace,
-  onBluetoothAdapterStateChange as onBluetoothAdapterStateChangeNamespace,
-  getBluetoothDevices as getBluetoothDevicesNamespace,
-  getConnectedBluetoothDevices as getConnectedBluetoothDevicesNamespace,
-  onBluetoothDeviceFound as onBluetoothDeviceFoundNamespace,
-  startBluetoothDevicesDiscovery as startBluetoothDevicesDiscoveryNamespace,
-} from '@tarojs/taro';
-import type { TNormalAction } from '../type';
-import { useCallback, useEffect, useState } from 'react';
-import useEnv from '../useEnv';
-import { ENV_TYPE } from '../constant';
+  PromiseAction,
+  PromiseOptionalAction,
+  PromiseWithoutOptionAction,
+  ExcludeOption,
+  ExcludeSuccess,
+  WithUndefind,
+} from '../type';
 
-declare var wx: any;
+export type AdapterState = Taro.getBluetoothAdapterState.SuccessCallbackResult;
 
-export interface IAdapter {
-  available: boolean;
-  discovering: boolean;
-  powered: boolean;
-}
-export type TOpenBluetoothAdapterType = 'central' | 'peripheral';
-export interface IOpenBluetoothAdapterFailResult
-  extends TaroGeneral.BluetoothError {
-  state?: 0 | 1 | 2 | 3 | 4;
-}
-export type TOpenBluetoothAdapter = (
-  mode?: TOpenBluetoothAdapterType,
-) => Promise<TaroGeneral.BluetoothError | IOpenBluetoothAdapterFailResult>;
-export interface IPolyOpenBluetoothAdapterOption
-  extends openBluetoothAdapterNamespace.Option {
-  mode?: TOpenBluetoothAdapterType;
-}
-export type TPolyOpenBluetoothAdapter = (
-  option: IPolyOpenBluetoothAdapterOption,
-) => Promise<TaroGeneral.BluetoothError | IOpenBluetoothAdapterFailResult>;
-export type TCloseBluetoothAdapter = () => Promise<TaroGeneral.BluetoothError>;
-export type TGetBluetoothAdapterState = () => Promise<
-  | getBluetoothAdapterStateNamespace.SuccessCallbackResult
-  | TaroGeneral.BluetoothError
+export type Adapter = ExcludeSuccess<AdapterState>;
+
+export type AdapterMode = 'central' | 'peripheral';
+
+export type ToggleAdapter = PromiseOptionalAction<
+  boolean | AdapterMode,
+  TaroGeneral.BluetoothError
 >;
-export type TOnBluetoothAdapterStateChange = (
-  callback?: onBluetoothAdapterStateChangeNamespace.Callback,
-) => void;
-export type TOffBluetoothAdapterStateChange = (
-  callback?: TaroGeneral.EventCallback,
-) => void;
-export type TGetBluetoothDevices = () => Promise<
-  | TaroGeneral.BluetoothError
-  | getBluetoothDevicesNamespace.SuccessCallbackResultBlueToothDevice[]
+
+export type GetState = PromiseWithoutOptionAction<AdapterState>;
+
+export type GetDevices =
+  PromiseWithoutOptionAction<Taro.getBluetoothDevices.SuccessCallbackResult>;
+
+export type GetConnected =
+  PromiseWithoutOptionAction<Taro.getConnectedBluetoothDevices.SuccessCallbackResult>;
+
+export type MakePair = PromiseAction<
+  ExcludeOption<Taro.makeBluetoothPair.Option>
 >;
-export type TGetConnectedBluetoothDevices = (
-  services: string[],
-) => Promise<
-  | TaroGeneral.BluetoothError
-  | getConnectedBluetoothDevicesNamespace.BluetoothDeviceInfo[]
+
+export type IsPaired = PromiseAction<string>;
+
+export type ToggleDiscovery = PromiseOptionalAction<
+  ExcludeOption<Taro.startBluetoothDevicesDiscovery.Option>,
+  TaroGeneral.BluetoothError
 >;
-export type TBluetoothDeviceFound = (
-  callback?: (
-    devices: onBluetoothDeviceFoundNamespace.CallbackResultBlueToothDevice[],
-  ) => void,
-) => void;
-export type TPowerLevel = 'low' | 'medium' | 'high';
-export interface IStartBluetoothDevicesDiscoveryOption {
-  services?: string[];
-  allowDuplicatesKey?: boolean;
-  interval?: number;
-  powerLevel?: TPowerLevel;
-}
-export type TStartBluetoothDevicesDiscovery = (
-  option?: IStartBluetoothDevicesDiscoveryOption,
-) => Promise<TaroGeneral.BluetoothError>;
-export interface IPolyStartBluetoothDevicesDiscoveryOption
-  extends startBluetoothDevicesDiscoveryNamespace.Option {
-  powerLevel?: TPowerLevel;
-}
-export type TPolyStartBluetoothDevicesDiscovery = (
-  option?: IPolyStartBluetoothDevicesDiscoveryOption,
-) => Promise<startBluetoothDevicesDiscoveryNamespace.Promised>;
-export type TMakeBluetoothPair = (
-  deviceId: string,
-  pin: string,
-  timeout?: number,
-) => Promise<TaroGeneral.BluetoothError>;
-export type TIsBluetoothDevicePaired = (
-  deviceId: string,
-) => Promise<TaroGeneral.BluetoothError>;
+
+export type Devices =
+  Taro.getBluetoothDevices.SuccessCallbackResultBlueToothDevice[];
+
+export type ConnectDevices =
+  Taro.getConnectedBluetoothDevices.BluetoothDeviceInfo[];
 
 function useBluetooth(): [
   {
-    devices?: getBluetoothDevicesNamespace.SuccessCallbackResultBlueToothDevice[];
-    connectedDevices?: getConnectedBluetoothDevicesNamespace.BluetoothDeviceInfo[];
-    adapter?: IAdapter;
+    devices: Devices;
+    connectedDevices: ConnectDevices;
+    adapter: WithUndefind<Adapter>;
   },
   {
-    openAdapter: TOpenBluetoothAdapter;
-    closeAdapter: TCloseBluetoothAdapter;
-    getAdapterState: TGetBluetoothAdapterState;
-    getDevices: TGetBluetoothDevices;
-    getConnectedDevices: TGetConnectedBluetoothDevices;
-    onAdapterStateChange: TOnBluetoothAdapterStateChange;
-    offAdapterStateChange: TOffBluetoothAdapterStateChange;
-    onDeviceFound: TBluetoothDeviceFound;
-    offDeviceFound: TBluetoothDeviceFound;
-    startDiscovery: TStartBluetoothDevicesDiscovery;
-    stopDiscovery: TNormalAction<TaroGeneral.BluetoothError>;
-    makePair: TMakeBluetoothPair;
-    isBluetoothDevicePaired: TIsBluetoothDevicePaired;
+    toggleAdapter: ToggleAdapter;
+    getState: GetState;
+    getDevices: GetDevices;
+    getConnected: GetConnected;
+    makePair: MakePair;
+    isPaired: IsPaired;
+    toggleDiscovery: ToggleDiscovery;
   },
 ] {
-  const env = useEnv();
-  const [adapter, setAdapter] = useState<IAdapter>();
-  const [devices, setDevices] =
-    useState<
-      getBluetoothDevicesNamespace.SuccessCallbackResultBlueToothDevice[]
-    >();
-  const [connectedDevices, setConnectedDevices] =
-    useState<getConnectedBluetoothDevicesNamespace.BluetoothDeviceInfo[]>();
+  const adapter = useTaroRef<Adapter>();
+  const [devices, setDevices] = useTaroState<Devices>([]);
+  const [connectedDevices, setConnectedDevices] = useTaroState<ConnectDevices>(
+    [],
+  );
 
-  useEffect(() => {
-    if (env && env === ENV_TYPE.WEAPP) {
-      openAdapter();
+  const getState: GetState = usePromise<{}, AdapterState>(
+    getBluetoothAdapterState,
+  );
+
+  const getDevices: GetDevices = usePromise<
+    {},
+    Taro.getBluetoothDevices.SuccessCallbackResult
+  >(getBluetoothDevices);
+
+  const getConnected: GetConnected = usePromise<
+    {},
+    Taro.getConnectedBluetoothDevices.SuccessCallbackResult
+  >(getConnectedBluetoothDevices);
+
+  const openAdapter = usePromise<
+    { mode: AdapterMode },
+    TaroGeneral.BluetoothError
+  >(openBluetoothAdapter);
+  const closeAdapter = usePromise<{}, TaroGeneral.BluetoothError>(
+    closeBluetoothAdapter,
+  );
+
+  const toggleAdapter = (switchOrMode) => {
+    if ((isBoolean(switchOrMode) && switchOrMode) || isString(switchOrMode)) {
+      return openAdapter({
+        mode: isString(switchOrMode)
+          ? (switchOrMode as AdapterMode)
+          : 'central',
+      }).then((res) => {
+        Promise.all([getState(), getDevices(), getConnected()]).then(
+          ([stateResult, devicesResult, connectResult]) => {
+            const { errMsg, ...state } = stateResult as AdapterState;
+            adapter.current = state as AdapterState;
+            const { devices } =
+              devicesResult as Taro.getBluetoothDevices.SuccessCallbackResult;
+            setDevices(devices);
+            const { devices: connected } =
+              connectResult as Taro.getConnectedBluetoothDevices.SuccessCallbackResult;
+            setConnectedDevices(connected);
+          },
+        );
+        return res;
+      });
     }
 
+    return closeAdapter();
+  };
+
+  useTaroEffect(() => {
+    toggleAdapter(true);
+
     return () => {
-      if (env && env === ENV_TYPE.WEAPP) {
-        closeAdapter();
-        offAdapterStateChange();
-        offDeviceFound();
-      }
+      toggleAdapter(false);
     };
-  }, [env]);
+  }, []);
 
-  const getAdapterState = useCallback<TGetBluetoothAdapterState>(() => {
-    return new Promise((resolve, reject) => {
-      if (env !== ENV_TYPE.WEAPP) {
-        reject({ errMsg: 'getBluetoothAdapterState: fail' });
-      } else {
-        try {
-          getBluetoothAdapterState({
-            success: resolve,
-            fail: reject,
-          });
-        } catch (e) {
-          reject({ errMsg: 'getBluetoothAdapterState: fail', data: e });
-        }
-      }
-    });
-  }, [env]);
+  const makePair: MakePair =
+    usePromise<ExcludeOption<Taro.makeBluetoothPair.Option>>(makeBluetoothPair);
 
-  const onAdapterStateChange = useCallback<TOnBluetoothAdapterStateChange>(
-    (callback) => {
-      if (env === ENV_TYPE.WEAPP) {
-        try {
-          onBluetoothAdapterStateChange((result) => {
-            setAdapter(result as IAdapter);
-            callback && callback(result);
-          });
-          console.info({ errMsg: 'onBluetoothAdapterStateChange: success' });
-        } catch (e) {
-          console.error({
-            errMsg: 'onBluetoothAdapterStateChange: fail',
-            data: e,
-          });
-        }
-      }
-    },
-    [env],
+  const isPairedAsync = usePromise<
+    ExcludeOption<Taro.isBluetoothDevicePaired.Option>
+  >(isBluetoothDevicePaired);
+  const isPaired: IsPaired = (deviceId) => {
+    return isPairedAsync({ deviceId });
+  };
+
+  const startDiscovery = usePromise<
+    ExcludeOption<Taro.startBluetoothDevicesDiscovery.Option>,
+    TaroGeneral.BluetoothError
+  >(startBluetoothDevicesDiscovery);
+  const stopDiscovery = usePromise<{}, TaroGeneral.BluetoothError>(
+    stopBluetoothDevicesDiscovery,
   );
 
-  const offAdapterStateChange = useCallback<TOffBluetoothAdapterStateChange>(
-    (callback) => {
-      if (env === ENV_TYPE.WEAPP) {
-        try {
-          wx.offBluetoothAdapterStateChange(() => {
-            callback && callback();
-          });
-          console.info({ errMsg: 'offBluetoothAdapterStateChange: success' });
-        } catch (e) {
-          console.error({
-            errMsg: 'offBluetoothAdapterStateChange: fail',
-            data: e,
-          });
-        }
-      }
-    },
-    [env],
-  );
-
-  const getDevices = useCallback<TGetBluetoothDevices>(() => {
-    return new Promise((resolve, reject) => {
-      if (env !== ENV_TYPE.WEAPP) {
-        reject({ errMsg: 'getBluetoothDevices: fail' });
-      } else {
-        try {
-          getBluetoothDevices({
-            success: ({ devices }) => {
-              setDevices(devices);
-              resolve(devices);
-            },
-            fail: reject,
-          });
-        } catch (e) {
-          reject({ errMsg: 'getBluetoothDevices: fail', data: e });
-        }
-      }
-    });
-  }, [env]);
-
-  const getConnectedDevices = useCallback<TGetConnectedBluetoothDevices>(
-    (services) => {
-      return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEAPP) {
-          reject({ errMsg: 'getConnectedBluetoothDevices: fail' });
-        } else {
-          try {
-            getConnectedBluetoothDevices({
-              services,
-              success: ({ devices }) => {
-                setConnectedDevices(devices);
-                resolve(devices);
-              },
-              fail: reject,
-            });
-          } catch (e) {
-            reject({ errMsg: 'getConnectedBluetoothDevices: fail', data: e });
-          }
-        }
-      });
-    },
-    [env],
-  );
-
-  const onDeviceFound = useCallback<TBluetoothDeviceFound>(
-    (callback) => {
-      if (env === ENV_TYPE.WEAPP) {
-        try {
-          onBluetoothDeviceFound(({ devices }) => {
-            callback && callback(devices);
-            setDevices(
-              devices as getBluetoothDevicesNamespace.SuccessCallbackResultBlueToothDevice[],
-            );
-          });
-          console.info({ errMsg: 'onBluetoothDeviceFound: success' });
-        } catch (e) {
-          console.error({
-            errMsg: 'onBluetoothDeviceFound: fail',
-            data: e,
-          });
-        }
-      }
-    },
-    [env],
-  );
-
-  const offDeviceFound = useCallback<TBluetoothDeviceFound>(
-    (callback) => {
-      if (env === ENV_TYPE.WEAPP) {
-        try {
-          wx.offBluetoothDeviceFound(
-            ({ devices }: onBluetoothDeviceFoundNamespace.CallbackResult) => {
-              callback && callback(devices);
-            },
-          );
-          console.info({ errMsg: 'offBluetoothDeviceFound: success' });
-        } catch (e) {
-          console.error({
-            errMsg: 'offBluetoothDeviceFound: fail',
-            data: e,
-          });
-        }
-      }
-    },
-    [env],
-  );
-
-  const startDiscovery = useCallback<TStartBluetoothDevicesDiscovery>(
-    (option = {}) => {
-      return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEAPP) {
-          reject({ errMsg: 'startBluetoothDevicesDiscovery: fail' });
-        } else {
-          try {
-            startBluetoothDevicesDiscovery({
-              ...option,
-              success: resolve,
-              fail: reject,
-            });
-          } catch (e) {
-            reject({ errMsg: 'startBluetoothDevicesDiscovery: fail', data: e });
-          }
-        }
-      });
-    },
-    [env],
-  );
-
-  const stopDiscovery = useCallback<
-    TNormalAction<TaroGeneral.BluetoothError>
-  >(() => {
-    return new Promise((resolve, reject) => {
-      if (env !== ENV_TYPE.WEAPP) {
-        reject({ errMsg: 'stopBluetoothDevicesDiscovery: fail' });
-      } else {
-        try {
-          stopBluetoothDevicesDiscovery({
-            success: resolve,
-            fail: reject,
-          });
-        } catch (e) {
-          reject({ errMsg: 'stopBluetoothDevicesDiscovery: fail', data: e });
-        }
-      }
-    });
-  }, [env]);
-
-  const makePair = useCallback<TMakeBluetoothPair>(
-    (deviceId, pin, timeout = 20000) => {
-      return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEAPP) {
-          reject({ errMsg: 'makeBluetoothPair: fail' });
-        } else {
-          try {
-            wx.makeBluetoothPair({
-              deviceId,
-              pin,
-              timeout,
-              success: resolve,
-              fail: reject,
-            });
-          } catch (e) {
-            reject({ errMsg: 'makeBluetoothPair: fail', data: e });
-          }
-        }
-      });
-    },
-    [env],
-  );
-
-  const isBluetoothDevicePaired = useCallback<TIsBluetoothDevicePaired>(
-    (deviceId) => {
-      return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEAPP) {
-          reject({ errMsg: 'isBluetoothDevicePaired: fail' });
-        } else {
-          try {
-            wx.isBluetoothDevicePaired({
-              deviceId,
-              success: resolve,
-              fail: reject,
-            });
-          } catch (e) {
-            reject({ errMsg: 'isBluetoothDevicePaired: fail', data: e });
-          }
-        }
-      });
-    },
-    [env],
-  );
-
-  const openAdapter = useCallback<TOpenBluetoothAdapter>(
-    (mode = 'central') => {
-      return new Promise((resolve, reject) => {
-        if (env !== ENV_TYPE.WEAPP) {
-          reject({ errMsg: 'openBluetoothAdapter: fail' });
-        } else {
-          try {
-            (openBluetoothAdapter as TPolyOpenBluetoothAdapter)({
-              mode,
-              success: resolve,
-              fail: reject,
-              complete: async () => {
-                // when complete, get state, and listen
-                const { errMsg, ...adapterState } =
-                  (await getAdapterState()) as getBluetoothAdapterStateNamespace.SuccessCallbackResult;
-                const devices =
-                  (await getDevices()) as getBluetoothDevicesNamespace.SuccessCallbackResultBlueToothDevice[];
-                setDevices(devices);
-                setAdapter(
-                  ((adapterState as unknown as { adapterState: IAdapter })
-                    ?.adapterState || adapterState) as IAdapter,
-                );
-                onAdapterStateChange();
-                onDeviceFound();
-              },
-            });
-          } catch (e) {
-            reject({ errMsg: 'openBluetoothAdapter: fail', data: e });
-          }
-        }
-      });
-    },
-    [env],
-  );
-
-  const closeAdapter = useCallback<TCloseBluetoothAdapter>(() => {
-    return new Promise((resolve, reject) => {
-      if (env !== ENV_TYPE.WEAPP) {
-        reject({ errMsg: 'closeBluetoothAdapter: fail' });
-      } else {
-        try {
-          closeBluetoothAdapter({
-            success: resolve,
-            fail: reject,
-          });
-        } catch (e) {
-          reject({ errMsg: 'closeBluetoothAdapter: fail', data: e });
-        }
-      }
-    });
-  }, [env]);
+  const toggleDiscovery: ToggleDiscovery = (option) => {
+    return option ? startDiscovery(option) : stopDiscovery();
+  };
 
   return [
-    { devices, connectedDevices, adapter },
+    { devices, connectedDevices, adapter: adapter.current },
     {
-      openAdapter,
-      closeAdapter,
-      getAdapterState,
+      toggleAdapter,
+      getState,
       getDevices,
-      getConnectedDevices,
-      onAdapterStateChange,
-      offAdapterStateChange,
-      onDeviceFound,
-      offDeviceFound,
-      startDiscovery,
-      stopDiscovery,
+      getConnected,
       makePair,
-      isBluetoothDevicePaired,
+      isPaired,
+      toggleDiscovery,
     },
   ];
 }
