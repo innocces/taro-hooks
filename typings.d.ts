@@ -1,6 +1,9 @@
 /// <reference types="@tarojs/taro" />
 /// <reference types="@taro-hooks/plugin-react" />
 
+// declare for vercel build success!
+declare module 'taro-hooks';
+
 declare module '*.css';
 declare module '*.less';
 declare module '*.scss';

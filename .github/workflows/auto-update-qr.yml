@@ -1,0 +1,22 @@
+# auto update qrCode in issue ##https://github.com/innocces/taro-hooks/issues/12
+
+name: Update QR
+
+on:
+  schedule:
+    - cron: '0 0 */7 * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: update wechat issue
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: 12
+          body: |
+            <img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/latest/qrcode.jpg" width="300" />
+          emoji: '+1,heart'
