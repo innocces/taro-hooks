@@ -7,7 +7,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "bootstrap": "yarn build:shared && yarn bootstrap:plugin && yarn build:sandpack && yarn bootstrap:request",
+    "bootstrap": "yarn build:shared && yarn bootstrap:plugin && yarn build:sandpack && yarn bootstrap:request && yarn bootstrap:others",
+    "bootstrap:others": "yarn build:compress && yarn build:canvas",
     "bootstrap:plugin": "yarn build:react-plugin && yarn build:vue-plugin && yarn build:docusaurus",
     "bootstrap:request": "yarn build:ahooks && yarn build:hooks && yarn build:use-request",
     "build": "lerna run build --no-private --stream",
@@ -50,6 +51,8 @@
     "build:vue-plugin": "lerna run build --scope=@taro-hooks/plugin-vue --stream",
     "dev:shared": "lerna run dev --scope=@taro-hooks/shared --stream",
     "build:shared": "lerna run build --scope=@taro-hooks/shared --stream",
+    "build:canvas": "lerna run build --scope=@taro-hooks/blueimp-canvas-to-blob --stream",
+    "build:compressor": "lerna run build --scope=@taro-hooks/compressorjs --stream",
     "deploy": "yarn docusaurus:build && yarn docs:deploy",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "lerna:publish": "lerna publish --no-private",
