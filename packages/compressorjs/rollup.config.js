@@ -6,7 +6,7 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const replace = require('@rollup/plugin-replace');
 const pkg = require('./package.json');
 
-pkg.name = pkg.name.replace('js', '').replace('-global', '');
+pkg.name = 'compressor';
 
 const name = changeCase.pascalCase(pkg.name);
 const banner = createBanner({

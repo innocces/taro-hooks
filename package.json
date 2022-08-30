@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "yarn build:shared && yarn bootstrap:plugin && yarn build:sandpack && yarn bootstrap:request && yarn bootstrap:others",
-    "bootstrap:others": "yarn build:compress && yarn build:canvas",
+    "bootstrap:others": "yarn build:compressor && yarn build:canvas",
     "bootstrap:plugin": "yarn build:react-plugin && yarn build:vue-plugin && yarn build:docusaurus",
     "bootstrap:request": "yarn build:ahooks && yarn build:hooks && yarn build:use-request",
     "build": "lerna run build --no-private --stream",

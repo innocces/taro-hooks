@@ -37,7 +37,7 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:css": "stylelint {docs,examples}/**/*.{css,html} --fix",
     "lint:js": "eslint src test *.js --fix",
-    "build": "npm run clean && npm run lint && npm run release && npm run compress && npm test",
+    "build": "npm run clean && npm run release && npm run compress",
     "start": "npm run dev",
     "test": "cross-env NODE_ENV=test karma start test/karma.conf.js",
     "test:coverage": "cat coverage/lcov.info | codecov"

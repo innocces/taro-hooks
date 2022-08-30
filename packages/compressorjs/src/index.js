@@ -1,4 +1,4 @@
-import toBlob from 'blueimp-canvas-to-blob-global';
+import toBlob from '@taro-hooks/blueimp-canvas-to-blob';
 import isBlob from 'is-blob';
 import DEFAULTS from './defaults';
 import { WINDOW } from './constants';
