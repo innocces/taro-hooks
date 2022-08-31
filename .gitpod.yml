@@ -5,7 +5,7 @@ tasks:
       gp sync-done bundle
   - name: dev server
     init: gp sync-await bundle
-    command: yarn docusaurus:start
+    command: cd website && yarn docusaurus:start
 
 ports:
   - port: 3000
