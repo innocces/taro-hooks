@@ -13,6 +13,8 @@
     "name": "Chen Fengyuan",
     "url": "https://chenfengyuan.com/"
   },
+  "sideEffects": false,
+  "_author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
   "files": [
     "src",
     "dist",
