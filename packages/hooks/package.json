@@ -33,7 +33,8 @@
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "repository": "https://github.com/innocces/taro-hooks",
   "homepage": "https://innocces.github.io/taro-hooks/",

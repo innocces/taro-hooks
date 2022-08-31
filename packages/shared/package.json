@@ -28,6 +28,7 @@
     "url": "https://github.com/innocces/taro-hooks/issues"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }
