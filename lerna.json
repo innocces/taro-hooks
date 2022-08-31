@@ -6,7 +6,8 @@
       "allowBranch": "next",
       "includeMergedTags": true,
       "message": "chore(release): publish %s",
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "createRelease": "github"
     },
     "publish": {
       "registry": "https://registry.npmjs.org",
