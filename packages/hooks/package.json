@@ -1,6 +1,6 @@
 {
   "name": "taro-hooks",
-  "version": "1.5.6",
+  "version": "2.0.0-beta-serro.150+f5c81862",
   "description": "为 Taro 而设计的 Hooks Library",
   "keywords": [
     "taro-hooks",
@@ -54,8 +54,8 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "@taro-hooks/compressorjs": "^1.5.6",
-    "@taro-hooks/use-request": "^1.5.6",
+    "@taro-hooks/compressorjs": "^2.0.0-beta-serro.150+f5c81862",
+    "@taro-hooks/use-request": "^2.0.0-beta-serro.150+f5c81862",
     "lodash-wechat": "^1.0.0",
     "querystring": "^0.2.1"
   },
@@ -73,5 +73,5 @@
     "node": ">=12.0.0"
   },
   "license": "MIT",
-  "gitHead": "94c042627873239070797597f18474cc84f23442"
+  "gitHead": "f5c8186224c758cc0faccea85e27a679a86be6a0"
 }

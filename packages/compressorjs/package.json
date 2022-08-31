@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/compressorjs",
-  "version": "1.5.6",
+  "version": "2.0.0-beta-serro.150+f5c81862",
   "description": "JavaScript image compressor.",
   "main": "dist/compressor.common.js",
   "module": "dist/compressor.esm.js",
@@ -45,7 +45,7 @@
     "test:coverage": "cat coverage/lcov.info | codecov"
   },
   "dependencies": {
-    "@taro-hooks/blueimp-canvas-to-blob": "^1.5.6",
+    "@taro-hooks/blueimp-canvas-to-blob": "^2.0.0-beta-serro.150+f5c81862",
     "is-blob": "^2.1.0"
   },
   "devDependencies": {
@@ -88,5 +88,6 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
-  }
+  },
+  "gitHead": "f5c8186224c758cc0faccea85e27a679a86be6a0"
 }

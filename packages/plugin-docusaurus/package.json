@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/plugin-docusaurus",
-  "version": "1.5.6",
+  "version": "2.0.0-beta-serro.150+f5c81862",
   "description": "docusaurus 插件",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
@@ -41,5 +41,6 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
-  }
+  },
+  "gitHead": "f5c8186224c758cc0faccea85e27a679a86be6a0"
 }
