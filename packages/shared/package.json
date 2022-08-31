@@ -26,5 +26,8 @@
   },
   "bugs": {
     "url": "https://github.com/innocces/taro-hooks/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }

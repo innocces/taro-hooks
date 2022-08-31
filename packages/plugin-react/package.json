@@ -43,5 +43,8 @@
   "peerDependencies": {
     "@tarojs/taro": ">=3.4.x",
     "react": ">=16.9"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }

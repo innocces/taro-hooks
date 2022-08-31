@@ -47,5 +47,8 @@
   "peerDependencies": {
     "@tarojs/taro": ">=3.4.x",
     "vue": ">=3.x"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }

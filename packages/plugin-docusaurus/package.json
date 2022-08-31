@@ -17,8 +17,7 @@
   "files": [
     "index.js",
     "dist",
-    "types",
-    "docusaurus"
+    "types"
   ],
   "repository": {
     "type": "git",
@@ -37,5 +36,8 @@
   },
   "dependencies": {
     "joi": "^17.6.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
