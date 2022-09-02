@@ -1,4 +1,4 @@
-const latestStabVersion = 'V1.5.8';
+const latestStabVersion = 'V1.5.9';
 
 module.exports = [
   {

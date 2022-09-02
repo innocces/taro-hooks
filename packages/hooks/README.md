@@ -55,7 +55,7 @@
 ## 安装
 
 ```bash
-$ npm i taro-hooks --save
+$ npm i taro-hooks@canary --save
 ```
 
 配合框架需要特别的插件配置, 请移步[文档 - 框架支持](https://next-version-taro-hooks.vercel.app/site/docs/intro#%E6%A1%86%E6%9E%B6%E6%94%AF%E6%8C%81)

@@ -14,7 +14,7 @@ sidebar_position: 2
 首先需要下载 **@taro-hooks/plugin-react** 插件
 
 ```bash
-$ npm i @taro-hooks/plugin-react
+$ npm i @taro-hooks/plugin-react@canary
 ```
 
 ### 项目配置

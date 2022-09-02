@@ -208,7 +208,7 @@ const config = {
           lastVersion: 'current',
           versions: {
             current: {
-              label: `${version} 🤖`,
+              label: `V${version.split('+')[0]} 🤖`,
             },
           },
         },
