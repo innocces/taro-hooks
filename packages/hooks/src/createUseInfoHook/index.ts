@@ -33,6 +33,6 @@ export function createUseInfoHook<T, S = undefined, R = CallbackResult<T>>(
       }
     };
 
-    return useTaroRef(safeExcute()).current;
+    return useTaroRef<T>(safeExcute()).current;
   };
 }
