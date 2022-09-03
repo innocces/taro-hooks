@@ -27,9 +27,7 @@
   "typedocMain": "src/index.ts",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "types": "dist/index.d.ts",
-  "unpkg": "dist/taro-hooks.js",
-  "jsdelivr": "dist/taro-hooks.js",
+  "types": "lib/index.d.ts",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
   "publishConfig": {
@@ -45,7 +43,6 @@
     "postinstall": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
   "files": [
-    "dist",
     "lib",
     "es",
     "package.json",
