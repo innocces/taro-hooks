@@ -39,7 +39,7 @@ $ @tarojs/cli@3.4.9 | MIT | deps: 38 | versions: 480
 $ npx @tarojs/cli init taro-hooks-app
 ```
 
-在选择项目的使用选择 **taro-hooks** 模板
+在选择项目的使用选择 **taro-hooks@canary** 模板
 
 ```bash
 ? 请选择模板源 Github（最新）
@@ -48,7 +48,7 @@ $ npx @tarojs/cli init taro-hooks-app
   pwa
   react-native
   redux
-> taro-hooks（使用 taro-hooks 的模板）
+> taro-hooks@canary（使用 taro-hooks canary版本的模板）
   taro-ui（使用 taro-ui 的模板）
   wxcloud（云开发模板）
   wxplugin

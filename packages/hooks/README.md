@@ -50,7 +50,7 @@
 
 ## taro init
 
-确保当前`node>=12.x`. 可使用`npx taro init projectname`选择`taro-hooks`模板进行初始化项目.
+确保当前`node>=12.x`. 可使用`npx taro init projectname`选择 **taro-hooks@canary** 模板进行初始化项目.
 
 ## 安装
 
