@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/ahooks",
-  "version": "2.0.0-beta-serro.150+f5c81862",
+  "version": "2.0.0-beta-serro.3+718a3a10",
   "description": "ahooks for Taro",
   "keywords": [
     "ahooks",
@@ -36,7 +36,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@taro-hooks/shared": "^2.0.0-beta-serro.150+f5c81862",
+    "@taro-hooks/shared": "^2.0.0-beta-serro.3+718a3a10",
     "lodash-wechat": "^1.0.0"
   },
   "peerDependencies": {
@@ -50,5 +50,5 @@
     "node": ">=12.0.0"
   },
   "license": "MIT",
-  "gitHead": "f5c8186224c758cc0faccea85e27a679a86be6a0"
+  "gitHead": "718a3a10c0fdb1bc565ff7e2e09012155946adb7"
 }

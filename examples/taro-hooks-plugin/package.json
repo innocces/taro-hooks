@@ -36,7 +36,7 @@
   "author": "",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "@taro-hooks/plugin-react": "^2.0.0-beta-serro.150",
+    "@taro-hooks/plugin-react": "^2.0.0-beta-serro.3",
     "@taroify/core": "^0.0.29-alpha.9",
     "@tarojs/cli": "3.4.14",
     "@tarojs/components": "3.4.14",
@@ -47,7 +47,7 @@
     "mockjs": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "taro-hooks": "^2.0.0-beta-serro.150"
+    "taro-hooks": "^2.0.0-beta-serro.3"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",

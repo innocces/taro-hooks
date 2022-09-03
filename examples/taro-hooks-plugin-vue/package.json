@@ -37,9 +37,9 @@
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@nutui/nutui-taro": "^3.1.21",
-    "@taro-hooks/plugin-vue": "^2.0.0-beta-serro.150",
-    "@taro-hooks/shared": "^2.0.0-beta-serro.150",
-    "@taro-hooks/use-request": "^2.0.0-beta-serro.150",
+    "@taro-hooks/plugin-vue": "^2.0.0-beta-serro.3",
+    "@taro-hooks/shared": "^2.0.0-beta-serro.3",
+    "@taro-hooks/use-request": "^2.0.0-beta-serro.3",
     "@tarojs/cli": "3.4.14",
     "@tarojs/components": "3.4.14",
     "@tarojs/plugin-framework-vue3": "3.4.14",
@@ -47,7 +47,7 @@
     "@tarojs/runtime": "3.4.14",
     "@tarojs/taro": "3.4.14",
     "mockjs": "^1.1.0",
-    "taro-hooks": "^2.0.0-beta-serro.150",
+    "taro-hooks": "^2.0.0-beta-serro.3",
     "vue": "^3.0.0"
   },
   "devDependencies": {
