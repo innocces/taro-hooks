@@ -94,6 +94,7 @@ export default defineConfig({
   exportStatic: {},
   navs: [
     null,
+    { title: 'Beta版本', path: 'https://next-version-taro-hooks.vercel.app' },
     { title: 'GitHub', path: 'https://github.com/innocces/taro-hooks' },
     { title: 'Gitee', path: 'https://gitee.com/inocces/taro-hooks' },
     {
