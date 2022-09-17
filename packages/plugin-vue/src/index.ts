@@ -63,7 +63,10 @@ export default (ctx: IPluginContext) => {
 function setDefinePlugin(chain: any, webpack: any) {
   chain.plugin('defined').use(webpack.DefinePlugin, [
     {
-      'process.env.__TARO_HOOKS_VUE__': JSON.stringify(true),
+      // fix process is not defined in 3.5.x webpackv5 mode!
+      __TARO_HOOKS_REACT__: JSON.stringify(false),
+      __TARO_HOOKS_VUE__: JSON.stringify(true),
+      TARO_ENV: JSON.stringify(process.env.TARO_ENV?.toLocaleUpperCase()),
     },
   ]);
 }

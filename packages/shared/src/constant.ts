@@ -9,7 +9,8 @@ export enum ENV_TYPE {
   JD = 'JD',
 }
 
-export const ENV = process?.env?.TARO_ENV;
+declare const TARO_ENV: ENV_TYPE;
+export const ENV = TARO_ENV;
 
 export const ISWEAPP = ENV === ENV_TYPE.WEAPP;
 
@@ -31,10 +32,11 @@ export const PREFIX = '🎮[taro-hooks]';
 
 export const INJECTKEY = '$$inject';
 
-export const FRAMEWORK: 'vue' | 'react' | null = process?.env
-  ?.__TARO_HOOKS_VUE__
+declare const __TARO_HOOKS_VUE__: boolean;
+declare const __TARO_HOOKS_REACT__: boolean;
+export const FRAMEWORK: 'vue' | 'react' | null = __TARO_HOOKS_VUE__
   ? 'vue'
-  : process?.env?.__TARO_HOOKS_REACT__
+  : __TARO_HOOKS_REACT__
   ? 'react'
   : null;
 
@@ -78,7 +80,7 @@ export const BANNER = `
 /**
  MIT License
 
- Copyright (c) 2021 innocces
+ Copyright (c) ${new Date().getFullYear()} innocces
 
  Power by TARO-HOOKS
  */
