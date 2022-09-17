@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/plugin-vue",
-  "version": "2.0.0-beta-serro.3+718a3a10",
+  "version": "2.0.0-beta-serro.5+628c69db",
   "description": "vue3 框架插件",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
@@ -34,7 +34,7 @@
     "url": "https://github.com/innocces/taro-hooks/issues"
   },
   "dependencies": {
-    "@taro-hooks/shared": "^2.0.0-beta-serro.3+718a3a10",
+    "@taro-hooks/shared": "^2.0.0-beta-serro.5+628c69db",
     "acorn": "^8.0.4",
     "acorn-walk": "^8.0.0"
   },
@@ -53,5 +53,5 @@
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
-  "gitHead": "718a3a10c0fdb1bc565ff7e2e09012155946adb7"
+  "gitHead": "628c69db9aed1a7c258f75dcf095449ec99023e0"
 }

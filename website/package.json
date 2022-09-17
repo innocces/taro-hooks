@@ -20,7 +20,7 @@
     "@easyops-cn/docusaurus-search-local": "^0.27.1",
     "@mdx-js/react": "^1.6.22",
     "@swc/core": "^1.2.174",
-    "@taro-hooks/sandpack": "^2.0.0-beta-serro.3",
+    "@taro-hooks/sandpack": "^2.0.0-beta-serro.5",
     "clsx": "^1.1.1",
     "docusaurus-plugin-sass": "^0.2.2",
     "octokit": "^1.7.1",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.1",
     "@docusaurus/plugin-pwa": "2.0.1",
-    "@taro-hooks/plugin-docusaurus": "^2.0.0-beta-serro.3",
+    "@taro-hooks/plugin-docusaurus": "^2.0.0-beta-serro.5",
     "@tsconfig/docusaurus": "^1.0.5",
     "docusaurus-plugin-typedoc": "^0.17.5",
     "hast-util-has-property": "^2.0.0",
