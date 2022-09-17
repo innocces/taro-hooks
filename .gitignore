@@ -26,7 +26,8 @@ lerna-debug.log
 /coverage
 packages/**/dist
 /hooks-docs
-
+/typedoc-docs
+/website/docs/api
 # misc
 .DS_Store
 

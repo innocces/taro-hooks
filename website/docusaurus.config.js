@@ -52,10 +52,7 @@ function getOptions(vue) {
 const packagesPath = join(process.cwd(), '..', 'packages');
 
 const typeDocEntries = readdirSync(packagesPath)
-  .filter(
-    (v) =>
-      !['hooks', 'app', 'blueimp-canvas-to-blob', 'compressorjs'].includes(v),
-  )
+  .filter((v) => !['app', 'blueimp-canvas-to-blob', 'compressorjs'].includes(v))
   .map((v) => join(packagesPath, v));
 
 /** @type {import('@docusaurus/types').Config} */

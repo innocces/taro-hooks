@@ -4,7 +4,17 @@ import * as path from 'path';
 const cwd = __dirname;
 
 const base = {
-  external: ['@tarojs/shared', '@tarojs/runtime', 'acorn', 'acorn-walk', 'vue'],
+  external: [
+    '@tarojs/helper',
+    '@tarojs/service',
+    '@tarojs/shared',
+    '@tarojs/runtime',
+    '@tarojs/taro',
+    '@taro-hooks/shared',
+    'acorn',
+    'acorn-walk',
+    'vue',
+  ],
   plugins: [typescript()],
 };
 

@@ -32,16 +32,14 @@
     "url": "https://github.com/innocces/taro-hooks/issues"
   },
   "dependencies": {
-    "@tarojs/runtime": "3.4.14",
-    "@tarojs/shared": "3.4.14",
     "acorn": "^8.0.4",
     "acorn-walk": "^8.0.0"
   },
-  "devDependencies": {
-    "@tarojs/service": "3.4.14",
-    "@tarojs/taro": "3.4.14"
-  },
   "peerDependencies": {
+    "@tarojs/helper": ">=3.4.x",
+    "@tarojs/runtime": ">=3.4.x",
+    "@tarojs/service": ">=3.4.x",
+    "@tarojs/shared": ">=3.4.x",
     "@tarojs/taro": ">=3.4.x",
     "react": ">=16.9"
   },
