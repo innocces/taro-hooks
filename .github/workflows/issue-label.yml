@@ -5,6 +5,19 @@ on:
     types: [opened]
 
 jobs:
+  add-qr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add QR
+        uses: actions-cool/issues-helper@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          actions: 'create-comment'
+          body: |
+            welcome discuss in wechat: <br /> <img src="https://cdn.jsdelivr.net/gh/innocces/DrawingBed/latest/qrcode.jpg" width="300" />
+          emoji: '+1,heart'
+
   add-labels:
     runs-on: ubuntu-latest
     if: contains(github.event.issue.body, '复现 repo') == false
