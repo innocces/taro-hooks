@@ -1,3 +1,4 @@
+import { ENV_TYPE } from '@tarojs/taro';
 /// <reference types="@tarojs/taro" />
 /// <reference types="@taro-hooks/plugin-react" />
 
@@ -19,9 +20,15 @@ declare module 'mockjs' {
 
 declare var BUILD_MODE: string | undefined;
 declare var __TARO_HOOKS_VUE__: boolean;
+declare var __TARO_HOOKS_REACT__: boolean;
+declare var TARO_ENV: ENV_TYPE;
 
+declare type BatteryManager = {
+  readonly charging: boolean;
+  readonly level: number;
+};
 interface Navigator {
-  getBattery: () => Promise<any>;
+  getBattery: () => Promise<BatteryManager>;
 }
 
 declare var wx: any;

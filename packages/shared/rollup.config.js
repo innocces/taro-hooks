@@ -15,7 +15,7 @@ const baseConfig = {
 /**
  MIT License
 
- Copyright (c) 2021 innocces
+ Copyright (c) ${new Date().getFullYear()} innocces
 
  Power by TARO-HOOKS
  */

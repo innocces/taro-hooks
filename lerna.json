@@ -15,7 +15,7 @@
     }
   },
   "ignoreChanges": ["**/*.md", "**/*.mdx", "**/es/*", "**/lib/*", "**/dist/*"],
-  "version": "2.0.0-beta-serro.3+718a3a10",
+  "version": "2.0.0-beta-serro.5+628c69db",
   "tagVersionPrefix": "taro-hooks-v",
   "npmClient": "yarn"
 }

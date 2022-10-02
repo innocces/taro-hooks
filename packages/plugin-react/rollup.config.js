@@ -5,8 +5,11 @@ const cwd = __dirname;
 
 const base = {
   external: [
+    '@tarojs/helper',
+    '@tarojs/service',
     '@tarojs/shared',
     '@tarojs/runtime',
+    '@tarojs/taro',
     'acorn',
     'acorn-walk',
     'react',

@@ -107,22 +107,18 @@ function useRequestImplement<TData, TParams extends any[]>(
     return vueRefResult as Result<TData, TParams>;
   }
 
-  if (FRAMEWORK === 'react') {
-    return {
-      loading: fetchInstance.state.loading,
-      data: fetchInstance.state.data,
-      error: fetchInstance.state.error,
-      params: fetchInstance.state.params || [],
-      cancel: useMemoizedFn(fetchInstance.cancel.bind(fetchInstance)),
-      refresh: useMemoizedFn(fetchInstance.refresh.bind(fetchInstance)),
-      refreshAsync: useMemoizedFn(
-        fetchInstance.refreshAsync.bind(fetchInstance),
-      ),
-      run: useMemoizedFn(fetchInstance.run.bind(fetchInstance)),
-      runAsync: useMemoizedFn(fetchInstance.runAsync.bind(fetchInstance)),
-      mutate: useMemoizedFn(fetchInstance.mutate.bind(fetchInstance)),
-    } as Result<TData, TParams>;
-  }
+  return {
+    loading: fetchInstance.state.loading,
+    data: fetchInstance.state.data,
+    error: fetchInstance.state.error,
+    params: fetchInstance.state.params || [],
+    cancel: useMemoizedFn(fetchInstance.cancel.bind(fetchInstance)),
+    refresh: useMemoizedFn(fetchInstance.refresh.bind(fetchInstance)),
+    refreshAsync: useMemoizedFn(fetchInstance.refreshAsync.bind(fetchInstance)),
+    run: useMemoizedFn(fetchInstance.run.bind(fetchInstance)),
+    runAsync: useMemoizedFn(fetchInstance.runAsync.bind(fetchInstance)),
+    mutate: useMemoizedFn(fetchInstance.mutate.bind(fetchInstance)),
+  } as Result<TData, TParams>;
 }
 
 export default useRequestImplement;

@@ -60,7 +60,6 @@
     "lerna:publish:minor": "lerna publish minor --no-private",
     "lerna:publish:patch": "lerna publish patch --no-private",
     "lerna:publish:beta:major": "lerna publish --canary major --preid beta-serro --no-private --no-git-reset --force-publish",
-    "lerna:publish:beta": "lerna publish --canary --preid beta-serro --no-private",
     "log": "./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s -r 0",
     "postversion": "npm run log",
     "contributors:generate": "all-contributors generate",

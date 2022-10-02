@@ -7774,11 +7774,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@taro-hooks/ahooks@^1.5.6, @taro-hooks/ahooks@workspace:packages/ahooks":
+"@taro-hooks/ahooks@^2.0.0-beta-serro.3+718a3a10, @taro-hooks/ahooks@workspace:packages/ahooks":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/ahooks@workspace:packages/ahooks"
   dependencies:
-    "@taro-hooks/shared": ^1.5.6
+    "@taro-hooks/shared": ^2.0.0-beta-serro.3+718a3a10
     lodash-wechat: ^1.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     vue: ">3.0"
@@ -7792,7 +7792,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@taro-hooks/blueimp-canvas-to-blob@^1.5.6, @taro-hooks/blueimp-canvas-to-blob@workspace:packages/blueimp-canvas-to-blob":
+"@taro-hooks/blueimp-canvas-to-blob@^2.0.0-beta-serro.3+718a3a10, @taro-hooks/blueimp-canvas-to-blob@workspace:packages/blueimp-canvas-to-blob":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/blueimp-canvas-to-blob@workspace:packages/blueimp-canvas-to-blob"
   dependencies:
@@ -7809,7 +7809,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@taro-hooks/compressorjs@^1.5.6, @taro-hooks/compressorjs@workspace:packages/compressorjs":
+"@taro-hooks/compressorjs@^2.0.0-beta-serro.3+718a3a10, @taro-hooks/compressorjs@workspace:packages/compressorjs":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/compressorjs@workspace:packages/compressorjs"
   dependencies:
@@ -7822,7 +7822,7 @@ __metadata:
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.5
     "@rollup/plugin-replace": ^3.0.0
-    "@taro-hooks/blueimp-canvas-to-blob": ^1.5.6
+    "@taro-hooks/blueimp-canvas-to-blob": ^2.0.0-beta-serro.3+718a3a10
     babel-plugin-istanbul: ^6.0.0
     chai: ^4.3.4
     change-case: ^4.1.2
@@ -7894,7 +7894,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@taro-hooks/plugin-docusaurus@^1.5.6, @taro-hooks/plugin-docusaurus@workspace:packages/plugin-docusaurus":
+"@taro-hooks/plugin-docusaurus@^2.0.0-beta-serro.3, @taro-hooks/plugin-docusaurus@workspace:packages/plugin-docusaurus":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/plugin-docusaurus@workspace:packages/plugin-docusaurus"
   dependencies:
@@ -7904,41 +7904,41 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@taro-hooks/plugin-react@^1.5.6, @taro-hooks/plugin-react@workspace:packages/plugin-react":
+"@taro-hooks/plugin-react@^2.0.0-beta-serro.3, @taro-hooks/plugin-react@workspace:packages/plugin-react":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/plugin-react@workspace:packages/plugin-react"
   dependencies:
-    "@tarojs/runtime": 3.4.14
-    "@tarojs/service": 3.4.14
-    "@tarojs/shared": 3.4.14
-    "@tarojs/taro": 3.4.14
     acorn: ^8.0.4
     acorn-walk: ^8.0.0
   peerDependencies:
+    "@tarojs/helper": ">=3.4.x"
+    "@tarojs/runtime": ">=3.4.x"
+    "@tarojs/service": ">=3.4.x"
+    "@tarojs/shared": ">=3.4.x"
     "@tarojs/taro": ">=3.4.x"
     react: ">=16.9"
   languageName: unknown
   linkType: soft
 
-"@taro-hooks/plugin-vue@^1.5.6, @taro-hooks/plugin-vue@workspace:packages/plugin-vue":
+"@taro-hooks/plugin-vue@^2.0.0-beta-serro.3, @taro-hooks/plugin-vue@workspace:packages/plugin-vue":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/plugin-vue@workspace:packages/plugin-vue"
   dependencies:
-    "@taro-hooks/shared": ^1.5.6
-    "@tarojs/runtime": 3.4.14
-    "@tarojs/service": 3.4.14
-    "@tarojs/shared": 3.4.14
-    "@tarojs/taro": 3.4.14
+    "@taro-hooks/shared": ^2.0.0-beta-serro.3+718a3a10
     acorn: ^8.0.4
     acorn-walk: ^8.0.0
     vue: ^3.0.0
   peerDependencies:
+    "@tarojs/helper": ">=3.4.x"
+    "@tarojs/runtime": ">=3.4.x"
+    "@tarojs/service": ">=3.4.x"
+    "@tarojs/shared": ">=3.4.x"
     "@tarojs/taro": ">=3.4.x"
     vue: ">=3.x"
   languageName: unknown
   linkType: soft
 
-"@taro-hooks/sandpack@^1.5.6, @taro-hooks/sandpack@workspace:packages/sandpack":
+"@taro-hooks/sandpack@^2.0.0-beta-serro.3, @taro-hooks/sandpack@workspace:packages/sandpack":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/sandpack@workspace:packages/sandpack"
   peerDependencies:
@@ -7947,7 +7947,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@taro-hooks/shared@^1.5.6, @taro-hooks/shared@workspace:packages/shared":
+"@taro-hooks/shared@^2.0.0-beta-serro.3, @taro-hooks/shared@^2.0.0-beta-serro.3+718a3a10, @taro-hooks/shared@workspace:packages/shared":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/shared@workspace:packages/shared"
   languageName: unknown
@@ -7960,9 +7960,9 @@ __metadata:
     "@babel/core": ^7.8.0
     "@babel/runtime": ^7.7.7
     "@nutui/nutui-taro": ^3.1.21
-    "@taro-hooks/plugin-vue": ^1.5.6
-    "@taro-hooks/shared": ^1.5.6
-    "@taro-hooks/use-request": ^1.5.6
+    "@taro-hooks/plugin-vue": ^2.0.0-beta-serro.3
+    "@taro-hooks/shared": ^2.0.0-beta-serro.3
+    "@taro-hooks/use-request": ^2.0.0-beta-serro.3
     "@tarojs/cli": 3.4.14
     "@tarojs/components": 3.4.14
     "@tarojs/mini-runner": 3.4.14
@@ -7982,7 +7982,7 @@ __metadata:
     eslint-plugin-vue: ^8.0.0
     mockjs: ^1.1.0
     stylelint: ^14.4.0
-    taro-hooks: ^1.5.6
+    taro-hooks: ^2.0.0-beta-serro.3
     typescript: ^4.6.3
     vue: ^3.0.0
     vue-loader: ^16.0.0-beta.8
@@ -7995,7 +7995,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.8.0
     "@babel/runtime": ^7.7.7
-    "@taro-hooks/plugin-react": ^1.5.6
+    "@taro-hooks/plugin-react": ^2.0.0-beta-serro.3
     "@taroify/core": ^0.0.29-alpha.9
     "@tarojs/cli": 3.4.14
     "@tarojs/components": 3.4.14
@@ -8021,20 +8021,20 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     stylelint: 9.3.0
-    taro-hooks: ^1.5.6
+    taro-hooks: ^2.0.0-beta-serro.3
     typescript: ^4.6.3
   languageName: unknown
   linkType: soft
 
-"@taro-hooks/use-request@^1.5.6, @taro-hooks/use-request@workspace:packages/use-request":
+"@taro-hooks/use-request@^2.0.0-beta-serro.3, @taro-hooks/use-request@^2.0.0-beta-serro.3+718a3a10, @taro-hooks/use-request@workspace:packages/use-request":
   version: 0.0.0-use.local
   resolution: "@taro-hooks/use-request@workspace:packages/use-request"
   dependencies:
-    "@taro-hooks/ahooks": ^1.5.6
-    "@taro-hooks/shared": ^1.5.6
+    "@taro-hooks/ahooks": ^2.0.0-beta-serro.3+718a3a10
+    "@taro-hooks/shared": ^2.0.0-beta-serro.3+718a3a10
     lodash-wechat: ^1.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    taro-hooks: ^1.5.6
+    taro-hooks: ^2.0.0-beta-serro.3+718a3a10
     vue: ">3.0"
   peerDependencies:
     "@tarojs/taro": ">3.4.0"
@@ -8058,11 +8058,12 @@ __metadata:
     "@easyops-cn/docusaurus-search-local": ^0.27.1
     "@mdx-js/react": ^1.6.22
     "@swc/core": ^1.2.174
-    "@taro-hooks/plugin-docusaurus": ^1.5.6
-    "@taro-hooks/sandpack": ^1.5.6
+    "@taro-hooks/plugin-docusaurus": ^2.0.0-beta-serro.3
+    "@taro-hooks/sandpack": ^2.0.0-beta-serro.3
     "@tsconfig/docusaurus": ^1.0.5
     clsx: ^1.1.1
     docusaurus-plugin-sass: ^0.2.2
+    docusaurus-plugin-typedoc: ^0.17.5
     hast-util-has-property: ^2.0.0
     hast-util-is-element: ^2.1.2
     octokit: ^1.7.1
@@ -12376,6 +12377,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"blueimp-canvas-to-blob-global@npm:^3.29.1":
+  version: 3.29.1
+  resolution: "blueimp-canvas-to-blob-global@npm:3.29.1"
+  checksum: 9e51e276a7cc6c0fdfe15784fdefb0a654bfeaeb777a0a4f215a6331447f2029aacbcf2c2e77e5d5b6938eda68e5262966e162110d921ecb4b2cb60c9bf4dd45
+  languageName: node
+  linkType: hard
+
 "blueimp-load-image@npm:5":
   version: 5.16.0
   resolution: "blueimp-load-image@npm:5.16.0"
@@ -14194,6 +14202,16 @@ __metadata:
     safe-buffer: 5.1.2
     vary: ~1.1.2
   checksum: 35c0f2eb1f28418978615dc1bc02075b34b1568f7f56c62d60f4214d4b7cc00d0f6d282b5f8a954f59872396bd770b6b15ffd8aa94c67d4bce9b8887b906999b
+  languageName: node
+  linkType: hard
+
+"compressorjs-global@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "compressorjs-global@npm:1.1.2"
+  dependencies:
+    blueimp-canvas-to-blob-global: ^3.29.1
+    is-blob: ^2.1.0
+  checksum: 688f2c05043a3841de7babfcd209d48ebd07589410f3b04433e2313a536063bd1af0a0f4bd6b7a65f76296522592923e717abbb5ad63c42e33bf9602e806d260
   languageName: node
   linkType: hard
 
@@ -16424,6 +16442,16 @@ __metadata:
     "@docusaurus/core": ^2.0.0-beta
     sass: ^1.30.0
   checksum: e409c403fe0679ffbf5bd3e7738664fc95dae78b4152321b546fd5b04b5309566ad19d4b9ea90554d587b5647d20957d7024a2ae180cc708112227a66eca84d0
+  languageName: node
+  linkType: hard
+
+"docusaurus-plugin-typedoc@npm:^0.17.5":
+  version: 0.17.5
+  resolution: "docusaurus-plugin-typedoc@npm:0.17.5"
+  peerDependencies:
+    typedoc: ">=0.22.0"
+    typedoc-plugin-markdown: ">=3.11.10"
+  checksum: 62af962dad33a413fe3b049b8a5642a3533f35d1cc6163e5db1a06d476b8eab77c4be9bea86c5ae9e30a0310039bb8730c18f1a87fcc8a4ef0c13ceba2ed8dd8
   languageName: node
   linkType: hard
 
@@ -33917,16 +33945,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"taro-hooks@^1.5.6, taro-hooks@workspace:packages/hooks":
+"taro-hooks@^2.0.0-beta-serro.3, taro-hooks@^2.0.0-beta-serro.3+718a3a10, taro-hooks@workspace:packages/hooks":
   version: 0.0.0-use.local
   resolution: "taro-hooks@workspace:packages/hooks"
   dependencies:
     "@babel/runtime": ^7.7.7
-    "@taro-hooks/compressorjs": ^1.5.6
-    "@taro-hooks/use-request": ^1.5.6
+    "@taro-hooks/compressorjs": ^2.0.0-beta-serro.3+718a3a10
+    "@taro-hooks/use-request": ^2.0.0-beta-serro.3+718a3a10
     "@tarojs/taro": 3.4.14
     lodash-wechat: ^1.0.0
-    lodash.uniq: ^4.5.0
     querystring: ^0.2.1
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     vue: ">3.0"
@@ -33939,6 +33966,22 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
+
+"taro-hooks@npm:^1.5.6":
+  version: 1.5.9
+  resolution: "taro-hooks@npm:1.5.9"
+  dependencies:
+    "@babel/runtime": ^7.14.6
+    compressorjs-global: ^1.1.2
+    lodash-wechat: ^1.0.0
+    lodash.uniq: ^4.5.0
+    querystring: ^0.2.1
+  peerDependencies:
+    "@tarojs/taro": ">= 3.x"
+    react: ">=16.9"
+  checksum: d22154553a0c0115b530de86ab3e914b0823c5a4a2c80572012b7c3c3bd091b0ee286ba85e50fec075cf0c5a1d462ce1807a7f2ab2278be7e16b5804f6b8dfb4
+  languageName: node
+  linkType: hard
 
 "taro-runtime-docs@npm:^3.3.14":
   version: 3.3.14
