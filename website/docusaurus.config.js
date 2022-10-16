@@ -17,11 +17,12 @@ const prod = process.env.NODE_ENV === 'production';
 // env
 const buildTarget = process.env.BUILD_TARGET;
 const gh = buildTarget === 'GH';
-const urlPrefix = '/site';
-const baseURI =
-  'https://next-version-taro-hooks.vercel.app' + (gh ? '/taro-hooks' : '');
+const urlPrefix = gh ? '/taro-hooks' : '/site';
+const ghBaseURI = 'https://innocces.github.io';
+const baseURI = gh ? ghBaseURI : 'https://next-version-taro-hooks.vercel.app';
 const githubURL = 'https://github.com/innocces/taro-hooks';
 const githubURLWithBranch = `${githubURL}/edit/next`;
+const prevBaseURI = baseURI + (gh ? '/taro-hooks' : '');
 
 const demoPaths = {
   '@vue-demo': 'examples/taro-hooks-plugin-vue/src/pages',
@@ -45,7 +46,7 @@ function getOptions(vue) {
   return {
     alias: vue ? pluginOptionAlias['@vue-demo'] : pluginOptionAlias,
     openTarget: vue ? openTarget['@vue-demo'] : openTarget,
-    previewOptions: require('./project.env')(prod, baseURI),
+    previewOptions: require('./project.env')(prod, prevBaseURI),
   };
 }
 

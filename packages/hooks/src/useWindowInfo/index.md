@@ -11,7 +11,7 @@ group:
 
 :::caution
 
-更推荐大家使用[useSystemInfo](/site/hooks/useSystemInfo/). 所有的信息均可获取到
+更推荐大家使用[useSystemInfo](/hooks/useSystemInfo/). 所有的信息均可获取到
 
 :::
 

@@ -8,6 +8,8 @@ const deployDirName = 'hooks-docs';
 
 async function main() {
   try {
+    // get process
+    const gh = process.env.BUILD_TARGET === 'GH';
     // find deploy directory
     const deployDirExists = fs.pathExistsSync(resolve(cwd(), deployDirName));
     // clean up deploy directory
@@ -27,7 +29,8 @@ async function main() {
     // copy website/build
     console.log(chalk.blue('copy website docs....'));
     const websiteBuildDir = 'website/build';
-    await $`cp -r -f ${websiteBuildDir}/ ${deployDirName}/site`;
+    const websiteDocDir = `${deployDirName}/${gh ? '' : 'site'}`;
+    await $`cp -r -f ${websiteBuildDir}/ ${websiteDocDir}`;
 
     // copy vue demo
     console.log(chalk.blue('copy plugin-vue demo....'));
