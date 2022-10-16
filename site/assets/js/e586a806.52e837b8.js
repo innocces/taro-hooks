@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_taro_hooks_website=self.webpackChunk_taro_hooks_website||[]).push([[6820],{5642:function(s){s.exports=JSON.parse('{"label":"Taro3.x","permalink":"/site/blog/tags/taro-3-x","allTagsPath":"/site/blog/tags","count":1}')}}]);
