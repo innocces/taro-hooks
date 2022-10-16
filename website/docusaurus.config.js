@@ -17,7 +17,7 @@ const prod = process.env.NODE_ENV === 'production';
 // env
 const buildTarget = process.env.BUILD_TARGET;
 const gh = buildTarget === 'GH';
-const urlPrefix = (gh ? '/taro-hooks' : '') + '/site';
+const urlPrefix = '/site';
 const baseURI =
   'https://next-version-taro-hooks.vercel.app' + (gh ? '/taro-hooks' : '');
 const githubURL = 'https://github.com/innocces/taro-hooks';
