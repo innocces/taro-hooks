@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="210px" height="432px" viewBox="0 0 210 432" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Combined Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="页面" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-2" transform="translate(-764.000000, -6132.000000)" fill="#FFFFFF">
+            <g id="内部案例" transform="translate(-88.000000, 6088.000000)">
+                <path d="M882,44 L1032,44 C1048.56854,44 1062,57.4314575 1062,74 L1062,446 C1062,462.568542 1048.56854,476 1032,476 L882,476 C865.431458,476 852,462.568542 852,446 L852,74 C852,57.4314575 865.431458,44 882,44 Z M883,54 C871.40202,54 862,63.4020203 862,75 L862,446 C862,457.59798 871.40202,467 883,467 L1031,467 C1042.59798,467 1052,457.59798 1052,446 L1052,75 C1052,63.4020203 1042.59798,54 1031,54 L883,54 Z M906,54 L1009,54 L1009,57 C1009,63.627417 1003.62742,69 997,69 L918,69 C911.372583,69 906,63.627417 906,57 L906,54 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

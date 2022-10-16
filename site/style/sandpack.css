@@ -1,0 +1,4 @@
+/* hidden open in sandbox icon */
+iframe {
+  display: none!important;
+}
