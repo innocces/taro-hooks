@@ -18,7 +18,7 @@ const prod = process.env.NODE_ENV === 'production';
 const siteMap = {
   vercel: 'https://next-version-taro-hooks.vercel.app',
   GH: 'https://innocces.github.io',
-  RENDER: 'https://taro-hooks.onrender.com/',
+  RENDER: 'https://taro-hooks.onrender.com',
 };
 
 // env

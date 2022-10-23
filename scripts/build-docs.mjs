@@ -29,7 +29,7 @@ async function main() {
     // copy website/build
     console.log(chalk.blue('copy website docs....'));
     const websiteBuildDir = 'website/build';
-    const websiteDocDir = `${deployDirName}/${gh ? '' : 'site'}`;
+    const websiteDocDir = `${deployDirName}/${gh ? '*' : 'site'}`;
     await $`cp -r -f ${websiteBuildDir}/ ${websiteDocDir}`;
 
     // copy vue demo
