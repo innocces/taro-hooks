@@ -14,12 +14,18 @@ const { version } = require(join(
 ));
 const navbarItem = require('./navbar');
 const prod = process.env.NODE_ENV === 'production';
+
+const siteMap = {
+  vercel: 'https://next-version-taro-hooks.vercel.app',
+  GH: 'https://innocces.github.io',
+  RENDER: 'https://taro-hooks.onrender.com/',
+};
+
 // env
-const buildTarget = process.env.BUILD_TARGET;
+const buildTarget = process.env.BUILD_TARGET ?? 'vercel';
 const gh = buildTarget === 'GH';
 const urlPrefix = gh ? '/taro-hooks' : '/site';
-const ghBaseURI = 'https://innocces.github.io';
-const baseURI = gh ? ghBaseURI : 'https://next-version-taro-hooks.vercel.app';
+const baseURI = siteMap[buildTarget];
 const githubURL = 'https://github.com/innocces/taro-hooks';
 const githubURLWithBranch = `${githubURL}/edit/next`;
 const prevBaseURI = baseURI + (gh ? '/taro-hooks' : '');

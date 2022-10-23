@@ -20,6 +20,7 @@
     "build:demos": "yarn build:vue-demo && yarn build:react-demo",
     "docs:build": "yarn bootstrap && yarn docusaurus:build && yarn build:demos && yarn generate-docs",
     "docs:build:gh": "cross-env BUILD_TARGET=GH yarn docs:build",
+    "docs:build:render": "cross-env BUILD_TARGET=RENDER yarn docs:build",
     "docs:deploy": "gh-pages -d website/build",
     "generate-template": "TS_NODE_PROJECT=scripts/tsconfig.json node -r ts-node/register scripts/generate-templ.ts",
     "generate-docs": "node scripts/build-docs.mjs",
