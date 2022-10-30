@@ -117,6 +117,7 @@ $ yarn develop:react-plugin:weapp
 
 - [![Gitter](https://img.shields.io/badge/chat-on%20gitter-blueviolet?style=for-the-badge)](https://gitter.im/hooks/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 - 点击[Welcome to discuss in wechat](https://github.com/innocces/taro-hooks/issues/12)获取最新二维码
+- [discord](https://discord.gg/N82HK72uJk)
 
 ## CHANGELOG
 
