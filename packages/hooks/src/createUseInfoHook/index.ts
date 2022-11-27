@@ -2,7 +2,7 @@ import { useTaroRef } from '@tarojs/taro';
 import { logError, log } from '@taro-hooks/shared';
 import { typeOf, isProd } from '../utils/tool';
 import type { CallbackResult } from '../type';
-export type Result<T, R = undefined> = T | R;
+export type NonResult<T, R = undefined> = T | R;
 
 /**
  * a general generate info api hook, make direaction return, use undefined make fail
@@ -12,7 +12,7 @@ export type Result<T, R = undefined> = T | R;
 export function createUseInfoHook<T, S = undefined, R = CallbackResult<T>>(
   fn: R,
   defaultReturn?: S,
-): CallbackResult<Result<T, S | undefined>> {
+): CallbackResult<NonResult<T, S | undefined>> {
   return () => {
     const safeExcute = () => {
       try {

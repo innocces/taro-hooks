@@ -37,3 +37,8 @@ export type PromiseOptionalAction<T, R = TaroGeneral.CallbackResult> = (
 
 export type PromiseWithoutOptionAction<R = TaroGeneral.CallbackResult> =
   () => Promise<UnionResult<R>>;
+
+export type BatteryManager = {
+  readonly charging: boolean;
+  readonly level: number;
+};
