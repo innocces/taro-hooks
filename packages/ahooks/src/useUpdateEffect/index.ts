@@ -1,4 +1,6 @@
 import { useTaroEffect } from '@tarojs/taro';
 import { createUpdateEffect } from '../createUpdateEffect';
 
-export default createUpdateEffect(useTaroEffect);
+const useUpdateEffect: typeof useTaroEffect = createUpdateEffect(useTaroEffect);
+
+export default useUpdateEffect;

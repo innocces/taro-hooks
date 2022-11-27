@@ -15,7 +15,7 @@ const useUnmount = (fn: () => void) => {
 
   useTaroEffect(
     () => () => {
-      fnRef.current();
+      fnRef?.current?.();
     },
     [],
   );

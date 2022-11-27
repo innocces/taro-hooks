@@ -24,7 +24,7 @@ function useThrottleFn<T extends noop>(fn: T, options?: ThrottleOptions) {
       // @ts-ignore
       throttle<T>(
         ((...args: any[]) => {
-          return fnRef.current(...args);
+          return fnRef?.current?.(...args);
         }) as T,
         wait,
         options,
