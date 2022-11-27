@@ -25,8 +25,8 @@
   "repository": "https://github.com/innocces/taro-hooks",
   "homepage": "https://next-version-taro-hooks.vercel.app/site/hooks/useRequest",
   "scripts": {
-    "build": "gulp",
-    "dev": "gulp -w"
+    "build": "gulp --isolatedModules true",
+    "dev": "gulp --w true"
   },
   "files": [
     "dist",
@@ -36,10 +36,10 @@
     "README.md"
   ],
   "dependencies": {
-    "@taro-hooks/ahooks": "^2.0.0-beta-serro.5+628c69db",
-    "@taro-hooks/shared": "^2.0.0-beta-serro.5+628c69db",
+    "@taro-hooks/ahooks": "workspace:*",
+    "@taro-hooks/shared": "workspace:*",
     "lodash-wechat": "^1.0.0",
-    "taro-hooks": "^2.0.0-beta-serro.5+628c69db"
+    "taro-hooks": "workspace:*"
   },
   "peerDependencies": {
     "@tarojs/taro": ">3.4.0"
