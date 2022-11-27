@@ -9,11 +9,19 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - run: npm i -g yarn
-      - run: npm i -g lerna
-      - run: yarn install --no-immutable
-      - run: yarn docs:build:gh
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install Deps
+        run: pnpm install
+      - name: Build Docs
+        run: pnpm -F @taro-hooks/website run build:gh
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
