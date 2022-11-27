@@ -1,9 +1,17 @@
-import { createUseInfoHook } from '../createUseInfoHook';
+import type { BatteryManager } from '../type';
+import { createUseInfoHook, NonResult } from '../createUseInfoHook';
+import type { CallbackResult } from '../type';
+
+export type Result = Taro.getBatteryInfoSync.Result;
+
+interface INavigator extends Navigator {
+  getBattery: () => Promise<BatteryManager>;
+}
 
 let batteryManager: Partial<BatteryManager> = {};
 
 // a bug will fixed: in taro, getBattery is missing????
-navigator.getBattery?.()?.then?.((battery) => {
+(navigator as INavigator).getBattery?.()?.then?.((battery) => {
   batteryManager = battery;
 });
 
@@ -22,9 +30,7 @@ const getBatteryInfoSync = () => {
   return result;
 };
 
-const useBattery = createUseInfoHook<Taro.getBatteryInfoSync.Result, {}>(
-  getBatteryInfoSync,
-  {},
-);
+const useBattery: CallbackResult<NonResult<Result, {} | undefined>> =
+  createUseInfoHook<Result, {}>(getBatteryInfoSync, {});
 
 export default useBattery;

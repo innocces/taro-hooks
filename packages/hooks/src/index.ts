@@ -45,6 +45,7 @@ import useInvoice from './useInvoice';
 import useWeRun from './useWeRun';
 import useMenuButtonBoundingClientRect from './useMenuButtonBoundingClientRect';
 import useTopBarText from './useTopBarText';
+import useEnterOptions from './useEnterOptions';
 
 // network
 import useNetworkType from './useNetworkType';
@@ -124,6 +125,7 @@ export {
   useWeRun,
   useMenuButtonBoundingClientRect,
   useTopBarText,
+  useEnterOptions,
   useBackground,
   useManualPullDownRefresh,
   useTabBar,

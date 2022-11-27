@@ -1,9 +1,10 @@
 import { getBatteryInfoSync } from '@tarojs/taro';
-import { createUseInfoHook } from '../createUseInfoHook';
+import { createUseInfoHook, NonResult } from '../createUseInfoHook';
+import type { CallbackResult } from '../type';
 
-const useBattery = createUseInfoHook<Taro.getBatteryInfoSync.Result, {}>(
-  getBatteryInfoSync,
-  {},
-);
+export type Result = Taro.getBatteryInfoSync.Result;
+
+const useBattery: CallbackResult<NonResult<Result, {} | undefined>> =
+  createUseInfoHook<Result, {}>(getBatteryInfoSync, {});
 
 export default useBattery;
