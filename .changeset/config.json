@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
+  "changelog": [
+    "@changelog/changelog-github",
+    { "repo": "innocces/taro-hooks" }
+  ],
+  "commit": false,
+  "fixed": [],
+  "linked": [],
+  "baseBranch": "next",
+  "access": "public",
+  "updateInternalDependencies": "minor",
+  "ignore": [
+    "@taro-hooks/taro-hooks-plugin",
+    "@taro-hooks/taro-hooks-plugin-vue"
+  ]
+}
