@@ -24,7 +24,7 @@ function useDebounceFn<T extends noop>(fn: T, options?: DebounceOptions) {
       // @ts-ignore
       debounce<T>(
         ((...args: any[]) => {
-          return fnRef.current(...args);
+          return fnRef?.current?.(...args);
         }) as T,
         wait,
         options,
