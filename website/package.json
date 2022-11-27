@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^1.0.0",
-    "@docusaurus/core": "2.0.1",
-    "@docusaurus/preset-classic": "2.0.1",
+    "@docusaurus/core": "2.1.0",
+    "@docusaurus/preset-classic": "2.1.0",
     "@easyops-cn/docusaurus-search-local": "^0.27.1",
     "@mdx-js/react": "^1.6.22",
     "@swc/core": "^1.2.174",
@@ -34,8 +34,8 @@
     "typed.js": "^2.0.12"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.1",
-    "@docusaurus/plugin-pwa": "2.0.1",
+    "@docusaurus/module-type-aliases": "2.1.0",
+    "@docusaurus/plugin-pwa": "2.1.0",
     "@taro-hooks/plugin-docusaurus": "^2.0.0-beta-serro.5",
     "@tsconfig/docusaurus": "^1.0.5",
     "docusaurus-plugin-typedoc": "^0.17.5",
