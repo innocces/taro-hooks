@@ -37,9 +37,9 @@
   "repository": "https://github.com/innocces/taro-hooks",
   "homepage": "https://innocces.github.io/taro-hooks/",
   "scripts": {
-    "build": "gulp",
-    "dev": "gulp -w",
-    "dev:ts": "gulp -w -skip",
+    "build": "gulp --isolatedModules true",
+    "dev": "gulp --w true --isolatedModules true",
+    "dev:ts": "gulp --w true --skip true --isolatedModules true",
     "postinstall": "node -e \"try{require('./postinstall')}catch(e){}\""
   },
   "files": [
@@ -50,21 +50,24 @@
     "postinstall.js"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.7.7",
-    "@taro-hooks/compressorjs": "^2.0.0-beta-serro.5+628c69db",
-    "@taro-hooks/use-request": "^2.0.0-beta-serro.5+628c69db",
+    "@taro-hooks/compressorjs": "workspace:*",
+    "@taro-hooks/shared": "workspace:*",
+    "@taro-hooks/use-request": "workspace:*",
     "lodash-wechat": "^1.0.0",
     "querystring": "^0.2.1"
   },
   "devDependencies": {
-    "@tarojs/taro": "3.4.14"
+    "@tarojs/taro": "3.5.7",
+    "@types/node": "^18.11.9"
   },
   "peerDependencies": {
     "@tarojs/taro": ">= 3.4.x"
   },
   "optionalDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "vue": ">3.0"
+    "vue": ">3.0",
+    "@taro-hooks/plugin-react": ">=2.0",
+    "@taro-hooks/plugin-vue": ">=2.0"
   },
   "engines": {
     "node": ">=12.0.0"

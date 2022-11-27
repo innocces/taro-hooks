@@ -1,11 +1,11 @@
 /*!
- * Compressor.js v2.0.0-beta-serro.150
+ * Compressor.js v2.0.0-beta-serro.5
  * https://fengyuanchen.github.io/compressorjs
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2022-09-03T03:09:29.296Z
+ * Date: 2022-11-27T13:06:39.840Z
  */
 
 (function (global, factory) {
@@ -19,99 +19,18 @@
 })(this, function () {
   'use strict';
 
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      enumerableOnly &&
-        (symbols = symbols.filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        })),
-        keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = null != arguments[i] ? arguments[i] : {};
-      i % 2
-        ? ownKeys(Object(source), !0).forEach(function (key) {
-            _defineProperty(target, key, source[key]);
-          })
-        : Object.getOwnPropertyDescriptors
-        ? Object.defineProperties(
-            target,
-            Object.getOwnPropertyDescriptors(source),
-          )
-        : ownKeys(Object(source)).forEach(function (key) {
-            Object.defineProperty(
-              target,
-              key,
-              Object.getOwnPropertyDescriptor(source, key),
-            );
-          });
-    }
-
-    return target;
-  }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function');
-    }
-  }
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ('value' in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    Object.defineProperty(Constructor, 'prototype', {
-      writable: false,
-    });
-    return Constructor;
-  }
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true,
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
   function _extends() {
     _extends = Object.assign
       ? Object.assign.bind()
       : function (target) {
           for (var i = 1; i < arguments.length; i++) {
             var source = arguments[i];
-
             for (var key in source) {
               if (Object.prototype.hasOwnProperty.call(source, key)) {
                 target[key] = source[key];
               }
             }
           }
-
           return target;
         };
     return _extends.apply(this, arguments);
@@ -132,7 +51,6 @@
    * Based on stackoverflow user Stoive's code snippet:
    * http://stackoverflow.com/q/4998908
    */
-
   (function (module) {
     if (typeof window === 'undefined') {
       return;
@@ -140,12 +58,10 @@
     if (typeof window === 'undefined') {
       return;
     }
-
     (function (window) {
       var CanvasPrototype =
         window.HTMLCanvasElement && window.HTMLCanvasElement.prototype;
       var hasCanvasPrototype = !!CanvasPrototype;
-
       var hasBlobConstructor =
         window.Blob &&
         (function () {
@@ -155,7 +71,6 @@
             return false;
           }
         })();
-
       var hasArrayBufferViewSupport =
         hasBlobConstructor &&
         window.Uint8Array &&
@@ -166,14 +81,12 @@
             return false;
           }
         })();
-
       var BlobBuilder =
         window.BlobBuilder ||
         window.WebKitBlobBuilder ||
         window.MozBlobBuilder ||
         window.MSBlobBuilder;
       var dataURIPattern = /^data:((.*?)(;charset=.*?)?)(;base64)?,/;
-
       var dataURLtoBlob =
         (hasBlobConstructor || BlobBuilder) &&
         window.atob &&
@@ -188,35 +101,32 @@
             arrayBuffer,
             intArray,
             i,
-            bb; // Parse the dataURI components as per RFC 2397
-
+            bb;
+          // Parse the dataURI components as per RFC 2397
           matches = dataURI.match(dataURIPattern);
-
           if (!matches) {
             throw new Error('invalid data URI');
-          } // Default to text/plain;charset=US-ASCII
-
+          }
+          // Default to text/plain;charset=US-ASCII
           mediaType = matches[2]
             ? matches[1]
             : 'text/plain' + (matches[3] || ';charset=US-ASCII');
           isBase64 = !!matches[4];
           dataString = dataURI.slice(matches[0].length);
-
           if (isBase64) {
             // Convert base64 to raw binary data held in a string:
             byteString = atob(dataString);
           } else {
             // Convert base64/URLEncoded data component to raw binary:
             byteString = decodeURIComponent(dataString);
-          } // Write the bytes of the string to an ArrayBuffer:
-
+          }
+          // Write the bytes of the string to an ArrayBuffer:
           arrayBuffer = new ArrayBuffer(byteString.length);
           intArray = new Uint8Array(arrayBuffer);
-
           for (i = 0; i < byteString.length; i += 1) {
             intArray[i] = byteString.charCodeAt(i);
-          } // Write the ArrayBuffer (or ArrayBufferView) to a blob:
-
+          }
+          // Write the ArrayBuffer (or ArrayBufferView) to a blob:
           if (hasBlobConstructor) {
             return new Blob(
               [hasArrayBufferViewSupport ? intArray : arrayBuffer],
@@ -225,12 +135,10 @@
               },
             );
           }
-
           bb = new BlobBuilder();
           bb.append(arrayBuffer);
           return bb.getBlob(mediaType);
         };
-
       if (hasCanvasPrototype) {
         if (window.HTMLCanvasElement && !CanvasPrototype.toBlob) {
           if (CanvasPrototype.mozGetAsFile) {
@@ -271,7 +179,6 @@
           }
         }
       }
-
       if (module.exports) {
         module.exports = dataURLtoBlob;
       } else {
@@ -279,14 +186,12 @@
       }
     })(globalThis || window); // shims globalThis to miniprogram
   })(canvasToBlob);
-
   var toBlob = canvasToBlob.exports;
 
-  var isBlob = function isBlob(value) {
+  var isBlob = (value) => {
     if (typeof Blob === 'undefined') {
       return false;
     }
-
     return (
       value instanceof Blob ||
       Object.prototype.toString.call(value) === '[object Blob]'
@@ -300,59 +205,50 @@
      * @type {boolean}
      */
     strict: true,
-
     /**
      * Indicates if read the image's Exif Orientation information,
      * and then rotate or flip the image automatically.
      * @type {boolean}
      */
     checkOrientation: true,
-
     /**
      * The max width of the output image.
      * @type {number}
      */
     maxWidth: Infinity,
-
     /**
      * The max height of the output image.
      * @type {number}
      */
     maxHeight: Infinity,
-
     /**
      * The min width of the output image.
      * @type {number}
      */
     minWidth: 0,
-
     /**
      * The min height of the output image.
      * @type {number}
      */
     minHeight: 0,
-
     /**
      * The width of the output image.
      * If not specified, the natural width of the source image will be used.
      * @type {number}
      */
     width: undefined,
-
     /**
      * The height of the output image.
      * If not specified, the natural height of the source image will be used.
      * @type {number}
      */
     height: undefined,
-
     /**
      * Sets how the size of the image should be resized to the container
      * specified by the `width` and `height` options.
      * @type {string}
      */
     resize: 'none',
-
     /**
      * The quality of the output image.
      * It must be a number between `0` and `1`,
@@ -361,28 +257,24 @@
      * @type {number}
      */
     quality: 0.8,
-
     /**
      * The mime type of the output image.
      * By default, the original mime type of the source image file will be used.
      * @type {string}
      */
     mimeType: 'auto',
-
     /**
      * Files whose file type is included in this list,
      * and whose file size exceeds the `convertSize` value will be converted to JPEGs.
      * @type {string｜Array}
      */
     convertTypes: ['image/png'],
-
     /**
      * PNG files over this size (5 MB by default) will be converted to JPEGs.
      * To disable this, just set the value to `Infinity`.
      * @type {number}
      */
     convertSize: 5000000,
-
     /**
      * The hook function to execute before draw the image into the canvas for compression.
      * @type {Function}
@@ -394,7 +286,6 @@
      * }
      */
     beforeDraw: null,
-
     /**
      * The hook function to execute after drew the image into the canvas for compression.
      * @type {Function}
@@ -406,7 +297,6 @@
      * }
      */
     drew: null,
-
     /**
      * The hook function to execute when success to compress the image.
      * @type {Function}
@@ -417,7 +307,6 @@
      * }
      */
     success: null,
-
     /**
      * The hook function to execute when fail to compress the image.
      * @type {Function}
@@ -430,55 +319,51 @@
     error: null,
   };
 
-  var IS_BROWSER =
+  const IS_BROWSER =
     typeof window !== 'undefined' && typeof window.document !== 'undefined';
-  var WINDOW = IS_BROWSER ? window : {};
+  const WINDOW = IS_BROWSER ? window : {};
 
   /**
    * Check if the given value is a positive number.
    * @param {*} value - The value to check.
    * @returns {boolean} Returns `true` if the given value is a positive number, else `false`.
    */
+  const isPositiveNumber = (value) => value > 0 && value < Infinity;
+  const { slice } = Array.prototype;
 
-  var isPositiveNumber = function isPositiveNumber(value) {
-    return value > 0 && value < Infinity;
-  };
-  var slice = Array.prototype.slice;
   /**
    * Convert array-like or iterable object to an array.
    * @param {*} value - The value to convert.
    * @returns {Array} Returns a new array.
    */
-
   function toArray(value) {
     return Array.from ? Array.from(value) : slice.call(value);
   }
-  var REGEXP_IMAGE_TYPE = /^image\/.+$/;
+  const REGEXP_IMAGE_TYPE = /^image\/.+$/;
+
   /**
    * Check if the given value is a mime type of image.
    * @param {*} value - The value to check.
    * @returns {boolean} Returns `true` if the given is a mime type of image, else `false`.
    */
-
   function isImageType(value) {
     return REGEXP_IMAGE_TYPE.test(value);
   }
+
   /**
    * Convert image type to extension.
    * @param {string} value - The image type to convert.
    * @returns {boolean} Returns the image extension.
    */
-
   function imageTypeToExtension(value) {
-    var extension = isImageType(value) ? value.substr(6) : '';
-
+    let extension = isImageType(value) ? value.substr(6) : '';
     if (extension === 'jpeg') {
       extension = 'jpg';
     }
-
-    return '.'.concat(extension);
+    return `.${extension}`;
   }
-  var fromCharCode = String.fromCharCode;
+  const { fromCharCode } = String;
+
   /**
    * Get string from char code in data view.
    * @param {DataView} dataView - The data view for read.
@@ -486,31 +371,27 @@
    * @param {number} length - The read length.
    * @returns {string} The read result.
    */
-
   function getStringFromCharCode(dataView, start, length) {
-    var str = '';
-    var i;
+    let str = '';
+    let i;
     length += start;
-
     for (i = start; i < length; i += 1) {
       str += fromCharCode(dataView.getUint8(i));
     }
-
     return str;
   }
-  var btoa = WINDOW.btoa;
+  const { btoa } = WINDOW;
+
   /**
    * Transform array buffer to Data URL.
    * @param {ArrayBuffer} arrayBuffer - The array buffer to transform.
    * @param {string} mimeType - The mime type of the Data URL.
    * @returns {string} The result Data URL.
    */
-
   function arrayBufferToDataURL(arrayBuffer, mimeType) {
-    var chunks = [];
-    var chunkSize = 8192;
-    var uint8 = new Uint8Array(arrayBuffer);
-
+    const chunks = [];
+    const chunkSize = 8192;
+    let uint8 = new Uint8Array(arrayBuffer);
     while (uint8.length > 0) {
       // XXX: Babel's `toConsumableArray` helper will throw error in IE or Safari 9
       // eslint-disable-next-line prefer-spread
@@ -519,28 +400,28 @@
       );
       uint8 = uint8.subarray(chunkSize);
     }
-
-    return 'data:'.concat(mimeType, ';base64,').concat(btoa(chunks.join('')));
+    return `data:${mimeType};base64,${btoa(chunks.join(''))}`;
   }
+
   /**
    * Get orientation value from given array buffer.
    * @param {ArrayBuffer} arrayBuffer - The array buffer to read.
    * @returns {number} The read orientation value.
    */
-
   function resetAndGetOrientation(arrayBuffer) {
-    var dataView = new DataView(arrayBuffer);
-    var orientation; // Ignores range error when the image does not have correct Exif information
+    const dataView = new DataView(arrayBuffer);
+    let orientation;
 
+    // Ignores range error when the image does not have correct Exif information
     try {
-      var littleEndian;
-      var app1Start;
-      var ifdStart; // Only handle JPEG image (start by 0xFFD8)
+      let littleEndian;
+      let app1Start;
+      let ifdStart;
 
+      // Only handle JPEG image (start by 0xFFD8)
       if (dataView.getUint8(0) === 0xff && dataView.getUint8(1) === 0xd8) {
-        var length = dataView.byteLength;
-        var offset = 2;
-
+        const length = dataView.byteLength;
+        let offset = 2;
         while (offset + 1 < length) {
           if (
             dataView.getUint8(offset) === 0xff &&
@@ -549,30 +430,21 @@
             app1Start = offset;
             break;
           }
-
           offset += 1;
         }
       }
-
       if (app1Start) {
-        var exifIDCode = app1Start + 4;
-        var tiffOffset = app1Start + 10;
-
+        const exifIDCode = app1Start + 4;
+        const tiffOffset = app1Start + 10;
         if (getStringFromCharCode(dataView, exifIDCode, 4) === 'Exif') {
-          var endianness = dataView.getUint16(tiffOffset);
+          const endianness = dataView.getUint16(tiffOffset);
           littleEndian = endianness === 0x4949;
-
-          if (
-            littleEndian ||
-            endianness === 0x4d4d
-            /* bigEndian */
-          ) {
+          if (littleEndian || endianness === 0x4d4d /* bigEndian */) {
             if (dataView.getUint16(tiffOffset + 2, littleEndian) === 0x002a) {
-              var firstIFDOffset = dataView.getUint32(
+              const firstIFDOffset = dataView.getUint32(
                 tiffOffset + 4,
                 littleEndian,
               );
-
               if (firstIFDOffset >= 0x00000008) {
                 ifdStart = tiffOffset + firstIFDOffset;
               }
@@ -580,27 +452,24 @@
           }
         }
       }
-
       if (ifdStart) {
-        var _length = dataView.getUint16(ifdStart, littleEndian);
-
-        var _offset;
-
-        var i;
-
-        for (i = 0; i < _length; i += 1) {
-          _offset = ifdStart + i * 12 + 2;
-
+        const length = dataView.getUint16(ifdStart, littleEndian);
+        let offset;
+        let i;
+        for (i = 0; i < length; i += 1) {
+          offset = ifdStart + i * 12 + 2;
           if (
-            dataView.getUint16(_offset, littleEndian) === 0x0112
-            /* Orientation */
+            dataView.getUint16(offset, littleEndian) ===
+            0x0112 /* Orientation */
           ) {
             // 8 is the offset of the current tag's value
-            _offset += 8; // Get the original orientation value
+            offset += 8;
 
-            orientation = dataView.getUint16(_offset, littleEndian); // Override the orientation with its default value
+            // Get the original orientation value
+            orientation = dataView.getUint16(offset, littleEndian);
 
-            dataView.setUint16(_offset, 1, littleEndian);
+            // Override the orientation with its default value
+            dataView.setUint16(offset, 1, littleEndian);
             break;
           }
         }
@@ -608,66 +477,64 @@
     } catch (e) {
       orientation = 1;
     }
-
     return orientation;
   }
+
   /**
    * Parse Exif Orientation value.
    * @param {number} orientation - The orientation to parse.
    * @returns {Object} The parsed result.
    */
-
   function parseOrientation(orientation) {
-    var rotate = 0;
-    var scaleX = 1;
-    var scaleY = 1;
-
+    let rotate = 0;
+    let scaleX = 1;
+    let scaleY = 1;
     switch (orientation) {
       // Flip horizontal
       case 2:
         scaleX = -1;
         break;
-      // Rotate left 180°
 
+      // Rotate left 180°
       case 3:
         rotate = -180;
         break;
-      // Flip vertical
 
+      // Flip vertical
       case 4:
         scaleY = -1;
         break;
-      // Flip vertical and rotate right 90°
 
+      // Flip vertical and rotate right 90°
       case 5:
         rotate = 90;
         scaleY = -1;
         break;
-      // Rotate right 90°
 
+      // Rotate right 90°
       case 6:
         rotate = 90;
         break;
-      // Flip horizontal and rotate right 90°
 
+      // Flip horizontal and rotate right 90°
       case 7:
         rotate = 90;
         scaleX = -1;
         break;
-      // Rotate left 90°
 
+      // Rotate left 90°
       case 8:
         rotate = -90;
         break;
     }
-
     return {
-      rotate: rotate,
-      scaleX: scaleX,
-      scaleY: scaleY,
+      rotate,
+      scaleX,
+      scaleY,
     };
   }
-  var REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
+  const REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
+
   /**
    * Normalize decimal number.
    * Check out {@link https://0.30000000000000004.com/}
@@ -675,9 +542,8 @@
    * @param {number} [times=100000000000] - The times for normalizing.
    * @returns {number} Returns the normalized number.
    */
-
   function normalizeDecimalNumber(value) {
-    var times =
+    let times =
       arguments.length > 1 && arguments[1] !== undefined
         ? arguments[1]
         : 100000000000;
@@ -685,27 +551,23 @@
       ? Math.round(value * times) / times
       : value;
   }
+
   /**
    * Get the max sizes in a rectangle under the given aspect ratio.
    * @param {Object} data - The original sizes.
    * @param {string} [type='contain'] - The adjust type.
    * @returns {Object} The result sizes.
    */
-
   function getAdjustedSizes(_ref) {
-    var aspectRatio = _ref.aspectRatio,
-      height = _ref.height,
-      width = _ref.width;
-    var type =
+    let { aspectRatio, height, width } = _ref;
+    let type =
       arguments.length > 1 && arguments[1] !== undefined
         ? arguments[1]
         : 'none';
-    var isValidWidth = isPositiveNumber(width);
-    var isValidHeight = isPositiveNumber(height);
-
+    const isValidWidth = isPositiveNumber(width);
+    const isValidHeight = isPositiveNumber(height);
     if (isValidWidth && isValidHeight) {
-      var adjustedWidth = height * aspectRatio;
-
+      const adjustedWidth = height * aspectRatio;
       if (
         ((type === 'contain' || type === 'none') && adjustedWidth > width) ||
         (type === 'cover' && adjustedWidth < width)
@@ -719,515 +581,374 @@
     } else if (isValidHeight) {
       width = height * aspectRatio;
     }
-
     return {
-      width: width,
-      height: height,
+      width,
+      height,
     };
   }
 
-  var ArrayBuffer$1 = WINDOW.ArrayBuffer,
-    FileReader = WINDOW.FileReader;
-  var URL = WINDOW.URL || WINDOW.webkitURL;
-  var REGEXP_EXTENSION = /\.\w+$/;
-  var AnotherCompressor = WINDOW.Compressor;
+  const { ArrayBuffer: ArrayBuffer$1, FileReader } = WINDOW;
+  const URL = WINDOW.URL || WINDOW.webkitURL;
+  const REGEXP_EXTENSION = /\.\w+$/;
+  const AnotherCompressor = WINDOW.Compressor;
+
   /**
    * Creates a new image compressor.
    * @class
    */
-
-  var Compressor = /*#__PURE__*/ (function () {
+  class Compressor {
     /**
      * The constructor of Compressor.
      * @param {File|Blob} file - The target image file for compressing.
      * @param {Object} [options] - The options for compressing.
      */
-    function Compressor(file, options) {
-      _classCallCheck(this, Compressor);
-
+    constructor(file, options) {
       this.file = file;
       this.image = new Image();
-      this.options = _objectSpread2(_objectSpread2({}, DEFAULTS), options);
+      this.options = {
+        ...DEFAULTS,
+        ...options,
+      };
       this.aborted = false;
       this.result = null;
       this.init();
     }
-
-    _createClass(
-      Compressor,
-      [
-        {
-          key: 'init',
-          value: function init() {
-            var _this = this;
-
-            var file = this.file,
-              options = this.options;
-
-            if (!isBlob(file)) {
-              this.fail(
-                new Error('The first argument must be a File or Blob object.'),
-              );
-              return;
-            }
-
-            var mimeType = file.type;
-
-            if (!isImageType(mimeType)) {
-              this.fail(
-                new Error(
-                  'The first argument must be an image File or Blob object.',
-                ),
-              );
-              return;
-            }
-
-            if (!URL || !FileReader) {
-              this.fail(
-                new Error(
-                  'The current browser does not support image compression.',
-                ),
-              );
-              return;
-            }
-
-            if (!ArrayBuffer$1) {
-              options.checkOrientation = false;
-            }
-
-            if (URL && !options.checkOrientation) {
-              this.load({
-                url: URL.createObjectURL(file),
-              });
-            } else {
-              var reader = new FileReader();
-              var checkOrientation =
-                options.checkOrientation && mimeType === 'image/jpeg';
-              this.reader = reader;
-
-              reader.onload = function (_ref) {
-                var target = _ref.target;
-                var result = target.result;
-                var data = {};
-
-                if (checkOrientation) {
-                  // Reset the orientation value to its default value 1
-                  // as some iOS browsers will render image with its orientation
-                  var orientation = resetAndGetOrientation(result);
-
-                  if (orientation > 1 || !URL) {
-                    // Generate a new URL which has the default orientation value
-                    data.url = arrayBufferToDataURL(result, mimeType);
-
-                    if (orientation > 1) {
-                      _extends(data, parseOrientation(orientation));
-                    }
-                  } else {
-                    data.url = URL.createObjectURL(file);
-                  }
-                } else {
-                  data.url = result;
-                }
-
-                _this.load(data);
-              };
-
-              reader.onabort = function () {
-                _this.fail(
-                  new Error('Aborted to read the image with FileReader.'),
-                );
-              };
-
-              reader.onerror = function () {
-                _this.fail(
-                  new Error('Failed to read the image with FileReader.'),
-                );
-              };
-
-              reader.onloadend = function () {
-                _this.reader = null;
-              };
-
-              if (checkOrientation) {
-                reader.readAsArrayBuffer(file);
-              } else {
-                reader.readAsDataURL(file);
-              }
-            }
-          },
-        },
-        {
-          key: 'load',
-          value: function load(data) {
-            var _this2 = this;
-
-            var file = this.file,
-              image = this.image;
-
-            image.onload = function () {
-              _this2.draw(
-                _objectSpread2(
-                  _objectSpread2({}, data),
-                  {},
-                  {
-                    naturalWidth: image.naturalWidth,
-                    naturalHeight: image.naturalHeight,
-                  },
-                ),
-              );
-            };
-
-            image.onabort = function () {
-              _this2.fail(new Error('Aborted to load the image.'));
-            };
-
-            image.onerror = function () {
-              _this2.fail(new Error('Failed to load the image.'));
-            }; // Match all browsers that use WebKit as the layout engine in iOS devices,
-            // such as Safari for iOS, Chrome for iOS, and in-app browsers.
-
-            if (
-              WINDOW.navigator &&
-              /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(
-                WINDOW.navigator.userAgent,
-              )
-            ) {
-              // Fix the `The operation is insecure` error (#57)
-              image.crossOrigin = 'anonymous';
-            }
-
-            image.alt = file.name;
-            image.src = data.url;
-          },
-        },
-        {
-          key: 'draw',
-          value: function draw(_ref2) {
-            var _this3 = this;
-
-            var naturalWidth = _ref2.naturalWidth,
-              naturalHeight = _ref2.naturalHeight,
-              _ref2$rotate = _ref2.rotate,
-              rotate = _ref2$rotate === void 0 ? 0 : _ref2$rotate,
-              _ref2$scaleX = _ref2.scaleX,
-              scaleX = _ref2$scaleX === void 0 ? 1 : _ref2$scaleX,
-              _ref2$scaleY = _ref2.scaleY,
-              scaleY = _ref2$scaleY === void 0 ? 1 : _ref2$scaleY;
-            var file = this.file,
-              image = this.image,
-              options = this.options;
-            var canvas = document.createElement('canvas');
-            var context = canvas.getContext('2d');
-            var is90DegreesRotated = Math.abs(rotate) % 180 === 90;
-            var resizable =
-              (options.resize === 'contain' || options.resize === 'cover') &&
-              isPositiveNumber(options.width) &&
-              isPositiveNumber(options.height);
-            var maxWidth = Math.max(options.maxWidth, 0) || Infinity;
-            var maxHeight = Math.max(options.maxHeight, 0) || Infinity;
-            var minWidth = Math.max(options.minWidth, 0) || 0;
-            var minHeight = Math.max(options.minHeight, 0) || 0;
-            var aspectRatio = naturalWidth / naturalHeight;
-            var width = options.width,
-              height = options.height;
-
-            if (is90DegreesRotated) {
-              var _ref3 = [maxHeight, maxWidth];
-              maxWidth = _ref3[0];
-              maxHeight = _ref3[1];
-              var _ref4 = [minHeight, minWidth];
-              minWidth = _ref4[0];
-              minHeight = _ref4[1];
-              var _ref5 = [height, width];
-              width = _ref5[0];
-              height = _ref5[1];
-            }
-
-            if (resizable) {
-              aspectRatio = width / height;
-            }
-
-            var _getAdjustedSizes = getAdjustedSizes(
-              {
-                aspectRatio: aspectRatio,
-                width: maxWidth,
-                height: maxHeight,
-              },
-              'contain',
-            );
-
-            maxWidth = _getAdjustedSizes.width;
-            maxHeight = _getAdjustedSizes.height;
-
-            var _getAdjustedSizes2 = getAdjustedSizes(
-              {
-                aspectRatio: aspectRatio,
-                width: minWidth,
-                height: minHeight,
-              },
-              'cover',
-            );
-
-            minWidth = _getAdjustedSizes2.width;
-            minHeight = _getAdjustedSizes2.height;
-
-            if (resizable) {
-              var _getAdjustedSizes3 = getAdjustedSizes(
-                {
-                  aspectRatio: aspectRatio,
-                  width: width,
-                  height: height,
-                },
-                options.resize,
-              );
-
-              width = _getAdjustedSizes3.width;
-              height = _getAdjustedSizes3.height;
-            } else {
-              var _getAdjustedSizes4 = getAdjustedSizes({
-                aspectRatio: aspectRatio,
-                width: width,
-                height: height,
-              });
-
-              var _getAdjustedSizes4$wi = _getAdjustedSizes4.width;
-              width =
-                _getAdjustedSizes4$wi === void 0
-                  ? naturalWidth
-                  : _getAdjustedSizes4$wi;
-              var _getAdjustedSizes4$he = _getAdjustedSizes4.height;
-              height =
-                _getAdjustedSizes4$he === void 0
-                  ? naturalHeight
-                  : _getAdjustedSizes4$he;
-            }
-
-            width = Math.floor(
-              normalizeDecimalNumber(
-                Math.min(Math.max(width, minWidth), maxWidth),
-              ),
-            );
-            height = Math.floor(
-              normalizeDecimalNumber(
-                Math.min(Math.max(height, minHeight), maxHeight),
-              ),
-            );
-            var destX = -width / 2;
-            var destY = -height / 2;
-            var destWidth = width;
-            var destHeight = height;
-            var params = [];
-
-            if (resizable) {
-              var srcX = 0;
-              var srcY = 0;
-              var srcWidth = naturalWidth;
-              var srcHeight = naturalHeight;
-
-              var _getAdjustedSizes5 = getAdjustedSizes(
-                {
-                  aspectRatio: aspectRatio,
-                  width: naturalWidth,
-                  height: naturalHeight,
-                },
-                {
-                  contain: 'cover',
-                  cover: 'contain',
-                }[options.resize],
-              );
-
-              srcWidth = _getAdjustedSizes5.width;
-              srcHeight = _getAdjustedSizes5.height;
-              srcX = (naturalWidth - srcWidth) / 2;
-              srcY = (naturalHeight - srcHeight) / 2;
-              params.push(srcX, srcY, srcWidth, srcHeight);
-            }
-
-            params.push(destX, destY, destWidth, destHeight);
-
-            if (is90DegreesRotated) {
-              var _ref6 = [height, width];
-              width = _ref6[0];
-              height = _ref6[1];
-            }
-
-            canvas.width = width;
-            canvas.height = height;
-
-            if (!isImageType(options.mimeType)) {
-              options.mimeType = file.type;
-            }
-
-            var fillStyle = 'transparent'; // Converts PNG files over the `convertSize` to JPEGs.
-
-            if (
-              file.size > options.convertSize &&
-              options.convertTypes.indexOf(options.mimeType) >= 0
-            ) {
-              options.mimeType = 'image/jpeg';
-            }
-
-            if (options.mimeType === 'image/jpeg') {
-              fillStyle = '#fff';
-            } // Override the default fill color (#000, black)
-
-            context.fillStyle = fillStyle;
-            context.fillRect(0, 0, width, height);
-
-            if (options.beforeDraw) {
-              options.beforeDraw.call(this, context, canvas);
-            }
-
-            if (this.aborted) {
-              return;
-            }
-
-            context.save();
-            context.translate(width / 2, height / 2);
-            context.rotate((rotate * Math.PI) / 180);
-            context.scale(scaleX, scaleY);
-            context.drawImage.apply(context, [image].concat(params));
-            context.restore();
-
-            if (options.drew) {
-              options.drew.call(this, context, canvas);
-            }
-
-            if (this.aborted) {
-              return;
-            }
-
-            var done = function done(result) {
-              if (!_this3.aborted) {
-                _this3.done({
-                  naturalWidth: naturalWidth,
-                  naturalHeight: naturalHeight,
-                  result: result,
-                });
-              }
-            };
-
-            if (canvas.toBlob) {
-              canvas.toBlob(done, options.mimeType, options.quality);
-            } else {
-              done(toBlob(canvas.toDataURL(options.mimeType, options.quality)));
-            }
-          },
-        },
-        {
-          key: 'done',
-          value: function done(_ref7) {
-            var naturalWidth = _ref7.naturalWidth,
-              naturalHeight = _ref7.naturalHeight,
-              result = _ref7.result;
-            var file = this.file,
-              image = this.image,
-              options = this.options;
-
-            if (URL && !options.checkOrientation) {
-              URL.revokeObjectURL(image.src);
-            }
-
-            if (result) {
-              // Returns original file if the result is greater than it and without size related options
-              if (
-                options.strict &&
-                result.size > file.size &&
-                options.mimeType === file.type &&
-                !(
-                  options.width > naturalWidth ||
-                  options.height > naturalHeight ||
-                  options.minWidth > naturalWidth ||
-                  options.minHeight > naturalHeight ||
-                  options.maxWidth < naturalWidth ||
-                  options.maxHeight < naturalHeight
-                )
-              ) {
-                result = file;
-              } else {
-                var date = new Date();
-                result.lastModified = date.getTime();
-                result.lastModifiedDate = date;
-                result.name = file.name; // Convert the extension to match its type
-
-                if (result.name && result.type !== file.type) {
-                  result.name = result.name.replace(
-                    REGEXP_EXTENSION,
-                    imageTypeToExtension(result.type),
-                  );
-                }
+    init() {
+      const { file, options } = this;
+      if (!isBlob(file)) {
+        this.fail(
+          new Error('The first argument must be a File or Blob object.'),
+        );
+        return;
+      }
+      const mimeType = file.type;
+      if (!isImageType(mimeType)) {
+        this.fail(
+          new Error('The first argument must be an image File or Blob object.'),
+        );
+        return;
+      }
+      if (!URL || !FileReader) {
+        this.fail(
+          new Error('The current browser does not support image compression.'),
+        );
+        return;
+      }
+      if (!ArrayBuffer$1) {
+        options.checkOrientation = false;
+      }
+      if (URL && !options.checkOrientation) {
+        this.load({
+          url: URL.createObjectURL(file),
+        });
+      } else {
+        const reader = new FileReader();
+        const checkOrientation =
+          options.checkOrientation && mimeType === 'image/jpeg';
+        this.reader = reader;
+        reader.onload = (_ref) => {
+          let { target } = _ref;
+          const { result } = target;
+          const data = {};
+          if (checkOrientation) {
+            // Reset the orientation value to its default value 1
+            // as some iOS browsers will render image with its orientation
+            const orientation = resetAndGetOrientation(result);
+            if (orientation > 1 || !URL) {
+              // Generate a new URL which has the default orientation value
+              data.url = arrayBufferToDataURL(result, mimeType);
+              if (orientation > 1) {
+                _extends(data, parseOrientation(orientation));
               }
             } else {
-              // Returns original file if the result is null in some cases.
-              result = file;
+              data.url = URL.createObjectURL(file);
             }
+          } else {
+            data.url = result;
+          }
+          this.load(data);
+        };
+        reader.onabort = () => {
+          this.fail(new Error('Aborted to read the image with FileReader.'));
+        };
+        reader.onerror = () => {
+          this.fail(new Error('Failed to read the image with FileReader.'));
+        };
+        reader.onloadend = () => {
+          this.reader = null;
+        };
+        if (checkOrientation) {
+          reader.readAsArrayBuffer(file);
+        } else {
+          reader.readAsDataURL(file);
+        }
+      }
+    }
+    load(data) {
+      const { file, image } = this;
+      image.onload = () => {
+        this.draw({
+          ...data,
+          naturalWidth: image.naturalWidth,
+          naturalHeight: image.naturalHeight,
+        });
+      };
+      image.onabort = () => {
+        this.fail(new Error('Aborted to load the image.'));
+      };
+      image.onerror = () => {
+        this.fail(new Error('Failed to load the image.'));
+      };
 
-            this.result = result;
-
-            if (options.success) {
-              options.success.call(this, result);
-            }
-          },
-        },
+      // Match all browsers that use WebKit as the layout engine in iOS devices,
+      // such as Safari for iOS, Chrome for iOS, and in-app browsers.
+      if (
+        WINDOW.navigator &&
+        /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent)
+      ) {
+        // Fix the `The operation is insecure` error (#57)
+        image.crossOrigin = 'anonymous';
+      }
+      image.alt = file.name;
+      image.src = data.url;
+    }
+    draw(_ref2) {
+      let {
+        naturalWidth,
+        naturalHeight,
+        rotate = 0,
+        scaleX = 1,
+        scaleY = 1,
+      } = _ref2;
+      const { file, image, options } = this;
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      const is90DegreesRotated = Math.abs(rotate) % 180 === 90;
+      const resizable =
+        (options.resize === 'contain' || options.resize === 'cover') &&
+        isPositiveNumber(options.width) &&
+        isPositiveNumber(options.height);
+      let maxWidth = Math.max(options.maxWidth, 0) || Infinity;
+      let maxHeight = Math.max(options.maxHeight, 0) || Infinity;
+      let minWidth = Math.max(options.minWidth, 0) || 0;
+      let minHeight = Math.max(options.minHeight, 0) || 0;
+      let aspectRatio = naturalWidth / naturalHeight;
+      let { width, height } = options;
+      if (is90DegreesRotated) {
+        [maxWidth, maxHeight] = [maxHeight, maxWidth];
+        [minWidth, minHeight] = [minHeight, minWidth];
+        [width, height] = [height, width];
+      }
+      if (resizable) {
+        aspectRatio = width / height;
+      }
+      ({ width: maxWidth, height: maxHeight } = getAdjustedSizes(
         {
-          key: 'fail',
-          value: function fail(err) {
-            var options = this.options;
-
-            if (options.error) {
-              options.error.call(this, err);
-            } else {
-              throw err;
-            }
-          },
+          aspectRatio,
+          width: maxWidth,
+          height: maxHeight,
         },
+        'contain',
+      ));
+      ({ width: minWidth, height: minHeight } = getAdjustedSizes(
         {
-          key: 'abort',
-          value: function abort() {
-            if (!this.aborted) {
-              this.aborted = true;
+          aspectRatio,
+          width: minWidth,
+          height: minHeight,
+        },
+        'cover',
+      ));
+      if (resizable) {
+        ({ width, height } = getAdjustedSizes(
+          {
+            aspectRatio,
+            width,
+            height,
+          },
+          options.resize,
+        ));
+      } else {
+        ({ width = naturalWidth, height = naturalHeight } = getAdjustedSizes({
+          aspectRatio,
+          width,
+          height,
+        }));
+      }
+      width = Math.floor(
+        normalizeDecimalNumber(Math.min(Math.max(width, minWidth), maxWidth)),
+      );
+      height = Math.floor(
+        normalizeDecimalNumber(
+          Math.min(Math.max(height, minHeight), maxHeight),
+        ),
+      );
+      const destX = -width / 2;
+      const destY = -height / 2;
+      const destWidth = width;
+      const destHeight = height;
+      const params = [];
+      if (resizable) {
+        let srcX = 0;
+        let srcY = 0;
+        let srcWidth = naturalWidth;
+        let srcHeight = naturalHeight;
+        ({ width: srcWidth, height: srcHeight } = getAdjustedSizes(
+          {
+            aspectRatio,
+            width: naturalWidth,
+            height: naturalHeight,
+          },
+          {
+            contain: 'cover',
+            cover: 'contain',
+          }[options.resize],
+        ));
+        srcX = (naturalWidth - srcWidth) / 2;
+        srcY = (naturalHeight - srcHeight) / 2;
+        params.push(srcX, srcY, srcWidth, srcHeight);
+      }
+      params.push(destX, destY, destWidth, destHeight);
+      if (is90DegreesRotated) {
+        [width, height] = [height, width];
+      }
+      canvas.width = width;
+      canvas.height = height;
+      if (!isImageType(options.mimeType)) {
+        options.mimeType = file.type;
+      }
+      let fillStyle = 'transparent';
 
-              if (this.reader) {
-                this.reader.abort();
-              } else if (!this.image.complete) {
-                this.image.onload = null;
-                this.image.onabort();
-              } else {
-                this.fail(
-                  new Error('The compression process has been aborted.'),
-                );
-              }
-            }
-          },
-          /**
-           * Get the no conflict compressor class.
-           * @returns {Compressor} The compressor class.
-           */
-        },
-      ],
-      [
-        {
-          key: 'noConflict',
-          value: function noConflict() {
-            window.Compressor = AnotherCompressor;
-            return Compressor;
-          },
-          /**
-           * Change the default options.
-           * @param {Object} options - The new default options.
-           */
-        },
-        {
-          key: 'setDefaults',
-          value: function setDefaults(options) {
-            _extends(DEFAULTS, options);
-          },
-        },
-      ],
-    );
+      // Converts PNG files over the `convertSize` to JPEGs.
+      if (
+        file.size > options.convertSize &&
+        options.convertTypes.indexOf(options.mimeType) >= 0
+      ) {
+        options.mimeType = 'image/jpeg';
+      }
+      if (options.mimeType === 'image/jpeg') {
+        fillStyle = '#fff';
+      }
 
-    return Compressor;
-  })();
+      // Override the default fill color (#000, black)
+      context.fillStyle = fillStyle;
+      context.fillRect(0, 0, width, height);
+      if (options.beforeDraw) {
+        options.beforeDraw.call(this, context, canvas);
+      }
+      if (this.aborted) {
+        return;
+      }
+      context.save();
+      context.translate(width / 2, height / 2);
+      context.rotate((rotate * Math.PI) / 180);
+      context.scale(scaleX, scaleY);
+      context.drawImage(image, ...params);
+      context.restore();
+      if (options.drew) {
+        options.drew.call(this, context, canvas);
+      }
+      if (this.aborted) {
+        return;
+      }
+      const done = (result) => {
+        if (!this.aborted) {
+          this.done({
+            naturalWidth,
+            naturalHeight,
+            result,
+          });
+        }
+      };
+      if (canvas.toBlob) {
+        canvas.toBlob(done, options.mimeType, options.quality);
+      } else {
+        done(toBlob(canvas.toDataURL(options.mimeType, options.quality)));
+      }
+    }
+    done(_ref3) {
+      let { naturalWidth, naturalHeight, result } = _ref3;
+      const { file, image, options } = this;
+      if (URL && !options.checkOrientation) {
+        URL.revokeObjectURL(image.src);
+      }
+      if (result) {
+        // Returns original file if the result is greater than it and without size related options
+        if (
+          options.strict &&
+          result.size > file.size &&
+          options.mimeType === file.type &&
+          !(
+            options.width > naturalWidth ||
+            options.height > naturalHeight ||
+            options.minWidth > naturalWidth ||
+            options.minHeight > naturalHeight ||
+            options.maxWidth < naturalWidth ||
+            options.maxHeight < naturalHeight
+          )
+        ) {
+          result = file;
+        } else {
+          const date = new Date();
+          result.lastModified = date.getTime();
+          result.lastModifiedDate = date;
+          result.name = file.name;
+
+          // Convert the extension to match its type
+          if (result.name && result.type !== file.type) {
+            result.name = result.name.replace(
+              REGEXP_EXTENSION,
+              imageTypeToExtension(result.type),
+            );
+          }
+        }
+      } else {
+        // Returns original file if the result is null in some cases.
+        result = file;
+      }
+      this.result = result;
+      if (options.success) {
+        options.success.call(this, result);
+      }
+    }
+    fail(err) {
+      const { options } = this;
+      if (options.error) {
+        options.error.call(this, err);
+      } else {
+        throw err;
+      }
+    }
+    abort() {
+      if (!this.aborted) {
+        this.aborted = true;
+        if (this.reader) {
+          this.reader.abort();
+        } else if (!this.image.complete) {
+          this.image.onload = null;
+          this.image.onabort();
+        } else {
+          this.fail(new Error('The compression process has been aborted.'));
+        }
+      }
+    }
+
+    /**
+     * Get the no conflict compressor class.
+     * @returns {Compressor} The compressor class.
+     */
+    static noConflict() {
+      window.Compressor = AnotherCompressor;
+      return Compressor;
+    }
+
+    /**
+     * Change the default options.
+     * @param {Object} options - The new default options.
+     */
+    static setDefaults(options) {
+      _extends(DEFAULTS, options);
+    }
+  }
 
   return Compressor;
 });

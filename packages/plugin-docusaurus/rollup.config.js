@@ -1,4 +1,4 @@
-import typescript from 'rollup-plugin-typescript2';
+import ts from 'rollup-plugin-ts';
 import * as path from 'path';
 
 const cwd = __dirname;
@@ -6,7 +6,7 @@ const cwd = __dirname;
 const base = {
   input: path.join(cwd, 'src/index.ts'),
   external: ['@docusaurus/types'],
-  plugins: [typescript()],
+  plugins: [ts()],
 };
 
 const vueLoaderBase = {

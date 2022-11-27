@@ -45,7 +45,7 @@
     "test:coverage": "cat coverage/lcov.info | codecov"
   },
   "dependencies": {
-    "@taro-hooks/blueimp-canvas-to-blob": "^2.0.0-beta-serro.5+628c69db",
+    "@taro-hooks/blueimp-canvas-to-blob": "workspace:*",
     "is-blob": "^2.1.0"
   },
   "devDependencies": {
