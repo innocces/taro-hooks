@@ -32,7 +32,9 @@
     "url": "https://github.com/innocces/taro-hooks/issues"
   },
   "devDependencies": {
-    "@docusaurus/types": "2.0.0-beta.20",
+    "@docusaurus/types": "2.2.0",
+    "@types/node": "^18.11.9",
+    "esbuild": "^0.15.15",
     "webpack": "4.46.0"
   },
   "dependencies": {

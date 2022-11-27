@@ -7,7 +7,7 @@
     class="reducer-item"
   >
     <nut-col :span="2">
-      <nut-checkbox v-model="done" @change="handleCheckboxChange" />
+      <nut-checkbox v-model="status" @change="handleCheckboxChange" />
     </nut-col>
     <nut-col :span="13">
       <text v-if="!edit">{{ text }}</text>
@@ -48,9 +48,11 @@ export default {
   emits: ['taskChange', 'taskDelete'],
   setup(props, { emit }) {
     const [edit, setEdit] = useTaroState(false);
+    const [status, setStatus] = useTaroSate(props.done);
 
     const handleCheckboxChange = (done) => {
       handleChange('done', done);
+      setStatus(done);
     };
 
     const handleChange = (type, value) => {
@@ -69,6 +71,7 @@ export default {
 
     return {
       edit,
+      status,
       setEdit,
       handleChange,
       handleDelete,

@@ -10,6 +10,7 @@
   "main": "dist/index.js",
   "module": "dist/shared.esm.js",
   "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "keywords": [
     "taro-hooks"
   ],
