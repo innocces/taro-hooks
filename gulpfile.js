@@ -2,9 +2,13 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const ts = require('gulp-typescript');
 const del = require('del');
+const yargs = require('yargs');
 
-const isWatch = process.argv[2] === '-w';
-const isSkipTS = process.argv[3] === '-skip';
+const argv = yargs(process.argv.slice(2)).alias('isolatedModules', 'iso').argv;
+
+const isWatch = argv.w;
+const isSkipTS = argv.skip;
+const isolatedModules = argv.iso;
 
 gulp.task('clean', async function () {
   await del('lib/**');
@@ -12,9 +16,13 @@ gulp.task('clean', async function () {
 });
 
 gulp.task('cjs', function () {
-  const tsProject = ts.createProject('tsconfig.json', {
+  const tsConfig = {
     module: 'CommonJS',
-  });
+  };
+  if (isolatedModules) {
+    tsConfig.isolatedModules = true;
+  }
+  const tsProject = ts.createProject('tsconfig.json', tsConfig);
   return tsProject
     .src()
     .pipe(tsProject())
@@ -27,9 +35,13 @@ gulp.task('cjs', function () {
 });
 
 gulp.task('es', function () {
-  const tsProject = ts.createProject('tsconfig.json', {
+  const tsConfig = {
     module: 'ESNext',
-  });
+  };
+  if (isolatedModules) {
+    tsConfig.isolatedModules = true;
+  }
+  const tsProject = ts.createProject('tsconfig.json', tsConfig);
   return tsProject
     .src()
     .pipe(tsProject())
@@ -42,10 +54,11 @@ gulp.task('es', function () {
 });
 
 gulp.task('declaration', function () {
-  const tsProject = ts.createProject('tsconfig.json', {
+  const tsConfig = {
     declaration: true,
     emitDeclarationOnly: true,
-  });
+  };
+  const tsProject = ts.createProject('tsconfig.json', tsConfig);
   return tsProject
     .src()
     .pipe(tsProject())
