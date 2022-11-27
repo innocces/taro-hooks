@@ -1,7 +1,7 @@
 tasks:
   - name: dependencies
     init: >
-      yarn &&
+      pnpm install &&
       gp sync-done bundle
   - name: dev server
     init: gp sync-await bundle
