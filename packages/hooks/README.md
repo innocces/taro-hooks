@@ -87,25 +87,23 @@ module.exports = {
 
 ## 参与贡献
 
-务必保证预装 **Lerna** & **yarn**, 保证 **Node >= 14**
+务必保证预装 **pnpm**, 保证 **Node >= 14**
 
 ```bash
 $ git clone git@github.com:innocces/taro-hooks.git
 $ cd taro-hooks
 # 安装依赖
-$ yarn
+$ pnpm install
 # 预编译文件
-$ yarn bootstrap
+$ pnpm run bootstrap
 # 开发文档
-$ yarn docusaurus:start
-# 启动Vue预览
-$ yarn develop:vue-plugin
-# 启动Vue 小程序 预览
-$ yarn develop:vue-plugin:weapp
-# 启动React预览
-$ yarn develop:react-plugin
-# 启动React 小程序 预览
-$ yarn develop:react-plugin:weapp
+$ pnpm run dev:docs
+# 启动 h5 预览
+$ pnpm run dev:demos:h5
+# 启动 小程序 预览
+$ pnpm run dev:demos:weapp
+# 执行某个子包(以taro-hooks为例)
+$ pnpm -F taro-hooks run build
 ```
 
 打开浏览器 - [http://localhost:3000](http://localhost:3000)  
