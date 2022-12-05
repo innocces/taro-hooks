@@ -1,15 +1,10 @@
-import { mergeReconciler } from '@tarojs/shared';
+import { hooks } from '@tarojs/shared';
 import * as taroHooks from './hooks';
 
-const hostConfig = {
-  initNativeApi(taro: any) {
-    for (const hook in taroHooks) {
-      // @ts-ignore
-      taro[hook] = taroHooks[hook];
-    }
-  },
-};
-
-mergeReconciler(hostConfig);
+hooks.tap('initNativeApi', function (taro) {
+  for (const hook in taroHooks) {
+    taro[hook] = taroHooks[hook];
+  }
+});
 
 export * from './hooks';

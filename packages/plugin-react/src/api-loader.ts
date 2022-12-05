@@ -1,4 +1,11 @@
-export default function (str: string): string {
+export default function (
+  str: string,
+  runtime = '@taro-hooks/plugin-react/dist/runtime',
+): string {
+  const realRuntime =
+    typeof runtime === 'string'
+      ? runtime
+      : '@taro-hooks/plugin-react/dist/runtime';
   return `import {
     useTaroState,
     useTaroEffect,
@@ -10,7 +17,7 @@ export default function (str: string): string {
     useTaroContext,
     useWatchEffect,
     taroCreateContext
-  } from '@taro-hooks/plugin-react/dist/runtime';
+  } from '${realRuntime}';
   ${str}
 
   taro.useTaroState = useTaroState;
