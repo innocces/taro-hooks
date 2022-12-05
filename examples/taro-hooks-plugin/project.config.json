@@ -33,7 +33,7 @@
     },
     "disableUseStrict": false,
     "useCompilerPlugins": false,
-    "minifyWXML": true,
+    "minifyWXML": false,
     "ignoreUploadUnusedFiles": false
   },
   "compileType": "miniprogram",

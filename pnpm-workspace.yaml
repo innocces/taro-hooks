@@ -1,6 +1,6 @@
 # workspaces
 
 packages:
-  - 'packages/*'
+  - 'packages/**'
   - 'website'
-  - 'examples/*'
+  - 'examples/**'

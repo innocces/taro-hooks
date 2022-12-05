@@ -9,6 +9,7 @@
   "typedocMain": "./src/runtime/hooks.ts",
   "main": "index.js",
   "typings": "types/index.d.ts",
+  "types": "types/index.d.ts",
   "keywords": [
     "taro-hooks",
     "hooks",
@@ -47,5 +48,9 @@
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
-  "gitHead": "628c69db9aed1a7c258f75dcf095449ec99023e0"
+  "gitHead": "628c69db9aed1a7c258f75dcf095449ec99023e0",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "esbuild": "^0.15.15"
+  }
 }
