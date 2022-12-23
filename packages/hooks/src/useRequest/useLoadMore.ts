@@ -140,7 +140,7 @@ function useLoadMore<R extends LoadMoreFormatReturn, RR = any>(
         ref.current.removeEventListener(eventName, scrollTrigger);
       }
     };
-  }, [scrollMethodRef]);
+  }, [scrollMethodRef, env]);
 
   return {
     ...result,
