@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <link rel="shortcut icon" type="image/x-icon" href="/image/hook.png" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <link rel="stylesheet" href="/taro-hooks/umi.css" />
+    <script>
+      window.routerBase = "/taro-hooks";
+    </script>
+    <script>
+      //! umi version: 3.5.36
+    </script>
+    <script
+      data-name="BMC-Widget"
+      data-cfasync="false"
+      src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+      data-id="innocces"
+      data-description="Support me on Buy me a coffee!"
+      data-message="_(:з」∠)_ thanks"
+      data-color="#BD5FFF"
+      data-position="Right"
+      data-x_margin="18"
+      data-y_margin="18"
+    ></script>
+    <script>
+      !(function () {
+        var e =
+            navigator.cookieEnabled && void 0 !== window.localStorage
+              ? localStorage.getItem("dumi:prefers-color")
+              : "auto",
+          o = window.matchMedia("(prefers-color-scheme: dark)").matches,
+          t = ["light", "dark", "auto"];
+        document.documentElement.setAttribute(
+          "data-prefers-color",
+          e === t[2] ? (o ? t[1] : t[0]) : t.indexOf(e) > -1 ? e : t[0]
+        );
+      })();
+    </script>
+    <title>useBase64ToArrayBuffer - Taro-hooks</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="/taro-hooks/umi.js"></script>
+  </body>
+</html>

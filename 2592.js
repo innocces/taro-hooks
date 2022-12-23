@@ -1,0 +1,1 @@
+(self["webpackChunk"]=self["webpackChunk"]||[]).push([[2592],{42592:function(n,r,t){"use strict";t.r(r),t.d(r,{taro_label_core:function(){return u}});var e=t(66402),u=function(){function n(n){(0,e.r)(this,n)}return n.prototype.render=function(){return(0,e.h)("label",{htmlFor:this["for"]},(0,e.h)("slot",null))},n}()}}]);
