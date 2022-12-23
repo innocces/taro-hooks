@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.10](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.9...taro-hooks-v1.5.10) (2022-12-23)
+
+### Bug Fixes
+
+- **useloadmore:** useLoadMore miss deps: env. cause listener error ([af9140d](https://github.com/innocces/taro-hooks/commit/af9140deb8d5465e9f7a719f561c7ae0dff5a0be))
+- **useloadmore:** useLoadMore miss deps: env. cause listener error ([fa20e72](https://github.com/innocces/taro-hooks/commit/fa20e72e3a7404bf6aabdddb367e8634494ddbb2))
+
 ## [1.5.9](https://github.com/innocces/taro-hooks/compare/taro-hooks-v1.5.8...taro-hooks-v1.5.9) (2022-08-02)
 
 ### Features
