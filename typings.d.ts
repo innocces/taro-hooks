@@ -36,3 +36,8 @@ declare var wx: any;
 declare type TRecord<T = unknown> = {
   [_: string | number]: T;
 };
+
+// never bundle with d.ts
+declare module '@taro-hooks/core' {
+  export * from '@taro-hooks/plugin-react/dist/runtime';
+}
