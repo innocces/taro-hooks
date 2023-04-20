@@ -1,13 +1,13 @@
 import type { DebouncedFunc, ThrottleSettings } from 'lodash';
 import { throttle } from 'lodash-wechat';
-import { useTaroEffect, useTaroRef } from '@tarojs/taro';
+import { useEffect, useRef } from '@taro-hooks/core';
 import type { Plugin } from '../types';
 
 const useThrottlePlugin: Plugin<any, any[]> = (
   fetchInstance,
   { throttleWait, throttleLeading, throttleTrailing },
 ) => {
-  const throttledRef = useTaroRef<DebouncedFunc<any>>();
+  const throttledRef = useRef<DebouncedFunc<any>>();
 
   const options: ThrottleSettings = {};
   if (throttleLeading !== undefined) {
@@ -17,7 +17,7 @@ const useThrottlePlugin: Plugin<any, any[]> = (
     options.trailing = throttleTrailing;
   }
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (throttleWait) {
       const _originRunAsync = fetchInstance.runAsync.bind(fetchInstance);
 

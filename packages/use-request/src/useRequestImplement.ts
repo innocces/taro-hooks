@@ -5,7 +5,7 @@ import {
   useUpdate,
   useMemoizedFn,
 } from '@taro-hooks/ahooks';
-import { useTaroMemo } from '@tarojs/taro';
+import { useMemo } from '@taro-hooks/core';
 import { escapeState, FRAMEWORK } from '@taro-hooks/shared';
 
 import Fetch from './Fetch';
@@ -27,12 +27,13 @@ function useRequestImplement<TData, TParams extends any[]>(
 
   const update = useUpdate();
 
-  const fetchInstance = useTaroMemo(() => {
+  const fetchInstance = useMemo(() => {
     const initState = plugins
       .map((p) => p?.onInit?.(fetchOptions))
       .filter(Boolean);
 
     const fetch = new Fetch<TData, TParams>(
+      // @ts-ignore
       serviceRef,
       fetchOptions,
       update,
@@ -77,7 +78,7 @@ function useRequestImplement<TData, TParams extends any[]>(
 
   // due to vue reactive, need reduce single for useMemo
   // ugly
-  const vueRefResult = useTaroMemo(
+  const vueRefResult = useMemo(
     () => ({
       loading: escapeState(fetchInstance).state.loading,
       data: escapeState(fetchInstance).state.data,

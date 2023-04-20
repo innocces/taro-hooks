@@ -1,4 +1,4 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import { useCreation, useUnmount } from '@taro-hooks/ahooks';
 import type { Plugin } from '../types';
 import * as cache from '../utils/cache';
@@ -16,9 +16,9 @@ const useCachePlugin: Plugin<any, any[]> = (
     getCache: customGetCache,
   },
 ) => {
-  const unSubscribeRef = useTaroRef<() => void>();
+  const unSubscribeRef = useRef<() => void>();
 
-  const currentPromiseRef = useTaroRef<Promise<any>>();
+  const currentPromiseRef = useRef<Promise<any>>();
 
   const _setCache = (key: string, cachedData: CachedData) => {
     if (customSetCache) {

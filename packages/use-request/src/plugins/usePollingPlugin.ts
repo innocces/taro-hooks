@@ -1,4 +1,4 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import { useUpdateEffect } from '@taro-hooks/ahooks';
 import { escapeState } from '@taro-hooks/shared';
 import { useVisible } from 'taro-hooks';
@@ -9,8 +9,8 @@ const usePollingPlugin: Plugin<any, any[]> = (
   fetchInstance,
   { pollingInterval, pollingWhenHidden = true },
 ) => {
-  const timerRef = useTaroRef<Timeout>();
-  const unsubscribeRef = useTaroRef<() => void>();
+  const timerRef = useRef<Timeout>();
+  const unsubscribeRef = useRef<() => void>();
   const documentVisible = useVisible();
   const unsubscribeReVisible = subscribeReVisible(() => {
     if (!pollingWhenHidden && !escapeState(documentVisible)) {

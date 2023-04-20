@@ -1,7 +1,8 @@
-import { useDidShow, useDidHide, useTaroState } from '@tarojs/taro';
+import { useDidShow, useDidHide } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 
 export default function isDocumentVisible(): boolean {
-  const [visible, setVisible] = useTaroState(true);
+  const [visible, setVisible] = useState(true);
 
   useDidShow(() => {
     setVisible(true);

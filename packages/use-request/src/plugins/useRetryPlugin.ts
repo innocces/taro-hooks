@@ -1,14 +1,14 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import type { Plugin, Timeout } from '../types';
 
 const useRetryPlugin: Plugin<any, any[]> = (
   fetchInstance,
   { retryInterval, retryCount },
 ) => {
-  const timerRef = useTaroRef<Timeout>();
-  const countRef = useTaroRef(0);
+  const timerRef = useRef<Timeout>();
+  const countRef = useRef(0);
 
-  const triggerByRetry = useTaroRef(false);
+  const triggerByRetry = useRef(false);
 
   if (!retryCount) {
     return {};

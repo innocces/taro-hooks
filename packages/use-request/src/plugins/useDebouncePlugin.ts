@@ -1,15 +1,15 @@
 import type { DebouncedFunc, DebounceSettings } from 'lodash';
 import { debounce } from 'lodash-wechat';
-import { useTaroEffect, useTaroMemo, useTaroRef } from '@tarojs/taro';
+import { useEffect, useMemo, useRef } from '@taro-hooks/core';
 import type { Plugin } from '../types';
 
 const useDebouncePlugin: Plugin<any, any[]> = (
   fetchInstance,
   { debounceWait, debounceLeading, debounceTrailing, debounceMaxWait },
 ) => {
-  const debouncedRef = useTaroRef<DebouncedFunc<any>>();
+  const debouncedRef = useRef<DebouncedFunc<any>>();
 
-  const options = useTaroMemo(() => {
+  const options = useMemo(() => {
     const ret: DebounceSettings = {};
     if (debounceLeading !== undefined) {
       ret.leading = debounceLeading;
@@ -23,7 +23,7 @@ const useDebouncePlugin: Plugin<any, any[]> = (
     return ret;
   }, [debounceLeading, debounceTrailing, debounceMaxWait]);
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (debounceWait) {
       const _originRunAsync = fetchInstance.runAsync.bind(fetchInstance);
 
