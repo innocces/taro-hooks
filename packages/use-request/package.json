@@ -42,7 +42,8 @@
     "taro-hooks": "workspace:*"
   },
   "peerDependencies": {
-    "@tarojs/taro": ">3.4.0"
+    "@tarojs/taro": ">= 3.4.x",
+    "@tarojs/taro-h5": ">= 3.4.x"
   },
   "optionalDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
@@ -52,5 +53,9 @@
     "node": ">=12.0.0"
   },
   "license": "MIT",
-  "gitHead": "628c69db9aed1a7c258f75dcf095449ec99023e0"
+  "gitHead": "628c69db9aed1a7c258f75dcf095449ec99023e0",
+  "devDependencies": {
+    "@tarojs/taro": "^3.6.5",
+    "@tarojs/taro-h5": "^3.6.5"
+  }
 }
