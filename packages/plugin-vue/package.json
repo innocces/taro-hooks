@@ -36,13 +36,18 @@
   },
   "dependencies": {
     "@taro-hooks/shared": "workspace:*",
-    "acorn": "^8.0.4",
-    "acorn-walk": "^8.0.0"
+    "acorn": "^8.8.2",
+    "acorn-walk": "^8.2.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
-    "esbuild": "^0.15.15",
-    "vue": "^3.0.0"
+    "@types/node": "^18.15.12",
+    "@tarojs/helper": "^3.6.5",
+    "@tarojs/runtime": "^3.6.5",
+    "@tarojs/service": "^3.6.5",
+    "@tarojs/shared": "^3.6.5",
+    "@tarojs/taro": "^3.6.5",
+    "esbuild": "^0.15.18",
+    "vue": "^3.2.47"
   },
   "peerDependencies": {
     "@tarojs/helper": ">=3.4.x",
