@@ -1,9 +1,5 @@
-import {
-  useTaroEffect,
-  useTaroRef,
-  useDidShow,
-  useDidHide,
-} from '@tarojs/taro';
+import { useDidShow, useDidHide } from '@tarojs/taro';
+import { useEffect, useRef } from '@taro-hooks/core';
 import { useUnmount } from '@taro-hooks/ahooks';
 import { escapeState } from '@taro-hooks/shared';
 import { useVisible } from 'taro-hooks';
@@ -25,7 +21,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
   fetchInstance,
   { refreshOnWindowFocus, focusTimespan = 5000 },
 ) => {
-  const unsubscribeRef = useTaroRef<() => void>();
+  const unsubscribeRef = useRef<() => void>();
   const visible = useVisible();
 
   const stopSubscribe = () => {
@@ -49,7 +45,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
     subscribeFocus();
   });
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (refreshOnWindowFocus) {
       const limitRefresh = limit(
         fetchInstance.refresh.bind(fetchInstance),

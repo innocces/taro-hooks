@@ -1,4 +1,4 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import { useUpdateEffect } from '@taro-hooks/ahooks';
 import { escapeState, FRAMEWORK } from '@taro-hooks/shared';
 import type { Plugin } from '../types';
@@ -14,7 +14,7 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
     refreshDepsAction,
   },
 ) => {
-  const hasAutoRun = useTaroRef(false);
+  const hasAutoRun = useRef(false);
   hasAutoRun.current = false;
 
   useUpdateEffect(() => {

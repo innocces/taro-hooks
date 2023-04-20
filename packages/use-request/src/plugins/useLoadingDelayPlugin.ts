@@ -1,11 +1,11 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import type { Plugin, Timeout } from '../types';
 
 const useLoadingDelayPlugin: Plugin<any, any[]> = (
   fetchInstance,
   { loadingDelay },
 ) => {
-  const timerRef = useTaroRef<Timeout>();
+  const timerRef = useRef<Timeout>();
 
   if (!loadingDelay) {
     return {};

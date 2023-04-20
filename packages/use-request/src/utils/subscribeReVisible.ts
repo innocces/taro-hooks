@@ -1,5 +1,5 @@
-import { useTaroEffect } from '@tarojs/taro';
 import { escapeState } from '@taro-hooks/shared';
+import { useEffect } from '@taro-hooks/core';
 import { useVisible } from 'taro-hooks';
 
 const listeners: any[] = [];
@@ -9,7 +9,7 @@ function subscribeReVisible(listener: () => void) {
 
   const visible = useVisible();
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (escapeState(visible)) {
       for (let i = 0; i < listeners.length; i++) {
         const listener = listeners[i];
