@@ -51,6 +51,6 @@
   "license": "MIT",
   "gitHead": "628c69db9aed1a7c258f75dcf095449ec99023e0",
   "devDependencies": {
-    "@types/node": "^18.11.9"
+    "@types/node": "^18.15.12"
   }
 }
