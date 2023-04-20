@@ -1,5 +1,5 @@
 import { throttle } from 'lodash-wechat';
-import { useTaroMemo } from '@tarojs/taro';
+import { useMemo } from '@taro-hooks/core';
 import useLatest from '../useLatest';
 import useUnmount from '../useUnmount';
 import type { ThrottleOptions } from '../useThrottle/throttleOptions';
@@ -19,7 +19,7 @@ function useThrottleFn<T extends noop>(fn: T, options?: ThrottleOptions) {
 
   const wait = options?.wait ?? 1000;
 
-  const throttled = useTaroMemo(
+  const throttled = useMemo(
     () =>
       // @ts-ignore
       throttle<T>(

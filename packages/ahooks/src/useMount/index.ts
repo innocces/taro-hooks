@@ -1,4 +1,4 @@
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import { isFunction } from '@taro-hooks/shared';
 
 const useMount = (fn: () => void) => {
@@ -10,7 +10,7 @@ const useMount = (fn: () => void) => {
     }
   }
 
-  useTaroEffect(() => {
+  useEffect(() => {
     fn?.();
   }, []);
 };

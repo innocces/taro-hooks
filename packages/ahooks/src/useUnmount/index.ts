@@ -1,4 +1,4 @@
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import useLatest from '../useLatest';
 import { isFunction } from '@taro-hooks/shared';
 
@@ -13,7 +13,7 @@ const useUnmount = (fn: () => void) => {
 
   const fnRef = useLatest(fn);
 
-  useTaroEffect(
+  useEffect(
     () => () => {
       fnRef?.current?.();
     },

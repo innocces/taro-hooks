@@ -36,14 +36,12 @@
     "README.md"
   ],
   "dependencies": {
-    "@taro-hooks/ahooks": "workspace:*",
     "@taro-hooks/shared": "workspace:*",
     "lodash-wechat": "^1.0.0"
   },
-  "peerDependencies": {
-    "@tarojs/taro": ">3.4.0"
-  },
   "optionalDependencies": {
+    "@taro-hooks/plugin-react": ">=2.0",
+    "@taro-hooks/plugin-vue": ">=2.0",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "vue": ">3.0"
   },
