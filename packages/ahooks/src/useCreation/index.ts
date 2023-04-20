@@ -1,10 +1,10 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import type { DependencyList } from '../type';
 import { depsAreSame } from '../utils';
 
 export default function useCreation<T>(factory: () => T, deps: DependencyList) {
-  const creation = useTaroRef(
+  const creation = useRef(
     {
       deps,
       obj: undefined as undefined | T,

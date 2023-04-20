@@ -1,4 +1,4 @@
-import { useTaroMemo, useTaroRef } from '@tarojs/taro';
+import { useMemo, useRef } from '@taro-hooks/core';
 import { isFunction } from '@taro-hooks/shared';
 
 type noop = (this: any, ...args: any[]) => any;
@@ -17,13 +17,13 @@ function useMemoizedFn<T extends noop>(fn: T) {
     }
   }
 
-  const fnRef = useTaroRef<T>(fn);
+  const fnRef = useRef<T>(fn);
 
   // why not write `fnRef.current = fn`?
   // https://github.com/alibaba/hooks/issues/728
-  fnRef.current = useTaroMemo(() => fn, [fn]);
+  fnRef.current = useMemo(() => fn, [fn]);
 
-  const memoizedFn = useTaroRef<PickFunction<T>>();
+  const memoizedFn = useRef<PickFunction<T>>();
   if (!memoizedFn.current) {
     memoizedFn.current = function (this, ...args) {
       return fnRef.current.apply(this, args);

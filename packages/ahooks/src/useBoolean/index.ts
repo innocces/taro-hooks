@@ -1,4 +1,4 @@
-import { useTaroMemo } from '@tarojs/taro';
+import { useMemo } from '@taro-hooks/core';
 import useToggle from '../useToggle';
 
 export interface Actions {
@@ -11,7 +11,7 @@ export interface Actions {
 export default function useBoolean(defaultValue = false): [boolean, Actions] {
   const [state, { toggle, set }] = useToggle(defaultValue);
 
-  const actions: Actions = useTaroMemo(() => {
+  const actions: Actions = useMemo(() => {
     const setTrue = () => set(true);
     const setFalse = () => set(false);
     return {

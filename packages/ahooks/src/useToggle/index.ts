@@ -1,4 +1,4 @@
-import { useTaroMemo, useTaroState } from '@tarojs/taro';
+import { useMemo, useState } from '@taro-hooks/core';
 
 export interface Actions<T> {
   setLeft: () => void;
@@ -20,9 +20,9 @@ function useToggle<D, R>(
   defaultValue: D = false as unknown as D,
   reverseValue?: R,
 ) {
-  const [state, setState] = useTaroState<D | R>(defaultValue);
+  const [state, setState] = useState<D | R>(defaultValue);
 
-  const actions = useTaroMemo(() => {
+  const actions = useMemo(() => {
     const reverseValueOrigin = (
       reverseValue === undefined ? !defaultValue : reverseValue
     ) as D | R;

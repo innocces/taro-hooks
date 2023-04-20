@@ -1,5 +1,5 @@
 import { debounce } from 'lodash-wechat';
-import { useTaroMemo } from '@tarojs/taro';
+import { useMemo } from '@taro-hooks/core';
 import type { DebounceOptions } from '../useDebounce/debounceOptions';
 import useLatest from '../useLatest';
 import useUnmount from '../useUnmount';
@@ -19,7 +19,7 @@ function useDebounceFn<T extends noop>(fn: T, options?: DebounceOptions) {
 
   const wait = options?.wait ?? 1000;
 
-  const debounced = useTaroMemo(
+  const debounced = useMemo(
     () =>
       // @ts-ignore
       debounce<T>(

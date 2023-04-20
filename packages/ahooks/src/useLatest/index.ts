@@ -1,7 +1,7 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 
-function useLatest<T>(value: T): ReturnType<typeof useTaroRef<T>> {
-  const ref = useTaroRef(value);
+function useLatest<T>(value: T): ReturnType<typeof useRef<T>> {
+  const ref = useRef(value);
   ref.current = value;
 
   return ref;

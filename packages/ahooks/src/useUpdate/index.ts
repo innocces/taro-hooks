@@ -1,9 +1,9 @@
-import { useTaroCallback, useTaroState } from '@tarojs/taro';
+import { useCallback, useState } from '@taro-hooks/core';
 
 const useUpdate = () => {
-  const [, setState] = useTaroState({});
+  const [, setState] = useState({});
 
-  return useTaroCallback(() => setState({}), []);
+  return useCallback(() => setState({}), []);
 };
 
 export default useUpdate;

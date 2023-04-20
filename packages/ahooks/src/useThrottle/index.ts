@@ -1,16 +1,16 @@
-import { useTaroEffect, useTaroState } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import useThrottleFn from '../useThrottleFn';
 import type { ThrottleOptions } from './throttleOptions';
 
 function useThrottle<T>(value: T, options?: ThrottleOptions) {
-  const [throttled, setThrottled] = useTaroState(value);
+  const [throttled, setThrottled] = useState(value);
 
   const throttleFn = useThrottleFn(() => {
     setThrottled(value);
   }, options);
 
-  useTaroEffect(() => {
+  useEffect(() => {
     escapeState(throttleFn).run();
   }, [value]);
 
