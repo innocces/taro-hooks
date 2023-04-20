@@ -37,7 +37,7 @@ export type Dispatch<A> = (action: A) => void;
  * @param {Array<unknown> | void | null} deps sideEffect deps
  * @returns {void}
  */
-function useEffect(
+export function useEffect(
   create: () => (() => void) | void,
   deps: Array<unknown> | void | null,
 ): void {
@@ -89,7 +89,7 @@ function useEffect(
  * @param {() => (() => void) | void} create sideEffect function
  * @returns {void}
  */
-function useWatchEffect(create: () => (() => void) | void): void {
+export function useWatchEffect(create: () => (() => void) | void): void {
   log('useWatchEffect always clean sideEffect when deps change,');
 
   if (!isFunction(create)) {
@@ -121,7 +121,7 @@ function useWatchEffect(create: () => (() => void) | void): void {
  * @param {Array<unknown> | void | null} deps sideEffect deps
  * @returns {void}
  */
-function useLayoutEffect(
+export function useLayoutEffect(
   create: () => (() => void) | void,
   deps: Array<unknown> | void | null,
 ): void {
@@ -177,7 +177,10 @@ function useLayoutEffect(
  * @param {Array<unknown> | void | null} deps sideEffect deps
  * @returns {void}
  */
-function useCallback<T>(callback: T, deps: Array<unknown> | void | null): T {
+export function useCallback<T>(
+  callback: T,
+  deps: Array<unknown> | void | null,
+): T {
   log('vue.ver useCallback is use watch to simulation.');
 
   if (!isFunction(callback)) {
@@ -209,7 +212,7 @@ function useCallback<T>(callback: T, deps: Array<unknown> | void | null): T {
  * @param {Array<unknown> | void | null} deps sideEffect deps
  * @returns {T} memo variable
  */
-function useMemo<T>(
+export function useMemo<T>(
   create: () => T,
   deps: Array<unknown> | void | null,
 ): Ref<T> {
@@ -248,7 +251,7 @@ function useMemo<T>(
  * @param {boolean} toRefTmpl need ref active
  * @returns {T} ref of value
  */
-function useRef<T>(
+export function useRef<T>(
   initialValue: T,
   toRefTmpl?: boolean,
 ): ToRefs<{
@@ -269,7 +272,7 @@ function useRef<T>(
  * @param {unknown} initialState initialState
  * @returns {[state, dispatch]} state and dispatch
  */
-function useState<S>(
+export function useState<S>(
   initialState: (() => S) | S,
 ): [Ref<S>, Dispatch<BasicStateAction<S>>] {
   log('vue.ver useState is use customRef to simulation.');
@@ -300,7 +303,7 @@ function useState<S>(
  * @param {unknown} initialArg initialArg
  * @returns {[state, dispatch]} state and dispatch
  */
-function useReducer<S, A>(
+export function useReducer<S, A>(
   reducer: (initState: S, action: A) => S,
   initialArg: S,
   init?: (initialArg: S) => S,
@@ -347,7 +350,7 @@ export type VueContext<T> = {
  * @param {T} defaultValue init or defaultValue
  * @returns {VueContext<T>} vue context
  */
-function createContext<T = Record<string, any>>(
+export function createContext<T = Record<string, any>>(
   defaultValue: T,
 ): VueContext<T> {
   const ProviderElement: ComponentOptions<IProviderProps<T>> = {
@@ -396,7 +399,7 @@ function createContext<T = Record<string, any>>(
  * @param {VueContext<T>} Context
  * @returns {T} context
  */
-function useContext<T>(Context: VueContext<T>): T {
+export function useContext<T>(Context: VueContext<T>): T {
   if (!isObject(Context) || !Context.$$inject) {
     throw new TypeError(
       'useContext only accept a context as the first argument.',
@@ -405,23 +408,3 @@ function useContext<T>(Context: VueContext<T>): T {
 
   return inject(INJECTKEY) as T;
 }
-
-export const useTaroEffect = useEffect;
-
-export { useWatchEffect };
-
-export const useTaroState = useState;
-
-export const useTaroCallback = useCallback;
-
-export const useTaroContext = useContext;
-
-export const useTaroReducer = useReducer;
-
-export const useTaroRef = useRef;
-
-export const useTaroMemo = useMemo;
-
-export const useTaroLayoutEffect = useLayoutEffect;
-
-export const taroCreateContext = createContext;

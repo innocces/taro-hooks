@@ -8,7 +8,8 @@
   "license": "MIT",
   "typedocMain": "./src/runtime/hooks.ts",
   "main": "index.js",
-  "typings": "types/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "types": "dist/runtime.d.ts",
   "keywords": [
     "taro-hooks",
     "hooks",
@@ -34,11 +35,13 @@
     "url": "https://github.com/innocces/taro-hooks/issues"
   },
   "dependencies": {
-    "@taro-hooks/shared": "^2.0.0-beta-serro.5+628c69db",
+    "@taro-hooks/shared": "workspace:*",
     "acorn": "^8.0.4",
     "acorn-walk": "^8.0.0"
   },
   "devDependencies": {
+    "@types/node": "^18.11.9",
+    "esbuild": "^0.15.15",
     "vue": "^3.0.0"
   },
   "peerDependencies": {
