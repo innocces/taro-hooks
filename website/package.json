@@ -37,7 +37,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.2.0",
     "@docusaurus/plugin-pwa": "2.2.0",
-    "@taro-hooks/plugin-docusaurus": "^2.0.0-beta-serro.5",
+    "@taro-hooks/plugin-docusaurus": "workspace:*",
     "@tsconfig/docusaurus": "^1.0.5",
     "classnames": "^2.3.2",
     "cross-env": "^7.0.3",
