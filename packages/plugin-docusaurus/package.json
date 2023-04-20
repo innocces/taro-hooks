@@ -33,12 +33,12 @@
   },
   "devDependencies": {
     "@docusaurus/types": "2.2.0",
-    "@types/node": "^18.11.9",
-    "esbuild": "^0.15.15",
+    "@types/node": "^18.15.12",
+    "esbuild": "^0.15.18",
     "webpack": "4.46.0"
   },
   "dependencies": {
-    "joi": "^17.6.0"
+    "joi": "^17.9.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
