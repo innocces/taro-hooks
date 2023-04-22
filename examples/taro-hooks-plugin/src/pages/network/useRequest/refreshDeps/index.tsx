@@ -2,7 +2,7 @@ import React from 'react';
 import DemoContent from '@src/components/DemoContent';
 import { Field, ActionSheet } from '@taroify/core';
 
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 
 const userSchool = (id: string) => {
@@ -27,8 +27,8 @@ async function getUserSchool(userId: string): Promise<string> {
 }
 
 export default () => {
-  const [userId, setUserId] = useTaroState('1');
-  const [open, setOpen] = useTaroState(false);
+  const [userId, setUserId] = useState('1');
+  const [open, setOpen] = useState(false);
   const { data, loading } = useRequest(() => getUserSchool(userId), {
     refreshDeps: [userId],
   });

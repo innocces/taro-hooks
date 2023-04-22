@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useRouter } from 'taro-hooks';
 import { View, Image } from '@tarojs/components';
 import { Collapse, Cell, Flex, Badge } from '@taroify/core';
@@ -11,7 +11,7 @@ import Icon from '@root/public/image/hook.png';
 import type { MenuItem } from '@root/public/constant';
 
 const Index = () => {
-  const [activeCollapseItem, setActiveCollapseItem] = useTaroState();
+  const [activeCollapseItem, setActiveCollapseItem] = useState();
   const [, { navigate, switchTab }] = useRouter();
 
   const handleNavigate = ({ path, name, onlyMini = false }: MenuItem) => {
@@ -42,7 +42,9 @@ const Index = () => {
                 title={name}
                 key={name}
                 clickable
-                onClick={() => handleNavigate({ name, path, onlyMini })}
+                onClick={() =>
+                  handleNavigate({ name, path, onlyMini, id: name })
+                }
               ></Cell>
             ))}
           </Collapse.Item>

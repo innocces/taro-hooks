@@ -1,7 +1,8 @@
 import React from 'react';
 import DemoContent from '@src/components/DemoContent';
 import { Radio, Cell } from '@taroify/core';
-import { useTaroEffect, showToast } from '@tarojs/taro';
+import { showToast } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import { useNetworkType } from 'taro-hooks';
 // @ts-ignore
@@ -10,7 +11,7 @@ import { NETWORKTYPE } from '@root/public/constant';
 export default () => {
   const networkType = useNetworkType();
 
-  useTaroEffect(() => {
+  useEffect(() => {
     showToast({
       title: `当前网络类型为: ${escapeState(networkType)}`,
       icon: 'none',

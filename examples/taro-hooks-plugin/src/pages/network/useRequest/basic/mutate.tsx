@@ -3,7 +3,8 @@ import { View } from '@tarojs/components';
 import DemoContent from '@src/components/DemoContent';
 import { Button, Input, Field } from '@taroify/core';
 
-import { showToast, useTaroState, useTaroRef } from '@tarojs/taro';
+import { showToast } from '@tarojs/taro';
+import { useRef, useState } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 import Mock from 'mockjs';
 
@@ -29,9 +30,9 @@ function editUsername(username: string): Promise<void> {
 
 export default () => {
   // store last username
-  const lastRef = useTaroRef<string>();
+  const lastRef = useRef<string>();
 
-  const [state, setState] = useTaroState('');
+  const [state, setState] = useState('');
 
   // get username
   const { data: username, mutate } = useRequest(getUsername);

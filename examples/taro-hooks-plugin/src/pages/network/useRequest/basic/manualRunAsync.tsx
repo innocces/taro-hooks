@@ -2,7 +2,8 @@ import React from 'react';
 import DemoContent from '@src/components/DemoContent';
 import { Button, Input, Field } from '@taroify/core';
 
-import { showToast, useTaroState } from '@tarojs/taro';
+import { showToast } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 
 function editUsername(username: string): Promise<void> {
@@ -18,7 +19,7 @@ function editUsername(username: string): Promise<void> {
 }
 
 export default () => {
-  const [state, setState] = useTaroState('');
+  const [state, setState] = useState('');
 
   const { loading, runAsync } = useRequest(editUsername, {
     manual: true,

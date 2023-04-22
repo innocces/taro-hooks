@@ -12,8 +12,10 @@ export default () => {
 
   const convertArrayBuffer = toArrayBuffer(convertBase64);
 
-  function displayArrayBuffer(arrayBuffer) {
-    return `Uint8Array(${arrayBuffer.byteLength})[${arrayBuffer.toString()}]`;
+  function displayArrayBuffer(shpwArrayBuffer) {
+    return `Uint8Array(${
+      shpwArrayBuffer.byteLength
+    })[${shpwArrayBuffer.toString()}]`;
   }
 
   return (

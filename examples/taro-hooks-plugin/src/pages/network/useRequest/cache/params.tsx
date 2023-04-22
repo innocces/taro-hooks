@@ -3,7 +3,7 @@ import DemoContent from '@src/components/DemoContent';
 import { Button, Field, Input } from '@taroify/core';
 
 import { useRequest } from 'taro-hooks';
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useBoolean } from '@taro-hooks/ahooks';
 import Mock from 'mockjs';
 
@@ -26,7 +26,7 @@ const Article = () => {
     cacheKey: 'cacheKey-demo',
   });
 
-  const [keyword, setKeyword] = useTaroState(params[0] || '');
+  const [keyword, setKeyword] = useState(params[0] || '');
 
   if (!data && loading) {
     return <Field>Loading</Field>;

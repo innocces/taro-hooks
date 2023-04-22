@@ -1,12 +1,12 @@
 import React from 'react';
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useToast, useRecord, useAudio } from 'taro-hooks';
 import DemoContent from '@src/components/DemoContent';
 import { Button } from '@taroify/core';
 
 export default () => {
   const [audioSource, setAudioSource] =
-    useTaroState<Taro.RecorderManager.OnStopCallbackResult>();
+    useState<Taro.RecorderManager.OnStopCallbackResult>();
 
   const [audioContext, { play }] = useAudio();
   const [, { start, stop }] = useRecord();

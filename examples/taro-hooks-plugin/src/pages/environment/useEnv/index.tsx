@@ -1,5 +1,6 @@
 import React from 'react';
-import { ENV_TYPE, useTaroEffect, showToast } from '@tarojs/taro';
+import { ENV_TYPE, showToast } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import { useEnv } from 'taro-hooks';
 
 import DemoContent from '@src/components/DemoContent';
@@ -8,7 +9,7 @@ import { Radio, Cell } from '@taroify/core';
 export default () => {
   const env = useEnv();
 
-  useTaroEffect(() => {
+  useEffect(() => {
     showToast({
       title: `当前环境: ${env}`,
       icon: 'none',

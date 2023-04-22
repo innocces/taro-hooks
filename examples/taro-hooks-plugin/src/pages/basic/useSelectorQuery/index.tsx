@@ -1,5 +1,6 @@
 import React from 'react';
-import { useTaroRef, useTaroState, NodesRef, useReady } from '@tarojs/taro';
+import { NodesRef, useReady } from '@tarojs/taro';
+import { useRef, useState } from '@taro-hooks/core';
 import { useSelectorQuery, useToast } from 'taro-hooks';
 import DemoContent from '@src/components/DemoContent';
 import { Cell, Tabs, Divider } from '@taroify/core';
@@ -19,12 +20,11 @@ export default () => {
     computedStyle: ['margin', 'backgroundColor'],
     context: true,
   };
-  const tabValue = useTaroRef<string>('bound');
+  const tabValue = useRef<string>('bound');
   const [bounding, setBounding] =
-    useTaroState<NodesRef.BoundingClientRectCallbackResult>();
-  const [fields, setFields] = useTaroState<TaroGeneral.IAnyObject>({});
-  const [scroll, setScroll] =
-    useTaroState<NodesRef.ScrollOffsetCallbackResult>();
+    useState<NodesRef.BoundingClientRectCallbackResult>();
+  const [fields, setFields] = useState<TaroGeneral.IAnyObject>({});
+  const [scroll, setScroll] = useState<NodesRef.ScrollOffsetCallbackResult>();
 
   const { show } = useToast({
     title: 'useEvent',

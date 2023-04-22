@@ -4,7 +4,7 @@ import DemoContent from '@src/components/DemoContent';
 import { Button } from '@taroify/core';
 
 export default () => {
-  const show = useModal({ title: 'useEvent', showCancel: false, mask: true });
+  const show = useModal({ title: 'useEvent', showCancel: false });
   const { set, setOnce, off, clear, trigger } = useEvent('useEvent');
 
   const eventName = 'event';

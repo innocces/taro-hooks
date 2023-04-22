@@ -2,7 +2,8 @@ import React from 'react';
 import DemoContent from '@src/components/DemoContent';
 import { Cell } from '@taroify/core';
 import { useApp, useModal } from 'taro-hooks';
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
+
 import Mock from 'mockjs';
 
 type GlobalData = Record<'framework' | 'package' | 'basic', string>;
@@ -12,10 +13,9 @@ export default () => {
   const show = useModal({
     title: '设置全局变量',
     content: '您是否要随机修改当前全局变量',
-    mask: true,
   });
 
-  useTaroEffect(() => {
+  useEffect(() => {
     const { window, pages } = app?.config ?? {};
     show({
       title: 'APP',
@@ -41,7 +41,7 @@ export default () => {
             key={key}
             title={key}
             brief={JSON.stringify(value)}
-            onClick={() => handleClick(key)}
+            onClick={() => handleClick(key as keyof GlobalData)}
           ></Cell>
         ))}
       </Cell.Group>
