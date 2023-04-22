@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import { useAPICheck, useActionSheet, useToast } from 'taro-hooks';
 import DemoContent from '@src/components/DemoContent';
@@ -22,14 +22,14 @@ export default () => {
   const [canIUse, setAPI] = useAPICheck(selection[0]);
   const { show: showToast } = useToast({ title: selection[0] });
 
-  useTaroEffect(() => {
+  useEffect(() => {
     const currentTapItem = escapeState(tapItem);
     if (currentTapItem) {
       setAPI(currentTapItem.tapItem);
     }
   }, [tapItem]);
 
-  useTaroEffect(() => {
+  useEffect(() => {
     const currentTapItem = escapeState(tapItem);
     const currentCanIUse = escapeState(canIUse);
     if (currentTapItem) {

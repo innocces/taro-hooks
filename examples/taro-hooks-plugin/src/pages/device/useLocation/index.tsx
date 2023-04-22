@@ -1,18 +1,17 @@
 import React from 'react';
-import { useTaroState, useTaroEffect, useTaroRef } from '@tarojs/taro';
+import { useRef, useEffect, useState } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import { useLocation, useModal } from 'taro-hooks';
 import DemoContent from '@src/components/DemoContent';
 import { Button, Cell } from '@taroify/core';
 
 export default () => {
-  const [locationInfo, setLocationInfo] = useTaroState({});
-  const updateStatus = useTaroRef<boolean>(false);
-  const listenStatus = useTaroRef<boolean>(false);
+  const [locationInfo, setLocationInfo] = useState({});
+  const updateStatus = useRef<boolean>(false);
+  const listenStatus = useRef<boolean>(false);
 
   const show = useModal({
     title: 'useLocation',
-    mask: true,
     showCancel: false,
   });
 
@@ -23,7 +22,7 @@ export default () => {
       type: 'gcj02',
     });
 
-  useTaroEffect(() => {
+  useEffect(() => {
     setLocationInfo(escapeState(location));
   }, [location]);
 

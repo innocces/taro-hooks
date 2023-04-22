@@ -166,6 +166,9 @@ importers:
         version: 3.6.5(@pmmmwh/react-refresh-webpack-plugin@0.5.10)(@types/react@18.0.37)(react-refresh@0.11.0)(react@18.2.0)
       '@tarojs/plugin-platform-alipay':
         specifier: ^3.6.5
+        version: 3.6.5(@types/react@17.0.58)(vue@3.2.47)
+      '@tarojs/plugin-platform-h5':
+        specifier: ^3.6.5
         version: 3.6.5(@types/react@18.0.37)(react@18.2.0)
       '@tarojs/plugin-platform-jd':
         specifier: ^3.6.5
@@ -227,7 +230,7 @@ importers:
         version: 3.6.5(@types/react@17.0.58)(vue@3.2.47)
       '@tarojs/webpack5-runner':
         specifier: ^3.6.5
-        version: 3.6.5(@babel/core@7.21.4)(@swc/core@1.3.42)(@types/node@18.15.12)(@types/react@18.0.37)(postcss@8.4.23)(react@18.2.0)(ts-node@10.9.1)(typescript@4.9.5)(webpack@5.69.0)
+        version: 3.6.5(@babel/core@7.21.4)(@swc/core@1.3.42)(@types/node@18.15.12)(@types/react@17.0.58)(postcss@8.4.23)(ts-node@10.9.1)(typescript@4.9.5)(vue@3.2.47)(webpack@5.69.0)
       '@types/react':
         specifier: ^18.0.37
         version: 18.0.37
@@ -301,6 +304,9 @@ importers:
         specifier: ^3.6.5
         version: 3.6.5(@types/react@17.0.58)(vue@3.2.47)
       '@tarojs/plugin-platform-alipay':
+        specifier: ^3.6.5
+        version: 3.6.5(@types/react@17.0.58)(vue@3.2.47)
+      '@tarojs/plugin-platform-h5':
         specifier: ^3.6.5
         version: 3.6.5(@types/react@17.0.58)(vue@3.2.47)
       '@tarojs/plugin-platform-jd':
@@ -628,6 +634,13 @@ importers:
 
   packages/plugin-react:
     dependencies:
+      acorn:
+        specifier: ^8.8.2
+        version: 8.8.2
+      acorn-walk:
+        specifier: ^8.2.0
+        version: 8.2.0
+    devDependencies:
       '@tarojs/helper':
         specifier: ^3.6.5
         version: 3.6.5
@@ -643,28 +656,28 @@ importers:
       '@tarojs/taro':
         specifier: ^3.6.5
         version: 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      acorn:
-        specifier: ^8.8.2
-        version: 8.8.2
-      acorn-walk:
-        specifier: ^8.2.0
-        version: 8.2.0
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-    devDependencies:
       '@types/node':
         specifier: ^18.15.12
         version: 18.15.12
       esbuild:
         specifier: ^0.15.18
         version: 0.15.18
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
 
   packages/plugin-vue:
     dependencies:
       '@taro-hooks/shared':
         specifier: workspace:*
         version: link:../shared
+      acorn:
+        specifier: ^8.8.2
+        version: 8.8.2
+      acorn-walk:
+        specifier: ^8.2.0
+        version: 8.2.0
+    devDependencies:
       '@tarojs/helper':
         specifier: ^3.6.5
         version: 3.6.5
@@ -680,13 +693,6 @@ importers:
       '@tarojs/taro':
         specifier: ^3.6.5
         version: 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      acorn:
-        specifier: ^8.8.2
-        version: 8.8.2
-      acorn-walk:
-        specifier: ^8.2.0
-        version: 8.2.0
-    devDependencies:
       '@types/node':
         specifier: ^18.15.12
         version: 18.15.12
@@ -706,10 +712,10 @@ importers:
         specifier: ^1.20.9
         version: 1.20.9(@lezer/common@1.0.2)(react-dom@18.2.0)(react@18.2.0)
       react:
-        specifier: ^18.2.0
+        specifier: '>=16.8'
         version: 18.2.0
       react-dom:
-        specifier: ^18.2.0
+        specifier: '>=16.8'
         version: 18.2.0(react@18.2.0)
     devDependencies:
       tslib:
@@ -807,6 +813,9 @@ importers:
       '@docusaurus/plugin-pwa':
         specifier: 2.4.0
         version: 2.4.0(@swc/core@1.3.52)(@types/node@18.15.12)(react-dom@18.2.0)(react@18.2.0)(ts-node@10.9.1)(typescript@4.9.5)
+      '@docusaurus/types':
+        specifier: 2.4.0
+        version: 2.4.0(@swc/core@1.3.52)(react-dom@18.2.0)(react@18.2.0)
       '@taro-hooks/plugin-docusaurus':
         specifier: workspace:*
         version: link:../packages/plugin-docusaurus
@@ -5997,6 +6006,25 @@ packages:
       - '@types/webpack'
       - '@types/webpack-dev-server'
 
+  /@tarojs/components-react@3.6.5(@types/react@17.0.58)(vue@3.2.47):
+    resolution: {integrity: sha512-GmeYTIo7IHWhr2gbdRoHMbX6PUaHz0hJ+WCLgcvv/XeTXufQxCvG3B4TBlvFzdagDsAJFL4WxwA29zAXi5M7Zw==}
+    dependencies:
+      '@babel/runtime': 7.21.0
+      '@tarojs/components': 3.6.5(@types/react@17.0.58)(react@18.2.0)(vue@3.2.47)
+      '@tarojs/taro': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
+      classnames: 2.3.2
+      intersection-observer: 0.7.0
+      resolve-pathname: 3.0.0
+      swiper: 6.8.0
+      weui: 1.1.3
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-native'
+      - '@types/webpack'
+      - '@types/webpack-dev-server'
+      - vue
+    dev: false
+
   /@tarojs/components@3.6.5(@types/react@17.0.58)(react@18.2.0)(vue@3.2.47):
     resolution: {integrity: sha512-DpWPP/bGNf4ezULzdKWUAJpyiCUlu1kEeqHs1UF+gaoCHg+TDvGJv/JxuinwZFgmptnsCFZrCy+s1jW6gNygrw==}
     peerDependencies:
@@ -6141,16 +6169,20 @@ packages:
       - '@types/react-native'
       - '@types/webpack'
       - '@types/webpack-dev-server'
-      - react
       - supports-color
       - vue
 
-  /@tarojs/plugin-platform-alipay@3.6.5(@types/react@18.0.37)(react@18.2.0):
-    resolution: {integrity: sha512-nnDL3fKqVmJZa7TbZKVJFRff+rb2KAuAFDJ7nLQ30Qzwi7YyyMkIIUwISvIMwn1xntsLXdz0cjWm3f0+9BcjvA==}
+  /@tarojs/plugin-platform-h5@3.6.5(@types/react@17.0.58)(vue@3.2.47):
+    resolution: {integrity: sha512-l5p9I4yq2s95moe21x7jTZPC9n0LwSfbntSneCUC2mJzwQFTMgCI1OvKZYIwm2MIoWXI1OsPpTTYpHsl23Jy4Q==}
     dependencies:
       '@tarojs/components': 3.6.5(@types/react@17.0.58)(react@18.2.0)(vue@3.2.47)
+      '@tarojs/components-react': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
+      '@tarojs/router': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
       '@tarojs/service': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
       '@tarojs/shared': 3.6.5
+      '@tarojs/taro-h5': 3.6.5(@types/react@17.0.58)(react@18.2.0)(vue@3.2.47)
+      babel-plugin-transform-taroapi: 3.6.5
+      resolve: 1.22.2
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-native'
@@ -6159,6 +6191,28 @@ packages:
       - react
       - supports-color
       - vue
+    dev: false
+
+  /@tarojs/plugin-platform-h5@3.6.5(@types/react@18.0.37)(react@18.2.0):
+    resolution: {integrity: sha512-l5p9I4yq2s95moe21x7jTZPC9n0LwSfbntSneCUC2mJzwQFTMgCI1OvKZYIwm2MIoWXI1OsPpTTYpHsl23Jy4Q==}
+    dependencies:
+      '@tarojs/components': 3.6.5(@types/react@17.0.58)(react@18.2.0)(vue@3.2.47)
+      '@tarojs/components-react': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
+      '@tarojs/router': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
+      '@tarojs/service': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
+      '@tarojs/shared': 3.6.5
+      '@tarojs/taro-h5': 3.6.5(@types/react@17.0.58)(react@18.2.0)(vue@3.2.47)
+      babel-plugin-transform-taroapi: 3.6.5
+      resolve: 1.22.2
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-native'
+      - '@types/webpack'
+      - '@types/webpack-dev-server'
+      - react
+      - supports-color
+      - vue
+    dev: false
 
   /@tarojs/plugin-platform-jd@3.6.5(@types/react@17.0.58)(vue@3.2.47):
     resolution: {integrity: sha512-KdS4LcDNfjNi47LMYdTd9CjnCO0o/G77T2fViFjMs2Rjtls6ooFmhw0VRuGIrq/n24P1qrlSTwtCBNk3rnNq/A==}
@@ -6458,102 +6512,6 @@ packages:
       - debug
       - fibers
       - node-sass
-      - react
-      - supports-color
-      - ts-node
-      - typescript
-      - uglify-js
-      - utf-8-validate
-      - vue
-      - webpack-cli
-    dev: true
-
-  /@tarojs/webpack5-runner@3.6.5(@babel/core@7.21.4)(@swc/core@1.3.42)(@types/node@18.15.12)(@types/react@18.0.37)(postcss@8.4.23)(react@18.2.0)(ts-node@10.9.1)(typescript@4.9.5)(webpack@5.69.0):
-    resolution: {integrity: sha512-I8GGg5QSJHx3e2QPwfhokYAx+Mar3GnKtg6BIY5XX/0DydFGc/1p7zYYMuFZM9o+NJrG0yBuhjxq5mNkSlzPag==}
-    peerDependencies:
-      postcss: ^8.4.18
-      webpack: ^5.78.0
-    dependencies:
-      '@parcel/css': 1.14.0
-      '@tarojs/helper': 3.6.5
-      '@tarojs/plugin-platform-alipay': 3.6.5(@types/react@18.0.37)(react@18.2.0)
-      '@tarojs/plugin-platform-jd': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      '@tarojs/plugin-platform-qq': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      '@tarojs/plugin-platform-swan': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      '@tarojs/plugin-platform-tt': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      '@tarojs/plugin-platform-weapp': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      '@tarojs/runner-utils': 3.6.5
-      '@tarojs/runtime': 3.6.5
-      '@tarojs/shared': 3.6.5
-      '@tarojs/taro': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      '@tarojs/taro-loader': 3.6.5(@types/react@17.0.58)(vue@3.2.47)
-      '@tarojs/webpack5-prebundle': 3.6.5(@types/react@17.0.58)(vue@3.2.47)(webpack@5.69.0)
-      acorn-walk: 8.2.0
-      autoprefixer: 9.8.8
-      babel-loader: 8.2.1(@babel/core@7.21.4)(webpack@5.69.0)
-      copy-webpack-plugin: 10.2.0(webpack@5.69.0)
-      css-loader: 6.7.3(webpack@5.69.0)
-      css-minimizer-webpack-plugin: 3.4.1(@parcel/css@1.14.0)(csso@5.0.5)(esbuild@0.14.54)(webpack@5.69.0)
-      csso: 5.0.5
-      detect-port: 1.5.1
-      esbuild: 0.14.54
-      esbuild-loader: 2.18.0(webpack@5.69.0)
-      file-loader: 6.0.0(webpack@5.69.0)
-      fs-extra: 8.1.0
-      html-minifier: 4.0.0
-      html-webpack-plugin: 5.5.0(webpack@5.69.0)
-      jsdom: 21.1.1
-      less: 4.1.3
-      less-loader: 10.2.0(less@4.1.3)(webpack@5.69.0)
-      loader-utils: 1.4.2
-      lodash: 4.17.21
-      md5: 2.3.0
-      micromatch: 4.0.5
-      mini-css-extract-plugin: 2.4.6(webpack@5.69.0)
-      miniprogram-simulate: 1.5.9
-      mkdirp: 1.0.4
-      ora: 5.4.1
-      postcss: 8.4.23
-      postcss-html-transform: 3.6.5(postcss@8.4.23)
-      postcss-import: 14.1.0(postcss@8.4.23)
-      postcss-loader: 7.2.4(@types/node@18.15.12)(postcss@8.4.23)(ts-node@10.9.1)(typescript@4.9.5)(webpack@5.69.0)
-      postcss-plugin-constparse: 3.6.5(postcss@8.4.23)
-      postcss-pxtransform: 3.6.5(postcss@8.4.23)
-      postcss-url: 10.1.3(postcss@8.4.23)
-      regenerator-runtime: 0.11.1
-      resolve: 1.22.2
-      resolve-url-loader: 5.0.0
-      sass: 1.50.0
-      sass-loader: 12.4.0(sass@1.50.0)(webpack@5.69.0)
-      sax: 1.2.4
-      style-loader: 3.3.1(webpack@5.69.0)
-      stylus: 0.55.0
-      stylus-loader: 6.2.0(stylus@0.55.0)(webpack@5.69.0)
-      tapable: 1.1.3
-      terser-webpack-plugin: 5.3.7(@swc/core@1.3.42)(esbuild@0.14.54)(webpack@5.69.0)
-      url-loader: 4.1.0(file-loader@6.0.0)(webpack@5.69.0)
-      vm2: 3.9.17
-      webpack: 5.69.0(@swc/core@1.3.42)
-      webpack-chain: 6.5.1
-      webpack-dev-server: 4.7.4(webpack@5.69.0)
-      webpack-format-messages: 2.0.6
-      webpackbar: 5.0.2(webpack@5.69.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@swc/core'
-      - '@swc/helpers'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-native'
-      - '@types/webpack'
-      - '@types/webpack-dev-server'
-      - bufferutil
-      - canvas
-      - clean-css
-      - debug
-      - fibers
-      - node-sass
-      - react
       - supports-color
       - ts-node
       - typescript
@@ -8412,7 +8370,6 @@ packages:
 
   /babel-plugin-transform-taroapi@3.6.5:
     resolution: {integrity: sha512-VCGJFUg/gcOV+c7y/3KI/SE+FBzBeALK0VOTC4aCqNub6p0TNNwDs2lS8UUY39M/tR1J2qo3JXqHBY83fcc15Q==}
-    dev: true
 
   /babel-preset-taro@3.6.5(@babel/core@7.21.4):
     resolution: {integrity: sha512-ju00PxpPwddR8GdcnQ91uUWXMKJDcNNqG3rHJ2nVCL288rz0kTXdSoMLYzZE1NZ+EpE0RR31I1+FHZcs0Df8GA==}

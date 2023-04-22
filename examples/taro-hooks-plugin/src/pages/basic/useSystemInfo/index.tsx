@@ -9,7 +9,7 @@ export default () => {
   return (
     <DemoContent>
       <Cell.Group clickable>
-        {Object.entries(systemInfo).map(([key, value]) => (
+        {Object.entries(systemInfo!).map(([key, value]) => (
           <Cell key={key} title={key} brief={JSON.stringify(value)}></Cell>
         ))}
       </Cell.Group>

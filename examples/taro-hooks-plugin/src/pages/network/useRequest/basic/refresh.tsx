@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import DemoContent from '@src/components/DemoContent';
 import { Button } from '@taroify/core';
 
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 import Mock from 'mockjs';
 
@@ -24,7 +24,7 @@ export default () => {
     },
   );
 
-  useTaroEffect(() => {
+  useEffect(() => {
     run(1);
   }, []);
 

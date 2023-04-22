@@ -1,7 +1,6 @@
 import React from 'react';
 import { Map } from '@tarojs/components';
-import { useTaroState, useTaroEffect, useReady } from '@tarojs/taro';
-import { escapeState } from '@taro-hooks/shared';
+import { useState } from '@taro-hooks/core';
 import { useModal, useMap } from 'taro-hooks';
 import DemoContent from '@src/components/DemoContent';
 import { Button, Cell } from '@taroify/core';
@@ -37,7 +36,7 @@ export default () => {
 
   const [mapContext, { get, include, moveTo, translate, toggleMarkers }] =
     useMap(mapId);
-  const [mapInfo, setMapInfo] = useTaroState({});
+  const [mapInfo, setMapInfo] = useState({});
 
   const handleGetInfo = async () => {
     try {

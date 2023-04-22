@@ -1,7 +1,7 @@
 import React from 'react';
 import { useActionSheet, useToast } from 'taro-hooks';
 import { escapeState } from '@taro-hooks/shared';
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import DemoContent from '@src/components/DemoContent';
 import { Button } from '@taroify/core';
 
@@ -9,7 +9,7 @@ export default () => {
   const { show, tapItem } = useActionSheet({ itemList: ['A', 'B', 'C'] });
   const { show: showToast } = useToast({ duration: 2000, mask: true });
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (escapeState(tapItem)) {
       const { tapIndex, tapItem: item } = escapeState(tapItem);
       showToast({ title: `${tapIndex}/${item}` });

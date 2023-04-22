@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import DemoContent from '@src/components/DemoContent';
 import { Button, Input, Field } from '@taroify/core';
 
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 import Mock from 'mockjs';
 
@@ -16,7 +16,7 @@ function getUsername(): Promise<string> {
 }
 
 export default () => {
-  const [state, setState] = useTaroState('');
+  const [state, setState] = useState('');
 
   // get username
   const {

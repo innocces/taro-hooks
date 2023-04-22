@@ -1,17 +1,18 @@
 import React from 'react';
-import { showToast, useTaroState, showModal, chooseVideo } from '@tarojs/taro';
+import { showToast, showModal, chooseVideo } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { log, logError } from '@taro-hooks/shared';
 import { useFile } from 'taro-hooks';
 import DemoContent from '@src/components/DemoContent';
 import { Cell, Button, Progress, Input, Field } from '@taroify/core';
 
 export default () => {
-  const [loading, setLoading] = useTaroState<boolean>(false);
-  const [uploadProgress, setUploadProgress] = useTaroState<number>(0);
-  const [downloadFile, setDownloadFile] = useTaroState<string>(
+  const [loading, setLoading] = useState<boolean>(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [downloadFile, setDownloadFile] = useState<string>(
     'https://storage.360buyimg.com/nutui/video/video_NutUI.mp4',
   );
-  const [downloadProgress, setDownloadProgress] = useTaroState<number>(0);
+  const [downloadProgress, setDownloadProgress] = useState<number>(0);
 
   const { download, upload } = useFile();
 

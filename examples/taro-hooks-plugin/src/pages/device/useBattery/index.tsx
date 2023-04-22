@@ -11,10 +11,10 @@ export default () => {
     <DemoContent>
       <Cell.Group clickable>
         <Cell title="充电与否">
-          <Switch disabled checked={batteryInfo.isCharging} />
+          <Switch disabled checked={batteryInfo?.isCharging} />
         </Cell>
-        <Cell title="电量" brief={<Progress percent={batteryInfo.level} />}>
-          {batteryInfo.level}
+        <Cell title="电量" brief={<Progress percent={batteryInfo?.level} />}>
+          {batteryInfo?.level}
         </Cell>
       </Cell.Group>
     </DemoContent>
