@@ -19,8 +19,9 @@ module.exports = [
         value: '<hr class="dropdown-separator">',
       },
       {
-        href: 'https://taro-hooks-innocces.vercel.app',
-        label: latestStabVersion,
+        type: 'html',
+        value:
+          '<a target="__blank" href="https://taro-hooks-innocces.vercel.app"><img src="https://img.shields.io/npm/v/taro-hooks?style=for-the-badge" /></a>',
       },
     ],
   },

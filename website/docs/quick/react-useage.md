@@ -5,7 +5,7 @@ sidebar_position: 2
 
 ## 概述
 
-**taro-hooks** 为了支持 **Vue3** 并使代码达到统一. 使用插件将原来的 **React hooks** 提取并注入到了 **@tarojs/taro** 中
+**taro-hooks** 为了支持 **Vue3** 并使代码达到统一. 使用插件将原来的 **React hooks** 提取并注入到了 **@taro-hooks/core** 中
 
 ## 配置
 
@@ -14,7 +14,7 @@ sidebar_position: 2
 首先需要下载 **@taro-hooks/plugin-react** 插件
 
 ```bash
-$ npm i @taro-hooks/plugin-react@canary
+$ npm i @taro-hooks/plugin-react
 ```
 
 ### 项目配置
@@ -31,25 +31,25 @@ const config = {
 
 ## **Hooks**
 
-所有的 **Hooks** 均在运行时注入到了 **@tarojs/taro** 内部, 并使用了 **useTaro** 的标准前缀.
+所有的 **Hooks** 均在运行时注入到了 **@taro-hooks/core** 内部, 并使用了和 **React** 中一致的名称.
 
 ```tsx title="example/index.tsx" showLineNumbers
 import React from 'react';
 import {
-  useTaroState,
-  useTaroEffect,
-  useTaroRef,
-  useTaroReducer,
-  useTaroCallback,
-  useTaroMemo,
-  useTaroLayoutEffect,
-  useTaroContext,
+  useState,
+  useEffect,
+  useRef,
+  useReducer,
+  useCallback,
+  useMemo,
+  useLayoutEffect,
+  useContext,
   useWatchEffect,
-  taroCreateContext,
-} from '@tarojs/taro';
+  createContext,
+} from '@taro-hooks/core';
 
 export default function App() {
-  const [count, setCount] = useTaroState(0);
+  const [count, setCount] = useState(0);
 
   return <view onClick={() => setCount(count + 1)}>{count}</view>;
 }
