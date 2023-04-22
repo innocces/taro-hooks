@@ -36,6 +36,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.4.0",
     "@docusaurus/plugin-pwa": "2.4.0",
+    "@docusaurus/types": "2.4.0",
     "@taro-hooks/plugin-docusaurus": "workspace:*",
     "@tsconfig/docusaurus": "^1.0.7",
     "classnames": "^2.3.2",

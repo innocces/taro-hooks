@@ -212,7 +212,7 @@ const config = {
           lastVersion: 'current',
           versions: {
             current: {
-              label: `V${version.split('+')[0]} 🤖`,
+              label: `V${version.split('+')[0]} 👻`,
             },
           },
         },
@@ -316,7 +316,7 @@ const config = {
         id: 'announce current progress info',
         content: `
           <div class="general-announcement">
-            <a target="__blank" href="https://github.com/innocces/taro-hooks/tree/next"><b>taro-hooks@next</b> 代号: Serro👻</a> 暂处于beta🤖阶段! 即将推出 🎉
+            <a target="__blank" href="https://github.com/innocces/taro-hooks/tree/next"><b>taro-hooks@next</b> 代号: Serro👻</a> 正式发布 🎉
           </div>
         `,
         textColor: 'var(--ifm-color-white)',

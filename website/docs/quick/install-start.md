@@ -30,7 +30,7 @@ $ @tarojs/cli@3.4.9 | MIT | deps: 38 | versions: 480
 ## 项目初始化
 
 :::info
-如果使用官方命令或者是 **taro-hooks** 提供的模板生成的项目会自动根据框架类型添加对应的 **plugin**
+如果使用官方命令或者是 **taro-hooks-next** 提供的模板生成的项目会自动根据框架类型添加对应的 **plugin**
 :::
 
 ### 使用官方命令创建模板项目
@@ -39,7 +39,7 @@ $ @tarojs/cli@3.4.9 | MIT | deps: 38 | versions: 480
 $ npx @tarojs/cli init taro-hooks-app
 ```
 
-在选择项目的使用选择 **taro-hooks@canary** 模板
+在选择项目的使用选择 **taro-hooks-next** 模板
 
 ```bash
 ? 请选择模板源 Github（最新）
@@ -48,7 +48,7 @@ $ npx @tarojs/cli init taro-hooks-app
   pwa
   react-native
   redux
-> taro-hooks@canary（使用 taro-hooks canary版本的模板）
+> taro-hooks-next
   taro-ui（使用 taro-ui 的模板）
   wxcloud（云开发模板）
   wxplugin

@@ -55,8 +55,8 @@ function HomepageHeader() {
               {/* make sure hidden when css not loaded */}
               <div id="typed" style={{ display: 'none' }}>
                 <p>
-                  🤖 npm i taro-hooks@canary^500 <br /> 🔍 Installing
-                  library...^500 <br /> 🚚 Fetching from source...^500 <br /> 🔨
+                  🤖 npm i taro-hooks^500 <br /> 🔍 Installing library...^500{' '}
+                  <br /> 🚚 Fetching from source...^500 <br /> 🔨
                   Building...^500 <br /> ✨ Done in 3.25s.
                 </p>
               </div>
@@ -72,7 +72,7 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
-      <Chat />
+      {/* <Chat /> */}
       <HomepageHeader />
       <main>
         <Intro />

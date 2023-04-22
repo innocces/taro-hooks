@@ -34,18 +34,3 @@ $ npm i @taro-hooks/plugin-react
 ## 关于 **Vue** 支持
 
 **taro-hooks** 支持 **Vue3** 主要是使用 [**@taro-hooks/plugin-vue**](https://github.com/innocces/taro-hooks/blob/next/packages/plugin-vue/README.md) 这个插件来提供了和 **React Hooks** 同样的官方 **hooks** 来完成差异化框架开发. 所以务必要保证项目内的 **Vue** 版本大于等于 **3.0**
-
-## webpack5
-
-在**taro3.5**版本中支持了**webpack5**模式. 这里需要注意的是, **taro-hooks**的 runtime 插件暂时还不支持**prebundle**. 故在使用**webpack5**模式的时候主要要关闭**prebundle**
-
-```javascript
-{
-  compiler: {
-    type: "webpack5",
-    prebundle: {
-      enable: false
-    }
-  }
-}
-```
