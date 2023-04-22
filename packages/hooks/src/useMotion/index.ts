@@ -3,10 +3,8 @@ import {
   stopDeviceMotionListening,
   onDeviceMotionChange,
   offDeviceMotionChange,
-  useTaroRef,
-  useTaroEffect,
-  useTaroState,
 } from '@tarojs/taro';
+import { useRef, useEffect, useState } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 
 import { generateGeneralFail } from '../utils/tool';
@@ -47,9 +45,9 @@ function useMotion(
     off: Off;
   },
 ] {
-  const [motion, setMotion] = useTaroState<Motion>();
-  const listenStatus = useTaroRef<boolean>(false);
-  const callbackQueen = useTaroRef<Callback[]>([]);
+  const [motion, setMotion] = useState<Motion>();
+  const listenStatus = useRef<boolean>(false);
+  const callbackQueen = useRef<Callback[]>([]);
 
   const privateListener: Callback = (callbackMotion) => {
     setMotion(callbackMotion);
@@ -109,7 +107,7 @@ function useMotion(
     }
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (autoListen) {
       manualListenMotion();
     }

@@ -1,9 +1,5 @@
-import {
-  showLoading,
-  hideLoading,
-  useTaroEffect,
-  useTaroRef,
-} from '@tarojs/taro';
+import { showLoading, hideLoading } from '@tarojs/taro';
+import { useRef, useEffect } from '@taro-hooks/core';
 
 import usePromise from '../usePromise';
 
@@ -27,9 +23,9 @@ export type Show = PromiseOptionalAction<
 export type Hide = PromiseWithoutOptionAction;
 
 function useLoading(option?: PartialLoadingOption): { show: Show; hide: Hide } {
-  const generalOption = useTaroRef<PartialLoadingOption | undefined>(option);
+  const generalOption = useRef<PartialLoadingOption | undefined>(option);
 
-  useTaroEffect(() => {
+  useEffect(() => {
     generalOption.current = option;
   }, [option]);
 

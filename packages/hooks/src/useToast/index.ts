@@ -1,4 +1,5 @@
-import { showToast, hideToast, useTaroRef, useTaroEffect } from '@tarojs/taro';
+import { showToast, hideToast } from '@tarojs/taro';
+import { useRef, useEffect } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 
 import { combineOptions, generateGeneralFail } from '../utils/tool';
@@ -16,9 +17,9 @@ export type Show = PromiseOptionalAction<ToastOption>;
 export type Hide = PromiseWithoutOptionAction;
 
 function useToast(option?: ToastOption): { show: Show; hide: Hide } {
-  const generalOption = useTaroRef<ToastOption | undefined>(option);
+  const generalOption = useRef<ToastOption | undefined>(option);
 
-  useTaroEffect(() => {
+  useEffect(() => {
     generalOption.current = option;
   }, [option]);
 

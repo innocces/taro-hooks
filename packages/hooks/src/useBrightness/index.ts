@@ -2,9 +2,8 @@ import {
   getScreenBrightness,
   setScreenBrightness,
   setKeepScreenOn,
-  useTaroState,
-  useTaroEffect,
 } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import { isNumber } from '@taro-hooks/shared';
 import usePromise from '../usePromise';
 
@@ -25,7 +24,7 @@ export type setBrightness = PromiseAction<number>;
 function useBrightness(
   keepon?: boolean,
 ): [WithUndefind<number>, setBrightness] {
-  const [brightness, changeBrightness] = useTaroState<number>();
+  const [brightness, changeBrightness] = useState<number>();
 
   const getAsync = usePromise<
     {},
@@ -50,7 +49,7 @@ function useBrightness(
     return setAsync({ value });
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     getBrightness();
     if (keepon) {
       setKeepScreenOn({ keepScreenOn: keepon });

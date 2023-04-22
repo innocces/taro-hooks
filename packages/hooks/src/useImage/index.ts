@@ -5,14 +5,13 @@ import Taro, {
   chooseImage,
   chooseMessageFile,
   editImage,
-  useTaroState,
 } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 
 import type {
   PromiseAction,
   PromiseParamsAction,
-  PromiseOptionalAction,
   UnionResult,
   ExcludeOption,
 } from '../type';
@@ -76,7 +75,7 @@ function useImage(options?: ChooseOption): [
     edit: Edit;
   },
 ] {
-  const [fileInfo, setFileInfo] = useTaroState<FileInfo>(INIT);
+  const [fileInfo, setFileInfo] = useState<FileInfo>(INIT);
 
   const chooseAsync = usePromise<
     ChooseOption,

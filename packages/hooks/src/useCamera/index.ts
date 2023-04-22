@@ -1,4 +1,5 @@
-import { createCameraContext, useTaroRef } from '@tarojs/taro';
+import { createCameraContext } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 
 import type { CameraContext, CameraFrameListener } from '@tarojs/taro';
@@ -41,7 +42,7 @@ function useCamera(): [
     listener: Listener;
   },
 ] {
-  const cameraContext = useTaroRef<CameraContext>(createCameraContext());
+  const cameraContext = useRef<CameraContext>(createCameraContext());
 
   const zoomAsync = usePromise<
     ExcludeOption<CameraContext.SetZoomOption>,

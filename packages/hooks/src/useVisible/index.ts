@@ -1,7 +1,8 @@
-import { useDidHide, useDidShow, useTaroState } from '@tarojs/taro';
+import { useDidHide, useDidShow } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 
 function useVisible(): boolean {
-  const [visible, changeVisible] = useTaroState<boolean>(true);
+  const [visible, changeVisible] = useState<boolean>(true);
 
   useDidShow(() => {
     changeVisible(true);

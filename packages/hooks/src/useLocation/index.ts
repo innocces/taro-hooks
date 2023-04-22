@@ -5,9 +5,8 @@ import Taro, {
   startLocationUpdate,
   startLocationUpdateBackground,
   stopLocationUpdate,
-  useTaroState,
-  useTaroEffect,
 } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 import {
   getLocation,
@@ -76,7 +75,7 @@ function useLocation(options?: Option): [
     off: Off;
   },
 ] {
-  const [location, setLocation] = useTaroState<Location>();
+  const [location, setLocation] = useState<Location>();
 
   const getAsync = usePromise<Option, Taro.getLocation.SuccessCallbackResult>(
     getLocation,
@@ -131,7 +130,7 @@ function useLocation(options?: Option): [
     offLocationChange(callback as Callback);
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     get();
   }, []);
 

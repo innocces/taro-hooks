@@ -79,9 +79,9 @@ const { download, upload } = useFile();
    可以使用**afterSend**监听方法获取到**xxxTask.xxxTaskPromise**.
 
    ```tsx showLineNumbers
-   import { useTaroRef } from '@tarojs/taro';
+   import { useRef } from '@tarojs/taro';
 
-   const task = useTaroRef<UploadTask.UploadTaskPromise>();
+   const task = useRef<UploadTask.UploadTaskPromise>();
 
    const afterSend = (concurrentTask) => (task.current = concurrentTask);
 

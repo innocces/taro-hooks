@@ -1,9 +1,5 @@
-import {
-  showActionSheet,
-  useTaroRef,
-  useTaroEffect,
-  useTaroState,
-} from '@tarojs/taro';
+import { showActionSheet } from '@tarojs/taro';
+import { useRef, useEffect, useState } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 
 import { combineOptions, generateGeneralFail } from '../utils/tool';
@@ -26,10 +22,10 @@ function useActionSheet(option?: ActionSheetOption): {
   tapItem: ActionSheetTapItem | undefined;
   show: Show;
 } {
-  const generalOption = useTaroRef<ActionSheetOption | undefined>(option);
-  const [tapItem, setTapItem] = useTaroState<ActionSheetTapItem>();
+  const generalOption = useRef<ActionSheetOption | undefined>(option);
+  const [tapItem, setTapItem] = useState<ActionSheetTapItem>();
 
-  useTaroEffect(() => {
+  useEffect(() => {
     generalOption.current = option;
   }, [option]);
 

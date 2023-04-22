@@ -2,22 +2,21 @@ import {
   getNetworkType,
   onNetworkStatusChange,
   offNetworkStatusChange,
-  useTaroState,
-  useTaroEffect,
 } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import { logError } from '@taro-hooks/shared';
 import usePromise from '../usePromise';
 
 export type NetworkType = keyof Taro.getNetworkType.NetworkType;
 
 function useNetworkType(autoListen = true): NetworkType {
-  const [networkType, setNetworkType] = useTaroState<NetworkType>('unknown');
+  const [networkType, setNetworkType] = useState<NetworkType>('unknown');
   const asyncGetNetworkType = usePromise<
     null,
     Taro.getNetworkType.SuccessCallbackResult
   >(getNetworkType);
 
-  useTaroEffect(() => {
+  useEffect(() => {
     asyncGetNetworkType().then(
       (response) => {
         setNetworkType(response.networkType);
@@ -33,7 +32,7 @@ function useNetworkType(autoListen = true): NetworkType {
     setNetworkType(response.networkType);
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (autoListen) {
       onNetworkStatusChange(listener);
 

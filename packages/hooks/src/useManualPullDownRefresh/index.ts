@@ -1,8 +1,5 @@
-import {
-  startPullDownRefresh,
-  stopPullDownRefresh,
-  useTaroRef,
-} from '@tarojs/taro';
+import { startPullDownRefresh, stopPullDownRefresh } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import { isNumber } from '@taro-hooks/shared';
 import usePromise from '../usePromise';
 
@@ -16,7 +13,7 @@ export type Start = PromiseOptionalAction<number>;
 export type Stop = PromiseWithoutOptionAction;
 
 function useManualPullDownRefresh(): [Start, Stop] {
-  const timer = useTaroRef<NodeJS.Timeout>();
+  const timer = useRef<NodeJS.Timeout>();
 
   const startAsync = usePromise<{}>(startPullDownRefresh);
 

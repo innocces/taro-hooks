@@ -6,8 +6,8 @@ sidebar_position: 6
 useRequest 提供了一个 `options.refreshDeps` 参数，当它的值变化后，会重新触发请求。
 
 ```jsx showLineNumbers
-import { useTaroState } from '@tarojs/taro';
-const [userId, setUserId] = useTaroState('1');
+import { useState } from '@tarojs/taro';
+const [userId, setUserId] = useState('1');
 
 const { data, run } = useRequest(() => getUserSchool(userId), {
   refreshDeps: [userId],
@@ -19,12 +19,12 @@ const { data, run } = useRequest(() => getUserSchool(userId), {
 与下面代码实现功能完全一致
 
 ```jsx showLineNumbers
-import { useTaroState, useTaroEffect } from '@tarojs/taro';
-const [userId, setUserId] = useTaroState('1');
+import { useState, useEffect } from '@tarojs/taro';
+const [userId, setUserId] = useState('1');
 
 const { data, refresh } = useRequest(() => getUserSchool(userId));
 
-useTaroEffect(() => {
+useEffect(() => {
   refresh();
 }, [userId]);
 ```

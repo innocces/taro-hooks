@@ -1,4 +1,5 @@
-import { canIUse, useTaroEffect, useTaroState } from '@tarojs/taro';
+import { canIUse } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 
 export type SetAPI = (scheme: string) => boolean;
 
@@ -10,9 +11,9 @@ function useAPICheck(scheme: string): [boolean, SetAPI] {
     return valid;
   };
 
-  const [apiValid, setApiValid] = useTaroState<boolean>(canIUse(scheme));
+  const [apiValid, setApiValid] = useState<boolean>(canIUse(scheme));
 
-  useTaroEffect(() => {
+  useEffect(() => {
     scheme && setAPI(scheme);
   }, [scheme]);
 

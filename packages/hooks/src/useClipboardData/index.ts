@@ -1,9 +1,5 @@
-import {
-  getClipboardData,
-  setClipboardData,
-  useTaroState,
-  useTaroEffect,
-} from '@tarojs/taro';
+import { getClipboardData, setClipboardData } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import { strictOf, isString, isUndef, logError } from '@taro-hooks/shared';
 import usePromise from '../usePromise';
 
@@ -23,7 +19,7 @@ export type SetOption = ExcludeOption<Taro.setClipboardData.Option>;
 export type Set = PromiseAction<any>;
 
 function useClipboardData(): [WithUndefind<string>, { get: Get; set: Set }] {
-  const [clipboardData, changeClipborardData] = useTaroState<string>();
+  const [clipboardData, changeClipborardData] = useState<string>();
 
   const getAsync = usePromise<{}, GetResult>(getClipboardData);
 
@@ -57,7 +53,7 @@ function useClipboardData(): [WithUndefind<string>, { get: Get; set: Set }] {
     });
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     get();
   }, []);
 

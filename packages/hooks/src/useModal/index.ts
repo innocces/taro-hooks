@@ -1,4 +1,5 @@
-import { showModal, useTaroRef, useTaroEffect } from '@tarojs/taro';
+import { showModal } from '@tarojs/taro';
+import { useRef, useEffect } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 
 import { combineOptions, generateGeneralFail } from '../utils/tool';
@@ -13,9 +14,9 @@ export type Show = PromiseOptionalAction<
 >;
 
 function useModal(option?: ShowModalOption): Show {
-  const generalOption = useTaroRef<ShowModalOption | undefined>(option);
+  const generalOption = useRef<ShowModalOption | undefined>(option);
 
-  useTaroEffect(() => {
+  useEffect(() => {
     generalOption.current = option;
   }, [option]);
 

@@ -1,5 +1,5 @@
 // private usePromise. do not use in outside
-import { useTaroEffect, useTaroRef, useTaroState } from '@tarojs/taro';
+import { useEffect, useRef, useState } from '@taro-hooks/core';
 import { isFunction, escapeState, ISVUE, ISREACT } from '@taro-hooks/shared';
 import { generateGeneralFail } from '../utils/tool';
 
@@ -40,14 +40,12 @@ function useActivePromise<T, S = TaroGeneral.CallbackResult>(
       });
     };
 
-  const [exector, setExector] = useTaroState<PromiseOptionalAction<T, S>>(() =>
+  const [exector, setExector] = useState<PromiseOptionalAction<T, S>>(() =>
     generator(context),
   );
-  const promiseLike = useTaroRef<PromiseOptionalAction<T, S>>(
-    generator(context),
-  );
+  const promiseLike = useRef<PromiseOptionalAction<T, S>>(generator(context));
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (context && ISREACT) {
       setExector(() => generator(context));
     }

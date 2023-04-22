@@ -9,8 +9,8 @@ import Taro, {
   navigateBackMiniProgram,
   openEmbeddedMiniProgram,
   exitMiniProgram,
-  useTaroRef,
 } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 
 import type { RouterInfo } from '@tarojs/taro';
 
@@ -69,7 +69,7 @@ function useRouter<R extends RecordData>(): [
     exit: Exit;
   },
 ] {
-  const router = useTaroRef<Omit<Route<R>, 'from'>>(useTaroRouter());
+  const router = useRef<Omit<Route<R>, 'from'>>(useTaroRouter());
   const from = useFrom();
 
   const navigateToAsync =
