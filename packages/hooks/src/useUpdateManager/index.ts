@@ -17,15 +17,15 @@ function useUpdateManager(callback: Callback) {
 
   useEffect(() => {
     if (updateManager.current) {
-      updateManager.current.onCheckForUpdate((res) => {
+      updateManager.current.onCheckForUpdate?.((res) => {
         updateInfo.current.hasUpdate = res.hasUpdate;
       });
 
-      updateManager.current.onUpdateFailed(() => {
+      updateManager.current.onUpdateFailed?.(() => {
         updateInfo.current.error = true;
       });
 
-      updateManager.current.onUpdateReady(() => {
+      updateManager.current.onUpdateReady?.(() => {
         updateInfo.current.ready = true;
       });
     }
