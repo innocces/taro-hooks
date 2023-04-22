@@ -1,9 +1,5 @@
-import {
-  vibrateLong,
-  vibrateShort,
-  useTaroRef,
-  useTaroEffect,
-} from '@tarojs/taro';
+import { vibrateLong, vibrateShort } from '@tarojs/taro';
+import { useRef, useEffect } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 import type { PromiseOptionalAction, Noop } from '../type';
 
@@ -21,7 +17,7 @@ function useVibrate(
   interval?: boolean,
   gap = VIBRATEINTERVAL.DEFAULT,
 ): { vibrate: Vibrate; clear: Clear } {
-  const timer = useTaroRef<NodeJS.Timeout>();
+  const timer = useRef<NodeJS.Timeout>();
 
   const clear: Clear = () => {
     if (timer.current) {
@@ -50,7 +46,7 @@ function useVibrate(
     });
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     return () => {
       if (timer.current && interval) {
         clear();

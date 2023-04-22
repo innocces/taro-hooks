@@ -1,4 +1,4 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import type { Page } from '@tarojs/taro';
 import usePage from '../usePage';
 
@@ -9,7 +9,7 @@ function useFrom(): Page | null {
     return stackLength > 1 ? pageStack[stackLength - 2] : null;
   };
 
-  return useTaroRef(generateFromInfo()).current;
+  return useRef(generateFromInfo()).current;
 }
 
 export default useFrom;

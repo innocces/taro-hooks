@@ -5,9 +5,9 @@ import Taro, {
   createVideoContext,
   getVideoInfo,
   openVideoEditor,
-  useTaroState,
   useReady,
 } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import type { VideoContext } from '@tarojs/taro';
 import type {
   ExcludeOption,
@@ -66,7 +66,7 @@ function useVideo(
     compress: Compress;
   },
 ] {
-  const [videoContext, setVideoContext] = useTaroState<VideoContext>();
+  const [videoContext, setVideoContext] = useState<VideoContext>();
 
   useReady(() => {
     setVideoContext(createVideoContext(id, option?.component));

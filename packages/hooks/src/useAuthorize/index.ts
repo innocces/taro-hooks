@@ -3,9 +3,8 @@ import {
   openSetting,
   authorize as taroAuthorize,
   authorizeForMiniProgram,
-  useTaroState,
-  useTaroEffect,
 } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import type { AuthSetting, SubscriptionsSetting } from '@tarojs/taro';
 import useVisible from '../useVisible';
 import usePromise from '../usePromise';
@@ -40,10 +39,10 @@ function useAuthorize(withSubscriptions?: boolean): {
   open: Open;
 } {
   const visible = useVisible();
-  const [authSetting, setAuthSetting] = useTaroState<WithMiniAuthSetting>({
+  const [authSetting, setAuthSetting] = useState<WithMiniAuthSetting>({
     mini: {},
   });
-  const [subscriptionsSetting, setSubscriptionsSetting] = useTaroState<
+  const [subscriptionsSetting, setSubscriptionsSetting] = useState<
     SubscriptionsSetting | {}
   >({});
 
@@ -90,7 +89,7 @@ function useAuthorize(withSubscriptions?: boolean): {
     });
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     get(withSubscriptions);
   }, [visible]);
 

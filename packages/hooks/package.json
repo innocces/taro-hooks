@@ -57,17 +57,19 @@
     "querystring": "^0.2.1"
   },
   "devDependencies": {
-    "@tarojs/taro": "3.5.7",
-    "@types/node": "^18.11.9"
+    "@tarojs/taro": "^3.6.5",
+    "@tarojs/taro-h5": "^3.6.5",
+    "@types/node": "^18.15.12"
   },
   "peerDependencies": {
-    "@tarojs/taro": ">= 3.4.x"
+    "@tarojs/taro": ">= 3.4.x",
+    "@tarojs/taro-h5": ">= 3.4.x"
   },
   "optionalDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "vue": ">3.0",
     "@taro-hooks/plugin-react": ">=2.0",
-    "@taro-hooks/plugin-vue": ">=2.0"
+    "@taro-hooks/plugin-vue": ">=2.0",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "vue": ">3.0"
   },
   "engines": {
     "node": ">=12.0.0"

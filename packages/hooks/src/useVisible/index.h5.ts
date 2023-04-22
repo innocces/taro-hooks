@@ -1,13 +1,14 @@
-import { useTaroState, useTaroEffect, useDidHide } from '@tarojs/taro';
+import { useDidHide } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 
 function useVisible(): boolean {
-  const [visible, changeVisible] = useTaroState<boolean>(true);
+  const [visible, changeVisible] = useState<boolean>(true);
   const listenVisible = () => {
     const visibleState = document.visibilityState;
     changeVisible(visibleState === 'visible');
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     window.addEventListener('visibilitychange', listenVisible, false);
     window.addEventListener('focus', listenVisible, false);
     window.addEventListener('blur', listenVisible, false);

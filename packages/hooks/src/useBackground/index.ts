@@ -1,8 +1,5 @@
-import {
-  setBackgroundColor,
-  setBackgroundTextStyle,
-  useTaroEffect,
-} from '@tarojs/taro';
+import { setBackgroundColor, setBackgroundTextStyle } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 
 import type {
@@ -30,7 +27,7 @@ function useBackground(option?: Option): [SetColor, SetStyle] {
     return setStyleAsync({ textStyle });
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (option) {
       const { textStyle, ...colorOption } = option;
       setColor(colorOption);

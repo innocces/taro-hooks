@@ -4,9 +4,8 @@ import {
   setNavigationBarColor,
   setNavigationBarTitle,
   hideHomeButton,
-  useTaroRef,
-  useTaroEffect,
 } from '@tarojs/taro';
+import { useRef, useEffect } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 
 import { combineOptions, generateGeneralFail } from '../utils/tool';
@@ -48,7 +47,7 @@ function useNavigationBar(option?: NavigationBarOption): {
   toggleLoading: ToggleLoading;
   hideButton: HideButton;
 } {
-  const generalOption = useTaroRef<NavigationBarOption | undefined>(option);
+  const generalOption = useRef<NavigationBarOption | undefined>(option);
 
   const hideButton: HideButton = usePromise(hideHomeButton);
 
@@ -109,7 +108,7 @@ function useNavigationBar(option?: NavigationBarOption): {
     return setColorAsync(setColorOption);
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (option) {
       const autoRun: Promise<TaroGeneral.CallbackResult>[] = [];
 

@@ -1,4 +1,4 @@
-import { useTaroRef } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import { logError, log } from '@taro-hooks/shared';
 import { typeOf, isProd } from '../utils/tool';
 import type { CallbackResult } from '../type';
@@ -33,6 +33,6 @@ export function createUseInfoHook<T, S = undefined, R = CallbackResult<T>>(
       }
     };
 
-    return useTaroRef<T>(safeExcute()).current;
+    return useRef<T>(safeExcute()).current;
   };
 }

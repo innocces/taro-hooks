@@ -1,4 +1,5 @@
-import { getApp, useTaroState, useTaroRef, useTaroEffect } from '@tarojs/taro';
+import { getApp } from '@tarojs/taro';
+import { useRef, useEffect, useState } from '@taro-hooks/core';
 import { isUndef, escapeState } from '@taro-hooks/shared';
 
 import type { App } from '@tarojs/taro';
@@ -21,15 +22,15 @@ function useApp<R extends RecordData = RecordData, T extends App = App>(
   globalData: GlobalData<R>;
   setGlobalData: SetGlobalData<GlobalData<R>>;
 } {
-  const appInstance = useTaroRef<Instance<T>>(
+  const appInstance = useRef<Instance<T>>(
     getApp<T>({ allowDefault: Boolean(allDefault) }),
   );
 
-  const [globalData, setGlobalData] = useTaroState<GlobalData<R>>(
+  const [globalData, setGlobalData] = useState<GlobalData<R>>(
     generateGlobalDataFromAppInstance(appInstance.current) as GlobalData<R>,
   );
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (appInstance.current) {
       setGlobalData(generateGlobalDataFromAppInstance(appInstance.current));
     }

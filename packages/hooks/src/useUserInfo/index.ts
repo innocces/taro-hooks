@@ -1,8 +1,8 @@
 import {
   getUserInfo as taroGetUserInfo,
   getUserProfile as taroGetUserProfile,
-  useTaroState,
 } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 import useAuthorize from '../useAuthorize';
 import { generateGeneralFail } from '../utils/tool';
@@ -31,7 +31,7 @@ function useUserInfo(): [
   UserInfo,
   { getUserInfo: GetInfo; getUserProfile: GetProfile },
 ] {
-  const [userInfo, setUserInfo] = useTaroState<UserInfo>();
+  const [userInfo, setUserInfo] = useState<UserInfo>();
   const { get } = useAuthorize();
 
   const getInfo = usePromise<

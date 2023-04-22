@@ -1,9 +1,8 @@
 import Taro, {
   createInnerAudioContext,
   getAvailableAudioSources,
-  useTaroRef,
-  useTaroEffect,
 } from '@tarojs/taro';
+import { useRef, useEffect } from '@taro-hooks/core';
 import { setInnerAudioOption } from './utils';
 import usePromise from '../usePromise';
 import type { InnerAudioContext } from '@tarojs/taro';
@@ -50,8 +49,8 @@ function useAudio(initOption = INITOPTION): [
     play;
   },
 ] {
-  const audioContext = useTaroRef<InnerAudioContext>(createInnerAudioContext());
-  const sources = useTaroRef<Sources>();
+  const audioContext = useRef<InnerAudioContext>(createInnerAudioContext());
+  const sources = useRef<Sources>();
 
   const setOption: SetOption = usePromise<Option>(setInnerAudioOption);
   const getSourceAsync = usePromise<
@@ -66,7 +65,7 @@ function useAudio(initOption = INITOPTION): [
     });
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     setOption({ ...initOption, context: audioContext.current });
     getSources();
   }, [initOption]);

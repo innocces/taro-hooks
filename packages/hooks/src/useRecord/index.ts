@@ -1,4 +1,5 @@
-import { getRecorderManager, useTaroRef } from '@tarojs/taro';
+import { getRecorderManager } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import usePromise from '../usePromise';
 import type { RecorderManager } from '@tarojs/taro';
 import type {
@@ -21,7 +22,7 @@ function useRecord(): [
     stop: Stop;
   },
 ] {
-  const recorderManager = useTaroRef<RecorderManager>(getRecorderManager());
+  const recorderManager = useRef<RecorderManager>(getRecorderManager());
 
   const start: Start = usePromise<ExcludeOption<RecorderManager.StartOption>>(
     recorderManager.current.start,

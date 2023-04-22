@@ -1,9 +1,5 @@
-import {
-  createMapContext,
-  useTaroState,
-  useReady,
-  useTaroEffect,
-} from '@tarojs/taro';
+import { createMapContext, useReady } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import { isNumber, ISREACT } from '@taro-hooks/shared';
 import usePromise from '../utils/useActivePromise';
 
@@ -61,8 +57,8 @@ function useMap<R = TaroGeneral.IAnyObject>(
     toggleMarkers: ToggleMarkers;
   },
 ] {
-  const [mapContext, setMapContext] = useTaroState<MapContext>();
-  const [, forceUpdate] = useTaroState<{}>({});
+  const [mapContext, setMapContext] = useState<MapContext>();
+  const [, forceUpdate] = useState<{}>({});
 
   useReady(() => {
     setMapContext(
@@ -70,7 +66,7 @@ function useMap<R = TaroGeneral.IAnyObject>(
     );
   });
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (mapContext && ISREACT) {
       forceUpdate({});
     }

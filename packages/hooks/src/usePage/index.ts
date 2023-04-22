@@ -1,4 +1,5 @@
-import { getCurrentInstance, getCurrentPages, useTaroRef } from '@tarojs/taro';
+import { getCurrentInstance, getCurrentPages } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import type { Current, Page } from '@tarojs/taro';
 
 function usePage(scope?: string): [
@@ -16,8 +17,8 @@ function usePage(scope?: string): [
     return getCurrentInstance();
   };
 
-  const pageStack = useTaroRef<Page[]>(getCurrentPages());
-  const pageInstance = useTaroRef<Current>(getPageInstance());
+  const pageStack = useRef<Page[]>(getCurrentPages());
+  const pageInstance = useRef<Current>(getPageInstance());
 
   return [
     pageStack.current.length,

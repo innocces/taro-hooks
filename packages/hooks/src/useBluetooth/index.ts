@@ -8,10 +8,8 @@ import {
   getBluetoothDevices,
   getBluetoothAdapterState,
   closeBluetoothAdapter,
-  useTaroState,
-  useTaroRef,
-  useTaroEffect,
 } from '@tarojs/taro';
+import { useRef, useEffect, useState } from '@taro-hooks/core';
 import { isBoolean, isString } from '@taro-hooks/shared';
 import usePromise from '../usePromise';
 import type {
@@ -75,11 +73,9 @@ function useBluetooth(): [
     toggleDiscovery: ToggleDiscovery;
   },
 ] {
-  const adapter = useTaroRef<Adapter>();
-  const [devices, setDevices] = useTaroState<Devices>([]);
-  const [connectedDevices, setConnectedDevices] = useTaroState<ConnectDevices>(
-    [],
-  );
+  const adapter = useRef<Adapter>();
+  const [devices, setDevices] = useState<Devices>([]);
+  const [connectedDevices, setConnectedDevices] = useState<ConnectDevices>([]);
 
   const getState: GetState = usePromise<{}, AdapterState>(
     getBluetoothAdapterState,
@@ -129,7 +125,7 @@ function useBluetooth(): [
     return closeAdapter();
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     toggleAdapter(true);
 
     return () => {

@@ -1,4 +1,5 @@
-import { createSelectorQuery, useTaroRef } from '@tarojs/taro';
+import { createSelectorQuery } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import type { NodesRef, SelectorQuery } from '@tarojs/taro';
 import type { PromiseParamsAction, PromiseAction } from '../type';
 import { generateGeneralFail } from '../utils/tool';
@@ -37,7 +38,7 @@ function useSelectorQuery(): [
     getScrollOffset: GetScrollOffset;
   },
 ] {
-  const query = useTaroRef<SelectorQuery>(createSelectorQuery());
+  const query = useRef<SelectorQuery>(createSelectorQuery());
 
   const querySelector = (selector: string) => query.current.select(selector);
   const querySelectorAll = (selector: string) =>

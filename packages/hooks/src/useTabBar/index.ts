@@ -7,8 +7,8 @@ import {
   setTabBarBadge,
   removeTabBarBadge,
   setTabBarItem,
-  useTaroRef,
 } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 import { isNumber, isObject } from '@taro-hooks/shared';
 import usePromise from '../usePromise';
 import useApp from '../useApp';
@@ -47,8 +47,8 @@ function useTabBar(): {
   setStyle: SetStyle;
   setItem: SetItem;
 } {
-  const memoRedDot = useTaroRef<RecordData<string, boolean | undefined>>({});
-  const memoVisible = useTaroRef<boolean>(true);
+  const memoRedDot = useRef<RecordData<string, boolean | undefined>>({});
+  const memoVisible = useRef<boolean>(true);
   const { app } = useApp();
 
   const showRedDotAsync =

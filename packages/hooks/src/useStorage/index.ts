@@ -4,9 +4,8 @@ import Taro, {
   getStorageInfo,
   removeStorage,
   clearStorage,
-  useTaroEffect,
-  useTaroState,
 } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import { logError, escapeState, isString } from '@taro-hooks/shared';
 import usePromise from '../usePromise';
 import getStorageSpaceInfo from './utils/index';
@@ -39,8 +38,7 @@ const initStorageInfo: StorageInfo = {
 };
 
 function useStorage() {
-  const [storageInfo, setStorageInfo] =
-    useTaroState<StorageInfo>(initStorageInfo);
+  const [storageInfo, setStorageInfo] = useState<StorageInfo>(initStorageInfo);
 
   async function get<T = RecordData>(
     key?: string | string[],
@@ -128,7 +126,7 @@ function useStorage() {
     }
   };
 
-  useTaroEffect(() => {
+  useEffect(() => {
     generateStorageInfo();
   }, []);
 

@@ -1,4 +1,5 @@
-import { getUpdateManager, useTaroRef, useTaroEffect } from '@tarojs/taro';
+import { getUpdateManager } from '@tarojs/taro';
+import { useRef, useEffect } from '@taro-hooks/core';
 
 import type { UpdateManager } from '@tarojs/taro';
 
@@ -11,10 +12,10 @@ export type UpdateInfo = {
 export type Callback = (manager: UpdateManager, updateInfo: UpdateInfo) => void;
 
 function useUpdateManager(callback: Callback) {
-  const updateManager = useTaroRef<UpdateManager>(getUpdateManager());
-  const updateInfo = useTaroRef<UpdateInfo>({});
+  const updateManager = useRef<UpdateManager>(getUpdateManager());
+  const updateInfo = useRef<UpdateInfo>({});
 
-  useTaroEffect(() => {
+  useEffect(() => {
     if (updateManager.current) {
       updateManager.current.onCheckForUpdate((res) => {
         updateInfo.current.hasUpdate = res.hasUpdate;
@@ -30,7 +31,7 @@ function useUpdateManager(callback: Callback) {
     }
   }, [updateManager.current]);
 
-  useTaroEffect(() => {
+  useEffect(() => {
     callback?.(updateManager.current, updateInfo.current);
   }, [updateInfo.current]);
 }
