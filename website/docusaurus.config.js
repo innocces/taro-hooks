@@ -261,6 +261,10 @@ const config = {
                 href: 'https://github.com/innocces/taro-hooks',
               },
               {
+                label: 'Discord',
+                href: 'https://discord.gg/XrrbdDCpKg',
+              },
+              {
                 label: '使用案例',
                 href: 'https://github.com/taro-hooks/user-cases',
               },
@@ -272,6 +276,10 @@ const config = {
               {
                 label: 'taroify',
                 href: 'https://github.com/mallfoundry/taroify',
+              },
+              {
+                label: 'dumi-theme-chakra',
+                href: 'https://github.com/innocces/dumi-theme-chakra',
               },
               {
                 label: 'general-tools',

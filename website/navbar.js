@@ -25,6 +25,12 @@ module.exports = [
     ],
   },
   {
+    href: 'https://discord.gg/XrrbdDCpKg',
+    position: 'right',
+    className: 'header-nav-link header-discord-link',
+    'aria-label': 'Discord link',
+  },
+  {
     href: 'https://github.com/innocces/taro-hooks/tree/next',
     position: 'right',
     className: 'header-nav-link header-github-link',

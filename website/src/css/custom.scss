@@ -80,6 +80,11 @@
     no-repeat;
 }
 
+.header-discord-link::before {
+  content: '';
+  background: url("https://api.iconify.design/logos:discord-icon.svg?color=%23888888") center center no-repeat;
+}
+
 // common-scss
 .general-content {
   max-width: 1190px;
