@@ -11,11 +11,12 @@ import type {
   PromiseOptionalAction,
   ExcludeOption,
   WithUndefind,
+  UnionCallBackResult,
 } from '../type';
 
 export type GetInfo = PromiseOptionalAction<
   ExcludeOption<Taro.getUserInfo.Option>,
-  Taro.getUserInfo.SuccessCallbackResult
+  UnionCallBackResult<Taro.getUserInfo.SuccessCallbackResult>
 >;
 
 export type GetProfile = PromiseOptionalAction<

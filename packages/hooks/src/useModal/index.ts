@@ -4,7 +4,11 @@ import usePromise from '../usePromise';
 
 import { combineOptions, generateGeneralFail } from '../utils/tool';
 
-import type { PromiseOptionalAction, ExcludeOption } from '../type';
+import type {
+  PromiseOptionalAction,
+  ExcludeOption,
+  PromiseResponse,
+} from '../type';
 
 export type ShowModalOption = Partial<ExcludeOption<Taro.showModal.Option>>;
 
@@ -20,7 +24,9 @@ function useModal(option?: ShowModalOption): Show {
     generalOption.current = option;
   }, [option]);
 
-  const showModalAsync = usePromise<ShowModalOption>(showModal);
+  const showModalAsync = usePromise<ShowModalOption, PromiseResponse<Show>>(
+    showModal,
+  );
 
   const show: Show = (option) => {
     if (!option && !generalOption.current)

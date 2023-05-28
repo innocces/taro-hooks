@@ -89,10 +89,10 @@ function useMotion(
   const stopAsync = usePromise(stopDeviceMotionListening);
 
   const stop: Stop = () => {
-    return stopAsync().then((res) => {
+    return stopAsync().then(() => {
       // clear callbackQueen
       callbackQueen.current?.map?.((callback) => off(callback));
-      return res;
+      return true;
     });
   };
 
