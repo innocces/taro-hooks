@@ -25,7 +25,7 @@ export default () => {
 
   const handleGet = () => {
     get<string>(generateKey()).then((res) => {
-      show({ title: res ?? '获取失败' });
+      show({ title: (res as string) ?? '获取失败' });
     });
   };
 
