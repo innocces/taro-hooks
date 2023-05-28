@@ -39,7 +39,7 @@ export type Dispatch<A> = (action: A) => void;
  */
 export function useEffect(
   create: () => (() => void) | void,
-  deps: Array<unknown> | void | null,
+  deps?: Array<unknown> | void | null,
 ): void {
   log(
     'vue.ver useEffect is use watch to simulation.',
@@ -123,7 +123,7 @@ export function useWatchEffect(create: () => (() => void) | void): void {
  */
 export function useLayoutEffect(
   create: () => (() => void) | void,
-  deps: Array<unknown> | void | null,
+  deps?: Array<unknown> | void | null,
 ): void {
   log('vue.ver useLayoutEffect is use watch + nextTick to simulation.');
 
@@ -179,7 +179,7 @@ export function useLayoutEffect(
  */
 export function useCallback<T>(
   callback: T,
-  deps: Array<unknown> | void | null,
+  deps?: Array<unknown> | void | null,
 ): T {
   log('vue.ver useCallback is use watch to simulation.');
 
@@ -214,7 +214,7 @@ export function useCallback<T>(
  */
 export function useMemo<T>(
   create: () => T,
-  deps: Array<unknown> | void | null,
+  deps?: Array<unknown> | void | null,
 ): Ref<T> {
   log('vue.ver useMemo is use watch to simulation.');
 
@@ -273,7 +273,7 @@ export function useRef<T>(
  * @returns {[state, dispatch]} state and dispatch
  */
 export function useState<S>(
-  initialState: (() => S) | S,
+  initialState?: (() => S) | S,
 ): [Ref<S>, Dispatch<BasicStateAction<S>>] {
   log('vue.ver useState is use customRef to simulation.');
 
