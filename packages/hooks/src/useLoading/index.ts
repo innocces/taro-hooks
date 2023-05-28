@@ -7,6 +7,7 @@ import type {
   ExcludeOption,
   PromiseOptionalAction,
   PromiseWithoutOptionAction,
+  PromiseResponse,
 } from '../type';
 
 import { generateGeneralFail, combineOptions } from '../utils/tool';
@@ -29,7 +30,10 @@ function useLoading(option?: PartialLoadingOption): { show: Show; hide: Hide } {
     generalOption.current = option;
   }, [option]);
 
-  const showLoadingAsync = usePromise<PartialLoadingOption>(showLoading);
+  const showLoadingAsync = usePromise<
+    PartialLoadingOption,
+    PromiseResponse<Show>
+  >(showLoading);
 
   const show: Show = (option) => {
     if (!option && !generalOption.current)

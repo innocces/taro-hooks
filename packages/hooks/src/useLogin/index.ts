@@ -7,6 +7,7 @@ import usePromise from '../usePromise';
 import { generateGeneralFail } from '../utils/tool';
 import type {
   ExcludeOption,
+  UnionCallBackResult,
   PromiseParamsAction,
   PromiseWithoutOptionAction,
 } from '../type';
@@ -14,7 +15,7 @@ import type {
 export type Check = PromiseWithoutOptionAction;
 export type Login = PromiseParamsAction<
   (needCheck?: boolean, plugin?: boolean, timeout?: number) => void,
-  Taro.login.SuccessCallbackResult
+  UnionCallBackResult<Taro.login.SuccessCallbackResult>
 >;
 
 function useLogin(): { check: Check; login: Login } {
