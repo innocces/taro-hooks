@@ -17,6 +17,7 @@ import type {
   PromiseParamsAction,
   PromiseOptionalAction,
   UnionResult,
+  UnionCallBackResult,
 } from '../type';
 import { generateGeneralFail } from '../utils/tool';
 
@@ -42,7 +43,7 @@ function useStorage() {
 
   async function get<T = RecordData>(
     key?: string | string[],
-  ): Promise<UnionResult<T>> {
+  ): Promise<UnionCallBackResult<T>> {
     try {
       let getKeys: string[] = [];
       if (!key) {
