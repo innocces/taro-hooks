@@ -53,8 +53,8 @@
   </block>
 </template>
 
-<script>
-import { useTaroState, useTaroReducer } from '@tarojs/taro';
+<script lang="ts">
+import { useState, useReducer } from '@taro-hooks/core';
 import Item from './Item.vue';
 
 // 1. Form (Object)
@@ -123,10 +123,7 @@ export default {
   },
   setup() {
     // 1. Form (Object)
-    const [formState, formDispatch] = useTaroReducer(
-      formReducer,
-      initialFormState,
-    );
+    const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
     const handleIncrementAge = () => {
       formDispatch({ type: 'incremented_age' });
@@ -137,10 +134,7 @@ export default {
     };
 
     // 2. Todo list (Array)
-    const [tasks, taskDispatch] = useTaroReducer(
-      tasksReducer,
-      initialTaskState,
-    );
+    const [tasks, taskDispatch] = useReducer(tasksReducer, initialTaskState);
     function handleAddTask(text) {
       taskDispatch({
         type: 'added',
@@ -163,7 +157,7 @@ export default {
         id: taskId,
       });
     }
-    const [currentAddTask, setCurrentAddTask] = useTaroState(null);
+    const [currentAddTask, setCurrentAddTask] = useState(null);
 
     return {
       formState,

@@ -56,13 +56,13 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroState, useTaroEffect, useTaroRef } from '@tarojs/taro';
+import { useState, useEffect, useRef } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import { useLocation, useModal } from 'taro-hooks';
 
-const [locationInfo, setLocationInfo] = useTaroState({});
-const updateStatus = useTaroRef<boolean>(false);
-const listenStatus = useTaroRef<boolean>(false);
+const [locationInfo, setLocationInfo] = useState({});
+const updateStatus = useRef<boolean>(false);
+const listenStatus = useRef<boolean>(false);
 
 const show = useModal({ title: 'useLocation', mask: true, showCancel: false });
 
@@ -73,7 +73,7 @@ const [location, { get, choose, choosePOI, open, toggleUpdate, on, off }] =
     type: 'gcj02',
   });
 
-useTaroEffect(() => {
+useEffect(() => {
   setLocationInfo(escapeState(location));
 }, [location]);
 

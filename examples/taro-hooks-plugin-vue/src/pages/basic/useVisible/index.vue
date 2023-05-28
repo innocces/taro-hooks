@@ -13,15 +13,15 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroEffect, useTaroState } from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
 import { useVisible } from 'taro-hooks';
 import { escapeState } from '@taro-hooks/shared';
 
 const visible = useVisible();
 type Item = { timestamp: number; status: boolean };
-const [subscribeList, setSubscribeList] = useTaroState<Item[]>([]);
+const [subscribeList, setSubscribeList] = useState<Item[]>([]);
 
-useTaroEffect(() => {
+useEffect(() => {
   const currentList = escapeState(subscribeList);
   setSubscribeList([
     ...currentList,

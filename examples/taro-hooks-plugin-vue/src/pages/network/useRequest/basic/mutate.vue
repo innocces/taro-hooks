@@ -24,7 +24,7 @@
 
 <script>
 import { showToast } from '@tarojs/taro';
-import { useTaroRef, useTaroState } from '@tarojs/taro';
+import { useRef, useState } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 import { escapeState } from '@taro-hooks/shared';
 
@@ -54,9 +54,9 @@ function editUsername() {
 export default {
   setup() {
     // store last username
-    const lastRef = useTaroRef();
+    const lastRef = useRef();
 
-    const [state, setState] = useTaroState('');
+    const [state, setState] = useState('');
 
     // get username
     const getUserNameRequest = useRequest(getUsername);

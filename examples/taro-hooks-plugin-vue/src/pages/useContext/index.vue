@@ -20,7 +20,7 @@
 
 <script>
 import { escapeState } from '@taro-hooks/shared';
-import { useTaroState, useTaroContext, useTaroMemo } from '@tarojs/taro';
+import { useState, useContext, useMemo } from '@taro-hooks/core';
 import ThemeContent from './ThemeContent.vue';
 import { themeContext, userContext } from './context';
 
@@ -36,20 +36,20 @@ export default {
   },
   setup() {
     // 1. Updating a value via context
-    const [theme, setTheme] = useTaroState({ theme: 'light' });
+    const [theme, setTheme] = useState({ theme: 'light' });
 
-    const currentTheme = useTaroContext(themeContext);
+    const currentTheme = useContext(themeContext);
 
     const handleChange = (event) => {
       setTheme({ theme: event ? 'dark' : 'light' });
     };
 
-    const memoTheme = useTaroMemo(() => {
+    const memoTheme = useMemo(() => {
       return escapeState(theme).theme === 'dark';
     }, [theme]);
 
     // 2. Updating an object via context
-    const [user, setUser] = useTaroState({ name: null });
+    const [user, setUser] = useState({ name: null });
     const useProviderValue = {
       user,
       setUser,

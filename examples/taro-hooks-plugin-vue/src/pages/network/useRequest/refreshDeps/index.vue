@@ -23,7 +23,7 @@
 
 <script>
 import { useRequest } from 'taro-hooks';
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 
 const userSchool = (id) => {
@@ -54,8 +54,8 @@ export default {
       { value: '2', name: 'user 2' },
       { value: '3', name: 'user 3' },
     ];
-    const [userId, setUserId] = useTaroState('1');
-    const [open, setOpen] = useTaroState(false);
+    const [userId, setUserId] = useState('1');
+    const [open, setOpen] = useState(false);
     const request = useRequest(() => getUserSchool(escapeState(userId)), {
       refreshDeps: [userId],
     });

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 import Mock from 'mockjs';
 
@@ -38,7 +38,7 @@ function getUsername(id) {
 
 export default {
   setup() {
-    const [state] = useTaroState('');
+    const [state] = useState('');
     const request = useRequest(getUsername, {
       defaultParams: ['1'],
     });

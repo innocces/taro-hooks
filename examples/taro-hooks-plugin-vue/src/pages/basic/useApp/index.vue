@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { useApp, useModal } from 'taro-hooks';
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import Mock from 'mockjs';
 
 type GlobalData = Record<'framework' | 'package' | 'basic', string>;
@@ -24,7 +24,7 @@ const show = useModal({
   mask: true,
 });
 
-useTaroEffect(() => {
+useEffect(() => {
   const { window, pages } = app?.config ?? {};
   show({
     title: 'APP',

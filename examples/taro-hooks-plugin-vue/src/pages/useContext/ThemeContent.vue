@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import { useTaroContext } from '@tarojs/taro';
+import { useContext } from '@taro-hooks/core';
 import { themeContext, userContext } from './context';
 
 export default {
   setup() {
-    const currentThemeContext = useTaroContext(themeContext);
-    const currentUserContext = useTaroContext(userContext);
+    const currentThemeContext = useContext(themeContext);
+    const currentUserContext = useContext(userContext);
     return {
       theme: currentThemeContext,
       user: currentUserContext,

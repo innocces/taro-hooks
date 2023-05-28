@@ -14,8 +14,9 @@
   </block>
 </template>
 
-<script>
-import { useTaroState, useTaroEffect, showToast } from '@tarojs/taro';
+<script lang="ts">
+import { showToast } from '@tarojs/taro';
+import { useState, useEffect } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 
 const subsQueue = {};
@@ -47,21 +48,21 @@ const chatAPI = {
 
 export default {
   setup() {
-    const [count, setCount] = useTaroState(0);
+    const [count, setCount] = useState(0);
     function handleClick() {
       setCount(escapeState(count) + 1);
     }
 
-    useTaroEffect(() => {
+    useEffect(() => {
       showToast({
         title: 'You clicked' + escapeState(count) + 'times',
         duration: 2000,
       });
     }, [count]);
 
-    const [isOnline, setIsOnline] = useTaroState(null);
+    const [isOnline, setIsOnline] = useState(null);
 
-    useTaroEffect(() => {
+    useEffect(() => {
       chatAPI.subscribeToFriendStatus(1, setIsOnline);
 
       return function cleanup() {

@@ -61,16 +61,17 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroState, ENV_TYPE } from '@tarojs/taro';
+import { ENV_TYPE } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import { useToast, useVideo, useEnv } from 'taro-hooks';
 
 const videoId = 'demo-video-id';
 const env = useEnv();
 const [videoInfo, setVideoInfo] =
-  useTaroState<Taro.chooseVideo.SuccessCallbackResult>();
+  useState<Taro.chooseVideo.SuccessCallbackResult>();
 const [videoSummary, setVideoSummary] =
-  useTaroState<Taro.getVideoInfo.SuccessCallbackResult>();
+  useState<Taro.getVideoInfo.SuccessCallbackResult>();
 
 const [videoContext, { choose, chooseMedia, open, save, compress, get }] =
   useVideo(videoId, {

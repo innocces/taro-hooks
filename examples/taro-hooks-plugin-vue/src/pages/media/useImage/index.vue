@@ -86,13 +86,13 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import { useToast, useImage } from 'taro-hooks';
 
 const { show } = useToast({ title: 'useImage', mask: true });
 const [imageInfo, setImageInfo] =
-  useTaroState<Taro.getImageInfo.SuccessCallbackResult>();
+  useState<Taro.getImageInfo.SuccessCallbackResult>();
 const [fileInfo, { choose, compress, get, preview, previewMedia, save, edit }] =
   useImage({
     count: 15,
