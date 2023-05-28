@@ -45,6 +45,7 @@
 		"@tarojs/helper": "^3.6.5",
 		"@tarojs/plugin-framework-vue3": "^3.6.5",
 		"@tarojs/plugin-platform-alipay": "^3.6.5",
+		"@tarojs/plugin-platform-h5": "^3.6.5",
 		"@tarojs/plugin-platform-jd": "^3.6.5",
 		"@tarojs/plugin-platform-qq": "^3.6.5",
 		"@tarojs/plugin-platform-swan": "^3.6.5",

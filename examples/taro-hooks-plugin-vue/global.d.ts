@@ -1,5 +1,4 @@
 /// <reference types="@tarojs/taro" />
-/// <reference types="@taro-hooks/plugin-vue" />
 
 declare module '*.png';
 declare module '*.gif';
@@ -26,4 +25,8 @@ declare namespace NodeJS {
       | 'qq'
       | 'jd';
   }
+}
+
+declare module '@taro-hooks/core' {
+  export * from '@taro-hooks/plugin-vue/dist/runtime';
 }
