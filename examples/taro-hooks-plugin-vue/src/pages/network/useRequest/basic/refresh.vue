@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 import { escapeState } from '@taro-hooks/shared';
 
@@ -39,7 +39,7 @@ export default {
       manual: true,
     });
 
-    useTaroEffect(() => {
+    useEffect(() => {
       escapeState(request).run(1);
     }, []);
 

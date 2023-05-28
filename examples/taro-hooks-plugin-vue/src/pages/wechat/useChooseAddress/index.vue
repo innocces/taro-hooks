@@ -20,13 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useChooseAddress, useModal } from 'taro-hooks';
 
 const choose = useChooseAddress();
 const show = useModal({ mask: true, title: '获取结果', showCancel: false });
 const [address, setAddress] =
-  useTaroState<Taro.chooseAddress.SuccessCallbackResult>();
+  useState<Taro.chooseAddress.SuccessCallbackResult>();
 
 const handleChoose = async () => {
   let content = '获取成功';

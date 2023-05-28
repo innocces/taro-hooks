@@ -36,22 +36,22 @@
 </template>
 
 <script>
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 
 export default {
   setup() {
-    const [count, setCount] = useTaroState(0);
+    const [count, setCount] = useState(0);
     function handleClick() {
       setCount(escapeState(count) + 1);
     }
 
-    const [text, setText] = useTaroState('hello');
+    const [text, setText] = useState('hello');
     function handleChange(val) {
       setText(val);
     }
 
-    const [liked, setLiked] = useTaroState(true);
+    const [liked, setLiked] = useState(true);
     function handleChangeLiked() {
       setLiked(!escapeState(liked));
     }

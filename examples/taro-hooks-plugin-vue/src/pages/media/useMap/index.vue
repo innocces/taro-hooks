@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroState, useTaroEffect } from '@tarojs/taro';
+import { useState, useEffect } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import { useModal, useMap } from 'taro-hooks';
 
@@ -84,7 +84,7 @@ const translateInfo = {
 
 const [mapContext, { get, include, moveTo, translate, toggleMarkers }] =
   useMap(mapId);
-const [mapInfo, setMapInfo] = useTaroState({});
+const [mapInfo, setMapInfo] = useState({});
 
 const handleGetInfo = async () => {
   try {
@@ -116,7 +116,7 @@ const handleTranslate = async () => {
   }
 };
 
-useTaroEffect(() => {
+useEffect(() => {
   if (escapeState(mapContext)) {
     handleGetInfo();
     toggleMarkers(markers, true);

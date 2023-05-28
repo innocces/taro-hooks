@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import { useTaroRef, useRouter } from '@tarojs/taro';
+import { useRouter } from '@tarojs/taro';
+import { useRef } from '@taro-hooks/core';
 export default {
   name: 'DemoContent',
   props: {
@@ -24,7 +25,7 @@ export default {
     desc: String,
   },
   setup() {
-    const demoRef = useTaroRef();
+    const demoRef = useRef();
     const { params = {} } = useRouter();
 
     function transferParams(params) {

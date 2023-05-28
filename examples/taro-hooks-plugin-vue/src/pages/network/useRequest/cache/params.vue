@@ -44,6 +44,7 @@
 
 <script>
 import { useRequest } from 'taro-hooks';
+import { useState } from '@taro-hooks/core';
 import { escapeState } from '@taro-hooks/shared';
 import { useToggle } from '@taro-hooks/ahooks';
 
@@ -67,7 +68,7 @@ export default {
     const request = useRequest(getArticle, {
       cacheKey: 'cacheKey-demo',
     });
-    const [keyword, setKeyword] = useTaroState(
+    const [keyword, setKeyword] = useState(
       escapeState(request).params[0] || '',
     );
 

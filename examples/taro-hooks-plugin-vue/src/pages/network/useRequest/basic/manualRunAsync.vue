@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import { useTaroState, showToast } from '@tarojs/taro';
+import { showToast } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 import { escapeState } from '@taro-hooks/shared';
 
@@ -42,7 +43,7 @@ function editUsername() {
 }
 export default {
   setup() {
-    const [state, setState] = useTaroState('');
+    const [state, setState] = useState('');
     const request = useRequest(editUsername, {
       manual: true,
     });

@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import { useTaroState, showToast } from '@tarojs/taro';
+import { showToast } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useRequest } from 'taro-hooks';
 
 function editUsername(username) {
@@ -46,9 +47,9 @@ function editUsername(username) {
 
 export default {
   setup() {
-    const [state, setState] = useTaroState('');
-    const [progress, setProgress] = useTaroState(0);
-    const [status, setStatus] = useTaroState();
+    const [state, setState] = useState('');
+    const [progress, setProgress] = useState(0);
+    const [status, setStatus] = useState();
     const request = useRequest(editUsername, {
       manual: true,
       onBefore: (params) => {

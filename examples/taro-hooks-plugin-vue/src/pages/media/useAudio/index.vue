@@ -33,11 +33,11 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 import { useToast, useRecord, useAudio } from 'taro-hooks';
 
 const [audioSource, setAudioSource] =
-  useTaroState<Taro.RecorderManager.OnStopCallbackResult>();
+  useState<Taro.RecorderManager.OnStopCallbackResult>();
 
 const [audioContext, { play }] = useAudio();
 const [, { start, stop }] = useRecord();

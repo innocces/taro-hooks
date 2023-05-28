@@ -36,8 +36,8 @@
   </nut-row>
 </template>
 
-<script>
-import { useTaroState } from '@tarojs/taro';
+<script lang="ts">
+import { useState } from '@taro-hooks/core';
 
 export default {
   props: {
@@ -47,8 +47,8 @@ export default {
   },
   emits: ['taskChange', 'taskDelete'],
   setup(props, { emit }) {
-    const [edit, setEdit] = useTaroState(false);
-    const [status, setStatus] = useTaroSate(props.done);
+    const [edit, setEdit] = useState(false);
+    const [status, setStatus] = useState(props.done);
 
     const handleCheckboxChange = (done) => {
       handleChange('done', done);

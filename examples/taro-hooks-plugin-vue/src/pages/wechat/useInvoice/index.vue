@@ -28,13 +28,14 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
+
 import { useInvoice, useModal } from 'taro-hooks';
 
 const { choose, chooseTitle } = useInvoice();
 const show = useModal({ mask: true, title: '获取结果', showCancel: false });
 const [invoice, setInvoice] =
-  useTaroState<Taro.chooseInvoice.SuccessCallbackResult>();
+  useState<Taro.chooseInvoice.SuccessCallbackResult>();
 
 const handleChoose = async () => {
   let content = '获取成功';

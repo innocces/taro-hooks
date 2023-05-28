@@ -14,7 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { useTaroEffect, showToast } from '@tarojs/taro';
+import { showToast } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 import { useNetworkType } from 'taro-hooks';
 import { escapeState } from '@taro-hooks/shared';
 // @ts-ignore
@@ -22,7 +23,7 @@ import { NETWORKTYPE } from '@root/public/constant';
 
 const networkType = useNetworkType();
 
-useTaroEffect(() => {
+useEffect(() => {
   showToast({
     title: `当前网络类型为: ${escapeState(networkType)}`,
     icon: 'none',

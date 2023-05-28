@@ -17,12 +17,12 @@
 <script setup lang="ts">
 import { useActionSheet, useToast } from 'taro-hooks';
 import { escapeState } from '@taro-hooks/shared';
-import { useTaroEffect } from '@tarojs/taro';
+import { useEffect } from '@taro-hooks/core';
 
 const { show, tapItem } = useActionSheet({ itemList: ['A', 'B', 'C'] });
 const { show: showToast } = useToast({ duration: 2000, mask: true });
 
-useTaroEffect(() => {
+useEffect(() => {
   if (escapeState(tapItem)) {
     const { tapIndex, tapItem: item } = escapeState(tapItem);
     showToast({ title: `${tapIndex}/${item}` });

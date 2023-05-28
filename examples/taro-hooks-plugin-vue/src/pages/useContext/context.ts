@@ -1,5 +1,5 @@
-import { taroCreateContext } from '@tarojs/taro';
+import { createContext } from '@taro-hooks/core';
 
-export const themeContext = taroCreateContext({ theme: 'light' });
+export const themeContext = createContext({ theme: 'light' });
 
-export const userContext = taroCreateContext({ name: null });
+export const userContext = createContext({ name: null });

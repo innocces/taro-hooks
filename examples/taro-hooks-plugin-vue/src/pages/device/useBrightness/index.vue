@@ -19,9 +19,9 @@
 
 <script setup lang="ts">
 import { useBrightness } from 'taro-hooks';
-import { useTaroState } from '@tarojs/taro';
+import { useState } from '@taro-hooks/core';
 
-const [rangeBrightness] = useTaroState<string>();
+const [rangeBrightness] = useState<string>();
 
 const [brightness, setBrightness] = useBrightness();
 </script>

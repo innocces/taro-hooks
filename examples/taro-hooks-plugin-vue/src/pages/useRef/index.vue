@@ -27,11 +27,12 @@
 </template>
 
 <script>
-import { useTaroRef, useTaroState, showToast } from '@tarojs/taro';
+import { useRef, useState } from '@taro-hooks/core';
+import { showToast } from '@tarojs/taro';
 
 export default {
   setup() {
-    const ref = useTaroRef(0);
+    const ref = useRef(0);
     function handleClick() {
       ref.current = ref.current + 1;
       showToast({
@@ -40,9 +41,9 @@ export default {
       });
     }
 
-    const [startTime, setStartTime] = useTaroState(null);
-    const [now, setNow] = useTaroState(null);
-    const intervalRef = useTaroRef(null);
+    const [startTime, setStartTime] = useState(null);
+    const [now, setNow] = useState(null);
+    const intervalRef = useRef(null);
 
     function handleStart() {
       setStartTime(Date.now());
