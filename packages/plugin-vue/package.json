@@ -8,8 +8,8 @@
   "license": "MIT",
   "typedocMain": "./src/runtime/hooks.ts",
   "main": "index.js",
-  "typings": "dist/index.d.ts",
-  "types": "dist/runtime.d.ts",
+  "typings": "types/index.d.ts",
+  "types": "types/index.d.ts",
   "keywords": [
     "taro-hooks",
     "hooks",
