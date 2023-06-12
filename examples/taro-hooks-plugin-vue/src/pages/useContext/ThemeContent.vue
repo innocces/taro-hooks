@@ -13,7 +13,7 @@
   </view>
 </template>
 
-<script>
+<script lang="ts">
 import { useContext } from '@taro-hooks/core';
 import { themeContext, userContext } from './context';
 
