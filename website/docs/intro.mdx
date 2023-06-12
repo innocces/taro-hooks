@@ -47,6 +47,9 @@ const config = {
   // ...
 }
 ```
+```ts title="project/types/global.d.ts"
+/// <reference types="@taro-hooks/plugin-react" />
+```
 ```tsx title="project/pages/index/index.tsx"
 import React from 'react';
 import { View } from '@tarojs/components';
@@ -70,6 +73,9 @@ const config = {
 + plugins: ['@taro-hooks/plugin-vue'],
   // ...
 }
+```
+```ts title="project/types/global.d.ts"
+/// <reference types="@taro-hooks/plugin-vue" />
 ```
 ```html title="project/pages/index/index.vue"
 <template>
