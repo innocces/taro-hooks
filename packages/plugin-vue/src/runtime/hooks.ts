@@ -400,7 +400,7 @@ export function createContext<T = Record<string, any>>(
  * @returns {T} context
  */
 export function useContext<T>(Context: VueContext<T>): T {
-  if (!isObject(Context) || !Context.$$inject) {
+  if (!isObject(Context) || !Context[INJECTKEY]) {
     throw new TypeError(
       'useContext only accept a context as the first argument.',
     );

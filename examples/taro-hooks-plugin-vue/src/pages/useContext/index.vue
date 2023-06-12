@@ -1,6 +1,6 @@
 <template>
   <ThemeProvider :value="theme">
-    <UserProvider :value="useProviderValue">
+    <UserProvider :value="userProviderValue">
       <block>
         <demo-content title="attention: this example is a multiple contexts">
           <ThemeContent />
@@ -18,7 +18,7 @@
   </ThemeProvider>
 </template>
 
-<script>
+<script lang="ts">
 import { escapeState } from '@taro-hooks/shared';
 import { useState, useContext, useMemo } from '@taro-hooks/core';
 import ThemeContent from './ThemeContent.vue';
@@ -50,7 +50,7 @@ export default {
 
     // 2. Updating an object via context
     const [user, setUser] = useState({ name: null });
-    const useProviderValue = {
+    const userProviderValue = {
       user,
       setUser,
     };
@@ -60,7 +60,7 @@ export default {
       currentTheme,
       setTheme,
       handleChange,
-      useProviderValue,
+      userProviderValue,
       memoTheme,
     };
   },
