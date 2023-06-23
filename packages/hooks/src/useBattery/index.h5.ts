@@ -1,6 +1,5 @@
 import type { BatteryManager } from '../type';
-import { createUseInfoHook, NonResult } from '../createUseInfoHook';
-import type { CallbackResult } from '../type';
+import { createUseInfoHook } from '../createUseInfoHook';
 
 export type Result = Taro.getBatteryInfoSync.Result;
 
@@ -16,7 +15,7 @@ let batteryManager: Partial<BatteryManager> = {};
 });
 
 const getBatteryInfoSync = () => {
-  let result = {
+  let result: Result = {
     isCharging: false,
     level: '100',
   };
@@ -30,7 +29,9 @@ const getBatteryInfoSync = () => {
   return result;
 };
 
-const useBattery: CallbackResult<NonResult<Result, {} | undefined>> =
-  createUseInfoHook<Result, {}>(getBatteryInfoSync, {});
+const useBattery = createUseInfoHook<'getBatteryInfoSync'>(
+  getBatteryInfoSync,
+  {},
+);
 
 export default useBattery;
