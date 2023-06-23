@@ -28,7 +28,7 @@ const config = {
   compiler: {
     type: 'webpack5',
     prebundle: {
-      enable: false,
+      enable: true,
       include: [],
     },
   },
