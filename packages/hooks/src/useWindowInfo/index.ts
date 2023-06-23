@@ -1,10 +1,6 @@
 import { getWindowInfo } from '@tarojs/taro';
-import { createUseInfoHook, NonResult } from '../createUseInfoHook';
-import type { CallbackResult } from '../type';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = Taro.getWindowInfo.Result;
-
-const useWindowInfo: CallbackResult<NonResult<Result, {} | undefined>> =
-  createUseInfoHook<Result, {}>(getWindowInfo, {});
+const useWindowInfo = createUseInfoHook<'getWindowInfo'>(getWindowInfo, {});
 
 export default useWindowInfo;
