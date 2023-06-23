@@ -1,10 +1,6 @@
 import { getDeviceInfo } from '@tarojs/taro';
-import { createUseInfoHook, NonResult } from '../createUseInfoHook';
-import type { CallbackResult } from '../type';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = Taro.getDeviceInfo.Result;
-
-const useDeviceInfo: CallbackResult<NonResult<Result, {} | undefined>> =
-  createUseInfoHook<Result, {}>(getDeviceInfo, {});
+const useDeviceInfo = createUseInfoHook<'getDeviceInfo'>(getDeviceInfo, {});
 
 export default useDeviceInfo;

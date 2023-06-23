@@ -1,11 +1,10 @@
 import { getLaunchOptionsSync } from '@tarojs/taro';
 
-import { createUseInfoHook, NonResult } from '../createUseInfoHook';
-import type { CallbackResult } from '../type';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = Taro.getLaunchOptionsSync.LaunchOptions;
-
-const useLaunchOptions: CallbackResult<NonResult<Result, {} | undefined>> =
-  createUseInfoHook<Result, {}>(getLaunchOptionsSync, {});
+const useLaunchOptions = createUseInfoHook<'getLaunchOptionsSync'>(
+  getLaunchOptionsSync,
+  {},
+);
 
 export default useLaunchOptions;

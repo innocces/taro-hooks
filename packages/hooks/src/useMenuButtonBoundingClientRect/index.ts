@@ -1,11 +1,10 @@
 import { getMenuButtonBoundingClientRect } from '@tarojs/taro';
-import { createUseInfoHook, NonResult } from '../createUseInfoHook';
-import type { CallbackResult } from '../type';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = Taro.getMenuButtonBoundingClientRect.Rect;
-
-const useMenuButtonBoundingClientRect: CallbackResult<
-  NonResult<Result, {} | undefined>
-> = createUseInfoHook<Result, {}>(getMenuButtonBoundingClientRect, {});
+const useMenuButtonBoundingClientRect =
+  createUseInfoHook<'getMenuButtonBoundingClientRect'>(
+    getMenuButtonBoundingClientRect,
+    {},
+  );
 
 export default useMenuButtonBoundingClientRect;

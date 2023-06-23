@@ -1,17 +1,12 @@
 /**
  * api: getAccountInfoSync
  */
-
 import { getAccountInfoSync } from '@tarojs/taro';
-import { createUseInfoHook, NonResult } from '../createUseInfoHook';
-import type { CallbackResult } from '../type';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = Taro.getAccountInfoSync.AccountInfo;
-
-const useAccountInfo: CallbackResult<NonResult<Result, {} | undefined>> =
-  createUseInfoHook<Taro.getAccountInfoSync.AccountInfo, {}>(
-    getAccountInfoSync,
-    {},
-  );
+const useAccountInfo = createUseInfoHook<'getAccountInfoSync'>(
+  getAccountInfoSync,
+  {},
+);
 
 export default useAccountInfo;

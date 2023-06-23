@@ -1,10 +1,9 @@
 import { getSystemInfoSync } from '@tarojs/taro';
-import { createUseInfoHook, NonResult } from '../createUseInfoHook';
-import type { CallbackResult } from '../type';
+import { createUseInfoHook } from '../createUseInfoHook';
 
-export type Result = Taro.getSystemInfoSync.Result;
-
-const useSystemInfo: CallbackResult<NonResult<Result, {} | undefined>> =
-  createUseInfoHook<Result, {}>(getSystemInfoSync, {});
+const useSystemInfo = createUseInfoHook<'getSystemInfoSync'>(
+  getSystemInfoSync,
+  {},
+);
 
 export default useSystemInfo;
