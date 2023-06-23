@@ -1,9 +1,9 @@
-import { getLaunchOptionsSync } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 
 import { createUseInfoHook } from '../createUseInfoHook';
 
 const useLaunchOptions = createUseInfoHook<'getLaunchOptionsSync'>(
-  getLaunchOptionsSync,
+  Taro.getLaunchOptionsSync,
   {},
 );
 

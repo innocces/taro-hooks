@@ -50,13 +50,14 @@
   },
   "gitHead": "628c69db9aed1a7c258f75dcf095449ec99023e0",
   "devDependencies": {
-    "@types/node": "^18.15.12",
-    "esbuild": "^0.15.18",
     "@tarojs/helper": "^3.6.5",
     "@tarojs/runtime": "^3.6.5",
     "@tarojs/service": "^3.6.5",
     "@tarojs/shared": "^3.6.5",
     "@tarojs/taro": "^3.6.5",
+    "@types/node": "^18.15.12",
+    "@types/react": "^18.0.37",
+    "esbuild": "^0.15.18",
     "react": "^18.2.0"
   }
 }

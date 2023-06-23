@@ -1,4 +1,5 @@
 import type { BatteryManager } from '../type';
+import Taro from '@tarojs/taro';
 import { createUseInfoHook } from '../createUseInfoHook';
 
 export type Result = Taro.getBatteryInfoSync.Result;
