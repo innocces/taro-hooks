@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.0.0
+
+### Major Changes
+
+- major version of 2
+
+### Patch Changes
+
+- Updated dependencies
+  - @taro-hooks/blueimp-canvas-to-blob@2.0.0
+
 ## 1.1.1 (Oct 5, 2021)
 
 - Fix loading error in Node.js (#137).

@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/plugin-react",
-  "version": "2.0.0-beta-serro.5+628c69db",
+  "version": "2.0.0",
   "description": "React/Preact/Nerv 框架插件",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",

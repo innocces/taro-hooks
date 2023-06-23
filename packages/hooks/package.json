@@ -1,6 +1,6 @@
 {
   "name": "taro-hooks",
-  "version": "2.0.0-beta-serro.5+628c69db",
+  "version": "2.0.0",
   "description": "为 Taro 而设计的 Hooks Library",
   "keywords": [
     "taro-hooks",
@@ -66,8 +66,8 @@
     "@tarojs/taro-h5": ">= 3.4.x"
   },
   "optionalDependencies": {
-    "@taro-hooks/plugin-react": ">=2.0",
-    "@taro-hooks/plugin-vue": ">=2.0",
+    "@taro-hooks/plugin-react": ">=2.0.0",
+    "@taro-hooks/plugin-vue": ">=2.0.0",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "vue": ">3.0"
   },

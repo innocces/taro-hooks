@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.0.0
+
+### Major Changes
+
+- major version of 2
+
+### Patch Changes
+
+- Updated dependencies
+  - @taro-hooks/compressorjs@2.0.0
+  - @taro-hooks/shared@2.0.0
+  - @taro-hooks/use-request@2.0.0
+
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
