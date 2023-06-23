@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "pnpm build:prepare && pnpm build:tools && pnpm build:plugins && pnpm build:hooks && pnpm build:request && pnpm build:docs",
+    "bootstrap": "pnpm build:prepare && pnpm run build:shared && pnpm build:plugins && pnpm build:tools && pnpm build:hooks && pnpm build:request && pnpm build:docs",
     "build:prepare": "pnpm -F @taro-hooks/shared -F @taro-hooks/blueimp-canvas-to-blob -F @taro-hooks/compressorjs run build",
     "dev:docs": "pnpm -F @taro-hooks/website run start",
     "build:docs": "pnpm -F @taro-hooks/website -F @taro-hooks/taro-hooks-** run build && pnpm run generate-docs",
@@ -15,6 +15,7 @@
     "build:plugins": "pnpm -F @taro-hooks/plugin-** run build",
     "dev:tools": "pnpm -F @taro-hooks/shared -F @taro-hooks/ahooks run dev",
     "build:tools": "pnpm -F @taro-hooks/shared -F @taro-hooks/ahooks run build",
+    "build:shared": "pnpm -F @taro-hooks/shared run build",
     "build:ahooks": "pnpm -F @taro-hooks/ahooks run build",
     "dev:sandpack": "pnpm -F @taro-hooks/sandpack run dev",
     "build:sandpack": "pnpm -F @taro-hooks/sandpack run build",
