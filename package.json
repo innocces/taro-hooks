@@ -26,10 +26,11 @@
     "generate-docs": "node scripts/build-docs.mjs",
     "generate-hooks-category": "node scripts/generate-hooks-category.mjs",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "prerelease": "pnpm changeset pre enter canary",
-    "publish": "pnpm changeset version",
+    "prepublishOnly": "pnpm run bootstrap",
+    "version": "changeset && changeset version",
+    "release": "changeset publish",
     "log": "./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s -r 0",
-    "postversion": "npm run log",
+    "postversion": "pnpm run log",
     "contributors:generate": "all-contributors generate"
   },
   "gitHooks": {
