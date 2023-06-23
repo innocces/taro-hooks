@@ -5,7 +5,7 @@
   "linked": [],
   "baseBranch": "next",
   "access": "public",
-  "updateInternalDependencies": "minor",
+  "updateInternalDependencies": "patch",
   "ignore": [
     "@taro-hooks/taro-hooks-plugin",
     "@taro-hooks/taro-hooks-plugin-vue",
