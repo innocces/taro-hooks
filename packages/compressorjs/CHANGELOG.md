@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1
+
+### Patch Changes
+
+- fix taro namespace missing error
+- Updated dependencies
+  - @taro-hooks/blueimp-canvas-to-blob@2.0.1
+
 ## 2.0.0
 
 ### Major Changes

@@ -1,5 +1,15 @@
 # Change Log
 
+## 2.0.1
+
+### Patch Changes
+
+- fix taro namespace missing error
+- Updated dependencies
+  - @taro-hooks/compressorjs@2.0.1
+  - @taro-hooks/shared@2.0.1
+  - @taro-hooks/use-request@2.0.1
+
 ## 2.0.0
 
 ### Major Changes

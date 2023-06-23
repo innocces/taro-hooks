@@ -1,5 +1,13 @@
 # @taro-hooks/plugin-vue
 
+## 2.0.1
+
+### Patch Changes
+
+- fix taro namespace missing error
+- Updated dependencies
+  - @taro-hooks/shared@2.0.1
+
 ## 2.0.0
 
 ### Major Changes
