@@ -31,8 +31,7 @@
     "prepublishOnly": "pnpm run bootstrap",
     "version": "changeset && changeset version",
     "release": "changeset publish",
-    "log": "./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s -r 0",
-    "postversion": "pnpm run log",
+    "postversion": "pnpm run bootstrap",
     "contributors:generate": "all-contributors generate"
   },
   "gitHooks": {

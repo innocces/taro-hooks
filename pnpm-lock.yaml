@@ -424,10 +424,10 @@ importers:
         version: 1.0.0
     optionalDependencies:
       '@taro-hooks/plugin-react':
-        specifier: '>=2.0.0'
+        specifier: '>=2.0.1'
         version: link:../plugin-react
       '@taro-hooks/plugin-vue':
-        specifier: '>=2.0.0'
+        specifier: '>=2.0.1'
         version: link:../plugin-vue
       react:
         specifier: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -607,10 +607,10 @@ importers:
         version: 0.2.1
     optionalDependencies:
       '@taro-hooks/plugin-react':
-        specifier: '>=2.0.0'
+        specifier: '>=2.0.1'
         version: link:../plugin-react
       '@taro-hooks/plugin-vue':
-        specifier: '>=2.0.0'
+        specifier: '>=2.0.1'
         version: link:../plugin-vue
       '@types/react':
         specifier: ^16.8.0 || ^17.0.0 || ^18.0.0
