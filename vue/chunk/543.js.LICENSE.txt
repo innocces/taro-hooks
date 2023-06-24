@@ -1,0 +1,19 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/
+
+/*! Universal Router | MIT License | https://www.kriasoft.com/universal-router/ */
+
+/*!@license Copyright 2013, Heinrich Goebl, License: MIT, see https://github.com/hgoebl/mobile-detect.js*/
+
+/*!__STENCIL_STATIC_IMPORT_SWITCH__*/
+
+/*!mobile-detect v1.4.5 2021-03-13*/

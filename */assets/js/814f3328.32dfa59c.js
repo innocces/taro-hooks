@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_taro_hooks_website=self.webpackChunk_taro_hooks_website||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"2.0.0-beta!!","permalink":"/taro-hooks/blog/new-version"}]}')}}]);
