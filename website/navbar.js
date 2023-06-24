@@ -21,7 +21,7 @@ module.exports = [
       {
         type: 'html',
         value:
-          '<a target="__blank" href="https://taro-hooks-innocces.vercel.app"><img src="https://img.shields.io/npm/v/taro-hooks?style=for-the-badge" /></a>',
+          '<a target="__blank" href="https://taro-hooks-innocces.vercel.app"><img src="https://badgen.net/npm/v/taro-hooks/1" /></a>',
       },
     ],
   },
