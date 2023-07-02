@@ -1,5 +1,13 @@
 # @taro-hooks/ahooks
 
+## 2.0.2
+
+### Patch Changes
+
+- chore addon version check postinatll script
+- Updated dependencies
+  - @taro-hooks/shared@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes

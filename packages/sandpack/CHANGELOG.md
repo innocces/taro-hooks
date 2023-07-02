@@ -1,5 +1,11 @@
 # @taro-hooks/sandpack
 
+## 2.0.2
+
+### Patch Changes
+
+- chore addon version check postinatll script
+
 ## 2.0.1
 
 ### Patch Changes
