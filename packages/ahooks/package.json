@@ -39,12 +39,6 @@
     "@taro-hooks/shared": "workspace:*",
     "lodash-wechat": "^1.0.0"
   },
-  "optionalDependencies": {
-    "@taro-hooks/plugin-react": ">=2.0.2",
-    "@taro-hooks/plugin-vue": ">=2.0.2",
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "vue": ">3.0"
-  },
   "engines": {
     "node": ">=12.0.0"
   },
