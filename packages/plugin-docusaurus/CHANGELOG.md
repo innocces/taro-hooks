@@ -1,5 +1,11 @@
 # @taro-hooks/plugin-docusaurus
 
+## 2.0.3
+
+### Patch Changes
+
+- remove vue & react peer deps
+
 ## 2.0.2
 
 ### Patch Changes

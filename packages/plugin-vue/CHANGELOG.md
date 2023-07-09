@@ -1,5 +1,13 @@
 # @taro-hooks/plugin-vue
 
+## 2.0.3
+
+### Patch Changes
+
+- remove vue & react peer deps
+- Updated dependencies
+  - @taro-hooks/shared@2.0.3
+
 ## 2.0.2
 
 ### Patch Changes
