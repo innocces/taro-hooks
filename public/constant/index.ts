@@ -35,6 +35,7 @@ export interface APIChildrenItem {
   name: string;
   tabBar?: boolean;
   onlyMini?: boolean;
+  path?: string;
 }
 
 export enum APIChildrenName {
@@ -115,6 +116,8 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
     {
       id: 'useBackground',
       name: 'useBackground 窗口设置',
+      // 背景色共用下拉
+      path: '/pages/layout/useManualPullDownRefresh/index',
     },
     {
       id: 'useManualPullDownRefresh',
