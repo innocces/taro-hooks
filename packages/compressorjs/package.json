@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/compressorjs",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "JavaScript image compressor.",
   "main": "dist/compressor.common.js",
   "module": "dist/compressor.esm.js",

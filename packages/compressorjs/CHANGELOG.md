@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.4
+
+### Patch Changes
+
+- support preact & nerv check framework
+- Updated dependencies
+  - @taro-hooks/blueimp-canvas-to-blob@2.0.4
+
 ## 2.0.3
 
 ### Patch Changes

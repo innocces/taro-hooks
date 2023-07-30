@@ -1,5 +1,15 @@
 # @taro-hooks/use-request
 
+## 2.0.4
+
+### Patch Changes
+
+- support preact & nerv check framework
+- Updated dependencies
+  - taro-hooks@2.0.4
+  - @taro-hooks/ahooks@2.0.4
+  - @taro-hooks/shared@2.0.4
+
 ## 2.0.3
 
 ### Patch Changes
