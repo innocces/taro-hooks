@@ -27,7 +27,8 @@ const config = {
   compiler: {
     type: 'webpack5',
     prebundle: {
-      enable: true,
+      // https://github.com/jdf2e/nutui/issues/2103
+      enable: !weapp,
       include: [],
     },
   },
@@ -39,7 +40,7 @@ const config = {
       pxtransform: {
         enable: true,
         config: {
-          selectorBlackList: ['nut-'],
+          // selectorBlackList: ['nut-'],
         },
       },
       url: {
@@ -64,7 +65,7 @@ const config = {
   h5: {
     publicPath: (gh ? '/taro-hooks' : '') + '/vue',
     staticDirectory: 'static',
-    esnextModules: ['nutui-taro'],
+    // esnextModules: ['nutui-taro'],
     router: {
       mode: 'browser',
       basename: (gh ? '/taro-hooks' : '') + '/vue',

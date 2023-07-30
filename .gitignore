@@ -23,6 +23,7 @@ lerna-debug.log
 /app-dist
 /packages/**/lib
 /packages/**/es
+/packages/**/.git
 /coverage
 packages/**/dist
 /hooks-docs

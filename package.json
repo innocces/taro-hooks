@@ -51,7 +51,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/runtime": "^7.21.0",
+    "@babel/runtime": "^7.21.5",
     "base-64": "^1.0.0",
     "lodash": "^4.17.21"
   },
@@ -68,7 +68,7 @@
     "all-contributors-cli": "^6.24.0",
     "babel-plugin-import": "^1.13.6",
     "babel-plugin-transform-async-to-promises": "^0.8.18",
-    "babel-preset-taro": "^3.6.5",
+    "babel-preset-taro": "^3.6.11",
     "chalk": "^5.2.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-cli": "^2.2.2",
