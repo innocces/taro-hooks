@@ -1,19 +1,29 @@
 import { chalk } from '@tarojs/helper';
 import { IPluginContext } from '@tarojs/service';
 
+// 同时兼容一下 preact 和 nerv
+const reactLike = ['preact', 'nerv'];
+const supportFrameworks = ['react', ...reactLike];
+
 export default (ctx: IPluginContext) => {
   const { framework } = ctx.initialConfig;
-  if (framework !== 'react' || !getReactPath()) return;
+  if ((framework && !supportFrameworks.includes(framework)) || !getReactPath())
+    return;
 
   ctx.modifyWebpackChain(({ chain, webpack }) => {
     setDefinePlugin(chain, webpack);
     console.log(
       chalk.blue(
-        '✨ 逮到一个使用taro-hooks的小可爱~ \n 当前使用的框架是: React',
+        `✨ 逮到一个使用taro-hooks的小可爱~ \n 当前使用的框架是: ${framework}`,
       ),
     );
 
     chain.resolve.alias.set('@taro-hooks/core', getRealRuntimePath());
+
+    // 检查一下除 react 的框架是否包含了对应的 alias. 不然 runtime 会报错
+    if (reactLike.includes(framework!) && !chain.resolve.alias.get('react')) {
+      chain.resolve.alias.set('react', framework!);
+    }
   });
 };
 
@@ -43,13 +53,13 @@ function getRealRuntimePath(): string {
   return `@taro-hooks/plugin-react/dist/runtime`;
 }
 
-export function getReactPath(): string {
+export function getReactPath(framework = 'react'): string {
   try {
-    return require.resolve('react', {
+    return require.resolve(framework, {
       paths: [process.cwd()],
     });
   } catch (error) {
-    console.log(chalk.yellow('找不到 React. 请先安装。'));
+    console.log(chalk.yellow(`找不到 ${framework}. 请先安装。`));
     process.exit(1);
   }
 }
