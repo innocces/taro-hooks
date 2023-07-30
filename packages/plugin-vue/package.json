@@ -41,11 +41,11 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.12",
-    "@tarojs/helper": "^3.6.5",
-    "@tarojs/runtime": "^3.6.5",
-    "@tarojs/service": "^3.6.5",
-    "@tarojs/shared": "^3.6.5",
-    "@tarojs/taro": "^3.6.5",
+    "@tarojs/helper": "^3.6.11",
+    "@tarojs/runtime": "^3.6.11",
+    "@tarojs/service": "^3.6.11",
+    "@tarojs/shared": "^3.6.11",
+    "@tarojs/taro": "^3.6.11",
     "esbuild": "^0.15.18",
     "vue": "^3.2.47"
   },

@@ -51,7 +51,7 @@
   "license": "MIT",
   "gitHead": "628c69db9aed1a7c258f75dcf095449ec99023e0",
   "devDependencies": {
-    "@tarojs/taro": "^3.6.5",
-    "@tarojs/taro-h5": "^3.6.5"
+    "@tarojs/taro": "^3.6.11",
+    "@tarojs/taro-h5": "^3.6.11"
   }
 }

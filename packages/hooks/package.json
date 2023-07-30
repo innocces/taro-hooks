@@ -57,8 +57,8 @@
     "querystring": "^0.2.1"
   },
   "devDependencies": {
-    "@tarojs/taro": "^3.6.5",
-    "@tarojs/taro-h5": "^3.6.5",
+    "@tarojs/taro": "^3.6.11",
+    "@tarojs/taro-h5": "^3.6.11",
     "@types/node": "^18.15.12"
   },
   "peerDependencies": {
