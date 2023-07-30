@@ -1,5 +1,11 @@
 # @taro-hooks/plugin-docusaurus
 
+## 2.0.4
+
+### Patch Changes
+
+- support preact & nerv check framework
+
 ## 2.0.3
 
 ### Patch Changes
