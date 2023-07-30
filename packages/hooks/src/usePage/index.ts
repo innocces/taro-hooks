@@ -1,24 +1,26 @@
-import { getCurrentInstance, getCurrentPages } from '@tarojs/taro';
+import { getCurrentInstance, getCurrentPages, Current } from '@tarojs/taro';
 import { useRef } from '@taro-hooks/core';
-import type { Current, Page } from '@tarojs/taro';
+import type { Page } from '@tarojs/taro';
+
+export type TypeCurrent = typeof Current;
 
 function usePage(scope?: string): [
   stackLength: number,
   Instance: {
-    pageInstance: Current;
+    pageInstance: TypeCurrent;
     pageStack: Page[];
   },
 ] {
-  const getPageInstance = (): Current => {
+  const getPageInstance = (): TypeCurrent => {
     if (scope && typeof scope === 'string') {
-      return getCurrentInstance().page?.selectComponent?.(scope) as Current;
+      return getCurrentInstance().page?.selectComponent?.(scope) as TypeCurrent;
     }
 
     return getCurrentInstance();
   };
 
   const pageStack = useRef<Page[]>(getCurrentPages());
-  const pageInstance = useRef<Current>(getPageInstance());
+  const pageInstance = useRef<TypeCurrent>(getPageInstance());
 
   return [
     pageStack.current.length,
