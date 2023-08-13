@@ -78,6 +78,7 @@
     "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
     "gh-pages": "^3.2.3",
+    "gray-matter": "^4.0.3",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-less": "^5.0.0",

@@ -35,7 +35,7 @@
     "access": "public"
   },
   "repository": "https://github.com/innocces/taro-hooks",
-  "homepage": "https://innocces.github.io/taro-hooks/",
+  "homepage": "https://next-version-taro-hooks.vercel.app/site",
   "scripts": {
     "build": "gulp --isolatedModules true",
     "dev": "gulp --w true --isolatedModules true",
@@ -45,6 +45,7 @@
   "files": [
     "lib",
     "es",
+    "metadata.json",
     "package.json",
     "README.md",
     "postinstall.js"
