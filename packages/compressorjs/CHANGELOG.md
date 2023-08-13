@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.5
+
+### Patch Changes
+
+- support auto-import plugin
+- Updated dependencies
+  - @taro-hooks/blueimp-canvas-to-blob@2.0.5
+
 ## 2.0.4
 
 ### Patch Changes

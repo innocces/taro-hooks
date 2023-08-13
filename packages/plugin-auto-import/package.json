@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/plugin-auto-import",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "taro-hooks unplugin-auto-import 插件",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
@@ -35,7 +35,7 @@
     "unplugin-auto-import": "^0.16.6"
   },
   "peerDependencies": {
-    "taro-hooks": ">=2.x"
+    "taro-hooks": ">=2.0.5"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",

@@ -1,5 +1,13 @@
 # @taro-hooks/ahooks
 
+## 2.0.5
+
+### Patch Changes
+
+- support auto-import plugin
+- Updated dependencies
+  - @taro-hooks/shared@2.0.5
+
 ## 2.0.4
 
 ### Patch Changes
