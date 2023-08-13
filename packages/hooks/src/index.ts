@@ -71,6 +71,9 @@ import useRecord from './useRecord';
 import useAudio from './useAudio';
 import useMap from './useMap';
 
+// ahooks
+export * from '@taro-hooks/ahooks';
+
 export {
   useEnv,
   useWebp,
