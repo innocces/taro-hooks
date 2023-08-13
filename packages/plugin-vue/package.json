@@ -40,13 +40,12 @@
     "acorn-walk": "^8.2.0"
   },
   "devDependencies": {
-    "@types/node": "^18.15.12",
     "@tarojs/helper": "^3.6.11",
     "@tarojs/runtime": "^3.6.11",
     "@tarojs/service": "^3.6.11",
     "@tarojs/shared": "^3.6.11",
     "@tarojs/taro": "^3.6.11",
-    "esbuild": "^0.15.18",
+    "@types/node": "^18.15.12",
     "vue": "^3.2.47"
   },
   "peerDependencies": {
