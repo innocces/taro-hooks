@@ -8,6 +8,7 @@
 # /yarn.lock
 /package-lock.json
 /packages/*/node_modules
+/packages/*/metadata.json
 /*/node_modules
 .pnpm-debug.log
 .yarn/cache
