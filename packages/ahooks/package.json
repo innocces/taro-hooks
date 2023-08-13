@@ -23,7 +23,7 @@
     "access": "public"
   },
   "repository": "https://github.com/innocces/taro-hooks",
-  "homepage": "https://innocces.github.io/taro-hooks/packages/use-request",
+  "homepage": "https://innocces.github.io/taro-hooks/packages/ahooks",
   "scripts": {
     "build": "gulp",
     "dev": "gulp -w"
