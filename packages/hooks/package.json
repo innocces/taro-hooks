@@ -50,6 +50,7 @@
     "postinstall.js"
   ],
   "dependencies": {
+    "@taro-hooks/ahooks": "workspace:^",
     "@taro-hooks/compressorjs": "workspace:*",
     "@taro-hooks/shared": "workspace:*",
     "@taro-hooks/use-request": "workspace:*",

@@ -577,6 +577,9 @@ importers:
 
   packages/hooks:
     dependencies:
+      '@taro-hooks/ahooks':
+        specifier: workspace:^
+        version: link:../ahooks
       '@taro-hooks/compressorjs':
         specifier: workspace:*
         version: link:../compressorjs
@@ -1745,8 +1748,8 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.5
-      '@babel/helper-environment-visitor': 7.22.5
-      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-environment-visitor': 7.18.9
+      '@babel/helper-plugin-utils': 7.20.2
       '@babel/helper-remap-async-to-generator': 7.18.9(@babel/core@7.22.5)
       '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.22.5)
     transitivePeerDependencies:
