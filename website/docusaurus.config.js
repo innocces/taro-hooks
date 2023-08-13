@@ -265,6 +265,10 @@ const config = {
                 href: 'https://discord.gg/XrrbdDCpKg',
               },
               {
+                label: 'Tg',
+                href: 'https://t.me/+liVrD6TyPV1lZmJl',
+              },
+              {
                 label: '使用案例',
                 href: 'https://github.com/taro-hooks/user-cases',
               },
@@ -307,6 +311,7 @@ const config = {
                 label: 'buy me coffee',
                 href: 'https://www.buymeacoffee.com/innocces?ref=widget-1376490',
               },
+              { label: 'afdian', href: 'https://afdian.net/a/innocces' }
             ],
           },
         ],

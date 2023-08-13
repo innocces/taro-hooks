@@ -9,12 +9,28 @@ sidebar_position: 2
 
 ## 配置
 
+### 安装 **taro-hooks**
+
+```bash
+# npm
+$ npm i taro-hooks
+# yarn
+$ yarn add taro-hooks
+# pnpm
+$ pnpm add taro-hooks
+```
+
 ### 安装插件
 
 首先需要下载 **@taro-hooks/plugin-react** 插件
 
 ```bash
+# npm
 $ npm i @taro-hooks/plugin-react
+# yarn
+$ yarn add @taro-hooks/plugin-react
+# pnpm
+$ pnpm add @taro-hooks/plugin-react
 ```
 
 ### 项目配置
@@ -26,6 +42,8 @@ const config = {
   // ...
 };
 ```
+
+> 我们也配套提供了适配 `unplugin-auto-import` 的插件 [`@taro-hooks/plugin-auto-import`](/docs/quick/auto-import)
 
 > 注意: 插件内部会检测当前项目的框架和依赖状态, 若您的项目不是 **React** 的项目, 那么很可能无法正常启动.
 

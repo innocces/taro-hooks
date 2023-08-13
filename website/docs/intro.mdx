@@ -26,19 +26,24 @@ sidebar_position: 1
 
 ### 框架支持
 
-在 **taro-hooks** 中可以使用 **React/Vue** 开发体验, 具体请参考:
+在 **taro-hooks** 中可以使用 **React/PReact/Nerv/Vue** 开发体验, 具体请参考:
 
-- [基础教程 ———— React](/docs/quick/react-useage)
+- [基础教程 ———— React/PReact/Nerv](/docs/quick/react-useage)
 - [基础教程 ———— Vue](/docs/quick/vue-useage)
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="React" groupId="codeDisplayGroup">
-  <TabItem value="React" label="React">
+  <TabItem value="React" label="React/PReact/Nerv">
 
 ```bash
+# npm
 $ npm i @taro-hooks/plugin-react
+# yarn
+$ yarn add @taro-hooks/plugin-react
+# pnpm
+$ pnpm add @taro-hooks/plugin-react
 ```
 ```js {3} title="project/config/index.js"
 const config = {
@@ -66,7 +71,12 @@ export default () => {
   <TabItem value="Vue" label="Vue">
 
 ```bash
+# npm
 $ npm i @taro-hooks/plugin-vue
+# yarn
+$ yarn add @taro-hooks/plugin-vue
+# pnpm
+$ pnpm add @taro-hooks/plugin-vue
 ```
 ```js {3} title="project/config/index.js"
 const config = {

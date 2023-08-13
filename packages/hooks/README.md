@@ -112,15 +112,73 @@ function Index() {
 </script>
 ```
 
+## 🎰 auto-import
+
+We provide the @taro-hooks/plugin-auto-import plugin to help you quickly use the [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import) capability.
+
+```bash
+# npm
+$ npm i @taro-hooks/plugin-auto-import
+# yarn
+$ yarn add @taro-hooks/plugin-auto-import
+# pnpm
+$ pnpm add @taro-hooks/plugin-auto-import
+```
+
+```js
+// config/index.js
+const config = {
+  // ...
+  // The main prerequisite is that you have installed the plugin for the corresponding framework.
+  plugins: [
+    // If you are using vue3, please install the @taro-hooks/plugin-vue plugin beforehand.
+    '@taro-hooks/plugin-vue'，
+    // If using React/PReact/Nerv, please pre-install the @taro-hooks/plugin-react plugin.
+    '@taro-hooks/plugin-react',
+    // Finally, the auto-import plugin is configured
+    [
+      '@taro-hooks/plugin-auto-import',
+      {
+        // your options, see configuration: https://github.com/antfu/unplugin-auto-import#configuration
+      }
+    ]
+  ],
+  // ...
+};
+```
+
+- React/PReact/Nerv
+
+```jsx
+function Index() {
+  const env = useEnv();
+
+  return <View>current env: {env}</View>;
+}
+```
+
+- Vue3
+
+```html
+<template>
+  <view>current env: {{env}}</view>
+</template>
+
+<script setup lang="ts">
+  const env = useEnv();
+</script>
+```
+
 ## 📦 Packages
 
-|                                                 packages                                                 |                                        downloads                                        |                                       version                                       |                                       license                                       |
-| :------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: |
-|                 ![taro-hooks](https://img.shields.io/badge/taro--hooks-pkg-blueviolet?)                  |               ![taro-hooks](https://img.shields.io/npm/dm/taro-hooks.svg)               |               ![taro-hooks](https://img.shields.io/npm/v/taro-hooks?)               |               ![taro-hooks](https://img.shields.io/npm/l/taro-hooks?)               |
-|       ![@taro-hooks/ahooks](https://img.shields.io/badge/%40taro--hooks%2Fahooks-pkg-blueviolet?)        |       ![@taro-hooks/ahooks](https://img.shields.io/npm/dm/@taro-hooks/ahooks.svg)       |       ![@taro-hooks/ahooks](https://img.shields.io/npm/v/@taro-hooks/ahooks?)       |       ![@taro-hooks/ahooks](https://img.shields.io/npm/l/@taro-hooks/ahooks?)       |
-|   ![@taro-hooks/plugin-vue](https://img.shields.io/badge/%40taro--hooks%2Fplugin--vue-pkg-blueviolet?)   |   ![@taro-hooks/plugin-vue](https://img.shields.io/npm/dm/@taro-hooks/plugin-vue.svg)   |   ![@taro-hooks/plugin-vue](https://img.shields.io/npm/v/@taro-hooks/plugin-vue?)   |   ![@taro-hooks/plugin-vue](https://img.shields.io/npm/l/@taro-hooks/plugin-vue?)   |
-| ![@taro-hooks/plugin-react](https://img.shields.io/badge/%40taro--hooks%2Fplugin--react-pkg-blueviolet?) | ![@taro-hooks/plugin-react](https://img.shields.io/npm/dm/@taro-hooks/plugin-react.svg) | ![@taro-hooks/plugin-react](https://img.shields.io/npm/v/@taro-hooks/plugin-react?) | ![@taro-hooks/plugin-react](https://img.shields.io/npm/l/@taro-hooks/plugin-react?) |
-|  ![@taro-hooks/use-request](https://img.shields.io/badge/%40taro--hooks%2Fuse--request-pkg-blueviolet?)  |  ![@taro-hooks/use-request](https://img.shields.io/npm/dm/@taro-hooks/use-request.svg)  |  ![@taro-hooks/use-request](https://img.shields.io/npm/v/@taro-hooks/use-request?)  |  ![@taro-hooks/use-request](https://img.shields.io/npm/l/@taro-hooks/use-request?)  |
+|                                                      packages                                                       |                                              downloads                                              |                                             version                                             |                                             license                                             |
+| :-----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
+|                       ![taro-hooks](https://img.shields.io/badge/taro--hooks-pkg-blueviolet?)                       |                     ![taro-hooks](https://img.shields.io/npm/dm/taro-hooks.svg)                     |                     ![taro-hooks](https://img.shields.io/npm/v/taro-hooks?)                     |                     ![taro-hooks](https://img.shields.io/npm/l/taro-hooks?)                     |
+|             ![@taro-hooks/ahooks](https://img.shields.io/badge/%40taro--hooks%2Fahooks-pkg-blueviolet?)             |             ![@taro-hooks/ahooks](https://img.shields.io/npm/dm/@taro-hooks/ahooks.svg)             |             ![@taro-hooks/ahooks](https://img.shields.io/npm/v/@taro-hooks/ahooks?)             |             ![@taro-hooks/ahooks](https://img.shields.io/npm/l/@taro-hooks/ahooks?)             |
+|        ![@taro-hooks/plugin-vue](https://img.shields.io/badge/%40taro--hooks%2Fplugin--vue-pkg-blueviolet?)         |         ![@taro-hooks/plugin-vue](https://img.shields.io/npm/dm/@taro-hooks/plugin-vue.svg)         |         ![@taro-hooks/plugin-vue](https://img.shields.io/npm/v/@taro-hooks/plugin-vue?)         |         ![@taro-hooks/plugin-vue](https://img.shields.io/npm/l/@taro-hooks/plugin-vue?)         |
+|      ![@taro-hooks/plugin-react](https://img.shields.io/badge/%40taro--hooks%2Fplugin--react-pkg-blueviolet?)       |       ![@taro-hooks/plugin-react](https://img.shields.io/npm/dm/@taro-hooks/plugin-react.svg)       |       ![@taro-hooks/plugin-react](https://img.shields.io/npm/v/@taro-hooks/plugin-react?)       |       ![@taro-hooks/plugin-react](https://img.shields.io/npm/l/@taro-hooks/plugin-react?)       |
+|       ![@taro-hooks/use-request](https://img.shields.io/badge/%40taro--hooks%2Fuse--request-pkg-blueviolet?)        |        ![@taro-hooks/use-request](https://img.shields.io/npm/dm/@taro-hooks/use-request.svg)        |        ![@taro-hooks/use-request](https://img.shields.io/npm/v/@taro-hooks/use-request?)        |        ![@taro-hooks/use-request](https://img.shields.io/npm/l/@taro-hooks/use-request?)        |
+| ![@taro-hooks/plugin-auto-import](https://img.shields.io/badge/%40taro--hooks%2Fplugin-auto-import-pkg-blueviolet?) | ![@taro-hooks/plugin-auto-import](https://img.shields.io/npm/dm/@taro-hooks/plugin-auto-import.svg) | ![@taro-hooks/plugin-auto-import](https://img.shields.io/npm/v/@taro-hooks/plugin-auto-import?) | ![@taro-hooks/plugin-auto-import](https://img.shields.io/npm/l/@taro-hooks/plugin-auto-import?) |
 
 ## 🗨️ Communication
 
