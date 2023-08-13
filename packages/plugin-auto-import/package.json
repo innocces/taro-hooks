@@ -1,0 +1,50 @@
+{
+  "name": "@taro-hooks/plugin-auto-import",
+  "version": "2.0.4",
+  "description": "taro-hooks unplugin-auto-import 插件",
+  "sideEffects": false,
+  "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
+  "homepage": "https://github.com/innocces/taro-hooks/blob/next/packages/plugin-auto-import/README.md",
+  "license": "MIT",
+  "main": "index.js",
+  "typings": "types/index.d.ts",
+  "types": "types/index.d.ts",
+  "keywords": [
+    "taro-hooks",
+    "hooks",
+    "unplugin-auto-import",
+    "taro"
+  ],
+  "files": [
+    "index.js",
+    "dist",
+    "types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innocces/taro-hooks"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "bugs": {
+    "url": "https://github.com/innocces/taro-hooks/issues"
+  },
+  "dependencies": {
+    "unplugin-auto-import": "^0.16.6"
+  },
+  "peerDependencies": {
+    "taro-hooks": ">=2.x"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "devDependencies": {
+    "@tarojs/helper": "^3.6.11",
+    "@tarojs/service": "^3.6.11",
+    "@types/fs-extra": "^11.0.1",
+    "fs-extra": "^11.1.1"
+  }
+}
