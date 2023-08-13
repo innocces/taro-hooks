@@ -14,7 +14,7 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: weapp ? 'dist-weapp' : 'dist',
-  plugins: ['@taro-hooks/plugin-react'],
+  plugins: ['@taro-hooks/plugin-react', '@taro-hooks/plugin-auto-import'],
   defineConstants: {},
   alias: {
     '@root': resolve(__dirname, '..', '..', '..'),

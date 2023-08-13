@@ -1,7 +1,6 @@
 import React from 'react';
 import { ENV_TYPE, showToast } from '@tarojs/taro';
 import { useEffect } from '@taro-hooks/core';
-import { useEnv } from 'taro-hooks';
 
 import DemoContent from '@src/components/DemoContent';
 import { Radio, Cell } from '@taroify/core';

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from '@taro-hooks/core';
-import { useRouter } from 'taro-hooks';
 import { View, Image } from '@tarojs/components';
 import { Collapse, Cell, Flex, Badge } from '@taroify/core';
 // @ts-ignore
