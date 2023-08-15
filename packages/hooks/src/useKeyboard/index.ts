@@ -36,7 +36,7 @@ function useKeyborad() {
     height,
     close: handleClose,
     getRange: getSelectedRange,
-  };
+  } as const;
 }
 
 export default useKeyborad;
