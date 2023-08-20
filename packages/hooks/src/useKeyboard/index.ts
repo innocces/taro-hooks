@@ -13,7 +13,7 @@ export type Close = PromiseWithoutOptionAction<TaroGeneral.CallbackResult>;
 export type SelectedRange =
   PromiseWithoutOptionAction<TaroGeneral.CallbackResult>;
 
-function useKeyborad() {
+function useKeyboard() {
   const [height, setHeight] = useState<number>(0);
 
   useEffect(() => {
@@ -43,4 +43,4 @@ function useKeyborad() {
   } as const;
 }
 
-export default useKeyborad;
+export default useKeyboard;

@@ -5,8 +5,8 @@ nav:
   path: /hooks
   order: 2
 group:
-  title: 小程序
-  path: /wechat
+  title: 设备
+  path: /device
 ---
 
 # useKeyboard
@@ -37,7 +37,7 @@ const { height, close, getRange } = useKeyboard();
 
 ## 代码演示
 
-<code src="useKeyboard/index" group="wechat" />
+<code src="useKeyboard/index" group="device" />
 
 ## Hook 支持度
 
