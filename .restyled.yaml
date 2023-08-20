@@ -1,9 +1,9 @@
 enabled: true
 
-request_review: 
+request_review:
   origin: author
   forked: author
- 
+
 ignore_labels:
   - restyled-ignore
 
@@ -13,17 +13,13 @@ labels:
 pull_requests: true
 
 statuses:
-  differences: true     # Red when style differences are found
-  no_differences: true  # Green when no differences are found
-  error: true           # Red if we encounter errors restyling
+  differences: true # Red when style differences are found
+  no_differences: true # Green when no differences are found
+  error: true # Red if we encounter errors restyling
 
 exclude:
-  - "**/*.patch"
-  - "**/node_modules/**/*"
-  - "node_modules/**/*"
-  - ".dumi/*"
-  = "packages/father-build/*"
-  = "packages/father-build/**/*"
-  = "packages/taro-runtime/*"
-  = "packages/taro-runtime/**/*"
-  - ".github/workflows/**/*"
+  - '**/*.patch'
+  - '**/node_modules/**/*'
+  - 'node_modules/**/*'
+  - '.dumi/*'
+  - '.github/workflows/**/*'
