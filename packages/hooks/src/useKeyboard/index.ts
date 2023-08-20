@@ -1,6 +1,10 @@
-import { useRef, useEffect, useState, useCallback } from '@taro-hooks/core';
-import { hideKeyboard } from '@tarojs/taro';
-import Taro from '@tarojs/taro';
+import { useEffect, useState } from '@taro-hooks/core';
+import {
+  hideKeyboard,
+  onKeyboardHeightChange,
+  offKeyboardHeightChange,
+  getSelectedTextRange,
+} from '@tarojs/taro';
 import usePromise from '../usePromise';
 
 import type { PromiseWithoutOptionAction } from '../type';
@@ -17,10 +21,10 @@ function useKeyborad() {
       setHeight(e.height);
     };
 
-    Taro.onKeyboardHeightChange(handle);
+    onKeyboardHeightChange(handle);
 
     return () => {
-      Taro.offKeyboardHeightChange(handle);
+      offKeyboardHeightChange(handle);
     };
   });
 
@@ -30,7 +34,7 @@ function useKeyborad() {
   const getSelectedRange: SelectedRange = usePromise<
     {},
     TaroGeneral.CallbackResult
-  >(Taro.getSelectedTextRange);
+  >(getSelectedTextRange);
 
   return {
     height,
