@@ -34,6 +34,7 @@
     "version": "changeset && changeset version",
     "release": "changeset publish",
     "postversion": "pnpm run build:packages",
+    "postinstall": "pnpm run build:packages",
     "contributors:generate": "all-contributors generate"
   },
   "gitHooks": {
