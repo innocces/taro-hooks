@@ -69,6 +69,7 @@ export default {
     'pages/device/useMotion/index',
     'pages/device/useLocation/index',
     'pages/device/useBluetooth/index',
+    'pages/device/useKeyboard/index',
     // feedback
     'pages/feedback/useActionSheet/index',
     'pages/feedback/useLoading/index',
