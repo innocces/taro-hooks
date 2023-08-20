@@ -139,7 +139,8 @@
         "useLocation/index",
         "useMotion/index",
         "useScanCode/index",
-        "useVibrate/index"
+        "useVibrate/index",
+        "useKeyboard/index"
       ]
     },
     {

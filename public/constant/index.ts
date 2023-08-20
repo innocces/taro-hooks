@@ -283,6 +283,11 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       id: 'useBluetooth',
       name: 'useBluetooth 蓝牙',
     },
+    {
+      id: 'useKeyboard',
+      name: 'useKeyboard 键盘',
+      onlyMini: true,
+    },
   ],
   [APIChildrenName.network]: [
     {
