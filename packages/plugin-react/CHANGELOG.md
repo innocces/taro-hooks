@@ -1,5 +1,11 @@
 # @taro-hooks/plugin-react
 
+## 2.0.6
+
+### Patch Changes
+
+- addon useKeyboard hook
+
 ## 2.0.5
 
 ### Patch Changes

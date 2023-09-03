@@ -1,5 +1,13 @@
 # @taro-hooks/plugin-vue
 
+## 2.0.6
+
+### Patch Changes
+
+- addon useKeyboard hook
+- Updated dependencies
+  - @taro-hooks/shared@2.0.6
+
 ## 2.0.5
 
 ### Patch Changes

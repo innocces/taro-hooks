@@ -1,5 +1,15 @@
 # @taro-hooks/use-request
 
+## 2.0.6
+
+### Patch Changes
+
+- addon useKeyboard hook
+- Updated dependencies
+  - @taro-hooks/ahooks@2.0.6
+  - taro-hooks@2.0.6
+  - @taro-hooks/shared@2.0.6
+
 ## 2.0.5
 
 ### Patch Changes
