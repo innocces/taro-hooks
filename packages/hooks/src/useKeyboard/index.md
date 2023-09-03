@@ -43,4 +43,4 @@ const { height, close, getRange } = useKeyboard();
 
 | 微信小程序 | H5  | ReactNative |
 | :--------: | :-: | :---------: |
-|     ✔️     |     |             |
+|     ✔️     |     |     ✔️     |
