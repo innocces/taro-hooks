@@ -41,6 +41,10 @@ async function main() {
     console.log(chalk.blue('copy plugin-react demo....'));
     const pluginReactBuildDir = 'examples/taro-hooks-plugin/dist';
     await $`cp -r -f ${pluginReactBuildDir}/ ${deployDirName}/react`;
+
+    // copy _redirects
+    console.log(chalk.blue('copy _redirects....'));
+    await $`cp -r -f ${cwd()}/_redirects ${deployDirName}`;
   } catch (e) {
     console.log(chalk.redBright('generate-docs failed'), e.message);
     process.exit();
