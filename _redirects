@@ -1,0 +1,9 @@
+/ /site
+
+/vue/pages/:type/:index* /vue/index.html
+/vue/pages/:type/:index/:second* /vue/index.html
+/vue/pages/:type/:index/:second/:main* /vue/index.html
+
+/react/pages/:type/:index* /react/index.html
+/react/pages/:type/:index/:second* /react/index.html
+/react/pages/:type/:index/:second/:main* /react/index.html
