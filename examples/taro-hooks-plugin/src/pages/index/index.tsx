@@ -11,11 +11,13 @@ import type { MenuItem } from '@root/public/constant';
 
 const Index = () => {
   const [activeCollapseItem, setActiveCollapseItem] = useState();
-  const [, { navigate, switchTab }] = useRouter();
+  const [, { navigate, switchTab, preload }] = useRouter();
 
   const handleNavigate = ({ path, name, onlyMini = false }: MenuItem) => {
     const navigateAction = path.includes('TabBar') ? switchTab : navigate;
-    navigateAction(path, { title: name, onlyMini: Number(onlyMini) });
+    const payload = { title: name, onlyMini: Number(onlyMini) };
+    preload(payload);
+    navigateAction(path, payload);
   };
 
   return (

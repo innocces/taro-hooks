@@ -48,7 +48,7 @@ export default {
   setup() {
     const collapseData = generateIndexMenu(true);
     const activeCollapseItem = ref('');
-    const [, { navigate, switchTab }] = useRouter();
+    const [, { navigate, switchTab, preload }] = useRouter();
     const show = useModal({
       title: 'Taro-Hooks',
       content: '由于个人账号限制. 暂无法使用线上示例!',
@@ -66,7 +66,9 @@ export default {
         show();
         return;
       }
-      navigateAction(path, { title: name, onlyMini: Number(onlyMini) });
+      const payload = { title: name, onlyMini: Number(onlyMini) };
+      preload(payload);
+      navigateAction(path);
     };
 
     return {

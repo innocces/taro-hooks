@@ -72,6 +72,10 @@ export const ChildrenList: { [_: string]: APIChildrenItem[] } = {
       name: 'useRouter 路由',
     },
     {
+      id: 'usePreload',
+      name: 'usePreload 预加载',
+    },
+    {
       id: 'useFrom',
       name: 'useFrom 路由来源',
     },

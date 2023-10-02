@@ -73,6 +73,7 @@
         "usePage/index",
         "usePromise/index",
         "useRouter/index",
+        "usePreload/index",
         "useSelectorQuery/index",
         "useStorage/index",
         "useSystemInfo/index",
