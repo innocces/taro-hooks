@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/sandpack",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "sandpack for taro-hooks",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",

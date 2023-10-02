@@ -1,5 +1,13 @@
 # @taro-hooks/ahooks
 
+## 2.0.7
+
+### Patch Changes
+
+- addon usePreload & preload info in useRouter
+- Updated dependencies
+  - @taro-hooks/shared@2.0.7
+
 ## 2.0.6
 
 ### Patch Changes

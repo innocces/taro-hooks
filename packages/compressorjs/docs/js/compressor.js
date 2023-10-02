@@ -1,35 +1,42 @@
 /*!
- * Compressor.js v2.0.6
+ * Compressor.js v2.0.7
  * https://fengyuanchen.github.io/compressorjs
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2023-09-03T14:05:08.779Z
+ * Date: 2023-10-02T05:33:23.100Z
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Compressor = factory());
-})(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined'
+    ? (module.exports = factory())
+    : typeof define === 'function' && define.amd
+    ? define(factory)
+    : ((global =
+        typeof globalThis !== 'undefined' ? globalThis : global || self),
+      (global.Compressor = factory()));
+})(this, function () {
+  'use strict';
 
   function _extends() {
-    _extends = Object.assign ? Object.assign.bind() : function (target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
+    _extends = Object.assign
+      ? Object.assign.bind()
+      : function (target) {
+          for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+              if (Object.prototype.hasOwnProperty.call(source, key)) {
+                target[key] = source[key];
+              }
+            }
           }
-        }
-      }
-      return target;
-    };
+          return target;
+        };
     return _extends.apply(this, arguments);
   }
 
-  var canvasToBlob = {exports: {}};
+  var canvasToBlob = { exports: {} };
 
   /*
    * JavaScript Canvas to Blob
@@ -45,66 +52,93 @@
    * http://stackoverflow.com/q/4998908
    */
   (function (module) {
-  if (typeof window === 'undefined') {
-    return;
-  }
+    if (typeof window === 'undefined') {
+      return;
+    }
     if (typeof window === 'undefined') {
       return;
     }
     (function (window) {
-
-      var CanvasPrototype = window.HTMLCanvasElement && window.HTMLCanvasElement.prototype;
+      var CanvasPrototype =
+        window.HTMLCanvasElement && window.HTMLCanvasElement.prototype;
       var hasCanvasPrototype = !!CanvasPrototype;
-      var hasBlobConstructor = window.Blob && function () {
-        try {
-          return Boolean(new Blob());
-        } catch (e) {
-          return false;
-        }
-      }();
-      var hasArrayBufferViewSupport = hasBlobConstructor && window.Uint8Array && function () {
-        try {
-          return new Blob([new Uint8Array(100)]).size === 100;
-        } catch (e) {
-          return false;
-        }
-      }();
-      var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+      var hasBlobConstructor =
+        window.Blob &&
+        (function () {
+          try {
+            return Boolean(new Blob());
+          } catch (e) {
+            return false;
+          }
+        })();
+      var hasArrayBufferViewSupport =
+        hasBlobConstructor &&
+        window.Uint8Array &&
+        (function () {
+          try {
+            return new Blob([new Uint8Array(100)]).size === 100;
+          } catch (e) {
+            return false;
+          }
+        })();
+      var BlobBuilder =
+        window.BlobBuilder ||
+        window.WebKitBlobBuilder ||
+        window.MozBlobBuilder ||
+        window.MSBlobBuilder;
       var dataURIPattern = /^data:((.*?)(;charset=.*?)?)(;base64)?,/;
-      var dataURLtoBlob = (hasBlobConstructor || BlobBuilder) && window.atob && window.ArrayBuffer && window.Uint8Array && function (dataURI) {
-        var matches, mediaType, isBase64, dataString, byteString, arrayBuffer, intArray, i, bb;
-        // Parse the dataURI components as per RFC 2397
-        matches = dataURI.match(dataURIPattern);
-        if (!matches) {
-          throw new Error('invalid data URI');
-        }
-        // Default to text/plain;charset=US-ASCII
-        mediaType = matches[2] ? matches[1] : 'text/plain' + (matches[3] || ';charset=US-ASCII');
-        isBase64 = !!matches[4];
-        dataString = dataURI.slice(matches[0].length);
-        if (isBase64) {
-          // Convert base64 to raw binary data held in a string:
-          byteString = atob(dataString);
-        } else {
-          // Convert base64/URLEncoded data component to raw binary:
-          byteString = decodeURIComponent(dataString);
-        }
-        // Write the bytes of the string to an ArrayBuffer:
-        arrayBuffer = new ArrayBuffer(byteString.length);
-        intArray = new Uint8Array(arrayBuffer);
-        for (i = 0; i < byteString.length; i += 1) {
-          intArray[i] = byteString.charCodeAt(i);
-        }
-        // Write the ArrayBuffer (or ArrayBufferView) to a blob:
-        if (hasBlobConstructor) {
-          return new Blob([hasArrayBufferViewSupport ? intArray : arrayBuffer], {
-            type: mediaType
-          });
-        }
-        bb = new BlobBuilder();
-        bb.append(arrayBuffer);
-        return bb.getBlob(mediaType);
-      };
+      var dataURLtoBlob =
+        (hasBlobConstructor || BlobBuilder) &&
+        window.atob &&
+        window.ArrayBuffer &&
+        window.Uint8Array &&
+        function (dataURI) {
+          var matches,
+            mediaType,
+            isBase64,
+            dataString,
+            byteString,
+            arrayBuffer,
+            intArray,
+            i,
+            bb;
+          // Parse the dataURI components as per RFC 2397
+          matches = dataURI.match(dataURIPattern);
+          if (!matches) {
+            throw new Error('invalid data URI');
+          }
+          // Default to text/plain;charset=US-ASCII
+          mediaType = matches[2]
+            ? matches[1]
+            : 'text/plain' + (matches[3] || ';charset=US-ASCII');
+          isBase64 = !!matches[4];
+          dataString = dataURI.slice(matches[0].length);
+          if (isBase64) {
+            // Convert base64 to raw binary data held in a string:
+            byteString = atob(dataString);
+          } else {
+            // Convert base64/URLEncoded data component to raw binary:
+            byteString = decodeURIComponent(dataString);
+          }
+          // Write the bytes of the string to an ArrayBuffer:
+          arrayBuffer = new ArrayBuffer(byteString.length);
+          intArray = new Uint8Array(arrayBuffer);
+          for (i = 0; i < byteString.length; i += 1) {
+            intArray[i] = byteString.charCodeAt(i);
+          }
+          // Write the ArrayBuffer (or ArrayBufferView) to a blob:
+          if (hasBlobConstructor) {
+            return new Blob(
+              [hasArrayBufferViewSupport ? intArray : arrayBuffer],
+              {
+                type: mediaType,
+              },
+            );
+          }
+          bb = new BlobBuilder();
+          bb.append(arrayBuffer);
+          return bb.getBlob(mediaType);
+        };
       if (hasCanvasPrototype) {
         if (window.HTMLCanvasElement && !CanvasPrototype.toBlob) {
           if (CanvasPrototype.mozGetAsFile) {
@@ -123,7 +157,11 @@
               CanvasPrototype.toBlob = function (callback, type, quality) {
                 var self = this;
                 setTimeout(function () {
-                  if ((type && type !== 'image/png' || quality) && CanvasPrototype.toDataURL && dataURLtoBlob) {
+                  if (
+                    ((type && type !== 'image/png') || quality) &&
+                    CanvasPrototype.toDataURL &&
+                    dataURLtoBlob
+                  ) {
                     callback(dataURLtoBlob(self.toDataURL(type, quality)));
                   } else {
                     callback(self.msToBlob(type));
@@ -150,11 +188,14 @@
   })(canvasToBlob);
   var toBlob = canvasToBlob.exports;
 
-  var isBlob = value => {
+  var isBlob = (value) => {
     if (typeof Blob === 'undefined') {
       return false;
     }
-    return value instanceof Blob || Object.prototype.toString.call(value) === '[object Blob]';
+    return (
+      value instanceof Blob ||
+      Object.prototype.toString.call(value) === '[object Blob]'
+    );
   };
 
   var DEFAULTS = {
@@ -275,10 +316,11 @@
      *   console.log(err.message);
      * }
      */
-    error: null
+    error: null,
   };
 
-  const IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+  const IS_BROWSER =
+    typeof window !== 'undefined' && typeof window.document !== 'undefined';
   const WINDOW = IS_BROWSER ? window : {};
 
   /**
@@ -286,10 +328,8 @@
    * @param {*} value - The value to check.
    * @returns {boolean} Returns `true` if the given value is a positive number, else `false`.
    */
-  const isPositiveNumber = value => value > 0 && value < Infinity;
-  const {
-    slice
-  } = Array.prototype;
+  const isPositiveNumber = (value) => value > 0 && value < Infinity;
+  const { slice } = Array.prototype;
 
   /**
    * Convert array-like or iterable object to an array.
@@ -322,9 +362,7 @@
     }
     return `.${extension}`;
   }
-  const {
-    fromCharCode
-  } = String;
+  const { fromCharCode } = String;
 
   /**
    * Get string from char code in data view.
@@ -342,9 +380,7 @@
     }
     return str;
   }
-  const {
-    btoa
-  } = WINDOW;
+  const { btoa } = WINDOW;
 
   /**
    * Transform array buffer to Data URL.
@@ -359,7 +395,9 @@
     while (uint8.length > 0) {
       // XXX: Babel's `toConsumableArray` helper will throw error in IE or Safari 9
       // eslint-disable-next-line prefer-spread
-      chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
+      chunks.push(
+        fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))),
+      );
       uint8 = uint8.subarray(chunkSize);
     }
     return `data:${mimeType};base64,${btoa(chunks.join(''))}`;
@@ -385,7 +423,10 @@
         const length = dataView.byteLength;
         let offset = 2;
         while (offset + 1 < length) {
-          if (dataView.getUint8(offset) === 0xff && dataView.getUint8(offset + 1) === 0xe1) {
+          if (
+            dataView.getUint8(offset) === 0xff &&
+            dataView.getUint8(offset + 1) === 0xe1
+          ) {
             app1Start = offset;
             break;
           }
@@ -400,7 +441,10 @@
           littleEndian = endianness === 0x4949;
           if (littleEndian || endianness === 0x4d4d /* bigEndian */) {
             if (dataView.getUint16(tiffOffset + 2, littleEndian) === 0x002a) {
-              const firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
+              const firstIFDOffset = dataView.getUint32(
+                tiffOffset + 4,
+                littleEndian,
+              );
               if (firstIFDOffset >= 0x00000008) {
                 ifdStart = tiffOffset + firstIFDOffset;
               }
@@ -414,7 +458,10 @@
         let i;
         for (i = 0; i < length; i += 1) {
           offset = ifdStart + i * 12 + 2;
-          if (dataView.getUint16(offset, littleEndian) === 0x0112 /* Orientation */) {
+          if (
+            dataView.getUint16(offset, littleEndian) ===
+            0x0112 /* Orientation */
+          ) {
             // 8 is the offset of the current tag's value
             offset += 8;
 
@@ -483,7 +530,7 @@
     return {
       rotate,
       scaleX,
-      scaleY
+      scaleY,
     };
   }
   const REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
@@ -496,8 +543,13 @@
    * @returns {number} Returns the normalized number.
    */
   function normalizeDecimalNumber(value) {
-    let times = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100000000000;
-    return REGEXP_DECIMALS.test(value) ? Math.round(value * times) / times : value;
+    let times =
+      arguments.length > 1 && arguments[1] !== undefined
+        ? arguments[1]
+        : 100000000000;
+    return REGEXP_DECIMALS.test(value)
+      ? Math.round(value * times) / times
+      : value;
   }
 
   /**
@@ -507,17 +559,19 @@
    * @returns {Object} The result sizes.
    */
   function getAdjustedSizes(_ref) {
-    let {
-      aspectRatio,
-      height,
-      width
-    } = _ref;
-    let type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'none';
+    let { aspectRatio, height, width } = _ref;
+    let type =
+      arguments.length > 1 && arguments[1] !== undefined
+        ? arguments[1]
+        : 'none';
     const isValidWidth = isPositiveNumber(width);
     const isValidHeight = isPositiveNumber(height);
     if (isValidWidth && isValidHeight) {
       const adjustedWidth = height * aspectRatio;
-      if ((type === 'contain' || type === 'none') && adjustedWidth > width || type === 'cover' && adjustedWidth < width) {
+      if (
+        ((type === 'contain' || type === 'none') && adjustedWidth > width) ||
+        (type === 'cover' && adjustedWidth < width)
+      ) {
         height = width / aspectRatio;
       } else {
         width = height * aspectRatio;
@@ -529,14 +583,11 @@
     }
     return {
       width,
-      height
+      height,
     };
   }
 
-  const {
-    ArrayBuffer: ArrayBuffer$1,
-    FileReader
-  } = WINDOW;
+  const { ArrayBuffer: ArrayBuffer$1, FileReader } = WINDOW;
   const URL = WINDOW.URL || WINDOW.webkitURL;
   const REGEXP_EXTENSION = /\.\w+$/;
   const AnotherCompressor = WINDOW.Compressor;
@@ -556,28 +607,31 @@
       this.image = new Image();
       this.options = {
         ...DEFAULTS,
-        ...options
+        ...options,
       };
       this.aborted = false;
       this.result = null;
       this.init();
     }
     init() {
-      const {
-        file,
-        options
-      } = this;
+      const { file, options } = this;
       if (!isBlob(file)) {
-        this.fail(new Error('The first argument must be a File or Blob object.'));
+        this.fail(
+          new Error('The first argument must be a File or Blob object.'),
+        );
         return;
       }
       const mimeType = file.type;
       if (!isImageType(mimeType)) {
-        this.fail(new Error('The first argument must be an image File or Blob object.'));
+        this.fail(
+          new Error('The first argument must be an image File or Blob object.'),
+        );
         return;
       }
       if (!URL || !FileReader) {
-        this.fail(new Error('The current browser does not support image compression.'));
+        this.fail(
+          new Error('The current browser does not support image compression.'),
+        );
         return;
       }
       if (!ArrayBuffer$1) {
@@ -585,19 +639,16 @@
       }
       if (URL && !options.checkOrientation) {
         this.load({
-          url: URL.createObjectURL(file)
+          url: URL.createObjectURL(file),
         });
       } else {
         const reader = new FileReader();
-        const checkOrientation = options.checkOrientation && mimeType === 'image/jpeg';
+        const checkOrientation =
+          options.checkOrientation && mimeType === 'image/jpeg';
         this.reader = reader;
-        reader.onload = _ref => {
-          let {
-            target
-          } = _ref;
-          const {
-            result
-          } = target;
+        reader.onload = (_ref) => {
+          let { target } = _ref;
+          const { result } = target;
           const data = {};
           if (checkOrientation) {
             // Reset the orientation value to its default value 1
@@ -634,15 +685,12 @@
       }
     }
     load(data) {
-      const {
-        file,
-        image
-      } = this;
+      const { file, image } = this;
       image.onload = () => {
         this.draw({
           ...data,
           naturalWidth: image.naturalWidth,
-          naturalHeight: image.naturalHeight
+          naturalHeight: image.naturalHeight,
         });
       };
       image.onabort = () => {
@@ -654,7 +702,10 @@
 
       // Match all browsers that use WebKit as the layout engine in iOS devices,
       // such as Safari for iOS, Chrome for iOS, and in-app browsers.
-      if (WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent)) {
+      if (
+        WINDOW.navigator &&
+        /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent)
+      ) {
         // Fix the `The operation is insecure` error (#57)
         image.crossOrigin = 'anonymous';
       }
@@ -667,26 +718,22 @@
         naturalHeight,
         rotate = 0,
         scaleX = 1,
-        scaleY = 1
+        scaleY = 1,
       } = _ref2;
-      const {
-        file,
-        image,
-        options
-      } = this;
+      const { file, image, options } = this;
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       const is90DegreesRotated = Math.abs(rotate) % 180 === 90;
-      const resizable = (options.resize === 'contain' || options.resize === 'cover') && isPositiveNumber(options.width) && isPositiveNumber(options.height);
+      const resizable =
+        (options.resize === 'contain' || options.resize === 'cover') &&
+        isPositiveNumber(options.width) &&
+        isPositiveNumber(options.height);
       let maxWidth = Math.max(options.maxWidth, 0) || Infinity;
       let maxHeight = Math.max(options.maxHeight, 0) || Infinity;
       let minWidth = Math.max(options.minWidth, 0) || 0;
       let minHeight = Math.max(options.minHeight, 0) || 0;
       let aspectRatio = naturalWidth / naturalHeight;
-      let {
-        width,
-        height
-      } = options;
+      let { width, height } = options;
       if (is90DegreesRotated) {
         [maxWidth, maxHeight] = [maxHeight, maxWidth];
         [minWidth, minHeight] = [minHeight, minWidth];
@@ -695,43 +742,46 @@
       if (resizable) {
         aspectRatio = width / height;
       }
-      ({
-        width: maxWidth,
-        height: maxHeight
-      } = getAdjustedSizes({
-        aspectRatio,
-        width: maxWidth,
-        height: maxHeight
-      }, 'contain'));
-      ({
-        width: minWidth,
-        height: minHeight
-      } = getAdjustedSizes({
-        aspectRatio,
-        width: minWidth,
-        height: minHeight
-      }, 'cover'));
+      ({ width: maxWidth, height: maxHeight } = getAdjustedSizes(
+        {
+          aspectRatio,
+          width: maxWidth,
+          height: maxHeight,
+        },
+        'contain',
+      ));
+      ({ width: minWidth, height: minHeight } = getAdjustedSizes(
+        {
+          aspectRatio,
+          width: minWidth,
+          height: minHeight,
+        },
+        'cover',
+      ));
       if (resizable) {
-        ({
-          width,
-          height
-        } = getAdjustedSizes({
-          aspectRatio,
-          width,
-          height
-        }, options.resize));
+        ({ width, height } = getAdjustedSizes(
+          {
+            aspectRatio,
+            width,
+            height,
+          },
+          options.resize,
+        ));
       } else {
-        ({
-          width = naturalWidth,
-          height = naturalHeight
-        } = getAdjustedSizes({
+        ({ width = naturalWidth, height = naturalHeight } = getAdjustedSizes({
           aspectRatio,
           width,
-          height
+          height,
         }));
       }
-      width = Math.floor(normalizeDecimalNumber(Math.min(Math.max(width, minWidth), maxWidth)));
-      height = Math.floor(normalizeDecimalNumber(Math.min(Math.max(height, minHeight), maxHeight)));
+      width = Math.floor(
+        normalizeDecimalNumber(Math.min(Math.max(width, minWidth), maxWidth)),
+      );
+      height = Math.floor(
+        normalizeDecimalNumber(
+          Math.min(Math.max(height, minHeight), maxHeight),
+        ),
+      );
       const destX = -width / 2;
       const destY = -height / 2;
       const destWidth = width;
@@ -742,17 +792,17 @@
         let srcY = 0;
         let srcWidth = naturalWidth;
         let srcHeight = naturalHeight;
-        ({
-          width: srcWidth,
-          height: srcHeight
-        } = getAdjustedSizes({
-          aspectRatio,
-          width: naturalWidth,
-          height: naturalHeight
-        }, {
-          contain: 'cover',
-          cover: 'contain'
-        }[options.resize]));
+        ({ width: srcWidth, height: srcHeight } = getAdjustedSizes(
+          {
+            aspectRatio,
+            width: naturalWidth,
+            height: naturalHeight,
+          },
+          {
+            contain: 'cover',
+            cover: 'contain',
+          }[options.resize],
+        ));
         srcX = (naturalWidth - srcWidth) / 2;
         srcY = (naturalHeight - srcHeight) / 2;
         params.push(srcX, srcY, srcWidth, srcHeight);
@@ -769,7 +819,10 @@
       let fillStyle = 'transparent';
 
       // Converts PNG files over the `convertSize` to JPEGs.
-      if (file.size > options.convertSize && options.convertTypes.indexOf(options.mimeType) >= 0) {
+      if (
+        file.size > options.convertSize &&
+        options.convertTypes.indexOf(options.mimeType) >= 0
+      ) {
         options.mimeType = 'image/jpeg';
       }
       if (options.mimeType === 'image/jpeg') {
@@ -787,7 +840,7 @@
       }
       context.save();
       context.translate(width / 2, height / 2);
-      context.rotate(rotate * Math.PI / 180);
+      context.rotate((rotate * Math.PI) / 180);
       context.scale(scaleX, scaleY);
       context.drawImage(image, ...params);
       context.restore();
@@ -797,12 +850,12 @@
       if (this.aborted) {
         return;
       }
-      const done = result => {
+      const done = (result) => {
         if (!this.aborted) {
           this.done({
             naturalWidth,
             naturalHeight,
-            result
+            result,
           });
         }
       };
@@ -813,22 +866,26 @@
       }
     }
     done(_ref3) {
-      let {
-        naturalWidth,
-        naturalHeight,
-        result
-      } = _ref3;
-      const {
-        file,
-        image,
-        options
-      } = this;
+      let { naturalWidth, naturalHeight, result } = _ref3;
+      const { file, image, options } = this;
       if (URL && !options.checkOrientation) {
         URL.revokeObjectURL(image.src);
       }
       if (result) {
         // Returns original file if the result is greater than it and without size related options
-        if (options.strict && result.size > file.size && options.mimeType === file.type && !(options.width > naturalWidth || options.height > naturalHeight || options.minWidth > naturalWidth || options.minHeight > naturalHeight || options.maxWidth < naturalWidth || options.maxHeight < naturalHeight)) {
+        if (
+          options.strict &&
+          result.size > file.size &&
+          options.mimeType === file.type &&
+          !(
+            options.width > naturalWidth ||
+            options.height > naturalHeight ||
+            options.minWidth > naturalWidth ||
+            options.minHeight > naturalHeight ||
+            options.maxWidth < naturalWidth ||
+            options.maxHeight < naturalHeight
+          )
+        ) {
           result = file;
         } else {
           const date = new Date();
@@ -838,7 +895,10 @@
 
           // Convert the extension to match its type
           if (result.name && result.type !== file.type) {
-            result.name = result.name.replace(REGEXP_EXTENSION, imageTypeToExtension(result.type));
+            result.name = result.name.replace(
+              REGEXP_EXTENSION,
+              imageTypeToExtension(result.type),
+            );
           }
         }
       } else {
@@ -851,9 +911,7 @@
       }
     }
     fail(err) {
-      const {
-        options
-      } = this;
+      const { options } = this;
       if (options.error) {
         options.error.call(this, err);
       } else {
@@ -893,5 +951,4 @@
   }
 
   return Compressor;
-
-}));
+});

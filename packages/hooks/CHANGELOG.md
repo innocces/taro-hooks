@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.0.7
+
+### Patch Changes
+
+- addon usePreload & preload info in useRouter
+- Updated dependencies
+  - @taro-hooks/ahooks@2.0.7
+  - @taro-hooks/compressorjs@2.0.7
+  - @taro-hooks/shared@2.0.7
+  - @taro-hooks/use-request@2.0.7
+
 ## 2.0.6
 
 ### Patch Changes

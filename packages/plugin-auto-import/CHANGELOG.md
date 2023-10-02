@@ -1,5 +1,13 @@
 # @taro-hooks/plugin-auto-import
 
+## 2.0.7
+
+### Patch Changes
+
+- addon usePreload & preload info in useRouter
+- Updated dependencies
+  - taro-hooks@2.0.7
+
 ## 2.0.6
 
 ### Patch Changes
