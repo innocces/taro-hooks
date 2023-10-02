@@ -6,6 +6,7 @@ import useWebp from './useWebp';
 import useApp from './useApp';
 import usePage from './usePage';
 import useRouter from './useRouter';
+import usePreload from './usePreload';
 import usePromise from './usePromise';
 import useArrayBuffer from './useArrayBuffer';
 import useClipboardData from './useClipboardData';
@@ -82,6 +83,7 @@ export {
   usePage,
   useLaunchOptions,
   useRouter,
+  usePreload,
   useFrom,
   usePromise,
   useArrayBuffer,

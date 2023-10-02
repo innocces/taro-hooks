@@ -20,8 +20,10 @@ group:
 ## API
 
 ```ts
-const [routerInfo, { navigate, switchTab, relaunch, redirect, back, exit }] =
-  useRouter<R>();
+const [
+  routerInfo,
+  { navigate, switchTab, relaunch, redirect, back, exit, preload },
+] = useRouter<R extends RecordData, S extends RecordData = RecordData>();
 ```
 
 ## 参数说明
@@ -39,12 +41,18 @@ const [routerInfo, { navigate, switchTab, relaunch, redirect, back, exit }] =
 | redirect   | 异步保留当前页面，跳转到应用内的某个页面或跳转至小程序 | `RouteNavigate<R>` |
 | back       | 异步关闭当前页面，返回上一页面或多级页面或返回小程序   | `Back`             |
 | exit       | 异步关闭小程序                                         | `Exit`             |
+| preload    | 跳转预加载 API                                         | `Preload`          |
 
 ### `Route`
 
 ```ts
-type Route<R extends Partial<RecordData>> = RouterInfo<R> & {
+export type Route<
+  R extends Partial<RecordData>,
+  S extends RecordData = RecordData,
+> = RouterInfo<R> & {
   from: ReturnType<typeof useFrom>;
+} & {
+  preloadData: S;
 };
 ```
 
@@ -71,6 +79,31 @@ type Back = PromiseParamsAction<RouteBackOption>;
 ```ts
 type Exit = PromiseWithoutOptionAction;
 ```
+
+### `Preload`
+
+````ts
+/**
+ * 跳转预加载 API
+ * @param options 预加载的数据
+ * @example
+ * ```tsx
+ * Taro.preload({ key: 'value' })
+ * ```
+ */
+preload (options: Record<string, any>)
+
+/**
+ * 跳转预加载 API
+ * @param key 预加载的数据 key
+ * @param value 预加载的数据 value
+ * @example
+ * ```tsx
+ * Taro.preload('key', 'value')
+ * ```
+ */
+preload (key: string, value: any)
+````
 
 ## 代码演示
 

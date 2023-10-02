@@ -9,6 +9,7 @@ import Taro, {
   navigateBackMiniProgram,
   openEmbeddedMiniProgram,
   exitMiniProgram,
+  preload,
 } from '@tarojs/taro';
 import { useRef } from '@taro-hooks/core';
 
@@ -54,12 +55,17 @@ export type Exit = PromiseWithoutOptionAction;
 
 export type RouteNavigate<R> = PromiseParamsAction<RouteOption<R>>;
 
-export type Route<R extends Partial<RecordData>> = RouterInfo<R> & {
+export type Route<
+  R extends Partial<RecordData>,
+  S extends RecordData = RecordData,
+> = RouterInfo<R> & {
   from: ReturnType<typeof useFrom>;
+} & {
+  preloadData: S;
 };
 
-function useRouter<R extends RecordData>(): [
-  Route<R>,
+function useRouter<R extends RecordData, S extends RecordData = RecordData>(): [
+  Route<R, S>,
   {
     navigate: RouteNavigate<R>;
     switchTab: SwitchTab;
@@ -67,9 +73,11 @@ function useRouter<R extends RecordData>(): [
     redirect: RouteNavigate<R>;
     relaunch: RouteNavigate<R>;
     exit: Exit;
+    preload: typeof preload;
   },
 ] {
-  const router = useRef<Omit<Route<R>, 'from'>>(useTaroRouter());
+  type TaroRouterInfo = Omit<Route<R, S>, 'from'>;
+  const router = useRef<TaroRouterInfo>(useTaroRouter() as TaroRouterInfo);
   const from = useFrom();
 
   const navigateToAsync =
@@ -140,6 +148,7 @@ function useRouter<R extends RecordData>(): [
       redirect,
       back,
       exit,
+      preload,
     },
   ];
 }
