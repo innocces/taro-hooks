@@ -1,8 +1,6 @@
 import { useDidShow, useDidHide } from '@tarojs/taro';
 import { useEffect, useRef } from '@taro-hooks/core';
 import { useUnmount } from '@taro-hooks/ahooks';
-import { escapeState } from '@taro-hooks/shared';
-import { useVisible } from 'taro-hooks';
 import type { Plugin } from '../types';
 import limit from '../utils/limit';
 import isOnline from '../utils/isOnline';
@@ -13,7 +11,9 @@ function subscribe(listener: () => void) {
   listeners.push(listener);
   return function unsubscribe() {
     const index = listeners.indexOf(listener);
-    listeners.splice(index, 1);
+    if (index > -1) {
+      listeners.splice(index, 1);
+    }
   };
 }
 
@@ -22,7 +22,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
   { refreshOnWindowFocus, focusTimespan = 5000 },
 ) => {
   const unsubscribeRef = useRef<() => void>();
-  const visible = useVisible();
+  const visible = useRef<boolean>(true);
 
   const stopSubscribe = () => {
     unsubscribeRef.current?.();
@@ -30,7 +30,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
 
   const subscribeFocus = async () => {
     const online = await isOnline();
-    if (!escapeState(visible) || !online) return;
+    if (visible.current || !online) return;
     for (let i = 0; i < listeners.length; i++) {
       const listener = listeners[i];
       listener();
@@ -38,10 +38,12 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
   };
 
   useDidShow(() => {
+    visible.current = true;
     subscribeFocus();
   });
 
   useDidHide(() => {
+    visible.current = false;
     subscribeFocus();
   });
 
@@ -58,7 +60,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
     return () => {
       stopSubscribe();
     };
-  }, [refreshOnWindowFocus, focusTimespan, visible]);
+  }, [refreshOnWindowFocus, focusTimespan]);
 
   useUnmount(() => {
     stopSubscribe();
