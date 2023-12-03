@@ -615,7 +615,7 @@ importers:
   packages/plugin-auto-import:
     dependencies:
       taro-hooks:
-        specifier: '>=2.0.6'
+        specifier: '>=2.0.7'
         version: link:../hooks
       unplugin-auto-import:
         specifier: ^0.16.6
