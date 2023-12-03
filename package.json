@@ -30,7 +30,7 @@
     "generate-docs": "node scripts/build-docs.mjs",
     "generate-hooks-category": "node scripts/generate-hooks-category.mjs",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "prepublishOnly": "pnpm run bootstrap",
+    "prepublishOnly": "pnpm run build:packages",
     "version": "changeset && changeset version",
     "release": "changeset publish",
     "postversion": "pnpm run build:packages",
