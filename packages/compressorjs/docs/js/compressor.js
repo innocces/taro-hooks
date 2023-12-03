@@ -1,11 +1,11 @@
 /*!
- * Compressor.js v2.0.7
+ * Compressor.js v2.0.8
  * https://fengyuanchen.github.io/compressorjs
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2023-10-02T05:33:23.100Z
+ * Date: 2023-12-03T08:53:43.312Z
  */
 
 (function (global, factory) {

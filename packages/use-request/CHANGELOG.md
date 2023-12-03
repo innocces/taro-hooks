@@ -1,5 +1,15 @@
 # @taro-hooks/use-request
 
+## 2.0.8
+
+### Patch Changes
+
+- fix useRequest refreshOnWindowFocus request twice error
+- Updated dependencies
+  - @taro-hooks/ahooks@2.0.8
+  - taro-hooks@2.0.8
+  - @taro-hooks/shared@2.0.8
+
 ## 2.0.7
 
 ### Patch Changes

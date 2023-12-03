@@ -1,5 +1,11 @@
 # @taro-hooks/blueimp-canvas-to-blob
 
+## 2.0.8
+
+### Patch Changes
+
+- fix useRequest refreshOnWindowFocus request twice error
+
 ## 2.0.7
 
 ### Patch Changes

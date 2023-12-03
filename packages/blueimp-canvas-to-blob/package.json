@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/blueimp-canvas-to-blob",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "title": "blueimp-canvas-to-blob",
   "description": "Canvas to Blob is a polyfill for the standard JavaScript canvas.toBlob method. It can be used to create Blob objects from an HTML canvas element.",
   "keywords": [
