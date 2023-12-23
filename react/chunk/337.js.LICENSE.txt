@@ -1,0 +1,26 @@
+/*! Bundled license information:
+
+mobile-detect/mobile-detect.js:
+  (*!mobile-detect v1.4.5 2021-03-13*)
+  (*!@license Copyright 2013, Heinrich Goebl, License: MIT, see https://github.com/hgoebl/mobile-detect.js*)
+
+@stencil/core/internal/client/index.js:
+  (*!__STENCIL_STATIC_IMPORT_SWITCH__*)
+
+universal-router/module.js:
+  (*! Universal Router | MIT License | https://www.kriasoft.com/universal-router/ *)
+
+jsonp-retry/dist/jsonp.esm.js:
+  (*
+  object-assign
+  (c) Sindre Sorhus
+  @license MIT
+  *)
+
+@tarojs/components/dist/components/index2.js:
+  (*!
+  	Copyright (c) 2018 Jed Watson.
+  	Licensed under the MIT License (MIT), see
+  	http://jedwatson.github.io/classnames
+  *)
+*/
