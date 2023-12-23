@@ -7,7 +7,7 @@ const supportFrameworks = ['react', ...reactLike];
 
 export default (ctx: IPluginContext) => {
   const { framework } = ctx.initialConfig;
-  if ((framework && !supportFrameworks.includes(framework)) || !getReactPath())
+  if ((framework && !supportFrameworks.includes(framework)) || !getReactPath(framework))
     return;
 
   ctx.modifyWebpackChain(({ chain, webpack }) => {
