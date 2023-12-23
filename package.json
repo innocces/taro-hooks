@@ -26,7 +26,7 @@
     "build:request": "pnpm -F @taro-hooks/use-request run build",
     "docs:build:render": "cross-env BUILD_TARGET=RENDER pnpm build:docs",
     "docs:build:gh": "cross-env BUILD_TARGET=GH pnpm build:docs",
-    "docs:build:cf": "cross-env BUILD_TARGET=cf pnpm build:docs",
+    "docs:build:cf": "pnpm build:packages && cross-env BUILD_TARGET=cf pnpm build:docs",
     "generate-template": "TS_NODE_PROJECT=scripts/tsconfig.json node -r ts-node/register scripts/generate-templ.ts",
     "generate-docs": "node scripts/build-docs.mjs",
     "generate-hooks-category": "node scripts/generate-hooks-category.mjs",
