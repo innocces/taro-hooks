@@ -30,6 +30,7 @@ const config = {
     prebundle: {
       enable: true,
       include: [],
+      exclude: ['@taroify/core', '@taroify/icons'],
     },
   },
   cache: {

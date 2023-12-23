@@ -3,5 +3,6 @@
   "prettier.jsxSingleQuote": true,
   "prettier.singleQuote": true,
   "prettier.requireConfig": true,
-  "files.autoSave": "onWindowChange"
+  "files.autoSave": "onWindowChange",
+  "deepscan.ignoreConfirmWarning": true
 }
