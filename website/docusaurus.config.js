@@ -17,6 +17,7 @@ const prod = process.env.NODE_ENV === 'production';
 
 const siteMap = {
   vercel: 'https://next-version-taro-hooks.vercel.app',
+  cf: 'https://next-taro-hooks.pages.dev',
   GH: 'https://innocces.github.io',
   RENDER: 'https://taro-hooks.onrender.com',
 };
@@ -311,7 +312,7 @@ const config = {
                 label: 'buy me coffee',
                 href: 'https://www.buymeacoffee.com/innocces?ref=widget-1376490',
               },
-              { label: 'afdian', href: 'https://afdian.net/a/innocces' }
+              { label: 'afdian', href: 'https://afdian.net/a/innocces' },
             ],
           },
         ],
