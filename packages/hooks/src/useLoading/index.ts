@@ -17,7 +17,6 @@ export type LoadingOption = ExcludeOption<Taro.showLoading.Option>;
 export type PartialLoadingOption = Partial<LoadingOption>;
 
 export type Show = PromiseOptionalAction<
-  TaroGeneral.CallbackResult,
   PartialLoadingOption
 >;
 
