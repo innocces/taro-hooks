@@ -1,1 +1,9 @@
+/ /site
 
+/vue/pages/:type/:index* /vue/index.html?type=:type&hook=:index
+/vue/pages/:type/:index/:second* /vue/index.html?type=:type&hook=:index&sub=:second
+/vue/pages/:type/:index/:second/:main* /vue/index.html?type=:type&hook=:index&sub=:second&function=:main
+
+/react/pages/:type/:index* /react/index.html?type=:type&hook=:index
+/react/pages/:type/:index/:second* /react/index.html?type=:type&hook=:index&sub=:second
+/react/pages/:type/:index/:second/:main* /react/index.html?type=:type&hook=:index&sub=:second&function=:main
