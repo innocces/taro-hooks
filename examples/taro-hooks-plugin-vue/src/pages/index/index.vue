@@ -34,8 +34,9 @@
 </template>
 
 <script lang="ts">
-import { useRouter, useModal } from 'taro-hooks';
+import { useRouter, useModal, useEnv, useLayoutEffect } from 'taro-hooks';
 import { ref } from 'vue';
+import { ENV_TYPE } from '@tarojs/taro';
 import {
   generateIndexMenu,
   PRODUCTIONDISABLEPANEL,
@@ -44,11 +45,14 @@ import {
 // @ts-ignore
 import type { MenuItem } from '@root/public/constant';
 
+let checkParams: any = undefined;
+
 export default {
   setup() {
     const collapseData = generateIndexMenu(true);
+    const env = useEnv();
     const activeCollapseItem = ref('');
-    const [, { navigate, switchTab, preload }] = useRouter();
+    const [pageInfo, { navigate, switchTab, preload }] = useRouter();
     const show = useModal({
       title: 'Taro-Hooks',
       content: '由于个人账号限制. 暂无法使用线上示例!',
@@ -70,6 +74,38 @@ export default {
       preload(payload);
       navigateAction(path);
     };
+
+    const handleCheckNavigate = () => {
+      const checkQueryField = ['type', 'hook', 'sub', 'function'];
+      const pageParams = pageInfo.params;
+      // 包含前两个即可
+      if (checkQueryField.slice(0, 2).every((v) => pageParams[v])) {
+        // 对比两个是否一致
+        const isEqual = Object.keys(pageParams).reduce((result, key) => {
+          if (!result) {
+            return result;
+          }
+
+          return pageParams[key] === checkParams?.[key];
+        }, true);
+
+        if (!isEqual) {
+          const path = checkQueryField.reduce(
+            (forwardPath, key) => [forwardPath, `/${pageParams[key]}`].join(''),
+            '/pages',
+          );
+          checkParams = pageParams;
+          navigate(path);
+        }
+      }
+    };
+
+    useLayoutEffect(() => {
+      // @ts-ignore
+      if (env === ENV_TYPE['WEB'] && CF !== '0') {
+        handleCheckNavigate();
+      }
+    }, [pageInfo]);
 
     return {
       activeCollapseItem,

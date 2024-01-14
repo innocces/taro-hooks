@@ -15,7 +15,9 @@ const config = {
   sourceRoot: 'src',
   outputRoot: weapp ? 'dist-weapp' : 'dist',
   plugins: ['@taro-hooks/plugin-react', '@taro-hooks/plugin-auto-import'],
-  defineConstants: {},
+  defineConstants: {
+    CF: process.env.CF_PAGES ? JSON.stringify(process.env.CF_PAGES) : "'0'",
+  },
   alias: {
     '@root': resolve(__dirname, '..', '..', '..'),
     '@src': resolve(__dirname, '..', 'src'),

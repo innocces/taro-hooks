@@ -13,6 +13,8 @@ declare module '*.scss';
 declare module '*.sass';
 declare module '*.styl';
 
+declare const CF: string;
+
 declare namespace NodeJS {
   interface ProcessEnv {
     TARO_ENV:
