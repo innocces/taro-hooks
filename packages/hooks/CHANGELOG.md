@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.0.10
+
+### Patch Changes
+
+- fix useLoading delcare error
+- Updated dependencies
+  - @taro-hooks/compressorjs@2.0.10
+  - @taro-hooks/ahooks@2.0.10
+  - @taro-hooks/shared@2.0.10
+  - @taro-hooks/use-request@2.0.10
+
 ## 2.0.9
 
 ### Patch Changes

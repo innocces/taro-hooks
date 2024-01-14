@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/plugin-vue",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "vue3 框架插件",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",

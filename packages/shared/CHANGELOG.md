@@ -1,5 +1,11 @@
 # @taro-hooks/shared
 
+## 2.0.10
+
+### Patch Changes
+
+- fix useLoading delcare error
+
 ## 2.0.9
 
 ### Patch Changes
