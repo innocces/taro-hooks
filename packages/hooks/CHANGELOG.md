@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.0.9
+
+### Patch Changes
+
+- fix react plugin for preact mode
+- Updated dependencies
+  - @taro-hooks/ahooks@2.0.9
+  - @taro-hooks/compressorjs@2.0.9
+  - @taro-hooks/shared@2.0.9
+  - @taro-hooks/use-request@2.0.9
+
 ## 2.0.8
 
 ### Patch Changes

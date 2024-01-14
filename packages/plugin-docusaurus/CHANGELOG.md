@@ -1,5 +1,11 @@
 # @taro-hooks/plugin-docusaurus
 
+## 2.0.9
+
+### Patch Changes
+
+- fix react plugin for preact mode
+
 ## 2.0.8
 
 ### Patch Changes

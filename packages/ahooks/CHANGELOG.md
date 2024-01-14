@@ -1,5 +1,13 @@
 # @taro-hooks/ahooks
 
+## 2.0.9
+
+### Patch Changes
+
+- fix react plugin for preact mode
+- Updated dependencies
+  - @taro-hooks/shared@2.0.9
+
 ## 2.0.8
 
 ### Patch Changes

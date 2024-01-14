@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.9
+
+### Patch Changes
+
+- fix react plugin for preact mode
+- Updated dependencies
+  - @taro-hooks/blueimp-canvas-to-blob@2.0.9
+
 ## 2.0.8
 
 ### Patch Changes
