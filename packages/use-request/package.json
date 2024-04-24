@@ -42,8 +42,8 @@
     "taro-hooks": "workspace:*"
   },
   "peerDependencies": {
-    "@tarojs/taro": ">= 3.4.x",
-    "@tarojs/taro-h5": ">= 3.4.x"
+    "@tarojs/taro": ">=3.4.x",
+    "@tarojs/taro-h5": ">=3.4.x"
   },
   "engines": {
     "node": ">=12.0.0"
