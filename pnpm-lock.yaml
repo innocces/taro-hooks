@@ -615,7 +615,7 @@ importers:
   packages/plugin-auto-import:
     dependencies:
       taro-hooks:
-        specifier: '>=2.0.8'
+        specifier: '>=2.0.10'
         version: link:../hooks
       unplugin-auto-import:
         specifier: ^0.16.6
@@ -21694,8 +21694,8 @@ packages:
     resolution: {integrity: sha512-oyratzOWyuFhBzONp06l0FBPu03ltCd1sRWoy2v38SnAKxtpZ8ySLTSEw//hIsBdocMda7fFZEjOG57L57mcUw==}
     dev: true
 
-  /miniprogram-compiler@0.2.2:
-    resolution: {integrity: sha512-fiJXv/15jCcRAU8YKcO7S7fkPKLa5ZBgpLN+d6B3r3KMktM5tAkDEQ+zm6aTfNoHurYOHcRyPyGf26gqQXlFXg==}
+  /miniprogram-compiler@0.2.3:
+    resolution: {integrity: sha512-/MfFiXTBUwYxnrTbj1hgwk1+qGkMCTL1zi8IReOq/0SPVkUxpx19E89w+ohYCELFXkMfVbD+6ejrHh3Y1u5sVg==}
     dependencies:
       glob: 7.2.3
       unescape-js: 1.1.4
@@ -21711,7 +21711,7 @@ packages:
       csso: 3.5.1
       j-component: 1.4.9
       less: 3.13.1
-      miniprogram-compiler: 0.2.2
+      miniprogram-compiler: 0.2.3
       postcss: 7.0.39
     dev: true
 

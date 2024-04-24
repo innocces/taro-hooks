@@ -1,5 +1,13 @@
 # @taro-hooks/ahooks
 
+## 2.0.11
+
+### Patch Changes
+
+- fix preload error
+- Updated dependencies
+  - @taro-hooks/shared@2.0.11
+
 ## 2.0.10
 
 ### Patch Changes

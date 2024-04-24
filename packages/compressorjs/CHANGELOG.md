@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.11
+
+### Patch Changes
+
+- fix preload error
+- Updated dependencies
+  - @taro-hooks/blueimp-canvas-to-blob@2.0.11
+
 ## 2.0.10
 
 ### Patch Changes

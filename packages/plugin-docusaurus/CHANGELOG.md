@@ -1,5 +1,11 @@
 # @taro-hooks/plugin-docusaurus
 
+## 2.0.11
+
+### Patch Changes
+
+- fix preload error
+
 ## 2.0.10
 
 ### Patch Changes
