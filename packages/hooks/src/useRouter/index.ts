@@ -17,6 +17,7 @@ import type { RouterInfo } from '@tarojs/taro';
 
 import useFrom from '../useFrom';
 import usePromise from '../usePromise';
+import usePage from '../usePage';
 
 import { stringfiyUrl } from '../utils/tool';
 
@@ -79,6 +80,7 @@ function useRouter<R extends RecordData, S extends RecordData = RecordData>(): [
   type TaroRouterInfo = Omit<Route<R, S>, 'from'>;
   const router = useRef<TaroRouterInfo>(useTaroRouter() as TaroRouterInfo);
   const from = useFrom();
+  const [, { pageInstance }] = usePage();
 
   const navigateToAsync =
     usePromise<ExcludeOption<Taro.navigateTo.Option>>(navigateTo);
@@ -140,7 +142,7 @@ function useRouter<R extends RecordData, S extends RecordData = RecordData>(): [
   const exit: Exit = exitMiniProgramAsync;
 
   return [
-    { ...router.current, from },
+    { ...router.current, from, preloadData: pageInstance.preloadData as S },
     {
       navigate,
       switchTab,
