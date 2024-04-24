@@ -58,7 +58,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.1",
+    "@changesets/cli": "^2.27.1",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
