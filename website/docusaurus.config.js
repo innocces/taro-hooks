@@ -115,6 +115,16 @@ const config = {
         beforeDefaultRemarkPlugins: [[require('./remark/code'), getOptions()]],
       }),
     ],
+    [
+      '@orama/plugin-docusaurus',
+      {
+        cloud: {
+          indexId: 'tkujjwkk1hfnz3lpg91pqn0y',
+          oramaCloudAPIKey: '4J9QUHFPmOzc9N6QN7oo5AYTKS1BEUzp',
+          deploy: prod,
+        },
+      },
+    ],
     // [
     //   'docusaurus-plugin-typedoc',
     //   {
@@ -334,12 +344,12 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['shell-session', 'http'],
       },
-      algolia: {
-        appId: 'HIV804W7Z6',
-        apiKey: '409a0690d65dac63b8f71447f88083fe',
-        indexName: 'taro-hooks',
-        contextualSearch: true,
-      },
+      // algolia: {
+      //   appId: 'HIV804W7Z6',
+      //   apiKey: '409a0690d65dac63b8f71447f88083fe',
+      //   indexName: 'taro-hooks',
+      //   contextualSearch: true,
+      // },
       metadata: [
         {
           name: 'keywords',
