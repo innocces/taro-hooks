@@ -5,9 +5,9 @@ import devConfig from './dev';
 import prodConfig from './prod';
 
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
-export default defineConfig(async (merge, {}) => {
+export default defineConfig(async (merge, { command, mode }) => {
   const baseConfig: UserConfigExport<'vite'> = {
-    projectName: 'taro-plugin-vite',
+    projectName: 'taro-plugin-vue-vite',
     date: '2024-07-24',
     designWidth: 750,
     deviceRatio: {
@@ -18,7 +18,7 @@ export default defineConfig(async (merge, {}) => {
     },
     sourceRoot: 'src',
     outputRoot: process.env.TARO_ENV === 'weapp' ? 'dist-weapp' : 'dist',
-    plugins: ['@taro-hooks/plugin-react'],
+    plugins: ['@taro-hooks/plugin-vue'],
     defineConstants: {
       CF: process.env.CF_PAGES ? JSON.stringify(process.env.CF_PAGES) : "'0'",
     },
@@ -30,7 +30,7 @@ export default defineConfig(async (merge, {}) => {
       patterns: [],
       options: {},
     },
-    framework: 'react',
+    framework: 'vue3',
     compiler: 'vite',
     mini: {
       postcss: {
