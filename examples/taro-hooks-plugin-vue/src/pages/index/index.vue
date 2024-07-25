@@ -34,7 +34,8 @@
 </template>
 
 <script lang="ts">
-import { useRouter, useModal, useEnv, useLayoutEffect } from 'taro-hooks';
+import { useLayoutEffect } from '@taro-hooks/core';
+import { useRouter, useModal, useEnv } from 'taro-hooks';
 import { ref } from 'vue';
 import { ENV_TYPE } from '@tarojs/taro';
 import {
