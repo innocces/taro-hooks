@@ -1,23 +1,20 @@
 import { IPluginContext } from '@tarojs/service';
 import { chalk } from '@tarojs/helper';
 import { reactLike } from './constant';
-import { getRealRuntimePath, isVersion4, getDefine } from './shared';
+import { getRealRuntimePath, getDefine } from './shared';
 
 export function modifyViteConfig(ctx: IPluginContext) {
   const { framework } = ctx.initialConfig;
+  ctx.modifyViteConfig?.(({ viteConfig }) => {
+    const taroHooksVitePlugins = [setDefinePlugin(), setAlias(framework)];
+    console.log(
+      chalk.blue(
+        `✨ 逮到一个使用taro-hooks的小可爱~ \n 当前使用的框架是: ${framework}`,
+      ),
+    );
 
-  if (isVersion4() && 'modifyViteConfig' in ctx) {
-    ctx.modifyViteConfig(({ viteConfig }) => {
-      const taroHooksVitePlugins = [setDefinePlugin(), setAlias(framework)];
-      console.log(
-        chalk.blue(
-          `✨ 逮到一个使用taro-hooks的小可爱~ \n 当前使用的框架是: ${framework}`,
-        ),
-      );
-
-      viteConfig.plugins.push(...taroHooksVitePlugins);
-    });
-  }
+    viteConfig.plugins.push(...taroHooksVitePlugins);
+  });
 }
 
 function setDefinePlugin() {
