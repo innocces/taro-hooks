@@ -9,6 +9,8 @@
   "ignore": [
     "@taro-hooks/taro-hooks-plugin",
     "@taro-hooks/taro-hooks-plugin-vue",
-    "@taro-hooks/website"
+    "@taro-hooks/website",
+    "@taro-hooks/taro-hooks-plugin-vite",
+    "@taro-hooks/taro-hooks-plugin-vue"
   ]
 }

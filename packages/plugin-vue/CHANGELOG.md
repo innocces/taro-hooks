@@ -1,5 +1,16 @@
 # @taro-hooks/plugin-vue
 
+## 2.1.0
+
+### Minor Changes
+
+- support vite mode
+
+### Patch Changes
+
+- Updated dependencies
+  - @taro-hooks/shared@2.1.0
+
 ## 2.0.11
 
 ### Patch Changes

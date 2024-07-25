@@ -1,5 +1,11 @@
 # @taro-hooks/shared
 
+## 2.1.0
+
+### Minor Changes
+
+- support vite mode
+
 ## 2.0.11
 
 ### Patch Changes

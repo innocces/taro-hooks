@@ -1,6 +1,5 @@
 {
   "name": "@taro-hooks/taro-hooks-plugin-vite",
-  "version": "1.0.0",
   "private": true,
   "description": "@taro-hooks/taro-hooks-plugin-vite",
   "templateInfo": {
@@ -37,8 +36,8 @@
   "dependencies": {
     "@babel/runtime": "^7.24.4",
     "@taro-hooks/ahooks": "workspace:*",
-		"@taro-hooks/plugin-react": "workspace:*",
-		"@taro-hooks/shared": "workspace:*",
+    "@taro-hooks/plugin-react": "workspace:*",
+    "@taro-hooks/shared": "workspace:*",
     "@tarojs/components": "4.0.3-alpha.4",
     "@tarojs/helper": "4.0.3-alpha.4",
     "@tarojs/plugin-platform-weapp": "4.0.3-alpha.4",

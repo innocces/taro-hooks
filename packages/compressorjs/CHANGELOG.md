@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.1.0
+
+### Minor Changes
+
+- support vite mode
+
+### Patch Changes
+
+- Updated dependencies
+  - @taro-hooks/blueimp-canvas-to-blob@2.1.0
+
 ## 2.0.11
 
 ### Patch Changes
