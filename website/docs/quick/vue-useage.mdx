@@ -3,7 +3,6 @@ title: Vue 教程
 sidebar_position: 3
 ---
 
-import { Sandpack } from '@taro-hooks/sandpack'
 import Alert from '@site/src/components/Alert'
 import UseTaroState from '@vue-demo/useState/index.vue'
 import UseTaroEffect from '@vue-demo/useEffect/index.vue'
@@ -179,7 +178,7 @@ const memoizedValue = useMemo(
 
 **useContext** 帮助您读取和订阅组件的上下文.
 
-<UseContext />
+<UseTaroContext />
 
 <Alert type="danger">
 注意: <strong>context</strong> 必须设置为对象的形式. 为了达到多层继承的目的. 继承的动作由 <code>createContext</code> 来完成. 内部实则走的是扩展合并.
