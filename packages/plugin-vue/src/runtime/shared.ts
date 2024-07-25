@@ -21,7 +21,7 @@ export function getRealRuntimePath(): string {
 
 export function getVuePath(): string {
   try {
-    return require.resolve('Vue', {
+    return require.resolve('vue', {
       paths: [process.cwd()],
     });
   } catch (error) {
