@@ -9,7 +9,11 @@ group:
   path: /basic
 ---
 
-<Alert>注意: 该 Hook 是改写自<a target="__blank" href="https://ahooks.js.org/zh-CN/hooks/use-throttle-fn">ahook useThrottleFn</a></Alert>
+:::warning
+
+注意: 该 Hook 是改写自<a target="__blank" href="https://ahooks.js.org/zh-CN/hooks/use-throttle-fn">ahook useThrottleFn</a>
+
+:::
 
 # useThrottleFn
 
