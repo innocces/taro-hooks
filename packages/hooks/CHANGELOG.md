@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.1.0
+
+### Minor Changes
+
+- retry publish
+
+### Patch Changes
+
+- Updated dependencies
+  - @taro-hooks/use-request@2.1.0
+
 ## 2.0.11
 
 ### Patch Changes
