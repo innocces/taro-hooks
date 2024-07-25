@@ -1,14 +1,1 @@
-// Hotjar Tracking Code for https://next-version-taro-hooks.vercel.app
-(function (h, o, t, j, a, r) {
-  h.hj =
-    h.hj ||
-    function () {
-      (h.hj.q = h.hj.q || []).push(arguments);
-    };
-  h._hjSettings = { hjid: 2952734, hjsv: 6 };
-  a = o.getElementsByTagName('head')[0];
-  r = o.createElement('script');
-  r.async = 1;
-  r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-  a.appendChild(r);
-})(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+!function(t,h,e,j,s,n){t.hj=t.hj||function(){(t.hj.q=t.hj.q||[]).push(arguments)},t._hjSettings={hjid:2952734,hjsv:6},s=h.getElementsByTagName("head")[0],(n=h.createElement("script")).async=1,n.src="https://static.hotjar.com/c/hotjar-"+t._hjSettings.hjid+".js?sv="+t._hjSettings.hjsv,s.appendChild(n)}(window,document);

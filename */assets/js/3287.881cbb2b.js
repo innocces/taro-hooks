@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_taro_hooks_website=self.webpackChunk_taro_hooks_website||[]).push([[3287],{3287:(t,e,o)=>{function s(t,e){return t.documentsStore.get(t.data.docs,e)}function n(t){return t.documentsStore.count(t.data.docs)}o.r(e),o.d(e,{count:()=>n,getByID:()=>s})}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_taro_hooks_website=self.webpackChunk_taro_hooks_website||[]).push([[9647],{8766:(e,t,s)=>{s.r(t),s.d(t,{default:()=>n});var r=s(8318),a=s(3372),o=s(6937),u=s(3998),c=s(2841),l=s(6115);function n(e){return r.createElement(o.e3,{className:(0,a.A)(u.G.wrapper.docsPages)},r.createElement(l.A,null,(0,c.v)(e.route.routes)))}}}]);
