@@ -7,7 +7,7 @@ sidebar_position: 1
 注意: 这里假设您已经具备了 **Taro** 以及 **React/Vue** 的基础开发知识. 若您尚未掌握建议您先学习相关的框架知识再回来继续阅读
 :::
 
-此次 **taro-hooks** 跟随 **taro3.x** 的思想. 进行了 **runtime + framwork-plugin** 的多框架支持方式. 故不再支持 **taro<3.x**. 若您想要在 **taro<3.x** 的项目中使用 **taro-hooks**. 请使用[旧版本](https://taro-hooks-innocces.vercel.app) (注意旧版本只支持 **React**)
+此次 **taro-hooks** 跟随 **taro3.x** 的思想. 进行了 **runtime + framwork-plugin** 的多框架支持方式. 故不再支持 **低于 taro3.x**. 若您想要在 **低于 taro3.x** 的项目中使用 **taro-hooks**. 请使用[旧版本](https://taro-hooks-innocces.vercel.app) (注意旧版本只支持 **React**)
 
 ## 环境准备
 

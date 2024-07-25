@@ -1,10 +1,11 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+const { join } = require('node:path');
+const { readdirSync } = require('node:fs');
+const { themes } = require('prism-react-renderer');
+const navbarItem = require('./navbar');
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-const { join } = require('path');
-const { readdirSync } = require('fs');
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
+
 const { version } = require(join(
   process.cwd(),
   '../',
@@ -12,7 +13,7 @@ const { version } = require(join(
   'hooks',
   'package.json',
 ));
-const navbarItem = require('./navbar');
+
 const prod = process.env.NODE_ENV === 'production';
 
 const siteMap = {
@@ -76,6 +77,14 @@ const config = {
   projectName: 'taro-hooks', // Usually your repo name.
   titleDelimiter: ' 🍺 ',
 
+  markdown: {
+    mdx1Compat: {
+      comments: true,
+      admonitions: true,
+      headingIds: true,
+    }
+  },
+
   webpack: {
     jsLoader: (isServer) => ({
       loader: require.resolve('swc-loader'),
@@ -106,14 +115,24 @@ const config = {
     [
       'content-docs',
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
+      {
         id: 'hooks',
         path: '../packages/hooks/src',
         routeBasePath: '/hooks',
         ...generateDocsOptions('src'),
         sidebarPath: require.resolve('./sidebarsHooks.json'),
         beforeDefaultRemarkPlugins: [[require('./remark/code'), getOptions()]],
-      }),
+      },
+    ],
+    [
+      '@orama/plugin-docusaurus-v3',
+      {
+        cloud: {
+          indexId: 'tkujjwkk1hfnz3lpg91pqn0y',
+          oramaCloudAPIKey: '4J9QUHFPmOzc9N6QN7oo5AYTKS1BEUzp', // Env variable suggested
+          deploy: true, // Enables deploy while building/starting
+        },
+      },
     ],
     // [
     //   'docusaurus-plugin-typedoc',
@@ -204,7 +223,7 @@ const config = {
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: `${githubURLWithBranch}/website/`,
@@ -223,6 +242,7 @@ const config = {
           feedOptions: {
             type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} Innocces, Inc.`,
+            limit: false
           },
         },
         theme: {
@@ -232,122 +252,129 @@ const config = {
           changefreq: 'weekly',
           priority: 0.5,
         },
-      }),
+      },
     ],
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      navbar: {
-        title: 'Taro-hooks',
-        logo: {
-          alt: 'Taro-hooks logo',
-          src: 'img/hook.png',
+  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  {
+    navbar: {
+      title: 'Taro-hooks',
+      logo: {
+        alt: 'Taro-hooks logo',
+        src: 'img/hook.png',
+      },
+      items: navbarItem,
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: '相关资源',
+          items: [
+            {
+              label: 'Taro',
+              href: 'https://taro.jd.com/',
+            },
+            {
+              label: 'Github',
+              href: 'https://github.com/innocces/taro-hooks',
+            },
+            {
+              label: 'Discord',
+              href: 'https://discord.gg/XrrbdDCpKg',
+            },
+            {
+              label: 'Tg',
+              href: 'https://t.me/+liVrD6TyPV1lZmJl',
+            },
+            {
+              label: '使用案例',
+              href: 'https://github.com/taro-hooks/user-cases',
+            },
+          ],
         },
-        items: navbarItem,
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: '相关资源',
-            items: [
-              {
-                label: 'Taro',
-                href: 'https://taro.jd.com/',
-              },
-              {
-                label: 'Github',
-                href: 'https://github.com/innocces/taro-hooks',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discord.gg/XrrbdDCpKg',
-              },
-              {
-                label: 'Tg',
-                href: 'https://t.me/+liVrD6TyPV1lZmJl',
-              },
-              {
-                label: '使用案例',
-                href: 'https://github.com/taro-hooks/user-cases',
-              },
-            ],
-          },
-          {
-            title: '友情推荐',
-            items: [
-              {
-                label: 'taroify',
-                href: 'https://github.com/mallfoundry/taroify',
-              },
-              {
-                label: 'dumi-theme-chakra',
-                href: 'https://github.com/innocces/dumi-theme-chakra',
-              },
-              {
-                label: 'general-tools',
-                href: 'https://general-tools.vercel.app/',
-              },
-            ],
-          },
-          {
-            title: '关于作者',
-            items: [
-              {
-                label: 'innocces',
-                href: 'https://github.com/innocces',
-              },
-              {
-                label: 'ryan-117',
-                href: 'https://github.com/ryan-117',
-              },
-            ],
-          },
-          {
-            title: '友情赞助',
-            items: [
-              {
-                label: 'buy me coffee',
-                href: 'https://www.buymeacoffee.com/innocces?ref=widget-1376490',
-              },
-              { label: 'afdian', href: 'https://afdian.net/a/innocces' },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} Taro-hooks, Inc. Built with Innocces.`,
-      },
-      announcementBar: {
-        id: 'announce current progress info',
-        content: `
+        {
+          title: '友情推荐',
+          items: [
+            {
+              label: 'taroify',
+              href: 'https://github.com/mallfoundry/taroify',
+            },
+            {
+              label: 'dumi-theme-chakra',
+              href: 'https://github.com/innocces/dumi-theme-chakra',
+            },
+            {
+              label: 'general-tools',
+              href: 'https://general-tools.vercel.app/',
+            },
+          ],
+        },
+        {
+          title: '关于作者',
+          items: [
+            {
+              label: 'innocces',
+              href: 'https://github.com/innocces',
+            },
+            {
+              label: 'ryan-117',
+              href: 'https://github.com/ryan-117',
+            },
+          ],
+        },
+        {
+          title: '友情赞助',
+          items: [
+            {
+              label: 'buy me coffee',
+              href: 'https://www.buymeacoffee.com/innocces?ref=widget-1376490',
+            },
+            { label: 'afdian', href: 'https://afdian.net/a/innocces' },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} Taro-hooks, Inc. Built with Innocces.`,
+    },
+    announcementBar: {
+      id: 'announce current progress info',
+      content: `
           <div class="general-announcement">
             <a target="__blank" href="https://github.com/innocces/taro-hooks/tree/next"><b>taro-hooks@2</b> 代号: Serro👻</a> 正式发布 🎉
           </div>
         `,
-        textColor: 'var(--ifm-color-white)',
-        backgroundColor: 'var(--ifm-color-primary)',
-        isCloseable: false,
-      },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-        additionalLanguages: ['shell-session', 'http'],
-      },
-      algolia: {
-        appId: 'HIV804W7Z6',
-        apiKey: '409a0690d65dac63b8f71447f88083fe',
-        indexName: 'taro-hooks',
-        contextualSearch: true,
-      },
-      metadata: [
-        {
-          name: 'keywords',
-          content:
-            'taro-hooks, hooks, taro, tarojs, tarojs-hooks, react, react-hooks, javascript, lerna, monorepo, wechat, miniprograme, typescript, helpers, web, h5, rn, react-native',
-        },
+      textColor: 'var(--ifm-color-white)',
+      backgroundColor: 'var(--ifm-color-primary)',
+      isCloseable: false,
+    },
+    prism: {
+      theme: lightCodeTheme,
+      darkTheme: darkCodeTheme,
+      additionalLanguages: [
+        'bash',
+        'diff',
+        'json',
+        'shell-session',
+        'http',
+        'css',
       ],
-    }),
+    },
+    algolia: {
+      appId: 'HIV804W7Z6',
+      apiKey: '409a0690d65dac63b8f71447f88083fe',
+      indexName: 'taro-hooks',
+      contextualSearch: true,
+    },
+    metadata: [
+      {
+        name: 'keywords',
+        content:
+          'taro-hooks, hooks, taro, tarojs, tarojs-hooks, react, react-hooks, javascript, lerna, monorepo, wechat, miniprograme, typescript, helpers, web, h5, rn, react-native',
+      },
+    ],
+  },
 
   stylesheets: ['//at.alicdn.com/t/font_3373489_imvarji5zu.css'],
 
