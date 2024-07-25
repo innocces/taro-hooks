@@ -1,19 +1,5 @@
 # Change Log
 
-## 2.1.0
-
-### Minor Changes
-
-- support vite mode
-
-### Patch Changes
-
-- Updated dependencies
-  - @taro-hooks/ahooks@2.1.0
-  - @taro-hooks/compressorjs@2.1.0
-  - @taro-hooks/shared@2.1.0
-  - @taro-hooks/use-request@2.1.0
-
 ## 2.0.11
 
 ### Patch Changes

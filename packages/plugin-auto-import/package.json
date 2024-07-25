@@ -1,6 +1,6 @@
 {
   "name": "@taro-hooks/plugin-auto-import",
-  "version": "3.0.0",
+  "version": "2.0.11",
   "description": "taro-hooks unplugin-auto-import 插件",
   "sideEffects": false,
   "author": "innocces<jiangjiangjiangxi@gmail.com>(https://github.com/innocces)",
