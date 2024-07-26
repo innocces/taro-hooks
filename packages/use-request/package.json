@@ -38,8 +38,7 @@
   "dependencies": {
     "@taro-hooks/ahooks": "workspace:*",
     "@taro-hooks/shared": "workspace:*",
-    "lodash-wechat": "^1.0.0",
-    "taro-hooks": "workspace:*"
+    "lodash-wechat": "^1.0.0"
   },
   "peerDependencies": {
     "@tarojs/taro": ">=3.4.x",

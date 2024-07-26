@@ -1,6 +1,6 @@
 import { escapeState } from '@taro-hooks/shared';
 import { useEffect } from '@taro-hooks/core';
-import { useVisible } from 'taro-hooks';
+import useVisible from '../useVisible';
 
 const listeners: any[] = [];
 

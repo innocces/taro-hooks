@@ -1,7 +1,7 @@
 import { useRef } from '@taro-hooks/core';
 import { useUpdateEffect } from '@taro-hooks/ahooks';
 import { escapeState } from '@taro-hooks/shared';
-import { useVisible } from 'taro-hooks';
+import useVisible from '../useVisible';
 import type { Plugin, Timeout } from '../types';
 import subscribeReVisible from '../utils/subscribeReVisible';
 

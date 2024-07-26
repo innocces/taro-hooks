@@ -854,7 +854,7 @@ importers:
   packages/plugin-auto-import:
     dependencies:
       taro-hooks:
-        specifier: '>=2.0.11'
+        specifier: '>=2.x'
         version: link:../hooks
       unplugin-auto-import:
         specifier: ^0.16.6
@@ -992,9 +992,6 @@ importers:
       lodash-wechat:
         specifier: ^1.0.0
         version: 1.0.0
-      taro-hooks:
-        specifier: workspace:*
-        version: link:../hooks
     devDependencies:
       '@tarojs/taro':
         specifier: ^3.6.11
