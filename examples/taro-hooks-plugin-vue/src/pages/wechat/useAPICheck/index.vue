@@ -12,7 +12,7 @@ import { escapeState } from '@taro-hooks/shared';
 import { useAPICheck, useActionSheet, useToast } from 'taro-hooks';
 
 const selection = [
-  'getSystemInfoSync.return.screenWidth',
+  'getWindowInfo.return.screenWidth',
   'showToast.object.image',
   'onCompassChange.callback.direction',
   'request.object.method.GET',

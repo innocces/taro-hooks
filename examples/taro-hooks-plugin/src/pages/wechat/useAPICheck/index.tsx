@@ -6,7 +6,7 @@ import DemoContent from '@src/components/DemoContent';
 import { Button } from '@taroify/core';
 
 const selection = [
-  'getSystemInfoSync.return.screenWidth',
+  'getWindowInfo.return.screenWidth',
   'showToast.object.image',
   'onCompassChange.callback.direction',
   'request.object.method.GET',
