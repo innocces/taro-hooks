@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.2.0
+
+### Minor Changes
+
+- #83
+
+### Patch Changes
+
+- Updated dependencies
+  - @taro-hooks/blueimp-canvas-to-blob@2.2.0
+
 ## 2.1.0
 
 ### Minor Changes
