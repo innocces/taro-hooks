@@ -12,6 +12,7 @@ import useArrayBuffer from './useArrayBuffer';
 import useClipboardData from './useClipboardData';
 import useSystemInfo from './useSystemInfo';
 import useAppBaseInfo from './useAppBaseInfo';
+import useRendererUserAgent from './useRendererUserAgent';
 import useWindowInfo from './useWindowInfo';
 import useDeviceInfo from './useDeviceInfo';
 import useEvent from './useEvent';
@@ -91,6 +92,7 @@ export {
   useClipboardData,
   useSystemInfo,
   useAppBaseInfo,
+  useRendererUserAgent,
   useWindowInfo,
   useDeviceInfo,
   useEvent,
