@@ -1,5 +1,19 @@
 # Change Log
 
+## 2.2.0
+
+### Minor Changes
+
+- #83
+
+### Patch Changes
+
+- Updated dependencies
+  - @taro-hooks/use-request@2.2.0
+  - @taro-hooks/ahooks@2.2.0
+  - @taro-hooks/compressorjs@2.2.0
+  - @taro-hooks/shared@2.2.0
+
 ## 2.1.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @taro-hooks/sandpack
 
+## 2.2.0
+
+### Minor Changes
+
+- #83
+
 ## 2.1.0
 
 ### Minor Changes
