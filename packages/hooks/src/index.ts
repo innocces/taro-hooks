@@ -11,6 +11,7 @@ import usePromise from './usePromise';
 import useArrayBuffer from './useArrayBuffer';
 import useClipboardData from './useClipboardData';
 import useSystemInfo from './useSystemInfo';
+import useAppBaseInfo from './useAppBaseInfo';
 import useWindowInfo from './useWindowInfo';
 import useDeviceInfo from './useDeviceInfo';
 import useEvent from './useEvent';
@@ -89,6 +90,7 @@ export {
   useArrayBuffer,
   useClipboardData,
   useSystemInfo,
+  useAppBaseInfo,
   useWindowInfo,
   useDeviceInfo,
   useEvent,
