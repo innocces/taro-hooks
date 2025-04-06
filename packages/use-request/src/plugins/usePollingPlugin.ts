@@ -41,7 +41,10 @@ const usePollingPlugin: Plugin<any, any[]> = (
     },
     onFinally: () => {
       // if pollingWhenHidden = false && document is hidden, then stop polling and subscribe revisable
-      if (!pollingWhenHidden && !escapeState(documentVisible)) {
+      if (
+        (!pollingWhenHidden && !escapeState(documentVisible)) ||
+        !pollingInterval
+      ) {
         unsubscribeRef.current = unsubscribeReVisible;
         return;
       }
