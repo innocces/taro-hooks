@@ -1,6 +1,7 @@
 import {
   getSetting,
   openSetting,
+  getAppAuthorizeSetting,
   authorize as taroAuthorize,
   authorizeForMiniProgram,
 } from '@tarojs/taro';
@@ -29,17 +30,23 @@ export type Open = PromiseOptionalAction<
   Taro.openSetting.SuccessCallbackResult
 >;
 
-export type WithMiniAuthSetting = AuthSetting & { mini: AuthSetting };
+export type WithMiniAndAppAuthSetting = AuthSetting & {
+  mini: AuthSetting;
+  app?: Taro.getAppAuthorizeSetting.Result;
+};
 
-function useAuthorize(withSubscriptions?: boolean): {
-  authSetting: WithMiniAuthSetting;
+function useAuthorize(
+  withSubscriptions?: boolean,
+  withAppAuthSetting?: boolean,
+): {
+  authSetting: WithMiniAndAppAuthSetting;
   subscriptionsSetting: SubscriptionsSetting | {};
   authorize: Authorize;
   get: Get;
   open: Open;
 } {
   const visible = useVisible();
-  const [authSetting, setAuthSetting] = useState<WithMiniAuthSetting>({
+  const [authSetting, setAuthSetting] = useState<WithMiniAndAppAuthSetting>({
     mini: {},
   });
   const [subscriptionsSetting, setSubscriptionsSetting] = useState<
@@ -66,7 +73,15 @@ function useAuthorize(withSubscriptions?: boolean): {
   const get: Get = (withSubscriptions) => {
     return getAsync({ withSubscriptions }).then((res) => {
       const { authSetting, subscriptionsSetting, miniprogramAuthSetting } = res;
-      setAuthSetting({ ...authSetting, mini: miniprogramAuthSetting });
+      const latestAuthSetting: WithMiniAndAppAuthSetting = {
+        ...authSetting,
+        mini: miniprogramAuthSetting,
+      };
+      if (withAppAuthSetting) {
+        const app = getAppAuthorizeSetting();
+        latestAuthSetting.app = app;
+      }
+      setAuthSetting(latestAuthSetting);
       setSubscriptionsSetting(subscriptionsSetting);
       return res;
     });
