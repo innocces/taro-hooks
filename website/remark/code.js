@@ -7,11 +7,11 @@ const { join } = require('path');
 const matchREG = /^<code src="(\S+)"( group="(\S+)")?.+\/>$/;
 
 const fakeImportCombineTabsNode = {
-  type: 'import',
+  type: 'mdxjsEsm',
   value: `import CombineTabs from '@site/src/components/Tabs';`,
 };
 const fakeImportCodeDisplayNode = {
-  type: 'import',
+  type: 'mdxjsEsm',
   value: `import CodeDisplay from '@site/src/components/CodeDisplay';`,
 };
 
@@ -53,10 +53,12 @@ module.exports = function codePlugin(options) {
           )
         );
       });
-      visit(root, 'jsx', (node, index) => {
-        const isCodeJSX = matchREG.test(node.value);
-        const fileAbsPath = node?.value?.match?.(matchREG)?.[1];
-        const group = node?.value?.match?.(matchREG)?.[3];
+      visit(root, ['jsx', 'mdxJsxFlowElement'], (node, index) => {
+        const isMdxJsxFlowElement = node.type === 'mdxJsxFlowElement' && node.name === 'code'
+        const attributes = node?.attributes ?? []
+        const isCodeJSX = isMdxJsxFlowElement || matchREG.test(node.value);
+        const fileAbsPath = isMdxJsxFlowElement ? attributes.find(v => v.name === 'src')?.value : node?.value?.match?.(matchREG)?.[1];
+        const group = isMdxJsxFlowElement ? attributes.find(v => v.name === 'group')?.value : node?.value?.match?.(matchREG)?.[3];
         if (
           isCodeJSX &&
           fileAbsPath?.length &&
@@ -94,7 +96,7 @@ module.exports = function codePlugin(options) {
             reactProps,
           )}>{\`${reactSource}\`}</CodeDisplay>`;
           const tabsNode = {
-            type: 'jsx',
+            type: 'mdxJsxFlowElement',
             value: `<CombineTabs VueTab={${vueTab}} ReactTab={${reactTab}} />`,
           };
           replaceNodes.push(tabsNode);

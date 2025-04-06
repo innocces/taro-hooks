@@ -23,6 +23,8 @@ tags: [React, Vue, Taro3.x, ahooks, useRequest]
 - 新用法(名称简写, 使用更方便)
 - 新成员([ryan-117](https://github.com/ryan-117))
 
+<!-- truncate -->
+
 ## 文档
 
 此次，我们将文档的框架从**dumi**替换成了**docusaurus**. 样式上与主文档基本一致. 并且增加了**docsearch**来助力全站检索.

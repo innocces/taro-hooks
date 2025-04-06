@@ -78,6 +78,8 @@ const config = {
   titleDelimiter: ' 🍺 ',
 
   markdown: {
+    format: 'mdx',
+    preprocessor: require('./remark/doc-code-replacer').processCodeInline(getOptions()),
     mdx1Compat: {
       comments: true,
       admonitions: true,
@@ -121,19 +123,19 @@ const config = {
         routeBasePath: '/hooks',
         ...generateDocsOptions('src'),
         sidebarPath: require.resolve('./sidebarsHooks.json'),
-        beforeDefaultRemarkPlugins: [[require('./remark/code'), getOptions()]],
+        // beforeDefaultRemarkPlugins: [[require('./remark/code'), getOptions()]],
       },
     ],
-    [
-      '@orama/plugin-docusaurus-v3',
-      {
-        cloud: {
-          indexId: 'tkujjwkk1hfnz3lpg91pqn0y',
-          oramaCloudAPIKey: '4J9QUHFPmOzc9N6QN7oo5AYTKS1BEUzp', // Env variable suggested
-          deploy: 'default', // Enables deploy while building/starting
-        },
-      },
-    ],
+    // [
+    //   '@orama/plugin-docusaurus-v3',
+    //   {
+    //     cloud: {
+    //       indexId: 'tkujjwkk1hfnz3lpg91pqn0y',
+    //       apiKey: '4J9QUHFPmOzc9N6QN7oo5AYTKS1BEUzp', // Env variable suggested
+    //       deploy: process.env.ENABLE_ORAMA_CLOUD_DEPLOY, // Enables deploy while building/starting
+    //     },
+    //   },
+    // ],
     // [
     //   'docusaurus-plugin-typedoc',
     //   {

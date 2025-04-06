@@ -17,6 +17,8 @@
 - [x] useSystemInfo
 - [x] useWindowInfo 🆕
 - [x] useDeviceInfo 🆕
+- [x] useAppBaseInfo 🆕
+- [x] useRendererUserAgent 🆕
 - [x] useEvent
 - [x] useVisible
 - [x] useSelectorQuery

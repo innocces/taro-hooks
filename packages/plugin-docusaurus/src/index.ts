@@ -3,6 +3,7 @@ import type {
   Plugin,
   DocusaurusContext,
   OptionValidationContext,
+  ValidationSchema,
 } from '@docusaurus/types';
 import type { Options as VueOptions } from './vue-loader';
 
@@ -81,5 +82,5 @@ export function validateOptions({
     vue: Joi.object<VueOptions>(),
   });
 
-  return validate(optionsScheme, options);
+  return validate(optionsScheme as ValidationSchema<Options>, options);
 }

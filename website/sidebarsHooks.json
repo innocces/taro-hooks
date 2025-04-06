@@ -77,6 +77,8 @@
         "useSelectorQuery/index",
         "useStorage/index",
         "useSystemInfo/index",
+        "useAppBaseInfo/index",
+        "useRendererUserAgent/index",
         "useDeviceInfo/index",
         "useWindowInfo/index",
         "useVisible/index"
